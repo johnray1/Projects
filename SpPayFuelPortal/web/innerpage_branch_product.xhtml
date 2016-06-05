@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>SP - PayFuel Adminstration</title>
+        
+        <link href="css/style.css" rel="stylesheet" type="text/css" />  
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+        
+        <link href="css/lightcase.css" rel="stylesheet" type="text/css" />
+        <link href="css/chosen.css" rel="stylesheet" type="text/css" />
+        <link href="css/jquery.dataTables.min.css" rel="stylesheet" />
+        <link href="css/buttons.dataTables.min.css" rel="stylesheet" />
+        <link href="css/easy-responsive-tabs.css" rel="stylesheet" />
+        
+        <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+        <script type="text/javascript" src="js/jquery.events.touch.js"></script>
+        <script type="text/javascript" src="js/lightcase.js"></script>
+        <script type="text/javascript" src="js/lightcase.init.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        
+        <script type="text/javascript" src="js/easy-responsive-tabs.js"></script>
+        <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="js/dataTables.buttons.min.js"></script>	
+        <script type="text/javascript" src="js/buttons.flash.min.js"></script>	
+        <script type="text/javascript" src="js/jszip.min.js"></script>	
+        <script type="text/javascript" src="js/pdfmake.min.js"></script>	
+        <script type="text/javascript" src="js/vfs_fonts.js"></script>	
+        <script type="text/javascript" src="js/buttons.html5.min.js"></script>	
+        <script type="text/javascript" src="js/moment.min.js"></script>
+        
+        
+        <script>
+            $(document).ready(function() {
+                $('#example').DataTable( {
+                    "bLengthChange": true,
+                    "paging":true,
+                    "searching": true,
+                    "ordering": true,
+                    "lengthMenu": [ [10, 25, 50, "All"]],
+                    
+                    dom: 'Bfrtip',		 
+                    buttons: [
+                        'excelHtml5',
+                        'csvHtml5',
+                        'pdfHtml5'
+                    ],
+                } );
+                
+                $('#example tbody')
+                        .on( 'mouseenter', 'td', function () {
+                            var colIdx = table.cell(this).index().column;
+                    
+                    $( table.cells().nodes() ).removeClass( 'highlight' );
+                    $( table.column( colIdx ).nodes() ).addClass( 'highlight' );
+                } );
+                
+                
+            } );
+        </script>
+        
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+        
+    </h:head>
+    
+    
+    
+    <h:body>
+        <ui:include src="templates/header.xhtml" /> 
+            
+        <!-- CONTENTS-->
+        <div class="container-fluid">
+            <div class="col-xs-12" style="display:inline-block;padding:10px;padding-top:25px;height:100%;">
+                
+                <!--FILTER START--> <!--FILTER START-->
+                    
+                <!-- Start DataTable-->    
+                <div class="col-xs-12 col-sm-12 sholderinbox" style="margin:0px;margin-top:20px;padding:0px;min-height:400px;font-family:ubuntu;overflow-x:auto;">
+                    <h2>Branch Product List
+                        
+                    </h2>
+                    <span class="container-fluid" style="overflow: auto;">
+                        <div  class="container-fluid" style="padding:10px;">
+                            <h:dataTable value="#{ProductBean.branchProductList.branchProductList}" var="pro"
+                                         id="example"
+                                         styleClass="display" 
+                                         cellspacing="0" 
+                                         width="100%" 
+                                style="padding:10px;">
+                                    
+                                <h:column>
+                                    <f:facet name="header">Branch Name</f:facet>
+                                        #{pro.branchName}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Product Name</f:facet>
+                                        #{pro.productName}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Price</f:facet>
+                                        #{pro.unitPrice}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Actions</f:facet>
+                                    <a data-rel="lightcase_edit" href="popup/popup_price_edit.xhtml" style="color: #ffffff" onclick="#{BranchBean.branchesByUserId()} #{ProductBean.products()}"><img src="images/icon_edit.png"/></a>
+                                    
+                                </h:column>
+                            </h:dataTable>
+                        </div>
+                    </span>
+                </div>
+                <!-- End DataTable--> 
+                
+                    
+                
+            </div>
+        </div>
+        <!-- End CONTENTS -->
+            
+        <ui:include src="templates/footer.xhtml" />     
+        
+        
+        
+        <!-- Scripts -->
+        <script type="text/javascript">
+            $(".textinput input").change(function() {
+                if ($(this).val() != "") {
+                    $(this).addClass('filled');
+                } else {
+                    $(this).removeClass('filled');
+                }
+            })
+        </script>
+        
+        <script type="text/javascript" src="js/chosen.jquery.min.js"></script>
+        
+        <script type="text/javascript">
+            var config = {
+                '.chosen-select'           : {},
+                '.chosen-select-deselect'  : {allow_single_deselect:true},
+                '.chosen-select-no-single' : {disable_search_threshold:10},
+                '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+                '.chosen-select-width'     : {width:"95%"}
+            }
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+        </script>
+        <!-- End Scripts -->
+        
+        
+        
+    </h:body>
+</html>

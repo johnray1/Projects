@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      
+      
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>SP - PayFuel Adminstration</title>
+        
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="css/lightcase.css" rel="stylesheet" type="text/css" />
+        <link href="css/chosen.css" rel="stylesheet" type="text/css" />
+        <link href="css/jquery.dataTables.min.css" rel="stylesheet" />
+        <link href="css/buttons.dataTables.min.css" rel="stylesheet" />
+        <link href="css/easy-responsive-tabs.css" rel="stylesheet" />
+        
+        <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery.events.touch.js"></script>
+        <script type="text/javascript" src="js/lightcase.js"></script>
+        <script type="text/javascript" src="js/lightcase.init.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script src="js/easy-responsive-tabs.js"></script>
+        <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="js/dataTables.buttons.min.js"></script>	
+        <script type="text/javascript" src="js/buttons.flash.min.js"></script>	
+        <script type="text/javascript" src="js/jszip.min.js"></script>	
+        <script type="text/javascript" src="js/pdfmake.min.js"></script>	
+        <script type="text/javascript" src="js/vfs_fonts.js"></script>	
+        <script type="text/javascript" src="js/buttons.html5.min.js"></script>	
+        <script type="text/javascript" src="js/buttons.print.min."></script>
+        <script type="text/javascript" src="js/moment.min.js"></script>
+        
+        
+        <script>
+            $(document).ready(function() {
+                $('#example').DataTable( {
+                    "bLengthChange": true,
+                    "paging":true,
+                    "searching": true,
+                    "ordering": true,
+                    "lengthMenu": [ [10, 25, 50, "All"]],
+                    
+                    dom: 'Bfrtip',		 
+                    buttons: [
+                        'excelHtml5',
+                        'csvHtml5',
+                        'pdfHtml5'
+                    ],
+                } );
+                
+                $('#example tbody')
+                        .on( 'mouseenter', 'td', function () {
+                            var colIdx = table.cell(this).index().column;
+                    
+                    $( table.cells().nodes() ).removeClass( 'highlight' );
+                    $( table.column( colIdx ).nodes() ).addClass( 'highlight' );
+                } );
+                
+                
+            } );
+        </script>
+        
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+        
+    </h:head>
+    
+    
+    <h:body>
+        
+        
+        
+        <!-- HEADER -->
+        
+        <!-- Top -->
+        <h:form>
+            <div class="container-fluid" style="margin:0px;padding:0px;">
+                <div style="height:65px;font-family:ubuntu;margin:0px;padding:0px;background-color:#1a8c35">
+                    <div class="col-xs-4"><img src="images/engenpayfuel_logo.jpg" class="logo hidden-xs"/><img src="images/engenpayfuel_logo_small.jpg" class="logo hidden-lg hidden-md hidden-sm visible-xs"/></div>
+                    <div class="col-xs-8" style="margin:0px;padding:0px;line-height:65px;text-align:right;font-size:30px;color:#ffffff;"><strong class="hidden-xs"> Management  </strong> 
+                        <h:commandLink action="#{LoginBean.logout}" class="logout">
+                            <h:graphicImage value="images/icon_logout.png" style="float: right"/>
+                            <span>WELCOME</span> 
+                            #{LoginBean.user}
+                        </h:commandLink>
+                    </div>
+                </div>
+            </div>
+        </h:form> 
+        <!-- End Top -->
+        
+        <!-- Navbar -->
+        <nav class="navbar navbar-default hidden-xs" style="background-color:#ffffff;height:70px;font-family:ubuntu;color:#ffffff;text-align:center;padding-bottom:0px;margin-bottom:0px;border-bottom:0px solid #012d90;border-radius:0px;">
+            <div class="container">
+                <div class="col-xs-12" style="margin:0px;padding:0px;border:0px solid red;">
+                    
+                    <a href="dashboard.xhtml" class="omenu">Dashboard</a>
+                    <a href="innerpage_branch.xhtml" class="omenu">Branches</a>
+                    <a href="innerpage_device.xhtml" class="omenu">Devices</a>
+                    <a href="innerpage_product.xhtml" class="omenu">Products</a>
+                    <a href="#{user.users()}" class="omenu">Users</a>
+                    <a href="innerpage_transactions.xhtml" class="omenu">Transactions</a>
+                    <a href="innerpage_logs.xhtml" class="omenu">Logs</a>  
+                </div>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+        
+        
+        
+        
+        
+        <!-- MobileMenu -->
+        <nav id="myNavbar" class="navbar navbar-default visible-xs hidden-sm hidden-md hidden-lg" style="text-align:left;margin-top:5px;" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only"> </span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">MENU</a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="dashboard.xhtml">Dashboard</a></li>
+                        <li><a href="innerpage_branch.xhtml">Branches</a></li>
+                        <li><a href="innerpage_device.xhtml">Devices</a></li>
+                        <li><a href="innerpage_product.xhtml">Products</a></li>
+                        <li><a href="#{user.users()}">Users</a></li>
+                        <li><a href="innerpage_transactions.xhtml">Transactions</a></li>
+                        <li><a href="innerpage_logs.xhtml">Logs</a></li>    
+                        
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- End MobileMenu -->
+        
+        
+        
+        
+        <!-- End HEADER-->
+        
+        
+        
+        
+        
+        <!-- CONTENTS-->
+        <div class="container-fluid">
+            
+            <div class="col-xs-12" style="display:inline-block;padding:10px;padding-top:25px;height:100%;">
+                <!--FILTER START-->
+                
+                
+                <!--FILTER END-->   
+                <div class="col-xs-12" style="margin:10px;padding:0px;border:0px solid red;text-align:center;font-family:ubuntu;">
+                    
+                    <a href="innerpage_role.xhtml" class="omenu">Roles</a>
+                    <a href="innerpage_permisson.xhtml" class="omenu_active">Permissons</a>
+                    
+                </div>   
+                
+                <div class="clear"></div>
+                
+                <div class="col-xs-12 col-sm-12 sholderinbox" style="margin:0px;margin-top:20px;padding:0px;min-height:400px;font-family:ubuntu;overflow-x:auto;">
+                    <h2>USER PERMISSONS</h2>
+                    <span class="container-fluid" style="overflow: auto;">
+                        <div  class="container-fluid" style="padding:10px;">
+                            
+                            <h:form>
+                                <h3>BRANCH</h3> 
+                                <h:selectManyCheckbox value="#{PermissonBean.permisson}">
+                                    <f:selectItem  itemValue="0" itemLabel="CREATE" />
+                                    <f:selectItem itemValue="1" itemLabel="EDIT" />
+                                    <f:selectItem itemValue="2" itemLabel="READ" />
+                                    <f:selectItem itemValue="3" itemLabel="LIST" />
+                                </h:selectManyCheckbox>
+                                <h:commandButton value="Submit" action="#{PermissonBean.setUserPermisson()}" />
+                            </h:form> 	
+                            
+                        </div>
+                    </span>
+                </div>
+                
+                
+                
+                <div class="col-xs-12 col-sm-3 holderbox">
+                    
+                    
+                </div>
+                
+                
+            </div>
+        </div>
+        <!-- End CONTENTS -->
+        
+        
+        
+        <div class="clear" style="margin-bottom:50px;"></div>
+        
+        
+        <!-- Footer -->
+        <div class="clear" style="margin-top:20px;"></div>
+        <footer class="footerlong">
+            
+            <div class="container hidden-xs hidden-sm">
+                <p class="col-xs-12" style="text-align:center;margin:0px;padding:5px;">
+                    <a href="dashboard.xhtml" class="omenu_footer">Dashboard</a>
+                    <a href="innerpage_branch.xhtml" class="omenu_footer">Branches</a>
+                    <a href="innerpage_device.xhtml" class="omenu_footer">Devices</a>
+                    <a href="#{user.users()}" class="omenu_footer">Users</a>
+                    <a href="innerpage_product.xhtml" class="omenu_footer">Products</a>
+                    <a href="innerpage_transactions.xhtml" class="omenu_footer">Transactions</a>
+                    <a href="innerpage_logs.xhtml" class="omenu_footer">LOgs</a>
+                </p>
+            </div>
+            
+            <div class="container" style="padding:0px;">
+                <p class="col-xs-5" style="text-align:left;font-family:ubuntu;"> &copy; Copyright 2016</p>
+                <p class="col-xs-7" style="text-align:right;font-family:ubuntu;">Powered by oltranz.com</p>
+            </div>
+        </footer>
+        <!-- Footer -->
+        
+        
+        <!-- Scripts -->
+        <script type="text/javascript">
+            $(".textinput input").change(function() {
+                if ($(this).val() != "") {
+                    $(this).addClass('filled');
+                } else {
+                    $(this).removeClass('filled');
+                }
+            })
+        </script>
+        
+        <script type="text/javascript" src="js/chosen.jquery.min.js"></script>
+        
+        <script type="text/javascript">
+            var config = {
+                '.chosen-select'           : {},
+                '.chosen-select-deselect'  : {allow_single_deselect:true},
+                '.chosen-select-no-single' : {disable_search_threshold:10},
+                '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+                '.chosen-select-width'     : {width:"95%"}
+            }
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+        </script>
+        <!-- End Scripts -->
+        
+        
+        
+    </h:body>
+</html>

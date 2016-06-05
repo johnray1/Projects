@@ -1,0 +1,351 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+          
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+          
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>SP - PayFuel Adminstration</title>
+            
+        <link href="css/style.css" rel="stylesheet" type="text/css" />  
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+            
+        <link href="css/lightcase.css" rel="stylesheet" type="text/css" />
+        <link href="css/chosen.css" rel="stylesheet" type="text/css" />
+        <link href="css/jquery.dataTables.min.css" rel="stylesheet" />
+        <link href="css/buttons.dataTables.min.css" rel="stylesheet" />
+        <link href="css/easy-responsive-tabs.css" rel="stylesheet" />
+            
+        <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+        <script type="text/javascript" src="js/jquery.events.touch.js"></script>
+        <script type="text/javascript" src="js/lightcase.js"></script>
+        <script type="text/javascript" src="js/lightcase.init.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+            
+        <script type="text/javascript" src="js/easy-responsive-tabs.js"></script>
+        <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="js/dataTables.buttons.min.js"></script>	
+        <script type="text/javascript" src="js/buttons.flash.min.js"></script>	
+        <script type="text/javascript" src="js/jszip.min.js"></script>	
+        <script type="text/javascript" src="js/pdfmake.min.js"></script>	
+        <script type="text/javascript" src="js/vfs_fonts.js"></script>	
+        <script type="text/javascript" src="js/buttons.html5.min.js"></script>	
+        <script type="text/javascript" src="js/buttons.print.min."></script>
+        <script type="text/javascript" src="js/moment.min.js"></script>
+            
+            
+        <script>
+            $(document).ready(function() {
+                $('#example').DataTable( {
+                    "bLengthChange": true,
+                    "paging":true,
+                    "searching": true,
+                    "ordering": true,
+                    "order": [[ 0, "desc" ]],
+                    "lengthMenu": [ [10, 25, 50, "All"]],
+                    
+                    dom: 'Bfrtip',		 
+                    buttons: [
+                        'excelHtml5',
+                        'csvHtml5',
+                        'pdfHtml5'
+                    ],
+                } );
+                
+                $('#example tbody')
+                        .on( 'mouseenter', 'td', function () {
+                            var colIdx = table.cell(this).index().column;
+                    
+                    $( table.cells().nodes() ).removeClass( 'highlight' );
+                    $( table.column( colIdx ).nodes() ).addClass( 'highlight' );
+                } );
+                
+                
+            } );
+        </script>
+            
+            
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+            
+    </h:head>
+        
+        
+    <h:body>
+        
+        
+        <ui:include src="templates/header.xhtml" /> 
+          
+        <!-- CONTENTS-->
+        <div class="container-fluid">
+            <div class="col-xs-12" style="display:inline-block;padding:10px;padding-top:25px;height:100%;">
+                
+                <!--FILTER START-->
+                <div class="col-xs-12 col-sm-12">
+                    
+                    <div class="col-xs-12 col-sm-12 sholderinbox" style="margin:0px;padding:0px;min-height:100px;">
+                        <h2>Filter Logs</h2>
+                            
+                        <!-- FORM -->
+                        <form class="container-fluid sforminput" action="" style="margin:0px;padding:0px;">
+                            
+                            <div class="col-xs-12 col-sm-2 stextinput" style="margin:0px;padding:0px;">
+                                <select data-placeholder="Logger Name" class="chosen-select">
+                                    <option value=""></option>
+                                    <option value="all">All</option>
+                                    <option value="name1">Name1</option>
+                                    <option value="name2">Name2</option>
+                                </select>
+                            </div>
+                                
+                            <div class="col-xs-12 col-sm-2 stextinput" style="margin:0px;padding:0px;">
+                                
+                                <select data-placeholder="Logger Type" class="chosen-select" >
+                                    <option value=""></option>
+                                    <option value="all">All</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="pompist">Pompist</option>
+                                    <option value="manager">Branch Manager</option>
+                                </select>
+                                    
+                            </div>
+                                
+                            <div class="col-xs-12 col-sm-2 stextinput" style="margin:0px;padding:0px;">
+                                <select data-placeholder="First Name" class="chosen-select">
+                                    <option value=""></option>
+                                    <option value="all">All</option>
+                                    <option value="f1">Firstname1</option>
+                                    <option value="f2">Firstname2</option>
+                                </select>
+                            </div>
+                                
+                            <div class="col-xs-12 col-sm-2 stextinput" style="margin:0px;padding:0px;">
+                                <select data-placeholder="Last Name" class="chosen-select">
+                                    <option value=""></option>
+                                    <option value="all">All</option>
+                                    <option value="f1">lastname1</option>
+                                    <option value="f2">lastname2</option>
+                                </select>
+                            </div>
+                                
+                            <div class="col-xs-12 col-sm-2 stextinput" style="margin:0px;padding:0px;">
+                                <select data-placeholder="Phone Number" class="chosen-select" >
+                                    <option value=""></option>
+                                    <option value="all">All</option>
+                                    <option value="name1@email.com">name1@email.com</option>
+                                    <option value="name2@email.com">name2@email.com</option>
+                                    <option value="name3@email.com">name3@email.com</option>
+                                </select>
+                            </div>
+                                
+                                
+                                
+                            <div class="col-xs-12 col-sm-2 stextinput" style="margin:0px;padding:0px;">
+                                <select data-placeholder="Email" class="chosen-select">
+                                    <option value=""></option>
+                                    <option value="all">All</option>
+                                    <option value="0700000000">0700000000</option>
+                                    <option value="0700000001">0700000001</option>
+                                    <option value="0700000002">0700000002</option>
+                                    <option value="0700000003">0700000003</option>
+                                </select>
+                            </div>
+                                
+                            <div class="clear"></div>
+                                
+                            <!-- DateRange -->
+                            <div class="col-xs-12 col-sm-12 stextinput_date"><input type="text" id="demo" value="02/10/2016 - 02/18/2016"/></div>	
+                            <!-- End DateRange -->
+                                
+                            <div class="clear"></div>
+                                
+                                
+                            <div class="col-xs-12 col-sm-12 ssubmitinput" style="margin:0px;padding:0px;"><input type="submit" name="submit" value="Filter" class="ssubmitinput"/></div>
+                                
+                        </form>
+                        <!-- End FORM -->	
+                            
+                    </div>
+                </div>
+                <!--FILTER END--> 
+                    
+                <div class="clear"></div>
+                    
+                <!-- Start DataTable--> 
+                <div class="col-xs-12 col-sm-12 sholderinbox" style="margin:0px;margin-top:20px;padding:0px;min-height:400px;font-family:ubuntu;overflow-x:auto;">
+                    <h2>Log List</h2>
+                    <span class="container-fluid" style="overflow: auto;">
+                        <div  class="container-fluid" style="padding:10px;">
+                            
+                            <h:dataTable value="#{LogsBean.logList.logList}" var="log"
+                                         id="example"
+                                         styleClass="display" 
+                                         cellspacing="0" 
+                                         width="100%" 
+                                         style="padding:10px;">
+                                <h:column>    				
+                                    <f:facet name="header">ID</f:facet>    				
+                                        #{log.id}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">USER NAME</f:facet>
+                                        #{log.userName}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">ACTION NAME</f:facet>
+                                        #{log.actionName}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">SOURCE</f:facet>
+                                        #{log.source}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">IP ADDRESS</f:facet>
+                                        #{log.ip}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Time</f:facet>
+                                        #{log.datetime}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Actions</f:facet>
+                                    <h:form>
+                                        <h:commandLink onclick="showDatails()"  id="viewDetails"> <h:graphicImage value="images/icon_view.png" />
+                                            <f:ajax event="click" listener="#{LogsBean.logById(log.id)}" render="viewDetailsContentPanel"/>
+                                        </h:commandLink>
+                                    </h:form>
+                                </h:column>
+                            </h:dataTable>
+                                
+                        </div>
+                    </span>
+                </div>
+                <!-- End DataTable-->
+                    
+                <!--Start Pop Up-->      
+                <div id="viewDetailsContent" style="display: none">
+                    
+                    <h:panelGroup id="viewDetailsContentPanel">
+                        <ui:include src="popup/popup_log_view.xhtml" /> 
+                    </h:panelGroup>
+                </div>
+                <!-- End Pop Up-->
+                    
+            </div>
+        </div>
+        <!-- End CONTENTS -->
+            
+            
+            
+        <ui:include src="templates/footer.xhtml" />  
+            
+        <script type="text/javascript">
+            function showDatails(){
+                jsf.ajax.addOnEvent(function(data) {
+                    var ajaxstatus = data.status; // Can be "begin", "complete" and "success"
+                     
+                     
+                    switch (ajaxstatus) {
+                        case "begin": // This is called right before ajax request is been sent.
+                             
+                            break;
+                         
+                        case "complete": // This is called right after ajax response is received.
+                             
+                             
+                            break;
+                         
+                        case "success": // This is called when ajax response is successfully processed.
+                             
+                             
+                            lightcase.start({
+                                href: '#',
+                                maxWidth: 640,
+                                maxHeight: 400,
+                                transition: 'scrollTop',
+                                speedIn:'600',
+                                speedOut:'600',
+                                forceWidth:true,
+                                swipe: true,
+                                useKeys: true,
+                                overlayOpacity:0.8,
+                                title:'',
+                                showSequenceInfo: false,
+                                onFinish: {
+                                    function () {
+                                        var content = $('#viewDetailsContent').html();
+                                        lightcase.get('contentInner').children().html(content);
+                                        // Do a resize now after filling in the content
+                                        lightcase.resize();
+                                    }
+                                }
+                            });
+                            jsf.ajax.
+                                    break;
+                    }
+                });
+            }
+             
+             
+            $('viewDetails').lightcase({
+                transition: 'scrollTop',
+                speedIn:'600',
+                speedOut:'600',
+                forceWidth:true,
+                swipe: true,
+                useKeys: true,
+                overlayOpacity:0.8,
+                title:'',
+                showSequenceInfo: false,
+            });
+             
+             
+            $(".textinput input").change(function() {
+                if ($(this).val() != "") {
+                    $(this).addClass('filled');
+                } else {
+                    $(this).removeClass('filled');
+                }
+            })
+             
+        </script>      
+            
+            
+        <!-- Scripts -->
+        <script type="text/javascript">
+            $(".textinput input").change(function() {
+                if ($(this).val() != "") {
+                    $(this).addClass('filled');
+                } else {
+                    $(this).removeClass('filled');
+                }
+            })
+        </script>
+            
+        <script type="text/javascript" src="js/chosen.jquery.min.js"></script>
+            
+        <script type="text/javascript">
+            var config = {
+                '.chosen-select'           : {},
+                '.chosen-select-deselect'  : {allow_single_deselect:true},
+                '.chosen-select-no-single' : {disable_search_threshold:10},
+                '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+                '.chosen-select-width'     : {width:"95%"}
+            }
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+        </script>
+        <!-- End Scripts -->
+            
+            
+            
+    </h:body>
+</html>

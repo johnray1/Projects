@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+    <h:head>
+        
+        <link href="css/style.css" rel="stylesheet" type="text/css" />  
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+        
+        <link href="css/lightcase.css" rel="stylesheet" type="text/css" />
+        <link href="css/chosen.css" rel="stylesheet" type="text/css" />
+        <link href="css/jquery.dataTables.min.css" rel="stylesheet" />
+        <link href="css/buttons.dataTables.min.css" rel="stylesheet" />
+        <link href="css/easy-responsive-tabs.css" rel="stylesheet" />
+        
+        <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+        <script type="text/javascript" src="js/jquery.events.touch.js"></script>
+        <script type="text/javascript" src="js/lightcase.js"></script>
+        <script type="text/javascript" src="js/lightcase.init.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        
+        <script type="text/javascript" src="js/easy-responsive-tabs.js"></script>
+        <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="js/dataTables.buttons.min.js"></script>	
+        <script type="text/javascript" src="js/buttons.flash.min.js"></script>	
+        <script type="text/javascript" src="js/jszip.min.js"></script>	
+        <script type="text/javascript" src="js/pdfmake.min.js"></script>	
+        <script type="text/javascript" src="js/vfs_fonts.js"></script>	
+        <script type="text/javascript" src="js/buttons.html5.min.js"></script>
+        <script type="text/javascript" src="js/moment.min.js"></script>
+        
+        
+        <script>
+            $(document).ready(function() {
+                $('#example').DataTable( {
+                    "bLengthChange": true,
+                    "paging":true,
+                    "searching": true,
+                    "ordering": true,
+                    "lengthMenu": [ [10, 25, 50, "All"]],
+                    
+                    dom: 'Bfrtip',		 
+                    buttons: [
+                        'excelHtml5',
+                        'csvHtml5',
+                        'pdfHtml5'
+                    ],
+                } );
+                
+                $('#example tbody')
+                        .on( 'mouseenter', 'td', function () {
+                            var colIdx = table.cell(this).index().column;
+                    
+                    $( table.cells().nodes() ).removeClass( 'highlight' );
+                    $( table.column( colIdx ).nodes() ).addClass( 'highlight' );
+                } );
+                
+                
+            } );
+        </script>
+        
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+        
+    </h:head>
+    
+    
+    <h:body>
+        
+        <ui:composition>       
+            <!-- Top -->
+            <h:form>
+                <div class="container-fluid" style="margin:0px;padding:0px;">
+                    <div style="height:65px;font-family:ubuntu;margin:0px;padding:0px;background-color:#1a8c35">
+                        <div class="col-xs-4"><img src="images/sppayfuel_logo.png" class="logo hidden-xs"/><img src="images/sppayfuel_logo.png" class="logo hidden-lg hidden-md hidden-sm visible-xs"/></div>
+                        <div class="col-xs-8" style="margin:0px;padding:0px;line-height:65px;text-align:right;font-size:30px;color:#ffffff;"><strong class="hidden-xs"> Management  </strong> 
+                            <h:commandLink action="#{LoginBean.logout}" class="logout">
+                                <h:graphicImage value="images/icon_logout.png" style="float: right"/>
+                                <span>WELCOME</span> 
+                                #{LoginBean.user}
+                            </h:commandLink>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- End Top -->
+                
+                
+                <!-- Navbar --> 
+                
+                <nav class="navbar navbar-default hidden-xs" style="background-color:#ffffff;height:70px;font-family:ubuntu;color:#ffffff;text-align:center;padding-bottom:0px;margin-bottom:0px;border-bottom:0px solid #012d90;border-radius:0px;">
+                    <div class="container-fluid">
+                        <div class="col-xs-12" style="margin:0px;padding:0px;border:0px solid red;">
+                            
+                            <div class="col-xs-1 dropdown" style="text-align:center;margin:0px;padding:0px;">
+                                <h:commandLink action="#{DashBean.dashBoard()}" class="#{TemplateBean.dashboardClassName}">DASHBOARD</h:commandLink>
+                            </div>
+                            
+                            <h:panelGroup class="col-xs-2 dropdown" style="text-align:center;margin:0px;padding:0px;" rendered="#{BranchBean.branchMenuItemRendered}">
+                            
+                                <h:commandLink action="#{BranchBean.branchesByUserId()}" class="#{TemplateBean.branchClassName}">BRANCHES</h:commandLink>
+                            
+                           </h:panelGroup>
+                            
+                            <div class="col-xs-2 dropdown" style="text-align:center;margin:0px;padding:0px;">
+                                <a class="#{TemplateBean.devicesClassName}" data-toggle="dropdown">ITEMS</a>
+                                <ul class="dropdown-menu" style="float:center;">
+                                    <li>
+                                        <h:commandLink action="#{DeviceBean.devices()}">POS</h:commandLink>
+                                    </li>
+                                    <li>
+                                        <h:commandLink action="#{DeviceBean.pumps()}">PUMPS - NOZZLES</h:commandLink>
+                                    </li>
+                                    <li>
+                                        <h:commandLink>TANKS</h:commandLink>
+                                    </li>
+                                    <li>
+                                        <h:commandLink>VOUCHER</h:commandLink>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="col-xs-2 dropdown" style="text-align:center;margin:0px;padding:0px;">
+                                <a class="#{TemplateBean.productsClassName}" data-toggle="dropdown">PRODUCTS</a>
+                                <ul class="dropdown-menu" style="float:center;">
+                                    <li>
+                                        <h:commandLink action="#{ProductBean.productTypes()}">TYPE</h:commandLink>
+                                    </li>
+                                    <li>
+                                        <h:commandLink action="#{ProductBean.products()}">PRODUCT</h:commandLink>
+                                    </li>
+                                    <li>
+                                        <h:commandLink action="#{ProductBean.branchProductsByUserId()}">BRANCH PRODUCTS</h:commandLink>
+                                    </li>
+                                    <li>
+                                        <h:commandLink >STOCKS</h:commandLink>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="col-xs-2 dropdown" style="text-align:center;margin:0px;padding:0px;">
+                                <a class="#{TemplateBean.usersClassName}" data-toggle="dropdown">USERS - ROLES</a>
+                                <ul class="dropdown-menu" style="float:center;">
+                                    <li>
+                                        <h:commandLink action="#{UserBean.users()}">USERS</h:commandLink>
+                                    </li>
+                                    <li>
+                                        <h:commandLink action="#{UserBean.roles()}">ROLES</h:commandLink>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="col-xs-2 dropdown" style="text-align:center;margin:0px;padding:0px;">
+                                <h:commandLink action="#{TransactionBean.transactions()}" class="#{TemplateBean.transactionsClassName}">TRANSACTIONS</h:commandLink>
+                            </div>
+                            
+                            <div class="col-xs-1 dropdown" style="text-align:center;margin:0px;padding:0px;">
+                                <h:commandLink action="#{LogsBean.logs()}" class="#{TemplateBean.logsClassName}">LOGS</h:commandLink>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                </nav>
+                
+                <!-- Navbar --> 
+                
+                <!-- MobileMenu -->
+                <nav id="myNavbar" class="navbar navbar-default visible-xs hidden-sm hidden-md hidden-lg" style="text-align:left;margin-top:5px;" role="navigation">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only"> </span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#">MENU</a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <h:commandLink action="dashboard.xhtml">Dashboard</h:commandLink>
+                                </li>
+                                <li>
+                                    <h:commandLink action="#{BranchBean.branchesByUserId()}">Branches</h:commandLink>
+                                </li>
+                                <li>
+                                    <h:commandLink action="#{DeviceBean.devices()}">Devices</h:commandLink>
+                                </li>
+                                <li>
+                                    <h:commandLink action="#{ProductBean.products()}">Products</h:commandLink>
+                                </li>
+                                <li>
+                                    <h:commandLink action="#{UserBean.users()}">Users</h:commandLink>
+                                </li>
+                                <li>
+                                    <h:commandLink action="#{UserBean.roles()}">Roles</h:commandLink>
+                                </li>
+                                <li>
+                                    <h:commandLink action="#{TransactionBean.transactions()}">Transactions</h:commandLink>
+                                </li>
+                                <li>
+                                    <h:commandLink action="innerpage_logs.xhtml">Logs</h:commandLink>
+                                </li>    
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <!-- End MobileMenu -->
+            </h:form>
+            
+        </ui:composition>
+    </h:body>
+</html>
+

@@ -1,0 +1,339 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+          
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+          
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>SP - PayFuel Adminstration</title>
+            
+        <link href="css/style.css" rel="stylesheet" type="text/css" />  
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="css/forms.css" rel="stylesheet" type="text/css" />   
+        <link href="css/lightcase.css" rel="stylesheet" type="text/css" />
+        <link href="css/chosen.css" rel="stylesheet" type="text/css" />
+        <link href="css/jquery.dataTables.min.css" rel="stylesheet" />
+        <link href="css/buttons.dataTables.min.css" rel="stylesheet" />
+        <link href="css/easy-responsive-tabs.css" rel="stylesheet" />
+            
+        <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+        <script type="text/javascript" src="js/jquery.events.touch.js"></script>
+        <script type="text/javascript" src="js/lightcase.js"></script>
+        <script type="text/javascript" src="js/lightcase.init.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+            
+        <script type="text/javascript" src="js/easy-responsive-tabs.js"></script>
+        <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="js/dataTables.buttons.min.js"></script>	
+        <script type="text/javascript" src="js/buttons.flash.min.js"></script>	
+        <script type="text/javascript" src="js/jszip.min.js"></script>	
+        <script type="text/javascript" src="js/pdfmake.min.js"></script>	
+        <script type="text/javascript" src="js/vfs_fonts.js"></script>	
+        <script type="text/javascript" src="js/buttons.html5.min.js"></script>	
+        <script type="text/javascript" src="js/moment.min.js"></script>
+            
+            
+        <script>
+            $(document).ready(function() {
+                $('#example').DataTable( {
+                    "bLengthChange": true,
+                    "paging":true,
+                    "searching": true,
+                    "ordering": true,
+                    "lengthMenu": [ [10, 25, 50, "All"]],
+                    
+                    dom: 'Bfrtip',		 
+                    buttons: [
+                        'excelHtml5',
+                        'csvHtml5',
+                        'pdfHtml5'
+                    ],
+                } );
+                
+                $('#example tbody')
+                        .on( 'mouseenter', 'td', function () {
+                            var colIdx = table.cell(this).index().column;
+                    
+                    $( table.cells().nodes() ).removeClass( 'highlight' );
+                    $( table.column( colIdx ).nodes() ).addClass( 'highlight' );
+                } );
+                
+                
+            } );
+        </script>
+            
+            
+            
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+            
+    </h:head>
+        
+        
+    <h:body>
+        
+        <ui:include src="templates/header.xhtml" /> 
+        <!-- CONTENTS-->
+        <div class="container-fluid">
+            <div class="col-xs-12" style="display:inline-block;padding:10px;padding-top:25px;height:100%;">
+                <!--FILTER START--><!--FILTER END-->  
+                <div class="clear"></div>
+                    
+                <div class="col-xs-12 col-sm-12 sholderinbox" style="margin:0px;margin-top:20px;padding:0px;min-height:400px;font-family:ubuntu;overflow-x:auto;">
+                    <h2>Branches List
+                        
+                        <!-- -->
+                        <label class="form_toggle" for="formcontent-toggle">
+                            <a data-rel="lightcase_edit" href="popup/popup_branch_add.xhtml" style="color: #ffffff">Add Branch</a>
+                        </label>
+                        <!-- -->
+                        <!-- -->
+                            
+                    </h2>
+                    <span class="container-fluid" style="overflow: auto;">
+                        <div  class="container-fluid" style="padding:10px;">
+                            
+                            
+                            <!-- Start DataTable--> 
+                            <h:dataTable value="#{BranchBean.branchList.branchList}" var="bra"
+                                         id="example"
+                                         styleClass="display" 
+                                         cellspacing="0" 
+                                         width="100%" 
+                                         style="padding:10px;">
+                                <h:column>    				
+                                    <f:facet name="header">Branch Id</f:facet>    				
+                                        #{bra.branchId}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Branch Name</f:facet>
+                                        #{bra.name}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Address</f:facet>
+                                        #{bra.descr}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Actions</f:facet>
+                                    <h:form>
+                                        <h:commandLink onclick="showDatails()"  id="viewDetails"> <h:graphicImage value="images/icon_view.png" />
+                                            <f:ajax event="click" listener="#{BranchBean.branchbyid(bra.branchId)}" render="viewDetailsContentPanel" />
+                                        </h:commandLink>
+                                        <h:commandLink onclick="editDatails()"  id="editDetails"> <h:graphicImage value="images/icon_edit.png" />
+                                            <f:ajax event="click" listener="#{BranchBean.branchbyid(bra.branchId)}" render="editDetailsContentPanel" />
+                                        </h:commandLink>
+                                    </h:form>
+                                        
+                                </h:column>
+                            </h:dataTable>
+                            <!-- End DataTable--> 
+                                
+                            <!--Start Pop Up-->      
+                            <div id="viewDetailsContent" style="display: none">
+                                
+                                <h:panelGroup id="viewDetailsContentPanel">
+                                    <ui:include src="popup/popup_branch_view.xhtml" /> 
+                                </h:panelGroup>
+                            </div>
+                                
+                            <div id="editDetailsContent" style="display: none">
+                                
+                                <h:panelGroup id="editDetailsContentPanel">
+                                    <ui:include src="popup/popup_branch_edit.xhtml" /> 
+                                </h:panelGroup>
+                            </div>
+                            <!-- End Pop Up-->
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- End CONTENTS -->
+            
+            
+            
+            
+            
+        <ui:include src="templates/footer.xhtml" />     
+            
+            
+            
+            
+            
+            
+        <!-- Scripts -->
+            
+        <script type="text/javascript">
+            function showDatails(){
+                jsf.ajax.addOnEvent(function(data) {
+                    var ajaxstatus = data.status; // Can be "begin", "complete" and "success"
+                    
+                    
+                    switch (ajaxstatus) {
+                        case "begin": // This is called right before ajax request is been sent.
+                            
+                            break;
+                        
+                        case "complete": // This is called right after ajax response is received.
+                            
+                            
+                            break;
+                        
+                        case "success": // This is called when ajax response is successfully processed.
+                            
+                            
+                            lightcase.start({
+                                href: '#',
+                                maxWidth: 640,
+                                maxHeight: '700',
+                                transition: 'scrollTop',
+                                speedIn:'600',
+                                speedOut:'600',
+                                forceWidth:true,
+                                swipe: true,
+                                useKeys: true,
+                                overlayOpacity:0.8,
+                                title:'',
+                                showSequenceInfo: false,
+                                onFinish: {
+                                    function () {
+                                        var content = $('#viewDetailsContent').html();
+                                        lightcase.get('contentInner').children().html(content);
+                                        // Do a resize now after filling in the content
+                                        lightcase.resize();
+                                    }
+                                }
+                            });
+                            jsf.ajax.
+                                    break;
+                    }
+                });
+            }
+            
+            
+            $('viewDetails').lightcase({
+                transition: 'scrollTop',
+                maxWidth:'640',
+                maxHeight:'400',
+                speedIn:'600',
+                speedOut:'600',
+                forceWidth:true,
+                swipe: true,
+                useKeys: true,
+                overlayOpacity:0.8,
+                title:'',
+                showSequenceInfo: false,
+            });
+            
+            
+            $(".textinput input").change(function() {
+                if ($(this).val() != "") {
+                    $(this).addClass('filled');
+                } else {
+                    $(this).removeClass('filled');
+                }
+            })
+            
+        </script>
+            
+        <script type="text/javascript">
+            function editDatails(){
+                jsf.ajax.addOnEvent(function(data) {
+                    var ajaxstatus = data.status; // Can be "begin", "complete" and "success"
+                    
+                    
+                    switch (ajaxstatus) {
+                        case "begin": // This is called right before ajax request is been sent.
+                            
+                            break;
+                        
+                        case "complete": // This is called right after ajax response is received.
+                            
+                            
+                            break;
+                        
+                        case "success": // This is called when ajax response is successfully processed.
+                            
+                            
+                            lightcase.start({
+                                href: '#',
+                                maxWidth: 640,
+                                maxHeight: 400,
+                                transition: 'scrollTop',
+                                speedIn:'600',
+                                speedOut:'600',
+                                forceWidth:true,
+                                swipe: true,
+                                useKeys: true,
+                                overlayOpacity:0.8,
+                                title:'',
+                                showSequenceInfo: false,
+                                onFinish: {
+                                    function () {
+                                        var content = $('#editDetailsContent').html();
+                                        lightcase.get('contentInner').children().html(content);
+                                        // Do a resize now after filling in the content
+                                        lightcase.resize();
+                                    }
+                                }
+                            });
+                            jsf.ajax.
+                                    break;
+                    }
+                });
+            }
+            
+            
+            $('editDetails').lightcase({
+                transition: 'scrollTop',
+                maxWidth:'640',
+                maxHeight:'400',
+                speedIn:'600',
+                speedOut:'600',
+                forceWidth:true,
+                swipe: true,
+                useKeys: true,
+                overlayOpacity:0.8,
+                title:'',
+                showSequenceInfo: false,
+            });
+            
+            
+            $(".textinput input").change(function() {
+                if ($(this).val() != "") {
+                    $(this).addClass('filled');
+                } else {
+                    $(this).removeClass('filled');
+                }
+            })
+            
+        </script>
+            
+        <script type="text/javascript" src="js/chosen.jquery.min.js"></script>
+            
+        <script type="text/javascript">
+            var config = {
+                '.chosen-select'           : {},
+                '.chosen-select-deselect'  : {allow_single_deselect:true},
+                '.chosen-select-no-single' : {disable_search_threshold:10},
+                '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+                '.chosen-select-width'     : {width:"95%"}
+            }
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+        </script>
+            
+        <!-- End Scripts -->
+            
+            
+            
+    </h:body>
+</html>

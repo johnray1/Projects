@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+    <h:head>
+        
+        <link href="css/style.css" rel="stylesheet" type="text/css" />  
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+        
+        <link href="css/lightcase.css" rel="stylesheet" type="text/css" />
+        <link href="css/chosen.css" rel="stylesheet" type="text/css" />
+        <link href="css/jquery.dataTables.min.css" rel="stylesheet" />
+        <link href="css/buttons.dataTables.min.css" rel="stylesheet" />
+        <link href="css/easy-responsive-tabs.css" rel="stylesheet" />
+        
+        <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+        <script type="text/javascript" src="js/jquery.events.touch.js"></script>
+        <script type="text/javascript" src="js/lightcase.js"></script>
+        <script type="text/javascript" src="js/lightcase.init.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        
+        <script type="text/javascript" src="js/easy-responsive-tabs.js"></script>
+        <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="js/dataTables.buttons.min.js"></script>	
+        <script type="text/javascript" src="js/buttons.flash.min.js"></script>	
+        <script type="text/javascript" src="js/jszip.min.js"></script>	
+        <script type="text/javascript" src="js/pdfmake.min.js"></script>	
+        <script type="text/javascript" src="js/vfs_fonts.js"></script>	
+        <script type="text/javascript" src="js/buttons.html5.min.js"></script>
+        <script type="text/javascript" src="js/moment.min.js"></script>
+        
+        
+        <script>
+            $(document).ready(function() {
+                $('#example').DataTable( {
+                    "bLengthChange": true,
+                    "paging":true,
+                    "searching": true,
+                    "ordering": true,
+                    "lengthMenu": [ [10, 25, 50, "All"]],
+                    
+                    dom: 'Bfrtip',		 
+                    buttons: [
+                        'excelHtml5',
+                        'csvHtml5',
+                        'pdfHtml5'
+                    ],
+                } );
+                
+                $('#example tbody')
+                        .on( 'mouseenter', 'td', function () {
+                            var colIdx = table.cell(this).index().column;
+                    
+                    $( table.cells().nodes() ).removeClass( 'highlight' );
+                    $( table.column( colIdx ).nodes() ).addClass( 'highlight' );
+                } );
+                
+                
+            } );
+        </script>
+        
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+        
+    </h:head>
+    
+    
+    <h:body>
+        
+        <ui:composition>
+            <h:form>
+            <!-- Footer -->
+            <div class="clear" style="margin-top:20px;"></div>
+            <footer class="footerlong">
+                <!--
+                <div class="container hidden-xs hidden-sm">
+                    <p class="col-xs-12" style="text-align:center;margin:0px;padding:5px;">
+                        
+                        <h:commandLink action="dashboard.xhtml" class="omenu_footer">Dashboard</h:commandLink>
+                        <h:commandLink action="#{BranchBean.branchesByUserId()}" class="omenu_footer">Branches</h:commandLink>
+                        <h:commandLink action="#{DeviceBean.devices()}" class="omenu_footer">Devices</h:commandLink>
+                        <h:commandLink action="#{ProductBean.products()}" class="omenu_footer">Products</h:commandLink>
+                        <h:commandLink action="#{UserBean.users()}" class="omenu_footer">Users</h:commandLink>
+                        <h:commandLink action="#{UserBean.roles()}" class="omenu_footer">Roles</h:commandLink>
+                        <h:commandLink action="#{TransactionBean.transactions()}" class="omenu_footer">Transactions</h:commandLink>
+                        <h:commandLink action="innerpage_logs.xhtml" class="omenu_footer">Logs</h:commandLink>
+                        
+                    </p>
+                </div>
+                -->
+                <div class="container" style="padding:0px;">
+                    <p class="col-xs-5" style="text-align:left;font-family:ubuntu;"> &copy; Copyright 2016</p>
+                    <p class="col-xs-7" style="text-align:right;font-family:ubuntu;">Powered by oltranz.com</p>
+                </div>
+            </footer>
+            <!-- Footer -->
+           </h:form> 
+        </ui:composition>
+    </h:body>
+</html>
+
+
+

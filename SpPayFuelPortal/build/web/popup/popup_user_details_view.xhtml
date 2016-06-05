@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>USER ID No ### - InPopup</title>
+        
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>	
+        
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+        
+        <script src="js/jquery-2.0.3.min.js"></script> 
+        <script src="js/bootstrap.min.js"></script>  
+        
+        <!-- x-editable -->
+        <link href="css/bootstrap-editable.css" rel="stylesheet"/>
+        <script src="js/bootstrap-editable.min.js"></script>
+        <script src="js/xeditable_functions.js"></script>
+        <!-- end x-editable -->
+    </h:head>
+    <h:body>
+        
+        <ui:composition> 
+            
+            <div class="container-fluid" style="margin:0px;padding:0px;border:0px solid red;">
+                
+                <div class="col-xs-12 col-sm-12 holderinbox_popup" style="margin:0px;padding:0px;min-height:300px;">
+                    <h2 style="text-align:left;font-size:18px;">USER  DETAILS<button id="enable" class="btn btn-default mode" style="margin:-3px;">VIEW MODE</button></h2>
+                    
+                    
+                    <span class="container-fluid" style="margin:0px;padding:0px;">
+                        
+                        <!-- DETAILS -->
+                        <table class="col-xs-12 innertable user_details">
+                            
+                            <tbody class="row">
+                                <tr>
+                                    <th class="col-xs-3 columnleft">USER ID</th>
+                                    <th class="col-xs-7 dataright" style="border:0px solid red;">
+                                        <a href="#" id="userid" data-type="text">id</a>
+                                    </th>
+                                </tr>
+                            </tbody>
+                            
+                            <tbody class="row">
+                                <tr>
+                                    <th class="col-xs-3 columnleft">FIRST NAME</th>
+                                    <th class="col-xs-7 dataright">
+                                        <a href="#" id="firstname" data-type="text">FIRST</a>
+                                    </th>
+                                </tr>
+                            </tbody>
+                            
+                            <tbody class="row">
+                                <tr>
+                                    <th class="col-xs-3 columnleft">OTHER NAME</th>
+                                    <th class="col-xs-7 dataright"><a href="#" id="othername" data-type="text">name</a></th>
+                                </tr>
+                            </tbody>
+                            
+                            <tbody class="row">
+                                <tr>
+                                    <th class="col-xs-3 columnleft">EMAIL</th>
+                                    <th class="col-xs-7 dataright"><a href="#" id="email" data-type="email">admin@example.com</a></th>
+                                </tr>
+                            </tbody>
+                            
+                            
+                            
+                            <tbody class="row">
+                                <tr>
+                                    <th class="col-xs-3 columnleft">PHONE NO</th>
+                                    <th class="col-xs-7 dataright"><a href="#" id="phone" data-type="text">data4 textarea</a></th>
+                                </tr>
+                            </tbody>
+                            
+                            <tbody class="row">
+                                <tr>
+                                    <th class="col-xs-3 columnleft">GENDER</th>
+                                    <th class="col-xs-7 dataright"><a href="#" id="gender" data-type="text">GENDER</a></th>
+                                </tr>
+                            </tbody>
+                            
+                            <tbody class="row">
+                                <tr>
+                                    <th class="col-xs-3 columnleft">DETAILS</th>
+                                    <th class="col-xs-7 dataright"><a href="#" id="details" data-type="textarea">data4 details</a></th>
+                                </tr>
+                            </tbody>
+                            
+                        </table>
+                        <!-- End DETAILS -->
+                        
+                        
+                        <!-- ROLES -->
+                        <table class="col-xs-12 innertable user_details">
+                            <tbody>
+                                <tr>
+                                    <th class="col-xs-12 edit_users_permissions">
+                                        
+                                        <div class="col-xs-12 edit_users_permissions_checkinput">
+                                            <fieldset> 
+                                                <legend>User Roles</legend>
+                                                <div id="roles" data-type="checklist" data-value="2,3" class="editable editable-click"></div>
+                                            </fieldset>
+                                        </div>
+                                        
+                                    </th>
+                                </tr>
+                            </tbody>						
+                        </table>
+                        <!-- End ROLES -->
+                        
+                        
+                        
+                        <!-- PERMISSIONS -->
+                        <table class="col-xs-12 innertable user_details">
+                            <tbody>
+                                <tr>
+                                    <th class="col-xs-12 edit_users_permissions">
+                                        
+                                        <div class="col-xs-12 edit_users_permissions_checkinput">
+                                            <fieldset> 
+                                                <legend>User Permissions</legend>
+                                                <div id="permissions" data-type="checklist" data-value="2,3" class="editable editable-click"></div>
+                                            </fieldset>
+                                        </div>
+                                        
+                                    </th>
+                                </tr>
+                            </tbody>						
+                        </table>
+                        <!-- End PERMISSION -->
+                        
+                    </span>
+                    
+                    <!-- <a href="#" class="user_mored"></a> -->
+                    <!-- <button class="print">PRINT</button> -->            
+                    
+                </div>
+            </div>
+            
+            <script>
+                // TOGGLE BUTTON
+                $('.mode').click(function(){
+                    var $this = $(this);
+                    $this.toggleClass('mode');
+                    if($this.hasClass('mode')){
+                        $this.text('VIEW MODE');			
+                    } else {
+                        $this.text('EDIT MODE');
+                    }
+                });
+            </script> 
+            
+            
+        </ui:composition>
+    </h:body>
+</html>
+
