@@ -141,6 +141,15 @@ public class ProductManagementService {
     }
     
     @GET
+    @Path("branch/products/{branchId}/{productId}")
+    @Produces({"application/xml", "application/json"})
+    public String getBranchProductList(@PathParam("branchId") Integer branchId,@PathParam("productId") Integer productId) {
+        
+        ResultObject result= productManager.getBranchProduct(branchId,productId);
+        return result.getJsonFormat();
+    }
+    
+    @GET
     @Path("product/{id}")
     @Produces({"application/xml", "application/json"})
     public String getProductByItsId(@PathParam("id") Integer id) {

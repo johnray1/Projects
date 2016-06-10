@@ -23,7 +23,8 @@ public class VoucherManager {
     @PersistenceContext
     private EntityManager em;
     @EJB
-            CommonFunctionEjb commonFunctionEjb;
+    CommonFunctionEjb commonFunctionEjb;
+    
      public ResultObject createVoucher(Voucher newVoucher){
         
         //set the returntype resultset object

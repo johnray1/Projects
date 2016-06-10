@@ -437,9 +437,193 @@ public class PumpManager {
             }
             resultObject.setObject(pumpNozzleProductModelList);
             resultObject.setMessage(pumpNozzleProductModelList.size()+" "+"Data found");
-            resultObject.setStatusCode(00);
+            resultObject.setStatusCode(100);
             return resultObject;
         }
     }
+    
+    public ResultObject getPumpNozzleProductList(int nozzleId){
+        
+        ResultObject resultObject=new ResultObject();
+        resultObject.setObjectClass(PumpNozzleProductModel.class);
+        
+        Nozzle nozzle=em.find(Nozzle.class,nozzleId);
+        
+        if(nozzle==null){
+            resultObject.setObject(null);
+            resultObject.setMessage("No Pumps Found");
+            resultObject.setStatusCode(500);
+            return resultObject;
+        }
+        else{
+            
+            PumpNozzleProductModel pumpNozzleProductModel=new PumpNozzleProductModel();
+            
+            pumpNozzleProductModel.setPumpId(nozzle.getPumpId());
+            Pump pump=commonFunctionEjb.getPumpName(nozzle.getPumpId());
+            pumpNozzleProductModel.setPumpName(pump.getName());
+            pumpNozzleProductModel.setNozzleId(nozzle.getNozzleId());
+            pumpNozzleProductModel.setNozzleName(nozzle.getNozzleName());
+            pumpNozzleProductModel.setIndex(nozzle.getNozzleIndex());
+            pumpNozzleProductModel.setProductId(nozzle.getProductId());
+            Product product=commonFunctionEjb.getProductName(nozzle.getProductId());
+            pumpNozzleProductModel.setProductName(product.getName());
+            pumpNozzleProductModel.setBranchId(pump.getBranchId());
+            Branch branch=commonFunctionEjb.getBranchName(pump.getBranchId());
+            pumpNozzleProductModel.setBranchName(branch.getName());
+            pumpNozzleProductModel.setStatus(pump.getStatus());
+            
+            resultObject.setObject(pumpNozzleProductModel);
+            resultObject.setMessage("Pump Data found");
+            resultObject.setStatusCode(100);
+            return resultObject;
+        }
+    }
+    
+//    public ResultObject getPumpNozzleProductList(int userId){
+//
+//        ResultObject resultObject=new ResultObject();
+//        resultObject.setObjectClass(PumpNozzleProductModel.class);
+//
+//        //check if user is available
+//        User user=em.find(User.class,userId);
+//        if(user==null){
+//            resultObject.setMessage("User is not Created To Access The PumpNozzleList");
+//            resultObject.setObject(null);
+//            resultObject.setStatusCode(500);
+//            return resultObject;
+//        }
+//
+//        List<PumpNozzleProductModel> pumpNozzleProductModelList=new ArrayList<>();
+//        Nozzle nozzle;
+//        List<Nozzle> nozzleList=(List<Nozzle>)em.createQuery("SELECT n FROM Nozzle n").getResultList();
+//
+//
+//        //if user id 1 bring all transaction
+//        if(user.getUserId()==1){
+//
+//            Iterator i=nozzleList.iterator();
+//            while(i.hasNext()){
+//                nozzle=(Nozzle) i.next();
+//
+//                PumpNozzleProductModel pumpNozzleProductModel=new PumpNozzleProductModel();
+//
+//                pumpNozzleProductModel.setPumpId(nozzle.getPumpId());
+//                Pump pump=commonFunctionEjb.getPumpName(nozzle.getPumpId());
+//                pumpNozzleProductModel.setPumpName(pump.getName());
+//                pumpNozzleProductModel.setNozzleId(nozzle.getNozzleId());
+//                pumpNozzleProductModel.setNozzleName(nozzle.getNozzleName());
+//                pumpNozzleProductModel.setIndex(nozzle.getNozzleIndex());
+//                pumpNozzleProductModel.setProductId(nozzle.getProductId());
+//                Product product=commonFunctionEjb.getProductName(nozzle.getProductId());
+//                pumpNozzleProductModel.setProductName(product.getName());
+//                pumpNozzleProductModel.setBranchId(pump.getBranchId());
+//                Branch branch=commonFunctionEjb.getBranchName(pump.getBranchId());
+//                pumpNozzleProductModel.setBranchName(branch.getName());
+//                pumpNozzleProductModel.setStatus(pump.getStatus());
+//
+//                pumpNozzleProductModelList.add(pumpNozzleProductModel);
+//            }
+//            resultObject.setObject(pumpNozzleProductModelList);
+//            resultObject.setMessage(pumpNozzleProductModelList.size()+" "+"Data found");
+//            resultObject.setStatusCode(100);
+//            return resultObject;
+//        }
+//
+//
+//        //get the user details,roles and its branch
+//        UserDetailsModel userDetails= (UserDetailsModel) userManager.getUserDetails(user.getUserId()).getObject();
+//        List<Role> roles=userDetails.getRoles();
+//        Integer branchId=-1;
+//        for(Role r: roles){
+//
+//            if(r.getTypeId()==1){
+//
+//                Iterator i=nozzleList.iterator();
+//                while(i.hasNext()){
+//                    nozzle=(Nozzle) i.next();
+//
+//                    PumpNozzleProductModel pumpNozzleProductModel=new PumpNozzleProductModel();
+//
+//                    pumpNozzleProductModel.setPumpId(nozzle.getPumpId());
+//                    Pump pump=commonFunctionEjb.getPumpName(nozzle.getPumpId());
+//                    pumpNozzleProductModel.setPumpName(pump.getName());
+//                    pumpNozzleProductModel.setNozzleId(nozzle.getNozzleId());
+//                    pumpNozzleProductModel.setNozzleName(nozzle.getNozzleName());
+//                    pumpNozzleProductModel.setIndex(nozzle.getNozzleIndex());
+//                    pumpNozzleProductModel.setProductId(nozzle.getProductId());
+//                    Product product=commonFunctionEjb.getProductName(nozzle.getProductId());
+//                    pumpNozzleProductModel.setProductName(product.getName());
+//                    pumpNozzleProductModel.setBranchId(pump.getBranchId());
+//                    Branch branch=commonFunctionEjb.getBranchName(pump.getBranchId());
+//                    pumpNozzleProductModel.setBranchName(branch.getName());
+//                    pumpNozzleProductModel.setStatus(pump.getStatus());
+//
+//                    pumpNozzleProductModelList.add(pumpNozzleProductModel);
+//                }
+//                resultObject.setObject(pumpNozzleProductModelList);
+//                resultObject.setMessage(pumpNozzleProductModelList.size()+" "+"Data found");
+//                resultObject.setStatusCode(100);
+//                return resultObject;
+//            }
+//
+//            if(r.getTypeId()==2){
+//
+//                List<RoleForBranch> list = (List<RoleForBranch>)em.createQuery("SELECT r FROM RoleForBranch r WHERE r.roleForBranchPK.roleId = :roleId").setParameter("roleId", r.getRoleId()).getResultList();
+//                if(list.size()>0)
+//
+//                    branchId=list.get(0).getRoleForBranchPK().getBranchId();
+//            }
+//        }
+//
+//        if(branchId==-1){
+//            resultObject.setObject(null);
+//            resultObject.setMessage("You are not a staff of any branch to access the PumpDetails");
+//            resultObject.setObjectClass(Branch.class);
+//            resultObject.setStatusCode(500);
+//            return resultObject;
+//        }
+//
+//        Pump p;
+//        List<Pump> pumpList=(List<Pump>) em.createQuery("SELECT p FROM Pump p WHERE p.branchId = :branchId").setParameter("branchId", branchId).getResultList();
+//        Iterator it=pumpList.iterator();
+//        while(it.hasNext()){
+//            p=(Pump) it.next();
+//
+//            nozzleList=(List<Nozzle>)em.createQuery("SELECT n FROM Nozzle n WHERE n.pumpId = :pumpId").setParameter("pumpId", p.getPumpId()).getResultList();
+//            Iterator i=nozzleList.iterator();
+//            while(i.hasNext()){
+//                nozzle=(Nozzle) i.next();
+//
+//                PumpNozzleProductModel pumpNozzleProductModel=new PumpNozzleProductModel();
+//
+//                pumpNozzleProductModel.setPumpId(nozzle.getPumpId());
+//                Pump pump=commonFunctionEjb.getPumpName(nozzle.getPumpId());
+//                pumpNozzleProductModel.setPumpName(pump.getName());
+//                pumpNozzleProductModel.setNozzleId(nozzle.getNozzleId());
+//                pumpNozzleProductModel.setNozzleName(nozzle.getNozzleName());
+//                pumpNozzleProductModel.setIndex(nozzle.getNozzleIndex());
+//                pumpNozzleProductModel.setProductId(nozzle.getProductId());
+//                Product product=commonFunctionEjb.getProductName(nozzle.getProductId());
+//                pumpNozzleProductModel.setProductName(product.getName());
+//                pumpNozzleProductModel.setBranchId(pump.getBranchId());
+//                Branch branch=commonFunctionEjb.getBranchName(pump.getBranchId());
+//                pumpNozzleProductModel.setBranchName(branch.getName());
+//                pumpNozzleProductModel.setStatus(pump.getStatus());
+//
+//                pumpNozzleProductModelList.add(pumpNozzleProductModel);
+//            }
+//
+//            resultObject.setObject(pumpNozzleProductModelList);
+//            resultObject.setMessage(pumpNozzleProductModelList.size()+" "+"Data found");
+//            resultObject.setStatusCode(100);
+//            return resultObject;
+//        }
+//
+//        resultObject.setObject(null);
+//        resultObject.setMessage("There are no PumpDetails in the system");
+//        resultObject.setStatusCode(500);
+//        return resultObject;
+//    }
     
 }

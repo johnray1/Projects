@@ -69,6 +69,15 @@ public class PumpManagementService {
     }
     
     @GET
+    @Path("getPumpNozzleProductList/{nozzleId}")
+    @Produces({"application/xml", "application/json"})
+    public String getPumpNozzleProductList(@PathParam("nozzleId") Integer nozzleId) {
+        
+        ResultObject result= pumpManager.getPumpNozzleProductList(nozzleId);
+        return result.getJsonFormat();
+    }
+    
+    @GET
     @Path("pump/{id}")
     @Produces({"application/xml", "application/json"})
     public String getPumpByItsId(@PathParam("id") Integer id) {

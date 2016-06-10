@@ -1,0 +1,65 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.oltranz.payfuel.services;
+
+import com.oltranz.payfuel.beans.TransactionManager;
+import com.oltranz.payfuel.models.ResultObject;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+
+/**
+ *
+ * @author John
+ */
+@Stateless
+@Path("TransactionManagementService")
+public class TransactionManagementService {
+    
+    @EJB
+    private TransactionManager transactionManager;
+    
+    @GET
+    @Path("transactions")
+    @Consumes({"application/xml", "application/json"})
+    public String getTransactionList() {
+        
+        ResultObject result= transactionManager.getTransactionList();
+        
+        String jsonResult=result.getJsonFormat();
+        
+        return jsonResult;
+    }
+    
+    @GET
+    @Path("transaction/{transactionId}")
+    @Consumes({"application/xml", "application/json"})
+    public String getTransactionListByTraId(@PathParam("transactionId") long transactionId) {
+        
+        ResultObject result= transactionManager.getTransactionListByTraId(transactionId);
+        
+        String jsonResult=result.getJsonFormat();
+        
+        return jsonResult;
+    }
+    
+    
+    @GET
+    @Path("transactions/{userId}")
+    @Consumes({"application/xml", "application/json"})
+    public String getTransactionList(@PathParam("userId") Integer userId) {
+        
+        ResultObject result= transactionManager.getTransactionList(userId);
+        
+        String jsonResult=result.getJsonFormat();
+        
+        return jsonResult;
+    }
+    
+}

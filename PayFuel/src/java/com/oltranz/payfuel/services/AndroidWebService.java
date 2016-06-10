@@ -18,10 +18,8 @@ import java.io.InputStream;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 
 /**
  *
@@ -112,66 +110,8 @@ public class AndroidWebService {
     }
     
     
-    @GET
-    @Path("pos/transactions")
-    @Consumes({"application/xml", "application/json"})
-    public String getTransactionList() {
-        
-        ResultObject result= androidDataManager.getTransactionList();
-        
-        String jsonResult=result.getJsonFormat();
-        
-        return jsonResult;
-    }
-    
-    @GET
-    @Path("pos/transaction/{transactionId}")
-    @Consumes({"application/xml", "application/json"})
-    public String getTransactionListByTraId(@PathParam("transactionId") Integer transactionId) {
-        
-        ResultObject result= androidDataManager.getTransactionListByTraId(transactionId);
-        
-        String jsonResult=result.getJsonFormat();
-        
-        return jsonResult;
-    }
     
     
-    @GET
-    @Path("pos/transactions/{userId}")
-    @Consumes({"application/xml", "application/json"})
-    public String getTransactionList(@PathParam("userId") Integer userId) {
-        
-        ResultObject result= androidDataManager.getTransactionList(userId);
-        
-        String jsonResult=result.getJsonFormat();
-        
-        return jsonResult;
-    }
-    
-    @GET
-    @Path("logs")
-    @Consumes({"application/xml", "application/json"})
-    public String getLogList() {
-        
-        ResultObject result= androidDataManager.getLogList();
-        
-        String jsonResult=result.getJsonFormat();
-        
-        return jsonResult;
-    }
-    
-    @GET
-    @Path("log/{logId}")
-    @Consumes({"application/xml", "application/json"})
-    public String getLog(@PathParam("logId") Integer logId) {
-        
-        ResultObject result= androidDataManager.getLog(logId);
-        
-        String jsonResult=result.getJsonFormat();
-        
-        return jsonResult;
-    }
     
     
     
