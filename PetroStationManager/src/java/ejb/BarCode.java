@@ -9,7 +9,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import javax.ejb.Stateless;
 import org.krysalis.barcode4j.impl.upcean.EAN13Bean;
 import org.krysalis.barcode4j.output.bitmap.BitmapCanvasProvider;
 import org.krysalis.barcode4j.tools.UnitConv;
@@ -18,14 +17,14 @@ import org.krysalis.barcode4j.tools.UnitConv;
  *
  * @author JOHN
  */
-@Stateless
+
 public class BarCode {
     
     
-    private String barCodePath = "/Users/JOHN/Desktop/";
+    private static String barCodePath = "/Users/JOHN/Desktop/";
     
 //this function create barcode image
-    public String eanImage(String fileName) {
+    public static String eanImage(String fileName) {
         
         try{
             EAN13Bean bean=new EAN13Bean();
@@ -46,6 +45,7 @@ public class BarCode {
             
             //Generate the barcode
             bean.generateBarcode(canvas, fileName);
+   
             
             canvas.finish();
             
@@ -61,7 +61,7 @@ public class BarCode {
     
     
 //this both function create barcode number
-    public String eanNumber(String s) {
+    public static String eanNumber(String s) {
         
         int result;
         result = addIntegerPlaceValue(s);
@@ -72,7 +72,7 @@ public class BarCode {
         return s;
     }
     
-    public int addIntegerPlaceValue(String barCode){
+    public static int addIntegerPlaceValue(String barCode){
         
         int summ = 0;
         for (int i = 0; i < barCode.length(); i++){

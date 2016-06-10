@@ -23,10 +23,9 @@ public class VoucherManagerEjb {
     private EntityManager entityManager;
     
     @EJB
-    private RandomPin rp;
+    RandomPin rp;
     
-    @EJB
-    private BarCode bc;
+    
     
     
     public String barCodeGenerator(VoucherGenerate vg){
@@ -39,7 +38,7 @@ public class VoucherManagerEjb {
         for (i = 0; i < no; i++){
             
             String ranNo=rp.createRandom12Digit();
-            String vNo=bc.eanNumber(ranNo);
+            String vNo=BarCode.eanNumber(ranNo);
             
             Voucher v=new Voucher();
             v.setVNo(vNo);
@@ -47,7 +46,7 @@ public class VoucherManagerEjb {
             v.setVAmount(Double.parseDouble(amount));
             entityManager.persist(v);
             
-            String vImage=bc.eanImage(ranNo);
+            String vImage=BarCode.eanImage(ranNo);
             
             
         }

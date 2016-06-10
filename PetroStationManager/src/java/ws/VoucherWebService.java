@@ -5,7 +5,6 @@
  */
 package ws;
 
-import beans.SpReq;
 import beans.VoucherGenerate;
 import ejb.CommonLibrary;
 import ejb.VoucherManagerEjb;

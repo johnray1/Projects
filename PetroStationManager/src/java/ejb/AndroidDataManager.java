@@ -508,10 +508,23 @@ public class AndroidDataManager {
         }
         
         else{
+//            VoucherOp vo=new VoucherOp();
+//            vo.setBarnumber(barNumber);
+//            vo.setBaramount("invalid");
+//            vo.setValidation("invalid");
+            
+            Voucher v=new Voucher();
+            List<Voucher> vl=(List<Voucher>)entityManager.createQuery("SELECT v FROM Voucher v WHERE v.vNo = :vNo and v.vFormat = :vFormat").setParameter("vNo", barNumber).setParameter("vFormat", barFormat).getResultList();
+            Iterator i=vl.iterator();
+            while(i.hasNext())
+            {
+                v=(Voucher) i.next();
+            }
+            
             VoucherOp vo=new VoucherOp();
-            vo.setBarnumber(barNumber);
-            vo.setBaramount("invalid");
-            vo.setValidation("invalid");
+            vo.setBarnumber(v.getVNo());
+            vo.setBaramount(v.getVAmount().toString());
+            vo.setValidation("valid");
             
             ObjectMapper mapper = new ObjectMapper();
             String jsonInString = mapper.writeValueAsString(vo);
