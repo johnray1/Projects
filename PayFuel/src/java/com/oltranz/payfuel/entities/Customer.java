@@ -35,7 +35,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Customer.findByCustomerTypeId", query = "SELECT c FROM Customer c WHERE c.customerTypeId = :customerTypeId")})
 public class Customer implements Serializable {
     private static final long serialVersionUID = 1L;
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)

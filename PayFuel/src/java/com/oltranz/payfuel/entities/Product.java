@@ -47,7 +47,7 @@ public class Product implements Serializable {
     private String name;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "hq_price", precision = 22)
-    private Double hqPrice=0.0;
+    private Double hqPrice;
     @Size(max = 50)
     @Column(name = "measure_unity", length = 50)
     private String measureUnity;

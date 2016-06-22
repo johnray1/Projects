@@ -7,9 +7,7 @@ package com.oltranz.payfuel.services;
 
 import com.oltranz.payfuel.beans.PaymentModeManager;
 import com.oltranz.payfuel.entities.PaymentMode;
-import com.oltranz.payfuel.library.CommonLibrary;
 import com.oltranz.payfuel.models.ResultObject;
-import java.io.InputStream;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;

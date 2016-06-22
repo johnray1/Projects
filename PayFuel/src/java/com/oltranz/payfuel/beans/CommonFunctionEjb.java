@@ -16,6 +16,7 @@ import com.oltranz.payfuel.entities.ProductType;
 import com.oltranz.payfuel.entities.Pump;
 import com.oltranz.payfuel.entities.Role;
 import com.oltranz.payfuel.entities.RoleType;
+import com.oltranz.payfuel.entities.Tank;
 import com.oltranz.payfuel.entities.Transaction;
 import com.oltranz.payfuel.entities.User;
 import com.oltranz.payfuel.entities.Voucher;
@@ -54,6 +55,15 @@ public class CommonFunctionEjb {
             return null;
         }
         return pump;
+    }
+    
+    public Tank getTank(int tankId){
+        
+        Tank tank=em.find(Tank.class, tankId);
+        if(tank==null){
+            return null;
+        }
+        return tank;
     }
     
     public Device getDeviceName(int deviceId){

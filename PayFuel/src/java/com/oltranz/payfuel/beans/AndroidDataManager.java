@@ -16,11 +16,11 @@ import com.oltranz.payfuel.entities.SpPaymentRes;
 import com.oltranz.payfuel.entities.Transaction;
 import com.oltranz.payfuel.entities.User;
 import com.oltranz.payfuel.entities.UserPumpNozzle;
-import com.oltranz.payfuel.entities.Voucher;
-import com.oltranz.payfuel.library.CommonLibrary;
+import com.oltranz.payfuel.library.PaymentLibrary;
 import com.oltranz.payfuel.models.AsyncTransaction;
 import com.oltranz.payfuel.models.LoginOpModel;
 import com.oltranz.payfuel.models.LogoutOpModel;
+import com.oltranz.payfuel.models.PaymentResponse;
 import com.oltranz.payfuel.models.ResultObject;
 import com.oltranz.payfuel.models.SaleDetailsModel;
 import com.oltranz.payfuel.models.SaleDetailsModelList;
@@ -30,6 +30,7 @@ import com.oltranz.payfuel.models.UserDetailsModel;
 import static java.lang.System.out;
 import java.net.InetAddress;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,8 +40,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 /**
  *
@@ -218,11 +217,12 @@ public class AndroidDataManager {
     
 //-------------------------------------------------------Sale-----------------------------------------------------------
     
+    
+    
     public ResultObject sale(SaleDetailsModel saleDetailsModel){
         
         ResultObject resultObject=new ResultObject();
         resultObject.setObjectClass(SaleDetailsModel.class);
-        
         try{
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date date = new Date();
@@ -233,6 +233,8 @@ public class AndroidDataManager {
             Device device=commonFunctionEjb.getDeviceNoId(saleDetailsModel.getDeviceId());
             String transactionId=device.getDeviceId().toString()+saleDetailsModel.getDeviceTransactionId();
             long traId=Long.parseLong(transactionId);
+            
+            PaymentResponse paymentResponse=PaymentLibrary.sendTestPaymentXML(traId,saleDetailsModel.getPaymentModeId(),saleDetailsModel.getAmount(),saleDetailsModel.getTelephone(),saleDetailsModel.getVoucherNumber());
             
             Transaction transaction=new Transaction();
             transaction.setTransactionId(traId);
@@ -250,154 +252,53 @@ public class AndroidDataManager {
             transaction.setQuantity(saleDetailsModel.getQuantity());
             transaction.setServerReqTime(dtt);
             transaction.setServerResTime(dtt);
+            Customer customer=new Customer();
+            customer.setName(saleDetailsModel.getName());
+            customer.setContactDetails(saleDetailsModel.getTelephone());
+            customer.setTin(saleDetailsModel.getTin());
+            em.persist(customer);
+            em.flush();
+            transaction.setCustomerId(customer.getCustomerId());
+            Nozzle nozzle=em.find(Nozzle.class, saleDetailsModel.getNozzleId());
             
-            //******************************************* PROCEED CASH PAYMENT ****************************************************************
-            
-            if(saleDetailsModel.getPaymentModeId()==1){
+            if(paymentResponse.getResStatus()==100){
                 
-                Customer customer=new Customer();
-                customer.setName(saleDetailsModel.getName());
-                customer.setContactDetails(saleDetailsModel.getTelephone());
-                customer.setTin(saleDetailsModel.getTin());
-                em.persist(customer);
-                em.flush();
-                
-                Nozzle nozzle=em.find(Nozzle.class, saleDetailsModel.getNozzleId());
                 transaction.setIndexbefore(nozzle.getNozzleIndex());
                 nozzle.setNozzleIndex(nozzle.getNozzleIndex()+saleDetailsModel.getQuantity());
                 em.merge(nozzle);
                 em.flush();
-                
                 transaction.setIndexafter(nozzle.getNozzleIndex());
-                transaction.setCustomerId(customer.getCustomerId());
                 transaction.setPaymentStatus("SUCCESS");
-                em.persist(transaction);
             }
-            
-            
-            //****************************************** PROCEED VOUCHER PAYMENT ***********************************************************
-            
-            else if(saleDetailsModel.getPaymentModeId()==2){
-                
-                Voucher voucher =commonFunctionEjb.voucherDetails(saleDetailsModel.getVoucherNumber());
-                if(voucher==null){
-                    resultObject.setObject(null);
-                    resultObject.setMessage("No Voucher Found");
-                    resultObject.setStatusCode(500);
-                    return resultObject;
-                }
-                
-                if(voucher.getRemainAmount()<=saleDetailsModel.getAmount()){
-                    resultObject.setObject(null);
-                    resultObject.setMessage("Amount Insufficient In Voucher Found");
-                    resultObject.setStatusCode(500);
-                    return resultObject;
-                }
-                
-                voucher.setRemainAmount(voucher.getRemainAmount()-saleDetailsModel.getAmount());
-                em.merge(voucher);
-                em.flush();
-                
-                Nozzle nozzle=em.find(Nozzle.class, saleDetailsModel.getNozzleId());
+            else
+            {
                 transaction.setIndexbefore(nozzle.getNozzleIndex());
-                nozzle.setNozzleIndex(nozzle.getNozzleIndex()+saleDetailsModel.getQuantity());
-                em.merge(nozzle);
-                em.flush();
-                
                 transaction.setIndexafter(nozzle.getNozzleIndex());
-                transaction.setCustomerId(voucher.getCustomerId());
-                transaction.setPaymentStatus("SUCCESS");
-                em.persist(transaction);
+                
+                if(paymentResponse.getResStatus()==301){
+                    transaction.setPaymentStatus("PENDING");
+                }
+                else{
+                    transaction.setPaymentStatus("FAILURE");
+                }
             }
-            
-            
-            //************************************* PROCEED MOBILE MONEY PAYMENT ************************************************************
-            
-            else if( (saleDetailsModel.getPaymentModeId()==3)||(saleDetailsModel.getPaymentModeId()==4)||(saleDetailsModel.getPaymentModeId()==5) ){
-                
-                Customer customer=new Customer();
-                customer.setName(saleDetailsModel.getName());
-                customer.setContactDetails(saleDetailsModel.getTelephone());
-                customer.setTin(saleDetailsModel.getTin());
-                em.persist(customer);
-                em.flush();
-                
-                transaction.setCustomerId(customer.getCustomerId());
-                transaction.setPaymentStatus("PENDING");
-                em.persist(transaction);
-                
-                String ps="";
-                
-                if(saleDetailsModel.getPaymentModeId()==3){
-                    ps="2484";
-                }
-                else if(saleDetailsModel.getPaymentModeId()==4){
-                    ps="3382";
-                }
-                else if(saleDetailsModel.getPaymentModeId()==5){
-                    ps="5728";
-                }
-                
-                
-                //this function is for posting data for mobile money request
-                String payXmlReturnData=sendPaymentXML(ps,traId,saleDetailsModel.getTelephone(),saleDetailsModel.getAmount());
-                
-            }
-            
-            //********************************************* Set ResultObject *****************************************
+            em.persist(transaction);
             
             resultObject.setObject(saleDetailsModel);
             resultObject.setMessage("Sale Details Persist And Payment Status"+" : "+transaction.getPaymentStatus().toUpperCase());
-            
-            if(transaction.getPaymentStatus().equalsIgnoreCase("SUCCESS")){
-                resultObject.setStatusCode(100);
-            }
-            else if(transaction.getPaymentStatus().equalsIgnoreCase("PENDING")){
-                resultObject.setStatusCode(301);
-            }
-            else if(transaction.getPaymentStatus().equalsIgnoreCase("CANCEL")){
-                resultObject.setStatusCode(500);
-            }
-            else if(transaction.getPaymentStatus().equalsIgnoreCase("FAILURE")){
-                resultObject.setStatusCode(500);
-            }
-            
+            resultObject.setStatusCode(paymentResponse.getResStatus());
             return resultObject;
-            
         }
-        catch(Exception e){
+        catch(ParseException e){
             resultObject.setObject(null);
             resultObject.setStatusCode(500);
-            resultObject.setMessage(e.getMessage());
+            resultObject.setMessage("Unparseable or Wrong Date Format");
             return resultObject;
         }
     }
     
-    //This Function Will Request A payment To PaymentGateWay
-    public String sendPaymentXML(String ps,Long tId,String tel,Double amount){
-        
-        String url="http://10.171.1.53/PaymentGateway/payments/paymentRequest";
-        String xmlData= "<COMMAND>"
-                + "<CONTRACTID>441001</CONTRACTID>"
-                + "<PAYINGACCOUNTIDATSP>"+tel+"</PAYINGACCOUNTIDATSP>"
-                +"<PAYMENTSPID>"+ps+"</PAYMENTSPID>"
-                +"<DESCR>"+amount+" PAYMENT FOR ENGEN"+"</DESCR>"
-                +"<TRANSID>"+tId+"</TRANSID>"
-                +"<AMOUNT>"+amount+"</AMOUNT>"
-                + "</COMMAND>";
-        
-        out.print("ANDROID  PAYMENT:"+xmlData);
-        Response response=CommonLibrary.sendRESTRequest(url, xmlData, MediaType.APPLICATION_XML, "POST");
-        String xmldata=response.readEntity(String.class);
-        
-        out.print("ANDROID  PAYMENT: Payment response Header:"+response+" | BODY:"+xmldata);
-        
-        return xmldata;
-        
-    }
-    
-    //On This function PaymentGateWay will Post the MOMO Payment Status
-    public void serviceProvisonConfirmation(ServiceProvison serviceProvisonIp){
+    //MoMO Conformation
+    public void momoConfirmation(ServiceProvison serviceProvisonIp){
         
         try{
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -458,30 +359,12 @@ public class AndroidDataManager {
                 }
             }
             
-            //POST PAYMENT CONFORMATION MASSAGE On This Function To Payment GateWay For Payment Conformation
-            String xmldata=serviceAcknowledgementXML(serviceProvisonIp);
+            //MoMO Acknowledgement and this function it returning  a header 200
+            PaymentLibrary.momoAcknowledgement(serviceProvisonIp);
         }
-        catch(Exception e){
-            
+        catch(ParseException e){
+            out.print(e.getMessage());
         }
-    }
-    
-    //On This function MyApp will Post the MOMO Payment Status Successfully Updated To Payment GateWay
-    public String serviceAcknowledgementXML(ServiceProvison serviceProvisonConform){
-        
-        String url="http://10.171.1.53/PaymentGateway/payments/paymentResponseConfirmation";
-        String xmlData= "<COMMAND>"
-                +"<TRANSID>"+serviceProvisonConform.getTRANSID()+"</TRANSID>"
-                +"<CONTRACTID>"+serviceProvisonConform.getCONTRACTID()+"</CONTRACTID>"
-                +"<STATUSCODE>"+serviceProvisonConform.getSTATUSCODE()+"</STATUSCODE>"
-                +"<DESCR>"+serviceProvisonConform.getSTATUSDESC()+"</DESCR>"
-                +"</COMMAND>";
-        out.print("ANDROID SERVICE CONFORMATION:"+xmlData);
-        Response response=CommonLibrary.sendRESTRequest(url, xmlData, MediaType.APPLICATION_XML, "POST");
-        String xmldata=response.readEntity(String.class);
-        out.print("ANDROID SERVICE CONFORMATION: Payment conformation response Header:"+response+" | BODY:"+xmldata);
-        
-        return xmldata;
     }
     
     
@@ -641,13 +524,204 @@ public class AndroidDataManager {
             }
             
         }
-        catch(Exception e){
+        catch(ParseException e){
             resultObject.setObject(null);
+            resultObject.setStatusCode(500);
+            resultObject.setMessage("Unparseable or Wrong Date Format");
             return resultObject;
         }
     }
     
     
+    
+    
+    
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    public ResultObject sale(SaleDetailsModel saleDetailsModel){
+//
+//        ResultObject resultObject=new ResultObject();
+//        resultObject.setObjectClass(SaleDetailsModel.class);
+//
+//        try{
+//            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            Date date = new Date();
+//            String dt=dateFormat.format(date);
+//            Date dtt=dateFormat.parse(dt);
+//            Date deviceDate=dateFormat.parse(saleDetailsModel.getDeviceTransactionTime());
+//
+//            Device device=commonFunctionEjb.getDeviceNoId(saleDetailsModel.getDeviceId());
+//            String transactionId=device.getDeviceId().toString()+saleDetailsModel.getDeviceTransactionId();
+//            long traId=Long.parseLong(transactionId);
+//
+//            Transaction transaction=new Transaction();
+//            transaction.setTransactionId(traId);
+//            transaction.setDeviceId(device.getDeviceId());
+//            transaction.setDeviceTransactionId(saleDetailsModel.getDeviceTransactionId());
+//            transaction.setDeviceTransactionTime(deviceDate);
+//            transaction.setBranchId(saleDetailsModel.getBranchId());
+//            transaction.setUserId(saleDetailsModel.getUserId());
+//            transaction.setPumpId(saleDetailsModel.getPumpId());
+//            transaction.setProductId(saleDetailsModel.getProductId());
+//            transaction.setPlatenumber(saleDetailsModel.getPlateNumber());
+//            transaction.setPaymentModeId(saleDetailsModel.getPaymentModeId());
+//            transaction.setNozzleId(saleDetailsModel.getNozzleId());
+//            transaction.setAmount(saleDetailsModel.getAmount());
+//            transaction.setQuantity(saleDetailsModel.getQuantity());
+//            transaction.setServerReqTime(dtt);
+//            transaction.setServerResTime(dtt);
+//
+//            //******************************************* PROCEED CASH PAYMENT ****************************************************************
+//
+//            if((saleDetailsModel.getPaymentModeId()==1)||(saleDetailsModel.getPaymentModeId()==6)||(saleDetailsModel.getPaymentModeId()==7)||(saleDetailsModel.getPaymentModeId()==8)||(saleDetailsModel.getPaymentModeId()==9)){
+//
+//                Customer customer=new Customer();
+//                customer.setName(saleDetailsModel.getName());
+//                customer.setContactDetails(saleDetailsModel.getTelephone());
+//                customer.setTin(saleDetailsModel.getTin());
+//                em.persist(customer);
+//                em.flush();
+//
+//                Nozzle nozzle=em.find(Nozzle.class, saleDetailsModel.getNozzleId());
+//                transaction.setIndexbefore(nozzle.getNozzleIndex());
+//                nozzle.setNozzleIndex(nozzle.getNozzleIndex()+saleDetailsModel.getQuantity());
+//                em.merge(nozzle);
+//                em.flush();
+//
+//                transaction.setIndexafter(nozzle.getNozzleIndex());
+//                transaction.setCustomerId(customer.getCustomerId());
+//                transaction.setPaymentStatus("SUCCESS");
+//                em.persist(transaction);
+//            }
+//
+//
+//            //****************************************** PROCEED VOUCHER PAYMENT ***********************************************************
+//
+//            else if(saleDetailsModel.getPaymentModeId()==2){
+//
+//                Voucher voucher =commonFunctionEjb.voucherDetails(saleDetailsModel.getVoucherNumber());
+//                if(voucher==null){
+//                    resultObject.setObject(null);
+//                    resultObject.setMessage("No Voucher Found");
+//                    resultObject.setStatusCode(500);
+//                    return resultObject;
+//                }
+//
+//                if(voucher.getRemainAmount()<=saleDetailsModel.getAmount()){
+//                    resultObject.setObject(null);
+//                    resultObject.setMessage("Amount Insufficient In Voucher Found");
+//                    resultObject.setStatusCode(500);
+//                    return resultObject;
+//                }
+//
+//                voucher.setRemainAmount(voucher.getRemainAmount()-saleDetailsModel.getAmount());
+//                em.merge(voucher);
+//                em.flush();
+//
+//                Nozzle nozzle=em.find(Nozzle.class, saleDetailsModel.getNozzleId());
+//                transaction.setIndexbefore(nozzle.getNozzleIndex());
+//                nozzle.setNozzleIndex(nozzle.getNozzleIndex()+saleDetailsModel.getQuantity());
+//                em.merge(nozzle);
+//                em.flush();
+//
+//                transaction.setIndexafter(nozzle.getNozzleIndex());
+//                transaction.setCustomerId(voucher.getCustomerId());
+//                transaction.setPaymentStatus("SUCCESS");
+//                em.persist(transaction);
+//            }
+//
+//
+//            //************************************* PROCEED MOBILE MONEY PAYMENT ***********************************************************************
+//
+//            else if( (saleDetailsModel.getPaymentModeId()==3)||(saleDetailsModel.getPaymentModeId()==4)||(saleDetailsModel.getPaymentModeId()==5) ){
+//
+//                Customer customer=new Customer();
+//                customer.setName(saleDetailsModel.getName());
+//                customer.setContactDetails(saleDetailsModel.getTelephone());
+//                customer.setTin(saleDetailsModel.getTin());
+//                em.persist(customer);
+//                em.flush();
+//
+//                transaction.setCustomerId(customer.getCustomerId());
+//                transaction.setPaymentStatus("PENDING");
+//                em.persist(transaction);
+//
+//                String ps="";
+//
+//                if(saleDetailsModel.getPaymentModeId()==3){
+//                    ps="2484";
+//                }
+//                else if(saleDetailsModel.getPaymentModeId()==4){
+//                    ps="3382";
+//                }
+//                else if(saleDetailsModel.getPaymentModeId()==5){
+//                    ps="5728";
+//                }
+//
+//
+//                //this function is for posting data for mobile money request
+//                String payXmlReturnData=sendPaymentXML(ps,traId,saleDetailsModel.getTelephone(),saleDetailsModel.getAmount());
+//
+//            }
+//
+//            //********************************************* Set ResultObject *****************************************
+//
+//            resultObject.setObject(saleDetailsModel);
+//            resultObject.setMessage("Sale Details Persist And Payment Status"+" : "+transaction.getPaymentStatus().toUpperCase());
+//
+//            if(transaction.getPaymentStatus().equalsIgnoreCase("SUCCESS")){
+//                resultObject.setStatusCode(100);
+//            }
+//            else if(transaction.getPaymentStatus().equalsIgnoreCase("PENDING")){
+//                resultObject.setStatusCode(301);
+//            }
+//            else if(transaction.getPaymentStatus().equalsIgnoreCase("CANCEL")){
+//                resultObject.setStatusCode(500);
+//            }
+//            else if(transaction.getPaymentStatus().equalsIgnoreCase("FAILURE")){
+//                resultObject.setStatusCode(500);
+//            }
+//
+//            return resultObject;
+//
+//        }
+//        catch(Exception e){
+//            resultObject.setObject(null);
+//            resultObject.setStatusCode(500);
+//            resultObject.setMessage(e.getMessage());
+//            return resultObject;
+//        }
+//    }

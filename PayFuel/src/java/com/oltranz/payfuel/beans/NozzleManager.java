@@ -69,6 +69,38 @@ public class NozzleManager {
         
     }
     
+    
+    public ResultObject editNozzle(Nozzle editNozzle) {
+        
+        
+        ResultObject resultObject=new ResultObject();
+        resultObject.setObjectClass(Nozzle.class);
+        try{
+            Nozzle nozzle=em.find(Nozzle.class, editNozzle.getNozzleId());
+            if(nozzle==null){
+                resultObject.setObject(null);
+                resultObject.setMessage("NozzleId is not created, to which we want to Update");
+                resultObject.setStatusCode(500);
+                return resultObject;
+            }
+            nozzle.setNozzleIndex(editNozzle.getNozzleIndex());
+            em.merge(nozzle);
+            
+            resultObject.setObject(nozzle);
+            resultObject.setMessage("Nozzle Succefully Updated");
+            resultObject.setStatusCode(100);
+            
+            return resultObject;
+        }
+        catch(Exception e){
+            resultObject.setObject(null);
+            resultObject.setMessage(e.getMessage());
+            return resultObject;
+        }
+        
+    }
+    
+    
     public ResultObject getNozzleList(){
         
         List<Nozzle> nozzleList=(List<Nozzle>)em.createNamedQuery("Nozzle.findAll").getResultList();

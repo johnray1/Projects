@@ -76,11 +76,11 @@ public class AndroidWebService {
     
     //service provison conformation link, after  mobile money payment the payment gateway post payment status on this link
     @POST
-    @Path("pos/spc")
-    public void serviceProvisonConfirmation(InputStream is) throws Exception{
+    @Path("pos/momoConfirmation")
+    public void momoConfirmation(InputStream is) throws Exception{
         
             ServiceProvison serviceProvisonIp=(ServiceProvison) CommonLibrary.unmarshalling(is, ServiceProvison.class);
-            androidDataManager.serviceProvisonConfirmation(serviceProvisonIp);
+            androidDataManager.momoConfirmation(serviceProvisonIp);
     }
     
     //async for mobile money

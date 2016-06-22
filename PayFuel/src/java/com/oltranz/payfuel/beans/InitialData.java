@@ -91,6 +91,10 @@ public class InitialData {
             paymentModesList.add(new PaymentMode(3,"MTN","Mobile Money"));
             paymentModesList.add(new PaymentMode(4,"TIGO","Tigo Cash"));
             paymentModesList.add(new PaymentMode(5,"AIRTEL","Airtel Money"));
+            paymentModesList.add(new PaymentMode(6,"VISA","Visa prepaid/credit card"));
+            paymentModesList.add(new PaymentMode(7,"MASTER","Master prepaid/credit card"));
+            paymentModesList.add(new PaymentMode(8,"DEBT","DEPT FOR POSTPAYMENT"));
+            paymentModesList.add(new PaymentMode(9,"SP CARD","SP FIDELITY card"));
             
             for(PaymentMode x: paymentModesList){
                 em.persist(x);

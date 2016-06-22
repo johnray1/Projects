@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Pump.findByPumpId", query = "SELECT p FROM Pump p WHERE p.pumpId = :pumpId"),
     @NamedQuery(name = "Pump.findByName", query = "SELECT p FROM Pump p WHERE p.name = :name"),
     @NamedQuery(name = "Pump.findByStatus", query = "SELECT p FROM Pump p WHERE p.status = :status"),
-    @NamedQuery(name = "Pump.findByBranchId", query = "SELECT p FROM Pump p WHERE p.branchId = :branchId")})
+    @NamedQuery(name = "Pump.findByTankId", query = "SELECT p FROM Pump p WHERE p.tankId = :tankId")})
 public class Pump implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -43,8 +43,8 @@ public class Pump implements Serializable {
     private String name;
     @Column(name = "status")
     private Integer status=7;
-    @Column(name = "branch_id")
-    private Integer branchId;
+    @Column(name = "tank_id")
+    private Integer tankId;
 
     public Pump() {
     }
@@ -77,12 +77,12 @@ public class Pump implements Serializable {
         this.status = status;
     }
 
-    public Integer getBranchId() {
-        return branchId;
+    public Integer getTankId() {
+        return tankId;
     }
 
-    public void setBranchId(Integer branchId) {
-        this.branchId = branchId;
+    public void setTankId(Integer tankId) {
+        this.tankId = tankId;
     }
 
     @Override

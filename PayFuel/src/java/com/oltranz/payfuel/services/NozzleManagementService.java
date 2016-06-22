@@ -39,6 +39,17 @@ public class NozzleManagementService {
         
     }
     
+    
+    @POST
+    @Path("nozzle/edit")
+    @Consumes({"application/xml", "application/json"})
+    public String editNozzle(Nozzle editNozzle) {
+        
+        ResultObject result=nozzleManager.editNozzle(editNozzle);
+        return result.getJsonFormat();
+        
+    }
+    
     @GET
     @Path("nozzles")
     @Consumes({"application/xml", "application/json"})

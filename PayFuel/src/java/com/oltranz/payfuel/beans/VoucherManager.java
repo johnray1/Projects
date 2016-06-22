@@ -73,5 +73,49 @@ public class VoucherManager {
         
         return resultObject;
     }
+     
+     public ResultObject editVoucher(Voucher editVoucher){
+        
+        ResultObject resultObject=new ResultObject();
+        resultObject.setObjectClass(Voucher.class);
+        
+        Voucher voucher=em.find(Voucher.class, editVoucher.getVoucherId());
+        
+        if(voucher==null){
+            resultObject.setMessage("No Voucher with id of the given one is found!");
+            resultObject.setObject(null);
+            return resultObject;
+        }
+        
+        voucher.setRemainAmount(editVoucher.getRemainAmount());
+        em.merge(voucher);
+        
+        
+        resultObject.setMessage("Voucher successfully updated");
+        resultObject.setObject(voucher);
+        resultObject.setStatusCode(100);
+        
+        return resultObject;
+        
+    }
+    
+    public ResultObject getVoucher(String voucherNo){
+        
+        ResultObject resultObject=new ResultObject();
+        resultObject.setObjectClass(Voucher.class);
+        
+        Voucher voucher =commonFunctionEjb.voucherDetails(voucherNo);
+        if(voucher==null){
+            resultObject.setObject(null);
+            resultObject.setMessage("No Voucher Found");
+            resultObject.setStatusCode(500);
+            return resultObject;
+        }
+        resultObject.setObject(voucher);
+        resultObject.setMessage("Voucher Found");
+        resultObject.setStatusCode(100);
+        
+        return resultObject;
+    }
     
 }

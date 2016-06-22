@@ -43,7 +43,7 @@ public class SpPaymentRes implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "transaction_id", nullable = false)
-    private Long transactionId;
+    private long transactionId;
     @Column(name = "contract_id")
     private Integer contractId;
     @Column(name = "status_code")

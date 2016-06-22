@@ -20,12 +20,6 @@ public class PumpDetailsModel {
     @JsonProperty("pumpName")
     private String pumpName;
     
-    @JsonProperty("branchId")
-    private int branchId;
-    
-    @JsonProperty("status")
-    private int status;
-    
     @JsonProperty("nozzleList")
     private List<NozzleDetailsModel> nozzleList;
 
@@ -57,33 +51,6 @@ public class PumpDetailsModel {
         this.pumpName = pumpName;
     }
 
-    /**
-     * @return the branchId
-     */
-    public int getBranchId() {
-        return branchId;
-    }
-
-    /**
-     * @param branchId the branchId to set
-     */
-    public void setBranchId(int branchId) {
-        this.branchId = branchId;
-    }
-
-    /**
-     * @return the status
-     */
-    public int getStatus() {
-        return status;
-    }
-
-    /**
-     * @param status the status to set
-     */
-    public void setStatus(int status) {
-        this.status = status;
-    }
 
     /**
      * @return the nozzleList
