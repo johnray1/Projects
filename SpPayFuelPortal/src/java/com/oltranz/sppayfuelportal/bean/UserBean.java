@@ -62,7 +62,7 @@ public class UserBean {
             Response response = CommonLibrary.sendRESTRequest(getBranchUrl, "empty data", MediaType.APPLICATION_JSON, "GET");
             //System.out.println(response.getHeaders());
             String jsonResponse = response.readEntity(String.class);
-            System.out.println(jsonResponse);
+            //System.out.println(jsonResponse);
             
             ObjectMapper mapper=new ObjectMapper();
             userList=(UserList)mapper.readValue(jsonResponse, UserList.class);
@@ -81,7 +81,7 @@ public class UserBean {
             String getUrl="http://localhost:8080/PayFuel/UserManagementService/user/"+userId;
             Response response = CommonLibrary.sendRESTRequest(getUrl, "empty data", MediaType.APPLICATION_JSON, "GET");
             String jsonResponse = response.readEntity(String.class);
-            System.out.println(jsonResponse);
+            //System.out.println(jsonResponse);
             
             ObjectMapper mapper=new ObjectMapper();
             userSingle=(UserSingle)mapper.readValue(jsonResponse, UserSingle.class);
@@ -109,7 +109,7 @@ public class UserBean {
                 "}";
         Response response=CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
         String jsonResponse=response.readEntity(String.class);
-        System.out.println(jsonResponse);
+        //System.out.println(jsonResponse);
         
         return "innerpage_user.xhtml";
     }
@@ -131,7 +131,7 @@ public class UserBean {
                 "}";
         Response response=CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
         String jsonResponse=response.readEntity(String.class);
-        System.out.println(jsonResponse);
+        //System.out.println(jsonResponse);
         
         return "innerpage_user.xhtml";
     }
@@ -156,7 +156,7 @@ public class UserBean {
             Response response = CommonLibrary.sendRESTRequest(getBranchUrl, "empty data", MediaType.APPLICATION_JSON, "GET");
             //System.out.println(response.getHeaders());
             String jsonResponse = response.readEntity(String.class);
-            System.out.println(jsonResponse);
+            //System.out.println(jsonResponse);
             
             ObjectMapper mapper=new ObjectMapper();
             roleList=(RoleList)mapper.readValue(jsonResponse, RoleList.class);
@@ -175,7 +175,7 @@ public class UserBean {
             String getUrl="http://localhost:8080/PayFuel/UserManagementService/getRoleDetails/"+roleId;
             Response response = CommonLibrary.sendRESTRequest(getUrl, "empty data", MediaType.APPLICATION_JSON, "GET");
             String jsonResponse = response.readEntity(String.class);
-            System.out.println(jsonResponse);
+            //System.out.println(jsonResponse);
             
             ObjectMapper mapper=new ObjectMapper();
             roleSingle=(RoleSingle)mapper.readValue(jsonResponse, RoleSingle.class);
@@ -194,7 +194,7 @@ public class UserBean {
             String url="http://localhost:8080/PayFuel/UserManagementService/getAllUsersOfARole/role/"+roleId;
             Response response = CommonLibrary.sendRESTRequest(url, "empty data", MediaType.APPLICATION_JSON, "GET");
             String jsonResponse = response.readEntity(String.class);
-            System.out.println(jsonResponse);
+            //System.out.println(jsonResponse);
             
             ObjectMapper mapper=new ObjectMapper();
             userList=(UserList)mapper.readValue(jsonResponse, UserList.class);
@@ -212,7 +212,7 @@ public class UserBean {
             Response response = CommonLibrary.sendRESTRequest(getBranchUrl, "empty data", MediaType.APPLICATION_JSON, "GET");
             //System.out.println(response.getHeaders());
             String jsonResponse = response.readEntity(String.class);
-            System.out.println(jsonResponse);
+            //System.out.println(jsonResponse);
             
             ObjectMapper mapper=new ObjectMapper();
             roleList=(RoleList)mapper.readValue(jsonResponse, RoleList.class);

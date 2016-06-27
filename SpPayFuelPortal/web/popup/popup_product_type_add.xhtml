@@ -40,16 +40,16 @@
                     
                     <div class="col-xs-12 theinput">
                         <h:outputLabel value="PRODUCT TYPE NAME"/>
-                        <h:inputText id="field1" value="#{ProductBean.productTypeName}"/>
+                        <h:inputText id="field1" value="#{ProductTypeBean.productTypeName}"/>
                     </div>
                     
                     <div class="col-xs-12 theinput">
                         <h:outputLabel value="DESCRIPTION"/>
-                        <h:inputText id="field2" value="#{ProductBean.descr}"/>
+                        <h:inputText id="field2" value="#{ProductTypeBean.descr}"/>
                     </div>
                         
                     <div class="col-xs-12 submitinput">
-                        <h:commandButton  value="REGISTER" action="#{ProductBean.createProductType()}"/>
+                        <h:commandButton  value="REGISTER" action="#{ProductTypeBean.createProductType()}"/>
                     </div>
                         
                 </h:form>

@@ -30,6 +30,7 @@ public class BranchBean implements Serializable{
     private String branchName;
     private String address;
     private Boolean branchMenuItemRendered;
+    private String saveActionName="Save";
     
     
     private BranchSingle branchSingle;
@@ -60,7 +61,11 @@ public class BranchBean implements Serializable{
         
     }
     
-    public String branchesByUserId(){
+    public void init() {
+        saveActionName="Save";
+    }
+    
+    public String branches(){
         
         templateBean.setDashboardClassName("omenu");
         templateBean.setBranchClassName("omenu_active");
@@ -91,7 +96,34 @@ public class BranchBean implements Serializable{
     
     
     
-    public void branchbyid(int branchId){
+    public void branchForView(int branchId){
+        branchById(branchId);
+    }
+    
+    
+    
+    public void branchForEdit(int branchId){
+        branchById(branchId);
+        saveActionName="Add";
+    }
+    
+    public String saveBranch(){
+        if(branchId.equals("-1")){
+            return create();
+        }else{
+            return update();
+        }
+    }
+    
+    public void branchForCreate(){
+        this.branchId="-1";
+        this.branchName="";
+        this.address="";
+        saveActionName="Add";
+    }
+    
+    
+    public void branchById(int branchId){
         
         try{
             String getUrl="http://localhost:8080/PayFuel/BranchManagementService/branch/"+branchId;
@@ -112,7 +144,6 @@ public class BranchBean implements Serializable{
         
     }
     
-    
     public String create(){
         
         String url="http://localhost:8080/PayFuel/BranchManagementService/branch/create";
@@ -124,13 +155,26 @@ public class BranchBean implements Serializable{
         String jsonResponse=response.readEntity(String.class);
         System.out.println(jsonResponse);
         
-        this.setBranchName(null);
-        this.setAddress(null);
-        
-        return "innerpage_branch.xhtml";
+        ObjectMapper mapper=new ObjectMapper();
+        try{
+            branchSingle=(BranchSingle)mapper.readValue(jsonResponse, BranchSingle.class);
+            
+            this.branchId=branchSingle.getBranch().getBranchId().toString();
+            this.branchName=branchSingle.getBranch().getName();
+            this.address=branchSingle.getBranch().getDescr();
+            
+        }
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
+            
+        }
+        return branches();
     }
     
-    public String edit(){
+    
+    
+    public String update(){
+        
         
         String url="http://localhost:8080/PayFuel/BranchManagementService/branch/edit";
         String  jsonData ="{\n" +
@@ -140,13 +184,10 @@ public class BranchBean implements Serializable{
                 "}";
         Response response=CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
         String jsonResponse=response.readEntity(String.class);
-        System.out.println(jsonResponse);
         
-        this.setBranchId(null);
-        this.setBranchName(null);
-        this.setAddress(null);
+        branchById(Integer.parseInt(branchId));
         
-        return "innerpage_branch.xhtml";
+        return branches();
     }
     
     
@@ -248,19 +289,33 @@ public class BranchBean implements Serializable{
     public void setBranchMenuItemRendered(Boolean branchMenuItemRendered) {
         this.branchMenuItemRendered = branchMenuItemRendered;
     }
-
+    
     /**
      * @return the templateBean
      */
     public TemplateBean getTemplateBean() {
         return templateBean;
     }
-
+    
     /**
      * @param templateBean the templateBean to set
      */
     public void setTemplateBean(TemplateBean templateBean) {
         this.templateBean = templateBean;
+    }
+    
+    /**
+     * @return the saveActionName
+     */
+    public String getSaveActionName() {
+        return saveActionName;
+    }
+    
+    /**
+     * @param saveActionName the saveActionName to set
+     */
+    public void setSaveActionName(String saveActionName) {
+        this.saveActionName = saveActionName;
     }
     
     

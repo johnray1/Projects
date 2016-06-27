@@ -22,7 +22,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 @ManagedBean(name="LogsBean")
 @SessionScoped
 public class LogsBean {
-    
+    private String saveActionName="Save";
     private LogList logList;
     private LogSingle logSingle;
     
@@ -30,6 +30,9 @@ public class LogsBean {
     @ManagedProperty(value="#{TemplateBean}")
     private TemplateBean templateBean;
     
+    public void init() {
+        saveActionName="Save";
+    }
     
     public String logs(){
         
@@ -43,11 +46,11 @@ public class LogsBean {
         templateBean.setLogsClassName("omenu_active");
         
         try{
-            String getBranchUrl="http://localhost:8080/PayFuel/AndroidWebService/logs";
+            String getBranchUrl="http://localhost:8080/PayFuel/LogManagementService/logs";
             Response response = CommonLibrary.sendRESTRequest(getBranchUrl, "empty data", MediaType.APPLICATION_JSON, "GET");
             //System.out.println(response.getHeaders());
             String jsonResponse = response.readEntity(String.class);
-            System.out.println(jsonResponse);
+            //System.out.println(jsonResponse);
             
             ObjectMapper mapper=new ObjectMapper();
             logList=(LogList)mapper.readValue(jsonResponse, LogList.class);
@@ -59,14 +62,17 @@ public class LogsBean {
         
     }
     
+    public void logForView(long logId){
+        logById(logId);
+    }
     
-    public void logById(int logId){
+    public void logById(long logId){
         
         try{
-            String getUrl="http://localhost:8080/PayFuel/AndroidWebService/log/"+logId;
+            String getUrl="http://localhost:8080/PayFuel/LogManagementService/log/"+logId;
             Response response = CommonLibrary.sendRESTRequest(getUrl, "empty data", MediaType.APPLICATION_JSON, "GET");
             String jsonResponse = response.readEntity(String.class);
-            System.out.println(jsonResponse);
+            //System.out.println(jsonResponse);
             
             ObjectMapper mapper=new ObjectMapper();
             logSingle=(LogSingle)mapper.readValue(jsonResponse, LogSingle.class);
@@ -117,6 +123,20 @@ public class LogsBean {
      */
     public void setLogSingle(LogSingle logSingle) {
         this.logSingle = logSingle;
+    }
+
+    /**
+     * @return the saveActionName
+     */
+    public String getSaveActionName() {
+        return saveActionName;
+    }
+
+    /**
+     * @param saveActionName the saveActionName to set
+     */
+    public void setSaveActionName(String saveActionName) {
+        this.saveActionName = saveActionName;
     }
     
     

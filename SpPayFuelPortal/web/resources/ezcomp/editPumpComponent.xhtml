@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:cc="http://xmlns.jcp.org/jsf/composite">
+        
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="nozzleIdValue" />
+        <cc:attribute name="nozzleNameLabel" />
+        <cc:attribute name="nozzleNameValue" />
+        <cc:attribute name="indexLabel" />
+        <cc:attribute name="indexValue" />
+        <cc:attribute name="saveActionName" />
+        <cc:attribute name="saveButtonAction" 
+                      method-signature="java.lang.String update()"/>
+        <cc:attribute name="renderedOnsuccess" />
+    </cc:interface>
+        
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        
+        <div class="container-fluid" style="margin:0px;padding:0px;border:0px solid red;;min-height:400px;">
+            
+            <div class="col-xs-12 col-sm-12 holderinbox_popup" style="margin:0px;padding:0px;">
+                <h2 style="text-align:center;font-size:18px;background-color:rgb(26, 140, 53);">EDIT PUMP</h2>
+                    
+                    
+                <!-- FORM -->
+                
+                <div class="col-xs-12 theinput">
+                    <h:inputHidden  id="field1" value="#{cc.attrs.nozzleIdValue}"/>
+                </div>
+                
+                <div class="col-xs-12 theinput">
+                    <h:outputLabel value="#{cc.attrs.nozzleNameLabel}"/>
+                    <h:inputText id="field2" value="#{cc.attrs.nozzleNameValue}"/>
+                </div>
+                
+                <div class="col-xs-12 theinput">
+                    <h:outputLabel value="#{cc.attrs.indexLabel}"/>
+                    <h:inputText id="field3" value="#{cc.attrs.indexValue}"/>
+                </div>
+                
+                <div  class="col-xs-12 submitinput" >
+                    <h:commandButton onclick="notifiyViewDetails();notifiyDatatableRefresh()" value="UPDATE" action="#{cc.attrs.saveButtonAction}">
+                        <f:ajax execute="@form" render="#{cc.attrs.renderedOnsuccess}" />
+                    </h:commandButton>
+                </div>
+                
+                <!-- End FORM -->
+                
+                
+            </div>
+        </div>
+    </cc:implementation>
+</html>

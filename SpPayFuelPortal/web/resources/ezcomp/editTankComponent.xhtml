@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:cc="http://xmlns.jcp.org/jsf/composite">
+        
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="tankIdValue" />
+        <cc:attribute name="tankNameLabel" />
+        <cc:attribute name="tankNameValue" />
+        <cc:attribute name="maxCapacityLabel" />
+        <cc:attribute name="maxCapacityValue" />
+        <cc:attribute name="currentCapacityLabel" />
+        <cc:attribute name="currentCapacityValue" />
+        <cc:attribute name="preCalLabel" />
+        <cc:attribute name="preCalValue" />
+        <cc:attribute name="nextCalLabel" />
+        <cc:attribute name="nextCalValue" />
+        <cc:attribute name="branchIdValue" />
+        <cc:attribute name="branchNameLabel" />
+        <cc:attribute name="saveActionName" />
+        <cc:attribute name="saveButtonAction" 
+                      method-signature="java.lang.String update()"/>
+        <cc:attribute name="renderedOnsuccess" />
+    </cc:interface>
+        
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        
+        <div class="container-fluid" style="margin:0px;padding:0px;border:0px solid red;;min-height:400px;">
+            
+            <div class="col-xs-12 col-sm-12 holderinbox_popup" style="margin:0px;padding:0px;">
+                <h2 style="text-align:center;font-size:18px;background-color:rgb(26, 140, 53);">EDIT TANK</h2>
+                    
+                    
+                <!-- FORM -->
+                
+                <div class="col-xs-12 theinput">
+                    <h:inputHidden  id="field1" value="#{cc.attrs.tankIdValue}"/>
+                </div>
+                
+                <div class="col-xs-12 theinput">
+                    <h:outputLabel value="#{cc.attrs.tankNameLabel}"/>
+                    <h:inputText id="field2" value="#{cc.attrs.tankNameValue}"/>
+                </div>
+                    
+                <div class="col-xs-12 theinput">
+                    <h:outputLabel value="#{cc.attrs.maxCapacityLabel}"/>
+                    <h:inputText id="field3" value="#{cc.attrs.maxCapacityValue}"/>
+                </div>
+                    
+                <div class="col-xs-12 theinput">
+                    <h:outputLabel value="#{cc.attrs.currentCapacityLabel}"/>
+                    <h:inputText id="field4" value="#{cc.attrs.currentCapacityValue}"/>
+                </div>
+                <div class="col-xs-12 theinput">
+                    <h:outputLabel value="#{cc.attrs.preCalLabel}"/>
+                    <h:inputText id="field5" value="#{cc.attrs.preCalValue}"/>
+                </div>
+                    
+                <div class="col-xs-12 theinput">
+                    <h:outputLabel value="#{cc.attrs.nextCalLabel}"/>
+                    <h:inputText id="field6" value="#{cc.attrs.nextCalValue}"/>
+                </div>
+                    
+                <div class="col-xs-12 selectinput">
+                    <h:outputLabel value="#{cc.attrs.branchNameLabel}"/>
+                    <h:selectOneMenu value="#{cc.attrs.branchIdValue}" id="field7">
+                        <f:selectItems value="#{BranchBean.branchList.branchList}" var="bra"
+                                       itemLabel="#{bra.name}" itemValue="#{bra.branchId}"/>
+                    </h:selectOneMenu>
+                </div>
+                        
+                        
+                
+                <div  class="col-xs-12 submitinput" >
+                    <h:commandButton onclick="notifiyViewDetails();notifiyDatatableRefresh()" value="UPDATE" action="#{cc.attrs.saveButtonAction}">
+                        <f:ajax execute="@form" render="#{cc.attrs.renderedOnsuccess}" />
+                    </h:commandButton>
+                </div>
+                
+                <!-- End FORM -->
+                
+                
+            </div>
+        </div>
+    </cc:implementation>
+</html>

@@ -13,35 +13,97 @@ import org.codehaus.jackson.annotate.JsonProperty;
  */
 public class PumpNozzleProductModel {
     
-    @JsonProperty("pumpId")
-    private Integer pumpId;
-    
-    @JsonProperty("pumpName")
-    private String pumpName;
-    
-    @JsonProperty("nozzleId")
-    private Integer nozzleId;
-    
-    @JsonProperty("nozzleName")
-    private String nozzleName;
-    
-    @JsonProperty("index")
-    private double index;
-    
-    @JsonProperty("productId")
-    private Integer productId;
-    
-    @JsonProperty("productName")
-    private String productName;
-    
     @JsonProperty("branchId")
     private Integer branchId;
-    
+
     @JsonProperty("branchName")
     private String branchName;
     
+    @JsonProperty("tankId")
+    private Integer tankId;
+
+    @JsonProperty("tankName")
+    private String tankName;
+
+    @JsonProperty("pumpId")
+    private Integer pumpId;
+
+    @JsonProperty("pumpName")
+    private String pumpName;
+
     @JsonProperty("status")
     private Integer status;
+    
+    @JsonProperty("nozzleId")
+    private Integer nozzleId;
+
+    @JsonProperty("nozzleName")
+    private String nozzleName;
+
+    @JsonProperty("index")
+    private double index;
+
+    @JsonProperty("productId")
+    private Integer productId;
+
+    @JsonProperty("productName")
+    private String productName;
+
+    /**
+     * @return the branchId
+     */
+    public Integer getBranchId() {
+        return branchId;
+    }
+
+    /**
+     * @param branchId the branchId to set
+     */
+    public void setBranchId(Integer branchId) {
+        this.branchId = branchId;
+    }
+
+    /**
+     * @return the branchName
+     */
+    public String getBranchName() {
+        return branchName;
+    }
+
+    /**
+     * @param branchName the branchName to set
+     */
+    public void setBranchName(String branchName) {
+        this.branchName = branchName;
+    }
+
+    /**
+     * @return the tankId
+     */
+    public Integer getTankId() {
+        return tankId;
+    }
+
+    /**
+     * @param tankId the tankId to set
+     */
+    public void setTankId(Integer tankId) {
+        this.tankId = tankId;
+    }
+
+    /**
+     * @return the tankName
+     */
+    public String getTankName() {
+        return tankName;
+    }
+
+    /**
+     * @param tankName the tankName to set
+     */
+    public void setTankName(String tankName) {
+        this.tankName = tankName;
+    }
 
     /**
      * @return the pumpId
@@ -69,6 +131,20 @@ public class PumpNozzleProductModel {
      */
     public void setPumpName(String pumpName) {
         this.pumpName = pumpName;
+    }
+
+    /**
+     * @return the status
+     */
+    public Integer getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     /**
@@ -141,49 +217,6 @@ public class PumpNozzleProductModel {
         this.productName = productName;
     }
 
-    /**
-     * @return the branchId
-     */
-    public Integer getBranchId() {
-        return branchId;
-    }
-
-    /**
-     * @param branchId the branchId to set
-     */
-    public void setBranchId(Integer branchId) {
-        this.branchId = branchId;
-    }
-
-    /**
-     * @return the branchName
-     */
-    public String getBranchName() {
-        return branchName;
-    }
-
-    /**
-     * @param branchName the branchName to set
-     */
-    public void setBranchName(String branchName) {
-        this.branchName = branchName;
-    }
-
-    /**
-     * @return the status
-     */
-    public Integer getStatus() {
-        return status;
-    }
-
-    /**
-     * @param status the status to set
-     */
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-    
-    
     
     
 }

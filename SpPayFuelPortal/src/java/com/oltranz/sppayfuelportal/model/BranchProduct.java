@@ -20,7 +20,7 @@ public class BranchProduct {
     private String branchName;
     
     @JsonProperty("productId")
-    private int productId;
+    private Integer productId;
     
     @JsonProperty("productName")
     private String productName;
@@ -59,14 +59,14 @@ public class BranchProduct {
     /**
      * @return the productId
      */
-    public int getProductId() {
+    public Integer getProductId() {
         return productId;
     }
 
     /**
      * @param productId the productId to set
      */
-    public void setProductId(int productId) {
+    public void setProductId(Integer productId) {
         this.productId = productId;
     }
 
@@ -97,6 +97,8 @@ public class BranchProduct {
     public void setUnitPrice(double unitPrice) {
         this.unitPrice = unitPrice;
     }
+
+    
     
     
 }

@@ -32,6 +32,7 @@ public class DeviceBean {
     private String pumpName;
     private String nozzleName;
     private String productId;
+    private String saveActionName="Save";
     
     private DeviceSingle deviceSingle;
     private DeviceList deviceList;
@@ -44,6 +45,9 @@ public class DeviceBean {
     @ManagedProperty(value="#{TemplateBean}")
     private TemplateBean templateBean;
     
+    public void init() {
+        setSaveActionName("Save");
+    }
     
     public String devices(){
         
@@ -74,21 +78,44 @@ public class DeviceBean {
         return "innerpage_device.xhtml";
     }
     
+    public void deviceForView(int deviceId){
+        deviceById(deviceId);
+    }
+    
+    
+     public void deviceForEdit(int deviceId){
+        deviceById(deviceId);
+        saveActionName="Add";
+    }
+     
+     public String saveDevice(){
+        if(deviceId.equals("-1")){
+            return create();
+        }else{
+            return update();
+        }
+    }
+    
     public void deviceById(int deviceId){
         
         try{
             String getUrl="http://localhost:8080/PayFuel/DeviceManagementService/device/"+deviceId;
             Response response = CommonLibrary.sendRESTRequest(getUrl, "empty data", MediaType.APPLICATION_JSON, "GET");
             String jsonResponse = response.readEntity(String.class);
-            System.out.println(jsonResponse);
+            //System.out.println(jsonResponse);
             
             ObjectMapper mapper=new ObjectMapper();
             deviceSingle=(DeviceSingle)mapper.readValue(jsonResponse, DeviceSingle.class);
+            
+            this.deviceId=deviceSingle.getDevice().getDeviceId().toString();
+            this.deviceNo=deviceSingle.getDevice().getDeviceNo();
+            this.branchId=deviceSingle.getDevice().getBranchId().toString();
+            
         }
         catch(Exception ex){
             System.out.println(ex.getMessage());
         }
-        //return "view_branch_popup.xhtml";
+        
     }
     
     public String create(){
@@ -108,7 +135,7 @@ public class DeviceBean {
         return "innerpage_device.xhtml";
     }
     
-    public String edit(){
+    public String update(){
         
         String url="http://localhost:8080/PayFuel/DeviceManagementService/device/edit";
         String  jsonData = "{\n" +
@@ -118,14 +145,10 @@ public class DeviceBean {
                 "}";
         Response response=CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
         String jsonResponse=response.readEntity(String.class);
-        System.out.println(jsonResponse);
         
+        deviceById(Integer.parseInt(deviceId));
         
-        this.branchId=null;
-        this.deviceId=null;
-        this.deviceNo=null;
-        
-        return "innerpage_device.xhtml";
+        return devices();
     }
     
     
@@ -260,63 +283,77 @@ public class DeviceBean {
     public void setTemplateBean(TemplateBean templateBean) {
         this.templateBean = templateBean;
     }
-
+    
     /**
      * @return the pumpNozzleProductModelList
      */
     public PumpNozzleProductModelList getPumpNozzleProductModelList() {
         return pumpNozzleProductModelList;
     }
-
+    
     /**
      * @param pumpNozzleProductModelList the pumpNozzleProductModelList to set
      */
     public void setPumpNozzleProductModelList(PumpNozzleProductModelList pumpNozzleProductModelList) {
         this.pumpNozzleProductModelList = pumpNozzleProductModelList;
     }
-
+    
     /**
      * @return the pumpName
      */
     public String getPumpName() {
         return pumpName;
     }
-
+    
     /**
      * @param pumpName the pumpName to set
      */
     public void setPumpName(String pumpName) {
         this.pumpName = pumpName;
     }
-
+    
     /**
      * @return the nozzleName
      */
     public String getNozzleName() {
         return nozzleName;
     }
-
+    
     /**
      * @param nozzleName the nozzleName to set
      */
     public void setNozzleName(String nozzleName) {
         this.nozzleName = nozzleName;
     }
-
+    
     /**
      * @return the productId
      */
     public String getProductId() {
         return productId;
     }
-
+    
     /**
      * @param productId the productId to set
      */
     public void setProductId(String productId) {
         this.productId = productId;
     }
-    
+
+    /**
+     * @return the saveActionName
+     */
+    public String getSaveActionName() {
+        return saveActionName;
+    }
+
+    /**
+     * @param saveActionName the saveActionName to set
+     */
+    public void setSaveActionName(String saveActionName) {
+        this.saveActionName = saveActionName;
+    }
+
     
     
 }

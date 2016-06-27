@@ -100,7 +100,7 @@
                             
                             <h:panelGroup class="col-xs-2 dropdown" style="text-align:center;margin:0px;padding:0px;" rendered="#{BranchBean.branchMenuItemRendered}">
                             
-                                <h:commandLink action="#{BranchBean.branchesByUserId()}" class="#{TemplateBean.branchClassName}">BRANCHES</h:commandLink>
+                                <h:commandLink action="#{BranchBean.branches()}" class="#{TemplateBean.branchClassName}">BRANCHES</h:commandLink>
                             
                            </h:panelGroup>
                             
@@ -108,16 +108,16 @@
                                 <a class="#{TemplateBean.devicesClassName}" data-toggle="dropdown">ITEMS</a>
                                 <ul class="dropdown-menu" style="float:center;">
                                     <li>
-                                        <h:commandLink action="#{DeviceBean.devices()}">POS</h:commandLink>
+                                        <h:commandLink action="#{DeviceBean.devices()}" rendered="true">POS</h:commandLink>
                                     </li>
                                     <li>
-                                        <h:commandLink action="#{DeviceBean.pumps()}">PUMPS - NOZZLES</h:commandLink>
+                                        <h:commandLink action="#{PumpBean.pumps()}" rendered="true">PUMPS - NOZZLES</h:commandLink>
                                     </li>
                                     <li>
-                                        <h:commandLink>TANKS</h:commandLink>
+                                        <h:commandLink action="#{TankBean.tanks()}" rendered="true">TANKS</h:commandLink>
                                     </li>
                                     <li>
-                                        <h:commandLink>VOUCHER</h:commandLink>
+                                        <h:commandLink rendered="false">VOUCHER</h:commandLink>
                                     </li>
                                 </ul>
                             </div>
@@ -126,16 +126,16 @@
                                 <a class="#{TemplateBean.productsClassName}" data-toggle="dropdown">PRODUCTS</a>
                                 <ul class="dropdown-menu" style="float:center;">
                                     <li>
-                                        <h:commandLink action="#{ProductBean.productTypes()}">TYPE</h:commandLink>
+                                        <h:commandLink action="#{ProductTypeBean.productTypes()}">TYPE</h:commandLink>
                                     </li>
                                     <li>
                                         <h:commandLink action="#{ProductBean.products()}">PRODUCT</h:commandLink>
                                     </li>
                                     <li>
-                                        <h:commandLink action="#{ProductBean.branchProductsByUserId()}">BRANCH PRODUCTS</h:commandLink>
+                                        <h:commandLink action="#{BranchProductBean.branchProducts()}">BRANCH PRODUCTS</h:commandLink>
                                     </li>
                                     <li>
-                                        <h:commandLink >STOCKS</h:commandLink>
+                                        <h:commandLink rendered="false">STOCKS</h:commandLink>
                                     </li>
                                 </ul>
                             </div>

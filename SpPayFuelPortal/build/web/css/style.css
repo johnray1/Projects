@@ -635,9 +635,9 @@ input[type="submit"]:active {
 
 /*FORMS ELEMENTS*/
 .edit_form{font-family:ubuntu;font-size:14px;font-weigth:normal;margin-top:10px;}
-.edit_form  label{font-family:ubuntu;font-size:13px;color:#042c90;text-transform:uppercase;}
+.edit_form  label{font-family:ubuntu;font-size:13px;color:#0c780c;text-transform:uppercase;}
 .edit_form  fieldset{margin:0px;padding:5px;border:1px solid #f7f7f7;border-bottom:3px solid #d9d9d9;}
-.edit_form  legend{width:auto;margin:0px;padding:3px;font-family:ubuntu;font-size:14px;color:#042c90;text-transform:uppercase;border:0px solid red;background:#ffffff;}
+.edit_form  legend{width:auto;margin:0px;padding:3px;font-family:ubuntu;font-size:14px;color:#0c780c;text-transform:uppercase;border:0px solid red;background:#ffffff;}
 
 .theinput{min-height:50px;margin:5px;border:0px solid red;}
 .theinput input{width:100%;padding:5px;border:0px solid #afbe57;border-bottom:3px solid #d9d9d9;outline:none;background-color:#f7f7f7;}
@@ -659,10 +659,10 @@ input[type="submit"]:active {
 
 .submitinput{min-height:50px;margin:5px;border:0px solid red;text-align:center;}
 .submitinput input[type="submit"] { width:200px;background: #ffffff;border: 2px solid #cccccc;border-radius: 15px; cursor: pointer; font-size: 18px;color:#afafaf;padding:5px;transition: all 0.15s ease;outline:none;}
-.submitinput input[type="submit"]:hover {width:210px;background: #042c90;border: 2px solid #042c90;border-radius: 15px;cursor: pointer;font-size: 18px;color:#ffffff;padding:5px;outline:none;}
-.submitinput input[type="submit"]:active {width:210px; background: #042c90; border: 2px solid #042c90; border-radius: 15px; color: white; cursor: pointer;font-size: 18px; color:#ffffff; padding:5px; outline:none; }
+.submitinput input[type="submit"]:hover {width:210px;background: #0c780c;border: 2px solid #0c780c;border-radius: 15px;cursor: pointer;font-size: 18px;color:#ffffff;padding:5px;outline:none;}
+.submitinput input[type="submit"]:active {width:210px; background: #0c780c; border: 2px solid #0c780c; border-radius: 15px; color: white; cursor: pointer;font-size: 18px; color:#ffffff; padding:5px; outline:none; }
 
-input[type="checkbox"]{display:inline-block;margin:10px auto;padding:10px;border:0px solid #042c90}
+input[type="checkbox"]{display:inline-block;margin:10px auto;padding:10px;border:0px solid #0c780c}
 input[type="radio"]{display:inline-block;margin:10px auto;padding:5px;}
 
 
@@ -679,7 +679,7 @@ input[type="radio"]{display:inline-block;margin:10px auto;padding:5px;}
 .edit_users_permissions_checkinput span{border:4px solid #ffffff;text-align:left;background-color:#ffffff;}
 .edit_users_permissions_checkinput span:hover{display:inline-block;border:4px solid #ffffff;text-align:left;background-color:#e5e5e5;border-radius:4px;}
 
-.edit_users_permissions input[type="checkbox"]{display:inline-block;margin:10px auto;padding:10px;border:0px solid #042c90;line-height:20px;}
+.edit_users_permissions input[type="checkbox"]{display:inline-block;margin:10px auto;padding:10px;border:0px solid #0c780c;line-height:20px;}
 
 
 

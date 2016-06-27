@@ -25,8 +25,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 @SessionScoped
 public class TransactionBean {
     
+    private String saveActionName="Save";
     private TransactionList transactionList;
-    
     private TransactionSingle transactionSingle;
     
     @ManagedProperty(value="#{TemplateBean}")
@@ -34,6 +34,12 @@ public class TransactionBean {
     
     @ManagedProperty(value="#{LoginBean}")
     private LoginBean loginBean;
+    
+    
+    
+    public void init() {
+        saveActionName="Save";
+    }
     
     public String transactions(){
         
@@ -50,11 +56,11 @@ public class TransactionBean {
         System.out.println(loginBean.getUserId());
         
         try{
-            String getBranchUrl="http://localhost:8080/PayFuel/AndroidWebService/pos/transactions/"+userId;
+            String getBranchUrl="http://localhost:8080/PayFuel/TransactionManagementService/transactions/"+userId;
             Response response = CommonLibrary.sendRESTRequest(getBranchUrl, "empty data", MediaType.APPLICATION_JSON, "GET");
             //System.out.println(response.getHeaders());
             String jsonResponse = response.readEntity(String.class);
-            System.out.println(jsonResponse);
+            //System.out.println(jsonResponse);
             
             ObjectMapper mapper=new ObjectMapper();
             transactionList=(TransactionList)mapper.readValue(jsonResponse, TransactionList.class);
@@ -66,13 +72,17 @@ public class TransactionBean {
         
     }
     
-    public void transactionById(int transactionId){
+    public void transactionForView(long transactionId){
+        transactionById(transactionId);
+    }
+    
+    public void transactionById(long transactionId){
         
         try{
-            String getUrl="http://localhost:8080/PayFuel/AndroidWebService/pos/transaction/"+transactionId;
+            String getUrl="http://localhost:8080/PayFuel/TransactionManagementService/transaction/"+transactionId;
             Response response = CommonLibrary.sendRESTRequest(getUrl, "empty data", MediaType.APPLICATION_JSON, "GET");
             String jsonResponse = response.readEntity(String.class);
-            System.out.println(jsonResponse);
+            //System.out.println(jsonResponse);
             
             ObjectMapper mapper=new ObjectMapper();
             transactionSingle=(TransactionSingle)mapper.readValue(jsonResponse, TransactionSingle.class);
@@ -137,6 +147,20 @@ public class TransactionBean {
      */
     public void setTransactionSingle(TransactionSingle transactionSingle) {
         this.transactionSingle = transactionSingle;
+    }
+
+    /**
+     * @return the saveActionName
+     */
+    public String getSaveActionName() {
+        return saveActionName;
+    }
+
+    /**
+     * @param saveActionName the saveActionName to set
+     */
+    public void setSaveActionName(String saveActionName) {
+        this.saveActionName = saveActionName;
     }
     
     
