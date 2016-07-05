@@ -6,11 +6,13 @@
 package com.oltranz.payfuel.services;
 
 import com.oltranz.payfuel.beans.LogManager;
+import com.oltranz.payfuel.models.LogFilter;
 import com.oltranz.payfuel.models.ResultObject;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
@@ -43,6 +45,18 @@ public class LogManagementService {
     public String getLog(@PathParam("logId") long logId) {
         
         ResultObject result= logManager.getLog(logId);
+        
+        String jsonResult=result.getJsonFormat();
+        
+        return jsonResult;
+    }
+    
+    @POST
+    @Path("logs/filter")
+    @Consumes({"application/xml", "application/json"})
+    public String filterLogs(LogFilter logFilterIp) {
+        
+        ResultObject result=logManager.filterLogs(logFilterIp);
         
         String jsonResult=result.getJsonFormat();
         

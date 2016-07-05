@@ -46,11 +46,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Transaction.findByPaymentStatus", query = "SELECT t FROM Transaction t WHERE t.paymentStatus = :paymentStatus"),
     @NamedQuery(name = "Transaction.findByAmount", query = "SELECT t FROM Transaction t WHERE t.amount = :amount"),
     @NamedQuery(name = "Transaction.findByQuantity", query = "SELECT t FROM Transaction t WHERE t.quantity = :quantity"),
-    @NamedQuery(name = "Transaction.findByIndexbefore", query = "SELECT t FROM Transaction t WHERE t.indexbefore = :indexbefore"),
-    @NamedQuery(name = "Transaction.findByIndexafter", query = "SELECT t FROM Transaction t WHERE t.indexafter = :indexafter"),
     @NamedQuery(name = "Transaction.findByPlatenumber", query = "SELECT t FROM Transaction t WHERE t.platenumber = :platenumber"),
     @NamedQuery(name = "Transaction.findByServerReqTime", query = "SELECT t FROM Transaction t WHERE t.serverReqTime = :serverReqTime"),
-    @NamedQuery(name = "Transaction.findByServerResTime", query = "SELECT t FROM Transaction t WHERE t.serverResTime = :serverResTime")})
+    @NamedQuery(name = "Transaction.findByServerResTime", query = "SELECT t FROM Transaction t WHERE t.serverResTime = :serverResTime"),
+    @NamedQuery(name = "Transaction.findByDate", query = "SELECT t FROM Transaction t WHERE t.date = :date")})
 public class Transaction implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -79,20 +78,16 @@ public class Transaction implements Serializable {
     private Long customerId;
     @Column(name = "payment_mode_id")
     private Integer paymentModeId;
-    @Size(max = 50)
-    @Column(name = "payment_status", length = 50)
+    @Size(max = 255)
+    @Column(name = "payment_status", length = 255)
     private String paymentStatus;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "amount", precision = 22)
     private Double amount;
     @Column(name = "quantity", precision = 22)
     private Double quantity;
-    @Column(name = "indexbefore", precision = 22)
-    private Double indexbefore;
-    @Column(name = "indexafter", precision = 22)
-    private Double indexafter;
-    @Size(max = 55)
-    @Column(name = "platenumber", length = 55)
+    @Size(max = 255)
+    @Column(name = "platenumber", length = 255)
     private String platenumber;
     @Column(name = "server_req_time")
     @Temporal(TemporalType.TIMESTAMP)
@@ -100,6 +95,9 @@ public class Transaction implements Serializable {
     @Column(name = "server_res_time")
     @Temporal(TemporalType.TIMESTAMP)
     private Date serverResTime;
+    @Column(name = "date")
+    @Temporal(TemporalType.DATE)
+    private Date date;
 
     public Transaction() {
     }
@@ -220,22 +218,6 @@ public class Transaction implements Serializable {
         this.quantity = quantity;
     }
 
-    public Double getIndexbefore() {
-        return indexbefore;
-    }
-
-    public void setIndexbefore(Double indexbefore) {
-        this.indexbefore = indexbefore;
-    }
-
-    public Double getIndexafter() {
-        return indexafter;
-    }
-
-    public void setIndexafter(Double indexafter) {
-        this.indexafter = indexafter;
-    }
-
     public String getPlatenumber() {
         return platenumber;
     }
@@ -258,6 +240,14 @@ public class Transaction implements Serializable {
 
     public void setServerResTime(Date serverResTime) {
         this.serverResTime = serverResTime;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     @Override

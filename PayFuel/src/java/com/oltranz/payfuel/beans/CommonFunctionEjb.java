@@ -10,6 +10,7 @@ import com.oltranz.payfuel.entities.BranchProductPrice;
 import com.oltranz.payfuel.entities.BranchProductPricePK;
 import com.oltranz.payfuel.entities.Customer;
 import com.oltranz.payfuel.entities.Device;
+import com.oltranz.payfuel.entities.IndexTracking;
 import com.oltranz.payfuel.entities.PaymentMode;
 import com.oltranz.payfuel.entities.Product;
 import com.oltranz.payfuel.entities.ProductType;
@@ -17,6 +18,7 @@ import com.oltranz.payfuel.entities.Pump;
 import com.oltranz.payfuel.entities.Role;
 import com.oltranz.payfuel.entities.RoleType;
 import com.oltranz.payfuel.entities.Tank;
+import com.oltranz.payfuel.entities.TankTracking;
 import com.oltranz.payfuel.entities.Transaction;
 import com.oltranz.payfuel.entities.User;
 import com.oltranz.payfuel.entities.Voucher;
@@ -208,6 +210,22 @@ public class CommonFunctionEjb {
             return transaction;
         }
         return null;
+    }
+    
+    public IndexTracking getIndexTracking(long transactionId){
+        IndexTracking indexTracking=(IndexTracking) em.createQuery("SELECT i FROM IndexTracking i WHERE i.transactionId = :transactionId").setParameter("transactionId", transactionId).getSingleResult();
+        if(indexTracking==null){
+            return null;
+        }
+        return indexTracking;
+    }
+    
+    public TankTracking getTankTracking(long transactionId){
+        TankTracking tankTracking=(TankTracking) em.createQuery("SELECT t FROM TankTracking t WHERE t.transactionId = :transactionId").setParameter("transactionId", transactionId).getSingleResult();
+        if(tankTracking==null){
+            return null;
+        }
+        return tankTracking;
     }
     
     public int getDeviceNoBranchId(String deviceNo){

@@ -46,7 +46,7 @@ public class PaymentMode implements Serializable {
     @Column(name = "descr", length = 255)
     private String descr;
     @Column(name = "status")
-    private Integer status=7;
+    private Integer status;
 
     public PaymentMode() {
     }

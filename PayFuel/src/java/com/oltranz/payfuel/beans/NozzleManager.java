@@ -83,6 +83,7 @@ public class NozzleManager {
                 resultObject.setStatusCode(500);
                 return resultObject;
             }
+            nozzle.setNozzleName(editNozzle.getNozzleName());
             nozzle.setNozzleIndex(editNozzle.getNozzleIndex());
             em.merge(nozzle);
             

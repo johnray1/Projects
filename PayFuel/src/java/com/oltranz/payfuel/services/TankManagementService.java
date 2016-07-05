@@ -11,8 +11,11 @@ import com.oltranz.payfuel.models.ResultObject;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 
 /**
  *
@@ -42,5 +45,32 @@ public class TankManagementService {
         ResultObject result=tankManager.editTank(editTank);
         return result.getJsonFormat();
         
+    }
+    
+    @GET
+    @Path("tanks")
+    @Produces({"application/xml", "application/json"})
+    public String getTankList() {
+        
+        ResultObject result= tankManager.getTankList();
+        return result.getJsonFormat();
+    }
+    
+    @GET
+    @Path("tanks/{userId}")
+    @Produces({"application/xml", "application/json"})
+    public String getDeviceListByUserId(@PathParam("userId") Integer userId) {
+        
+        ResultObject result= tankManager.getTankList(userId);
+        return result.getJsonFormat();
+    }
+    
+    @GET
+    @Path("tank/{tankId}")
+    @Produces({"application/xml", "application/json"})
+    public String getTankByItsId(@PathParam("tankId") Integer tankId) {
+        
+        ResultObject result= tankManager.getTankByItsId(tankId);
+        return result.getJsonFormat();
     }
 }

@@ -146,10 +146,10 @@ public class UserManager {
             
             //set logs
             Log log=new Log();
+            log.setActionId(1);
             log.setActionName("Create New User");
             log.setActionResult(0);
             log.setDatetime(new Date());
-            log.setActionId(1);
             log.setObjectId(u.getUserId()); //user object id =1
             log.setObjectName("user");
             log.setUserId(actionBy);

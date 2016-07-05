@@ -22,6 +22,10 @@ public class DeviceRegistrationModel {
     @JsonProperty("deviceId")
     private String deviceId;
     
+    @JsonProperty("serialNumber")
+    private String serialNumber;
+
+    
 
     
 
@@ -65,6 +69,20 @@ public class DeviceRegistrationModel {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * @return the serialNumber
+     */
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    /**
+     * @param serialNumber the serialNumber to set
+     */
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
     }
 
     

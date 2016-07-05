@@ -13,6 +13,7 @@ import com.oltranz.payfuel.entities.Role;
 import com.oltranz.payfuel.entities.RoleForUser;
 import com.oltranz.payfuel.entities.RoleType;
 import com.oltranz.payfuel.entities.SystemObject;
+import com.oltranz.payfuel.entities.TransactionType;
 import com.oltranz.payfuel.entities.User;
 import com.oltranz.payfuel.library.Common;
 import com.oltranz.payfuel.models.ResultObject;
@@ -104,16 +105,16 @@ public class InitialData {
             //Action(Integer id, String name, String descr)
             initializationLog+="\n\n Actions Initialization begins...";
             List<Action> actionsList=new ArrayList();
-            actionsList.add(new Action(1,"Create","To create a new instance of an object"));
-            actionsList.add(new Action(2,"Read","To access and read few or detailed info of an object"));
-            actionsList.add(new Action(3,"Update","To Edit and Update instance of an object"));
-            actionsList.add(new Action(4,"Delete","To delete instance of an object"));
-            actionsList.add(new Action(5,"List","To View list of object"));
-            actionsList.add(new Action(6,"Change Status","To change the status of an instance of an object"));
-            actionsList.add(new Action(7,"Pos Login","To User Pos Login"));
-            actionsList.add(new Action(8,"Pos Logout","To User Pos Logout"));
-            actionsList.add(new Action(9,"Web Login","To User Web Login"));
-            actionsList.add(new Action(10,"Web Logout","To User Web Logout"));
+            actionsList.add(new Action(1,"CREATE","To create a new instance of an object"));
+            actionsList.add(new Action(2,"READ","To access and read few or detailed info of an object"));
+            actionsList.add(new Action(3,"UPDATE","To Edit and Update instance of an object"));
+            actionsList.add(new Action(4,"DELETE","To delete instance of an object"));
+            actionsList.add(new Action(5,"LIST","To View list of object"));
+            actionsList.add(new Action(6,"CHANGE STATUS","To change the status of an instance of an object"));
+            actionsList.add(new Action(7,"POS LOGIN","To User Pos Login"));
+            actionsList.add(new Action(8,"POS LOGOUT","To User Pos Logout"));
+            actionsList.add(new Action(9,"WEB LOGIN","To User Web Login"));
+            actionsList.add(new Action(10,"WEB LOGOUT","To User Web Logout"));
             for(Action x: actionsList){
                 em.persist(x);
                 initializationLog+="\n "+x.getName() +" Added successfully";
@@ -159,7 +160,18 @@ public class InitialData {
             
             
             
+            //String name,int typeId,String descr
+            initializationLog+="\n\n TransactionType Initialization begins...";
+            em.persist(new TransactionType(1,"SALE","Sale Type"));
+            em.flush();
+            em.persist(new TransactionType(2,"CORRECTION","Correction Type"));
+            em.flush();
+            em.persist(new TransactionType(3,"CANCELLATION","Cancellation Type"));
+            em.flush();
+            em.persist(new TransactionType(4,"DEEPING","Deeping Type"));
+            em.flush();
             
+            initializationLog+="\n "+" Added successfully";
             
             //String name,int typeId,String descr
             initializationLog+="\n\n Roles Initialization begins...";

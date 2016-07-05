@@ -354,7 +354,8 @@ public class DeviceManager {
             resultObject.setObjectClass(Device.class);
             resultObject.setStatusCode(100);
             return resultObject;
-        }else{
+        }
+        else{
             resultObject.setMessage("Device with given Id not found!");
             resultObject.setObject(null);
             resultObject.setObjectClass(Device.class);

@@ -36,6 +36,7 @@ public class ApplicationConfig  extends Application{
       resourses.add(com.oltranz.payfuel.services.TransactionManagementService.class);
       resourses.add(com.oltranz.payfuel.services.LogManagementService.class);
       resourses.add(com.oltranz.payfuel.services.TankManagementService.class);
+      resourses.add(com.oltranz.payfuel.services.ActionManagementService.class);
       
       
   }

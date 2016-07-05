@@ -18,8 +18,10 @@ import java.io.InputStream;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 
 /**
  *
@@ -67,6 +69,30 @@ public class AndroidWebService {
     public String sale(SaleDetailsModel saleDetailsModel) {
         
         ResultObject result= androidDataManager.sale(saleDetailsModel);
+        
+        String jsonResult=result.getJsonFormat();
+        
+        return jsonResult;
+    }
+    
+    @POST
+    @Path("pos/saleCancel")
+    @Consumes({"application/xml", "application/json"})
+    public String saleCancel(SaleDetailsModel saleDetailsModel) {
+        
+        ResultObject result= androidDataManager.sale(saleDetailsModel);
+        
+        String jsonResult=result.getJsonFormat();
+        
+        return jsonResult;
+    }
+    
+    @GET
+    @Path("pos/cancelSale/{deviceTransactionId}")
+    @Consumes({"application/xml", "application/json"})
+    public String cancelSale(@PathParam("deviceTransactionId") Long deviceTransactionId) {
+        
+        ResultObject result= androidDataManager.cancelSale(deviceTransactionId);
         
         String jsonResult=result.getJsonFormat();
         
