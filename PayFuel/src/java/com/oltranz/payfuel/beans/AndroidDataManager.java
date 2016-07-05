@@ -63,12 +63,12 @@ public class AndroidDataManager {
             CommonFunctionEjb commonFunctionEjb;
 //-------------------------------------------------------Login/Logout----------------------------------------------------------
     
-    public  ResultObject login(String deviceNo, String pin){
+    public  ResultObject login(String deviceName, String pin){
         
         ResultObject resultObject=new ResultObject();
         resultObject.setObjectClass(LoginOpModel.class);
         try{
-            int deviceBranchId=commonFunctionEjb.getDeviceNoBranchId(deviceNo);//device branch id
+            int deviceBranchId=commonFunctionEjb.getDeviceNoBranchId(deviceName);//device branch id
             int userId=commonFunctionEjb.isUserIdAvailable(pin);
             
             //get the user details
@@ -120,7 +120,7 @@ public class AndroidDataManager {
             log.setUserId(userDetails.getUserId());
             User actionByUser=em.find(User.class,userDetails.getUserId());
             log.setUserName(actionByUser.getFname()+" "+actionByUser.getOtherNames());
-            log.setSource("POS : "+deviceNo);
+            log.setSource("POS : "+deviceName);
             InetAddress IP=InetAddress.getLocalHost();
             log.setIp(IP.toString());
             em.persist(log);
@@ -138,12 +138,12 @@ public class AndroidDataManager {
         }
     }
     
-    public  ResultObject logout(String deviceNo,Integer userId){
+    public  ResultObject logout(String deviceName,Integer userId){
         
         ResultObject resultObject=new ResultObject();
         resultObject.setObjectClass(LogoutOpModel.class);
         try{
-            int deviceBranchId=commonFunctionEjb.getDeviceNoBranchId(deviceNo);//device branch id
+            int deviceBranchId=commonFunctionEjb.getDeviceNoBranchId(deviceName);//device branch id
             
             //get the user details
             UserDetailsModel userDetails=(UserDetailsModel) userManager.getUserDetails(userId).getObject();
@@ -200,7 +200,7 @@ public class AndroidDataManager {
             log.setUserId(userDetails.getUserId());
             User actionByUser=em.find(User.class,userDetails.getUserId());
             log.setUserName(actionByUser.getFname()+" "+actionByUser.getOtherNames());
-            log.setSource("POS : "+deviceNo);
+            log.setSource("POS : "+deviceName);
             InetAddress IP=InetAddress.getLocalHost();
             log.setIp(IP.toString());
             em.persist(log);

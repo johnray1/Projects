@@ -221,7 +221,7 @@ public class CommonFunctionEjb {
     public int getDeviceNoBranchId(String deviceName){
         
         Device d=new Device();
-        List<Device> dl=(List<Device>)em.createQuery("SELECT d FROM Device d WHERE d.deviceName = :deviceName").setParameter("deviceNo", deviceName).getResultList();
+        List<Device> dl=(List<Device>)em.createQuery("SELECT d FROM Device d WHERE d.deviceName = :deviceName").setParameter("deviceName", deviceName).getResultList();
         if(!dl.isEmpty())
         {
             Iterator i=dl.iterator();
