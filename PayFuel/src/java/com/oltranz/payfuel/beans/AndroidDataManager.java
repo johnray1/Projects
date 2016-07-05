@@ -445,7 +445,7 @@ public class AndroidDataManager {
             AsyncTransaction transactionAsync=new AsyncTransaction();
             transactionAsync.setUserId(transaction.getUserId());
             Device device=commonFunctionEjb.getDeviceName(transaction.getDeviceId());
-            transactionAsync.setDeviceId(device.getDeviceNo());
+            transactionAsync.setDeviceId(device.getDeviceName());
             transactionAsync.setBranchId(transaction.getBranchId());
             transactionAsync.setDeviceTransactionId(transaction.getDeviceTransactionId());
             

@@ -25,12 +25,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "device", catalog = "PayFuelDB", schema = "", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"device_no"})})
+    @UniqueConstraint(columnNames = {"device_name"}),
+    @UniqueConstraint(columnNames = {"serial_no"})})
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Device.findAll", query = "SELECT d FROM Device d"),
     @NamedQuery(name = "Device.findByDeviceId", query = "SELECT d FROM Device d WHERE d.deviceId = :deviceId"),
-    @NamedQuery(name = "Device.findByDeviceNo", query = "SELECT d FROM Device d WHERE d.deviceNo = :deviceNo"),
+    @NamedQuery(name = "Device.findByDeviceName", query = "SELECT d FROM Device d WHERE d.deviceName = :deviceName"),
+    @NamedQuery(name = "Device.findBySerialNo", query = "SELECT d FROM Device d WHERE d.serialNo = :serialNo"),
     @NamedQuery(name = "Device.findByStatus", query = "SELECT d FROM Device d WHERE d.status = :status"),
     @NamedQuery(name = "Device.findByBranchId", query = "SELECT d FROM Device d WHERE d.branchId = :branchId")})
 public class Device implements Serializable {
@@ -40,9 +42,12 @@ public class Device implements Serializable {
     @Basic(optional = false)
     @Column(name = "device_id", nullable = false)
     private Integer deviceId;
-    @Size(max = 100)
-    @Column(name = "device_no", length = 100)
-    private String deviceNo;
+    @Size(max = 255)
+    @Column(name = "device_name", length = 255)
+    private String deviceName;
+    @Size(max = 255)
+    @Column(name = "serial_no", length = 255)
+    private String serialNo;
     @Column(name = "status")
     private Integer status=7;
     @Column(name = "branch_id")
@@ -63,12 +68,20 @@ public class Device implements Serializable {
         this.deviceId = deviceId;
     }
 
-    public String getDeviceNo() {
-        return deviceNo;
+    public String getDeviceName() {
+        return deviceName;
     }
 
-    public void setDeviceNo(String deviceNo) {
-        this.deviceNo = deviceNo;
+    public void setDeviceName(String deviceName) {
+        this.deviceName = deviceName;
+    }
+
+    public String getSerialNo() {
+        return serialNo;
+    }
+
+    public void setSerialNo(String serialNo) {
+        this.serialNo = serialNo;
     }
 
     public Integer getStatus() {

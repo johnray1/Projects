@@ -79,12 +79,36 @@ public class DeviceManager {
                 return resultObject;
             }
             
-            Device newDevice=new Device();
-            newDevice.setDeviceNo(regDeviceModel.getDeviceId());
-            newDevice.setBranchId(branchId);
+            //check device if same serial is available
+            Device device=commonFunctionEjb.getSerialNo(regDeviceModel.getSerialNumber());
+            if(device==null){
+                
+                Device newDevice=new Device();
+                newDevice.setDeviceName(regDeviceModel.getDeviceId());
+                newDevice.setSerialNo(regDeviceModel.getSerialNumber());
+                newDevice.setBranchId(branchId);
+                return createDevice(newDevice);
+            }
+            else{
+                device.setDeviceName(regDeviceModel.getDeviceId());
+                device.setBranchId(branchId);
+                em.merge(device);
+                em.flush();
+                
+                DeviceRegistrationResponse deviceRegistrationResponse=new DeviceRegistrationResponse();
+                deviceRegistrationResponse.setDeviceId(device.getDeviceId());
+                deviceRegistrationResponse.setDeviceName(device.getDeviceName());
+                deviceRegistrationResponse.setStatus(device.getStatus());
+                deviceRegistrationResponse.setBranchId(device.getBranchId());
+                deviceRegistrationResponse.setBranchName(em.find(Branch.class,device.getBranchId()).getName());
+                
+                resultObject.setObject(deviceRegistrationResponse);
+                resultObject.setMessage("New Device successfully created ");
+                resultObject.setStatusCode(100);
+                
+                return resultObject;
+            }
             
-            
-            return createDevice(newDevice);
         }
         catch(Exception e){
             resultObject.setObject(null);
@@ -109,7 +133,7 @@ public class DeviceManager {
             return resultObject;
         }
         //check if device name is available before
-        int deviceIsAvailable=commonFunctionEjb.isDeviceAvailable(newDevice.getDeviceNo());
+        int deviceIsAvailable=commonFunctionEjb.isDeviceAvailable(newDevice.getDeviceName());
         if(deviceIsAvailable!=0){
             resultObject.setObject(null);
             resultObject.setMessage("Device name already used by another");
@@ -118,14 +142,15 @@ public class DeviceManager {
         }
         
         Device device=new Device();
-        device.setDeviceNo(newDevice.getDeviceNo());
+        device.setDeviceName(newDevice.getDeviceName());
+        device.setSerialNo(newDevice.getSerialNo());
         device.setBranchId(newDevice.getBranchId());
         em.persist(device);
         em.flush();
         
         DeviceRegistrationResponse deviceRegistrationResponse=new DeviceRegistrationResponse();
         deviceRegistrationResponse.setDeviceId(device.getDeviceId());
-        deviceRegistrationResponse.setDeviceName(device.getDeviceNo());
+        deviceRegistrationResponse.setDeviceName(device.getDeviceName());
         deviceRegistrationResponse.setStatus(device.getStatus());
         deviceRegistrationResponse.setBranchId(device.getBranchId());
         deviceRegistrationResponse.setBranchName(em.find(Branch.class,device.getBranchId()).getName());
@@ -154,7 +179,7 @@ public class DeviceManager {
         }
         
         //check if device is available before
-        int deviceIsAvailable=commonFunctionEjb.isDeviceAvailable(editDevice.getDeviceNo());
+        int deviceIsAvailable=commonFunctionEjb.isDeviceAvailable(editDevice.getDeviceName());
         if(deviceIsAvailable!=0){
             resultObject.setObject(null);
             resultObject.setMessage("Device name already used by another");
@@ -162,7 +187,8 @@ public class DeviceManager {
             return resultObject;
         }
         
-        device.setDeviceNo(editDevice.getDeviceNo());
+        device.setDeviceName(editDevice.getDeviceName());
+        device.setSerialNo(editDevice.getSerialNo());
         device.setBranchId(editDevice.getBranchId());
         device.setStatus(editDevice.getStatus());//default value of a device status is 7 even if i dont post status the 7 is coming in this object
         em.merge(device);
@@ -221,7 +247,7 @@ public class DeviceManager {
                 
                 Devices devices=new Devices();
                 devices.setDeviceId(device.getDeviceId());
-                devices.setDeviceNo(device.getDeviceNo());
+                devices.setDeviceNo(device.getDeviceName());
                 devices.setBranchId(device.getBranchId());
                 Branch branch=commonFunctionEjb.getBranchName(device.getBranchId());
                 devices.setBranchName(branch.getName());
@@ -255,7 +281,7 @@ public class DeviceManager {
                     
                     Devices devices=new Devices();
                     devices.setDeviceId(device.getDeviceId());
-                    devices.setDeviceNo(device.getDeviceNo());
+                    devices.setDeviceNo(device.getDeviceName());
                     devices.setBranchId(device.getBranchId());
                     Branch branch=commonFunctionEjb.getBranchName(device.getBranchId());
                     devices.setBranchName(branch.getName());
@@ -301,7 +327,7 @@ public class DeviceManager {
                 
                 Devices devices=new Devices();
                 devices.setDeviceId(device.getDeviceId());
-                devices.setDeviceNo(device.getDeviceNo());
+                devices.setDeviceNo(device.getDeviceName());
                 devices.setBranchId(device.getBranchId());
                 Branch branch=commonFunctionEjb.getBranchName(device.getBranchId());
                 devices.setBranchName(branch.getName());
@@ -337,7 +363,7 @@ public class DeviceManager {
             
             Devices devices=new Devices();
             devices.setDeviceId(device.getDeviceId());
-            devices.setDeviceNo(device.getDeviceNo());
+            devices.setDeviceNo(device.getDeviceName());
             devices.setBranchId(device.getBranchId());
             Branch branch=commonFunctionEjb.getBranchName(device.getBranchId());
             devices.setBranchName(branch.getName());
@@ -381,7 +407,7 @@ public class DeviceManager {
         
         SimpleDateFormat sdf = new SimpleDateFormat("--yyyy-MM-dd/HH:mm");
         Date deletionTIme=new Date();
-        device.setDeviceNo(device.getDeviceNo()+ sdf.format(deletionTIme));
+        device.setDeviceName(device.getDeviceName()+ sdf.format(deletionTIme));
         em.merge(device);
         
         

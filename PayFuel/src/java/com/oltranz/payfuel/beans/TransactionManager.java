@@ -75,7 +75,7 @@ public class TransactionManager {
                 Customer customer=commonFunctionEjb.getCustomer(transaction.getCustomerId());//customer
                 transactionDetailsModel.setCustomer(customer.getContactDetails());
                 Device device=commonFunctionEjb.getDeviceName(transaction.getDeviceId());//device
-                transactionDetailsModel.setDeviceName(device.getDeviceNo());
+                transactionDetailsModel.setDeviceName(device.getDeviceName());
                 PaymentMode paymentMode=commonFunctionEjb.getPaymentModeName(transaction.getPaymentModeId());
                 transactionDetailsModel.setPaymentMode(paymentMode.getName());
                 transactionDetailsModel.setPaymentStatus(transaction.getPaymentStatus());
@@ -150,7 +150,7 @@ public class TransactionManager {
             Customer customer=commonFunctionEjb.getCustomer(transaction.getCustomerId());//customer
             transactionDetailsModel.setCustomer(customer.getContactDetails());
             Device device=commonFunctionEjb.getDeviceName(transaction.getDeviceId());//device
-            transactionDetailsModel.setDeviceName(device.getDeviceNo());
+            transactionDetailsModel.setDeviceName(device.getDeviceName());
             PaymentMode paymentMode=commonFunctionEjb.getPaymentModeName(transaction.getPaymentModeId());
             transactionDetailsModel.setPaymentMode(paymentMode.getName());
             transactionDetailsModel.setPaymentStatus(transaction.getPaymentStatus());
@@ -207,7 +207,7 @@ public class TransactionManager {
                 Customer customer=commonFunctionEjb.getCustomer(transaction.getCustomerId());
                 transactionDetailsModel.setCustomer(customer.getContactDetails());
                 Device device=commonFunctionEjb.getDeviceName(transaction.getDeviceId());
-                transactionDetailsModel.setDeviceName(device.getDeviceNo());
+                transactionDetailsModel.setDeviceName(device.getDeviceName());
                 PaymentMode paymentMode=commonFunctionEjb.getPaymentModeName(transaction.getPaymentModeId());
                 transactionDetailsModel.setPaymentMode(paymentMode.getName());
                 transactionDetailsModel.setPaymentStatus(transaction.getPaymentStatus());
@@ -248,7 +248,7 @@ public class TransactionManager {
                     Customer customer=commonFunctionEjb.getCustomer(transaction.getCustomerId());
                     transactionDetailsModel.setCustomer(customer.getContactDetails());
                     Device device=commonFunctionEjb.getDeviceName(transaction.getDeviceId());
-                    transactionDetailsModel.setDeviceName(device.getDeviceNo());
+                    transactionDetailsModel.setDeviceName(device.getDeviceName());
                     PaymentMode paymentMode=commonFunctionEjb.getPaymentModeName(transaction.getPaymentModeId());
                     transactionDetailsModel.setPaymentMode(paymentMode.getName());
                     transactionDetailsModel.setPaymentStatus(transaction.getPaymentStatus());
@@ -301,7 +301,7 @@ public class TransactionManager {
                 Customer customer=commonFunctionEjb.getCustomer(transaction.getCustomerId());
                 transactionDetailsModel.setCustomer(customer.getContactDetails());
                 Device device=commonFunctionEjb.getDeviceName(transaction.getDeviceId());
-                transactionDetailsModel.setDeviceName(device.getDeviceNo());
+                transactionDetailsModel.setDeviceName(device.getDeviceName());
                 PaymentMode paymentMode=commonFunctionEjb.getPaymentModeName(transaction.getPaymentModeId());
                 transactionDetailsModel.setPaymentMode(paymentMode.getName());
                 transactionDetailsModel.setPaymentStatus(transaction.getPaymentStatus());
@@ -407,7 +407,7 @@ public class TransactionManager {
             Customer customer=commonFunctionEjb.getCustomer(transaction.getCustomerId());
             transactionDetailsModel.setCustomer(customer.getContactDetails());
             Device device=commonFunctionEjb.getDeviceName(transaction.getDeviceId());
-            transactionDetailsModel.setDeviceName(device.getDeviceNo());
+            transactionDetailsModel.setDeviceName(device.getDeviceName());
             PaymentMode paymentMode=commonFunctionEjb.getPaymentModeName(transaction.getPaymentModeId());
             transactionDetailsModel.setPaymentMode(paymentMode.getName());
             transactionDetailsModel.setPaymentStatus(transaction.getPaymentStatus());

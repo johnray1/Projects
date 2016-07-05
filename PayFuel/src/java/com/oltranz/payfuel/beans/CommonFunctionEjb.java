@@ -176,18 +176,19 @@ public class CommonFunctionEjb {
         }
         return 0;
     }
+    //-------------------------------------------------DEVICE----------------------------------------------------------
     
-    public Device getDeviceNoId(String deviceNo){
+    public Device getDeviceNoId(String deviceName){
         
         Device device=new Device();
-        List<Device> dl=(List<Device>)em.createQuery("SELECT d FROM Device d WHERE d.deviceNo = :deviceNo").setParameter("deviceNo", deviceNo).getResultList();
+        List<Device> dl=(List<Device>)em.createQuery("SELECT d FROM Device d WHERE d.deviceName = :deviceName").setParameter("deviceName", deviceName).getResultList();
         if(!dl.isEmpty())
         {
             Iterator i=dl.iterator();
             while(i.hasNext()){
                 device=(Device) i.next();
             }
-            if((device.getDeviceNo().equals(deviceNo))&& ((device.getDeviceNo()!= null))||(!device.getDeviceNo().isEmpty())){
+            if((device.getDeviceName().equals(deviceName))&& ((device.getDeviceName()!= null))||(!device.getDeviceName().isEmpty())){
                 return device;
             }
             else{
@@ -196,6 +197,71 @@ public class CommonFunctionEjb {
         }
         return null;
     }
+    
+    public int isDeviceAvailable(String deviceName){
+        
+        Device d=new Device();
+        List<Device> dl=(List<Device>)em.createQuery("SELECT d FROM Device d WHERE d.deviceName = :deviceName").setParameter("deviceName", deviceName).getResultList();
+        if(!dl.isEmpty())
+        {
+            Iterator i=dl.iterator();
+            while(i.hasNext()){
+                d=(Device) i.next();
+            }
+            if((d.getDeviceName().equals(deviceName))&& ((d.getDeviceName()!= null))||(!d.getDeviceName().isEmpty())){
+                return d.getDeviceId();
+            }
+            else{
+                return 0;
+            }
+        }
+        return 0;
+    }
+    
+    public int getDeviceNoBranchId(String deviceName){
+        
+        Device d=new Device();
+        List<Device> dl=(List<Device>)em.createQuery("SELECT d FROM Device d WHERE d.deviceName = :deviceName").setParameter("deviceNo", deviceName).getResultList();
+        if(!dl.isEmpty())
+        {
+            Iterator i=dl.iterator();
+            while(i.hasNext()){
+                d=(Device) i.next();
+            }
+            if((d.getDeviceName().equals(deviceName))&& ((d.getDeviceName()!= null))||(!d.getDeviceName().isEmpty())){
+                return d.getBranchId();
+            }
+            else{
+                return 0;
+            }
+        }
+        return 0;
+    }
+    
+    public Device getSerialNo(String serialNo){
+        
+        Device device=new Device();
+        List<Device> dl=(List<Device>)em.createQuery("SELECT d FROM Device d WHERE d.serialNo = :serialNo").setParameter("serialNo", serialNo).getResultList();
+        if(!dl.isEmpty())
+        {
+            Iterator i=dl.iterator();
+            while(i.hasNext()){
+                device=(Device) i.next();
+            }
+            if((device.getSerialNo().equals(serialNo))&& ((device.getSerialNo()!= null))||(!device.getSerialNo().isEmpty())){
+                return device;
+            }
+            else{
+                return null;
+            }
+        }
+        return null;
+    }
+    
+    
+    
+    //---------------------------------------------------Transaction--------------------------------------------------------
+    
     
     public Transaction getDeviceTransactionId(long deviceTransactionId){
         
@@ -228,25 +294,7 @@ public class CommonFunctionEjb {
         return tankTracking;
     }
     
-    public int getDeviceNoBranchId(String deviceNo){
-        
-        Device d=new Device();
-        List<Device> dl=(List<Device>)em.createQuery("SELECT d FROM Device d WHERE d.deviceNo = :deviceNo").setParameter("deviceNo", deviceNo).getResultList();
-        if(!dl.isEmpty())
-        {
-            Iterator i=dl.iterator();
-            while(i.hasNext()){
-                d=(Device) i.next();
-            }
-            if((d.getDeviceNo().equals(deviceNo))&& ((d.getDeviceNo()!= null))||(!d.getDeviceNo().isEmpty())){
-                return d.getBranchId();
-            }
-            else{
-                return 0;
-            }
-        }
-        return 0;
-    }
+    
     
     
     
@@ -318,25 +366,7 @@ public class CommonFunctionEjb {
         
     }
     
-    public int isDeviceAvailable(String deviceNo){
-        
-        Device d=new Device();
-        List<Device> dl=(List<Device>)em.createQuery("SELECT d FROM Device d WHERE d.deviceNo = :deviceNo").setParameter("deviceNo", deviceNo).getResultList();
-        if(!dl.isEmpty())
-        {
-            Iterator i=dl.iterator();
-            while(i.hasNext()){
-                d=(Device) i.next();
-            }
-            if((d.getDeviceNo().equals(deviceNo))&& ((d.getDeviceNo()!= null))||(!d.getDeviceNo().isEmpty())){
-                return d.getDeviceId();
-            }
-            else{
-                return 0;
-            }
-        }
-        return 0;
-    }
+    
     
     public long isVoucherAvailable(String voucherNo){
         
