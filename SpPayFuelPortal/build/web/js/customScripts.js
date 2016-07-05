@@ -5,6 +5,7 @@ function  turn2DataTable(tableId){
         "paging":true,
         "searching": true,
         "ordering": true,
+        "order": [[ 0, "desc" ]],
         "lengthMenu": [ [10, 25, 50, "All"]],
         
         dom: 'Bfrtip',		 

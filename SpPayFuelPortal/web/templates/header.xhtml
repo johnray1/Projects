@@ -153,7 +153,7 @@
                             </div>
                             
                             <div class="col-xs-2 dropdown" style="text-align:center;margin:0px;padding:0px;">
-                                <h:commandLink action="#{TransactionBean.transactions()}" class="#{TemplateBean.transactionsClassName}">TRANSACTIONS</h:commandLink>
+                                <h:commandLink action="#{TransactionBean.transactions()}" class="#{TemplateBean.transactionsClassName}" onclick="#{PaymentModeBean.paymentModes()};#{ActionBean.actions()}">TRANSACTIONS</h:commandLink>
                             </div>
                             
                             <div class="col-xs-1 dropdown" style="text-align:center;margin:0px;padding:0px;">

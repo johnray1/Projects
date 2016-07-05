@@ -25,6 +25,14 @@ import org.codehaus.jackson.map.ObjectMapper;
 @SessionScoped
 public class TransactionBean {
     
+    private int branchId;
+    private int usId;
+    private int deviceId;
+    private int productId;
+    private int paymentModeId;
+    private String status;
+    private String date;
+    
     private String saveActionName="Save";
     private TransactionList transactionList;
     private TransactionSingle transactionSingle;
@@ -58,12 +66,17 @@ public class TransactionBean {
         try{
             String getBranchUrl="http://localhost:8080/PayFuel/TransactionManagementService/transactions/"+userId;
             Response response = CommonLibrary.sendRESTRequest(getBranchUrl, "empty data", MediaType.APPLICATION_JSON, "GET");
-            //System.out.println(response.getHeaders());
             String jsonResponse = response.readEntity(String.class);
-            //System.out.println(jsonResponse);
             
             ObjectMapper mapper=new ObjectMapper();
             transactionList=(TransactionList)mapper.readValue(jsonResponse, TransactionList.class);
+            this.branchId=0;
+            this.usId=0;
+            this.deviceId=0;
+            this.productId=0;
+            this.paymentModeId=0;
+            this.status=null;
+            this.date=null;
         }
         catch(Exception ex){
             System.out.println(ex.getMessage());
@@ -93,6 +106,41 @@ public class TransactionBean {
         
     }
     
+    
+    public String filteredTransactions(){
+        
+        templateBean.setDashboardClassName("omenu");
+        templateBean.setBranchClassName("omenu");
+        templateBean.setDevicesClassName("omenu");
+        templateBean.setProductsClassName("omenu");
+        templateBean.setUsersClassName("omenu");
+        templateBean.setRolesClassName("omenu");
+        templateBean.setTransactionsClassName("omenu_active");
+        templateBean.setLogsClassName("omenu");
+        try{
+            String url="http://localhost:8080/PayFuel/TransactionManagementService/transactions/filter";
+                               
+            String  jsonData = "{\n" +
+                    "\"branchId\":"+branchId+",\n" +
+                    "\"userId\":"+usId+",\n" +
+                    "\"deviceId\":"+deviceId+",\n" +
+                    "\"productId\":"+productId+",\n" +
+                    "\"paymentModeId\":"+paymentModeId+",\n" +
+                    "\"status\":\""+status+"\"\n" +
+                    "}";
+            Response response=CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
+            String jsonResponse = response.readEntity(String.class);
+            
+            ObjectMapper mapper=new ObjectMapper();
+            transactionList=(TransactionList)mapper.readValue(jsonResponse, TransactionList.class);
+        }
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return "innerpage_transactions.xhtml";
+        
+    }
+    
     /**
      * @return the transactionList
      */
@@ -106,62 +154,165 @@ public class TransactionBean {
     public void setTransactionList(TransactionList transactionList) {
         this.transactionList = transactionList;
     }
-
+    
     /**
      * @return the templateBean
      */
     public TemplateBean getTemplateBean() {
         return templateBean;
     }
-
+    
     /**
      * @param templateBean the templateBean to set
      */
     public void setTemplateBean(TemplateBean templateBean) {
         this.templateBean = templateBean;
     }
-
+    
     /**
      * @return the loginBean
      */
     public LoginBean getLoginBean() {
         return loginBean;
     }
-
+    
     /**
      * @param loginBean the loginBean to set
      */
     public void setLoginBean(LoginBean loginBean) {
         this.loginBean = loginBean;
     }
-
+    
     /**
      * @return the transactionSingle
      */
     public TransactionSingle getTransactionSingle() {
         return transactionSingle;
     }
-
+    
     /**
      * @param transactionSingle the transactionSingle to set
      */
     public void setTransactionSingle(TransactionSingle transactionSingle) {
         this.transactionSingle = transactionSingle;
     }
-
+    
     /**
      * @return the saveActionName
      */
     public String getSaveActionName() {
         return saveActionName;
     }
-
+    
     /**
      * @param saveActionName the saveActionName to set
      */
     public void setSaveActionName(String saveActionName) {
         this.saveActionName = saveActionName;
     }
+    
+    
+    
+    
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
+    
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
+    /**
+     * @return the date
+     */
+    public String getDate() {
+        return date;
+    }
+    
+    /**
+     * @param date the date to set
+     */
+    public void setDate(String date) {
+        this.date = date;
+    }
+    
+    /**
+     * @return the branchId
+     */
+    public int getBranchId() {
+        return branchId;
+    }
+    
+    /**
+     * @param branchId the branchId to set
+     */
+    public void setBranchId(int branchId) {
+        this.branchId = branchId;
+    }
+    
+    /**
+     * @return the usId
+     */
+    public int getUsId() {
+        return usId;
+    }
+    
+    /**
+     * @param usId the usId to set
+     */
+    public void setUsId(int usId) {
+        this.usId = usId;
+    }
+    
+    /**
+     * @return the deviceId
+     */
+    public int getDeviceId() {
+        return deviceId;
+    }
+    
+    /**
+     * @param deviceId the deviceId to set
+     */
+    public void setDeviceId(int deviceId) {
+        this.deviceId = deviceId;
+    }
+    
+    /**
+     * @return the productId
+     */
+    public int getProductId() {
+        return productId;
+    }
+    
+    /**
+     * @param productId the productId to set
+     */
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+    
+    /**
+     * @return the paymentModeId
+     */
+    public int getPaymentModeId() {
+        return paymentModeId;
+    }
+    
+    /**
+     * @param paymentModeId the paymentModeId to set
+     */
+    public void setPaymentModeId(int paymentModeId) {
+        this.paymentModeId = paymentModeId;
+    }
+    
+    
     
     
 }

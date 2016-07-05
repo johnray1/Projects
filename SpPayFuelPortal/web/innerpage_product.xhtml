@@ -45,10 +45,9 @@
             } );
         </script>
             
-            
-            
+          
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
-            
+         
     </h:head>
     
     
@@ -114,7 +113,7 @@
                                             <f:ajax event="click" listener="#{ProductBean.productForView(pro.productId)}" render="viewDetailsContentPanel" />
                                         </h:commandLink>
                                             
-                                        <h:commandLink onclick="notifyEditInit()"    id="editDetails" > <h:graphicImage value="images/icon_edit.png" />
+                                        <h:commandLink onclick="notifyEdit()"    id="editDetails" > <h:graphicImage value="images/icon_edit.png" />
                                             <f:ajax event="click"  listener="#{ProductBean.productForEdit(pro.productId)}" rendererType="postValidate" render=":editDetailsContentPanel :edit_form" />
                                         </h:commandLink>
                                             
@@ -168,9 +167,7 @@
         
        <ui:include src="templates/footer.xhtml" />  
         
-        
-        
-        <!--Start Scripts -->
+       <!--Start Scripts -->
             
         <script type="text/javascript" src="js/chosen.jquery.min.js"></script>
         <script type="text/javascript">
@@ -179,30 +176,33 @@
             var turnDataTable=false;
             var content2Show="";
             
-            function notifyEditInit(){
-                showEdit=true;
-                showDetails=false;
-            }
-            
-            function notifiyDatatableRefresh(){
-                var turnDataTable=true;
-            }
-            
             function notifiyViewDetails(){
                 showEdit=false;
                 showDetails=true;
             }
             
+            function notifyEdit(){
+                showEdit=true;
+                showDetails=false;
+            }
+            
+            function notifiyDatatableRefresh(){
+                
+                turnDataTable=true;
+                
+            }
+            
+            
+            
             jsf.ajax.addOnEvent(function(data) {                  
                 switch (data.status) { //Can be "begin", "complete" and "success"
+                    
                     case "begin": // This is called right before ajax request is been sent.
                         
                         break;
                     
                     case "complete": // This is called right after ajax response is received.
-                        
-                        
-                        
+                     
                         break;
                     case "success": // This is called when ajax response is successfully processed.
                         
@@ -221,18 +221,19 @@
                             showSequenceInfo: false,
                             onFinish: {
                                 function () {
-                                    if(turnDataTable){
-                                        turn2DataTable('dataTableList');
-                                        turnDataTable=false;
-                                    }
                                     
                                     if(showDetails){
                                         
                                         content2Show= $('#viewDetailsContentPanel').html();
                                     }
+                                    
                                     if(showEdit)
                                         content2Show= $('#editDetailsContentPanel').html();
                                     
+                                    if(turnDataTable){
+                                        turn2DataTable('dataTableList');
+                                        turnDataTable=false;
+                                    }
                                     
                                     lightcase.get('contentInner').children().html(content2Show);
                                     // Do a resize now after filling in the content
@@ -245,24 +246,6 @@
                 }
             });
             
-            
-            
-            
-            
-            
-            $('editDetails').lightcase({
-                transition: 'scrollTop',
-                maxWidth:'640',
-                maxHeight:'400',
-                speedIn:'600',
-                speedOut:'600',
-                forceWidth:true,
-                swipe: true,
-                useKeys: true,
-                overlayOpacity:0.8,
-                title:'',
-                showSequenceInfo: false,
-            });
             
             
             $(".textinput input").change(function() {
@@ -286,7 +269,7 @@
                 $(selector).chosen(config[selector]);
             }
         </script>
-        
+            
         <!-- End Scripts -->
             
         

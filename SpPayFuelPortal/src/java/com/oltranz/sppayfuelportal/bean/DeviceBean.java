@@ -67,7 +67,7 @@ public class DeviceBean {
             Response response = CommonLibrary.sendRESTRequest(getBranchUrl, "empty data", MediaType.APPLICATION_JSON, "GET");
             //System.out.println(response.getHeaders());
             String jsonResponse = response.readEntity(String.class);
-            System.out.println(jsonResponse);
+            //System.out.println(jsonResponse);
             
             ObjectMapper mapper=new ObjectMapper();
             deviceList=(DeviceList)mapper.readValue(jsonResponse, DeviceList.class);
@@ -127,7 +127,7 @@ public class DeviceBean {
                 "}";
         Response response=CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
         String jsonResponse=response.readEntity(String.class);
-        System.out.println(jsonResponse);
+        //System.out.println(jsonResponse);
         
         this.branchId=null;
         this.deviceNo=(null);

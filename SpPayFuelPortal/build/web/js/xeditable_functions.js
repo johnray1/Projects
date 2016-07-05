@@ -19,23 +19,19 @@ $(document).ready(function()
     //make data1 editable
     $('#othername').editable();
     
-    //make data1 editable
-    $('#gender').editable();
+    //make email editable
+    $('#email').editable();
     
-    //make data1 editable
-    $('#phone').editable(); 
-    
-    //make data1 editable
-    $('#details').editable();	
+    //make email editable
+    $('#genderto').editable();
     
     //make data2 selectbox editable
-    $('#data2').editable({
+    $('#gender').editable({
         type: 'select',
         value: 2, //display default value
         source: [
-            {value: 1, text: 'data choice 1'},
-            {value: 2, text: 'data choice 2'},
-            {value: 3, text: 'data choice 3'}
+            {value: 1, text: 'MALE'},
+            {value: 2, text: 'FEMALE'}
         ]
         
         /*
@@ -45,13 +41,14 @@ $(document).ready(function()
          */
     });
     
-    //make data3 email editable
-    $('#email').editable();	
+    //make data1 editable
+    $('#phone').editable(); 
+    
+    //make data1 editable
+    $('#details').editable();	
     
     
     
-    //make data4 textarea editable
-    $('#data4').editable();
     
     
     //make users checkbox editable
@@ -90,7 +87,7 @@ $(document).ready(function()
             {value: 7, text: 'Permission 7'},
             {value: 8, text: 'Permission 8'},
             {value: 9, text: 'Permission 9'},
-            {value: 10, text: 'Permission 10'}
+            {value: 10,text:'Permission 10'}
         ]
     });
     

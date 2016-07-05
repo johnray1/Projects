@@ -4,7 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>USER ID No ### - InPopup</title>
+        <title>USER DETAILS</title>
         
         <meta charset="utf-8"></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -12,15 +12,13 @@
         
         <link href="css/style.css" rel="stylesheet" type="text/css" />
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="css/bootstrap-editable.css" rel="stylesheet"/>
         
         <script src="js/jquery-2.0.3.min.js"></script> 
-        <script src="js/bootstrap.min.js"></script>  
-        
-        <!-- x-editable -->
-        <link href="css/bootstrap-editable.css" rel="stylesheet"/>
+        <script src="js/bootstrap.min.js"></script> 
         <script src="js/bootstrap-editable.min.js"></script>
         <script src="js/xeditable_functions.js"></script>
-        <!-- end x-editable -->
+        
     </h:head>
     <h:body>
         
@@ -28,8 +26,10 @@
             
             <div class="container-fluid" style="margin:0px;padding:0px;border:0px solid red;">
                 
-                <div class="col-xs-12 col-sm-12 holderinbox_popup" style="margin:0px;padding:0px;min-height:300px;">
-                    <h2 style="text-align:left;font-size:18px;">USER  DETAILS<button id="enable" class="btn btn-default mode" style="margin:-3px;">VIEW MODE</button></h2>
+                <div class="col-xs-12 col-sm-12 holderinbox_popup" style="margin:0px;padding:0px;min-height:300px;min-width:400px;">
+                    <h2 style="text-align:left;font-size:18px;">USER  DETAILS
+                        <button id="enable" class="btn btn-default mode" style="margin:-3px;">VIEW</button>
+                    </h2>
                     
                     
                     <span class="container-fluid" style="margin:0px;padding:0px;">
@@ -37,58 +37,49 @@
                         <!-- DETAILS -->
                         <table class="col-xs-12 innertable user_details">
                             
-                            <tbody class="row">
-                                <tr>
-                                    <th class="col-xs-3 columnleft">USER ID</th>
-                                    <th class="col-xs-7 dataright" style="border:0px solid red;">
-                                        <a href="#" id="userid" data-type="text">id</a>
-                                    </th>
-                                </tr>
-                            </tbody>
                             
                             <tbody class="row">
                                 <tr>
-                                    <th class="col-xs-3 columnleft">FIRST NAME</th>
+                                    <th class="col-xs-3 columnleft">NAME</th>
                                     <th class="col-xs-7 dataright">
-                                        <a href="#" id="firstname" data-type="text">FIRST</a>
+                                        <a href="#" id="firstname" data-type="text" class="editable editable-click">#{UserBean.userSingle.userDetailsModel.fname} #{UserBean.userSingle.userDetailsModel.otherNames}</a>
                                     </th>
-                                </tr>
-                            </tbody>
-                            
-                            <tbody class="row">
-                                <tr>
-                                    <th class="col-xs-3 columnleft">OTHER NAME</th>
-                                    <th class="col-xs-7 dataright"><a href="#" id="othername" data-type="text">name</a></th>
                                 </tr>
                             </tbody>
                             
                             <tbody class="row">
                                 <tr>
                                     <th class="col-xs-3 columnleft">EMAIL</th>
-                                    <th class="col-xs-7 dataright"><a href="#" id="email" data-type="email">admin@example.com</a></th>
+                                    <th class="col-xs-7 dataright">
+                                        <a href="#" id="email" data-type="email" class="editable editable-click">#{UserBean.userSingle.userDetailsModel.email}</a>
+                                    </th>
                                 </tr>
                             </tbody>
-                            
-                            
                             
                             <tbody class="row">
                                 <tr>
                                     <th class="col-xs-3 columnleft">PHONE NO</th>
-                                    <th class="col-xs-7 dataright"><a href="#" id="phone" data-type="text">data4 textarea</a></th>
+                                    <th class="col-xs-7 dataright">
+                                        <a href="#" id="phone" data-type="text" class="editable editable-click">#{UserBean.userSingle.userDetailsModel.phoneNumber}</a>
+                                    </th>
                                 </tr>
                             </tbody>
                             
                             <tbody class="row">
                                 <tr>
                                     <th class="col-xs-3 columnleft">GENDER</th>
-                                    <th class="col-xs-7 dataright"><a href="#" id="gender" data-type="text">GENDER</a></th>
+                                    <th class="col-xs-7 dataright">
+                                        <a href="#" id="genderto" data-type="text" class="editable editable-click">#{UserBean.userSingle.userDetailsModel.gender}</a>
+                                    </th>
                                 </tr>
                             </tbody>
                             
                             <tbody class="row">
                                 <tr>
                                     <th class="col-xs-3 columnleft">DETAILS</th>
-                                    <th class="col-xs-7 dataright"><a href="#" id="details" data-type="textarea">data4 details</a></th>
+                                    <th class="col-xs-7 dataright">
+                                        <a href="#" id="details" data-type="textarea" class="editable editable-click">#{UserBean.userSingle.userDetailsModel.details}</a>
+                                    </th>
                                 </tr>
                             </tbody>
                             
@@ -150,9 +141,9 @@
                     var $this = $(this);
                     $this.toggleClass('mode');
                     if($this.hasClass('mode')){
-                        $this.text('VIEW MODE');			
+                        $this.text('VIEW');			
                     } else {
-                        $this.text('EDIT MODE');
+                        $this.text('EDIT');
                     }
                 });
             </script> 

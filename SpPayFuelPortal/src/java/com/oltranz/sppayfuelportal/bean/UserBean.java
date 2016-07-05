@@ -35,6 +35,7 @@ public class UserBean {
     private String gender;
     private String phoneNumber;
     private String details;
+    private String saveActionName="Save";
     
     private UserSingle userSingle;
     private UserList userList;
@@ -45,6 +46,10 @@ public class UserBean {
     
     @ManagedProperty(value="#{TemplateBean}")
     private TemplateBean templateBean;
+    
+    public void init() {
+        saveActionName="Save";
+    }
     
     public String users(){
         
@@ -74,6 +79,26 @@ public class UserBean {
         
     }
     
+    public void userForView(int userId){
+        userById(userId);
+    }
+    
+    
+    
+    public void userForEdit(int userId){
+        userById(userId);
+        saveActionName="Add";
+    }
+    
+    
+    
+    public String saveUser(){
+        if(userId.equals("-1")){
+            return create();
+        }else{
+            return update();
+        }
+    }
     
     public void userById(int userId){
         
@@ -90,10 +115,10 @@ public class UserBean {
         catch(Exception ex){
             System.out.println(ex.getMessage());
         }
-        //return "view_branch_popup.xhtml";
+        
     }
     
-    public String addUser(){
+    public String create(){
         
         String url="http://localhost:8080/PayFuel/UserManagementService/user/create";
         String  jsonData ="{\n" +
@@ -114,7 +139,7 @@ public class UserBean {
         return "innerpage_user.xhtml";
     }
     
-    public String editUser(){
+    public String update(){
         
         String url="http://localhost:8080/PayFuel/UserManagementService/user/edit";
         String  jsonData ="{\n" +
@@ -131,9 +156,10 @@ public class UserBean {
                 "}";
         Response response=CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
         String jsonResponse=response.readEntity(String.class);
-        //System.out.println(jsonResponse);
         
-        return "innerpage_user.xhtml";
+        userById(Integer.parseInt(userId));
+        
+        return users();
     }
     
     
@@ -431,6 +457,20 @@ public class UserBean {
      */
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    /**
+     * @return the saveActionName
+     */
+    public String getSaveActionName() {
+        return saveActionName;
+    }
+
+    /**
+     * @param saveActionName the saveActionName to set
+     */
+    public void setSaveActionName(String saveActionName) {
+        this.saveActionName = saveActionName;
     }
     
     

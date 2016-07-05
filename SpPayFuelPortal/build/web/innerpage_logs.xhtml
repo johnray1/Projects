@@ -4,11 +4,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-          
-      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-          
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <meta charset="utf-8"></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -17,12 +13,12 @@
             
         <link href="css/style.css" rel="stylesheet" type="text/css" />  
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
-            
         <link href="css/lightcase.css" rel="stylesheet" type="text/css" />
-        <link href="css/chosen.css" rel="stylesheet" type="text/css" />
         <link href="css/jquery.dataTables.min.css" rel="stylesheet" />
         <link href="css/buttons.dataTables.min.css" rel="stylesheet" />
         <link href="css/easy-responsive-tabs.css" rel="stylesheet" />
+        <link href="js/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="css/chosen.css" rel="stylesheet" type="text/css" />
             
         <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
         <script type="text/javascript" src="js/jquery.events.touch.js"></script>
@@ -40,7 +36,8 @@
         <script type="text/javascript" src="js/buttons.html5.min.js"></script>	
         <script type="text/javascript" src="js/buttons.print.min."></script>
         <script type="text/javascript" src="js/moment.min.js"></script>
-         <script src="js/customScripts.js" type="text/javascript"></script>
+        <script type="text/javascript" src="js/daterangepicker.js"></script>
+        <script src="js/customScripts.js" type="text/javascript"></script>
             
         <script>
             
@@ -49,6 +46,74 @@
             } );
         </script>
             
+            
+        <script type="text/javascript">
+            $(function() {
+                
+                $('#dateip').daterangepicker({
+                    "showDropdowns": true,
+                    autoUpdateInput: true,
+                    "timePicker": true,
+                    "timePicker24Hour": true,
+                    "autoApply": true,
+                    ranges: {
+                        'Today': [moment(), moment()],
+                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')] 
+                    },
+                    "locale": {
+                        "format": "MM/DD/YYYY h:mm A",
+                        "separator": " - ",
+                        "applyLabel": "Apply",
+                        "cancelLabel": "Cancel",
+                        "fromLabel": "From",
+                        "toLabel": "To",
+                        "customRangeLabel": "Custom",
+                        "daysOfWeek": [
+                            "Su",
+                            "Mo",
+                            "Tu",
+                            "We",
+                            "Th",
+                            "Fr",
+                            "Sa"
+                        ],
+                        "monthNames": [
+                            "January",
+                            "February",
+                            "March",
+                            "April",
+                            "May",
+                            "June",
+                            "July",
+                            "August",
+                            "September",
+                            "October",
+                            "November",
+                            "December"
+                        ],
+                        "firstDay": 1
+                    },
+                    
+                    "opens": "center"
+                }, 
+                
+                function(start, end, label) {
+                    console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
+                });
+                
+                $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
+                    $(this).val(picker.startDate.format('MM/DD/YYYY h:mm A') + ' - ' + picker.endDate.format('MM/DD/YYYY h:mm A'));
+                });
+                
+                $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
+                    $(this).val('');
+                });
+            });
+        </script>
             
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
             
@@ -71,80 +136,49 @@
                         <h2>Filter Logs</h2>
                             
                         <!-- FORM -->
-                        <h:form class="container-fluid sforminput"  style="margin:0px;padding:0px;" rendered="false">
+                        <h:form class="container-fluid sforminput"  style="margin:0px;padding:0px;" rendered="true">
                             
-                            <div class="col-xs-12 col-sm-2 stextinput" style="margin:0px;padding:0px;">
-                                <select data-placeholder="Logger Name" class="chosen-select">
-                                    <option value=""></option>
-                                    <option value="all">All</option>
-                                    <option value="name1">Name1</option>
-                                    <option value="name2">Name2</option>
-                                </select>
+                            <div class="col-xs-12 col-sm-3 stextinput" style="margin:0px;padding:0px;">
+                                <h:selectOneMenu value="#{LogsBean.usId}" class="chosen-select">
+                                    <f:selectItem itemLabel="USER" />
+                                    <f:selectItems value="#{UserBean.userList.userList}" var="user"
+                                                   itemLabel="#{user.fname}  #{user.otherNames}" itemValue="#{user.userId}"/>
+                                </h:selectOneMenu>
                             </div>
                                 
-                            <div class="col-xs-12 col-sm-2 stextinput" style="margin:0px;padding:0px;">
-                                
-                                <select data-placeholder="Logger Type" class="chosen-select" >
-                                    <option value=""></option>
-                                    <option value="all">All</option>
-                                    <option value="admin">Admin</option>
-                                    <option value="pompist">Pompist</option>
-                                    <option value="manager">Branch Manager</option>
-                                </select>
-                                    
+                            <div class="col-xs-12 col-sm-3 stextinput" style="margin:0px;padding:0px;">
+                                <h:selectOneMenu value="#{LogsBean.actionId}" class="chosen-select">
+                                    <f:selectItem itemLabel="ACTION" />
+                                    <f:selectItems value="#{ActionBean.actionList.actionList}" var="act"
+                                                   itemLabel="#{act.name}" itemValue="#{act.id}"/>
+                                </h:selectOneMenu>
                             </div>
                                 
-                            <div class="col-xs-12 col-sm-2 stextinput" style="margin:0px;padding:0px;">
-                                <select data-placeholder="First Name" class="chosen-select">
-                                    <option value=""></option>
-                                    <option value="all">All</option>
-                                    <option value="f1">Firstname1</option>
-                                    <option value="f2">Firstname2</option>
-                                </select>
+                            <div class="col-xs-12 col-sm-3 stextinput" style="margin:0px;padding:0px;">
+                                <h:selectOneMenu value="#{LogsBean.source}" class="chosen-select">
+                                    <f:selectItem itemLabel="SOURCE" />
+                                    <f:selectItem itemLabel="WEB" itemValue="WEB"/>
+                                    <f:selectItem itemLabel="POS" itemValue="POS"/>
+                                </h:selectOneMenu>
                             </div>
                                 
-                            <div class="col-xs-12 col-sm-2 stextinput" style="margin:0px;padding:0px;">
-                                <select data-placeholder="Last Name" class="chosen-select">
-                                    <option value=""></option>
-                                    <option value="all">All</option>
-                                    <option value="f1">lastname1</option>
-                                    <option value="f2">lastname2</option>
-                                </select>
+                            <div class="col-xs-12 col-sm-3 stextinput" style="margin:0px;padding:0px;">
+                                <h:selectOneMenu value="#{LogsBean.ip}" class="chosen-select">
+                                    <f:selectItem itemLabel="IP" />
+                                    <f:selectItems value="#{LogsBean.logList.logList}" var="log"
+                                                   itemLabel="#{log.ip}" itemValue="#{log.ip}"/>
+                                </h:selectOneMenu>
                             </div>
-                                
-                            <div class="col-xs-12 col-sm-2 stextinput" style="margin:0px;padding:0px;">
-                                <select data-placeholder="Phone Number" class="chosen-select" >
-                                    <option value=""></option>
-                                    <option value="all">All</option>
-                                    <option value="name1@email.com">name1@email.com</option>
-                                    <option value="name2@email.com">name2@email.com</option>
-                                    <option value="name3@email.com">name3@email.com</option>
-                                </select>
-                            </div>
-                                
-                                
-                                
-                            <div class="col-xs-12 col-sm-2 stextinput" style="margin:0px;padding:0px;">
-                                <select data-placeholder="Email" class="chosen-select">
-                                    <option value=""></option>
-                                    <option value="all">All</option>
-                                    <option value="0700000000">0700000000</option>
-                                    <option value="0700000001">0700000001</option>
-                                    <option value="0700000002">0700000002</option>
-                                    <option value="0700000003">0700000003</option>
-                                </select>
-                            </div>
-                                
-                            <div class="clear"></div>
                                 
                             <!-- DateRange -->
-                            <div class="col-xs-12 col-sm-12 stextinput_date"><input type="text" id="demo" value="02/10/2016 - 02/18/2016"/></div>	
+                            <div class="col-xs-12 col-sm-12 stextinput_date">
+                                <input type="text" id="dateip" value="02/10/2016 - 02/18/2016"/>
+                            </div>	
                             <!-- End DateRange -->
                                 
-                            <div class="clear"></div>
-                                
-                                
-                            <div class="col-xs-12 col-sm-12 ssubmitinput" style="margin:0px;padding:0px;"><input type="submit" name="submit" value="Filter" class="ssubmitinput"/></div>
+                            <div class="col-xs-12 col-sm-12 ssubmitinput" style="margin:0px;padding:0px;">
+                                <h:commandButton action="#{LogsBean.filteredLogs()}" value="Filter" class="ssubmitinput"/>
+                            </div>
                                 
                         </h:form>
                         <!-- End FORM -->	
@@ -162,7 +196,7 @@
                         <div  class="container-fluid" style="padding:10px;">
                             
                             <h:dataTable value="#{LogsBean.logList.logList}" var="log"
-                                         id="example"
+                                         id="dataTableList"
                                          styleClass="display" 
                                          cellspacing="0" 
                                          width="100%" 
@@ -242,29 +276,32 @@
             var turnDataTable=false;
             var content2Show="";
             
-            function notifyEditInit(){
-                showEdit=true;
-                showDetails=false;
-            }
-            
-            function notifiyDatatableRefresh(){
-                var turnDataTable=true;
-            }
-            
             function notifiyViewDetails(){
                 showEdit=false;
                 showDetails=true;
             }
             
+            function notifyEdit(){
+                showEdit=true;
+                showDetails=false;
+            }
+            
+            function notifiyDatatableRefresh(){
+                
+                turnDataTable=true;
+                
+            }
+            
+            
+            
             jsf.ajax.addOnEvent(function(data) {                  
                 switch (data.status) { //Can be "begin", "complete" and "success"
+                    
                     case "begin": // This is called right before ajax request is been sent.
                         
                         break;
                     
                     case "complete": // This is called right after ajax response is received.
-                        
-                        
                         
                         break;
                     case "success": // This is called when ajax response is successfully processed.
@@ -284,18 +321,19 @@
                             showSequenceInfo: false,
                             onFinish: {
                                 function () {
-                                    if(turnDataTable){
-                                        turn2DataTable('dataTableList');
-                                        turnDataTable=false;
-                                    }
                                     
                                     if(showDetails){
                                         
                                         content2Show= $('#viewDetailsContentPanel').html();
                                     }
+                                    
                                     if(showEdit)
                                         content2Show= $('#editDetailsContentPanel').html();
                                     
+                                    if(turnDataTable){
+                                        turn2DataTable('dataTableList');
+                                        turnDataTable=false;
+                                    }
                                     
                                     lightcase.get('contentInner').children().html(content2Show);
                                     // Do a resize now after filling in the content
@@ -308,24 +346,6 @@
                 }
             });
             
-            
-            
-            
-            
-            
-            $('editDetails').lightcase({
-                transition: 'scrollTop',
-                maxWidth:'640',
-                maxHeight:'400',
-                speedIn:'600',
-                speedOut:'600',
-                forceWidth:true,
-                swipe: true,
-                useKeys: true,
-                overlayOpacity:0.8,
-                title:'',
-                showSequenceInfo: false,
-            });
             
             
             $(".textinput input").change(function() {
@@ -349,7 +369,7 @@
                 $(selector).chosen(config[selector]);
             }
         </script>
-        
+            
         <!-- End Scripts -->
             
             

@@ -83,7 +83,6 @@ public class BranchBean implements Serializable{
             String getUrl="http://localhost:8080/PayFuel/BranchManagementService/branches/"+userId;
             Response response = CommonLibrary.sendRESTRequest(getUrl, "empty data", MediaType.TEXT_PLAIN, "GET");
             String jsonResponse = response.readEntity(String.class);
-            System.out.println(jsonResponse);
             
             ObjectMapper mapper=new ObjectMapper();
             branchList=(BranchList)mapper.readValue(jsonResponse, BranchList.class);

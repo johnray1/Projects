@@ -5,35 +5,27 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-          
-          
-      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-          
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:tp="http://java.sun.com/jsf/composite/ezcomp">
     <h:head>
         <meta charset="utf-8"></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <title>SP - PayFuel Adminstration</title>
             
-        
+            
         <link href="css/style.css" rel="stylesheet" type="text/css" />
-        <link href="css/bootstrap-editable.css" rel="stylesheet"/>   
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="css/bootstrap-editable.css" rel="stylesheet"/> 
         <link href="css/lightcase.css" rel="stylesheet" type="text/css" />
         <link href="css/chosen.css" rel="stylesheet" type="text/css" />
         <link href="css/jquery.dataTables.min.css" rel="stylesheet" />
         <link href="css/buttons.dataTables.min.css" rel="stylesheet" /> 
-        <script src="js/jquery-2.0.3.min.js"></script> 
             
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script src="js/jquery-2.0.3.min.js"></script> 
         <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
         <script type="text/javascript" src="js/jquery.events.touch.js"></script>
         <script type="text/javascript" src="js/lightcase.js"></script>
         <script type="text/javascript" src="js/lightcase.init.js"></script>
-            
-            
-            
         <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>			
         <script type="text/javascript" src="js/dataTables.buttons.min.js"></script>	
         <script type="text/javascript" src="js/buttons.flash.min.js"></script>	
@@ -41,38 +33,15 @@
         <script type="text/javascript" src="js/pdfmake.min.js"></script>	
         <script type="text/javascript" src="js/vfs_fonts.js"></script>	
         <script type="text/javascript" src="js/buttons.html5.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
         <script src="js/bootstrap-editable.min.js"></script>
         <script src="js/xeditable_functions.js"></script>    
-            
-            
-        
+        <script src="js/customScripts.js" type="text/javascript"></script>
             
         <script>
+            
             $(document).ready(function() {
-                $('#example').DataTable( {
-                    "bLengthChange": true,
-                    "paging":true,
-                    "searching": true,
-                    "ordering": true,
-                    "lengthMenu": [ [10, 25, 50, "All"]],
-                    
-                    dom: 'Bfrtip',		 
-                    buttons: [
-                        'excelHtml5',
-                        'csvHtml5',
-                        'pdfHtml5'
-                    ],
-                } );
-                
-                $('#example tbody')
-                        .on( 'mouseenter', 'td', function () {
-                            var colIdx = table.cell(this).index().column;
-                    
-                    $( table.cells().nodes() ).removeClass( 'highlight' );
-                    $( table.column( colIdx ).nodes() ).addClass( 'highlight' );
-                } );
-                
-                
+                turn2DataTable('dataTableList');
             } );
         </script>
             
@@ -102,56 +71,69 @@
                             
                             <!-- Start DataTable-->  
                                 
-                                
-                            <h:dataTable value="#{UserBean.userList.userList}" var="us"
-                                         id="example"
-                                         styleClass="display" 
-                                         cellspacing="0" 
-                                         width="100%" 
-                                         style="padding:10px;">
-                                <h:column>    				
-                                    <f:facet name="header">UserID</f:facet>    				
-                                        #{us.userId}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">First Name</f:facet>
-                                        #{us.fname}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">Other Name</f:facet>
-                                        #{us.otherNames}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">Email</f:facet>
-                                        #{us.email}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">Phone Number</f:facet>
-                                        #{us.phoneNumber}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">GENDER</f:facet>
-                                        #{us.gender}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">Actions</f:facet>
-                                    <h:form>
-                                        <h:commandLink onclick="showDatails()"  id="viewDetails"> <h:graphicImage value="images/icon_view.png" />
-                                            <f:ajax event="click" listener="#" render="viewDetailsContentPanel" />
-                                        </h:commandLink>
-                                        <a data-rel="lightcase_edit" href="popup/popup_user_edit.xhtml"><img src="images/icon_edit.png"/></a>
-                                    </h:form>
-                                </h:column>
-                            </h:dataTable>
+                            <h:panelGroup id="usersList">    
+                                <h:dataTable value="#{UserBean.userList.userList}" var="us"
+                                             id="dataTableList"
+                                             styleClass="display" 
+                                             cellspacing="0" 
+                                             width="100%" 
+                                             style="padding:10px;">
+                                    <h:column>    				
+                                        <f:facet name="header">UserID</f:facet>    				
+                                            #{us.userId}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">First Name</f:facet>
+                                            #{us.fname}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Other Name</f:facet>
+                                            #{us.otherNames}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Email</f:facet>
+                                            #{us.email}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Phone Number</f:facet>
+                                            #{us.phoneNumber}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">GENDER</f:facet>
+                                            #{us.gender}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Actions</f:facet>
+                                        <h:form >
+                                            
+                                            <h:commandLink   onclick="notifiyViewDetails()" id="viewDetails"> 
+                                                <h:graphicImage value="images/icon_view.png" />
+                                                <f:ajax event="click" listener="#{UserBean.userForView(us.userId)}" render="viewDetailsContentPanel" />
+                                            </h:commandLink>
+                                            
+                                        </h:form>  
+                                    </h:column>
+                                </h:dataTable>
+                            </h:panelGroup>
                             <!-- End DataTable--> 
                                 
-                            <!--Start Pop Up-->      
-                            <div id="viewDetailsContent" style="display: none">
+                            <!--Start Pop Up
+                            Only one at any one time will be rendered, and this is controlled in the back bean
+                            -->  
                                 
-                                <h:panelGroup id="viewDetailsContentPanel">
+                                
+                            <div id="viewDetailsContent" style="display:none">
+                                
+                                <h:panelGroup id="viewDetailsContentPanel" >
                                     <ui:include src="popup/popup_user_details_view.xhtml" /> 
                                 </h:panelGroup>
+                                
+                                    
                             </div>
+                                
+                                
+                            <!-- End Pop Up-->
+                                
                                 
                         </div>
                     </span>
@@ -168,64 +150,83 @@
             
         <!-- Scripts -->
             
+            
+        <script type="text/javascript" src="js/chosen.jquery.min.js"></script>
+            
         <script type="text/javascript">
-            function showDatails(){
-                jsf.ajax.addOnEvent(function(data) {
-                    var ajaxstatus = data.status; // Can be "begin", "complete" and "success"
-                    
-                    
-                    switch (ajaxstatus) {
-                        case "begin": // This is called right before ajax request is been sent.
-                            
-                            break;
-                        
-                        case "complete": // This is called right after ajax response is received.
-                            
-                            
-                            break;
-                        
-                        case "success": // This is called when ajax response is successfully processed.
-                            
-                            
-                            lightcase.start({
-                                href: '#',
-                                maxWidth: 640,
-                                maxHeight: 800,
-                                transition: 'scrollTop',
-                                speedIn:'600',
-                                speedOut:'600',
-                                forceWidth:true,
-                                swipe: true,
-                                useKeys: true,
-                                overlayOpacity:0.8,
-                                title:'',
-                                showSequenceInfo: false,
-                                onFinish: {
-                                    function () {
-                                        var content = $('#viewDetailsContent').html();
-                                        lightcase.get('contentInner').children().html(content);
-                                        // Do a resize now after filling in the content
-                                        lightcase.resize();
-                                    }
-                                }
-                            });
-                            jsf.ajax.
-                                    break;
-                    }
-                });
+            
+            var showDetails=false;
+            var showEdit=false;
+            var turnDataTable=false;
+            var content2Show="";
+            
+            function notifiyViewDetails(){
+                showEdit=false;
+                showDetails=true;
+            }
+            
+            function notifyEdit(){
+                showEdit=true;
+                showDetails=false;
+            }
+            
+            function notifiyDatatableRefresh(){
+                
+                turnDataTable=true;
+                
             }
             
             
-            $('viewDetails').lightcase({
-                transition: 'scrollTop',
-                speedIn:'600',
-                speedOut:'600',
-                forceWidth:true,
-                swipe: true,
-                useKeys: true,
-                overlayOpacity:0.8,
-                title:'',
-                showSequenceInfo: false,
+            
+            jsf.ajax.addOnEvent(function(data) {                  
+                switch (data.status) { //Can be "begin", "complete" and "success"
+                    
+                    case "begin": // This is called right before ajax request is been sent.
+                        
+                        break;
+                    
+                    case "complete": // This is called right after ajax response is received.
+                        
+                        break;
+                    case "success": // This is called when ajax response is successfully processed.
+                        
+                        lightcase.start({
+                            href: '#',
+                            maxWidth: '640',
+                            maxHeight: '700',
+                            transition: 'scrollTop',
+                            speedIn:'600',
+                            speedOut:'600',
+                            forceWidth:true,
+                            swipe: true,
+                            useKeys: true,
+                            overlayOpacity:0.8,
+                            showSequenceInfo: false,
+                            onFinish: {
+                                function () {
+                                    
+                                    if(showDetails){
+                                        
+                                        content2Show= $('#viewDetailsContentPanel').html();
+                                    }
+                                    
+                                    if(showEdit)
+                                        content2Show= $('#editDetailsContentPanel').html();
+                                    
+                                    if(turnDataTable){
+                                        turn2DataTable('dataTableList');
+                                        turnDataTable=false;
+                                    }
+                                    
+                                    lightcase.get('contentInner').children().html(content2Show);
+                                    // Do a resize now after filling in the content
+                                    lightcase.resize();
+                                }
+                            }
+                        });
+                        
+                        break;
+                }
             });
             
             
@@ -237,22 +238,7 @@
                 }
             })
             
-        </script>
-            
-            
-            
-            
-        <script type="text/javascript">
-            $(".textinput input").change(function() {
-                if ($(this).val() != "") {
-                    $(this).addClass('filled');
-                } else {
-                    $(this).removeClass('filled');
-                }
-            })
-        </script>
-            
-        <script type="text/javascript" src="js/chosen.jquery.min.js"></script>
+        </script>   
             
         <script type="text/javascript">
             var config = {
@@ -267,16 +253,9 @@
             }
         </script>
             
-        <script>
-            $(document).ready(function(){
-                $('.print').click(function(){
-                    $(this).hide();
-                    window.print();
-                    $(this).show();
-                });
-                
-            });
-        </script>
+            
+        
+            
             
         <!-- End Scripts -->
             
