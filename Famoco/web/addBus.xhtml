@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+  
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            
+            <div class="container-fluid" style="margin:0px;padding:0px;border:0px solid red;">
+
+<div class="col-xs-12 col-sm-12 holderinbox_popup" style="margin:0px;padding:0px;min-height:300px;">
+<h2 style="text-align:center;font-size:18px;">ADD BUS</h2>
+                        
+                       
+<!-- FORM -->
+ <h:form>
+	<div class="textinput"><h:inputText id="username" value="#{bus.numberPlate}"/><label for="field1">Plate Number</label></div>
+	<div class="textinput"><h:inputText id="password" value="#{bus.descr}"/><label for="field2">Description:</label></div>
+
+        <div class="submitinput"><h:commandButton onclick="saveEditedItem(this,'','');event.preventDefault();"  value="Submit"  /></div>
+     <f:event listener="#{bus.saveNewBus()}" type="preRenderView"></f:event>
+</h:form>
+<!-- End FORM -->
+
+              
+</div>
+    </div>
+
+
+<!-- Scripts -->
+	<script type="text/javascript">
+	$(".textinput input").change(function() {
+  if ($(this).val() != "") {
+    $(this).addClass('filled');
+  } else {
+    $(this).removeClass('filled');
+  }
+})
+	</script>
+            </ui:composition>
+    </h:body>
+</html>
+

@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        
+        <title>InterCity - Management</title>
+        
+        <link href="css/style.css" rel="stylesheet"/>
+        <link href="css/bootstrap.css" rel="stylesheet"/>
+        
+		<script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>	
+        <script type="text/javascript" src="js/bootstrap.min2.js"></script>	
+		
+	
+		<link href="css/easy-responsive-tabs.css" rel="stylesheet" />
+		<script src="js/easy-responsive-tabs.js"></script>
+		
+		<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>	
+		
+		<script type="text/javascript" src="js/dataTables.buttons.min.js"></script>	
+		<script type="text/javascript" src="js/buttons.flash.min.js"></script>	
+		<script type="text/javascript" src="js/jszip.min.js"></script>	
+		<script type="text/javascript" src="js/pdfmake.min.js"></script>	
+		<script type="text/javascript" src="js/vfs_fonts.js"></script>	
+		<script type="text/javascript" src="js/buttons.html5.min.js"></script>	
+		<script type="text/javascript" src="js/buttons.print.min."></script>
+		
+		<link href="css/jquery.dataTables.min.css" rel="stylesheet" />
+		<link href="css/buttons.dataTables.min.css" rel="stylesheet" />
+		
+<script>
+$(document).ready(function() {
+    $('#list_buses').DataTable( {
+	"bLengthChange": true,
+		"paging":true,
+		"searching": true,
+		"ordering": true,
+		"lengthMenu": [ [10, 25, 50, "All"]],
+		
+		dom: 'Bfrtip',		 
+        buttons: [
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ],
+    } );
+	
+    $('#list_subcontractors').DataTable( {
+	"bLengthChange": true,
+		"paging":true,
+		"searching": true,
+		"ordering": true,
+		"lengthMenu": [ [10, 25, 50, "All"]],
+		
+		dom: 'Bfrtip',		 
+        buttons: [
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ],
+	} );
+} );
+</script>
+
+
+		<script type="text/javascript" src="js/moment.min.js"></script>
+		<script type="text/javascript" src="js/daterangepicker.js"></script>
+		<link rel="stylesheet" type="text/css" href="js/daterangepicker.css" />
+		<link href="css/chosen.css" rel="stylesheet" type="text/css" />
+		
+		<link href="css/lightcase.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/lightcase.js"></script>
+		<script type="text/javascript" src="js/lightcase.init.js"></script>
+		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+    </head>
+    <body>
+
+
+<!-- HEADER -->
+<ui:include src="headerPage.xhtml"/>
+<!-- End HEADER--> 
+        
+ 
+<!-- CONTENTS-->
+<div class="container-fluid">
+<div class="col-xs-12" style="display:inline-block;padding:10px;padding-top:25px;height:100%;">
+
+<!-- TABS -->
+<div style="border:0px solid red;">
+
+<div id="parentVerticalTab">
+
+	<ul class="resp-tabs-list">
+		<li id="tablist1">Users</li>
+		<li id="tablist2">Devices</li>
+                <li id="tablist2">Buses</li>
+                <li id="tablist2">Service Providers</li>
+	</ul>
+
+
+<div class="resp-tabs-container">
+	
+	<div id="tabcontent1">
+<!-- In -->
+<div class="col-xs-12" style="float: none;margin: 0 auto;padding:5px;min-height:400px;border:0px solid #f0f0f0;overflow-x:auto;font-family:ubuntu;">
+....
+</div>
+<!-- EnIn-->
+	</div>
+	
+	
+	<div id="tabcontent2">
+<!-- In -->
+<div class="col-xs-12" style="float: none;margin: 0 auto;padding:5px;min-height:400px;border:0px solid #f0f0f0;overflow-x:auto;font-family:ubuntu;">
+...
+</div>
+<!-- EnIn-->
+	</div>
+
+	
+	</div>
+</div>
+
+
+</div>
+<!-- TABS -->
+
+
+</div></div>
+<!-- End CONTENTS -->
+        
+        
+
+<script>
+$(document).ready(function () {
+
+        //Vertical Tab
+        $('#parentVerticalTab').easyResponsiveTabs({
+            type: 'vertical', //Types: default, vertical, accordion
+            width: 'auto', //auto or any width like 600px
+            fit: true, // 100% fit in a container
+            closed: 'accordion', // Start closed if in accordion view
+            tabidentify: 'hor_1', // The tab groups identifier
+            activate: function(event) { // Callback function if tab is switched
+                var $tab = $(this);
+                var $info = $('#nested-tabInfo2');
+                var $name = $('span', $info);
+                $name.text($tab.text());
+                $info.show();
+            }
+        });
+       
+		
+});
+</script>
+
+
+<script type="text/javascript" src="js/chosen.jquery.min.js"></script>
+		<script type="text/javascript">
+			var config = {
+			  '.chosen-select'           : {},
+			  '.chosen-select-deselect'  : {allow_single_deselect:true},
+			  '.chosen-select-no-single' : {disable_search_threshold:10},
+			  '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+			  '.chosen-select-width'     : {width:"95%"}
+			}
+			for (var selector in config) {
+			  $(selector).chosen(config[selector]);
+			}
+		</script>
+
+    </body>
+</html>

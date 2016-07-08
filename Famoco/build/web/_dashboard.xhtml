@@ -1,0 +1,615 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <head>
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+            
+        <title>InterCity - Payment Management</title>
+            
+        <link href="css/style.css" rel="stylesheet"/>
+        <link href="css/bootstrap.css" rel="stylesheet"/>
+            
+        <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>	
+        <script type="text/javascript" src="js/bootstrap.min2.js"></script>	
+            
+            
+        <link href="css/easy-responsive-tabs.css" rel="stylesheet" />
+        <script src="js/easy-responsive-tabs.js"></script>
+        
+       <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>	
+		
+		<script type="text/javascript" src="js/dataTables.buttons.min.js"></script>	
+		<script type="text/javascript" src="js/buttons.flash.min.js"></script>	
+		<script type="text/javascript" src="js/jszip.min.js"></script>	
+		<script type="text/javascript" src="js/pdfmake.min.js"></script>	
+		<script type="text/javascript" src="js/vfs_fonts.js"></script>	
+		<script type="text/javascript" src="js/buttons.html5.min.js"></script>	
+		<script type="text/javascript" src="js/buttons.print.min.js"></script>
+         <script type="text/javascript" src="js/famacojs.js"></script>
+        <link href="css/jquery.dataTables.min.css" rel="stylesheet" />
+        <link href="css/buttons.dataTables.min.css" rel="stylesheet" />
+        
+        <script>
+
+            
+            $(document).ready(function() {
+                
+                $('#example').DataTable( {
+                    "bLengthChange": true,
+                    "paging":true,
+                    "searching": true,
+                    "ordering": true,
+                    "lengthMenu": [ [10, 25, 50, "All"]],
+                    
+                    dom: 'Bfrtip',		 
+                    buttons: [
+                        'excelHtml5',
+                        'csvHtml5',
+                        'pdfHtml5'
+                    ],
+                } );
+                
+                $('#subcontractors').DataTable( {
+                    "paging":false,
+                    "searching": false,
+                    "ordering": true,	
+                    "info": false		
+                } );
+                
+                $('#transdash').DataTable( {
+                    "paging":true,
+                    "iDisplayLength": 6,
+                    "searching": true,
+                    "ordering": true,	
+                    "info": true,
+                    dom: 'Bfrtip',		 
+                    buttons: [
+                        'excelHtml5',
+                        'csvHtml5',
+                        'pdfHtml5'
+                    ],		
+                } );
+                
+                $('#trips').DataTable( {
+                    "paging":false,
+                    "searching": false,
+                    "ordering": true,	
+                    "info": false		
+                } )
+            } );
+        </script>
+        
+        
+        <script type="text/javascript" src="js/moment.min.js"></script>
+        <script type="text/javascript" src="js/daterangepicker.js"></script>
+          <link rel="stylesheet" type="text/css" href="js/daterangepicker.css" />
+        <link href="css/chosen.css" rel="stylesheet" type="text/css" />
+        
+        
+        
+        <script type="text/javascript">
+            $(function() {
+                
+                $('#demo').daterangepicker({
+                    "showDropdowns": true,
+                    "timePicker": true,
+                    "timePicker24Hour": true,
+                    "autoApply": true,
+                    ranges: {
+                        'Today': [moment(), moment()],
+                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')] 
+                    },
+                    "locale": {
+                        "format": "MM/DD/YYYY",
+                        "separator": " - ",
+                        "applyLabel": "Apply",
+                        "cancelLabel": "Cancel",
+                        "fromLabel": "From",
+                        "toLabel": "To",
+                        "customRangeLabel": "Custom",
+                        "daysOfWeek": [
+                            "Su",
+                            "Mo",
+                            "Tu",
+                            "We",
+                            "Th",
+                            "Fr",
+                            "Sa"
+                        ],
+                        "monthNames": [
+                            "January",
+                            "February",
+                            "March",
+                            "April",
+                            "May",
+                            "June",
+                            "July",
+                            "August",
+                            "September",
+                            "October",
+                            "November",
+                            "December"
+                        ],
+                        "firstDay": 1
+                    },
+                    "startDate": "02/10/2016",
+                    "endDate": "02/18/2016",
+                    "opens": "center"
+                }, function(start, end, label) {
+                    console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
+                });
+               
+         
+        
+        
+                
+            });
+            
+           
+            
+            
+        </script>
+        
+        
+        
+        <link href="css/lightcase.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="js/lightcase.js"></script>
+        <script type="text/javascript" src="js/lightcase.init.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+    </head>
+    <body>
+        
+        
+        
+        <!-- HEADER -->
+        <ui:include src="headerPage.xhtml"/>
+       
+        <!-- End HEADER--> 
+        
+        <!-- CONTENTS-->
+        <div class="container-fluid" id="mycontent">
+                <div class="col-xs-12" style="display:inline-block;padding:10px;padding-top:25px;height:100%;border:0px solid red;">
+                    
+                <!-- ROW 1 -->
+                    <div class="col-xs-12 col-sm-3">
+                        
+                    <div class="col-xs-12 dashboardbox_amount" style="padding:0px;min-height:200px;overflow-x:auto;">
+                        <!-- IN -->
+                        <h2>Current Amount</h2>
+                        <span>2,542,300<label>RWF</label></span>
+                        <!-- IN -->
+                    </div>
+                    
+                    <div class="col-xs-12 dashboardbox_amount" style="padding:0px;min-height:200px;overflow-x:auto;">
+                        <!-- IN -->
+                        <h2>Previous Amount</h2>
+                        <span>2,002,300<label>RWF</label></span>
+                        <!-- IN -->
+                    </div>
+                </div>
+                
+                <div class="col-xs-12 col-sm-3">
+                    <div class="col-xs-12 dashboardbox_title" style="padding:0px;min-height:53px;overflow-x:auto;">
+                        <!-- IN -->
+                        <h2>TODAY'S SUMMARY</h2>
+                        <!-- IN -->
+                    </div>
+                    
+                    <div class="col-xs-12 dashboardbox_title passengers" style="padding:0px;min-height:100px;overflow:hidden;">
+                        <!-- IN -->
+                        <h3>Total Passengers</h3>
+                        <span>500</span>
+                        <!-- IN -->
+                    </div>
+                    
+                    <div class="col-xs-12 dashboardbox_title income" style="padding:0px;min-height:100px;overflow:hidden;">
+                        <!-- IN -->
+                        <h3>Total Income</h3>
+                        <span>542,300<label>RWF</label></span>
+                        <!-- IN -->
+                    </div>
+                    
+                    <div class="col-xs-12 dashboardbox_title buses" style="padding:0px;min-height:100px;overflow:hidden;">
+                        <!-- IN -->
+                        
+                        <h3>Active Buses</h3>
+                        <span>#{authe.activenumberBuses}</span>
+                        <!-- IN -->
+                    </div>
+                </div>
+                
+                <div class="col-xs-12 col-sm-6">
+                    <div class="col-xs-12 dashboardbox" style="padding:0px;min-height:420px;overflow-x:auto;">
+                        <!-- IN -->
+                        <h2>Todays Bus Status</h2>
+                        <span>
+                            <div  class="container-fluid" style="padding:0px;font-family:ubuntu;font-size:13px;">
+                                
+                                <h:dataTable id="transdash" class="display" value="#{busesDisplay.dashboardBuses.dashbuses}"  var="dbus" cellspacing="0" width="100%" style="padding: 0px;">
+                                    <h:column  >
+                                        <f:facet name="header">
+                                            <h:outputText value="Bus " />
+                                        </f:facet>
+                                        <h:outputText value="#{dbus.numberPlate}" />
+                                    </h:column> 
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Owner " />
+                                        </f:facet>
+                                        <h:outputText value="#{dbus.ownerName}" />
+                                    </h:column> 
+                                    
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Yesterday Income " />
+                                        </f:facet>
+                                        <h:outputText value="#{dbus.yesterdayIncome}">
+                                             <f:convertNumber pattern="##,###"/>
+                                        </h:outputText>
+                                    </h:column>
+                                                  <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText  value="Today Income"/>
+                                                
+                                        </f:facet>
+                                                      <h:outputText value="#{dbus.todayIncome}" >
+                                                          <f:convertNumber pattern="##,###"/>
+                                                      </h:outputText>
+                                    </h:column> 
+                                      
+                                    <h:column>  
+                                        <f:facet name="header">  
+                                            <h:outputText value="View" />  
+                                        </f:facet>  
+                                            
+                                        <div style="text-align:center;color:#c0c0c0;"><a data-rel="lightcase_edit" href="inpopup.xhtml" class="icon_view">&nbsp;</a></div>
+                                            
+                                    </h:column>  
+                                        
+                                </h:dataTable> 
+                                
+                                <!-- -->
+                              <!--  <table id="buses" class="display" cellspacing="0" width="100%" style="padding: 0px;">
+                                        <thead>
+                                            <tr>
+                                                <th>Bus</th>
+                                                <th>Owners</th>
+                                                <th>Passengers</th>
+                                                <th>Income</th>
+                                                <th style="text-align:center;color:#c0c0c0;">VIEW</th>
+                                            </tr>
+                                        </thead>
+                                            
+                                        <tbody>            
+                                                        <tr>
+                                                <td>RAA ### A</td>
+                                                <td>SubContractor</td>
+                                                <td>###</td>
+                                                <td>000,000 RWF</td>
+                                                <td style="text-align:center;color:#c0c0c0;"><a data-rel="lightcase_edit" href="inpopup.xhtml" class="icon_view">&nbsp;</a></td>
+                                                        </tr> 
+                                                            
+                                                        <tr>
+                                                <td>RAA ### A</td>
+                                                <td>SubContractor</td>
+                                                <td>###</td>
+                                                <td>000,000 RWF</td>
+                                                <td style="text-align:center;color:#c0c0c0;"><a data-rel="lightcase_edit" href="inpopup.xhtml" class="icon_view">&nbsp;</a></td>
+                                                        </tr>
+                                                            
+                                                        <tr>
+                                                <td>RAA ### A</td>
+                                                <td>SubContractor</td>
+                                                <td>###</td>
+                                                <td>000,000 RWF</td>
+                                                <td style="text-align:center;color:#c0c0c0;"><a data-rel="lightcase_edit" href="inpopup.xhtml" class="icon_view">&nbsp;</a></td>
+                                                        </tr>
+                                                            
+                                                        <tr>
+                                                <td>RAA ### A</td>
+                                                <td>SubContractor</td>
+                                                <td>###</td>
+                                                <td>000,000 RWF</td>
+                                                <td style="text-align:center;color:#c0c0c0;"><a data-rel="lightcase_edit" href="inpopup.xhtml" class="icon_view">&nbsp;</a></td>
+                                                        </tr>
+                                                            
+                                                        <tr>
+                                                <td>RAA ### A</td>
+                                                <td>SubContractor</td>
+                                                <td>###</td>
+                                                <td>000,000 RWF</td>
+                                                <td style="text-align:center;color:#c0c0c0;"><a data-rel="lightcase_edit" href="inpopup.xhtml" class="icon_view">&nbsp;</a></td>
+                                                        </tr>
+                                                            
+                                                        <tr>
+                                                <td>RAA ### A</td>
+                                                <td>SubContractor</td>
+                                                <td>###</td>
+                                                <td>000,000 RWF</td>
+                                                <td style="text-align:center;color:#c0c0c0;"><a data-rel="lightcase_edit" href="inpopup.xhtml" class="icon_view">&nbsp;</a></td>
+                                                        </tr>
+                                                            
+                                                        <tr>
+                                                <td>RAA ### A</td>
+                                                <td>SubContractor</td>
+                                                <td>###</td>
+                                                <td>000,000 RWF</td>
+                                                <td style="text-align:center;color:#c0c0c0;"><a data-rel="lightcase_edit" href="inpopup.xhtml" class="icon_view">&nbsp;</a></td>
+                                                        </tr>
+                                                            
+                                                        <tr>
+                                                <td>RAA ### A</td>
+                                                <td>SubContractor</td>
+                                                <td>###</td>
+                                                <td>000,000 RWF</td>
+                                                <td style="text-align:center;color:#c0c0c0;"><a data-rel="lightcase_edit" href="inpopup.xhtml" class="icon_view">&nbsp;</a></td>
+                                                        </tr> 
+                                                            
+                                                        <tr>
+                                                <td>RAA ### A</td>
+                                                <td>SubContractor</td>
+                                                <td>###</td>
+                                                <td>000,000 RWF</td>
+                                                <td style="text-align:center;color:#c0c0c0;"><a data-rel="lightcase_edit" href="inpopup.xhtml" class="icon_view">&nbsp;</a></td>
+                                                        </tr>
+                                                            
+                                                        <tr>
+                                                <td>RAA ### A</td>
+                                                <td>SubContractor</td>
+                                                <td>###</td>
+                                                <td>000,000 RWF</td>
+                                                <td style="text-align:center;color:#c0c0c0;"><a data-rel="lightcase_edit" href="inpopup.xhtml" class="icon_view">&nbsp;</a></td>
+                                                        </tr>
+                                                </tbody>
+                                    </table> --> 
+                                <!-- -->
+                            </div>
+                        </span>
+                        <!-- IN -->
+                    </div>
+                </div>
+                
+                <!-- End ROW 1 -->
+                
+                <div class="clear" style="margin-top:10px;"></div>
+                
+                <!-- ROW 2 -->
+                <div class="col-xs-12 col-sm-6">
+                    <div class="col-xs-12 dashboardbox" style="padding:0px;min-height:370px;overflow-x:auto;margin-top:15px;">
+                        <!-- IN -->
+                        <h2>Buses Owners</h2>
+                        <span>
+                            <div  class="container-fluid" style="padding:0px;font-family:ubuntu;font-size:13px;">
+                                <h:dataTable value="#{busesDisplay.dashboardContractors.dashContractors}"  var="dco" id="subcontractors" class="display" cellspacing="0" width="100%" style="padding: 0px;">
+                                    <h:column  >
+                                        <f:facet name="header">
+                                            <h:outputText value="Bus Owner Name " />
+                                        </f:facet>
+                                        <h:outputText value="#{dco.busOwnerName}" />
+                                    </h:column> 
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Number of Buses " />
+                                        </f:facet>
+                                        <h:outputText value="#{dco.busesCount}" />
+                                    </h:column> 
+                                    
+                                  
+                                                  <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText  value="Sales"/>
+                                                
+                                        </f:facet>
+                                                      <h:outputText value="#{dco.todaySales}" >
+                                                          <f:convertNumber pattern="##,###"/>
+                                                      </h:outputText>
+                                    </h:column> 
+                                      
+                                    <h:column>  
+                                        <f:facet name="header">  
+                                            <h:outputText value="View" />  
+                                        </f:facet>  
+                                            
+                                        <div style="text-align:center;color:#c0c0c0;"><a data-rel="lightcase_edit" href="inpopup.xhtml" class="icon_view">&nbsp;</a></div>
+                                            
+                                    </h:column>  
+                                        
+                                </h:dataTable> 
+                                   
+                                
+                                
+                                
+                                
+                                
+                                <!-- -->
+                              <!--  <table id="subcontractors" class="display" cellspacing="0" width="100%" style="padding: 0px;">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Buses Qty</th>
+                                            <th>Income</th>
+                                            <th style="text-align:center;color:#c0c0c0;">VIEW</th>
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody>            
+                                        <tr>
+                                            <td>Subcontractor Name1</td>
+                                            <td>###</td>
+                                            <td>0,000,000 RWF</td>
+                                            <td style="text-align:center;color:#c0c0c0;"><a data-rel="lightcase_edit" href="inpopup.xhtml" class="icon_view">&nbsp;</a></td>
+                                        </tr>         
+                                        <tr>
+                                            <td>Subcontractor Name2</td>
+                                            <td>###</td>
+                                            <td>0,500,000 RWF</td>
+                                            <td style="text-align:center;color:#c0c0c0;"><a data-rel="lightcase_edit" href="inpopup.xhtml" class="icon_view">&nbsp;</a></td>
+                                        </tr> 
+                                        <tr>
+                                            <td>Subcontractor Name3</td>
+                                            <td>###</td>
+                                            <td>1,020,000 RWF</td>
+                                            <td style="text-align:center;color:#c0c0c0;"><a data-rel="lightcase_edit" href="inpopup.xhtml" class="icon_view">&nbsp;</a></td>
+                                        </tr> 
+                                        <tr>
+                                            <td>Subcontractor Name4</td>
+                                            <td>###</td>
+                                            <td>1,200,000 RWF</td>
+                                            <td style="text-align:center;color:#c0c0c0;"><a data-rel="lightcase_edit" href="inpopup.xhtml" class="icon_view">&nbsp;</a></td>
+                                        </tr> 
+                                        <tr>
+                                            <td>Subcontractor Name5</td>
+                                            <td>###</td>
+                                            <td>1,000,000 RWF</td>
+                                            <td style="text-align:center;color:#c0c0c0;"><a data-rel="lightcase_edit" href="inpopup.xhtml" class="icon_view">&nbsp;</a></td>
+                                        </tr> 
+                                        <tr>
+                                            <td>Subcontractor Name6</td>
+                                            <td>###</td>
+                                            <td>1,000,000 RWF</td>
+                                            <td style="text-align:center;color:#c0c0c0;"><a data-rel="lightcase_edit" href="inpopup.xhtml" class="icon_view">&nbsp;</a></td>
+                                        </tr> 
+                                    </tbody>
+                                </table>-->
+                                <!-- -->
+                            </div>
+                        </span>
+                        <!-- IN -->
+                    </div>
+                </div>	
+                
+                <div class="col-xs-12 col-sm-6">
+                    <div class="col-xs-12 dashboardbox" style="padding:0px;min-height:370px;overflow-x:auto;margin-top:15px;">
+                        <!-- IN -->
+                        <h2>Trips</h2>
+                        <span>
+                            <div  class="container-fluid" style="padding:0px;font-family:ubuntu;font-size:13px;">
+                                <!-- -->
+                                <table id="trips" class="display" cellspacing="0" width="100%" style="padding: 0px;">
+                                    <thead>
+                                        <tr>
+                                            <th>Departure</th>
+                                            <th>Destination</th>
+                                            <th>Price</th>
+                                            <th style="text-align:center;color:#c0c0c0;">EDIT</th>
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody>            
+                                        <tr>
+                                            <td>Departure</td>
+                                            <td>Destination</td>
+                                            <td>0,000 RWF</td>
+                                            <td style="text-align:center;color:#c0c0c0;"><a data-rel="lightcase_edit" href="inpopup_edit.xhtml" class="icon_edit">&nbsp;</a></td>
+                                        </tr>         
+                                        <tr>
+                                            <td>Departure</td>
+                                            <td>Destination</td>
+                                            <td>0,000 RWF</td>
+                                            <td style="text-align:center;color:#c0c0c0;"><a data-rel="lightcase_edit" href="inpopup_edit.xhtml" class="icon_edit">&nbsp;</a></td>
+                                        </tr>  
+                                        <tr>
+                                            <td>Departure</td>
+                                            <td>Destination</td>
+                                            <td>0,000 RWF</td>
+                                            <td style="text-align:center;color:#c0c0c0;"><a data-rel="lightcase_edit" href="inpopup_edit.xhtml" class="icon_edit">&nbsp;</a></td>
+                                        </tr>  
+                                        <tr>
+                                            <td>Departure</td>
+                                            <td>Destination</td>
+                                            <td>0,000 RWF</td>
+                                            <td style="text-align:center;color:#c0c0c0;"><a data-rel="lightcase_edit" href="inpopup_edit.xhtml" class="icon_edit">&nbsp;</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Departure</td>
+                                            <td>Destination</td>
+                                            <td>0,000 RWF</td>
+                                            <td style="text-align:center;color:#c0c0c0;"><a data-rel="lightcase_edit" href="inpopup_edit.xhtml" class="icon_edit">&nbsp;</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Departure</td>
+                                            <td>Destination</td>
+                                            <td>0,000 RWF</td>
+                                            <td style="text-align:center;color:#c0c0c0;"><a data-rel="lightcase_edit" href="inpopup_edit.xhtml" class="icon_edit">&nbsp;</a></td>
+                                        </tr>  
+                                    </tbody>
+                                </table>
+                                <!-- -->
+                            </div>
+                        </span>
+                        <!-- IN -->
+                    </div>
+                </div>
+                
+                
+                <!-- IN 
+                <div class="col-xs-12 col-sm-2">
+                        <div class="col-xs-12 dashboardbox" style="padding:0px;min-height:370px;overflow-x:auto;">
+                            
+        <h2>Logs</h2>
+        <span>
+        ...
+        </span>
+            
+                        </div>
+                </div>
+        IN -->
+                
+                
+                <!-- End ROW 2 -->
+                
+            </div>
+        </div>
+        <!-- End CONTENTS -->
+        
+        
+        
+        <script>
+            $(document).ready(function () {
+                
+                //Vertical Tab
+                $('#parentVerticalTab').easyResponsiveTabs({
+                    type: 'vertical', //Types: default, vertical, accordion
+                    width: 'auto', //auto or any width like 600px
+                    fit: true, // 100% fit in a container
+                    closed: 'accordion', // Start closed if in accordion view
+                    tabidentify: 'hor_1', // The tab groups identifier
+                    activate: function(event) { // Callback function if tab is switched
+                        var $tab = $(this);
+                        var $info = $('#nested-tabInfo2');
+                        var $name = $('span', $info);
+                        $name.text($tab.text());
+                        $info.show();
+                    }
+                });
+                
+                
+            });
+        </script>
+        
+        <script type="text/javascript" src="js/chosen.jquery.min.js"></script>
+        <script type="text/javascript">
+            var config = {
+                '.chosen-select'           : {},
+                '.chosen-select-deselect'  : {allow_single_deselect:true},
+                '.chosen-select-no-single' : {disable_search_threshold:10},
+                '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+                '.chosen-select-width'     : {width:"95%"}
+            }
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+        </script>
+    </body>
+</html>

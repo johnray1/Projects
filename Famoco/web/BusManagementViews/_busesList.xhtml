@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+  
+    <h:head>
+        <title>Buses List</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <div class="container-fluid">
+            <div class="col-xs-12" style="display:inline-block;padding:10px;padding-top:25px;height:100%;">
+                
+                <!-- TABS -->
+                <div style="border:0px solid red;">
+                    
+                    <div id="parentVerticalTab">
+                        
+                        <ul class="resp-tabs-list">
+                            <li id="tablist1">List of Buses</li>
+                            <li id="tablist2">ITEMS List 2</li>
+                        </ul>
+                            
+                            
+                        <div class="resp-tabs-container">
+                            
+                            <div id="tabcontent1">
+                                <!-- In -->
+                                <div class="col-xs-12" style="float: none;margin: 0 auto;padding:5px;min-height:400px;border:0px solid #f0f0f0;overflow-x:auto;font-family:ubuntu;">
+                                    <div  class="container-fluid" style="padding:0px;font-family:ubuntu;">
+                                        <a data-rel="lightcase:myCollection" href="#inline1" class="button_add"><i class="fa fa-plus"></i> Add a Bus</a>
+                                        <!-- -->
+                                        <h:dataTable value="#{busesDisplay.buses.buses}" var="bu" id="list_buses" class="display" cellspacing="0" width="100%" style="padding: 0px;margin-bottom: 30px;">
+                                            <h:column  >
+                                                <f:facet name="header">
+                                                    <h:outputText value="Plate Number " />
+                                                </f:facet>
+                                                <h:outputText value="#{bu.numberPlate}" />
+                                            </h:column> 
+                                            <h:column  >
+                                                <f:facet name="header">
+                                                    <h:outputText value="Description " />
+                                                </f:facet>
+                                                <h:outputText value="#{bu.descr}" />
+                                            </h:column> 
+                                            <h:column  >
+                                                <f:facet name="header">
+                                                    <h:outputText value="Transporter Owned?" />
+                                                </f:facet>
+                                                <h:outputText value="#{bu.transporterOwned}" />
+                                            </h:column> 
+                                            <h:column  >
+                                                <f:facet name="header">
+                                                    <h:outputText value="owner" />
+                                                </f:facet>
+                                                <h:outputText value="#{bu.ownerId}" />
+                                            </h:column> 
+                                            <h:column >
+                                                <f:facet name="header">
+                                                    <h:outputText value="Actions" />
+                                                </f:facet>
+                                                <a data-rel="lightcase:myCollection" href="#detail#{bu.numberPlate}" class="icon_view">&nbsp;</a> 
+                                                <a data-rel="lightcase_edit" href="inpopup_edit.xhtml" class="icon_edit">&nbsp;</a> 
+                                                <a href="#" class="icon_delete">&nbsp;</a>
+                                                    
+                                            </h:column> 
+                                                
+                                        </h:dataTable>
+                                        #{busesDisplay.buses.message}
+                                       
+                                    </div>
+                                        
+                                </div>
+                                <!-- EnIn-->
+                            </div>
+                                
+                        </div>
+                    </div>
+                        
+                        
+                </div>
+                <!-- TABS -->
+            </div></div>
+       </ui:composition>
+    </h:body>
+</html>

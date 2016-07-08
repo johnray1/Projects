@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<title>InterCity - Management</title>
+
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		
+  </head>
+
+
+  <body>
+
+<div class="container-fluid" style="margin:0px;padding:0px;border:0px solid red;">
+
+  <div class="col-xs-12 col-sm-12 holderinbox_popup" style="margin:0px;padding:0px;min-height:300px;">
+<h2 style="text-align:center;font-size:18px;">Edit ITEM ID #1</h2>
+                        
+                       
+<!-- FORM -->
+<form class="container-fluid forminput" action="">
+	<div class="textinput"><input type="text" id="field1" name="fieldname1" /><label for="field1">Field 1</label></div>
+	<div class="textinput"><input type="text" id="field2" name="fieldname2" /><label for="field2">Field 2</label></div>
+	<div class="textinput"><input type="text" id="field3" name="fieldname3" /><label for="field3">Field 3</label></div>
+	<div class="textinput"><input type="text" id="field4" name="fieldname4" /><label for="field4">Field 4</label></div>
+	<div class="textinput"><input type="text" id="field5" name="fieldname5" /><label for="field5">Field 5</label></div>
+	<div class="submitinput"><input type="submit" name="submit" value="UPDATE" /></div>
+</form>
+<!-- End FORM -->
+
+              
+</div>
+</div>
+
+
+<!-- Scripts -->
+	<script type="text/javascript">
+	$(".textinput input").change(function() {
+  if ($(this).val() != "") {
+    $(this).addClass('filled');
+  } else {
+    $(this).removeClass('filled');
+  }
+})
+	</script>
+<!-- End Scripts -->
+
+  </body>
+</html>

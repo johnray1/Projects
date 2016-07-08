@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<title>Engen - Retreive Password</title>
+
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		
+  </head>
+
+
+  <body>
+
+<div class="container-fluid" style="margin:0px;padding:0px;border:0px solid red;">
+
+  <div class="col-xs-12 col-sm-12 holderinbox_popup" style="margin:0px;padding:0px;min-height:200px;">
+<h2 style="text-align:center;font-size:18px;">Forgot your password ?</h2>
+                        
+                       
+<!-- FORM -->
+<form class="container-fluid forminput" action="">
+	<div class="textinput" style="text-align:center;font-weight:bold;margin-bottom:40px;">In order to receive your access again please enter the email address provided during the registration.</div>
+	<div class="textinput"><input type="text" id="field1"/><label for="field1">Enter email</label></div>
+	<div style="color:red;text-align:center;margin:0px;margin-top:-5px;padding:0px;font-size:12px">Your entered unknown EMAIL</div>
+	<div class="submitinput"><input type="submit" name="submit" value="Submit" /></div>
+</form>
+<!-- End FORM -->
+
+              
+</div>
+</div>
+
+
+<!-- Scripts -->
+	<script type="text/javascript">
+	$(".textinput input").change(function() {
+  if ($(this).val() != "") {
+    $(this).addClass('filled');
+  } else {
+    $(this).removeClass('filled');
+  }
+})
+	</script>
+<!-- End Scripts -->
+
+  </body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<title>InterCity - Management</title>
+
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+  </head>
+
+
+  <body>
+
+<div class="container-fluid" style="margin:0px;padding:0px;border:0px solid red;">
+
+  <div class="col-xs-12 col-sm-12 holderinbox_popup" style="margin:0px;padding:0px;min-height:300px;">
+<h2 style="text-align:center;font-size:18px;">ITEM #1 Status</h2>
+
+<div class="row inner_popups_wallet">
+<div class="col-xs-6"><div class="col-xs-12 amount1">Current Amount<h4>0,000,000<label>RWF</label></h4></div></div> 
+<div class="col-xs-6"><div class="col-xs-12 amount2">Previous Amount<h4>0,000,000<label>RWF</label></h4></div></div>  
+</div>
+           
+<div class="clear"></div>                        
+                       
+<!-- Table -->
+<span class="container-fluid">
+
+<table class="col-xs-12 innertable_popups">
+
+						<tbody class="row"><tr>
+								<th class="col-xs-6" style="text-align:right;padding:7px;border-right:2px solid white;">Field 1</th>
+								<th class="col-xs-6" style="text-align:left;padding:7px;font-size:14px;color:#000000;">Data 1</th>
+						</tr></tbody>
+						
+						<tbody class="row"><tr>
+								<th class="col-xs-6" style="text-align:right;padding:7px;border-right:2px solid white;">Field 2</th>
+								<th class="col-xs-6" style="text-align:left;padding:7px;font-size:14px;color:#000000;">Data 2</th>
+						</tr></tbody>
+						
+						<tbody class="row"><tr>
+								<th class="col-xs-6" style="text-align:right;padding:7px;border-right:2px solid white;">Field 3</th>
+								<th class="col-xs-6" style="text-align:left;padding:7px;font-size:14px;color:#000000;">Data 3</th>
+						</tr></tbody>
+						
+						<tbody class="row"><tr>
+								<th class="col-xs-6" style="text-align:right;padding:7px;border-right:2px solid white;">Field 4</th>
+								<th class="col-xs-6" style="text-align:left;padding:7px;font-size:14px;color:#000000;">Data 4</th>
+						</tr></tbody>				
+					
+						
+</table>
+
+</span>
+<!--End  Table -->
+
+<button class="print">PRINT</button>
+              
+</div>
+</div>
+
+
+<script>
+$(document).ready(function(){
+  $('.print').click(function(){
+      $(this).hide();
+      window.print();
+    $(this).show();
+  });
+  
+});
+</script>
+
+  </body>
+</html>

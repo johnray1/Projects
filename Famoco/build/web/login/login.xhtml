@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>InterCity - Payment Management</title>
+        <link href="/Famoco/css/style.css" rel="stylesheet"/>
+        <link href="/Famoco/css/bootstrap.css" rel="stylesheet"/>
+        <link href="/Famoco/css/hover.css" rel="stylesheet" />
+        
+        <link href="/Famoco/css/lightcase.css" rel="stylesheet" type="text/css" />
+        <link href="/Famoco/css/chosen.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="/Famoco/js/jquery-1.12.0.min.js"></script>
+        <script type="text/javascript" src="/Famoco/js/jquery.events.touch.js"></script>
+        <script type="text/javascript" src="/Famoco/js/lightcase.js"></script>
+        <script type="text/javascript" src="/Famoco/js/lightcase.init.js"></script>
+        <script type="text/javascript" src="/Famoco/js/bootstrap.min.js"></script>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <script type="text/javascript" src="/Famoco/js/jquery-1.12.0.min.js"></script>
+            <script src="/Famoco/js/customJS/custom.js" type="text/javascript"></script>
+            <script src="../js/customJS/jsf.js" type="text/javascript"></script>
+            
+            <div class="col-xs-12 col-sm-4 loginbox">
+                
+                <div class="container-fluid" style="margin:0px;padding:0px;text-align:center;"><img src="/Famoco/images/Intercity_logo_onbox.png"  class="img-responsive logologin"/></div>
+                <div class="clear"></div>
+                
+                <!-- FORM -->
+                <h:form class="container-fluid formlogininput" id="autheForm"  >
+                    <div class="textlogininput"> 
+                        <h:inputText  value="#{login.username}" id="username" />
+                        <label for="autheForm:username">phone number</label></div>
+                    <div class="textlogininput">
+                        <h:inputSecret value="#{login.password}" id="password"/>
+                        <label for="autheForm:password">Password</label></div>
+                    
+                    <div id="warning" style="color:#ffffcc;text-align:center;margin:0px;margin-top:5px;padding:0px;font-size:12px">#{requestMessages.loginFailure}</div>
+                    <div style="color:red;text-align:center;margin:0px;margin-top:5px;padding:0px;font-size:12px"><a data-rel="lightcase_forgot" href="forgotpswd.xhtml" style="color:#a3a3a3;text-decoration:none;">FORGOT PASSWORD ?</a></div>
+                    
+                    <div class="submitlogininput">
+                        <h:commandButton  value="Login" >
+                            <f:ajax execute="@form" listener="#{user.userAuthenticata()}" render="test" />
+                            
+                        </h:commandButton>
+                        
+                    </div>
+                    
+                    
+                </h:form>
+                <h:panelGroup id="test" layout="block"></h:panelGroup>
+                <!-- End FORM -->
+                <div class="col-xs-12 col-sm-4"></div>
+                
+            </div>
+        </ui:composition>
+        
+        
+        <script src="/Famoco/js/jquery.min.js"></script>
+        <script src="/Famoco/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            $(".textlogininput input").change(function() {
+                if ($(this).val() != "") {
+                    $(this).addClass('filled');
+                } else {
+                    $(this).removeClass('filled');
+                }
+            })
+        </script>
+    </h:body>
+</html>
+

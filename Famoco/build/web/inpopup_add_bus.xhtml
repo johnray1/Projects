@@ -1,0 +1,48 @@
+
+      
+        <div class="container-fluid" style="margin:0px;padding:0px;border:0px solid red;">
+    
+            <div class="col-xs-12 col-sm-12 holderinbox_popup" style="margin:0px;padding:0px;min-height:300px;">
+                <h2 style="text-align:center;font-size:18px;">ADD A NEW BUS</h2>
+    
+    
+                <!-- FORM -->
+                <form class="container-fluid forminput" onsubmit="lightcase.close();" id="form1" >
+                    <div class="textinput"><input type="text" id="field1" name="plate" /><label for="field1">PLATE NUMBER</label></div>
+                    <div class="textinput"><input type="text" id="field2" name="description" /><label for="field2">DESCRIPTION</label></div>
+            
+                    <div class="textinput"><input type="text" id="field3" name="owner" /><label for="field3">OWNER</label></div>
+           
+                    <div class="textinput"><input type="text" id="field4" name="fieldname4" /><label for="field4">Field 4</label></div>
+                    <div class="textinput"><input type="text" id="field5" name="fieldname5" /><label for="field5">Field 5</label></div>
+                    <div class="submitinput"><input type="submit" name="submit" value="SUBMIT" /> <input type="clear" name="reset" value="Clear" /> </div>
+           
+                </form>
+                <!-- End FORM -->
+    
+    
+    
+    
+            </div>
+        </div>
+    
+    
+        <!-- Scripts -->
+        <script type="text/javascript">
+            $(".textinput input").change(function() {
+                if ($(this).val() != "") {
+                    $(this).addClass('filled');
+                } else {
+                    $(this).removeClass('filled');
+                }
+            });
+            $("#form1").submit(function(){
+                alert("the form is ");
+                var list= document.getElementsByTagName("iframe")[0];
+                alert(list);
+                
+            }); 
+            
+        </script>
+        <!-- End Scripts -->
+    
