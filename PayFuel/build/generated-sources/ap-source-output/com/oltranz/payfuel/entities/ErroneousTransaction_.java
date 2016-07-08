@@ -5,7 +5,7 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2016-07-05T13:52:59")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2016-07-08T13:05:40")
 @StaticMetamodel(ErroneousTransaction.class)
 public class ErroneousTransaction_ { 
 
@@ -24,7 +24,7 @@ public class ErroneousTransaction_ {
     public static volatile SingularAttribute<ErroneousTransaction, Long> transactionId;
     public static volatile SingularAttribute<ErroneousTransaction, String> platenumber;
     public static volatile SingularAttribute<ErroneousTransaction, Date> serverResTime;
-    public static volatile SingularAttribute<ErroneousTransaction, Long> checksum;
+    public static volatile SingularAttribute<ErroneousTransaction, Integer> checksum;
     public static volatile SingularAttribute<ErroneousTransaction, Long> customerId;
     public static volatile SingularAttribute<ErroneousTransaction, Long> id;
     public static volatile SingularAttribute<ErroneousTransaction, Integer> nozzleId;

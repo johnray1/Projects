@@ -10,7 +10,9 @@ import com.oltranz.payfuel.entities.BranchProductPrice;
 import com.oltranz.payfuel.entities.BranchProductPricePK;
 import com.oltranz.payfuel.entities.Customer;
 import com.oltranz.payfuel.entities.Device;
+import com.oltranz.payfuel.entities.ErroneousTransaction;
 import com.oltranz.payfuel.entities.IndexTracking;
+import com.oltranz.payfuel.entities.Nozzle;
 import com.oltranz.payfuel.entities.PaymentMode;
 import com.oltranz.payfuel.entities.Product;
 import com.oltranz.payfuel.entities.ProductType;
@@ -22,6 +24,10 @@ import com.oltranz.payfuel.entities.TankTracking;
 import com.oltranz.payfuel.entities.Transaction;
 import com.oltranz.payfuel.entities.User;
 import com.oltranz.payfuel.entities.Voucher;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -258,46 +264,6 @@ public class CommonFunctionEjb {
         return null;
     }
     
-    
-    
-    //---------------------------------------------------Transaction--------------------------------------------------------
-    
-    
-    public Transaction getDeviceTransactionId(long deviceTransactionId){
-        
-        Transaction transaction=new Transaction();
-        List<Transaction> tl=(List<Transaction>)em.createQuery("SELECT t FROM Transaction t WHERE t.deviceTransactionId = :deviceTransactionId").setParameter("deviceTransactionId", deviceTransactionId).getResultList();
-        if(!tl.isEmpty())
-        {
-            Iterator i=tl.iterator();
-            while(i.hasNext()){
-                transaction=(Transaction) i.next();
-            }
-            return transaction;
-        }
-        return null;
-    }
-    
-    public IndexTracking getIndexTracking(long transactionId){
-        IndexTracking indexTracking=(IndexTracking) em.createQuery("SELECT i FROM IndexTracking i WHERE i.transactionId = :transactionId").setParameter("transactionId", transactionId).getSingleResult();
-        if(indexTracking==null){
-            return null;
-        }
-        return indexTracking;
-    }
-    
-    public TankTracking getTankTracking(long transactionId){
-        TankTracking tankTracking=(TankTracking) em.createQuery("SELECT t FROM TankTracking t WHERE t.transactionId = :transactionId").setParameter("transactionId", transactionId).getSingleResult();
-        if(tankTracking==null){
-            return null;
-        }
-        return tankTracking;
-    }
-    
-    
-    
-    
-    
     public Double getProductPrice(Integer branchId,Integer productId){
         
         BranchProductPrice branchProductPrice=(BranchProductPrice) em.createQuery("SELECT b FROM BranchProductPrice b WHERE b.branchProductPricePK.branchId = :branchId and b.branchProductPricePK.productId = :productId").setParameter("branchId", branchId).setParameter("productId", productId).getSingleResult();
@@ -403,6 +369,114 @@ public class CommonFunctionEjb {
         }
         return null;
     }
+    
+    public Date getDate(){
+        try{
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = new Date();
+            String dt=dateFormat.format(date);
+            Date dtt=dateFormat.parse(dt);
+            return dtt;
+        }
+        catch(ParseException pe){
+            return null;
+        }
+    }
+    
+    
+    
+    //----------------------------------------------------------------Transaction------------------------------------------------------------------------
+    
+    
+    public Transaction getDeviceTransactionId(long deviceTransactionId){
+        
+        Transaction transaction=new Transaction();
+        List<Transaction> tl=(List<Transaction>)em.createQuery("SELECT t FROM Transaction t WHERE t.deviceTransactionId = :deviceTransactionId").setParameter("deviceTransactionId", deviceTransactionId).getResultList();
+        if(!tl.isEmpty())
+        {
+            Iterator i=tl.iterator();
+            while(i.hasNext()){
+                transaction=(Transaction) i.next();
+            }
+            return transaction;
+        }
+        return null;
+    }
+    
+    
+    
+    public IndexTracking getIndexTracking(long transactionId){
+        IndexTracking indexTracking=(IndexTracking) em.createQuery("SELECT i FROM IndexTracking i WHERE i.transactionId = :transactionId").setParameter("transactionId", transactionId).getSingleResult();
+        if(indexTracking==null){
+            return null;
+        }
+        return indexTracking;
+    }
+    
+    
+    
+    public TankTracking getTankTracking(long transactionId){
+        TankTracking tankTracking=(TankTracking) em.createQuery("SELECT t FROM TankTracking t WHERE t.transactionId = :transactionId").setParameter("transactionId", transactionId).getSingleResult();
+        if(tankTracking==null){
+            return null;
+        }
+        return tankTracking;
+    }
+    
+    
+    
+    public ErroneousTransaction createErroneousTransaction(Transaction transaction){
+        
+        
+        //check the list size for set check sum
+        List<ErroneousTransaction> erroneousTransactionList=(List<ErroneousTransaction>)em.createQuery("SELECT e FROM ErroneousTransaction e WHERE e.deviceTransactionId = :deviceTransactionId").setParameter("deviceTransactionId", transaction.getDeviceTransactionId()).getResultList();
+        Integer checkSum = erroneousTransactionList.size()+1;
+        
+        
+        //set erroneous transaction
+        ErroneousTransaction erroneousTransaction=new ErroneousTransaction();
+        erroneousTransaction.setChecksum(checkSum);
+        erroneousTransaction.setTransactionId(transaction.getTransactionId());
+        erroneousTransaction.setDeviceTransactionId(transaction.getDeviceTransactionId());
+        erroneousTransaction.setDeviceTransactionTime(transaction.getDeviceTransactionTime());
+        erroneousTransaction.setBranchId(transaction.getBranchId());
+        erroneousTransaction.setUserId(transaction.getUserId());
+        erroneousTransaction.setDeviceId(transaction.getDeviceId());
+        erroneousTransaction.setPumpId(transaction.getPumpId());
+        erroneousTransaction.setNozzleId(transaction.getNozzleId());
+        erroneousTransaction.setProductId(transaction.getProductId());
+        erroneousTransaction.setCustomerId(transaction.getCustomerId());
+        erroneousTransaction.setPaymentModeId(transaction.getPaymentModeId());
+        erroneousTransaction.setPaymentStatus(transaction.getPaymentStatus());
+        erroneousTransaction.setAmount(transaction.getAmount());
+        erroneousTransaction.setQuantity(transaction.getQuantity());
+        erroneousTransaction.setPlatenumber(transaction.getPlatenumber());
+        erroneousTransaction.setServerReqTime(transaction.getServerReqTime());
+        erroneousTransaction.setServerResTime(transaction.getServerResTime());
+        erroneousTransaction.setDate(transaction.getDate());
+        em.persist(erroneousTransaction);
+        em.flush();
+        
+        
+        //After set corrected Nozzle Index
+        Nozzle nozzle=em.find(Nozzle.class, transaction.getNozzleId());
+        double correctedIndex=nozzle.getNozzleIndex()-transaction.getQuantity();
+        nozzle.setNozzleIndex(correctedIndex);
+        em.merge(nozzle);
+        em.flush();
+        
+        //After set corrected Tank Quantity
+        Pump pump=getPumpName(transaction.getPumpId());
+        Tank tank=getTank(pump.getTankId());
+        double correctQuantity=tank.getCurrentCapacity()+transaction.getQuantity();
+        tank.setCurrentCapacity(correctQuantity);
+        em.merge(tank);
+        em.flush();
+        
+        return erroneousTransaction;
+        
+    }
+    
     
     
 }

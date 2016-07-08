@@ -6,9 +6,11 @@
 package com.oltranz.payfuel.beans;
 
 import com.oltranz.payfuel.entities.Branch;
+import com.oltranz.payfuel.entities.Deeping;
 import com.oltranz.payfuel.entities.Role;
 import com.oltranz.payfuel.entities.RoleForBranch;
 import com.oltranz.payfuel.entities.Tank;
+import com.oltranz.payfuel.entities.Tanking;
 import com.oltranz.payfuel.entities.User;
 import com.oltranz.payfuel.models.ResultObject;
 import com.oltranz.payfuel.models.Tanks;
@@ -297,5 +299,94 @@ public class TankManager {
             return resultObject;
         }
     }
+    
+    
+    //-----------------------------------------------------Tanking---------------------------------------------------------
+    
+    public ResultObject createTanking(Tanking newTanking) {
+        
+        ResultObject resultObject=new ResultObject();
+        resultObject.setObjectClass(Tanking.class);
+        
+        User user=em.find(User.class, newTanking.getUserId());
+        if(user==null){
+            resultObject.setObject(null);
+            resultObject.setMessage("UserId is not created,Who Can Do Tanking");
+            resultObject.setStatusCode(500);
+            return resultObject;
+        }
+        
+        Tank tank=em.find(Tank.class, newTanking.getTankId());
+        if(tank==null){
+            resultObject.setObject(null);
+            resultObject.setMessage("No Tank with id of the given one is found For Tanking!");
+            resultObject.setStatusCode(500);
+            return resultObject;
+        }
+        
+        Tanking tanking=new Tanking();
+        tanking.setUserId(newTanking.getUserId());
+        tanking.setTankId(newTanking.getTankId());
+        tanking.setQuantity(newTanking.getQuantity());
+        tanking.setDatetime(commonFunctionEjb.getDate());
+        em.persist(tanking);
+        em.flush();
+        
+        double currentCapacity=tank.getCurrentCapacity()+tanking.getQuantity();
+        tank.setCurrentCapacity(currentCapacity);
+        em.merge(tank);
+        em.flush();
+        
+        resultObject.setObject(tanking);
+        resultObject.setMessage("Tanking Successfully Happened ");
+        resultObject.setStatusCode(100);
+        
+        return resultObject;
+    }
+    
+    //-----------------------------------------------------Deeping---------------------------------------------------------
+    
+    public ResultObject createDeeping(Deeping newDeeping) {
+        
+        ResultObject resultObject=new ResultObject();
+        resultObject.setObjectClass(Deeping.class);
+        
+        User user=em.find(User.class, newDeeping.getUserId());
+        if(user==null){
+            resultObject.setObject(null);
+            resultObject.setMessage("UserId is not created,Who Can Do Deeping");
+            resultObject.setStatusCode(500);
+            return resultObject;
+        }
+        
+        Tank tank=em.find(Tank.class, newDeeping.getTankId());
+        if(tank==null){
+            resultObject.setObject(null);
+            resultObject.setMessage("No Tank with id of the given one is found For Deeping!");
+            resultObject.setStatusCode(500);
+            return resultObject;
+        }
+        
+        
+        Deeping deeping=new Deeping();
+        deeping.setUserId(newDeeping.getUserId());
+        deeping.setTankId(newDeeping.getTankId());
+        deeping.setQuantityBefore(tank.getCurrentCapacity());
+        deeping.setQuantityAfter(newDeeping.getQuantityAfter());
+        deeping.setDatetime(commonFunctionEjb.getDate());
+        em.persist(deeping);
+        em.flush();
+        
+        tank.setCurrentCapacity(deeping.getQuantityAfter());
+        em.merge(tank);
+        em.flush();
+        
+        resultObject.setObject(deeping);
+        resultObject.setMessage("Deeping Successfully Happened ");
+        resultObject.setStatusCode(100);
+        
+        return resultObject;
+    }
+    
     
 }

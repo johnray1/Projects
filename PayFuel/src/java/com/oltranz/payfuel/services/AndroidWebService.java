@@ -8,12 +8,15 @@ package com.oltranz.payfuel.services;
 import com.oltranz.payfuel.beans.AndroidDataManager;
 import com.oltranz.payfuel.library.CommonLibrary;
 import com.oltranz.payfuel.models.AsyncTransaction;
+import com.oltranz.payfuel.models.AuthenticationModel;
 import com.oltranz.payfuel.models.LoginIpModel;
 import com.oltranz.payfuel.models.LogoutIpModel;
 import com.oltranz.payfuel.models.ResultObject;
 import com.oltranz.payfuel.models.SaleDetailsModel;
 import com.oltranz.payfuel.models.ServiceProvison;
 import com.oltranz.payfuel.models.SyncTransaction;
+import com.oltranz.payfuel.models.SaleCancelModel;
+import com.oltranz.payfuel.models.SaleEditModel;
 import java.io.InputStream;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -21,7 +24,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 
 /**
  *
@@ -51,6 +53,8 @@ public class AndroidWebService {
     
     
     
+    
+    
     @POST
     @Path("pos/logout")
     @Consumes({"application/xml", "application/json"})
@@ -75,29 +79,7 @@ public class AndroidWebService {
         return jsonResult;
     }
     
-    @POST
-    @Path("pos/saleCancel")
-    @Consumes({"application/xml", "application/json"})
-    public String saleCancel(SaleDetailsModel saleDetailsModel) {
-        
-        ResultObject result= androidDataManager.sale(saleDetailsModel);
-        
-        String jsonResult=result.getJsonFormat();
-        
-        return jsonResult;
-    }
     
-    @GET
-    @Path("pos/cancelSale/{deviceTransactionId}")
-    @Consumes({"application/xml", "application/json"})
-    public String cancelSale(@PathParam("deviceTransactionId") Long deviceTransactionId) {
-        
-        ResultObject result= androidDataManager.cancelSale(deviceTransactionId);
-        
-        String jsonResult=result.getJsonFormat();
-        
-        return jsonResult;
-    }
  
     
     //service provison conformation link, after  mobile money payment the payment gateway post payment status on this link
@@ -136,9 +118,41 @@ public class AndroidWebService {
     }
     
     
+    @POST
+    @Path("pos/adminLogin")
+    @Consumes({"application/xml", "application/json"})
+    public String adminLogin(AuthenticationModel  authenticationModelIp) {
+        
+        ResultObject result= androidDataManager.adminLogin(authenticationModelIp);
+        
+        String jsonResult=result.getJsonFormat();
+        
+        return jsonResult;
+    }
     
     
+    @POST
+    @Path("pos/saleEdit")
+    @Consumes({"application/xml", "application/json"})
+    public String saleEdit(SaleEditModel saleEditModel) {
+        
+        ResultObject result= androidDataManager.saleEdit(saleEditModel);
+        
+        String jsonResult=result.getJsonFormat();
+        
+        return jsonResult;
+    }
     
-    
+    @GET
+    @Path("pos/saleCancel")
+    @Consumes({"application/xml", "application/json"})
+    public String saleCancel(SaleCancelModel saleCancelModel) {
+        
+        ResultObject result= androidDataManager.saleCancel(saleCancelModel);
+        
+        String jsonResult=result.getJsonFormat();
+        
+        return jsonResult;
+    }
     
 }

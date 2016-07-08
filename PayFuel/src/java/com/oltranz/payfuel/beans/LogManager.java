@@ -67,24 +67,49 @@ public class LogManager {
         resultObject.setObjectClass(Log.class);
         
         String nul="null";
-        String and="and";
         String sqlQuery="SELECT l FROM Log l WHERE";
+        
+        //-------------------------------------------------------------------------------------------------------------------------------------------------------
         
         if(logFilter.getUserId()!=0){
             sqlQuery+=" l.userId = :userId";
         }
         
-        if(logFilter.getActionId()!=0){
-            sqlQuery+=" and l.actionId = :actionId";
+        if( (logFilter.getUserId()!=0) && ((logFilter.getActionId()!=0)||(!logFilter.getSource().equalsIgnoreCase(nul))||(!logFilter.getIp().equalsIgnoreCase(nul))) ){
+            sqlQuery+=" and";
         }
+        
+        //-------------------------------------------------------------------------------------------------------------------------------------------------------
+        
+        
+        if(logFilter.getActionId()!=0){
+            sqlQuery+=" l.actionId = :actionId";
+        }
+        
+        if( (logFilter.getActionId()!=0) && ((!logFilter.getSource().equalsIgnoreCase(nul))||(!logFilter.getIp().equalsIgnoreCase(nul))) ){
+            sqlQuery+=" and";
+        }
+        
+        //-------------------------------------------------------------------------------------------------------------------------------------------------------
+        
         
         if(!logFilter.getSource().equalsIgnoreCase(nul)){
-            sqlQuery+=" and l.source = :source";
+            sqlQuery+=" l.source = :source";
         }
         
-        if(!logFilter.getIp().equalsIgnoreCase(nul)){
-            sqlQuery+=" and l.ip = :ip";
+        if((!logFilter.getSource().equalsIgnoreCase(nul)) && ( (!logFilter.getIp().equalsIgnoreCase(nul)) ) ){
+            sqlQuery+=" and";
         }
+        
+        //-------------------------------------------------------------------------------------------------------------------------------------------------------
+        
+        
+        if(!logFilter.getIp().equalsIgnoreCase(nul)){
+            sqlQuery+=" l.ip = :ip";
+        }
+        
+        //-------------------------------------------------------------------------------------------------------------------------------------------------------
+        
         
         Query query = em.createQuery(sqlQuery);
         

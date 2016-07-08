@@ -62,9 +62,9 @@ public class ErroneousTransaction implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "transaction_id", nullable = false)
-    private long transactionId;
+    private Long transactionId;
     @Column(name = "checksum")
-    private Long checksum;
+    private Integer checksum;
     @Column(name = "device_transaction_id")
     private Long deviceTransactionId;
     @Column(name = "device_transaction_time")
@@ -127,19 +127,19 @@ public class ErroneousTransaction implements Serializable {
         this.id = id;
     }
 
-    public long getTransactionId() {
+    public Long getTransactionId() {
         return transactionId;
     }
 
-    public void setTransactionId(long transactionId) {
+    public void setTransactionId(Long transactionId) {
         this.transactionId = transactionId;
     }
 
-    public Long getChecksum() {
+    public Integer getChecksum() {
         return checksum;
     }
 
-    public void setChecksum(Long checksum) {
+    public void setChecksum(Integer checksum) {
         this.checksum = checksum;
     }
 

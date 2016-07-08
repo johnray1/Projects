@@ -33,12 +33,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "IndexTracking.findAll", query = "SELECT i FROM IndexTracking i"),
     @NamedQuery(name = "IndexTracking.findById", query = "SELECT i FROM IndexTracking i WHERE i.id = :id"),
-    @NamedQuery(name = "IndexTracking.findByTransactionId", query = "SELECT i FROM IndexTracking i WHERE i.transactionId = :transactionId"),
-    @NamedQuery(name = "IndexTracking.findByTransactionTypeId", query = "SELECT i FROM IndexTracking i WHERE i.transactionTypeId = :transactionTypeId"),
     @NamedQuery(name = "IndexTracking.findByIndexbefore", query = "SELECT i FROM IndexTracking i WHERE i.indexbefore = :indexbefore"),
     @NamedQuery(name = "IndexTracking.findByIndexafter", query = "SELECT i FROM IndexTracking i WHERE i.indexafter = :indexafter"),
-    @NamedQuery(name = "IndexTracking.findByDateTime", query = "SELECT i FROM IndexTracking i WHERE i.dateTime = :dateTime"),
-    @NamedQuery(name = "IndexTracking.findByUserId", query = "SELECT i FROM IndexTracking i WHERE i.userId = :userId")})
+    @NamedQuery(name = "IndexTracking.findByTransactionId", query = "SELECT i FROM IndexTracking i WHERE i.transactionId = :transactionId"),
+    @NamedQuery(name = "IndexTracking.findByTransactionTypeId", query = "SELECT i FROM IndexTracking i WHERE i.transactionTypeId = :transactionTypeId"),
+    @NamedQuery(name = "IndexTracking.findByUserId", query = "SELECT i FROM IndexTracking i WHERE i.userId = :userId"),
+    @NamedQuery(name = "IndexTracking.findByAdminId", query = "SELECT i FROM IndexTracking i WHERE i.adminId = :adminId"),
+    @NamedQuery(name = "IndexTracking.findByDateTime", query = "SELECT i FROM IndexTracking i WHERE i.dateTime = :dateTime")})
 public class IndexTracking implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,6 +47,11 @@ public class IndexTracking implements Serializable {
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Long id;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "indexbefore", precision = 22)
+    private Double indexbefore;
+    @Column(name = "indexafter", precision = 22)
+    private Double indexafter;
     @Basic(optional = false)
     @NotNull
     @Column(name = "transaction_id", nullable = false)
@@ -54,16 +60,13 @@ public class IndexTracking implements Serializable {
     @NotNull
     @Column(name = "transaction_type_id", nullable = false)
     private int transactionTypeId;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "indexbefore", precision = 22)
-    private Double indexbefore;
-    @Column(name = "indexafter", precision = 22)
-    private Double indexafter;
+    @Column(name = "user_id")
+    private Integer userId;
+    @Column(name = "admin_id")
+    private Integer adminId;
     @Column(name = "date_time")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateTime;
-    @Column(name = "user_id")
-    private Integer userId;
 
     public IndexTracking() {
     }
@@ -86,22 +89,6 @@ public class IndexTracking implements Serializable {
         this.id = id;
     }
 
-    public Long getTransactionId() {
-        return transactionId;
-    }
-
-    public void setTransactionId(Long transactionId) {
-        this.transactionId = transactionId;
-    }
-
-    public int getTransactionTypeId() {
-        return transactionTypeId;
-    }
-
-    public void setTransactionTypeId(int transactionTypeId) {
-        this.transactionTypeId = transactionTypeId;
-    }
-
     public Double getIndexbefore() {
         return indexbefore;
     }
@@ -118,12 +105,20 @@ public class IndexTracking implements Serializable {
         this.indexafter = indexafter;
     }
 
-    public Date getDateTime() {
-        return dateTime;
+    public Long getTransactionId() {
+        return transactionId;
     }
 
-    public void setDateTime(Date dateTime) {
-        this.dateTime = dateTime;
+    public void setTransactionId(Long transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public int getTransactionTypeId() {
+        return transactionTypeId;
+    }
+
+    public void setTransactionTypeId(int transactionTypeId) {
+        this.transactionTypeId = transactionTypeId;
     }
 
     public Integer getUserId() {
@@ -132,6 +127,22 @@ public class IndexTracking implements Serializable {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public Integer getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(Integer adminId) {
+        this.adminId = adminId;
+    }
+
+    public Date getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(Date dateTime) {
+        this.dateTime = dateTime;
     }
 
     @Override

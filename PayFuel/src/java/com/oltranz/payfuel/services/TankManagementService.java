@@ -6,7 +6,9 @@
 package com.oltranz.payfuel.services;
 
 import com.oltranz.payfuel.beans.TankManager;
+import com.oltranz.payfuel.entities.Deeping;
 import com.oltranz.payfuel.entities.Tank;
+import com.oltranz.payfuel.entities.Tanking;
 import com.oltranz.payfuel.models.ResultObject;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -36,6 +38,8 @@ public class TankManagementService {
         return result.getJsonFormat();
         
     }
+    
+    
     
     @POST
     @Path("tank/edit")
@@ -72,5 +76,25 @@ public class TankManagementService {
         
         ResultObject result= tankManager.getTankByItsId(tankId);
         return result.getJsonFormat();
+    }
+    
+    @POST
+    @Path("tanking/create")
+    @Consumes({"application/xml", "application/json"})
+    public String createTanking(Tanking newTanking) {
+        
+        ResultObject result=tankManager.createTanking(newTanking);
+        return result.getJsonFormat();
+        
+    }
+    
+    @POST
+    @Path("deeping/create")
+    @Consumes({"application/xml", "application/json"})
+    public String createDeeping(Deeping newDeeping) {
+        
+        ResultObject result=tankManager.createDeeping(newDeeping);
+        return result.getJsonFormat();
+        
     }
 }

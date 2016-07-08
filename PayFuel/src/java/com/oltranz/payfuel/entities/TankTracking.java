@@ -34,13 +34,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "TankTracking.findAll", query = "SELECT t FROM TankTracking t"),
     @NamedQuery(name = "TankTracking.findById", query = "SELECT t FROM TankTracking t WHERE t.id = :id"),
-    @NamedQuery(name = "TankTracking.findByTransactionId", query = "SELECT t FROM TankTracking t WHERE t.transactionId = :transactionId"),
-    @NamedQuery(name = "TankTracking.findByTransactionTypeId", query = "SELECT t FROM TankTracking t WHERE t.transactionTypeId = :transactionTypeId"),
-    @NamedQuery(name = "TankTracking.findByTankId", query = "SELECT t FROM TankTracking t WHERE t.tankId = :tankId"),
     @NamedQuery(name = "TankTracking.findByQuantitybefore", query = "SELECT t FROM TankTracking t WHERE t.quantitybefore = :quantitybefore"),
     @NamedQuery(name = "TankTracking.findByQuantityafter", query = "SELECT t FROM TankTracking t WHERE t.quantityafter = :quantityafter"),
-    @NamedQuery(name = "TankTracking.findByDateTime", query = "SELECT t FROM TankTracking t WHERE t.dateTime = :dateTime"),
-    @NamedQuery(name = "TankTracking.findByUserId", query = "SELECT t FROM TankTracking t WHERE t.userId = :userId")})
+    @NamedQuery(name = "TankTracking.findByTankId", query = "SELECT t FROM TankTracking t WHERE t.tankId = :tankId"),
+    @NamedQuery(name = "TankTracking.findByTransactionId", query = "SELECT t FROM TankTracking t WHERE t.transactionId = :transactionId"),
+    @NamedQuery(name = "TankTracking.findByTransactionTypeId", query = "SELECT t FROM TankTracking t WHERE t.transactionTypeId = :transactionTypeId"),
+    @NamedQuery(name = "TankTracking.findByUserId", query = "SELECT t FROM TankTracking t WHERE t.userId = :userId"),
+    @NamedQuery(name = "TankTracking.findByAdminId", query = "SELECT t FROM TankTracking t WHERE t.adminId = :adminId"),
+    @NamedQuery(name = "TankTracking.findByDateTime", query = "SELECT t FROM TankTracking t WHERE t.dateTime = :dateTime")})
 public class TankTracking implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -48,26 +49,28 @@ public class TankTracking implements Serializable {
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Long id;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "quantitybefore", precision = 22)
+    private Double quantitybefore;
+    @Column(name = "quantityafter", precision = 22)
+    private Double quantityafter;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "tank_id", nullable = false)
+    private int tankId;
     @Column(name = "transaction_id")
     private Long transactionId;
     @Basic(optional = false)
     @NotNull
     @Column(name = "transaction_type_id", nullable = false)
     private int transactionTypeId;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "tank_id", nullable = false)
-    private int tankId;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "quantitybefore", precision = 22)
-    private Double quantitybefore;
-    @Column(name = "quantityafter", precision = 22)
-    private Double quantityafter;
+    @Column(name = "user_id")
+    private Integer userId;
+    @Column(name = "admin_id")
+    private Integer adminId;
     @Column(name = "date_time")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateTime;
-    @Column(name = "user_id")
-    private Integer userId;
 
     public TankTracking() {
     }
@@ -76,10 +79,10 @@ public class TankTracking implements Serializable {
         this.id = id;
     }
 
-    public TankTracking(Long id, int transactionTypeId, int tankId) {
+    public TankTracking(Long id, int tankId, int transactionTypeId) {
         this.id = id;
-        this.transactionTypeId = transactionTypeId;
         this.tankId = tankId;
+        this.transactionTypeId = transactionTypeId;
     }
 
     public Long getId() {
@@ -88,30 +91,6 @@ public class TankTracking implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getTransactionId() {
-        return transactionId;
-    }
-
-    public void setTransactionId(Long transactionId) {
-        this.transactionId = transactionId;
-    }
-
-    public int getTransactionTypeId() {
-        return transactionTypeId;
-    }
-
-    public void setTransactionTypeId(int transactionTypeId) {
-        this.transactionTypeId = transactionTypeId;
-    }
-
-    public int getTankId() {
-        return tankId;
-    }
-
-    public void setTankId(int tankId) {
-        this.tankId = tankId;
     }
 
     public Double getQuantitybefore() {
@@ -130,12 +109,28 @@ public class TankTracking implements Serializable {
         this.quantityafter = quantityafter;
     }
 
-    public Date getDateTime() {
-        return dateTime;
+    public int getTankId() {
+        return tankId;
     }
 
-    public void setDateTime(Date dateTime) {
-        this.dateTime = dateTime;
+    public void setTankId(int tankId) {
+        this.tankId = tankId;
+    }
+
+    public Long getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(Long transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public int getTransactionTypeId() {
+        return transactionTypeId;
+    }
+
+    public void setTransactionTypeId(int transactionTypeId) {
+        this.transactionTypeId = transactionTypeId;
     }
 
     public Integer getUserId() {
@@ -144,6 +139,22 @@ public class TankTracking implements Serializable {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public Integer getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(Integer adminId) {
+        this.adminId = adminId;
+    }
+
+    public Date getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(Date dateTime) {
+        this.dateTime = dateTime;
     }
 
     @Override

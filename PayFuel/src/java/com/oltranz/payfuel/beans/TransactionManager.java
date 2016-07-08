@@ -329,43 +329,82 @@ public class TransactionManager {
         return resultObject;
     }
     
+    
+    
     public ResultObject filterTransaction(TransactionFilter transactionFilter){
         
         ResultObject resultObject= new ResultObject();
         resultObject.setObjectClass(TransactionDetailsModel.class);
-       
+        
         List<TransactionDetailsModel> transactionDetailsModelList=new ArrayList<>();
         Transaction transaction;
         
         String nul="null";
-        String and="and";
         String sqlQuery="SELECT t FROM Transaction t WHERE";
+        
+        //-------------------------------------------------------------------------------------------------------------------------------------------------------
+        
         
         if(transactionFilter.getBranchId()!=0){
             sqlQuery+=" t.branchId = :branchId";
         }
         
-        if(transactionFilter.getUserId()!=0){
-            sqlQuery+=" and t.userId = :userId";
+        if((transactionFilter.getBranchId()!=0) && ((transactionFilter.getUserId()!=0)||(transactionFilter.getDeviceId()!=0)||(transactionFilter.getProductId()!=0)||(transactionFilter.getPaymentModeId()!=0)||(!transactionFilter.getStatus().equalsIgnoreCase(nul))) ){
+            sqlQuery+=" and";
         }
+        
+        //-------------------------------------------------------------------------------------------------------------------------------------------------------
+        
+        if(transactionFilter.getUserId()!=0){
+            sqlQuery+=" t.userId = :userId";
+        }
+        
+        if((transactionFilter.getUserId()!=0) && ((transactionFilter.getDeviceId()!=0)||(transactionFilter.getProductId()!=0)||(transactionFilter.getPaymentModeId()!=0)||(!transactionFilter.getStatus().equalsIgnoreCase(nul))) ){
+            sqlQuery+=" and";
+        }
+        
+        //-------------------------------------------------------------------------------------------------------------------------------------------------------
+        
         
         if(transactionFilter.getDeviceId()!=0){
-            sqlQuery+=" and t.deviceId = :deviceId";
+            sqlQuery+=" t.deviceId = :deviceId";
         }
+        
+        if((transactionFilter.getDeviceId()!=0) && ((transactionFilter.getProductId()!=0)||(transactionFilter.getPaymentModeId()!=0)||(!transactionFilter.getStatus().equalsIgnoreCase(nul))) ){
+            sqlQuery+=" and";
+        }
+        
+        //-------------------------------------------------------------------------------------------------------------------------------------------------------
+        
         
         if(transactionFilter.getProductId()!=0){
-            sqlQuery+=" and t.productId = :productId";
+            sqlQuery+=" t.productId = :productId";
         }
+        
+        if((transactionFilter.getProductId()!=0) && ((transactionFilter.getPaymentModeId()!=0)||(!transactionFilter.getStatus().equalsIgnoreCase(nul))) ){
+            sqlQuery+=" and";
+        }
+        
+        //-------------------------------------------------------------------------------------------------------------------------------------------------------
+        
         
         if(transactionFilter.getPaymentModeId()!=0){
-            sqlQuery+=" and t.paymentModeId = :paymentModeId";
+            sqlQuery+=" t.paymentModeId = :paymentModeId";
         }
+        
+        if((transactionFilter.getPaymentModeId()!=0) && ((!transactionFilter.getStatus().equalsIgnoreCase(nul))) ){
+            sqlQuery+=" and";
+        }
+        
+        //-------------------------------------------------------------------------------------------------------------------------------------------------------
+        
         
         if(!transactionFilter.getStatus().equalsIgnoreCase(nul)){
-            sqlQuery+=" and t.paymentStatus = :paymentStatus";
+            sqlQuery+=" t.paymentStatus = :paymentStatus";
         }
         
-       
+        
+        //-------------------------------------------------------------------------------------------------------------------------------------------------------
         
         
         Query query = em.createQuery(sqlQuery);

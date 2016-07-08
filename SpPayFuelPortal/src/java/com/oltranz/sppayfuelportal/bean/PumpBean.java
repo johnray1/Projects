@@ -53,7 +53,7 @@ public class PumpBean {
         templateBean.setLogsClassName("omenu");
         
         int userId=loginBean.getUserId();
-        System.out.println(loginBean.getUserId());
+        
         try{
             String getBranchUrl="http://localhost:8080/PayFuel/PumpManagementService/getPumpNozzleProductList";
             Response response = CommonLibrary.sendRESTRequest(getBranchUrl, "empty data", MediaType.APPLICATION_JSON, "GET");

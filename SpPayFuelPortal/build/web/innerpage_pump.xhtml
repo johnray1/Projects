@@ -45,9 +45,9 @@
             } );
         </script>
             
-           
+            
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
-         
+            
     </h:head>
         
         
@@ -70,7 +70,7 @@
                             <a data-rel="lightcase_edit" href="popup/popup_device_add.xhtml" style="color: #ffffff" onclick="#{BranchBean.branches()}">Add Pump</a>
                         </label>
                         <!-- -->
-                        
+                            
                     </h2>
                     <span class="container-fluid" style="overflow: auto;">
                         <div  class="container-fluid" style="padding:10px;">
@@ -78,63 +78,72 @@
                             
                             <!-- Start DataTable-->  
                                 
-                              <h:panelGroup id="pumpsList">   
-                            <h:dataTable value="#{PumpBean.pumpNozzleProductModelList.pumpNozzleProductModelList}" var="pump"
-                                         id="dataTableList"
-                                         styleClass="display" 
-                                         cellspacing="0" 
-                                         width="100%" 
-                                         style="padding:10px;">
-                                <h:column>    				
-                                    <f:facet name="header">Pump Name</f:facet>    				
-                                        #{pump.pumpName}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">Nozzle Name</f:facet>
-                                        #{pump.nozzleName}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">Nozzle Index</f:facet>
-                                        #{pump.index}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">Product Name</f:facet>
-                                        #{pump.productName}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">Branch Name</f:facet>
-                                        #{pump.branchName}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">Actions</f:facet>
-                                    <h:form >
-                                        
-                                        <h:commandLink   onclick="notifiyViewDetails()" id="viewDetails"> <h:graphicImage value="images/icon_view.png" />
-                                            <f:ajax event="click" listener="#{PumpBean.pumpForView(pump.nozzleId)}" render="viewDetailsContentPanel" />
-                                        </h:commandLink>
-                                        
-                                        <h:commandLink onclick="notifyEdit()"    id="editDetails" > <h:graphicImage value="images/icon_edit.png" />
-                                            <f:ajax event="click"  listener="#{PumpBean.pumpForEdit(pump.nozzleId)}" rendererType="postValidate" render=":editDetailsContentPanel :edit_form" />
-                                        </h:commandLink>
-                                        
-                                    </h:form>  
-                                </h:column>
-                            </h:dataTable>
+                            <h:panelGroup id="pumpsList">   
+                                <h:dataTable value="#{PumpBean.pumpNozzleProductModelList.pumpNozzleProductModelList}" var="pump"
+                                             id="dataTableList"
+                                             styleClass="display" 
+                                             cellspacing="0" 
+                                             width="100%" 
+                                             style="padding:10px;">
+                                    <h:column>
+                                        <f:facet name="header">Branch Name</f:facet>
+                                            #{pump.branchName}
+                                    </h:column>
+                                    <h:column>    				
+                                        <f:facet name="header">Pump Name</f:facet>    				
+                                            #{pump.pumpName}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Nozzle Name</f:facet>
+                                            #{pump.nozzleName}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Nozzle Index</f:facet>
+                                            #{pump.index}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Product Name</f:facet>
+                                            #{pump.productName}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Previous Calibration</f:facet>
+                                            
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Next Calibration</f:facet>
+                                           
+                                    </h:column>
+                                    
+                                    <h:column>
+                                        <f:facet name="header">Actions</f:facet>
+                                        <h:form >
+                                            
+                                            <h:commandLink   onclick="notifiyViewDetails()" id="viewDetails"> <h:graphicImage value="images/icon_view.png" />
+                                                <f:ajax event="click" listener="#{PumpBean.pumpForView(pump.nozzleId)}" render="viewDetailsContentPanel" />
+                                            </h:commandLink>
+                                                
+                                            <h:commandLink onclick="notifyEdit()"    id="editDetails" > <h:graphicImage value="images/icon_edit.png" />
+                                                <f:ajax event="click"  listener="#{PumpBean.pumpForEdit(pump.nozzleId)}" rendererType="postValidate" render=":editDetailsContentPanel :edit_form" />
+                                            </h:commandLink>
+                                                
+                                        </h:form>  
+                                    </h:column>
+                                </h:dataTable>
                             </h:panelGroup>
-                            
+                                
                             <!-- End DataTable--> 
                                 
                             <!--Start Pop Up
                             Only one at any one time will be rendered, and this is controlled in the back bean
                             -->  
-                            
-                            
+                                
+                                
                             <div id="viewDetailsContent" style="display:none">
                                 
                                 <h:panelGroup id="viewDetailsContentPanel" >
                                     <ui:include src="popup/popup_pump_view.xhtml" /> 
                                 </h:panelGroup>
-                                
+                                    
                                 <h:panelGroup id="editDetailsContentPanel">
                                     <h:form class="container-fluid edit_form" id="edit_form">
                                         <tp:editPumpComponent 
@@ -149,10 +158,10 @@
                                             /> 
                                     </h:form>
                                 </h:panelGroup>      
-                                
+                                    
                             </div>
-                            
-                            
+                                
+                                
                             <!-- End Pop Up-->
                         </div>
                     </span>
@@ -160,17 +169,17 @@
             </div>
         </div>
         <!-- End CONTENTS -->
-        
-        
-        
+            
+            
+            
         <div class="clear" style="margin-bottom:50px;"></div>
-        
+            
             
             
             
         <ui:include src="templates/footer.xhtml" />  
-        
-        
+            
+            
         <!--Start Scripts -->
             
         <script type="text/javascript" src="js/chosen.jquery.min.js"></script>
@@ -206,7 +215,7 @@
                         break;
                     
                     case "complete": // This is called right after ajax response is received.
-                     
+                        
                         break;
                     case "success": // This is called when ajax response is successfully processed.
                         
@@ -277,8 +286,8 @@
         </script>
             
         <!-- End Scripts -->
-        
-        
+            
+            
             
     </h:body>
 </html>

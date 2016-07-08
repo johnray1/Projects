@@ -31,6 +31,9 @@ public class PumpNozzleProductModel {
 
     @JsonProperty("pumpName")
     private String pumpName;
+    
+    @JsonProperty("nozzleNo")
+    private String nozzleNo;
 
     @JsonProperty("status")
     private Integer status;
@@ -216,6 +219,20 @@ public class PumpNozzleProductModel {
      */
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    /**
+     * @return the nozzleNo
+     */
+    public String getNozzleNo() {
+        return nozzleNo;
+    }
+
+    /**
+     * @param nozzleNo the nozzleNo to set
+     */
+    public void setNozzleNo(String nozzleNo) {
+        this.nozzleNo = nozzleNo;
     }
 
     

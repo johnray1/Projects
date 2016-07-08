@@ -185,73 +185,84 @@ public class InitialData {
             em.flush();
             
             initializationLog+="\n "+" Added successfully";
-        
-           //String name,int type_id,String descr
+            
+            //String name,int type_id,String descr
 //            initializationLog+="\n\n Users' roles Initialization begins...";
 //            List<Role> roles=new ArrayList();
 //            roles.add(new Role("Overall Administrators",1,"Overall System Administrators"));
 //            roles.add(new Role("Overall General users",1,"Overall General users"));
 //            roles.add(new Role("Branch's Administrators",2,"Branch's Administrators"));
 //            roles.add(new Role("Branch's General users",2,"Branch's General users"));
-//            
+//
 //            for(Role x: roles){
 //                em.persist(x);
 //                em.flush();
 //                initializationLog+="\n "+x.getName() +" Added successfully";
 //            }
-        
-        
-        
-        /*User(
-        String fname,
-        String otherNames,
-        String email,
-        String password,
-        String pin,
-        String permissions,
-        String phoneNumber,
-        String gender,
-        String details)*/
-        initializationLog+="\n\n Users Initialization begins...";
-        List<User> usersList=new ArrayList();
-        usersList.add(new User("System"," Administrator","admin@oltranz.com",Common.shared.get_SHA_512_SecurePassword("admin", "726"),"000","ffffffffffffffffffffffffffffffff","0726255084","MALE","Initial system administrator with all permissions"));
-        for(User x: usersList){
-            em.persist(x);
-            initializationLog+="\n ID:"+ x.getUserId()+", Names:"+x.getFname() + x.getOtherNames() +" Added successfully";
             
-            //UserInRole(Integer userId, Integer roleId)
-            initializationLog+="\n\n Adding user ID:"+ x.getUserId()+", Names:"+x.getFname() + x.getOtherNames() +" to his roles  begins...";
-            List<RoleForUser> roleForUserList=new ArrayList();
-            roleForUserList.add(new RoleForUser(x.getUserId(),1));  // add to overall administrators
-            roleForUserList.add(new RoleForUser(x.getUserId(),2));  // add to overall administrators
-            roleForUserList.forEach(y->em.persist(x));
-            for(RoleForUser y: roleForUserList){
-                em.persist(y);
+            //String name,int typeId,String descr
+            initializationLog+="\n\n TransactionType Initialization begins...";
+            em.persist(new TransactionType(1,"SALE","Sale Type"));
+            em.flush();
+            em.persist(new TransactionType(2,"CORRECTION","Correction Type"));
+            em.flush();
+            em.persist(new TransactionType(3,"CANCELLATION","Cancellation Type"));
+            em.flush();
+            em.persist(new TransactionType(4,"DEEPING","Deeping Type"));
+            em.flush();
+            
+            initializationLog+="\n "+" Added successfully";
+            
+            /*User(
+            String fname,
+            String otherNames,
+            String email,
+            String password,
+            String pin,
+            String permissions,
+            String phoneNumber,
+            String gender,
+            String details)*/
+            initializationLog+="\n\n Users Initialization begins...";
+            List<User> usersList=new ArrayList();
+            usersList.add(new User("System"," Administrator","admin@oltranz.com",Common.shared.get_SHA_512_SecurePassword("admin", "726"),"000","ffffffffffffffffffffffffffffffff","0726255084","MALE","Initial system administrator with all permissions"));
+            for(User x: usersList){
+                em.persist(x);
+                initializationLog+="\n ID:"+ x.getUserId()+", Names:"+x.getFname() + x.getOtherNames() +" Added successfully";
                 
-                initializationLog+="\n adding of user  ID:"+ x.getUserId()+", Names:"+x.getFname() + x.getOtherNames() +" to role"+ em.find(Role.class, y.getRoleForUserPK().getRoleId()).getName()+" completed successfully";
+                //UserInRole(Integer userId, Integer roleId)
+                initializationLog+="\n\n Adding user ID:"+ x.getUserId()+", Names:"+x.getFname() + x.getOtherNames() +" to his roles  begins...";
+                List<RoleForUser> roleForUserList=new ArrayList();
+                roleForUserList.add(new RoleForUser(x.getUserId(),1));  // add to overall administrators
+                roleForUserList.add(new RoleForUser(x.getUserId(),2));  // add to overall administrators
+                roleForUserList.forEach(y->em.persist(x));
+                for(RoleForUser y: roleForUserList){
+                    em.persist(y);
+                    
+                    initializationLog+="\n adding of user  ID:"+ x.getUserId()+", Names:"+x.getFname() + x.getOtherNames() +" to role"+ em.find(Role.class, y.getRoleForUserPK().getRoleId()).getName()+" completed successfully";
+                }
             }
+            
+            
+            
+            initializationLog+="\n\n Data Initialization completed successfully at "+ ((new Date()).toString());
+            resultObject.setObject(initializationLog);
+            return resultObject;
+            
+        }
+        catch(Exception ex){
+            
+            String message="AAA: Find All: "+ex.getMessage()+" | TRACE :";
+            StringWriter errors = new StringWriter();
+            ex.printStackTrace(new PrintWriter(errors));
+            message+=errors.toString();
+            out.print(message);
+            
+            initializationLog+="\n\n An error Occured: "+message;
+            resultObject.setObject(initializationLog);
+            return resultObject;
         }
         
-        
-        
-        initializationLog+="\n\n Data Initialization completed successfully at "+ ((new Date()).toString());
-        resultObject.setObject(initializationLog);
-        return resultObject;
-        
     }
-    catch(Exception ex){
     
-    String message="AAA: Find All: "+ex.getMessage()+" | TRACE :";
-    StringWriter errors = new StringWriter();
-    ex.printStackTrace(new PrintWriter(errors));
-    message+=errors.toString();
-    out.print(message);
-    
-    initializationLog+="\n\n An error Occured: "+message;
-    resultObject.setObject(initializationLog);
-    return resultObject;
-}
-    
-}
-
 }
