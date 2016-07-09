@@ -55,7 +55,7 @@ public class IndexTracking implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "transaction_id", nullable = false)
-    private Long transactionId;
+    private long transactionId;
     @Basic(optional = false)
     @NotNull
     @Column(name = "transaction_type_id", nullable = false)
@@ -105,11 +105,11 @@ public class IndexTracking implements Serializable {
         this.indexafter = indexafter;
     }
 
-    public Long getTransactionId() {
+    public long getTransactionId() {
         return transactionId;
     }
 
-    public void setTransactionId(Long transactionId) {
+    public void setTransactionId(long transactionId) {
         this.transactionId = transactionId;
     }
 

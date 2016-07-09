@@ -35,7 +35,7 @@ public class BranchProductPrice implements Serializable {
     @Column(name = "b_price", precision = 22)
     private Double bPrice;
     @Column(name = "bp_status")
-    private Integer bpStatus=7;
+    private Integer bpStatus;
 
     public BranchProductPrice() {
     }

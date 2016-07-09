@@ -42,14 +42,14 @@ public class Product implements Serializable {
     @Basic(optional = false)
     @Column(name = "product_id", nullable = false)
     private Integer productId;
-    @Size(max = 50)
-    @Column(name = "name", length = 50)
+    @Size(max = 255)
+    @Column(name = "name", length = 255)
     private String name;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "hq_price", precision = 22)
     private Double hqPrice;
-    @Size(max = 50)
-    @Column(name = "measure_unity", length = 50)
+    @Size(max = 255)
+    @Column(name = "measure_unity", length = 255)
     private String measureUnity;
     @Column(name = "status")
     private Integer status=7;

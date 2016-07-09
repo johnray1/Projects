@@ -127,11 +127,11 @@ public class ErroneousTransaction implements Serializable {
         this.id = id;
     }
 
-    public Long getTransactionId() {
+    public long getTransactionId() {
         return transactionId;
     }
 
-    public void setTransactionId(Long transactionId) {
+    public void setTransactionId(long transactionId) {
         this.transactionId = transactionId;
     }
 

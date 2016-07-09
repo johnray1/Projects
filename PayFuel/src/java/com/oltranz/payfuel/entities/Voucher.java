@@ -6,6 +6,7 @@
 package com.oltranz.payfuel.entities;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -68,7 +69,7 @@ public class Voucher implements Serializable {
     @Column(name = "status")
     private Integer status=7;
     @Column(name = "customer_id")
-    private Long customerId;
+    private BigInteger customerId;
 
     public Voucher() {
     }
@@ -141,11 +142,11 @@ public class Voucher implements Serializable {
         this.status = status;
     }
 
-    public Long getCustomerId() {
+    public BigInteger getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Long customerId) {
+    public void setCustomerId(BigInteger customerId) {
         this.customerId = customerId;
     }
 

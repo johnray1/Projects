@@ -45,6 +45,7 @@ public class DeviceManager {
         
         ResultObject resultObject=new ResultObject();
         resultObject.setObjectClass(DeviceRegistrationResponse.class);
+        
         //Authenticating email and password
         resultObject=userManager.authenticateWebUser(regDeviceModel.getEmail(), regDeviceModel.getPassword());
         try{
@@ -188,9 +189,7 @@ public class DeviceManager {
         }
         
         device.setDeviceName(editDevice.getDeviceName());
-        device.setSerialNo(editDevice.getSerialNo());
         device.setBranchId(editDevice.getBranchId());
-        device.setStatus(editDevice.getStatus());//default value of a device status is 7 even if i dont post status the 7 is coming in this object
         em.merge(device);
         
         

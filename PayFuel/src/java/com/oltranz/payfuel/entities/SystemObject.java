@@ -36,8 +36,8 @@ public class SystemObject implements Serializable {
     @NotNull
     @Column(name = "id", nullable = false)
     private Integer id;
-    @Size(max = 100)
-    @Column(name = "name", length = 100)
+    @Size(max = 255)
+    @Column(name = "name", length = 255)
     private String name;
     @Size(max = 255)
     @Column(name = "descr", length = 255)

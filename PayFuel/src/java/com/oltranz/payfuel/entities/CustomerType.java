@@ -36,8 +36,8 @@ public class CustomerType implements Serializable {
     @NotNull
     @Column(name = "customer_type_id", nullable = false)
     private Integer customerTypeId;
-    @Size(max = 50)
-    @Column(name = "name", length = 50)
+    @Size(max = 255)
+    @Column(name = "name", length = 255)
     private String name;
     @Size(max = 255)
     @Column(name = "descr", length = 255)

@@ -40,8 +40,8 @@ public class Role implements Serializable {
     @Basic(optional = false)
     @Column(name = "role_id", nullable = false)
     private Integer roleId;
-    @Size(max = 100)
-    @Column(name = "name", length = 100)
+    @Size(max = 255)
+    @Column(name = "name", length = 255)
     private String name;
     @Size(max = 255)
     @Column(name = "permissions", length = 255)

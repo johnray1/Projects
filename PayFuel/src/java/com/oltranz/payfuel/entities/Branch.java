@@ -39,8 +39,8 @@ public class Branch implements Serializable {
     @Basic(optional = false)
     @Column(name = "branch_id", nullable = false)
     private Integer branchId;
-    @Size(max = 50)
-    @Column(name = "name", length = 50)
+    @Size(max = 255)
+    @Column(name = "name", length = 255)
     private String name;
     @Size(max = 255)
     @Column(name = "descr", length = 255)

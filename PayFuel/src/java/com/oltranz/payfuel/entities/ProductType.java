@@ -40,8 +40,8 @@ public class ProductType implements Serializable {
     @Basic(optional = false)
     @Column(name = "product_type_id", nullable = false)
     private Integer productTypeId;
-    @Size(max = 50)
-    @Column(name = "name", length = 50)
+    @Size(max = 255)
+    @Column(name = "name", length = 255)
     private String name;
     @Column(name = "status")
     private Integer status=7;

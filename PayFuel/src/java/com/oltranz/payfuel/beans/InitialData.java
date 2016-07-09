@@ -160,7 +160,7 @@ public class InitialData {
             
             
             
-            //String name,int typeId,String descr
+            //TransactionType (Integer id,String name, String descr)
             initializationLog+="\n\n TransactionType Initialization begins...";
             em.persist(new TransactionType(1,"SALE","Sale Type"));
             em.flush();
@@ -172,6 +172,7 @@ public class InitialData {
             em.flush();
             
             initializationLog+="\n "+" Added successfully";
+            
             
             //String name,int typeId,String descr
             initializationLog+="\n\n Roles Initialization begins...";
@@ -186,32 +187,7 @@ public class InitialData {
             
             initializationLog+="\n "+" Added successfully";
             
-            //String name,int type_id,String descr
-//            initializationLog+="\n\n Users' roles Initialization begins...";
-//            List<Role> roles=new ArrayList();
-//            roles.add(new Role("Overall Administrators",1,"Overall System Administrators"));
-//            roles.add(new Role("Overall General users",1,"Overall General users"));
-//            roles.add(new Role("Branch's Administrators",2,"Branch's Administrators"));
-//            roles.add(new Role("Branch's General users",2,"Branch's General users"));
-//
-//            for(Role x: roles){
-//                em.persist(x);
-//                em.flush();
-//                initializationLog+="\n "+x.getName() +" Added successfully";
-//            }
             
-            //String name,int typeId,String descr
-            initializationLog+="\n\n TransactionType Initialization begins...";
-            em.persist(new TransactionType(1,"SALE","Sale Type"));
-            em.flush();
-            em.persist(new TransactionType(2,"CORRECTION","Correction Type"));
-            em.flush();
-            em.persist(new TransactionType(3,"CANCELLATION","Cancellation Type"));
-            em.flush();
-            em.persist(new TransactionType(4,"DEEPING","Deeping Type"));
-            em.flush();
-            
-            initializationLog+="\n "+" Added successfully";
             
             /*User(
             String fname,

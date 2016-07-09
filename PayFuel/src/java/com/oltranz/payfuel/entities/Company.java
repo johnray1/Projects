@@ -40,8 +40,8 @@ public class Company implements Serializable {
     @Basic(optional = false)
     @Column(name = "company_id", nullable = false)
     private Integer companyId;
-    @Size(max = 50)
-    @Column(name = "name", length = 50)
+    @Size(max = 255)
+    @Column(name = "name", length = 255)
     private String name;
     @Size(max = 255)
     @Column(name = "descr", length = 255)

@@ -40,11 +40,11 @@ public class Customer implements Serializable {
     @Basic(optional = false)
     @Column(name = "customer_id", nullable = false)
     private Long customerId;
-    @Size(max = 50)
-    @Column(name = "name", length = 50)
+    @Size(max = 255)
+    @Column(name = "name", length = 255)
     private String name;
-    @Size(max = 50)
-    @Column(name = "tin", length = 50)
+    @Size(max = 255)
+    @Column(name = "tin", length = 255)
     private String tin;
     @Size(max = 255)
     @Column(name = "contact_details", length = 255)

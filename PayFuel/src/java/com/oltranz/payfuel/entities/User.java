@@ -45,32 +45,32 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "user_id", nullable = false)
     private Integer userId;
-    @Size(max = 100)
-    @Column(name = "fname", length = 100)
+    @Size(max = 255)
+    @Column(name = "fname", length = 255)
     private String fname;
-    @Size(max = 150)
-    @Column(name = "other_names", length = 150)
+    @Size(max = 255)
+    @Column(name = "other_names", length = 255)
     private String otherNames;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Size(max = 100)
-    @Column(name = "email", length = 100)
+    @Size(max = 255)
+    @Column(name = "email", length = 255)
     private String email;
     @Size(max = 255)
     @Column(name = "password", length = 255)
     private String password;
-    @Size(max = 100)
-    @Column(name = "pin", length = 100)
+    @Size(max = 255)
+    @Column(name = "pin", length = 255)
     private String pin;
     @Size(max = 255)
     @Column(name = "permissions", length = 255)
     private String permissions="00000000000000000000000000000000";
     @Column(name = "status")
     private Integer status=7;
-    @Size(max = 50)
-    @Column(name = "phone_number", length = 50)
+    @Size(max = 255)
+    @Column(name = "phone_number", length = 255)
     private String phoneNumber;
-    @Size(max = 50)
-    @Column(name = "gender", length = 50)
+    @Size(max = 255)
+    @Column(name = "gender", length = 255)
     private String gender;
     @Size(max = 255)
     @Column(name = "details", length = 255)

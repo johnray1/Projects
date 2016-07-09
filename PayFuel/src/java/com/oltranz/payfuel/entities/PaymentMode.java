@@ -39,14 +39,14 @@ public class PaymentMode implements Serializable {
     @NotNull
     @Column(name = "payment_mode_id", nullable = false)
     private Integer paymentModeId;
-    @Size(max = 55)
-    @Column(name = "name", length = 55)
+    @Size(max = 255)
+    @Column(name = "name", length = 255)
     private String name;
     @Size(max = 255)
     @Column(name = "descr", length = 255)
     private String descr;
     @Column(name = "status")
-    private Integer status;
+    private Integer status=7;
 
     public PaymentMode() {
     }
