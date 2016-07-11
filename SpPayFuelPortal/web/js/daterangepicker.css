@@ -237,9 +237,9 @@
 /* Text Input Above Each Calendar */
 
 .daterangepicker .input-mini {
-  border: 1px solid #ccc;
+  border: 1px solid;
   border-radius: 4px;
-  color: #555;
+  color: #0c780c;
   display: block;
   height: 30px;
   line-height: 30px;

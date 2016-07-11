@@ -35,6 +35,7 @@ public class LoginBean implements Serializable{
     
     //validate login
     public String validateUsernamePassword() {
+        
         templateBean.setDashboardClassName("omenu_active");
         templateBean.setBranchClassName("omenu");
         templateBean.setDevicesClassName("omenu");
@@ -52,9 +53,9 @@ public class LoginBean implements Serializable{
                 
                 userId=ud.getUserDetailsModel().getUserId();
                 user=ud.getUserDetailsModel().getFname();
+                
                 HttpSession session = SessionBean.getSession();
                 session.setAttribute("username",user );
-                
                 session.setAttribute("permissions", ud.getUserDetailsModel().getPermissions());
                 
                 
@@ -62,7 +63,7 @@ public class LoginBean implements Serializable{
                 session.setMaxInactiveInterval(30*60);
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.getExternalContext().redirect("dashboard.xhtml");
-                return "dashboard";
+                return "dashboard?faces-redirect=true";
             }
             else {
                 FacesContext.getCurrentInstance().addMessage(
@@ -74,7 +75,7 @@ public class LoginBean implements Serializable{
                         )
                         
                 );
-                return "login";
+                return "login.xhtml";
             }
         }
         catch(Exception ex){

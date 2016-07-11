@@ -104,7 +104,7 @@
                                                 <f:ajax event="click" listener="#{DeviceBean.deviceForView(dev.deviceId)}" render="viewDetailsContentPanel" />
                                             </h:commandLink>
                                                 
-                                            <h:commandLink onclick="notifyEdit()"    id="editDetails" > <h:graphicImage value="images/icon_edit.png" />
+                                            <h:commandLink onclick="notifyEdit()"    id="editDetails"  rendered="true"> <h:graphicImage value="images/icon_edit.png" />
                                                 <f:ajax event="click"  listener="#{DeviceBean.deviceForEdit(dev.deviceId)}" rendererType="postValidate" render=":editDetailsContentPanel :edit_form" />
                                             </h:commandLink>
                                                 

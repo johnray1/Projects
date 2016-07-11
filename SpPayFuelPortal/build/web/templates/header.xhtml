@@ -76,7 +76,7 @@
                     <div style="height:65px;font-family:ubuntu;margin:0px;padding:0px;background-color:#1a8c35">
                         <div class="col-xs-4"><img src="images/sppayfuel_logo.png" class="logo hidden-xs"/><img src="images/sppayfuel_logo.png" class="logo hidden-lg hidden-md hidden-sm visible-xs"/></div>
                         <div class="col-xs-8" style="margin:0px;padding:0px;line-height:65px;text-align:right;font-size:30px;color:#ffffff;"><strong class="hidden-xs"> Management  </strong> 
-                            <h:commandLink action="#{LoginBean.logout}" class="logout">
+                            <h:commandLink action="#{LoginBean.logout()}" class="logout">
                                 <h:graphicImage value="images/icon_logout.png" style="float: right"/>
                                 <span>WELCOME</span> 
                                 #{LoginBean.user}
@@ -167,6 +167,8 @@
                 
                 <!-- Navbar --> 
                 
+                
+                
                 <!-- MobileMenu -->
                 <nav id="myNavbar" class="navbar navbar-default visible-xs hidden-sm hidden-md hidden-lg" style="text-align:left;margin-top:5px;" role="navigation">
                     <div class="container">
@@ -182,10 +184,10 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
                                 <li>
-                                    <h:commandLink action="dashboard.xhtml">Dashboard</h:commandLink>
+                                    <h:commandLink action="#{DashBean.dashBoard()}">Dashboard</h:commandLink>
                                 </li>
                                 <li>
-                                    <h:commandLink action="#{BranchBean.branchesByUserId()}">Branches</h:commandLink>
+                                    <h:commandLink action="#{BranchBean.branches()}">Branches</h:commandLink>
                                 </li>
                                 <li>
                                     <h:commandLink action="#{DeviceBean.devices()}">Devices</h:commandLink>
@@ -197,19 +199,19 @@
                                     <h:commandLink action="#{UserBean.users()}">Users</h:commandLink>
                                 </li>
                                 <li>
-                                    <h:commandLink action="#{UserBean.roles()}">Roles</h:commandLink>
-                                </li>
-                                <li>
                                     <h:commandLink action="#{TransactionBean.transactions()}">Transactions</h:commandLink>
                                 </li>
                                 <li>
-                                    <h:commandLink action="innerpage_logs.xhtml">Logs</h:commandLink>
+                                    <h:commandLink action="#{LogsBean.logs()}">Logs</h:commandLink>
                                 </li>    
                             </ul>
                         </div>
                     </div>
                 </nav>
                 <!-- End MobileMenu -->
+                
+                
+                
             </h:form>
             
         </ui:composition>

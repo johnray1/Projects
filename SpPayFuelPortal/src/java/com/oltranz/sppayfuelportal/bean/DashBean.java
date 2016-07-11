@@ -32,7 +32,7 @@ public class DashBean {
         templateBean.setLogsClassName("omenu");
         
         
-        return "dashboard";
+        return "dashboard?faces-redirect=true";
     }
     
     /**

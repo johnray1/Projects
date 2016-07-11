@@ -75,7 +75,7 @@ public class UserBean {
         catch(Exception ex){
             System.out.println(ex.getMessage());
         }
-        return "innerpage_user.xhtml";
+        return "innerpage_user.xhtml?faces-redirect=true";
         
     }
     

@@ -69,7 +69,7 @@ public class DeviceBean {
         catch(Exception ex){
             System.out.println(ex.getMessage());
         }
-        return "innerpage_device.xhtml";
+        return "innerpage_device.xhtml?faces-redirect=true";
     }
     
     public void deviceForView(int deviceId){

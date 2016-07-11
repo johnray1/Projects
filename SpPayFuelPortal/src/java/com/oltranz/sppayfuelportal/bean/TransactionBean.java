@@ -81,7 +81,7 @@ public class TransactionBean {
         catch(Exception ex){
             System.out.println(ex.getMessage());
         }
-        return "innerpage_transactions.xhtml";
+        return "innerpage_transactions.xhtml?faces-redirect=true";
         
     }
     
@@ -117,6 +117,7 @@ public class TransactionBean {
         templateBean.setRolesClassName("omenu");
         templateBean.setTransactionsClassName("omenu_active");
         templateBean.setLogsClassName("omenu");
+       
         try{
             String url="http://localhost:8080/PayFuel/TransactionManagementService/transactions/filter";
                                
@@ -126,7 +127,8 @@ public class TransactionBean {
                     "\"deviceId\":"+deviceId+",\n" +
                     "\"productId\":"+productId+",\n" +
                     "\"paymentModeId\":"+paymentModeId+",\n" +
-                    "\"status\":\""+status+"\"\n" +
+                    "\"status\":\""+status+"\",\n" +
+                    "\"date\":\""+date+"\"\n" +
                     "}";
             Response response=CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
             String jsonResponse = response.readEntity(String.class);

@@ -73,7 +73,7 @@ public class TankBean {
         catch(Exception ex){
             System.out.println(ex.getMessage());
         }
-        return "innerpage_tank.xhtml";
+        return "innerpage_tank.xhtml?faces-redirect=true";
     }
     
     public void tankForView(int branchId){

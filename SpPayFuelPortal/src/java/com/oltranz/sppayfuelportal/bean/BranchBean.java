@@ -90,7 +90,7 @@ public class BranchBean implements Serializable{
         catch(Exception ex){
             System.out.println(ex.getMessage());
         }
-        return "innerpage_branch.xhtml";
+        return "innerpage_branch.xhtml?faces-redirect=true";
     }
     
     

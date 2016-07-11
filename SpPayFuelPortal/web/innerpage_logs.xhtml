@@ -50,7 +50,7 @@
         <script type="text/javascript">
             $(function() {
                 
-                $('#dateip').daterangepicker({
+                $('#form\\:daterangepicker').daterangepicker({
                     "showDropdowns": true,
                     autoUpdateInput: true,
                     "timePicker": true,
@@ -65,7 +65,7 @@
                         'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')] 
                     },
                     "locale": {
-                        "format": "MM/DD/YYYY h:mm A",
+                        "format": "YYYY/MM/DD HH:mm",
                         "separator": " - ",
                         "applyLabel": "Apply",
                         "cancelLabel": "Cancel",
@@ -136,7 +136,7 @@
                         <h2>Filter Logs</h2>
                             
                         <!-- FORM -->
-                        <h:form class="container-fluid sforminput"  style="margin:0px;padding:0px;" rendered="true">
+                        <h:form id="form" class="container-fluid sforminput"  style="margin:0px;padding:0px;" rendered="true">
                             
                             <div class="col-xs-12 col-sm-3 stextinput" style="margin:0px;padding:0px;">
                                 <h:selectOneMenu value="#{LogsBean.usId}" class="chosen-select">
@@ -172,7 +172,7 @@
                                 
                             <!-- DateRange -->
                             <div class="col-xs-12 col-sm-12 stextinput_date">
-                                <input type="text" id="dateip" value="02/10/2016 - 02/18/2016"/>
+                                <h:inputText id="daterangepicker" value="#{LogsBean.date}"/>
                             </div>	
                             <!-- End DateRange -->
                                 

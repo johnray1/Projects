@@ -94,7 +94,7 @@ public class ProductBean {
         catch(Exception ex){
             System.out.println(ex.getMessage());
         }
-        return "innerpage_product.xhtml";
+        return "innerpage_product.xhtml?faces-redirect=true";
         
     }
     

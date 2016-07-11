@@ -67,7 +67,7 @@ public class PumpBean {
         catch(Exception ex){
             System.out.println(ex.getMessage());
         }
-        return "innerpage_pump.xhtml";
+        return "innerpage_pump.xhtml?faces-redirect=true";
     }
     
     

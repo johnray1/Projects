@@ -89,7 +89,7 @@ public class ProductTypeBean {
         catch(Exception ex){
             System.out.println(ex.getMessage());
         }
-        return "innerpage_product_type.xhtml";
+        return "innerpage_product_type.xhtml?faces-redirect=true";
         
     }
     

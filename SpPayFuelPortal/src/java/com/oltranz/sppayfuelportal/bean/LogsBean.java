@@ -70,7 +70,7 @@ public class LogsBean {
         catch(Exception ex){
             System.out.println(ex.getMessage());
         }
-        return "innerpage_logs.xhtml";
+        return "innerpage_logs.xhtml?faces-redirect=true";
         
     }
     
@@ -112,7 +112,8 @@ public class LogsBean {
                     "\"userId\":"+usId+",\n" +
                     "\"actionId\":"+actionId+",\n" +
                     "\"source\":\""+source+"\",\n" +
-                    "\"ip\":\""+ip+"\"\n" +
+                    "\"ip\":\""+ip+"\",\n" +
+                    "\"date\":\""+date+"\"\n" +
                     "}";
             Response response=CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
             String jsonResponse = response.readEntity(String.class);

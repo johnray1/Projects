@@ -2,11 +2,8 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
         
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:h="http://java.sun.com/jsf/html">
+      
     <h:head>
         <meta charset="utf-8"></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -26,18 +23,18 @@
         <div class="container-fluid" style="margin:0px;padding:0px;border:0px solid red;">
             
             <div class="col-xs-12 col-sm-12 holderinbox_popup" style="margin:0px;padding:0px;min-height:200px;">
-                <h2 style="text-align:center;font-size:18px;">Forgot your password ?</h2>
+                <h2 style="text-align:center;font-size:18px;">RESET PASSWORD</h2>
                     
                     
                 <!-- FORM -->
                 <h:form class="container-fluid forminput">
-                    <div class="textinput" style="text-align:center;font-weight:bold;margin-bottom:40px;">In order to receive your access again please enter the email address provided during the registration.</div>
+                    <div class="textinput" style="text-align:center;font-weight:bold;margin-bottom:40px;">In order to receive your PASSWORD please enter the EMAIL address provided during the registration.</div>
                     <div class="textinput">
-                        <h:inputText   id="field1" value="#{email.email}" />
+                        <h:inputText   id="field1" value="#{EmailBean.email}" />
                         <h:outputLabel for="field1" value="Enter email"/>
                     </div>
                     <div class="submitinput">
-                        <h:commandButton  value="Submit" action="forgotpswd.xhtml" actionListener="#{email.sendEmail()}" />
+                        <h:commandButton  value="Submit" action="forgotpswd.xhtml" actionListener="#{EmailBean.email()}" />
                     </div>
                 </h:form>
                 <!-- End FORM -->
