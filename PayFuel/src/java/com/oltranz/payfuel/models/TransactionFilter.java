@@ -30,6 +30,9 @@ public class TransactionFilter {
     
     @JsonProperty("status")
     private String status;
+    
+    @JsonProperty("date")
+    private String date;
    
 
     /**
@@ -114,6 +117,20 @@ public class TransactionFilter {
      */
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    /**
+     * @return the date
+     */
+    public String getDate() {
+        return date;
+    }
+
+    /**
+     * @param date the date to set
+     */
+    public void setDate(String date) {
+        this.date = date;
     }
 
     

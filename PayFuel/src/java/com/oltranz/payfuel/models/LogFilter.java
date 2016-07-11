@@ -24,6 +24,9 @@ public class LogFilter {
     
     @JsonProperty("ip")
     private String ip;
+    
+    @JsonProperty("date")
+    private String date;
 
     /**
      * @return the userId
@@ -79,6 +82,20 @@ public class LogFilter {
      */
     public void setIp(String ip) {
         this.ip = ip;
+    }
+
+    /**
+     * @return the date
+     */
+    public String getDate() {
+        return date;
+    }
+
+    /**
+     * @param date the date to set
+     */
+    public void setDate(String date) {
+        this.date = date;
     }
     
     
