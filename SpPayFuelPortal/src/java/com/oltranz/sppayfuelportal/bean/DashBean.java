@@ -5,6 +5,7 @@
 */
 package com.oltranz.sppayfuelportal.bean;
 
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -15,7 +16,8 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean(name="DashBean")
 @SessionScoped
-public class DashBean {
+public class DashBean implements Serializable{
+    
     
     @ManagedProperty(value="#{TemplateBean}")
     private TemplateBean templateBean;
@@ -31,22 +33,27 @@ public class DashBean {
         templateBean.setTransactionsClassName("omenu");
         templateBean.setLogsClassName("omenu");
         
-        
         return "dashboard?faces-redirect=true";
     }
-    
+
     /**
      * @return the templateBean
      */
     public TemplateBean getTemplateBean() {
         return templateBean;
     }
-    
+
     /**
      * @param templateBean the templateBean to set
      */
     public void setTemplateBean(TemplateBean templateBean) {
         this.templateBean = templateBean;
     }
+    
+    
+    
+    
+
+    
     
 }

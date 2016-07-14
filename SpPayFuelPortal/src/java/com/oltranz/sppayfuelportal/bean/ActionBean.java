@@ -8,6 +8,7 @@ package com.oltranz.sppayfuelportal.bean;
 import com.oltranz.sppayfuelportal.library.CommonLibrary;
 import com.oltranz.sppayfuelportal.model.ActionList;
 import com.oltranz.sppayfuelportal.model.BranchList;
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.ws.rs.core.MediaType;
@@ -20,7 +21,7 @@ import org.codehaus.jackson.map.ObjectMapper;
  */
 @ManagedBean(name="ActionBean")
 @SessionScoped
-public class ActionBean {
+public class ActionBean implements Serializable{
     
     private ActionList actionList;
     

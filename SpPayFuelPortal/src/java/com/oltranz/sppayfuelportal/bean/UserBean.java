@@ -11,6 +11,7 @@ import com.oltranz.sppayfuelportal.model.RoleSingle;
 import com.oltranz.sppayfuelportal.model.RoleUserList;
 import com.oltranz.sppayfuelportal.model.UserList;
 import com.oltranz.sppayfuelportal.model.UserSingle;
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -24,7 +25,7 @@ import org.codehaus.jackson.map.ObjectMapper;
  */
 @ManagedBean(name="UserBean")
 @SessionScoped
-public class UserBean {
+public class UserBean implements Serializable{
     
     private String userId;
     private String fname;

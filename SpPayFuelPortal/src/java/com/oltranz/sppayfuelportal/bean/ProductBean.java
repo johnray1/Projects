@@ -11,6 +11,7 @@ import com.oltranz.sppayfuelportal.model.BranchProductList;
 import com.oltranz.sppayfuelportal.model.BranchProductSingle;
 import com.oltranz.sppayfuelportal.model.ProductList;
 import com.oltranz.sppayfuelportal.model.ProductSingle;
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -26,7 +27,7 @@ import org.codehaus.jackson.map.ObjectMapper;
  */
 @ManagedBean(name="ProductBean")
 @SessionScoped
-public class ProductBean {
+public class ProductBean implements Serializable{
     
     private String branchId;
     private String productId;

@@ -7,6 +7,7 @@ package com.oltranz.sppayfuelportal.bean;
 
 import com.oltranz.sppayfuelportal.library.CommonLibrary;
 import com.oltranz.sppayfuelportal.model.PaymentModeList;
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -20,7 +21,7 @@ import org.codehaus.jackson.map.ObjectMapper;
  */
 @ManagedBean(name="PaymentModeBean")
 @SessionScoped
-public class PaymentModeBean {
+public class PaymentModeBean implements Serializable{
     
     private PaymentModeList paymentModeList;
     
@@ -36,7 +37,7 @@ public class PaymentModeBean {
             Response response = CommonLibrary.sendRESTRequest(url, "empty data", MediaType.APPLICATION_JSON, "GET");
             //System.out.println(response.getHeaders());
             String jsonResponse = response.readEntity(String.class);
-            System.out.println(jsonResponse);
+            //System.out.println(jsonResponse);
             
             ObjectMapper mapper=new ObjectMapper();
             paymentModeList=(PaymentModeList)mapper.readValue(jsonResponse, PaymentModeList.class);

@@ -10,50 +10,49 @@
         <title>SP - PayFuel Adminstration</title>
         <link href="css/style.css" rel="stylesheet"/>
         <link href="css/bootstrap.css" rel="stylesheet"/>
-        
-        
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.js"></script>
-        <script type="text/javascript" src="js/charts.js"></script>  
-        
+        <script type="text/javascript" src="js/charts.js"></script>
     </h:head>
     <h:body>
         
         
-       
-       <ui:include src="templates/header.xhtml" /> 
-       
+        
+        <ui:include src="templates/header.xhtml" /> 
+        
         <!-- CONTENTS-->
         <div class="container-fluid">
             <div class="col-xs-12" style="display:inline-block;padding:10px;padding-top:25px;height:100%;">
-                
-                
-                
-                <div class="clear"></div>
-                
-                <div class="col-xs-12 col-sm-7 holderbox">
-                    <div class="col-xs-12 col-sm-12 holderinbox" style="margin:0px;padding:0px;min-height:300px;">
-                        <h2>Transactions</h2>
-                        <div id="containerlive" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-                    </div>
-                </div>
-                
-                
-                <div class="col-xs-12 col-sm-5 holderbox">
-                    <div class="col-xs-12 col-sm-12 holderinbox" style="margin:0px;padding:0px;min-height:300px;">
-                        <h2>Products</h2>
-                        <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-                    </div>
-                </div>
                 
                 <div class="clear"></div>
                 
                 <div class="col-xs-12 col-sm-7 holderbox">
                     <div class="col-xs-12 col-sm-12 holderinbox" style="margin:0px;padding:0px;min-height:300px;">
                         <h2>Branches</h2>
-                        <div id="containerbranches" style="min-width: 300px; height: 400px; margin: 0 auto"></div>
+                        <div id="containerbra" style="min-width: 300px; height: 400px; margin: 0 auto"></div>
                     </div>
                 </div>
                 
+                <div class="clear"></div>
+                
+                
+                
+                <div class="col-xs-12 col-sm-5 holderbox">
+                    <div class="col-xs-12 col-sm-12 holderinbox" style="margin:0px;padding:0px;min-height:300px;">
+                        <h2>Products</h2>
+                        <div id="containerpro" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+                    </div>
+                </div>
+                
+                <div class="clear"></div>
+                
+                <div class="col-xs-12 col-sm-7 holderbox">
+                    <div class="col-xs-12 col-sm-12 holderinbox" style="margin:0px;padding:0px;min-height:300px;">
+                        <h2>Top 10 Users</h2>
+                        <div id="containerus" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+                    </div>
+                </div>
+                
+                <div class="clear"></div>
                 
                 <div class="col-xs-12 col-sm-5 holderbox">
                     <div class="col-xs-12 col-sm-12 holderinbox" style="margin:0px;padding:0px;min-height:300px;">
@@ -62,52 +61,18 @@
                     </div>
                 </div>
                 
-                <div class="clear"></div>
-                
-                
-                <div class="col-xs-12 col-sm-7 holderbox">
-                    <div class="col-xs-12 col-sm-12 holderinbox" style="margin:0px;padding:0px;min-height:300px;">
-                        <h2>Top 10 Users</h2>
-                        <div id="container10" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
-                    </div>
-                </div>
-                
-                <!--
-                <div class="col-xs-12 col-sm-5 holderbox">
-                                <div class="col-xs-12 col-sm-12 holderinbox" style="margin:0px;padding:0px;min-height:300px;">
-                                <h2>Logs</h2>
-                
-                                </div>
-                </div>
-                -->
-                
-                
-                
-                
-                
-            </div><div class="clear"></div>
+            </div>
+            <div class="clear"/>
         </div>
         <!-- End CONTENTS- -->
         
         
         <ui:include src="templates/footer.xhtml" /> 
         
-        
-        
-        
-        
-        
-        
-        
-        
         <!-- Scripts -->
-        
         <script src="https://code.highcharts.com/highcharts.js"></script>
         <script src="https://code.highcharts.com/modules/exporting.js"></script>
-        
         <script src="js/bootstrap.min.js"></script>
-        
-        
         <!-- End Scripts -->
         
     </h:body>

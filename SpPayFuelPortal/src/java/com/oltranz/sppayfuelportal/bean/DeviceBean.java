@@ -9,6 +9,7 @@ package com.oltranz.sppayfuelportal.bean;
 import com.oltranz.sppayfuelportal.library.CommonLibrary;
 import com.oltranz.sppayfuelportal.model.DeviceList;
 import com.oltranz.sppayfuelportal.model.DeviceSingle;
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -23,7 +24,7 @@ import org.codehaus.jackson.map.ObjectMapper;
  */
 @ManagedBean(name="DeviceBean")
 @SessionScoped
-public class DeviceBean {
+public class DeviceBean implements Serializable{
     
     private String branchId;
     private String deviceId;

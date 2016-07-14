@@ -63,6 +63,7 @@ public class LoginBean implements Serializable{
                 session.setMaxInactiveInterval(30*60);
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.getExternalContext().redirect("dashboard.xhtml");
+                
                 return "dashboard?faces-redirect=true";
             }
             else {
