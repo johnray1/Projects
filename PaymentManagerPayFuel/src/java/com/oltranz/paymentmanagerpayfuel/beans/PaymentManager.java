@@ -86,8 +86,8 @@ public class PaymentManager {
             Voucher voucher=getVoucher(paymentRequest.getVoucherNumber());
             if(voucher==null){
                 
-                paymentResponse.setReqStatus(100);
-                paymentResponse.setResStatus(500);
+                paymentResponse.setReqStatus(500);
+                paymentResponse.setResStatus(100);
                 paymentResponse.setDesc("No Voucher Found");
                 
                 payment.setTransactionId(paymentRequest.getTransactionId());
@@ -102,8 +102,8 @@ public class PaymentManager {
             }
             if(voucher.getRemainAmount()<=paymentRequest.getAmount()){
                 
-                paymentResponse.setReqStatus(100);
-                paymentResponse.setResStatus(500);
+                paymentResponse.setReqStatus(500);
+                paymentResponse.setResStatus(100);
                 paymentResponse.setDesc("Insufficient Amount");
                 
                 payment.setTransactionId(paymentRequest.getTransactionId());
@@ -136,8 +136,8 @@ public class PaymentManager {
             return paymentResponse;
         }
         catch(ParseException pe){
-            paymentResponse.setReqStatus(100);
-            paymentResponse.setResStatus(500);
+            paymentResponse.setReqStatus(500);
+            paymentResponse.setResStatus(100);
             paymentResponse.setDesc(pe.getMessage());
             return paymentResponse;
         }
@@ -215,11 +215,11 @@ public class PaymentManager {
             payment.setRequestDatetime(dtt);
             payment.setResponseDatetime(dtt);
             
-            if(paymentResponse.getResStatus()==100){
+            if(paymentResponse.getReqStatus()==100){
                 payment.setDescr(paymentRequest.getAmount()+"frw Of MOMO Transaction Successful");
             }
             else{
-                if(paymentResponse.getResStatus()==301){
+                if(paymentResponse.getReqStatus()==301){
                     payment.setDescr(paymentRequest.getAmount()+"frw Of MOMO Transaction Pending");
                 }
                 else{
@@ -231,8 +231,8 @@ public class PaymentManager {
             return paymentResponse;
         }
         catch(ParseException pe){
-            paymentResponse.setReqStatus(100);
-            paymentResponse.setResStatus(500);
+            paymentResponse.setReqStatus(500);
+            paymentResponse.setResStatus(100);
             paymentResponse.setDesc(pe.getMessage());
             return paymentResponse;
         }
