@@ -43,13 +43,14 @@ public class Gender implements Serializable {
     @Column(name = "descr", length = 255)
     private String descr;
 
-    public Gender() {
-    }
-
     public Gender(Integer id, String name, String descr) {
         this.id = id;
         this.name = name;
         this.descr = descr;
+    }
+
+    
+    public Gender() {
     }
 
     public Gender(Integer id) {

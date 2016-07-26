@@ -6,6 +6,7 @@
 package com.oltranz.payfuel.entities;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;

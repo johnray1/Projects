@@ -221,6 +221,9 @@ public class PumpManager {
                 pumpNozzleProductModel.setPumpId(nozzle.getPumpId());
                 Pump pump=commonFunctionEjb.getPumpName(nozzle.getPumpId());
                 pumpNozzleProductModel.setPumpName(pump.getName());
+                pumpNozzleProductModel.setPreCalibrationDate(pump.getPreCalibrationDate());
+                pumpNozzleProductModel.setNextCalibrationDate(pump.getNextCalibrationDate());
+                pumpNozzleProductModel.setNozzleNo(commonFunctionEjb.getNozzleNo(pump.getPumpId()));
                 pumpNozzleProductModel.setNozzleId(nozzle.getNozzleId());
                 pumpNozzleProductModel.setNozzleName(nozzle.getNozzleName());
                 pumpNozzleProductModel.setIndex(nozzle.getNozzleIndex());
@@ -242,117 +245,6 @@ public class PumpManager {
             resultObject.setStatusCode(100);
             return resultObject;
         }
-    }
-    
-    public ResultObject getPumpNozzleProductList(int userId){
-        
-        ResultObject resultObject=new ResultObject();
-        resultObject.setObjectClass(PumpNozzleProductModel.class);
-        
-        //check if user is available
-        User user=em.find(User.class,userId);
-        if(user==null){
-            resultObject.setMessage("User is not Created To Access The Device");
-            resultObject.setObject(null);
-            resultObject.setStatusCode(500);
-            return resultObject;
-        }
-        
-        List<PumpNozzleProductModel> pumpNozzleProductModelList=new ArrayList<>();
-        Nozzle nozzle;
-        List<Nozzle> nozzleList=(List<Nozzle>)em.createQuery("SELECT n FROM Nozzle n").getResultList();
-        //if user id 1 bring all branch
-        if(user.getUserId()==1){
-            Iterator i=nozzleList.iterator();
-            while(i.hasNext()){
-                nozzle=(Nozzle) i.next();
-                
-                PumpNozzleProductModel pumpNozzleProductModel=new PumpNozzleProductModel();
-                
-                pumpNozzleProductModel.setPumpId(nozzle.getPumpId());
-                Pump pump=commonFunctionEjb.getPumpName(nozzle.getPumpId());
-                pumpNozzleProductModel.setPumpName(pump.getName());
-                pumpNozzleProductModel.setNozzleId(nozzle.getNozzleId());
-                pumpNozzleProductModel.setNozzleName(nozzle.getNozzleName());
-                pumpNozzleProductModel.setIndex(nozzle.getNozzleIndex());
-                pumpNozzleProductModel.setProductId(nozzle.getProductId());
-                Product product=commonFunctionEjb.getProductName(nozzle.getProductId());
-                pumpNozzleProductModel.setProductName(product.getName());
-                Tank tank=commonFunctionEjb.getTank(pump.getTankId());
-                pumpNozzleProductModel.setBranchId(tank.getBranchId());
-                Branch branch=commonFunctionEjb.getBranchName(tank.getBranchId());
-                pumpNozzleProductModel.setBranchName(branch.getName());
-                pumpNozzleProductModel.setStatus(pump.getStatus());
-                pumpNozzleProductModel.setTankId(pump.getTankId());
-                pumpNozzleProductModel.setTankName(tank.getName());
-                
-                pumpNozzleProductModelList.add(pumpNozzleProductModel);
-            }
-            resultObject.setObject(pumpNozzleProductModelList);
-            resultObject.setMessage(pumpNozzleProductModelList.size()+" "+"Data found");
-            resultObject.setStatusCode(100);
-            return resultObject;
-        }
-        
-        //get the user details,roles and its branch
-        UserDetailsModel userDetails= (UserDetailsModel) userManager.getUserDetails(user.getUserId()).getObject();
-        List<Role> roles=userDetails.getRoles();
-        Integer branchId=-1;
-        for(Role r: roles){
-            
-            if(r.getTypeId()==1){
-                
-                Iterator i=nozzleList.iterator();
-                while(i.hasNext()){
-                    nozzle=(Nozzle) i.next();
-                    
-                    PumpNozzleProductModel pumpNozzleProductModel=new PumpNozzleProductModel();
-                    
-                    pumpNozzleProductModel.setPumpId(nozzle.getPumpId());
-                    Pump pump=commonFunctionEjb.getPumpName(nozzle.getPumpId());
-                    pumpNozzleProductModel.setPumpName(pump.getName());
-                    pumpNozzleProductModel.setNozzleId(nozzle.getNozzleId());
-                    pumpNozzleProductModel.setNozzleName(nozzle.getNozzleName());
-                    pumpNozzleProductModel.setIndex(nozzle.getNozzleIndex());
-                    pumpNozzleProductModel.setProductId(nozzle.getProductId());
-                    Product product=commonFunctionEjb.getProductName(nozzle.getProductId());
-                    pumpNozzleProductModel.setProductName(product.getName());
-                    Tank tank=commonFunctionEjb.getTank(pump.getTankId());
-                    pumpNozzleProductModel.setBranchId(tank.getBranchId());
-                    Branch branch=commonFunctionEjb.getBranchName(tank.getBranchId());
-                    pumpNozzleProductModel.setBranchName(branch.getName());
-                    pumpNozzleProductModel.setStatus(pump.getStatus());
-                    pumpNozzleProductModel.setTankId(pump.getTankId());
-                    pumpNozzleProductModel.setTankName(tank.getName());
-                    
-                    pumpNozzleProductModelList.add(pumpNozzleProductModel);
-                }
-                resultObject.setObject(pumpNozzleProductModelList);
-                resultObject.setMessage(pumpNozzleProductModelList.size()+" "+"Data found");
-                resultObject.setStatusCode(100);
-                return resultObject;
-            }
-            
-            if(r.getTypeId()==2){
-                
-                List<RoleForBranch> list = (List<RoleForBranch>)em.createQuery("SELECT r FROM RoleForBranch r WHERE r.roleForBranchPK.roleId = :roleId").setParameter("roleId", r.getRoleId()).getResultList();
-                if(list.size()>0)
-                    
-                    branchId=list.get(0).getRoleForBranchPK().getBranchId();
-            }
-        }
-        
-        if(branchId==-1){
-            resultObject.setObject(null);
-            resultObject.setMessage("You are not a staff of any branch to access the Pumps");
-            resultObject.setObjectClass(Branch.class);
-            resultObject.setStatusCode(500);
-            return resultObject;
-        }
-        
-        
-        
-        return resultObject;
     }
     
     public ResultObject getPumpNozzleProduct(int nozzleId){
@@ -375,6 +267,9 @@ public class PumpManager {
             pumpNozzleProductModel.setPumpId(nozzle.getPumpId());
             Pump pump=commonFunctionEjb.getPumpName(nozzle.getPumpId());
             pumpNozzleProductModel.setPumpName(pump.getName());
+            pumpNozzleProductModel.setPreCalibrationDate(pump.getPreCalibrationDate());
+            pumpNozzleProductModel.setNextCalibrationDate(pump.getNextCalibrationDate());
+            pumpNozzleProductModel.setNozzleNo(commonFunctionEjb.getNozzleNo(pump.getPumpId()));
             pumpNozzleProductModel.setNozzleId(nozzle.getNozzleId());
             pumpNozzleProductModel.setNozzleName(nozzle.getNozzleName());
             pumpNozzleProductModel.setIndex(nozzle.getNozzleIndex());
@@ -397,159 +292,7 @@ public class PumpManager {
     }
     
     
-    
-//-----------------------------------------Android UserData To Get Pump Details-----------------------------------------------------------------
-    
-    public ResultObject getTankPumpNozzleDetailsByUserId(Integer userId){
-        
-        ResultObject resultObject=new ResultObject();
-        resultObject.setObjectClass(PumpDetailsModel.class);
-        try{
-            User user=em.find(User.class,userId);
-            if(user==null){
-                resultObject.setMessage("User is not Created To Access The Pumps");
-                resultObject.setObject(null);
-                resultObject.setStatusCode(500);
-                return resultObject;
-            }
-            
-            
-            //get the user details
-            UserDetailsModel userDetails= (UserDetailsModel) userManager.getUserDetails(user.getUserId()).getObject();
-            List<Role> roles=userDetails.getRoles();
-            Integer branchId=-1;
-            for(Role r: roles){
-                if(r.getTypeId()==2){
-                    
-                    List<RoleForBranch> list = (List<RoleForBranch>)em.createQuery("SELECT r FROM RoleForBranch r WHERE r.roleForBranchPK.roleId = :roleId").setParameter("roleId", r.getRoleId()).getResultList();
-                    if(list.size()>0)
-                        
-                        branchId=list.get(0).getRoleForBranchPK().getBranchId();
-                }
-            }
-            if(branchId==-1){
-                resultObject.setObject(null);
-                resultObject.setMessage("You are not a staff of any branch");
-                resultObject.setObjectClass(DeviceRegistrationResponse.class);
-                resultObject.setStatusCode(500);
-                return resultObject;
-            }
-            
-            
-            //check pumps according to branch id
-            List<TankDetailsModel> tankDetailsList=new ArrayList<>();
-            List<Tank> tankList=em.createQuery("SELECT t FROM Tank t WHERE t.branchId = :branchId").setParameter("branchId", branchId).getResultList();
-            for(Tank t:tankList){
-                
-                List<PumpDetailsModel> pumpDetailsList=pumpListOfTank(t.getTankId());
-                TankDetailsModel tankDetailsModel=new TankDetailsModel();
-                tankDetailsModel.setTankName(t.getName());
-                tankDetailsModel.setBranchName(commonFunctionEjb.getBranchName(t.getBranchId()).getName());
-                tankDetailsModel.setPumpList(pumpDetailsList);
-                
-                tankDetailsList.add(tankDetailsModel);
-            }
-            
-            resultObject.setObject(tankDetailsList);
-            resultObject.setMessage(tankDetailsList.size()+" "+"Tanks found");
-            resultObject.setStatusCode(100);
-            return resultObject;
-            
-        }
-        catch(Exception e){
-            String message=e.getMessage();
-            resultObject.setObject(null);
-            resultObject.setMessage(message);
-            resultObject.setStatusCode(500);
-            return resultObject;
-        }
-    }
-    
-    public List<PumpDetailsModel> pumpListOfTank(Integer tankId){
-        
-        List<PumpDetailsModel> pumpDetailsList=new ArrayList<>();
-        Pump p;
-        List<Pump> pumpList=em.createQuery("SELECT p FROM Pump p WHERE p.tankId = :tankId").setParameter("tankId", tankId).getResultList();
-        
-        if(pumpList.isEmpty()){
-            pumpDetailsList.add(null);
-        }
-        
-        Iterator i=pumpList.iterator();
-        while(i.hasNext()){
-            p=(Pump) i.next();
-            PumpDetailsModel pumpDetailsModel=new PumpDetailsModel();
-            pumpDetailsModel.setPumpId(p.getPumpId());
-            pumpDetailsModel.setPumpName(p.getName());
-            Tank tank=commonFunctionEjb.getTank(p.getTankId());
-            pumpDetailsModel.setNozzleList(nozzleListOfPump(p.getPumpId(),tank.getBranchId()));
-            
-            pumpDetailsList.add(pumpDetailsModel);
-        }
-        return pumpDetailsList;
-    }
-    
-    public List<NozzleDetailsModel> nozzleListOfPump(Integer pumpId,Integer branchId){
-        
-        List<NozzleDetailsModel> nozzleDetailsList=new ArrayList<>();
-        Nozzle n;
-        List<Nozzle> nozzleList=em.createQuery("SELECT n FROM Nozzle n WHERE n.pumpId = :pumpId").setParameter("pumpId", pumpId).getResultList();
-        if(nozzleList.isEmpty()){
-            nozzleDetailsList.add(null);
-        }
-        else{
-            Iterator i=nozzleList.iterator();
-            while(i.hasNext()){
-                
-                n=(Nozzle) i.next();
-                
-                UserPumpNozzle userPumpNozzle=checkNozzleId(n.getNozzleId());
-                //int nozzleId=userPumpNozzle.getUserPumpNozzlePK().getNozzleId();
-                
-                NozzleDetailsModel nozzleDetails=new NozzleDetailsModel();
-                nozzleDetails.setNozzleId(n.getNozzleId());
-                nozzleDetails.setNozzleName(n.getNozzleName());
-                nozzleDetails.setNozzleIndex(n.getNozzleIndex());
-                nozzleDetails.setProductId(n.getProductId());
-                Product product=commonFunctionEjb.getProductName(n.getProductId());
-                nozzleDetails.setProductName(product.getName());
-                nozzleDetails.setUnitPrice(commonFunctionEjb.getProductPrice(branchId,n.getProductId()));
-                if(userPumpNozzle==null){
-                    nozzleDetails.setStatus(n.getNozzleStatus());
-                    nozzleDetails.setUserName(null);
-                }
-                else{
-                    nozzleDetails.setStatus(8);
-                    User user=commonFunctionEjb.getUserName(userPumpNozzle.getUserPumpNozzlePK().getUserId());
-                    nozzleDetails.setUserName(user.getFname());
-                }
-                nozzleDetailsList.add(nozzleDetails);
-            }
-            
-        }
-        return nozzleDetailsList;
-        
-    }
-    
-    public UserPumpNozzle checkNozzleId(int nozzleId){
-        
-        UserPumpNozzle userPumpNozzle=new UserPumpNozzle();
-        List<UserPumpNozzle> checkNozzle=(List<UserPumpNozzle>)em.createQuery("SELECT u FROM UserPumpNozzle u WHERE u.userPumpNozzlePK.nozzleId = :nozzleId").setParameter("nozzleId", nozzleId).getResultList();
-        if(checkNozzle.isEmpty()){
-            return null;
-        }
-        else{
-            Iterator i=checkNozzle.iterator();
-            while(i.hasNext()){
-                userPumpNozzle=(UserPumpNozzle) i.next();
-            }
-            return userPumpNozzle;
-        }
-        
-    }
-    
-    
-//----------------------------------------Android UserData To AssignPump---------------------------------------------------------------------------------
+//----------------------------------------Android UserData To AssignPump-------------------------------------------------------------------------------------------
     
     public ResultObject assignUserToPumpNozzle(AssignedPumpModelList assignedPumpModelListIp){
         
@@ -621,4 +364,206 @@ public class PumpManager {
     }
     
     
+    
+//-----------------------------------------Android UserData To Get Pump Details------------------------------------------------------------------------------------
+    
+    public ResultObject getTankPumpNozzleDetailsByUserId(Integer userId){
+        
+        ResultObject resultObject=new ResultObject();
+        resultObject.setObjectClass(PumpDetailsModel.class);
+        try{
+            User user=em.find(User.class,userId);
+            if(user==null){
+                resultObject.setMessage("User is not Created To Access The Pumps");
+                resultObject.setObject(null);
+                resultObject.setStatusCode(500);
+                return resultObject;
+            }
+            
+            
+            //get the user details
+            UserDetailsModel userDetails= (UserDetailsModel) userManager.getUserDetails(user.getUserId()).getObject();
+            List<Role> roles=userDetails.getRoles();
+            Integer branchId=-1;
+            for(Role r: roles){
+                if(r.getTypeId()==2){
+                    
+                    List<RoleForBranch> list = (List<RoleForBranch>)em.createQuery("SELECT r FROM RoleForBranch r WHERE r.roleForBranchPK.roleId = :roleId").setParameter("roleId", r.getRoleId()).getResultList();
+                    if(list.size()>0)
+                        
+                        branchId=list.get(0).getRoleForBranchPK().getBranchId();
+                }
+            }
+            if(branchId==-1){
+                resultObject.setObject(null);
+                resultObject.setMessage("You are not a staff of any branch");
+                resultObject.setObjectClass(DeviceRegistrationResponse.class);
+                resultObject.setStatusCode(500);
+                return resultObject;
+            }
+            
+            
+            //check pumps according to branch id
+            List<TankDetailsModel> tankDetailsList=new ArrayList<>();
+            List<Tank> tankList=em.createQuery("SELECT t FROM Tank t WHERE t.branchId = :branchId").setParameter("branchId", branchId).getResultList();
+            for(Tank t:tankList){
+                
+                //call pumplistoftank function
+                List<PumpDetailsModel> pumpDetailsList=pumpListOfTank(t.getTankId());
+                TankDetailsModel tankDetailsModel=new TankDetailsModel();
+                tankDetailsModel.setTankName(t.getName());
+                tankDetailsModel.setBranchName(commonFunctionEjb.getBranchName(t.getBranchId()).getName());
+                tankDetailsModel.setPumpList(pumpDetailsList);
+                
+                tankDetailsList.add(tankDetailsModel);
+            }
+            
+            resultObject.setObject(tankDetailsList);
+            resultObject.setMessage(tankDetailsList.size()+" "+"Tanks found");
+            resultObject.setStatusCode(100);
+            return resultObject;
+            
+        }
+        catch(Exception e){
+            String message=e.getMessage();
+            resultObject.setObject(null);
+            resultObject.setMessage(message);
+            resultObject.setStatusCode(500);
+            return resultObject;
+        }
+    }
+    
+    public List<PumpDetailsModel> pumpListOfTank(Integer tankId){
+        
+        List<PumpDetailsModel> pumpDetailsList=new ArrayList<>();
+        Pump p;
+        List<Pump> pumpList=em.createQuery("SELECT p FROM Pump p WHERE p.tankId = :tankId").setParameter("tankId", tankId).getResultList();
+        
+        if(pumpList.isEmpty()){
+            pumpDetailsList.add(null);
+        }
+        
+        Iterator i=pumpList.iterator();
+        while(i.hasNext()){
+            p=(Pump) i.next();
+            PumpDetailsModel pumpDetailsModel=new PumpDetailsModel();
+            pumpDetailsModel.setPumpId(p.getPumpId());
+            pumpDetailsModel.setPumpName(p.getName());
+            Tank tank=commonFunctionEjb.getTank(p.getTankId());
+            //call nozzleListOfPump function
+            pumpDetailsModel.setNozzleList(nozzleListOfPump(p.getPumpId(),tank.getBranchId()));
+            
+            pumpDetailsList.add(pumpDetailsModel);
+        }
+        return pumpDetailsList;
+    }
+    
+    public List<NozzleDetailsModel> nozzleListOfPump(Integer pumpId,Integer branchId){
+        
+        List<NozzleDetailsModel> nozzleDetailsList=new ArrayList<>();
+        Nozzle n;
+        List<Nozzle> nozzleList=em.createQuery("SELECT n FROM Nozzle n WHERE n.pumpId = :pumpId").setParameter("pumpId", pumpId).getResultList();
+        if(nozzleList.isEmpty()){
+            nozzleDetailsList.add(null);
+        }
+        else{
+            Iterator i=nozzleList.iterator();
+            while(i.hasNext()){
+                
+                n=(Nozzle) i.next();
+                //call checkNozzleId function
+                UserPumpNozzle userPumpNozzle=checkNozzleId(n.getNozzleId());
+                //int nozzleId=userPumpNozzle.getUserPumpNozzlePK().getNozzleId();
+                
+                NozzleDetailsModel nozzleDetails=new NozzleDetailsModel();
+                nozzleDetails.setNozzleId(n.getNozzleId());
+                nozzleDetails.setNozzleName(n.getNozzleName());
+                nozzleDetails.setNozzleIndex(n.getNozzleIndex());
+                nozzleDetails.setProductId(n.getProductId());
+                Product product=commonFunctionEjb.getProductName(n.getProductId());
+                nozzleDetails.setProductName(product.getName());
+                nozzleDetails.setUnitPrice(commonFunctionEjb.getProductPrice(branchId,n.getProductId()));
+                if(userPumpNozzle==null){
+                    nozzleDetails.setStatus(n.getNozzleStatus());
+                    nozzleDetails.setUserName(null);
+                }
+                else{
+                    nozzleDetails.setStatus(8);
+                    User user=commonFunctionEjb.getUserName(userPumpNozzle.getUserPumpNozzlePK().getUserId());
+                    nozzleDetails.setUserName(user.getFname());
+                }
+                nozzleDetailsList.add(nozzleDetails);
+            }
+            
+        }
+        return nozzleDetailsList;
+        
+    }
+    
+    public UserPumpNozzle checkNozzleId(int nozzleId){
+        
+        UserPumpNozzle userPumpNozzle=new UserPumpNozzle();
+        List<UserPumpNozzle> checkNozzle=(List<UserPumpNozzle>)em.createQuery("SELECT u FROM UserPumpNozzle u WHERE u.userPumpNozzlePK.nozzleId = :nozzleId").setParameter("nozzleId", nozzleId).getResultList();
+        if(checkNozzle.isEmpty()){
+            return null;
+        }
+        else{
+            Iterator i=checkNozzle.iterator();
+            while(i.hasNext()){
+                userPumpNozzle=(UserPumpNozzle) i.next();
+            }
+            return userPumpNozzle;
+        }
+        
+    }
+    
+    
+//---------------------------------------------------------------------demo test mode--------------------------------------------------------------------------------------------
+    
+    public ResultObject getPumpNozzleProductList(int userId){
+        
+        ResultObject resultObject=new ResultObject();
+        resultObject.setObjectClass(PumpNozzleProductModel.class);
+        
+        List<PumpNozzleProductModel> pumpNozzleProductModelList=new ArrayList<>();
+        Nozzle nozzle;
+        List<Nozzle> nozzleList=(List<Nozzle>)em.createQuery("SELECT n FROM Nozzle n").getResultList();
+        if(nozzleList.isEmpty()){
+            resultObject.setObject(null);
+            resultObject.setMessage("No Pumps Found");
+            resultObject.setStatusCode(500);
+            return resultObject;
+        }
+        else{
+            Iterator i=nozzleList.iterator();
+            while(i.hasNext()){
+                nozzle=(Nozzle) i.next();
+                
+                PumpNozzleProductModel pumpNozzleProductModel=new PumpNozzleProductModel();
+                
+                pumpNozzleProductModel.setPumpId(nozzle.getPumpId());
+                Pump pump=commonFunctionEjb.getPumpName(nozzle.getPumpId());
+                pumpNozzleProductModel.setPumpName(pump.getName());
+                pumpNozzleProductModel.setNozzleId(nozzle.getNozzleId());
+                pumpNozzleProductModel.setNozzleName(nozzle.getNozzleName());
+                pumpNozzleProductModel.setIndex(nozzle.getNozzleIndex());
+                pumpNozzleProductModel.setProductId(nozzle.getProductId());
+                Product product=commonFunctionEjb.getProductName(nozzle.getProductId());
+                pumpNozzleProductModel.setProductName(product.getName());
+                Tank tank=commonFunctionEjb.getTank(pump.getTankId());
+                pumpNozzleProductModel.setBranchId(tank.getBranchId());
+                Branch branch=commonFunctionEjb.getBranchName(tank.getBranchId());
+                pumpNozzleProductModel.setBranchName(branch.getName());
+                pumpNozzleProductModel.setStatus(pump.getStatus());
+                pumpNozzleProductModel.setTankId(pump.getTankId());
+                pumpNozzleProductModel.setTankName(tank.getName());
+                
+                pumpNozzleProductModelList.add(pumpNozzleProductModel);
+            }
+            resultObject.setObject(pumpNozzleProductModelList);
+            resultObject.setMessage(pumpNozzleProductModelList.size()+" "+"Data found");
+            resultObject.setStatusCode(100);
+            return resultObject;
+        }
+    }
 }

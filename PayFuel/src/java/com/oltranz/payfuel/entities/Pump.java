@@ -6,6 +6,7 @@
 package com.oltranz.payfuel.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -30,6 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Pump.findByPumpId", query = "SELECT p FROM Pump p WHERE p.pumpId = :pumpId"),
     @NamedQuery(name = "Pump.findByName", query = "SELECT p FROM Pump p WHERE p.name = :name"),
     @NamedQuery(name = "Pump.findByStatus", query = "SELECT p FROM Pump p WHERE p.status = :status"),
+    @NamedQuery(name = "Pump.findByPreCalibrationDate", query = "SELECT p FROM Pump p WHERE p.preCalibrationDate = :preCalibrationDate"),
+    @NamedQuery(name = "Pump.findByNextCalibrationDate", query = "SELECT p FROM Pump p WHERE p.nextCalibrationDate = :nextCalibrationDate"),
     @NamedQuery(name = "Pump.findByTankId", query = "SELECT p FROM Pump p WHERE p.tankId = :tankId")})
 public class Pump implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -43,6 +48,12 @@ public class Pump implements Serializable {
     private String name;
     @Column(name = "status")
     private Integer status=7;
+    @Column(name = "pre_calibration_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date preCalibrationDate;
+    @Column(name = "next_calibration_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date nextCalibrationDate;
     @Column(name = "tank_id")
     private Integer tankId;
 
@@ -75,6 +86,22 @@ public class Pump implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Date getPreCalibrationDate() {
+        return preCalibrationDate;
+    }
+
+    public void setPreCalibrationDate(Date preCalibrationDate) {
+        this.preCalibrationDate = preCalibrationDate;
+    }
+
+    public Date getNextCalibrationDate() {
+        return nextCalibrationDate;
+    }
+
+    public void setNextCalibrationDate(Date nextCalibrationDate) {
+        this.nextCalibrationDate = nextCalibrationDate;
     }
 
     public Integer getTankId() {

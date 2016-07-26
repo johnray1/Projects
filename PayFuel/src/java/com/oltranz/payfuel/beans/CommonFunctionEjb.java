@@ -74,6 +74,12 @@ public class CommonFunctionEjb {
         return tank;
     }
     
+    public int getNozzleNo(int pumpId){
+        
+        List<Nozzle> nozzleList=(List<Nozzle>) em.createQuery("SELECT n FROM Nozzle n WHERE n.pumpId = :pumpId").setParameter("pumpId", pumpId).getResultList();
+        return nozzleList.size();
+    }
+    
     public Device getDeviceName(int deviceId){
         Device device=em.find(Device.class, deviceId);
         if(device==null){

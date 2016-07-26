@@ -5,6 +5,7 @@
  */
 package com.oltranz.payfuel.models;
 
+import java.util.Date;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
@@ -32,8 +33,14 @@ public class PumpNozzleProductModel {
     @JsonProperty("pumpName")
     private String pumpName;
     
+    @JsonProperty("preCalibrationDate")
+    private Date preCalibrationDate;
+    
+    @JsonProperty("nextCalibrationDate")
+    private Date nextCalibrationDate;
+    
     @JsonProperty("nozzleNo")
-    private String nozzleNo;
+    private Integer nozzleNo;
 
     @JsonProperty("status")
     private Integer status;
@@ -224,15 +231,43 @@ public class PumpNozzleProductModel {
     /**
      * @return the nozzleNo
      */
-    public String getNozzleNo() {
+    public Integer getNozzleNo() {
         return nozzleNo;
     }
 
     /**
      * @param nozzleNo the nozzleNo to set
      */
-    public void setNozzleNo(String nozzleNo) {
+    public void setNozzleNo(Integer nozzleNo) {
         this.nozzleNo = nozzleNo;
+    }
+
+    /**
+     * @return the preCalibrationDate
+     */
+    public Date getPreCalibrationDate() {
+        return preCalibrationDate;
+    }
+
+    /**
+     * @param preCalibrationDate the preCalibrationDate to set
+     */
+    public void setPreCalibrationDate(Date preCalibrationDate) {
+        this.preCalibrationDate = preCalibrationDate;
+    }
+
+    /**
+     * @return the nextCalibrationDate
+     */
+    public Date getNextCalibrationDate() {
+        return nextCalibrationDate;
+    }
+
+    /**
+     * @param nextCalibrationDate the nextCalibrationDate to set
+     */
+    public void setNextCalibrationDate(Date nextCalibrationDate) {
+        this.nextCalibrationDate = nextCalibrationDate;
     }
 
     

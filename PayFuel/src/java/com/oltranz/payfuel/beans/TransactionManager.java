@@ -5,6 +5,7 @@
 */
 package com.oltranz.payfuel.beans;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oltranz.payfuel.entities.Branch;
 import com.oltranz.payfuel.entities.Customer;
 import com.oltranz.payfuel.entities.Device;
@@ -12,9 +13,12 @@ import com.oltranz.payfuel.entities.PaymentMode;
 import com.oltranz.payfuel.entities.Product;
 import com.oltranz.payfuel.entities.Role;
 import com.oltranz.payfuel.entities.RoleForBranch;
+import com.oltranz.payfuel.entities.Tank;
 import com.oltranz.payfuel.entities.Transaction;
 import com.oltranz.payfuel.entities.User;
+import com.oltranz.payfuel.models.Bar;
 import com.oltranz.payfuel.models.DayTransaction;
+import com.oltranz.payfuel.models.Pie;
 import com.oltranz.payfuel.models.ResultObject;
 import com.oltranz.payfuel.models.TransactionDetailsModel;
 import com.oltranz.payfuel.models.TransactionFilter;
@@ -31,7 +35,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -363,7 +366,7 @@ public class TransactionManager {
                 sqlQuery+=" t.branchId = :branchId";
             }
             
-            if((transactionFilter.getBranchId()!=0) && ((transactionFilter.getUserId()!=0)||(transactionFilter.getDeviceId()!=0)||(transactionFilter.getProductId()!=0)||(transactionFilter.getPaymentModeId()!=0)||(!transactionFilter.getStatus().equalsIgnoreCase(nul))) ){
+            if( (transactionFilter.getBranchId()!=0) && ( (transactionFilter.getUserId()!=0)||(transactionFilter.getDeviceId()!=0)||(transactionFilter.getProductId()!=0)||(transactionFilter.getPaymentModeId()!=0)||(!transactionFilter.getStatus().equalsIgnoreCase(nul))||(!transactionFilter.getDate().equalsIgnoreCase(nul)) ) ){
                 sqlQuery+=" and";
             }
             
@@ -373,7 +376,7 @@ public class TransactionManager {
                 sqlQuery+=" t.userId = :userId";
             }
             
-            if((transactionFilter.getUserId()!=0) && ((transactionFilter.getDeviceId()!=0)||(transactionFilter.getProductId()!=0)||(transactionFilter.getPaymentModeId()!=0)||(!transactionFilter.getStatus().equalsIgnoreCase(nul))) ){
+            if( (transactionFilter.getUserId()!=0) && ( (transactionFilter.getDeviceId()!=0)||(transactionFilter.getProductId()!=0)||(transactionFilter.getPaymentModeId()!=0)||(!transactionFilter.getStatus().equalsIgnoreCase(nul))||(!transactionFilter.getDate().equalsIgnoreCase(nul)) ) ){
                 sqlQuery+=" and";
             }
             
@@ -384,7 +387,7 @@ public class TransactionManager {
                 sqlQuery+=" t.deviceId = :deviceId";
             }
             
-            if((transactionFilter.getDeviceId()!=0) && ((transactionFilter.getProductId()!=0)||(transactionFilter.getPaymentModeId()!=0)||(!transactionFilter.getStatus().equalsIgnoreCase(nul))) ){
+            if( (transactionFilter.getDeviceId()!=0) && ( (transactionFilter.getProductId()!=0)||(transactionFilter.getPaymentModeId()!=0)||(!transactionFilter.getStatus().equalsIgnoreCase(nul))||(!transactionFilter.getDate().equalsIgnoreCase(nul)) ) ){
                 sqlQuery+=" and";
             }
             
@@ -395,7 +398,7 @@ public class TransactionManager {
                 sqlQuery+=" t.productId = :productId";
             }
             
-            if((transactionFilter.getProductId()!=0) && ((transactionFilter.getPaymentModeId()!=0)||(!transactionFilter.getStatus().equalsIgnoreCase(nul))) ){
+            if( (transactionFilter.getProductId()!=0) && ( (transactionFilter.getPaymentModeId()!=0)||(!transactionFilter.getStatus().equalsIgnoreCase(nul))||(!transactionFilter.getDate().equalsIgnoreCase(nul)) ) ){
                 sqlQuery+=" and";
             }
             
@@ -406,7 +409,7 @@ public class TransactionManager {
                 sqlQuery+=" t.paymentModeId = :paymentModeId";
             }
             
-            if((transactionFilter.getPaymentModeId()!=0) && ((!transactionFilter.getStatus().equalsIgnoreCase(nul))) ){
+            if( (transactionFilter.getPaymentModeId()!=0) && ( (!transactionFilter.getStatus().equalsIgnoreCase(nul))||(!transactionFilter.getDate().equalsIgnoreCase(nul)) ) ){
                 sqlQuery+=" and";
             }
             
@@ -417,7 +420,7 @@ public class TransactionManager {
                 sqlQuery+=" t.paymentStatus = :paymentStatus";
             }
             
-            if((!transactionFilter.getStatus().equalsIgnoreCase(nul)) && ((!transactionFilter.getDate().equalsIgnoreCase(nul))) ){
+            if( (!transactionFilter.getStatus().equalsIgnoreCase(nul)) && ( (!transactionFilter.getDate().equalsIgnoreCase(nul)) ) ){
                 sqlQuery+=" and";
             }
             
@@ -504,8 +507,208 @@ public class TransactionManager {
         
     }
     
+
+
+    
+    public String pieProductSale(){
+        
+        try{
+            List<Product> productList=(List<Product>)em.createQuery("SELECT p FROM Product p").getResultList();
+            List<Pie> pieList=new ArrayList<>();
+            
+            for(Product product:productList){
+                
+                double amount=productPerSale(product.getProductId());
+                Pie pie=new Pie();
+                pie.setName(product.getName());
+                pie.setY(amount);
+                pieList.add(pie);
+            }
+            
+            ObjectMapper mapper = new ObjectMapper();
+            String jsonString = mapper.writeValueAsString(pieList);
+            
+            return jsonString;
+        }
+        catch(Exception e){
+            return null;
+        }
+    }
+    
+    public double productPerSale(int productId){
+        
+        List<Transaction> transactionList=(List<Transaction>)em.createQuery("SELECT t FROM Transaction t WHERE t.productId = :productId").setParameter("productId",productId).getResultList();
+        double amount=0;
+        for(Transaction transaction : transactionList){
+            amount+=transaction.getAmount();
+        }
+        return amount;
+    }
     
     
+    
+    public String topBranchSale(){
+        
+        try{
+            List<Branch> branchList=(List<Branch>)em.createQuery("SELECT b FROM Branch b").getResultList();
+            List<Pie> pieList=new ArrayList<>();
+            
+            for(Branch branch:branchList){
+                
+                double amount=branchPerSale(branch.getBranchId());
+                Pie pie=new Pie();
+                pie.setName(branch.getName());
+                pie.setY(amount);
+                pieList.add(pie);
+            }
+            
+            ObjectMapper mapper = new ObjectMapper();
+            String jsonString = mapper.writeValueAsString(pieList);
+            
+            return jsonString;
+        }
+        catch(Exception e){
+            return null;
+        }
+    }
+    
+    public double branchPerSale(int branchId){
+        
+        List<Transaction> transactionList=(List<Transaction>)em.createQuery("SELECT t FROM Transaction t WHERE t.branchId = :branchId").setParameter("branchId",branchId).getResultList();
+        double amount=0;
+        for(Transaction transaction : transactionList){
+            amount+=transaction.getAmount();
+        }
+        return amount;
+    }
+    
+    public String topUserSale(){
+        
+        try{
+            List<User> userList=(List<User>)em.createQuery("SELECT u FROM User u").getResultList();
+            List<Pie> pieList=new ArrayList<>();
+            
+            for(User user:userList){
+                
+                double amount=userPerSale(user.getUserId());
+                Pie pie=new Pie();
+                pie.setName(user.getFname());
+                pie.setY(amount);
+                pieList.add(pie);
+            }
+            
+            ObjectMapper mapper = new ObjectMapper();
+            String jsonString = mapper.writeValueAsString(pieList);
+            
+            return jsonString;
+        }
+        catch(Exception e){
+            return null;
+        }
+    }
+    
+    public double userPerSale(int userId){
+        
+        List<Transaction> transactionList=(List<Transaction>)em.createQuery("SELECT t FROM Transaction t WHERE t.userId = :userId").setParameter("userId",userId).getResultList();
+        double amount=0;
+        for(Transaction transaction : transactionList){
+            amount+=transaction.getAmount();
+        }
+        return amount;
+    }
+    
+    
+    public String tankChart(){
+        try{
+            
+            List<Tank> tankList=(List<Tank>)em.createQuery("SELECT t FROM Tank t").getResultList();
+            List<Pie> pieList=new ArrayList<>();
+            
+            for(Tank tank : tankList){
+                Pie pie=new Pie();
+                pie.setName(tank.getName());
+                pie.setY(tank.getCurrentCapacity());
+                pieList.add(pie);
+            }
+            ObjectMapper mapper = new ObjectMapper();
+            String jsonString = mapper.writeValueAsString(pieList);
+            
+            return jsonString;
+        }
+        catch(Exception e){
+            return null;
+        }
+    }
+    
+    public String paymentModeChart(){
+        
+        try{
+            List<PaymentMode> paymentModeList=(List<PaymentMode>)em.createQuery("SELECT p FROM PaymentMode p").getResultList();
+            List<Bar> barList=new ArrayList<>();
+            
+            for(PaymentMode pm:paymentModeList){
+                
+                int length=paymentModePerSale(pm.getPaymentModeId());
+                Bar bar=new Bar();
+                bar.setName(pm.getName());
+                bar.setY(length);
+                
+                if(pm.getPaymentModeId()==1)
+                {
+                    bar.setColor("#ffc508");
+                }
+                if(pm.getPaymentModeId()==2)
+                {
+                    bar.setColor("#ffc508");
+                }
+                if(pm.getPaymentModeId()==3)
+                {
+                    bar.setColor("#000000");
+                }
+                if(pm.getPaymentModeId()==4)
+                {
+                    bar.setColor("#000000");
+                }
+                if(pm.getPaymentModeId()==5)
+                {
+                    bar.setColor("#000000");
+                }
+                if(pm.getPaymentModeId()==6)
+                {
+                    bar.setColor("#000000");
+                }
+                if(pm.getPaymentModeId()==7)
+                {
+                    bar.setColor("#000000");
+                }
+                if(pm.getPaymentModeId()==8)
+                {
+                    bar.setColor("#000000");
+                }
+                if(pm.getPaymentModeId()==9)
+                {
+                    bar.setColor("#000000");
+                }
+                barList.add(bar);
+            }
+            
+            ObjectMapper mapper = new ObjectMapper();
+            String jsonString = mapper.writeValueAsString(barList);
+            
+            return jsonString;
+        }
+        catch(Exception e){
+            return null;
+        }
+        
+    }
+    
+    public int paymentModePerSale(int paymentModeId){
+        
+        List<Transaction> transactionList=(List<Transaction>)em.createQuery("SELECT t FROM Transaction t WHERE t.paymentModeId = :paymentModeId").setParameter("paymentModeId",paymentModeId).getResultList();
+        
+        return transactionList.size();
+    }
     
     
     

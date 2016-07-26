@@ -92,7 +92,7 @@ public class LogManager {
                 sqlQuery+=" l.userId = :userId";
             }
             
-            if( (logFilter.getUserId()!=0) && ((logFilter.getActionId()!=0)||(!logFilter.getSource().equalsIgnoreCase(nul))||(!logFilter.getIp().equalsIgnoreCase(nul))) ){
+            if( (logFilter.getUserId()!=0) && ((logFilter.getActionId()!=0)||(!logFilter.getSource().equalsIgnoreCase(nul))||(!logFilter.getIp().equalsIgnoreCase(nul))||(!logFilter.getDate().equalsIgnoreCase(nul)) ) ){
                 sqlQuery+=" and";
             }
             
@@ -103,7 +103,7 @@ public class LogManager {
                 sqlQuery+=" l.actionId = :actionId";
             }
             
-            if( (logFilter.getActionId()!=0) && ((!logFilter.getSource().equalsIgnoreCase(nul))||(!logFilter.getIp().equalsIgnoreCase(nul))) ){
+            if( (logFilter.getActionId()!=0) && ((!logFilter.getSource().equalsIgnoreCase(nul))||(!logFilter.getIp().equalsIgnoreCase(nul))||(!logFilter.getDate().equalsIgnoreCase(nul)) ) ){
                 sqlQuery+=" and";
             }
             
@@ -114,7 +114,7 @@ public class LogManager {
                 sqlQuery+=" l.source = :source";
             }
             
-            if((!logFilter.getSource().equalsIgnoreCase(nul)) && ( (!logFilter.getIp().equalsIgnoreCase(nul)) ) ){
+            if((!logFilter.getSource().equalsIgnoreCase(nul)) && ( (!logFilter.getIp().equalsIgnoreCase(nul))||(!logFilter.getDate().equalsIgnoreCase(nul)) ) ){
                 sqlQuery+=" and";
             }
             

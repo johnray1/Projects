@@ -94,30 +94,11 @@ public class PumpManagementService {
     }
     
     @GET
-    @Path("getPumpNozzleProductList/{userId}")
-    @Produces({"application/xml", "application/json"})
-    public String getPumpNozzleProductList(@PathParam("userId") Integer userId) {
-        
-        ResultObject result= pumpManager.getPumpNozzleProductList(userId);
-        return result.getJsonFormat();
-    }
-    
-    @GET
     @Path("getPumpNozzleProduct/{nozzleId}")
     @Produces({"application/xml", "application/json"})
     public String getPumpNozzleProduct(@PathParam("nozzleId") Integer nozzleId) {
         
         ResultObject result= pumpManager.getPumpNozzleProduct(nozzleId);
-        return result.getJsonFormat();
-    }
-    
-    
-    @GET
-    @Path("pumpsbyuser/{userId}")
-    @Produces({"application/xml", "application/json"})
-    public String getTankPumpNozzleDetailsByUserId(@PathParam("userId") Integer userId) {
-        
-        ResultObject result= pumpManager.getTankPumpNozzleDetailsByUserId(userId);
         return result.getJsonFormat();
     }
     
@@ -133,6 +114,25 @@ public class PumpManagementService {
     }
     
     
+    @GET
+    @Path("pumpsbyuser/{userId}")
+    @Produces({"application/xml", "application/json"})
+    public String getTankPumpNozzleDetailsByUserId(@PathParam("userId") Integer userId) {
+        
+        ResultObject result= pumpManager.getTankPumpNozzleDetailsByUserId(userId);
+        return result.getJsonFormat();
+    }
+    
+  //------------------------------------------------------------------------demo-----------------------------------------------------------------------------------  
+    
+    @GET
+    @Path("getPumpNozzleProductList/{userId}")
+    @Produces({"application/xml", "application/json"})
+    public String getPumpNozzleProductList(@PathParam("userId") Integer userId) {
+        
+        ResultObject result= pumpManager.getPumpNozzleProductList(userId);
+        return result.getJsonFormat();
+    }
     
     
     

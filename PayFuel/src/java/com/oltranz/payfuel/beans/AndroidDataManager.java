@@ -261,12 +261,20 @@ public class AndroidDataManager {
             transaction.setServerReqTime(dtt);
             transaction.setServerResTime(dtt);
             transaction.setDate(dtt);
+            
             Customer customer=new Customer();
             customer.setName(saleDetailsModel.getName());
             customer.setContactDetails(saleDetailsModel.getTelephone());
             customer.setTin(saleDetailsModel.getTin());
+            if(saleDetailsModel.getPaymentModeId()==2){
+                customer.setCustomerTypeId(1);
+            }
+            else{
+                customer.setCustomerTypeId(2);
+            }
             em.persist(customer);
             em.flush();
+            
             transaction.setCustomerId(customer.getCustomerId());
             
             //now we get nozzle index and tank quantity
@@ -313,6 +321,8 @@ public class AndroidDataManager {
                 em.flush();
                 tankTracking.setQuantityafter(tank.getCurrentCapacity());
                 em.persist(tankTracking);
+                
+                
                 
                 transaction.setPaymentStatus("SUCCESS");
             }
