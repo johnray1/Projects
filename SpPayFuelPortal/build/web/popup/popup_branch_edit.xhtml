@@ -3,23 +3,15 @@
         
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-          
-      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-          
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:h="http://java.sun.com/jsf/html">
     <h:head>
         <meta charset="utf-8"></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <title>SP - Form</title>
-            
         <link href="../css/style.css" rel="stylesheet" type="text/css" />
         <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
         <link href="../css/forms.css" rel="stylesheet" type="text/css" />
-        
-        
         <script type="text/javascript" src="../js/jquery-1.12.0.min.js"></script>
         <script type="text/javascript" src="../js/bootstrap.min.js"></script>
         
@@ -54,7 +46,7 @@
                         </div>
                         
                         <div class="col-xs-12 submitinput">
-                            <h:commandButton  value="UPDATE" action="#{BranchBean.edit()}"/>
+                            <h:commandButton  value="UPDATE" action="#{BranchBean.update()}"/>
                         </div>
                         
                     </h:form>

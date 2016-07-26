@@ -1,9 +1,106 @@
 
+//----------------------------------------------------------tanks----------------------------------------------------------
+$(function () {
+    
+    var processed_json = new Array();
+    $.getJSON('http://41.74.172.132:8080/PayFuel/TransactionManagementService/tankChart', function(data) {
+        
+        // Populate series
+        for (i = 0; i < data.length; i++){
+            processed_json.push([data[i].name, data[i].y]);
+        }
+        
+        
+        
+        $('#sp_tanks').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Tanks Quantity '
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: {
+                type: 'category',
+                labels: {
+                    rotation: -45,
+                    style: {
+                        fontSize: '11px',
+                        fontFamily: 'Verdana, sans-serif'
+                    }
+                }
+            },
+            yAxis: {
+                min: 0,
+                labels: {
+                    align: 'right',
+                    format: '{value:.,0f} L'
+                },
+                title: {
+                    text: 'Quantity in Liters'
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            
+            credits: {
+                enabled: false
+            },
+            
+            tooltip: {
+                pointFormat: 'Quantity: <b>{point.y:.1f} Liters</b>'
+            },
+            series: [{
+                    name: 'Branches',
+                    color:'#808080',
+                    data: processed_json,
+                    zones: [
+                        {value: 0,
+                            color: '#ff0000'
+                        }, 
+                        
+                        {value: 2500,
+                            color: '#ff0000'
+                        },
+                        
+                        
+                        {value: 10000,
+                            color: '#ff6600'
+                        },
+                        
+                        {value:20000,
+                            color: '#1a8c35'
+                        },
+                        
+                        {value:20600,
+                            color: '#1a8c35'
+                        }
+                        
+                    ],
+                    
+                    dataLabels: {
+                        enabled: false,
+                        rotation: 0,
+                        color: '#FFFFFF',
+                        align: 'right',
+                        format: '{point.y:,.1f}', // one decimal
+                        y: 20, // 10 pixels down from the top
+                        style: {
+                            fontSize: '10px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
+                    }
+                }]
+        });
+    });
+});
 
 
-//----------------------------------------------------------container product---------------------------------------------------------------------------------------------------------------------------------------------
 
-
+//----------------------------------------------------------products----------------------------------------------------------
 $(function () {
     
     // Make monochrome colors and set them as default for all pies
@@ -15,23 +112,23 @@ $(function () {
         for (i = 0; i < 10; i += 1) {
             // Start out with a darkened base color (negative brighten), and end
             // up with a much brighter color
-            colors.push(Highcharts.Color('#f40030').brighten((i - 3) / 5).get());
+            colors.push(Highcharts.Color('#eddb10').brighten((i - 1) / 10).get());
         }
         return colors;
     }());
     
     var processed_json = new Array();
     
-    $.getJSON('http://localhost:8080/PayFuel/TransactionManagementService/pieProductSale', function(data) {
+    $.getJSON('http://41.74.172.132:8080/PayFuel/TransactionManagementService/pieProductSale', function(data) {
         
-        alert(data);
+        
         // Populate series
         for (i = 0; i < data.length; i++){
             processed_json.push([data[i].name, data[i].y]);
         }
         
         // Build the chart
-        $('#containerpro').highcharts({
+        $('#sp_products').highcharts({
             chart: {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
@@ -39,11 +136,16 @@ $(function () {
                 type: 'pie'
             },
             title: {
-                text: ''
+                text: 'Products Sold'
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
             },
+            
+            credits: {
+                enabled: false
+            },
+            
             plotOptions: {
                 pie: {
                     allowPointSelect: true,
@@ -66,25 +168,115 @@ $(function () {
 });
 
 
+//----------------------------------------------------------paymentmodes----------------------------------------------------------
+$(function () {
+    $('#sp_payments').highcharts({
+        title: {
+            text: 'Payment Methods Usage per Products'
+        },
+        
+        yAxis: {
+            title: {
+                text: 'Transaction Counts'
+            }
+        },
+        xAxis: {
+            categories: ['Super', 'Gasoil']
+        },
+        
+        credits: {
+            enabled: false
+        },
+        
+        
+        series: [
+            
+            {
+                type: 'column',
+                name: 'CASH',
+                color:'#000000',
+                data: [2200, 700]
+            }, 
+            
+            {
+                type: 'column',
+                name: 'MTN',
+                color:'#ffc508',
+                data: [2000, 800]
+            }, 
+            
+            {
+                type: 'column',
+                name: 'TIGO',
+                color:'#193370',
+                data: [1500, 400]
+            },
+            
+            {
+                type: 'column',
+                name: 'AIRTEL',
+                color:'#ec1f27',
+                data: [1400, 600]
+            },
+            
+            {
+                type: 'column',
+                name: 'Voucher',
+                color:'#7aaa75',
+                data: [2000, 350]
+            },
+            
+            {
+                type: 'column',
+                name: 'Debt',
+                color:'#808080',
+                data: [200, 100]
+            },
+            
+            {
+                type: 'column',
+                name: 'Visa',
+                color:'#1a1f71',
+                data: [1100, 200]
+            },
+            
+            {
+                type: 'column',
+                name: 'Mastercard',
+                color:'#fcbb37',
+                data: [1000, 300]
+            },
+            
+            {
+                type: 'column',
+                name: 'SP Card',
+                color:'#1a8c35',
+                data: [500, 200]
+            }
+            
+        ]
+    });
+});
 
-//----------------------------------------------------------container branch---------------------------------------------------------------------------------------------------------------------------------------------
 
+
+//----------------------------------------------------------branches----------------------------------------------------------
 $(function () {
     
     var processed_json = new Array();
-    $.getJSON('http://localhost:8080/PayFuel/TransactionManagementService/topBranchSale', function(data) {
+    $.getJSON('http://41.74.172.132:8080/PayFuel/TransactionManagementService/topBranchSale', function(data) {
         
         // Populate series
         for (i = 0; i < data.length; i++){
             processed_json.push([data[i].name, data[i].y]);
         }
         
-        $('#containerbra').highcharts({
+        $('#sp_topbranches').highcharts({
             chart: {
                 type: 'column'
             },
             title: {
-                text: 'Top Branches '
+                text: 'Top 10 Selling Branches '
             },
             subtitle: {
                 text: ''
@@ -106,15 +298,22 @@ $(function () {
                 }
             },
             legend: {
+                enabled: false,
+                floating: true
+            },
+            
+            credits: {
                 enabled: false
             },
+            
             tooltip: {
-                pointFormat: 'Sells: <b>{point.y:.1f} millions</b>'
+                pointFormat: 'Sells: <b>{point.y:.1f} RWF</b>'
             },
+            
             series: [{
                     name: 'Branches',
-                    data: processed_json,
-                    color: '#f40030',
+                    data:processed_json,
+                    color: '#1a8c35',
                     dataLabels: {
                         enabled: false,
                         rotation: 0,
@@ -132,90 +331,19 @@ $(function () {
     });
 });
 
-//----------------------------------------------------------container paymentmode---------------------------------------------------------------------------------------------------------------------------------------------
 
-$(function () {
-    $('#containerpm').highcharts({
-        title: {
-            text: 'Payment Methods per Products'
-        },
-        
-        yAxis: {
-            title: {
-                text: 'Transaction Counts'
-            }
-        },
-        xAxis: {
-            categories: []
-        },
-        labels: {
-            items: [{
-                    html: 'Payment Methods Usage',
-                    style: {
-                        left: '180px',
-                        top: '0px',
-                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
-                    }
-                }]
-        },
-        series: [
-            {
-                type: 'column',
-                name: 'CASH',
-                color:'#000000',
-                data:[
-                    {name: 'SUPER',y: 2200}, 
-                    {name: 'GASOIL',y: 700}
-                ]
-            }, 
-            {
-                type: 'column',
-                name: 'MTN',
-                color:'#ffc508',
-                data: [
-                    {name: 'SUPER',y: 2000}, 
-                    {name: 'GASOIL',y: 800}]
-            }, 
-            {
-                type: 'column',
-                name: 'TIGO',
-                color:'#193370',
-                data: [
-                    {name: 'SUPER',y: 1500}, 
-                    {name: 'GASOIL',y: 400}
-                ]
-            },
-            {
-                type: 'pie',
-                name: 'Total consumption',
-                data: [
-                    {name: 'Cash',y: 150,color:'#000000'}, 
-                    {name: 'MTN Mobile Money',y: 20,color:'#ffc508'},
-                    {name: 'Tigo Cash',y: 20,color:'#193370'}
-                ],
-                center: [225, 35],
-                size: 80,
-                showInLegend: false,
-                dataLabels: {
-                    enabled: false
-                }
-            }]
-    });
-});
-
-//----------------------------------------------------------container user---------------------------------------------------------------------------------------------------------------------------------------------
-
+//----------------------------------------------------------sellers----------------------------------------------------------
 $(function () {
     
     var processed_json = new Array();
-    $.getJSON('http://localhost:8080/PayFuel/TransactionManagementService/topUserSale', function(data) {
+    $.getJSON('http://41.74.172.132:8080/PayFuel/TransactionManagementService/topUserSale', function(data) {
         
         // Populate series
         for (i = 0; i < data.length; i++){
             processed_json.push([data[i].name, data[i].y]);
         }
         
-        $('#containerus').highcharts({
+        $('#sp_topseller').highcharts({
             chart: {
                 type: 'bar'
             },
@@ -223,113 +351,43 @@ $(function () {
                 text: 'Top 10 Seller Perfomance'
             },
             xAxis: {
-
-            
                 categories: []
-			
             },
+            
             yAxis: {
                 min: 0,
+                labels: {
+                    format: '{value:.,0f} RwF'
+                },
                 title: {
                     text: 'Amount in RWF'
                 }
             },
+            
             legend: {
-                reversed: false
+                enabled: false,
+                floating: true
             },
+            
+            credits: {
+                enabled: false
+            },
+            
             plotOptions: {
                 series: {
                     stacking: 'medium'
                 }
             },
+            
+            tooltip: {
+                pointFormat: 'Amount Sold: <b>{point.y:.1f} RWF</b>'
+            },
+            
             series: [{
-                    name: 'Cash Transacted',
-                    color:'#f40030',
+                    color:'#215cca',
                     data: processed_json
                 }]
-        });
-    });
-});
-
-
-//----------------------------------------------------------container transaction---------------------------------------------------------------------------------------------------------------------------------------------
-
-$(function () {
-    $(document).ready(function () {
-        Highcharts.setOptions({
-            global: {
-                useUTC: false
-            }
-        });
-
-        $('#containertra').highcharts({
-            chart: {
-                type: 'spline',
-                animation: Highcharts.svg, // don't animate in old IE
-                marginRight: 10,
-                
-                events: {
-                    load: function () {
-
-                        // set up the updating of the chart each second
-                        var series = this.series[0];
-                        setInterval(function () {
-                            var x = (new Date()).getTime(), // current time
-                            y = Math.random();
-                            series.addPoint([x, y], true, true);
-                        }, 1000);
-                    }
-                }
-            },
-            title: {
-                text: 'Transactions Per Second'
-            },
-            xAxis: {
-                type: 'datetime',
-                tickPixelInterval: 150
-            },
-            yAxis: {
-                title: {
-                    text: 'Transactions counts'
-                },
-				
-                plotLines: [{
-                        value: 0,
-                        width: 1,
-                        color: '#808080'
-                    }]
-            },
-            tooltip: {
-                formatter: function () {
-                    return '<b>' + this.series.name + '</b><br/>' +
-                            Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
-                            Highcharts.numberFormat(this.y, 2);
-                }
-            },
-            legend: {
-                enabled: false
-            },
-            exporting: {
-                enabled: false
-            },
-            series: [{
-                    name: 'RWF',
-                    color:'#f40030',
-                    data: (function () {
-                        // generate an array of random data
-                        var data = [],
-                        time = (new Date()).getTime(),
-                        i;
-
-                        for (i = -19; i <= 0; i += 1) {
-                            data.push({
-                                x: time + i * 1000,
-                                y: Math.random()
-                            });
-                        }
-                        return data;
-                    }())
-                }]
+            
         });
     });
 });

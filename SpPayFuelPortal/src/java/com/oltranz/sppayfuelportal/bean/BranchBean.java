@@ -106,6 +106,13 @@ public class BranchBean implements Serializable{
         saveActionName="Add";
     }
     
+    public void branchForCreate(){
+        this.branchId="-1";
+        this.branchName="";
+        this.address="";
+        saveActionName="Add";
+    }
+    
     public String saveBranch(){
         if(branchId.equals("-1")){
             return create();
@@ -114,12 +121,7 @@ public class BranchBean implements Serializable{
         }
     }
     
-    public void branchForCreate(){
-        this.branchId="-1";
-        this.branchName="";
-        this.address="";
-        saveActionName="Add";
-    }
+    
     
     
     public void branchById(int branchId){
@@ -143,33 +145,6 @@ public class BranchBean implements Serializable{
         
     }
     
-    public String create(){
-        
-        String url="http://localhost:8080/PayFuel/BranchManagementService/branch/create";
-        String  jsonData = "{\n" +
-                "\"name\":\""+branchName+"\",\n" +
-                "\"descr\":\""+address+"\"\n" +
-                "}";
-        Response response=CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
-        String jsonResponse=response.readEntity(String.class);
-        System.out.println(jsonResponse);
-        
-        ObjectMapper mapper=new ObjectMapper();
-        try{
-            branchSingle=(BranchSingle)mapper.readValue(jsonResponse, BranchSingle.class);
-            
-            this.branchId=branchSingle.getBranch().getBranchId().toString();
-            this.branchName=branchSingle.getBranch().getName();
-            this.address=branchSingle.getBranch().getDescr();
-            
-        }
-        catch(Exception ex){
-            System.out.println(ex.getMessage());
-            
-        }
-        return branches();
-    }
-    
     
     
     public String update(){
@@ -186,6 +161,29 @@ public class BranchBean implements Serializable{
         
         branchById(Integer.parseInt(branchId));
         
+        return branches();
+    }
+    
+    
+    public String create(){
+        try{
+            String url="http://localhost:8080/PayFuel/BranchManagementService/branch/create";
+            String  jsonData = "{\n" +
+                    "\"name\":\""+branchName+"\",\n" +
+                    "\"descr\":\""+address+"\"\n" +
+                    "}";
+            Response response=CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
+            String jsonResponse=response.readEntity(String.class);
+            
+            ObjectMapper mapper=new ObjectMapper();
+            branchSingle=(BranchSingle)mapper.readValue(jsonResponse, BranchSingle.class);
+            
+            branchById(branchSingle.getBranch().getBranchId());
+        }
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
+            
+        }
         return branches();
     }
     

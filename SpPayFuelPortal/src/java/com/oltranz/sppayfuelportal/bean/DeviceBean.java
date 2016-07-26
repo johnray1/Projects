@@ -127,7 +127,7 @@ public class DeviceBean implements Serializable{
         this.branchId=null;
         this.deviceNo=(null);
         
-        return "innerpage_device.xhtml";
+        return "innerpage_device.xhtml?faces-redirect=true";
     }
     
     public String update(){

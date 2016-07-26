@@ -6,6 +6,7 @@
 package com.oltranz.sppayfuelportal.bean;
 
 import com.oltranz.sppayfuelportal.library.CommonLibrary;
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.ws.rs.core.MediaType;
@@ -17,7 +18,7 @@ import javax.ws.rs.core.Response;
  */
 @ManagedBean(name="EmailBean")
 @SessionScoped
-public class EmailBean {
+public class EmailBean implements Serializable{
     
     private String email;
     

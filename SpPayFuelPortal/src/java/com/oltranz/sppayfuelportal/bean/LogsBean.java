@@ -124,7 +124,7 @@ public class LogsBean {
         catch(Exception ex){
             System.out.println(ex.getMessage());
         }
-        return "innerpage_logs.xhtml";
+        return "innerpage_logs.xhtml?faces-redirect=true";
         
     }
     

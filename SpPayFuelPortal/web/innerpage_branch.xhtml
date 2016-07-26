@@ -62,11 +62,16 @@
                 <div class="clear"></div>
                     
                 <div class="col-xs-12 col-sm-12 sholderinbox" style="margin:0px;margin-top:20px;padding:0px;min-height:400px;font-family:ubuntu;overflow-x:auto;">
-                    <h2>Branches List
+                    <h2>BRANCHES LIST
                         
                         <!-- -->
                         <label class="form_toggle" for="formcontent-toggle">
-                            <a data-rel="lightcase_edit" href="popup/popup_branch_add.xhtml" style="color: #ffffff">Add Branch</a>
+                            <h:form >
+                                <h:commandLink onclick="notifyAdd()" id="addDetails" style="color: #ffffff"> 
+                                    Add Branch
+                                    <f:ajax event="click"  listener="#{BranchBean.branchForCreate()}" rendererType="postValidate" render=":addDetailsContentPanel :add_form" />
+                                </h:commandLink>
+                            </h:form>  
                         </label>
                         <!-- -->
                         <!-- -->
@@ -84,8 +89,8 @@
                                              styleClass="display" 
                                              cellspacing="0" 
                                              width="100%" 
-                                             style="padding:10px;">
-                                    
+                                    style="padding:10px;">
+                                        
                                     <h:column>
                                         <f:facet name="header">Branch Name</f:facet>
                                             #{bra.name}
@@ -131,16 +136,28 @@
                                     <h:form class="container-fluid edit_form" id="edit_form">
                                         <tp:editBranchComponent 
                                             branchIdValue="#{BranchBean.branchId}"
-                                            branchAddressLabel="Address" 
-                                            branchAddressValue="#{BranchBean.address}" 
-                                            branchNameLabel="Branch Name"
                                             branchNameValue="#{BranchBean.branchName}"
+                                            branchAddressValue="#{BranchBean.address}"
                                             saveActionName="#{BranchBean.saveActionName}"
                                             saveButtonAction="#{BranchBean.saveBranch()}"
                                             renderedOnsuccess=":viewDetailsContentPanel :branchesList"
                                             /> 
                                     </h:form>
                                 </h:panelGroup>
+                                
+                                <h:panelGroup id="addDetailsContentPanel">
+                                    <h:form class="container-fluid edit_form" id="add_form">
+                                        <tp:addBranchComponent 
+                                            branchIdValue="#{BranchBean.branchId}"
+                                            branchNameValue="#{BranchBean.branchName}"
+                                            branchAddressValue="#{BranchBean.address}"
+                                            saveActionName="#{BranchBean.saveActionName}"
+                                            saveButtonAction="#{BranchBean.saveBranch()}"
+                                            renderedOnsuccess=":viewDetailsContentPanel :branchesList"
+                                            /> 
+                                    </h:form>
+                                </h:panelGroup>
+                                
                             </div>
                                 
                                 
@@ -166,19 +183,32 @@
         
         <script type="text/javascript">
             
+            
             var showDetails=false;
+            var showAdd=false;
             var showEdit=false;
             var turnDataTable=false;
             var content2Show="";
             
             function notifiyViewDetails(){
-                showEdit=false;
                 showDetails=true;
+                showAdd=false;
+                showEdit=false;
+                alert(showDetails);
+                
+            }
+            
+            function notifyAdd(){
+                showAdd=true;
+                showEdit=false;
+                showDetails=false;
             }
             
             function notifyEdit(){
                 showEdit=true;
+                showAdd=false;
                 showDetails=false;
+                alert(showEdit);
             }
             
             function notifiyDatatableRefresh(){
@@ -217,12 +247,17 @@
                                 function () {
                                     
                                     if(showDetails){
-                                        
+                                        alert(showDetails);
                                         content2Show= $('#viewDetailsContentPanel').html();
                                     }
                                     
-                                    if(showEdit)
+                                    if(showAdd){
+                                        content2Show= $('#addDetailsContentPanel').html();
+                                    }
+                                    
+                                    if(showEdit){
                                         content2Show= $('#editDetailsContentPanel').html();
+                                    }
                                     
                                     if(turnDataTable){
                                         turn2DataTable('dataTableList');
@@ -230,7 +265,6 @@
                                     }
                                     
                                     lightcase.get('contentInner').children().html(content2Show);
-                                    // Do a resize now after filling in the content
                                     lightcase.resize();
                                 }
                             }
@@ -247,7 +281,7 @@
                 } else {
                     $(this).removeClass('filled');
                 }
-            })
+            });
             
         </script>   
         

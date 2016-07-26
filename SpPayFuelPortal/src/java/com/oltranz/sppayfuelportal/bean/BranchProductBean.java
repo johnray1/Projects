@@ -8,6 +8,7 @@ package com.oltranz.sppayfuelportal.bean;
 import com.oltranz.sppayfuelportal.library.CommonLibrary;
 import com.oltranz.sppayfuelportal.model.BranchProductList;
 import com.oltranz.sppayfuelportal.model.BranchProductSingle;
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -21,7 +22,7 @@ import org.codehaus.jackson.map.ObjectMapper;
  */
 @ManagedBean(name="BranchProductBean")
 @SessionScoped
-public class BranchProductBean {
+public class BranchProductBean implements Serializable{
     
     private String branchId;
     private String productId;
@@ -67,7 +68,7 @@ public class BranchProductBean {
             System.out.println(ex.getMessage());
         }
         
-        return "innerpage_branch_product.xhtml";
+        return "innerpage_branch_product.xhtml?faces-redirect=true";
     }
     
     
@@ -124,7 +125,7 @@ public class BranchProductBean {
         
         
         
-        return "innerpage_branch_product.xhtml";
+        return "innerpage_branch_product.xhtml?faces-redirect=true";
     }
     
     public String update(){

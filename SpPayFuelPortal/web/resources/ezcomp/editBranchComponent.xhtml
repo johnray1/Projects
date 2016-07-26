@@ -8,9 +8,7 @@
     <!-- INTERFACE -->
     <cc:interface>
         <cc:attribute name="branchIdValue" />
-        <cc:attribute name="branchNameLabel" />
         <cc:attribute name="branchNameValue" />
-        <cc:attribute name="branchAddressLabel" />
         <cc:attribute name="branchAddressValue" />
         <cc:attribute name="saveActionName" />
         <cc:attribute name="saveButtonAction" 
@@ -30,23 +28,23 @@
                 <!-- FORM -->
                 
                 <div class="col-xs-12 theinput">
-                    <h:inputHidden  id="field1" value="#{cc.attrs.branchIdValue}"/>
-                </div>
-                
-                <div class="col-xs-12 theinput">
-                    <h:outputLabel value="#{cc.attrs.branchNameLabel}"/>
+                    <h:outputLabel value="BRANCH NAME"/>
                     <h:inputText id="field2" value="#{cc.attrs.branchNameValue}"/>
                 </div>
                 
                 <div class="col-xs-12 theinput">
-                    <h:outputLabel value="#{cc.attrs.branchAddressLabel}"/>
+                    <h:outputLabel value="ADDRESS"/>
                     <h:inputText id="field3" value="#{cc.attrs.branchAddressValue}"/>
                 </div>
                 
                 <div  class="col-xs-12 submitinput" >
-                    <h:commandButton onclick="notifiyViewDetails(); notifiyDatatableRefresh()" value="UPDATE" action="#{cc.attrs.saveButtonAction}">
+                    <h:commandButton onclick="notifiyViewDetails();notifiyDatatableRefresh();" value="UPDATE" action="#{cc.attrs.saveButtonAction}">
                         <f:ajax execute="@form" render="#{cc.attrs.renderedOnsuccess}" />
                     </h:commandButton>
+                </div>
+                
+                <div class="col-xs-12 theinput">
+                    <h:inputHidden  id="field1" value="#{cc.attrs.branchIdValue}"/>
                 </div>
                 
                 <!-- End FORM -->

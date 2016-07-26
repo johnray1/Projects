@@ -1,5 +1,5 @@
 /*FORMS ELEMENTS*/
-.edit_form{font-family:ubuntu;font-size:14px;font-weigth:normal;margin-top:10px;}
+.edit_form{font-family:ubuntu;font-size:14px;margin-top:0px;}
 .edit_form  label{font-family:ubuntu;font-size:13px;color:rgb(26, 140, 53);text-transform:uppercase;font-weight:normal;}
 .edit_form  fieldset{margin:0px;padding:5px;border:1px solid #d9d9d9;border-bottom:3px solid #d9d9d9;background-color:#F7FFF9;}
 .edit_form  legend{width:auto;margin:0px;padding:3px;font-family:ubuntu;font-size:14px;color:rgb(26, 140, 53);text-transform:uppercase;border:0px solid red;background:#ffffff;}

@@ -819,3 +819,217 @@ div.form_content{
 	width:50%;
 	display: none;
 }
+
+
+/*TANKS*/
+
+#tank_1{display:block;position:absolute;width: 592px;height: 234px;margin:0px;padding:0px;border:0px solid #0066ff;border-top-left-radius: 64px 90px;border-top-right-radius: 64px 90px;border-bottom-left-radius:64px 100px;border-bottom-right-radius:64px 100px;overflow:hidden;}
+#tank_2{display:block;position:absolute;width: 592px;height: 234px;margin:0px;padding:0px;border:0px solid #0066ff;border-top-left-radius: 64px 90px;border-top-right-radius: 64px 90px;border-bottom-left-radius:64px 100px;border-bottom-right-radius:64px 100px;overflow:hidden;}
+#level_super1, #level_super2{position: absolute; bottom: 0; left: 0;width: 100%; margin: 0; padding:0; border: 0px solid green; background-color:#000000;background:url(../images/tank_levelbg.png) repeat-x bottom;box-sizing: border-box;}
+#level_gasoil{position: absolute; bottom: 0; left: 0;width: 100%; margin: 0; padding:0; border: 0px solid green; background-color:#000000;background:url(../images/tank_levelbg.png) repeat-x bottom;box-sizing: border-box;}
+
+div.tank_meter{
+display:block;
+position: absolute;
+left:-90px;
+bottom:-4px;
+width: 70px;
+height: 240px;
+margin:0px;
+padding:0px; 
+border: 0px  solid red;
+background:url(../images/tank_levelsnumbers.png) no-repeat bottom right;
+}
+
+
+div.tank_super{
+display:inline-block;
+position: relative;
+width: 600px;
+height: 240px;
+margin:0px auto;
+margin-top:27px;
+margin-bottom:0px;
+padding:0px; 
+border: 4px  solid red;
+border-top-left-radius: 70px 100px;
+border-top-right-radius: 70px 100px;
+border-bottom-left-radius: 70px 100px;
+border-bottom-right-radius: 70px 100px;
+
+}
+
+
+div.tank_super label{
+display:block;
+position: relative;
+width: 600px;
+height: 25px;
+top:-29px;
+margin:0px auto;
+border:0px  solid #ff0000;
+line-height:25px;
+background:url(../images/tank_cover.png) no-repeat left bottom;
+text-align:right;
+padding-right:47px;
+font-weight:bold;
+font-size:18px;
+color:#ff0000;
+}
+
+
+
+div.tank_gasoil{
+display:inline-block;
+position: relative;
+width: 600px;
+height: 240px;
+margin:0px auto;
+margin-top:27px;
+margin-bottom:0px;
+padding:0px; 
+border: 4px  solid #3366ff;
+border-top-left-radius: 70px 100px;
+border-top-right-radius: 70px 100px;
+border-bottom-left-radius: 70px 100px;
+border-bottom-right-radius: 70px 100px;
+
+}
+
+
+div.tank_gasoil label{
+display:block;
+position: relative;
+width: 600px;
+height: 25px;
+top:-29px;
+margin:0px auto;
+border:0px  solid #ff0000;
+line-height:25px;
+background:url(../images/tank_cover.png) no-repeat left bottom;
+text-align:right;
+padding-right:47px;
+font-weight:bold;
+font-size:18px;
+color:#3366ff;
+}
+
+.quantities{
+display:inline-block;
+position: relative;
+margin:0px auto;
+margin-top:50px;
+padding:0px; 
+border:0px  solid red;
+}
+
+.quantity_t{
+display:inline-block;
+position: relative;
+width: 200px;
+height:60px;
+margin:0px auto;
+margin:5px;
+padding:2px; 
+border:1px  solid #e4e4e4;
+border-radius:27px;
+font-size:12px;
+text-transform:uppercase;
+font-weight:bold;
+background-color:rgba(255,255,255,0.8)
+
+}
+
+.quantity_d{
+display:inline-block;
+position: relative;
+width: 200px;
+height:60px;
+margin:0px auto;
+margin:5px;
+padding:2px; 
+border:1px  solid #e4e4e4;
+border-radius:27px;
+font-size:12px;
+text-transform:uppercase;
+font-weight:bold;
+background-color:rgba(255,255,255,0.8)
+}
+
+.quantity_t input, .quantity_d input{
+display:inline-block;
+width:90%;
+margin-bottom:5px;
+padding:0px; 
+border:0px  solid green;
+font-size:25px;
+font-weight:bold;
+color:black;
+text-align:center;
+outline:none;
+background-color:transparent;
+overflow:hidden;
+}
+
+.quantity_diff{
+display:block;
+width: 100px;
+height:50px;
+margin:0px auto;
+margin-top:17px;
+padding:1px; 
+border:1px  solid #000000;
+border-radius:27px;
+font-size:12px;
+text-transform:uppercase;
+font-weight:bold;
+background-color:rgba(0,0,0,0.8);
+color:#808080;
+}
+
+#q_super1_diff, #q_super2_diff, #q_gasoil_diff{
+display:inline-block;
+width:90%;
+margin-bottom:5px;
+padding:0px; 
+border:0px  solid green;
+font-size:18px;
+font-weight:bold;
+color:#ffff00;
+text-align:center;
+outline:none;
+background-color:transparent;
+overflow:hidden;
+}
+
+#q_super1_diff span, #q_super2_diff span, #q_gasoil_diff span{color:#c0c0c0;}
+
+div.tank_pump{min-height:207px;background:url(../images/tank_pumpbg.png) no-repeat center top;background-size:contain;text-align:center;padding:0px;padding-top:37px;font-weight:bold;font-size:27px;}
+
+.nozzle_box{width:100%;height:70px;margin:0px;padding:3px;text-align:left;font-weight:bold;}
+.super{background:url(../images/nozzle_super.png) no-repeat center top;border:0px solid blue;outline:none;}
+.gasoil{background:url(../images/nozzle_gasoil.png) no-repeat center top;border:0px solid blue;outline:none;}
+.flip{-moz-transform: scaleX(-1);-o-transform: scaleX(-1);-webkit-transform: scaleX(-1);transform: scaleX(-1);filter: FlipH;-ms-filter: "FlipH";}
+.unflip{color:green;}
+
+.disable{opacity:0.4;-webkit-filter: grayscale(100%);filter: grayscale(100%);}
+.disable:after{
+  content: "DISABLED";
+  display: block;
+  position: absolute;
+  width:100%;
+  height:100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.8);
+  color:white;
+  font-size:20px;
+  text-align:center;
+  line-height:100%;
+  z-index:999999;
+  border-radius:7px;
+  padding-top:37px;
+ 
+}
+
+.indexes{border-radius:7px;width:100%;height:25px;margin:0px;padding:3px;border:1px solid #c1c1c1;text-align:center;background-color:#f1f1f1}

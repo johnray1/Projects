@@ -137,7 +137,7 @@ public class UserBean implements Serializable{
         String jsonResponse=response.readEntity(String.class);
         //System.out.println(jsonResponse);
         
-        return "innerpage_user.xhtml";
+        return "innerpage_user.xhtml?faces-redirect=true";
     }
     
     public String update(){

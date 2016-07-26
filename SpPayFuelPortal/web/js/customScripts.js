@@ -13,15 +13,7 @@ function  turn2DataTable(tableId){
             'excelHtml5',
             'csvHtml5',
             'pdfHtml5'
-        ],
-    } );
-    
-    $('#'+tableId+' tbody')
-            .on( 'mouseenter', 'td', function () {
-                var colIdx = table.cell(this).index().column;
-        
-        $( table.cells().nodes() ).removeClass( 'highlight' );
-        $( table.column( colIdx ).nodes() ).addClass( 'highlight' );
+        ]
     } );
     
 }
