@@ -131,10 +131,10 @@
                                     <h:form class="container-fluid edit_form" id="edit_form">
                                         <tp:editBranchComponent 
                                             branchIdValue="#{BranchBean.branchId}"
-                                            branchAddressLabel="Address" 
-                                            branchAddressValue="#{BranchBean.address}" 
                                             branchNameLabel="Branch Name"
                                             branchNameValue="#{BranchBean.branchName}"
+                                            branchAddressLabel="Address" 
+                                            branchAddressValue="#{BranchBean.address}"
                                             saveActionName="#{BranchBean.saveActionName}"
                                             saveButtonAction="#{BranchBean.saveBranch()}"
                                             renderedOnsuccess=":viewDetailsContentPanel :branchesList"
@@ -172,8 +172,9 @@
             var content2Show="";
             
             function notifiyViewDetails(){
-                showEdit=false;
                 showDetails=true;
+                showEdit=false;
+                
             }
             
             function notifyEdit(){

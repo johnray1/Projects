@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>AIRTIME MANAGEMENT POTRAL</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <div class="container-fluid" style="margin:0px;padding:0px;border:0px solid red;min-width:480px;min-height:380px">
+                
+                <div class="col-xs-12 col-sm-12 holderinbox_popup" style="margin:0px;padding:0px;min-height:300px;">
+                    <h2 style="text-align:center;font-size:18px;">VIEW CUSTOMER</h2>
+                    
+                    <div class="row inner_popups_wallet">
+                        <div class="col-xs-6"><div class="col-xs-12 amount1">Previous Amount<h4>&#8358; #{CustomerBean.customerSingle.yesterdayBalance}</h4></div></div> 
+                        <div class="col-xs-6"><div class="col-xs-12 amount2">Current Amount<h4>&#8358; #{CustomerBean.customerSingle.nowBalance}</h4></div></div>  
+                    </div>
+                    
+                    <div class="clear"></div>                        
+                    
+                    <!-- Table -->
+                    <span class="container-fluid">
+                        
+                        <table class="col-xs-12 innertable_popups">
+                            
+                            <tbody class="row">
+                                <tr>
+                                    <th class="col-xs-6" style="text-align:right;padding:7px;border-right:2px solid white;">NAME</th>
+                                    <th class="col-xs-6" style="text-align:left;padding:7px;font-size:14px;color:#000000;">#{CustomerBean.customerSingle.customer.getfName()} #{CustomerBean.customerSingle.customer.otherNames}</th>
+                                </tr>
+                            </tbody>
+                            
+                            <tbody class="row">
+                                <tr>
+                                    <th class="col-xs-6" style="text-align:right;padding:7px;border-right:2px solid white;">PHONE</th>
+                                    <th class="col-xs-6" style="text-align:left;padding:7px;font-size:14px;color:#000000;">#{CustomerBean.customerSingle.customer.msisdn}</th>
+                                </tr>
+                            </tbody>
+                            
+                            <tbody class="row">
+                                <tr>
+                                    <th class="col-xs-6" style="text-align:right;padding:7px;border-right:2px solid white;">EMAIL</th>
+                                    <th class="col-xs-6" style="text-align:left;padding:7px;font-size:14px;color:#000000;">#{CustomerBean.customerSingle.customer.email}</th>
+                                </tr>
+                            </tbody>
+                            
+                            <tbody class="row">
+                                <tr>
+                                    <th class="col-xs-6" style="text-align:right;padding:7px;border-right:2px solid white;">CREATION TIME</th>
+                                    <th class="col-xs-6" style="text-align:left;padding:7px;font-size:14px;color:#000000;">#{CustomerBean.customerSingle.customer.creationTime}</th>
+                                </tr>
+                            </tbody>	
+                            
+                            <tbody class="row">
+                                <tr>
+                                    <th class="col-xs-6" style="text-align:right;padding:7px;border-right:2px solid white;">UPDATION TIME</th>
+                                    <th class="col-xs-6" style="text-align:left;padding:7px;font-size:14px;color:#000000;">#{CustomerBean.customerSingle.customer.lastUpdateTime}</th>
+                                </tr>
+                            </tbody>	
+                            
+                            
+                        </table>
+                        
+                    </span>
+                    <!--End  Table -->
+                    
+                    <button onclick="lightcase.close()" class="print">CLOSE</button>
+                    
+                </div>
+            </div>
+            
+        </ui:composition>
+    </h:body>
+</html>
+

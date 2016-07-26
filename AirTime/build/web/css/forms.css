@@ -1,0 +1,33 @@
+/*FORMS ELEMENTS*/
+.edit_form{font-family:ubuntu;font-size:14px;font-weight:normal;margin-top:0px;}
+.edit_form  label{font-family:ubuntu;font-size:13px;color:#303192;text-transform:uppercase;font-weight:normal;}
+.edit_form  fieldset{margin:0px;padding:5px;border:1px solid #d7d7f2;border-bottom:3px solid #d7d7f2;background-color:#ffffff;}
+.edit_form  legend{width:auto;margin:0px;padding:3px;font-family:ubuntu;font-size:14px;color:#303192;text-transform:uppercase;border:0px solid red;background:#ffffff;}
+
+.theinput{min-height:50px;margin:5px;border:0px solid red;}
+.theinput input{width:100%;padding:5px;border:0px solid #afbe57;border-bottom:3px solid #d7d7f2;outline:none;background-color:#fff6f2;}
+
+
+.checkinput{min-height:50px;margin:5px;border:0px solid red;}
+.checkinput label{font-family:ubuntu;font-size:12px;color:#000000;text-transform:none;line-height:20px;}
+.checkinput span{border:0px solid #afbe57;text-align:center;font-size:12px;}
+
+.radioinput{min-height:50px;margin:5px;border:0px solid red;}
+.radioinput label{font-family:ubuntu;font-size:12px;color:#000000;text-transform:none;}
+.radioinput span{border:0px solid #afbe57;text-align:center;font-size:12px;}
+
+.selectinput{min-height:50px;margin:5px;border:0px solid red;}
+.selectinput select{width:100%;padding:5px;border:0px solid #afbe57;border-bottom:3px solid #d7d7f2;outline:none;background-color:#fff6f2;}
+
+.textareainput{min-height:50px;margin:5px;border:0px solid red;}
+.textareainput textarea{width:100%;min-height:90px;padding:5px;border:0px solid #afbe57;border-bottom:3px solid #d7d7f2;outline:none;background-color:#fff6f2;}
+
+.submitinput{min-height:50px;margin:5px;border:0px solid red;text-align:center;}
+.submitinput input[type="submit"] { width:200px;background: #ffffff;border: 2px solid #cccccc;border-radius: 0px; cursor: pointer; font-size: 18px;color:#afafaf;padding:5px;transition: all 0.15s ease;outline:none;}
+.submitinput input[type="submit"]:hover {width:210px;background: #ff6501;border: 2px solid #ff6501;border-radius: 0px;cursor: pointer;font-size: 18px;color:#ffffff;padding:5px;outline:none;}
+.submitinput input[type="submit"]:active {width:210px; background: #ff6501; border: 2px solid #ff6501; border-radius: 0px; color: white; cursor: pointer;font-size: 18px; color:#ffffff; padding:5px; outline:none; }
+
+input[type="checkbox"]{display:inline-block;margin:10px auto;padding:10px;}
+input[type="radio"]{display:inline-block;margin:10px auto;padding:5px;}
+
+

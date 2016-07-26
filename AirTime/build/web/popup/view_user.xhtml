@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>AIRTIME MANAGEMENT POTRAL</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <div class="container-fluid" style="margin:0px;padding:0px;border:0px solid red;min-width:480px;min-height:380px">
+                
+                <div class="col-xs-12 col-sm-12 holderinbox_popup" style="margin:0px;padding:0px;min-height:300px;">
+                    <h2 style="text-align:center;font-size:18px;">VIEW USER</h2>
+                    <!-- Table -->
+                    <span class="container-fluid">
+                        
+                        <table class="col-xs-12 innertable_popups">
+                            
+                            <tbody class="row">
+                                <tr>
+                                    <th class="col-xs-6" style="text-align:right;padding:7px;border-right:2px solid white;">NAME</th>
+                                    <th class="col-xs-6" style="text-align:left;padding:7px;font-size:14px;color:#000000;">#{UserBean.user.getfName()} #{UserBean.user.otherName}</th>
+                                </tr>
+                            </tbody>
+                            
+                            <tbody class="row">
+                                <tr>
+                                    <th class="col-xs-6" style="text-align:right;padding:7px;border-right:2px solid white;">EMAIL</th>
+                                    <th class="col-xs-6" style="text-align:left;padding:7px;font-size:14px;color:#000000;">#{UserBean.user.email}</th>
+                                </tr>
+                            </tbody>
+                            
+                            <tbody class="row">
+                                <tr>
+                                    <th class="col-xs-6" style="text-align:right;padding:7px;border-right:2px solid white;">PHONE</th>
+                                    <th class="col-xs-6" style="text-align:left;padding:7px;font-size:14px;color:#000000;">#{UserBean.user.msisdn}</th>
+                                </tr>
+                            </tbody>
+                            
+                            <tbody class="row">
+                                <tr>
+                                    <th class="col-xs-6" style="text-align:right;padding:7px;border-right:2px solid white;">CREATED BY</th>
+                                    <th class="col-xs-6" style="text-align:left;padding:7px;font-size:14px;color:#000000;">#{UserBean.user.createdBy}</th>
+                                </tr>
+                            </tbody>
+                            
+                            <tbody class="row">
+                                <tr>
+                                    <th class="col-xs-6" style="text-align:right;padding:7px;border-right:2px solid white;">MODIFIED BY</th>
+                                    <th class="col-xs-6" style="text-align:left;padding:7px;font-size:14px;color:#000000;">#{UserBean.user.modifiedBy}</th>
+                                </tr>
+                            </tbody>	
+                            
+                            
+                        </table>
+                        
+                    </span>
+                    <!--End  Table -->
+                    
+                    <button onclick="lightcase.close()" class="print">CLOSE</button>
+                    
+                </div>
+            </div>
+           
+        </ui:composition>
+    </h:body>
+</html>
+
