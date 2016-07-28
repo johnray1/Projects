@@ -60,7 +60,7 @@ public class LoginBean implements Serializable{
             LoginModel lm=LoginDAO.validate(msisdn, pin);
             int statusCode=lm.getResponseStatusSimpleBean().getStatusCode();
             
-            if (statusCode==200) {
+            if (statusCode==400) {
                 
                 
                 username=lm.getCustomerDetails().getfName();
@@ -119,7 +119,7 @@ public class LoginBean implements Serializable{
                 RegisterResponse rr=LoginDAO.validateRegister(registerRequest);
                 int statusCode=rr.getResponseStatusSimpleBean().getStatusCode();
                 
-                if (statusCode==200) {
+                if (statusCode==400) {
                     
                     
                     username=rr.getCustomerDetails().getfName();

@@ -19,6 +19,9 @@ public class CustomerSingle {
     @JsonProperty("nowBalance")
     private double nowBalance;
     
+    @JsonProperty("status")
+    private ResponseStatusSimpleBean responseStatusSimpleBean;
+    
     @JsonProperty("yesterdayBalance")
     private double yesterdayBalance;
 
@@ -62,6 +65,20 @@ public class CustomerSingle {
      */
     public void setYesterdayBalance(double yesterdayBalance) {
         this.yesterdayBalance = yesterdayBalance;
+    }
+
+    /**
+     * @return the responseStatusSimpleBean
+     */
+    public ResponseStatusSimpleBean getResponseStatusSimpleBean() {
+        return responseStatusSimpleBean;
+    }
+
+    /**
+     * @param responseStatusSimpleBean the responseStatusSimpleBean to set
+     */
+    public void setResponseStatusSimpleBean(ResponseStatusSimpleBean responseStatusSimpleBean) {
+        this.responseStatusSimpleBean = responseStatusSimpleBean;
     }
     
     

@@ -9,6 +9,9 @@ import com.oltranz.airtimeweb.library.CommonLibrary;
 import com.oltranz.airtimeweb.model.Transaction;
 import com.oltranz.airtimeweb.model.TransactionList;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
@@ -28,6 +31,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 public class TransactionBean {
     
     private String msisdn;
+    private String date;
+    private Date currentDate;
     
     private Transaction transaction;
     private TransactionList transactionList;
@@ -38,8 +43,18 @@ public class TransactionBean {
     public void transactions(String msisd){
         
         try{
-            String url="http://41.74.172.132:8080/AirtimeRechargeSystem/wallettransactions/walletstatement/"+msisd;
-            Response response=CommonLibrary.sendRESTRequest(url, "empty data", MediaType.APPLICATION_JSON, "GET");
+            currentDate = new Date();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String from=dateFormat.format(currentDate)+"  00:00";
+            String to=dateFormat.format(currentDate)+"  23:59";
+            
+            String url="http://41.74.172.132:8080/AirtimeRechargeSystem/wallettransactions/walletstatement";
+            String  jsonData = "{\n" +
+                    "\"from\":\""+from+"\",\n" +
+                    "\"to\":\""+to+"\",\n" +
+                    "\"msisdn\":\""+msisd+"\"\n" +
+                    "}";
+            Response response=CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
             String jsonResponse = response.readEntity(String.class);
             
             ObjectMapper mapper=new ObjectMapper();
@@ -52,10 +67,6 @@ public class TransactionBean {
         
     }
     
-    public void transactionForView(Transaction tra){
-       transaction=tra;
-    }
-    
     public void customerTransactions(){
         
         templateBean.setWelcomeClassName("omenu");
@@ -64,8 +75,18 @@ public class TransactionBean {
         templateBean.setNotificationClassName("omenu");
         
         try{
-            String url="http://41.74.172.132:8080/AirtimeRechargeSystem/wallettransactions/walletstatement/"+msisdn;
-            Response response=CommonLibrary.sendRESTRequest(url, "empty data", MediaType.APPLICATION_JSON, "GET");
+            currentDate = new Date();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String from=dateFormat.format(currentDate);
+            String to=dateFormat.format(currentDate)+"  23:59";
+            
+            String url="http://41.74.172.132:8080/AirtimeRechargeSystem/wallettransactions/walletstatement";
+            String  jsonData = "{\n" +
+                    "\"from\":\""+from+"\",\n" +
+                    "\"to\":\""+to+"\",\n" +
+                    "\"msisdn\":\""+msisdn+"\"\n" +
+                    "}";
+            Response response=CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
             String jsonResponse = response.readEntity(String.class);
             
             ObjectMapper mapper=new ObjectMapper();
@@ -75,6 +96,47 @@ public class TransactionBean {
         }
         catch (IOException ex) {
             Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public void transactionForView(Transaction tra){
+        transaction=tra;
+    }
+    
+    
+    
+    
+    public void filterTransactions(){
+        
+        templateBean.setWelcomeClassName("omenu");
+        templateBean.setAccountClassName("omenu");
+        templateBean.setTransactionClassName("omenu_active");
+        templateBean.setNotificationClassName("omenu");
+        
+        try {
+            String dateIp=date;
+            String[] output = dateIp.split("-");
+            String start=output[0];  
+            String end=output[1];
+            String from = start.replace('/', '-');  
+            String to = end.replace('/', '-');
+            
+            String url="http://41.74.172.132:8080/AirtimeRechargeSystem/wallettransactions/walletstatement";
+            String  jsonData = "{\n" +
+                    "\"from\":\""+from+"\",\n" +
+                    "\"to\":\""+to+"\",\n" +
+                    "\"msisdn\":\""+msisdn+"\"\n" +
+                    "}";
+            Response response=CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
+            String jsonResponse = response.readEntity(String.class);
+            ObjectMapper mapper=new ObjectMapper();
+            
+            transactionList=(TransactionList)mapper.readValue(jsonResponse, TransactionList.class);
+            FacesContext.getCurrentInstance().getExternalContext().redirect("transaction.xhtml");
+        } 
+        catch (IOException ex) {
+            Logger.getLogger(TransactionBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
@@ -135,6 +197,34 @@ public class TransactionBean {
      */
     public void setTransactionList(TransactionList transactionList) {
         this.transactionList = transactionList;
+    }
+    
+    /**
+     * @return the date
+     */
+    public String getDate() {
+        return date;
+    }
+    
+    /**
+     * @param date the date to set
+     */
+    public void setDate(String date) {
+        this.date = date;
+    }
+    
+    /**
+     * @return the currentDate
+     */
+    public Date getCurrentDate() {
+        return currentDate;
+    }
+    
+    /**
+     * @param currentDate the currentDate to set
+     */
+    public void setCurrentDate(Date currentDate) {
+        this.currentDate = currentDate;
     }
     
     
