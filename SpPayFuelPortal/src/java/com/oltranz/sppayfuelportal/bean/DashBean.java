@@ -6,7 +6,6 @@
 package com.oltranz.sppayfuelportal.bean;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -19,13 +18,16 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class DashBean implements Serializable{
     
-    private Date date;
+    
     
     @ManagedProperty(value="#{TemplateBean}")
     private TemplateBean templateBean;
     
+    @ManagedProperty(value="#{TankBean}")
+    private TankBean tankBean;
+    
     public String dashBoard(){
-        date=new Date();
+        
         templateBean.setDashboardClassName("omenu_active");
         templateBean.setBranchClassName("omenu");
         templateBean.setDevicesClassName("omenu");
@@ -35,16 +37,22 @@ public class DashBean implements Serializable{
         templateBean.setTransactionsClassName("omenu");
         templateBean.setLogsClassName("omenu");
         
+        tankBean.tank1Dashboard();
+        tankBean.tank2Dashboard();
+        tankBean.tank3Dashboard();
+        
         return "dashboard?faces-redirect=true";
     }
-
+    
+    
+    
     /**
      * @return the templateBean
      */
     public TemplateBean getTemplateBean() {
         return templateBean;
     }
-
+    
     /**
      * @param templateBean the templateBean to set
      */
@@ -53,23 +61,19 @@ public class DashBean implements Serializable{
     }
 
     /**
-     * @return the date
+     * @return the tankBean
      */
-    public Date getDate() {
-        return date;
+    public TankBean getTankBean() {
+        return tankBean;
     }
 
     /**
-     * @param date the date to set
+     * @param tankBean the tankBean to set
      */
-    public void setDate(Date date) {
-        this.date = date;
+    public void setTankBean(TankBean tankBean) {
+        this.tankBean = tankBean;
     }
     
-    
-    
-    
-
     
     
 }

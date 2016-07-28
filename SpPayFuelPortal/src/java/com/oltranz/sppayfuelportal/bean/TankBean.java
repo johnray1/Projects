@@ -49,7 +49,12 @@ public class TankBean {
     private NozzleDash nozzleDash4;
     
     private TankDash tankDash3;
-    
+    private PumpDash pumpDash3;
+    private PumpDash pumpDash4;
+    private NozzleDash nozzleDash5;
+    private NozzleDash nozzleDash6;
+    private NozzleDash nozzleDash7;
+    private NozzleDash nozzleDash8;
     
     
     private String saveActionName="Save";
@@ -190,6 +195,19 @@ public class TankBean {
             
             ObjectMapper mapper=new ObjectMapper();
             tankDash3=(TankDash)mapper.readValue(jsonResponse, TankDash.class);
+            
+            List<PumpDash> pumpDashList=tankDash3.getPumpDash();
+            
+            pumpDash3=pumpDashList.get(0);
+            List<NozzleDash> nozzleDashList=pumpDash3.getNozzleDash();
+            nozzleDash5=nozzleDashList.get(0);
+            nozzleDash6=nozzleDashList.get(1);
+            
+            pumpDash4=pumpDashList.get(1);
+            List<NozzleDash> nozzleDashListt=pumpDash4.getNozzleDash();
+            nozzleDash7=nozzleDashListt.get(0);
+            nozzleDash8=nozzleDashListt.get(1);
+            
             
         }
         catch(Exception ex){
@@ -554,6 +572,90 @@ public class TankBean {
      */
     public void setNozzleDash4(NozzleDash nozzleDash4) {
         this.nozzleDash4 = nozzleDash4;
+    }
+
+    /**
+     * @return the pumpDash3
+     */
+    public PumpDash getPumpDash3() {
+        return pumpDash3;
+    }
+
+    /**
+     * @param pumpDash3 the pumpDash3 to set
+     */
+    public void setPumpDash3(PumpDash pumpDash3) {
+        this.pumpDash3 = pumpDash3;
+    }
+
+    /**
+     * @return the pumpDash4
+     */
+    public PumpDash getPumpDash4() {
+        return pumpDash4;
+    }
+
+    /**
+     * @param pumpDash4 the pumpDash4 to set
+     */
+    public void setPumpDash4(PumpDash pumpDash4) {
+        this.pumpDash4 = pumpDash4;
+    }
+
+    /**
+     * @return the nozzleDash5
+     */
+    public NozzleDash getNozzleDash5() {
+        return nozzleDash5;
+    }
+
+    /**
+     * @param nozzleDash5 the nozzleDash5 to set
+     */
+    public void setNozzleDash5(NozzleDash nozzleDash5) {
+        this.nozzleDash5 = nozzleDash5;
+    }
+
+    /**
+     * @return the nozzleDash6
+     */
+    public NozzleDash getNozzleDash6() {
+        return nozzleDash6;
+    }
+
+    /**
+     * @param nozzleDash6 the nozzleDash6 to set
+     */
+    public void setNozzleDash6(NozzleDash nozzleDash6) {
+        this.nozzleDash6 = nozzleDash6;
+    }
+
+    /**
+     * @return the nozzleDash7
+     */
+    public NozzleDash getNozzleDash7() {
+        return nozzleDash7;
+    }
+
+    /**
+     * @param nozzleDash7 the nozzleDash7 to set
+     */
+    public void setNozzleDash7(NozzleDash nozzleDash7) {
+        this.nozzleDash7 = nozzleDash7;
+    }
+
+    /**
+     * @return the nozzleDash8
+     */
+    public NozzleDash getNozzleDash8() {
+        return nozzleDash8;
+    }
+
+    /**
+     * @param nozzleDash8 the nozzleDash8 to set
+     */
+    public void setNozzleDash8(NozzleDash nozzleDash8) {
+        this.nozzleDash8 = nozzleDash8;
     }
 
     

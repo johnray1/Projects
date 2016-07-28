@@ -8,6 +8,7 @@ package com.oltranz.sppayfuelportal.bean;
 import com.oltranz.sppayfuelportal.dao.LoginDAO;
 import com.oltranz.sppayfuelportal.model.UserDetails;
 import java.io.Serializable;
+import java.util.Date;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -29,6 +30,7 @@ public class LoginBean implements Serializable{
     private String msg;
     private String user;
     private Integer userId;
+    private Date date;
     
     @ManagedProperty(value="#{TemplateBean}")
     private TemplateBean templateBean;
@@ -36,8 +38,11 @@ public class LoginBean implements Serializable{
     @ManagedProperty(value="#{TankBean}")
     private TankBean tankBean;
     
+    
+    
     //validate login
     public String validateUsernamePassword() {
+        date=new Date();
         
         templateBean.setDashboardClassName("omenu_active");
         templateBean.setBranchClassName("omenu");
@@ -56,6 +61,7 @@ public class LoginBean implements Serializable{
                 
                 userId=ud.getUserDetailsModel().getUserId();
                 user=ud.getUserDetailsModel().getFname();
+                
                 
                 tankBean.setUserId(userId);
                 tankBean.tank1Dashboard();
@@ -186,6 +192,22 @@ public class LoginBean implements Serializable{
     public void setTankBean(TankBean tankBean) {
         this.tankBean = tankBean;
     }
+
+    /**
+     * @return the date
+     */
+    public Date getDate() {
+        return date;
+    }
+
+    /**
+     * @param date the date to set
+     */
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    
     
     
 }
