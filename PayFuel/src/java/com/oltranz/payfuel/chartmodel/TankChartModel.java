@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.oltranz.payfuel.models;
+package com.oltranz.payfuel.chartmodel;
 
 /**
  *
  * @author John
  */
-public class Bar {
+public class TankChartModel {
     
     private String name;
-    private double y;
-    private String color;
+    private double max;
+    private double current;
 
     /**
      * @return the name
@@ -30,32 +30,34 @@ public class Bar {
     }
 
     /**
-     * @return the y
+     * @return the max
      */
-    public double getY() {
-        return y;
+    public double getMax() {
+        return max;
     }
 
     /**
-     * @param y the y to set
+     * @param max the max to set
      */
-    public void setY(double y) {
-        this.y = y;
+    public void setMax(double max) {
+        this.max = max;
     }
 
     /**
-     * @return the color
+     * @return the current
      */
-    public String getColor() {
-        return color;
+    public double getCurrent() {
+        return current;
     }
 
     /**
-     * @param color the color to set
+     * @param current the current to set
      */
-    public void setColor(String color) {
-        this.color = color;
+    public void setCurrent(double current) {
+        this.current = current;
     }
+    
+    
     
     
 }

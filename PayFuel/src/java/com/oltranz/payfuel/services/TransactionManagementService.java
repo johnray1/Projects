@@ -91,54 +91,7 @@ public class TransactionManagementService {
         return jsonResult;
     }
     
-    @GET
-    @Path("pieProductSale")
-    @Consumes({"application/xml", "application/json"})
-    public String pieProductSale() {
-        
-        String jsonResult=transactionManager.pieProductSale();
-        
-        return jsonResult;
-    }
     
-    @GET
-    @Path("topBranchSale")
-    @Consumes({"application/xml", "application/json"})
-    public String topBranchSale() {
-        
-        String jsonResult=transactionManager.topBranchSale();
-        
-        return jsonResult;
-    }
     
-    @GET
-    @Path("topUserSale")
-    @Consumes({"application/xml", "application/json"})
-    public String topUserSale() {
-        
-        String jsonResult=transactionManager.topUserSale();
-        
-        return jsonResult;
-    }
-    
-    @GET
-    @Path("tankChart")
-    @Consumes({"application/xml", "application/json"})
-    public String tankChart() {
-        
-        String jsonResult=transactionManager.tankChart();
-        
-        return jsonResult;
-    }
-    
-    @GET
-    @Path("paymentModeChart")
-    @Consumes({"application/xml", "application/json"})
-    public String paymentModeChart() {
-        
-        String jsonResult=transactionManager.paymentModeChart();
-        
-        return jsonResult;
-    }
     
 }
