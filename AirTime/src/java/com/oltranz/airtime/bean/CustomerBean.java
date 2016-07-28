@@ -34,6 +34,7 @@ public class CustomerBean {
     private TemplateBean templateBean;
     
     public String customers(){
+        
         templateBean.setDashboardClassName("omenu");
         templateBean.setUserClassName("omenu");
         templateBean.setCustomerClassName("omenu_active");
@@ -47,6 +48,7 @@ public class CustomerBean {
             String jsonResponse = response.readEntity(String.class);
             
             ObjectMapper mapper=new ObjectMapper();
+            
             customerList=(CustomerList)mapper.readValue(jsonResponse, CustomerList.class);
             
         }

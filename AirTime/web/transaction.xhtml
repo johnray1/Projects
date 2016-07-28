@@ -10,7 +10,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         
-        <title>AIRTIME MANAGEMENT POTRAL</title>
+        <title>AIRTIME - MANAGEMENT</title>
         
         <link href="css/style.css" rel="stylesheet"/>
         <link href="css/bootstrap.css" rel="stylesheet"/>
@@ -171,7 +171,12 @@
                     <div id="parentVerticalTab">
                         
                         <ul class="resp-tabs-list">
-                            <li id="tablist1">TRANSACTIONS</li>
+                            <li id="tablist1">
+                                TRANSACTIONS<br></br>
+                                <h:outputText value="#{TransactionBean.currentDate}">
+                                    <f:convertDateTime type="date" pattern="EEE, d MMM yyyy" />
+                                </h:outputText> 
+                            </li>
                         </ul>
                         
                         
@@ -208,18 +213,26 @@
                                                 <f:facet name="header">AMOUNT</f:facet>
                                                 &#8358; #{tra.walletTransaction.amount}
                                             </h:column>
-                                            
-                                            <h:column>
-                                                <f:facet name="header">CUR BALANCE</f:facet>
-                                                &#8358; #{tra.walletTransaction.newBalance}
-                                            </h:column>
                                             <h:column>
                                                 <f:facet name="header">PRE BALANCE</f:facet>
-                                                &#8358; #{tra.walletTransaction.prevBalance}
+                                                &#8358; 
+                                                <h:outputText value="#{tra.walletTransaction.prevBalance}">
+                                                    <f:convertNumber pattern="##,###"/>
+                                                </h:outputText>
                                             </h:column>
                                             <h:column>
+                                                <f:facet name="header">CUR BALANCE</f:facet>
+                                                &#8358; 
+                                                <h:outputText value="#{tra.walletTransaction.newBalance}">
+                                                    <f:convertNumber pattern="##,###"/>
+                                                </h:outputText>
+                                            </h:column>
+                                            
+                                            <h:column>
                                                 <f:facet name="header">TRANSACTION DATE</f:facet>
-                                                    #{tra.walletTransaction.transTime}
+                                                <h:outputText value="#{tra.walletTransaction.transTime}">
+                                                    <f:convertDateTime pattern="EEE, d MMM yyyy HH:mm"/>
+                                                </h:outputText>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">ACTION</f:facet>

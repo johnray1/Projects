@@ -5,6 +5,7 @@
 */
 package com.oltranz.airtime.model;
 
+import java.util.Date;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
@@ -41,7 +42,7 @@ public class WalletTransaction {
     private String token;
     
     @JsonProperty("transTime")
-    private String transTime;
+    private Date transTime;
     
     @JsonProperty("transTypeId")
     private int transTypeId;
@@ -172,20 +173,7 @@ public class WalletTransaction {
         this.token = token;
     }
 
-    /**
-     * @return the transTime
-     */
-    public String getTransTime() {
-        return transTime;
-    }
-
-    /**
-     * @param transTime the transTime to set
-     */
-    public void setTransTime(String transTime) {
-        this.transTime = transTime;
-    }
-
+    
     /**
      * @return the transTypeId
      */
@@ -198,6 +186,20 @@ public class WalletTransaction {
      */
     public void setTransTypeId(int transTypeId) {
         this.transTypeId = transTypeId;
+    }
+
+    /**
+     * @return the transTime
+     */
+    public Date getTransTime() {
+        return transTime;
+    }
+
+    /**
+     * @param transTime the transTime to set
+     */
+    public void setTransTime(Date transTime) {
+        this.transTime = transTime;
     }
     
     

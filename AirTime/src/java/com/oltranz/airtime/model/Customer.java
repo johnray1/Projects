@@ -5,6 +5,7 @@
  */
 package com.oltranz.airtime.model;
 
+import java.util.Date;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
@@ -13,79 +14,59 @@ import org.codehaus.jackson.annotate.JsonProperty;
  */
 public class Customer {
     
-    @JsonProperty("OSversion")
-    private String OSversion;
-    
-    @JsonProperty("creationTime")
-    private String creationTime;
-    
-    @JsonProperty("email")
-    private String email;
+    @JsonProperty("msisdn")
+    private String msisdn;
     
     @JsonProperty("fName")
     private String fName;
     
-    @JsonProperty("imei")
-    private String imei;
-    
-    @JsonProperty("lastUpdateTime")
-    private String lastUpdateTime;
-    
-    @JsonProperty("msisdn")
-    private String msisdn;
-    
     @JsonProperty("otherNames")
     private String otherNames;
-    
-    @JsonProperty("phoneSerialNumber")
-    private String phoneSerialNumber;
     
     @JsonProperty("pin")
     private String pin;
     
+    @JsonProperty("email")
+    private String email;
+    
+    @JsonProperty("imei")
+    private String imei;
+    
+    @JsonProperty("creationTime")
+    private Date creationTime;
+    
+    @JsonProperty("lastUpdateTime")
+    private Date lastUpdateTime;
+    
+    @JsonProperty("phoneSerialNumber")
+    private String phoneSerialNumber;
+    
+    @JsonProperty("OSversion")
+    private String OSversion;
+    
+    @JsonProperty("createdBy")
+    private String createdBy;
+   
+    @JsonProperty("modifiedBy")
+    private String modifiedBy;
+    
     @JsonProperty("status")
     private boolean status;
 
+    
+    
     /**
-     * @return the OSversion
+     * @return the msisdn
      */
-    public String getOSversion() {
-        return OSversion;
+    public String getMsisdn() {
+        return msisdn;
     }
 
     /**
-     * @param OSversion the OSversion to set
+     * @param msisdn the msisdn to set
      */
-    public void setOSversion(String OSversion) {
-        this.OSversion = OSversion;
-    }
-
-    /**
-     * @return the creationTime
-     */
-    public String getCreationTime() {
-        return creationTime;
-    }
-
-    /**
-     * @param creationTime the creationTime to set
-     */
-    public void setCreationTime(String creationTime) {
-        this.creationTime = creationTime;
-    }
-
-    /**
-     * @return the email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * @param email the email to set
-     */
-    public void setEmail(String email) {
-        this.email = email;
+    public void setMsisdn(String msisdn) {
+        this.msisdn = msisdn;
     }
 
     /**
@@ -103,48 +84,6 @@ public class Customer {
     }
 
     /**
-     * @return the imei
-     */
-    public String getImei() {
-        return imei;
-    }
-
-    /**
-     * @param imei the imei to set
-     */
-    public void setImei(String imei) {
-        this.imei = imei;
-    }
-
-    /**
-     * @return the lastUpdateTime
-     */
-    public String getLastUpdateTime() {
-        return lastUpdateTime;
-    }
-
-    /**
-     * @param lastUpdateTime the lastUpdateTime to set
-     */
-    public void setLastUpdateTime(String lastUpdateTime) {
-        this.lastUpdateTime = lastUpdateTime;
-    }
-
-    /**
-     * @return the msisdn
-     */
-    public String getMsisdn() {
-        return msisdn;
-    }
-
-    /**
-     * @param msisdn the msisdn to set
-     */
-    public void setMsisdn(String msisdn) {
-        this.msisdn = msisdn;
-    }
-
-    /**
      * @return the otherNames
      */
     public String getOtherNames() {
@@ -156,20 +95,6 @@ public class Customer {
      */
     public void setOtherNames(String otherNames) {
         this.otherNames = otherNames;
-    }
-
-    /**
-     * @return the phoneSerialNumber
-     */
-    public String getPhoneSerialNumber() {
-        return phoneSerialNumber;
-    }
-
-    /**
-     * @param phoneSerialNumber the phoneSerialNumber to set
-     */
-    public void setPhoneSerialNumber(String phoneSerialNumber) {
-        this.phoneSerialNumber = phoneSerialNumber;
     }
 
     /**
@@ -187,6 +112,92 @@ public class Customer {
     }
 
     /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * @return the imei
+     */
+    public String getImei() {
+        return imei;
+    }
+
+    /**
+     * @param imei the imei to set
+     */
+    public void setImei(String imei) {
+        this.imei = imei;
+    }
+
+    
+
+    /**
+     * @return the phoneSerialNumber
+     */
+    public String getPhoneSerialNumber() {
+        return phoneSerialNumber;
+    }
+
+    /**
+     * @param phoneSerialNumber the phoneSerialNumber to set
+     */
+    public void setPhoneSerialNumber(String phoneSerialNumber) {
+        this.phoneSerialNumber = phoneSerialNumber;
+    }
+
+    /**
+     * @return the OSversion
+     */
+    public String getOSversion() {
+        return OSversion;
+    }
+
+    /**
+     * @param OSversion the OSversion to set
+     */
+    public void setOSversion(String OSversion) {
+        this.OSversion = OSversion;
+    }
+
+    /**
+     * @return the createdBy
+     */
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    /**
+     * @param createdBy the createdBy to set
+     */
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    /**
+     * @return the modifiedBy
+     */
+    public String getModifiedBy() {
+        return modifiedBy;
+    }
+
+    /**
+     * @param modifiedBy the modifiedBy to set
+     */
+    public void setModifiedBy(String modifiedBy) {
+        this.modifiedBy = modifiedBy;
+    }
+
+    /**
      * @return the status
      */
     public boolean isStatus() {
@@ -199,6 +210,36 @@ public class Customer {
     public void setStatus(boolean status) {
         this.status = status;
     }
+
+    /**
+     * @return the creationTime
+     */
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    /**
+     * @param creationTime the creationTime to set
+     */
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    /**
+     * @return the lastUpdateTime
+     */
+    public Date getLastUpdateTime() {
+        return lastUpdateTime;
+    }
+
+    /**
+     * @param lastUpdateTime the lastUpdateTime to set
+     */
+    public void setLastUpdateTime(Date lastUpdateTime) {
+        this.lastUpdateTime = lastUpdateTime;
+    }
+
+    
 
     
     

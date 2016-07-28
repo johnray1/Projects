@@ -19,6 +19,9 @@ public class CustomerSingle {
     @JsonProperty("nowBalance")
     private double nowBalance;
     
+    @JsonProperty("status")
+    private Status status;
+    
     @JsonProperty("yesterdayBalance")
     private double yesterdayBalance;
 
@@ -51,6 +54,20 @@ public class CustomerSingle {
     }
 
     /**
+     * @return the status
+     */
+    public Status getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    /**
      * @return the yesterdayBalance
      */
     public double getYesterdayBalance() {
@@ -63,7 +80,7 @@ public class CustomerSingle {
     public void setYesterdayBalance(double yesterdayBalance) {
         this.yesterdayBalance = yesterdayBalance;
     }
-    
+
     
     
 }

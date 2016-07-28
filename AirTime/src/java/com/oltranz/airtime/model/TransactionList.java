@@ -14,6 +14,9 @@ import org.codehaus.jackson.annotate.JsonProperty;
  */
 public class TransactionList {
     
+    @JsonProperty("status")
+    private Status status;
+    
     @JsonProperty("walletHistory")
     private List<Transaction> transactionList;
 
@@ -30,6 +33,22 @@ public class TransactionList {
     public void setTransactionList(List<Transaction> transactionList) {
         this.transactionList = transactionList;
     }
+
+    /**
+     * @return the status
+     */
+    public Status getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+    
+    
     
     
 }

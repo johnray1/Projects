@@ -9,7 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         
-        <title>AIRTIME MANAGEMENT POTRAL - Title</title>
+        <title>AIRTIME - MANAGEMENT</title>
         
         <link href="css/style.css" rel="stylesheet"/>
         <link href="css/bootstrap.css" rel="stylesheet"/>
@@ -95,13 +95,19 @@
                                                     #{customer.email}
                                             </h:column>
                                             <h:column>
+                                                <f:facet name="header">STATUS</f:facet>
+                                                    #{customer.status}
+                                            </h:column>
+                                            <h:column>
                                                 <f:facet name="header">Actions</f:facet>
                                                 <h:form >
                                                     <h:commandLink   onclick="notifiyViewDetails()" id="viewDetails"> 
                                                         <h:graphicImage value="images/icon_view.png" />
                                                         <f:ajax event="click" listener="#{CustomerBean.customerForView(customer.msisdn)}" render="viewDetailsContentPanel" />
                                                     </h:commandLink>
-                                                    
+                                                    <h:commandLink action="#{CustomerBean.activeDeactive(customer)}" rendered="false"> 
+                                                        <h:graphicImage value="images/icon_delete.png" />
+                                                    </h:commandLink>
                                                 </h:form> 
                                             </h:column>
                                         </h:dataTable>
