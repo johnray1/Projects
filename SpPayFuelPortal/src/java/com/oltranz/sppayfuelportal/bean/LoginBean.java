@@ -33,6 +33,9 @@ public class LoginBean implements Serializable{
     @ManagedProperty(value="#{TemplateBean}")
     private TemplateBean templateBean;
     
+    @ManagedProperty(value="#{TankBean}")
+    private TankBean tankBean;
+    
     //validate login
     public String validateUsernamePassword() {
         
@@ -53,6 +56,12 @@ public class LoginBean implements Serializable{
                 
                 userId=ud.getUserDetailsModel().getUserId();
                 user=ud.getUserDetailsModel().getFname();
+                
+                tankBean.setUserId(userId);
+                tankBean.tank1Dashboard();
+                tankBean.tank2Dashboard();
+                tankBean.tank3Dashboard();
+                
                 
                 HttpSession session = SessionBean.getSession();
                 session.setAttribute("username",user );
@@ -162,6 +171,20 @@ public class LoginBean implements Serializable{
      */
     public void setTemplateBean(TemplateBean templateBean) {
         this.templateBean = templateBean;
+    }
+
+    /**
+     * @return the tankBean
+     */
+    public TankBean getTankBean() {
+        return tankBean;
+    }
+
+    /**
+     * @param tankBean the tankBean to set
+     */
+    public void setTankBean(TankBean tankBean) {
+        this.tankBean = tankBean;
     }
     
     

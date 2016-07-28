@@ -1,37 +1,97 @@
 
-//----------------------------------------------------------tanks----------------------------------------------------------
+// product sale per day
+$(function () {
+    $('#sp_soldquantiesperday').highcharts({
+        chart: {
+            type: 'column',
+            style: {	fontFamily: 'ubuntu'}
+        },
+        title: {
+            text: 'Products Quantities Sold per DAY'
+        },
+        
+        xAxis: {
+            categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
+            crosshair: true
+        },
+        
+        
+        yAxis: {
+            min: 0,
+            labels: {
+                align: 'right',
+                format: '{value:.,0f} L'
+            },
+            title: {
+                text: 'Quantity in Liters'
+            }
+        },
+        
+        
+        tooltip: {
+            headerFormat: '<strong>Day {point.key}</strong><br />',
+            pointFormat: 'Sold quantities of <span style="color:{series.color}">{series.name}: <b>{point.y:.1f} L</b></span><br />',
+            shared: true
+        },
+        
+        plotOptions: {
+            column: {
+                pointPadding: 0,
+                borderWidth: 0
+            }
+        },
+        
+        credits: {
+            enabled: false
+        },
+        
+        series: [{
+                name: 'Super',
+                color: '#137cce',
+                borderRadius: '3',
+                data: [2141, 2547, 3212, 3554, 3850, 3776, 4007, 4352, 3914, 3910, 3301, 4050, 4700, 2803, 2915, 3116, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                
+            },{
+                name: 'Gasoil',
+                color: '#eddb11',
+                borderRadius: '3',
+                data: [1141, 1547, 2212, 1554, 2850, 1776, 3007, 2352, 2914, 2910, 2301, 2050, 2700, 1803, 1915, 1116, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                
+            }]
+    });
+});
+
+
+
+// product sale goal
 $(function () {
     
-    var processed_json = new Array();
-    $.getJSON('http://41.74.172.132:8080/PayFuel/TransactionManagementService/tankChart', function(data) {
+    var monthName = new Array();
+    var superr = new Array();
+    var gasoil = new Array();
+    $.getJSON('http://localhost:8080/PayFuel/ChartManagementService/monthlyProductChart', function(data) {
         
         // Populate series
         for (i = 0; i < data.length; i++){
-            processed_json.push([data[i].name, data[i].y]);
+            monthName.push([data[i].name]);
+            superr.push([data[i].superr]);
+            gasoil.push([data[i].gasoil]);
         }
-        
-        
-        
-        $('#sp_tanks').highcharts({
+    
+        $('#sp_goals').highcharts({
             chart: {
-                type: 'column'
+                type: 'column',
+                style: {	fontFamily: 'ubuntu'}
             },
+        
             title: {
-                text: 'Tanks Quantity '
+                text: 'Product Sale PreMonth  vs  Product Sale CurMonth'
             },
-            subtitle: {
-                text: ''
-            },
+        
             xAxis: {
-                type: 'category',
-                labels: {
-                    rotation: -45,
-                    style: {
-                        fontSize: '11px',
-                        fontFamily: 'Verdana, sans-serif'
-                    }
-                }
+                categories: monthName
             },
+        
             yAxis: {
                 min: 0,
                 labels: {
@@ -39,60 +99,83 @@ $(function () {
                     format: '{value:.,0f} L'
                 },
                 title: {
-                    text: 'Quantity in Liters'
-                }
+                    text: 'Product Quantities in Liters'
+                },
+                plotLines: [{
+                        color: '#137cce',
+                        dashStyle: 'longdashdot',
+                        width: 2,
+                        value:20000,
+                        label: {
+                            align: 'right',
+                            style: {
+                                color:'#000000',
+                                fontWeight: 'bold',
+                                fontSize: '15',
+                                fontStyle: 'italic'
+                            },
+                            text: 'Goal for Super :20,000 L',
+                            x: -10
+                        },
+                        zIndex: 111
+                    },{
+                        color: '#eddb11',
+                        dashStyle: 'longdashdot',
+                        width:2,
+                        value:15000,
+                        label: {
+                            align: 'right',
+                            style: {
+                                color:'#000000',
+                                fontWeight: 'bold',
+                                fontSize: '15',
+                                fontStyle: 'italic'
+                            },
+                            text: 'Goal for Gasoil: 15,000 L',
+                            x: -10
+                        },
+                        zIndex: 111
+                    }]
             },
-            legend: {
-                enabled: false
-            },
-            
+        
             credits: {
                 enabled: false
             },
-            
+        
             tooltip: {
-                pointFormat: 'Quantity: <b>{point.y:.1f} Liters</b>'
+                valueSuffix: ' Liters',
+                headerFormat: '<span style="font-size:11px">Quantity Status</span><br/>',
+                pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b><br/>',
+                shared: true
             },
-            series: [{
-                    name: 'Branches',
-                    color:'#808080',
-                    data: processed_json,
-                    zones: [
-                        {value: 0,
-                            color: '#ff0000'
-                        }, 
-                        
-                        {value: 2500,
-                            color: '#ff0000'
-                        },
-                        
-                        
-                        {value: 10000,
-                            color: '#ff6600'
-                        },
-                        
-                        {value:20000,
-                            color: '#1a8c35'
-                        },
-                        
-                        {value:20600,
-                            color: '#1a8c35'
-                        }
-                        
-                    ],
-                    
+        
+            plotOptions: {            
+                series: {
+                    animation: {duration: 2000}
+                },
+            
+                column: {
+                    grouping: true,
+                    shadow: false,
+                    borderWidth: 0,				
                     dataLabels: {
-                        enabled: false,
-                        rotation: 0,
-                        color: '#FFFFFF',
-                        align: 'right',
-                        format: '{point.y:,.1f}', // one decimal
-                        y: 20, // 10 pixels down from the top
-                        style: {
-                            fontSize: '10px',
-                            fontFamily: 'Verdana, sans-serif'
-                        }
+                        enabled: true,
+                        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b><br/>',
+                        format: '{point.y:,.0f} Liters'
                     }
+                }
+            },
+        
+            series: [{
+                    name: 'Super',
+                    color: '#137cce',
+                    borderRadius: '7',
+                    data: superr
+                }, {
+                    name: 'Gasoil',
+                    color:"#eddb11",
+                    borderRadius: '7',
+                    data: gasoil
                 }]
         });
     });
@@ -100,77 +183,109 @@ $(function () {
 
 
 
-//----------------------------------------------------------products----------------------------------------------------------
+//tank
 $(function () {
     
-    // Make monochrome colors and set them as default for all pies
-    Highcharts.getOptions().plotOptions.pie.colors = (function () {
-        var colors = [],
-        base = Highcharts.getOptions().colors[0],
-        i;
-        
-        for (i = 0; i < 10; i += 1) {
-            // Start out with a darkened base color (negative brighten), and end
-            // up with a much brighter color
-            colors.push(Highcharts.Color('#eddb10').brighten((i - 1) / 10).get());
-        }
-        return colors;
-    }());
-    
-    var processed_json = new Array();
-    
-    $.getJSON('http://41.74.172.132:8080/PayFuel/TransactionManagementService/pieProductSale', function(data) {
-        
+    var tankName = new Array();
+    var maxCap = new Array();
+    var curCap = new Array();
+    $.getJSON('http://localhost:8080/PayFuel/ChartManagementService/tankChart', function(data) {
         
         // Populate series
         for (i = 0; i < data.length; i++){
-            processed_json.push([data[i].name, data[i].y]);
+            tankName.push([data[i].name]);
+            maxCap.push([data[i].max]);
+            curCap.push([data[i].current]);
         }
         
-        // Build the chart
-        $('#sp_products').highcharts({
+        $('#sp_tanks').highcharts({
+        
             chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false,
-                type: 'pie'
+                type: 'column',
+                style: {	fontFamily: 'ubuntu'}
             },
+        
             title: {
-                text: 'Products Sold'
+                fontSize:'14',
+                text: 'Current Quantitiy vs Maximum Capacity'
             },
-            tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        
+            xAxis: {
+                categories: tankName
             },
-            
+        
+            yAxis: {
+                min: 0,
+                labels: {
+                    align: 'right',
+                    format: '{value:.,0f} L'
+                },
+                title: {
+                    text: 'Tank Quantities in Liters'
+                }
+            },
+        
             credits: {
                 enabled: false
             },
-            
+        
+            tooltip: {
+                valueSuffix: ' Liters',
+                headerFormat: '<span style="font-size:11px">Quantity Status</span><br/>',
+                pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b><br/>',
+                shared: true
+            },
+        
             plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
+                colorByPoint: true,
+                series: {
+                    animation: {duration: 2000}
+                },
+                column: {
+                    grouping: false,
+                    shadow: false,
+                    borderWidth: 0,				
                     dataLabels: {
                         enabled: true,
-                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                        style: {
-                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'gray'
-                        }
+                        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b><br/>',
+                        format: '{point.y:,.0f} Liters'
                     }
                 }
             },
-            series: [{
-                    name: 'Products',
-                    data: processed_json
-                }]
+        
+            series: [
+                {
+                    name: 'Full Quantity',
+                    color:'#e6e6e6',
+                    borderRadius: '7',
+                    data: maxCap
+                }, 
+                {
+                    name: 'Current Quantity',
+                    colors: [
+                        '#137cce', 
+                        '#137cce', 
+                        '#eddb11'
+                    ],
+                    colorByPoint: true,
+                    borderRadius: '7',
+                    data: curCap
+                }
+            ]
         });
     });
 });
 
 
-//----------------------------------------------------------paymentmodes----------------------------------------------------------
+
+//payment mode
 $(function () {
     $('#sp_payments').highcharts({
+        
+        chart: {
+            style: {	fontFamily: 'ubuntu'}
+        },
+        
         title: {
             text: 'Payment Methods Usage per Products'
         },
@@ -195,6 +310,7 @@ $(function () {
                 type: 'column',
                 name: 'CASH',
                 color:'#000000',
+                borderRadius: '7',
                 data: [2200, 700]
             }, 
             
@@ -202,6 +318,7 @@ $(function () {
                 type: 'column',
                 name: 'MTN',
                 color:'#ffc508',
+                borderRadius: '4',
                 data: [2000, 800]
             }, 
             
@@ -209,6 +326,7 @@ $(function () {
                 type: 'column',
                 name: 'TIGO',
                 color:'#193370',
+                borderRadius: '4',
                 data: [1500, 400]
             },
             
@@ -216,6 +334,7 @@ $(function () {
                 type: 'column',
                 name: 'AIRTEL',
                 color:'#ec1f27',
+                borderRadius: '4',
                 data: [1400, 600]
             },
             
@@ -223,6 +342,7 @@ $(function () {
                 type: 'column',
                 name: 'Voucher',
                 color:'#7aaa75',
+                borderRadius: '4',
                 data: [2000, 350]
             },
             
@@ -230,6 +350,7 @@ $(function () {
                 type: 'column',
                 name: 'Debt',
                 color:'#808080',
+                borderRadius: '4',
                 data: [200, 100]
             },
             
@@ -237,6 +358,7 @@ $(function () {
                 type: 'column',
                 name: 'Visa',
                 color:'#1a1f71',
+                borderRadius: '4',
                 data: [1100, 200]
             },
             
@@ -244,6 +366,7 @@ $(function () {
                 type: 'column',
                 name: 'Mastercard',
                 color:'#fcbb37',
+                borderRadius: '4',
                 data: [1000, 300]
             },
             
@@ -251,6 +374,7 @@ $(function () {
                 type: 'column',
                 name: 'SP Card',
                 color:'#1a8c35',
+                borderRadius: '4',
                 data: [500, 200]
             }
             
@@ -258,136 +382,3 @@ $(function () {
     });
 });
 
-
-
-//----------------------------------------------------------branches----------------------------------------------------------
-$(function () {
-    
-    var processed_json = new Array();
-    $.getJSON('http://41.74.172.132:8080/PayFuel/TransactionManagementService/topBranchSale', function(data) {
-        
-        // Populate series
-        for (i = 0; i < data.length; i++){
-            processed_json.push([data[i].name, data[i].y]);
-        }
-        
-        $('#sp_topbranches').highcharts({
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'Top 10 Selling Branches '
-            },
-            subtitle: {
-                text: ''
-            },
-            xAxis: {
-                type: 'category',
-                labels: {
-                    rotation: -45,
-                    style: {
-                        fontSize: '11px',
-                        fontFamily: 'Verdana, sans-serif'
-                    }
-                }
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'Sells in RWF millions'
-                }
-            },
-            legend: {
-                enabled: false,
-                floating: true
-            },
-            
-            credits: {
-                enabled: false
-            },
-            
-            tooltip: {
-                pointFormat: 'Sells: <b>{point.y:.1f} RWF</b>'
-            },
-            
-            series: [{
-                    name: 'Branches',
-                    data:processed_json,
-                    color: '#1a8c35',
-                    dataLabels: {
-                        enabled: false,
-                        rotation: 0,
-                        color: '#FFFFFF',
-                        align: 'right',
-                        format: '{point.y:,.1f}', // one decimal
-                        y: 20, // 10 pixels down from the top
-                        style: {
-                            fontSize: '10px',
-                            fontFamily: 'Verdana, sans-serif'
-                        }
-                    }
-                }]
-        });
-    });
-});
-
-
-//----------------------------------------------------------sellers----------------------------------------------------------
-$(function () {
-    
-    var processed_json = new Array();
-    $.getJSON('http://41.74.172.132:8080/PayFuel/TransactionManagementService/topUserSale', function(data) {
-        
-        // Populate series
-        for (i = 0; i < data.length; i++){
-            processed_json.push([data[i].name, data[i].y]);
-        }
-        
-        $('#sp_topseller').highcharts({
-            chart: {
-                type: 'bar'
-            },
-            title: {
-                text: 'Top 10 Seller Perfomance'
-            },
-            xAxis: {
-                categories: []
-            },
-            
-            yAxis: {
-                min: 0,
-                labels: {
-                    format: '{value:.,0f} RwF'
-                },
-                title: {
-                    text: 'Amount in RWF'
-                }
-            },
-            
-            legend: {
-                enabled: false,
-                floating: true
-            },
-            
-            credits: {
-                enabled: false
-            },
-            
-            plotOptions: {
-                series: {
-                    stacking: 'medium'
-                }
-            },
-            
-            tooltip: {
-                pointFormat: 'Amount Sold: <b>{point.y:.1f} RWF</b>'
-            },
-            
-            series: [{
-                    color:'#215cca',
-                    data: processed_json
-                }]
-            
-        });
-    });
-});

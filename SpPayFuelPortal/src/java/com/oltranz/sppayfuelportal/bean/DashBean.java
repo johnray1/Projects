@@ -6,6 +6,7 @@
 package com.oltranz.sppayfuelportal.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -18,12 +19,13 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class DashBean implements Serializable{
     
+    private Date date;
     
     @ManagedProperty(value="#{TemplateBean}")
     private TemplateBean templateBean;
     
     public String dashBoard(){
-        
+        date=new Date();
         templateBean.setDashboardClassName("omenu_active");
         templateBean.setBranchClassName("omenu");
         templateBean.setDevicesClassName("omenu");
@@ -48,6 +50,20 @@ public class DashBean implements Serializable{
      */
     public void setTemplateBean(TemplateBean templateBean) {
         this.templateBean = templateBean;
+    }
+
+    /**
+     * @return the date
+     */
+    public Date getDate() {
+        return date;
+    }
+
+    /**
+     * @param date the date to set
+     */
+    public void setDate(Date date) {
+        this.date = date;
     }
     
     
