@@ -54,14 +54,12 @@ public class UserBean implements Serializable{
     
     public String users(){
         
-        templateBean.setDashboardClassName("omenu");
-        templateBean.setBranchClassName("omenu");
-        templateBean.setDevicesClassName("omenu");
-        templateBean.setProductsClassName("omenu");
-        templateBean.setUsersClassName("omenu_active");
-        templateBean.setRolesClassName("omenu");
-        templateBean.setTransactionsClassName("omenu");
-        templateBean.setLogsClassName("omenu");
+        templateBean.setDashboardClassName("deactive");
+        templateBean.setBranchClassName("deactive");
+        templateBean.setProductClassName("deactive");
+        templateBean.setGoalClassName("deactive");
+        templateBean.setTransactionClassName("deactive");
+        templateBean.setSettingClassName("active");
         
         try{
             String getBranchUrl="http://localhost:8080/PayFuel/UserManagementService/users";
@@ -169,14 +167,12 @@ public class UserBean implements Serializable{
     
     public String roles(){
         
-        templateBean.setDashboardClassName("omenu");
-        templateBean.setBranchClassName("omenu");
-        templateBean.setDevicesClassName("omenu");
-        templateBean.setProductsClassName("omenu");
-        templateBean.setUsersClassName("omenu_active");
-        templateBean.setRolesClassName("omenu");
-        templateBean.setTransactionsClassName("omenu");
-        templateBean.setLogsClassName("omenu");
+        templateBean.setDashboardClassName("deactive");
+        templateBean.setBranchClassName("deactive");
+        templateBean.setProductClassName("deactive");
+        templateBean.setGoalClassName("deactive");
+        templateBean.setTransactionClassName("deactive");
+        templateBean.setSettingClassName("active");
         
         try{
             String getBranchUrl="http://localhost:8080/PayFuel/UserManagementService/getAllRoles";

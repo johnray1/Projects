@@ -43,19 +43,15 @@ public class PumpBean {
     
     public String pumps(){
         
-        templateBean.setDashboardClassName("omenu");
-        templateBean.setBranchClassName("omenu");
-        templateBean.setDevicesClassName("omenu_active");
-        templateBean.setProductsClassName("omenu");
-        templateBean.setUsersClassName("omenu");
-        templateBean.setRolesClassName("omenu");
-        templateBean.setTransactionsClassName("omenu");
-        templateBean.setLogsClassName("omenu");
-        
-        int userId=loginBean.getUserId();
+        templateBean.setDashboardClassName("deactive");
+        templateBean.setBranchClassName("deactive");
+        templateBean.setProductClassName("deactive");
+        templateBean.setGoalClassName("deactive");
+        templateBean.setTransactionClassName("deactive");
+        templateBean.setSettingClassName("active");
         
         try{
-            String getBranchUrl="http://localhost:8080/PayFuel/PumpManagementService/getPumpNozzleProductList";
+            String getBranchUrl="http://localhost:8080/PayFuel/PumpManagementService/getPumpNozzleProductList/"+loginBean.getbId();
             Response response = CommonLibrary.sendRESTRequest(getBranchUrl, "empty data", MediaType.APPLICATION_JSON, "GET");
             //System.out.println(response.getHeaders());
             String jsonResponse = response.readEntity(String.class);

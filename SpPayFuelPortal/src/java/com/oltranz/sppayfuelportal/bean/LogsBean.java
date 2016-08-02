@@ -8,6 +8,9 @@ package com.oltranz.sppayfuelportal.bean;
 import com.oltranz.sppayfuelportal.library.CommonLibrary;
 import com.oltranz.sppayfuelportal.model.LogList;
 import com.oltranz.sppayfuelportal.model.LogSingle;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -36,36 +39,44 @@ public class LogsBean {
     @ManagedProperty(value="#{TemplateBean}")
     private TemplateBean templateBean;
     
+    @ManagedProperty(value="#{ActionBean}")
+    private ActionBean actionBean;
+    
     public void init() {
         saveActionName="Save";
     }
     
     public String logs(){
         
-        templateBean.setDashboardClassName("omenu");
-        templateBean.setBranchClassName("omenu");
-        templateBean.setDevicesClassName("omenu");
-        templateBean.setProductsClassName("omenu");
-        templateBean.setUsersClassName("omenu");
-        templateBean.setRolesClassName("omenu");
-        templateBean.setTransactionsClassName("omenu");
-        templateBean.setLogsClassName("omenu_active");
+        templateBean.setDashboardClassName("deactive");
+        templateBean.setBranchClassName("deactive");
+        templateBean.setProductClassName("deactive");
+        templateBean.setGoalClassName("deactive");
+        templateBean.setTransactionClassName("deactive");
+        templateBean.setSettingClassName("active");
+        
+        actionBean.actions();
+        
+        Date currentDate = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        String startDate=dateFormat.format(currentDate)+"  00:00";
+        String endDate=dateFormat.format(currentDate)+"  23:59";
+        date=startDate+" - "+endDate;
         
         try{
-            String getBranchUrl="http://localhost:8080/PayFuel/LogManagementService/logs";
-            Response response = CommonLibrary.sendRESTRequest(getBranchUrl, "empty data", MediaType.APPLICATION_JSON, "GET");
-            //System.out.println(response.getHeaders());
+            String url="http://localhost:8080/PayFuel/LogManagementService/logs/filter";
+            String  jsonData = "{\n" +
+                    "\"userId\":"+usId+",\n" +
+                    "\"actionId\":"+actionId+",\n" +
+                    "\"source\":\""+source+"\",\n" +
+                    "\"ip\":\""+ip+"\",\n" +
+                    "\"date\":\""+date+"\"\n" +
+                    "}";
+            Response response=CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
             String jsonResponse = response.readEntity(String.class);
-            //System.out.println(jsonResponse);
             
             ObjectMapper mapper=new ObjectMapper();
             logList=(LogList)mapper.readValue(jsonResponse, LogList.class);
-            
-            this.usId=0;
-            this.actionId=0;
-            this.source=null;
-            this.ip=null;
-            this.date=null;
         }
         catch(Exception ex){
             System.out.println(ex.getMessage());
@@ -97,14 +108,14 @@ public class LogsBean {
     
     public String filteredLogs(){
         
-        templateBean.setDashboardClassName("omenu");
-        templateBean.setBranchClassName("omenu");
-        templateBean.setDevicesClassName("omenu");
-        templateBean.setProductsClassName("omenu");
-        templateBean.setUsersClassName("omenu");
-        templateBean.setRolesClassName("omenu");
-        templateBean.setTransactionsClassName("omenu");
-        templateBean.setLogsClassName("omenu_active");
+        templateBean.setDashboardClassName("deactive");
+        templateBean.setBranchClassName("deactive");
+        templateBean.setProductClassName("deactive");
+        templateBean.setGoalClassName("deactive");
+        templateBean.setTransactionClassName("deactive");
+        templateBean.setSettingClassName("active");
+        
+        actionBean.actions();
         
         try{
             String url="http://localhost:8080/PayFuel/LogManagementService/logs/filter";
@@ -239,19 +250,33 @@ public class LogsBean {
     public void setIp(String ip) {
         this.ip = ip;
     }
-
+    
     /**
      * @return the date
      */
     public String getDate() {
         return date;
     }
-
+    
     /**
      * @param date the date to set
      */
     public void setDate(String date) {
         this.date = date;
+    }
+    
+    /**
+     * @return the actionBean
+     */
+    public ActionBean getActionBean() {
+        return actionBean;
+    }
+    
+    /**
+     * @param actionBean the actionBean to set
+     */
+    public void setActionBean(ActionBean actionBean) {
+        this.actionBean = actionBean;
     }
     
     

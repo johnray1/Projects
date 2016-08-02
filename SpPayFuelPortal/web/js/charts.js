@@ -1,64 +1,82 @@
 
 // product sale per day
 $(function () {
-    $('#sp_soldquantiesperday').highcharts({
-        chart: {
-            type: 'column',
-            style: {	fontFamily: 'ubuntu'}
-        },
-        title: {
-            text: 'Products Quantities Sold per DAY'
-        },
+    var dateList = new Array();
+    var superList = new Array();
+    var gasoilList = new Array();
+    $.getJSON('http://41.74.172.132:8080/PayFuel/ChartManagementService/dailyProductChart', function(data) {
         
-        xAxis: {
-            categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
-            crosshair: true
-        },
+        // Populate series
+        for (i = 0; i < data.day.length; i++){
+            dateList.push(data.day[i]);
+        }
         
+        for (j = 0; j < data.superList.length; j++){
+            superList.push(data.superList[j]);
+        }
         
-        yAxis: {
-            min: 0,
-            labels: {
-                align: 'right',
-                format: '{value:.,0f} L'
+        for (k = 0; k < data.gasoilList.length; k++){
+            gasoilList.push(data.gasoilList[k]);
+        }
+    
+        $('#sp_soldquantiesperday').highcharts({
+            chart: {
+                type: 'column',
+                style: {	fontFamily: 'ubuntu'}
             },
             title: {
-                text: 'Quantity in Liters'
-            }
-        },
+                text: 'Products Quantities Sold per DAY'
+            },
+        
+            xAxis: {
+                categories: dateList,
+                crosshair: true
+            },
         
         
-        tooltip: {
-            headerFormat: '<strong>Day {point.key}</strong><br />',
-            pointFormat: 'Sold quantities of <span style="color:{series.color}">{series.name}: <b>{point.y:.1f} L</b></span><br />',
-            shared: true
-        },
+            yAxis: {
+                min: 0,
+                labels: {
+                    align: 'right',
+                    format: '{value:.,0f} L'
+                },
+                title: {
+                    text: 'Quantity in Liters'
+                }
+            },
         
-        plotOptions: {
-            column: {
-                pointPadding: 0,
-                borderWidth: 0
-            }
-        },
         
-        credits: {
-            enabled: false
-        },
+            tooltip: {
+                headerFormat: '<strong>Day {point.key}</strong><br />',
+                pointFormat: 'Sold quantities of <span style="color:{series.color}">{series.name}: <b>{point.y:.1f} L</b></span><br />',
+                shared: true
+            },
         
-        series: [{
-                name: 'Super',
-                color: '#137cce',
-                borderRadius: '3',
-                data: [2141, 2547, 3212, 3554, 3850, 3776, 4007, 4352, 3914, 3910, 3301, 4050, 4700, 2803, 2915, 3116, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-                
-            },{
-                name: 'Gasoil',
-                color: '#eddb11',
-                borderRadius: '3',
-                data: [1141, 1547, 2212, 1554, 2850, 1776, 3007, 2352, 2914, 2910, 2301, 2050, 2700, 1803, 1915, 1116, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-                
-            }]
+            plotOptions: {
+                column: {
+                    pointPadding: 0,
+                    borderWidth: 0
+                }
+            },
+        
+            credits: {
+                enabled: false
+            },
+        
+            series: [{
+                    name: 'Super',
+                    color: '#137cce',
+                    borderRadius: '3',
+                    data: superList
+                },{
+                    name: 'Gasoil',
+                    color: '#eddb11',
+                    borderRadius: '3',
+                    data: gasoilList
+                }]
+        });
     });
+
 });
 
 
@@ -69,7 +87,7 @@ $(function () {
     var monthName = new Array();
     var superr = new Array();
     var gasoil = new Array();
-    $.getJSON('http://localhost:8080/PayFuel/ChartManagementService/monthlyProductChart', function(data) {
+    $.getJSON('http://41.74.172.132:8080/PayFuel/ChartManagementService/monthlyProductChart', function(data) {
         
         // Populate series
         for (i = 0; i < data.length; i++){
@@ -105,7 +123,7 @@ $(function () {
                         color: '#137cce',
                         dashStyle: 'longdashdot',
                         width: 2,
-                        value:20000,
+                        value:100,
                         label: {
                             align: 'right',
                             style: {
@@ -114,7 +132,7 @@ $(function () {
                                 fontSize: '15',
                                 fontStyle: 'italic'
                             },
-                            text: 'Goal for Super :20,000 L',
+                            text: 'Goal for Super :100 L',
                             x: -10
                         },
                         zIndex: 111
@@ -122,7 +140,7 @@ $(function () {
                         color: '#eddb11',
                         dashStyle: 'longdashdot',
                         width:2,
-                        value:15000,
+                        value:90,
                         label: {
                             align: 'right',
                             style: {
@@ -131,7 +149,7 @@ $(function () {
                                 fontSize: '15',
                                 fontStyle: 'italic'
                             },
-                            text: 'Goal for Gasoil: 15,000 L',
+                            text: 'Goal for Gasoil: 90 L',
                             x: -10
                         },
                         zIndex: 111
@@ -189,7 +207,7 @@ $(function () {
     var tankName = new Array();
     var maxCap = new Array();
     var curCap = new Array();
-    $.getJSON('http://localhost:8080/PayFuel/ChartManagementService/tankChart', function(data) {
+    $.getJSON('http://41.74.172.132:8080/PayFuel/ChartManagementService/tankChart', function(data) {
         
         // Populate series
         for (i = 0; i < data.length; i++){
@@ -254,13 +272,16 @@ $(function () {
             },
         
             series: [
+                
                 {
+                    showInLegend: false, 
                     name: 'Full Quantity',
                     color:'#e6e6e6',
                     borderRadius: '7',
                     data: maxCap
                 }, 
                 {
+                    showInLegend: false, 
                     name: 'Current Quantity',
                     colors: [
                         '#137cce', 

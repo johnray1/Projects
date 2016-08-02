@@ -67,14 +67,12 @@ public class ProductTypeBean {
     
     public String productTypes(){
         
-        templateBean.setDashboardClassName("omenu");
-        templateBean.setBranchClassName("omenu");
-        templateBean.setDevicesClassName("omenu");
-        templateBean.setProductsClassName("omenu_active");
-        templateBean.setUsersClassName("omenu");
-        templateBean.setRolesClassName("omenu");
-        templateBean.setTransactionsClassName("omenu");
-        templateBean.setLogsClassName("omenu");
+        templateBean.setDashboardClassName("deactive");
+        templateBean.setBranchClassName("deactive");
+        templateBean.setProductClassName("active");
+        templateBean.setGoalClassName("deactive");
+        templateBean.setTransactionClassName("deactive");
+        templateBean.setSettingClassName("deactive");
         
         try{
             String getBranchUrl="http://localhost:8080/PayFuel/ProductManagementService/productTypes";

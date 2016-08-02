@@ -34,7 +34,7 @@ public class TankBean {
     private String preCalibrationDate;
     private String nextCalibrationDate;
     private String branchId;
-   
+    private int bId;
     
     private TankDash tankDash1;
     private PumpDash pumpDash1;
@@ -61,7 +61,7 @@ public class TankBean {
     private TankSingle tankSingle;
     private TankList tankList;
     
-    private int userId;
+    
     
     @ManagedProperty(value="#{TemplateBean}")
     private TemplateBean templateBean;
@@ -73,22 +73,20 @@ public class TankBean {
     
     public String tanks(){
         
-        templateBean.setDashboardClassName("omenu");
-        templateBean.setBranchClassName("omenu");
-        templateBean.setDevicesClassName("omenu_active");
-        templateBean.setProductsClassName("omenu");
-        templateBean.setUsersClassName("omenu");
-        templateBean.setRolesClassName("omenu");
-        templateBean.setTransactionsClassName("omenu");
-        templateBean.setLogsClassName("omenu");
+        templateBean.setDashboardClassName("deactive");
+        templateBean.setBranchClassName("deactive");
+        templateBean.setProductClassName("deactive");
+        templateBean.setGoalClassName("deactive");
+        templateBean.setTransactionClassName("deactive");
+        templateBean.setSettingClassName("active");
         
         
         try{
-            String getBranchUrl="http://localhost:8080/PayFuel/TankManagementService/tanks/"+userId;
+            String getBranchUrl="http://localhost:8080/PayFuel/TankManagementService/tanks/"+bId;
             Response response = CommonLibrary.sendRESTRequest(getBranchUrl, "empty data", MediaType.APPLICATION_JSON, "GET");
-            //System.out.println(response.getHeaders());
+            
             String jsonResponse = response.readEntity(String.class);
-            //System.out.println(jsonResponse);
+            
             
             ObjectMapper mapper=new ObjectMapper();
             tankList=(TankList)mapper.readValue(jsonResponse, TankList.class);
@@ -474,19 +472,7 @@ public class TankBean {
         this.templateBean = templateBean;
     }
     
-    /**
-     * @return the userId
-     */
-    public int getUserId() {
-        return userId;
-    }
     
-    /**
-     * @param userId the userId to set
-     */
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
 
     /**
      * @return the pumpDash1
@@ -656,6 +642,22 @@ public class TankBean {
      */
     public void setNozzleDash8(NozzleDash nozzleDash8) {
         this.nozzleDash8 = nozzleDash8;
+    }
+
+    
+
+    /**
+     * @return the bId
+     */
+    public int getbId() {
+        return bId;
+    }
+
+    /**
+     * @param bId the bId to set
+     */
+    public void setbId(int bId) {
+        this.bId = bId;
     }
 
     

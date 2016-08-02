@@ -53,7 +53,7 @@ public class BranchBean implements Serializable{
         
         String s=Common.shared.byteArrayToString(permissionBytes);
         
-        int bitValue=Common.shared.GetBit(permissionBytes, 1);//1 means 2nd Position bit in permisson
+        int bitValue=Common.shared.GetBit(permissionBytes, 1);//1 means 2nd Position bit in permisson like array
         
         
         branchMenuItemRendered=bitValue==1;
@@ -67,20 +67,16 @@ public class BranchBean implements Serializable{
     
     public String branches(){
         
-        templateBean.setDashboardClassName("omenu");
-        templateBean.setBranchClassName("omenu_active");
-        templateBean.setDevicesClassName("omenu");
-        templateBean.setProductsClassName("omenu");
-        templateBean.setUsersClassName("omenu");
-        templateBean.setRolesClassName("omenu");
-        templateBean.setTransactionsClassName("omenu");
-        templateBean.setLogsClassName("omenu");
+        templateBean.setDashboardClassName("deactive");
+        templateBean.setBranchClassName("active");
+        templateBean.setProductClassName("deactive");
+        templateBean.setGoalClassName("deactive");
+        templateBean.setTransactionClassName("deactive");
+        templateBean.setSettingClassName("deactive");
+       
         
-        
-        int userId=loginBean.getUserId();
-        System.out.println(loginBean.getUserId());
         try{
-            String getUrl="http://localhost:8080/PayFuel/BranchManagementService/branches/"+userId;
+            String getUrl="http://localhost:8080/PayFuel/BranchManagementService/branches/"+loginBean.getbId();
             Response response = CommonLibrary.sendRESTRequest(getUrl, "empty data", MediaType.TEXT_PLAIN, "GET");
             String jsonResponse = response.readEntity(String.class);
             

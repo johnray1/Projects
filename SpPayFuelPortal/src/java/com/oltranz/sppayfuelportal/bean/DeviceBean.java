@@ -46,19 +46,16 @@ public class DeviceBean implements Serializable{
     
     public String devices(){
         
-        templateBean.setDashboardClassName("omenu");
-        templateBean.setBranchClassName("omenu");
-        templateBean.setDevicesClassName("omenu_active");
-        templateBean.setProductsClassName("omenu");
-        templateBean.setUsersClassName("omenu");
-        templateBean.setRolesClassName("omenu");
-        templateBean.setTransactionsClassName("omenu");
-        templateBean.setLogsClassName("omenu");
+        templateBean.setDashboardClassName("deactive");
+        templateBean.setBranchClassName("deactive");
+        templateBean.setProductClassName("deactive");
+        templateBean.setGoalClassName("deactive");
+        templateBean.setTransactionClassName("deactive");
+        templateBean.setSettingClassName("active");
         
-        int userId=loginBean.getUserId();
-        System.out.println(loginBean.getUserId());
+        
         try{
-            String getBranchUrl="http://localhost:8080/PayFuel/DeviceManagementService/devices/"+userId;
+            String getBranchUrl="http://localhost:8080/PayFuel/DeviceManagementService/devices/"+loginBean.getbId();
             Response response = CommonLibrary.sendRESTRequest(getBranchUrl, "empty data", MediaType.APPLICATION_JSON, "GET");
             //System.out.println(response.getHeaders());
             String jsonResponse = response.readEntity(String.class);

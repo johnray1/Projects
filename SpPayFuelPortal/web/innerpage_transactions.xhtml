@@ -10,23 +10,25 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <title>SP - PayFuel Adminstration</title>
-        
-        <link href="css/style.css" rel="stylesheet" type="text/css" />  
+            
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link href="css/menu.css" rel="stylesheet"/>
+        <link href="css/tanks.css" rel="stylesheet"/>
+        <link href="css/topheader.css" rel="stylesheet"/>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
-        <link href="css/forms.css" rel="stylesheet" type="text/css" />   
         <link href="css/lightcase.css" rel="stylesheet" type="text/css" />
         <link href="css/jquery.dataTables.min.css" rel="stylesheet" />
         <link href="css/buttons.dataTables.min.css" rel="stylesheet" />
         <link href="css/easy-responsive-tabs.css" rel="stylesheet" />
         <link href="js/daterangepicker.css" rel="stylesheet" type="text/css" />
         <link href="css/chosen.css" rel="stylesheet" type="text/css" />
-        
+            
         <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
         <script type="text/javascript" src="js/jquery.events.touch.js"></script>
         <script type="text/javascript" src="js/lightcase.js"></script>
         <script type="text/javascript" src="js/lightcase.init.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        
+            
         <script type="text/javascript" src="js/easy-responsive-tabs.js"></script>
         <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="js/dataTables.buttons.min.js"></script>	
@@ -35,17 +37,19 @@
         <script type="text/javascript" src="js/pdfmake.min.js"></script>	
         <script type="text/javascript" src="js/vfs_fonts.js"></script>	
         <script type="text/javascript" src="js/buttons.html5.min.js"></script>	
+        <script type="text/javascript" src="js/buttons.print.min."></script>
         <script type="text/javascript" src="js/moment.min.js"></script>
         <script type="text/javascript" src="js/daterangepicker.js"></script>
         <script src="js/customScripts.js" type="text/javascript"></script>
-        
+            
         <script>
             
             $(document).ready(function() {
                 turn2DataTable('dataTableList');
             } );
         </script>
-        
+            
+            
         <script type="text/javascript">
             $(function() {
                 
@@ -64,7 +68,7 @@
                         'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')] 
                     },
                     "locale": {
-                        "format": "YYYY/MM/DD  HH:mm",
+                        "format": "YYYY/MM/DD HH:mm",
                         "separator": " - ",
                         "applyLabel": "Apply",
                         "cancelLabel": "Cancel",
@@ -113,9 +117,9 @@
                 });
             });
         </script>
-        
+            
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
-        
+            
     </h:head>
     
     
@@ -307,8 +311,8 @@
         <ui:include src="templates/footer.xhtml" />  
         
         
-        <!--Start Scripts -->
-        
+       <!--Start Scripts -->
+            
         <script type="text/javascript" src="js/chosen.jquery.min.js"></script>
         <script type="text/javascript">
             var showEdit=false;
@@ -388,7 +392,6 @@
             
             
             
-            
             $(".textinput input").change(function() {
                 if ($(this).val() != "") {
                     $(this).addClass('filled');
@@ -411,7 +414,44 @@
             }
         </script>
         
+        <script>
+            $(document).ready(function () {
+                $('#parentVerticalTab').easyResponsiveTabs({
+                    type: 'default', //Types: default, vertical, accordion
+                    width: 'auto', //auto or any width like 600px
+                    fit: true, // 100% fit in a container
+                    closed: 'accordion', // Start closed if in accordion view
+                    tabidentify: 'hor_1', // The tab groups identifier
+                    activate: function (event) { // Callback function if tab is switched
+                        var $tab = $(this);
+                        var $info = $('#nested-tabInfo2');
+                        var $name = $('span', $info);
+                        $name.text($tab.text());
+                        $info.show();
+                    }
+                });
+                        
+                        
+            });
+        </script>
+        
+        
+        <script type="text/javascript">
+            $("document").ready(function ($) {
+                var nav = $('#menufloat0');
+                
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > 200) {
+                        nav.addClass("menufloat");
+                    } else {
+                        nav.removeClass("menufloat");
+                    }
+                });
+            });
+        </script>
+            
         <!-- End Scripts -->
+            
         
         
         

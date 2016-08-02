@@ -21,16 +21,12 @@ public class TemplateBean implements Serializable{
     //Menu variables
     private String dashboardClassName;
     private String branchClassName;
-    private String devicesClassName;
-    private String productsClassName;
-    private String usersClassName;
-    private String rolesClassName;
-    private String transactionsClassName;
-    private String logsClassName;
+    private String productClassName;
+    private String goalClassName;
+    private String transactionClassName;
+    private String settingClassName;
+    private String hideClassName;
 
-    
-    
-    
     /**
      * @return the dashboardClassName
      */
@@ -60,87 +56,73 @@ public class TemplateBean implements Serializable{
     }
 
     /**
-     * @return the devicesClassName
+     * @return the productClassName
      */
-    public String getDevicesClassName() {
-        return devicesClassName;
+    public String getProductClassName() {
+        return productClassName;
     }
 
     /**
-     * @param devicesClassName the devicesClassName to set
+     * @param productClassName the productClassName to set
      */
-    public void setDevicesClassName(String devicesClassName) {
-        this.devicesClassName = devicesClassName;
+    public void setProductClassName(String productClassName) {
+        this.productClassName = productClassName;
     }
 
     /**
-     * @return the productsClassName
+     * @return the goalClassName
      */
-    public String getProductsClassName() {
-        return productsClassName;
+    public String getGoalClassName() {
+        return goalClassName;
     }
 
     /**
-     * @param productsClassName the productsClassName to set
+     * @param goalClassName the goalClassName to set
      */
-    public void setProductsClassName(String productsClassName) {
-        this.productsClassName = productsClassName;
+    public void setGoalClassName(String goalClassName) {
+        this.goalClassName = goalClassName;
     }
 
     /**
-     * @return the usersClassName
+     * @return the transactionClassName
      */
-    public String getUsersClassName() {
-        return usersClassName;
+    public String getTransactionClassName() {
+        return transactionClassName;
     }
 
     /**
-     * @param usersClassName the usersClassName to set
+     * @param transactionClassName the transactionClassName to set
      */
-    public void setUsersClassName(String usersClassName) {
-        this.usersClassName = usersClassName;
+    public void setTransactionClassName(String transactionClassName) {
+        this.transactionClassName = transactionClassName;
     }
 
     /**
-     * @return the rolesClassName
+     * @return the settingClassName
      */
-    public String getRolesClassName() {
-        return rolesClassName;
+    public String getSettingClassName() {
+        return settingClassName;
     }
 
     /**
-     * @param rolesClassName the rolesClassName to set
+     * @param settingClassName the settingClassName to set
      */
-    public void setRolesClassName(String rolesClassName) {
-        this.rolesClassName = rolesClassName;
+    public void setSettingClassName(String settingClassName) {
+        this.settingClassName = settingClassName;
     }
 
     /**
-     * @return the transactionsClassName
+     * @return the hideClassName
      */
-    public String getTransactionsClassName() {
-        return transactionsClassName;
+    public String getHideClassName() {
+        return hideClassName;
     }
 
     /**
-     * @param transactionsClassName the transactionsClassName to set
+     * @param hideClassName the hideClassName to set
      */
-    public void setTransactionsClassName(String transactionsClassName) {
-        this.transactionsClassName = transactionsClassName;
-    }
-
-    /**
-     * @return the logsClassName
-     */
-    public String getLogsClassName() {
-        return logsClassName;
-    }
-
-    /**
-     * @param logsClassName the logsClassName to set
-     */
-    public void setLogsClassName(String logsClassName) {
-        this.logsClassName = logsClassName;
+    public void setHideClassName(String hideClassName) {
+        this.hideClassName = hideClassName;
     }
     
     

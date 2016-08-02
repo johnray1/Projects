@@ -5,65 +5,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     
     <h:head>
-        
-        <link href="css/style.css" rel="stylesheet" type="text/css" />  
-        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
-        
-        <link href="css/lightcase.css" rel="stylesheet" type="text/css" />
-        <link href="css/chosen.css" rel="stylesheet" type="text/css" />
-        <link href="css/jquery.dataTables.min.css" rel="stylesheet" />
-        <link href="css/buttons.dataTables.min.css" rel="stylesheet" />
-        <link href="css/easy-responsive-tabs.css" rel="stylesheet" />
-        
-        <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
-        <script type="text/javascript" src="js/jquery.events.touch.js"></script>
-        <script type="text/javascript" src="js/lightcase.js"></script>
-        <script type="text/javascript" src="js/lightcase.init.js"></script>
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        
-        <script type="text/javascript" src="js/easy-responsive-tabs.js"></script>
-        <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="js/dataTables.buttons.min.js"></script>	
-        <script type="text/javascript" src="js/buttons.flash.min.js"></script>	
-        <script type="text/javascript" src="js/jszip.min.js"></script>	
-        <script type="text/javascript" src="js/pdfmake.min.js"></script>	
-        <script type="text/javascript" src="js/vfs_fonts.js"></script>	
-        <script type="text/javascript" src="js/buttons.html5.min.js"></script>
-        <script type="text/javascript" src="js/moment.min.js"></script>
-        
-        
-        <script>
-            $(document).ready(function() {
-                $('#example').DataTable( {
-                    "bLengthChange": true,
-                    "paging":true,
-                    "searching": true,
-                    "ordering": true,
-                    "lengthMenu": [ [10, 25, 50, "All"]],
-                    
-                    dom: 'Bfrtip',		 
-                    buttons: [
-                        'excelHtml5',
-                        'csvHtml5',
-                        'pdfHtml5'
-                    ],
-                } );
-                
-                $('#example tbody')
-                        .on( 'mouseenter', 'td', function () {
-                            var colIdx = table.cell(this).index().column;
-                    
-                    $( table.cells().nodes() ).removeClass( 'highlight' );
-                    $( table.column( colIdx ).nodes() ).addClass( 'highlight' );
-                } );
-                
-                
-            } );
-        </script>
-        
-        
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
-        
+        <title>Facelet Title</title>
     </h:head>
     
     

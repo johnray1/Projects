@@ -7,8 +7,6 @@ package com.oltranz.sppayfuelportal.bean;
 
 import com.oltranz.sppayfuelportal.library.Common;
 import com.oltranz.sppayfuelportal.library.CommonLibrary;
-import com.oltranz.sppayfuelportal.model.BranchProductList;
-import com.oltranz.sppayfuelportal.model.BranchProductSingle;
 import com.oltranz.sppayfuelportal.model.ProductList;
 import com.oltranz.sppayfuelportal.model.ProductSingle;
 import java.io.Serializable;
@@ -73,14 +71,12 @@ public class ProductBean implements Serializable{
     
     public String products(){
         
-        templateBean.setDashboardClassName("omenu");
-        templateBean.setBranchClassName("omenu");
-        templateBean.setDevicesClassName("omenu");
-        templateBean.setProductsClassName("omenu_active");
-        templateBean.setUsersClassName("omenu");
-        templateBean.setRolesClassName("omenu");
-        templateBean.setTransactionsClassName("omenu");
-        templateBean.setLogsClassName("omenu");
+        templateBean.setDashboardClassName("deactive");
+        templateBean.setBranchClassName("deactive");
+        templateBean.setProductClassName("active");
+        templateBean.setGoalClassName("deactive");
+        templateBean.setTransactionClassName("deactive");
+        templateBean.setSettingClassName("deactive");
         
         try{
             String getBranchUrl="http://localhost:8080/PayFuel/ProductManagementService/products";

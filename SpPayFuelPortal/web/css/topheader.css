@@ -1,0 +1,69 @@
+/*TOP HEADER */
+.topheader{margin:0px;padding:0px;}
+.topheader > div{height:65px;font-family:ubuntu;margin:0px;padding:0px;background-color:#1a8c35}
+.topheader > div div.logo {margin:0px;padding:0px;}
+.topheader > div div.logo img{border:0px solid pink;padding-left:5px;}
+.topheader > div div.name{border:0px solid pink;margin:0px;padding:0px;}
+
+.topheader > div div.name strong{margin:0px;padding:0px;padding-right:17px;line-height:65px;text-align:right;font-size:30px;color:#ffffff;border:0px solid red;}
+
+.topheader > div div.name div.dropdown {position: relative; display: inline-block;margin:0px;padding:0px;}
+.topheader > div div.name div.dropdown span{display:inline-block;width:100%;height:65px;background-color:#17802f;color:#f1e01e;outline:none;font-size:16px;text-align:left;text-transform:uppercase;text-decoration:none}
+.topheader > div div.name div.dropdown span:hover{display:inline-block;width:100%;height:65px;background-color:#107828;color:#f1e01e;outline:none;font-size:16px;text-align:left;text-transform:uppercase;text-decoration:none}
+.topheader > div div.name div.dropdown span label{display:inline-block;margin:17px;margin-left:0px;padding:3px 17px;background-color:#f1e01e;color:#000000;font-size:16px;text-align:center;font-weight:bold;border-radius:7px;  }
+.topheader > div div.name div.dropdown span img{border:0px solid red;margin-left:7px;}
+
+.topheader > div div.name div.dropdown:hover span{display:inline-block;width:100%;height:65px;background-color:#107828;color:#f1e01e;outline:none;font-size:16px;text-align:left;text-transform:uppercase;text-decoration:none}
+
+.topheader > div div.name div.dropdown-content {display: none;  position: absolute; background-color: #107828;  min-width: 375px;min-height:150px;padding: 17px;  z-index: 1;}
+.topheader > div div.name div.dropdown-content h4{display:block;width:100%;margin:0px;padding:0px;text-align:center;font-size:14px;color:#ffffff;letter-spacing:2px;font-family:ubuntu;text-transform:uppercase;}
+.topheader > div div.name div.dropdown-content a{display:block;margin:0px;margin-top:7px;padding:7px;width:100%;min-height:50px;background-color:#1c8635; color:#ffffff;font-size:13px;text-decoration:none;-webkit-transition: all 800ms ease-in-out;-moz-transition: all 800ms ease-in-out;	-ms-transition: all 800ms ease-in-out;-o-transition: all 800ms ease-in-out;transition: all 800ms ease-in-out;z-index:9999;}
+.topheader > div div.name div.dropdown-content a:hover{display:block;margin:0px;margin-top:7px;padding:7px;width:100%;min-height:50px;background-color:#146326; color:#ffffff;font-size:13px;text-decoration:none;}
+.topheader > div div.name div.dropdown-content a div {display:inline-block;height:20px;margin:0px;padding:2px;width:100%;background-color:transparent;color:#f1e01e;font-size:12px;text-decoration:none;text-align:left;}
+.topheader > div div.name div.dropdown-content a div em{display:inline-block;text-align:right;float:right;margin:0px;padding:0px;color:#38d15b;font-size:11px;text-decoration:none;}
+
+.topheader > div div.name div.dropdown-content a.more{width:100%;min-height:20px;background-color:transparent;margin:0px;padding:7px;text-align:center;color:#38d15b;font-size:11px;text-decoration:none;text-transform:uppercase;border:0px solid red;}
+
+.topheader > div div.name div.dropdown:hover div.dropdown-content {display: block;}
+
+.topheader > div div.name a.logout{display:inline-block;height:65px;margin-left:10px;background-color:#17802f;color:#f1e01e;outline:none;font-size:14px;line-height:15px;text-align:left;text-transform:none;text-decoration:none;-webkit-transition: all 800ms ease;-moz-transition: all 800ms ease;	-ms-transition: all 800ms ease;-o-transition: all 800ms ease;transition: all 800ms ease;}
+.topheader > div div.name a.logout label{padding:7px;margin-top:10px;color:#28a245;font-size:14px;font-weight:normal;line-height:17px;cursor:hand;}
+.topheader > div div.name a.logout label strong{display:block;color:#f1e01e;font-size:16px;line-height:17px;}
+
+.topheader > div div.name a:hover.logout{background-color:#136a26;;background-image:url(../images/icon_logout.png);background-repeat:no-repeat;background-position:right center;}
+
+
+/* MEDIA QUERIES */
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+
+.topheader > div div.name div.dropdown-content {display: none;  position: absolute; background-color: #107828;  min-width: 375px;min-height:150px;padding: 17px; margin-left:-97px; z-index: 1;}
+.topheader > div div.name div.dropdown span label{display:inline-block;margin:17px;margin-left:0px;padding:3px 13px;background-color:#f1e01e;color:#000000;font-size:14px;text-align:center;font-weight:bold;border-radius:7px;  }
+
+.topheader > div div.name a.logout{background-color:#136a26;;background-image:url(../images/icon_logout.png);background-repeat:no-repeat;background-position:right center;}
+
+}
+
+@media only screen and (min-width :480px) and (max-width : 768px) {
+    img.logo{border:0px solid yellow;}
+}
+
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-width : 768px) and (max-width : 1024px) {
+.topheader > div div.name strong{margin:0px;padding:0px;padding-right:17px;line-height:65px;text-align:right;font-size:14px;color:#ffffff;border:0px solid red;}
+
+}
+
+
+/* Desktops and laptops ----------- */
+@media only screen  and (min-width : 1224px) {
+    img.logo{border:0px solid green;}
+}
+
+
+/* Large screens ----------- */
+@media only screen  and (min-width : 1824px) {
+    img.logo{border:0px solid red;}
+}

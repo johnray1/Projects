@@ -24,12 +24,12 @@ import javax.servlet.http.HttpSession;
 @SessionScoped
 public class LoginBean implements Serializable{
     
-    
-    
     private String pwd;
     private String msg;
     private String user;
+    private String branchName;
     private Integer userId;
+    private Integer bId;
     private Date date;
     
     @ManagedProperty(value="#{TemplateBean}")
@@ -44,15 +44,12 @@ public class LoginBean implements Serializable{
     public String validateUsernamePassword() {
         date=new Date();
         
-        templateBean.setDashboardClassName("omenu_active");
-        templateBean.setBranchClassName("omenu");
-        templateBean.setDevicesClassName("omenu");
-        templateBean.setProductsClassName("omenu");
-        templateBean.setUsersClassName("omenu");
-        templateBean.setRolesClassName("omenu");
-        templateBean.setTransactionsClassName("omenu");
-        templateBean.setLogsClassName("omenu");
-        
+        templateBean.setDashboardClassName("active");
+        templateBean.setBranchClassName("deactive");
+        templateBean.setProductClassName("deactive");
+        templateBean.setGoalClassName("deactive");
+        templateBean.setTransactionClassName("deactive");
+        templateBean.setSettingClassName("deactive");
         
         try{
             UserDetails ud = LoginDAO.validate(user, pwd);
@@ -60,10 +57,16 @@ public class LoginBean implements Serializable{
             if (ud.getStatusCode()==100) {
                 
                 userId=ud.getUserDetailsModel().getUserId();
+                bId=ud.getUserDetailsModel().getBranchId();
                 user=ud.getUserDetailsModel().getFname();
+                branchName=ud.getUserDetailsModel().getBranchName();
                 
+                if(userId!=1){
+                    
+                    templateBean.setHideClassName("hide");
+                }
                 
-                tankBean.setUserId(userId);
+                tankBean.setbId(bId);
                 tankBean.tank1Dashboard();
                 tankBean.tank2Dashboard();
                 tankBean.tank3Dashboard();
@@ -178,28 +181,28 @@ public class LoginBean implements Serializable{
     public void setTemplateBean(TemplateBean templateBean) {
         this.templateBean = templateBean;
     }
-
+    
     /**
      * @return the tankBean
      */
     public TankBean getTankBean() {
         return tankBean;
     }
-
+    
     /**
      * @param tankBean the tankBean to set
      */
     public void setTankBean(TankBean tankBean) {
         this.tankBean = tankBean;
     }
-
+    
     /**
      * @return the date
      */
     public Date getDate() {
         return date;
     }
-
+    
     /**
      * @param date the date to set
      */
@@ -207,6 +210,36 @@ public class LoginBean implements Serializable{
         this.date = date;
     }
 
+    /**
+     * @return the branchName
+     */
+    public String getBranchName() {
+        return branchName;
+    }
+
+    /**
+     * @param branchName the branchName to set
+     */
+    public void setBranchName(String branchName) {
+        this.branchName = branchName;
+    }
+
+    /**
+     * @return the bId
+     */
+    public Integer getbId() {
+        return bId;
+    }
+
+    /**
+     * @param bId the bId to set
+     */
+    public void setbId(Integer bId) {
+        this.bId = bId;
+    }
+
+    
+    
     
     
     

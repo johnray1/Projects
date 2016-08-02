@@ -44,19 +44,16 @@ public class BranchProductBean implements Serializable{
     
     public String branchProducts(){
         
-        templateBean.setDashboardClassName("omenu");
-        templateBean.setBranchClassName("omenu");
-        templateBean.setDevicesClassName("omenu");
-        templateBean.setProductsClassName("omenu_active");
-        templateBean.setUsersClassName("omenu");
-        templateBean.setRolesClassName("omenu");
-        templateBean.setTransactionsClassName("omenu");
-        templateBean.setLogsClassName("omenu");
+        templateBean.setDashboardClassName("deactive");
+        templateBean.setBranchClassName("deactive");
+        templateBean.setProductClassName("active");
+        templateBean.setGoalClassName("deactive");
+        templateBean.setTransactionClassName("deactive");
+        templateBean.setSettingClassName("deactive");
         
-        int userId=loginBean.getUserId();
-        System.out.println(loginBean.getUserId());
+        
         try{
-            String getUrl="http://localhost:8080/PayFuel/ProductManagementService/branch/products/"+userId;
+            String getUrl="http://localhost:8080/PayFuel/ProductManagementService/branch/products/"+loginBean.getbId();
             Response response = CommonLibrary.sendRESTRequest(getUrl, "empty data", MediaType.APPLICATION_JSON, "GET");
             String jsonResponse = response.readEntity(String.class);
             //System.out.println(jsonResponse);

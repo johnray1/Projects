@@ -20,6 +20,12 @@ public class UserDetailsModel {
     @JsonProperty("userId")
     private Integer userId;
     
+    @JsonProperty("branchId")
+    private Integer branchId;
+    
+    @JsonProperty("branchName")
+    private String branchName;
+    
     @JsonProperty("fname")
     private String fname;
     
@@ -170,6 +176,34 @@ public class UserDetailsModel {
      */
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    /**
+     * @return the branchName
+     */
+    public String getBranchName() {
+        return branchName;
+    }
+
+    /**
+     * @param branchName the branchName to set
+     */
+    public void setBranchName(String branchName) {
+        this.branchName = branchName;
+    }
+
+    /**
+     * @return the branchId
+     */
+    public Integer getBranchId() {
+        return branchId;
+    }
+
+    /**
+     * @param branchId the branchId to set
+     */
+    public void setBranchId(Integer branchId) {
+        this.branchId = branchId;
     }
 
     
