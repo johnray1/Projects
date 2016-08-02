@@ -49,7 +49,6 @@ public class Gender implements Serializable {
         this.descr = descr;
     }
 
-    
     public Gender() {
     }
 

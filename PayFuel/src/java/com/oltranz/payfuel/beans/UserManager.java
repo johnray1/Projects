@@ -271,7 +271,7 @@ public class UserManager {
     
     public ResultObject authenticateWebUser(String email, String password){
         
-       
+        
         ResultObject resultObject=new ResultObject();
         resultObject.setObject(null);
         resultObject.setObjectClass(UserDetailsModel.class);
@@ -469,6 +469,31 @@ public class UserManager {
             return resultObject;
         }
         
+        //find user branchId
+        Integer branchId=-1;
+        String branchName="No Branch";
+        
+        if(user.getUserId()==1){
+            branchId=0;
+            branchName="HQ";
+        }
+        else{
+            List<RoleForUser> ulist = (List<RoleForUser>)em.createQuery("SELECT r FROM RoleForUser r WHERE r.roleForUserPK.userId = :userId").setParameter("userId", u.getUserId()).getResultList();
+           
+            if(ulist.size()>0){
+                
+                Integer roleId=ulist.get(0).getRoleForUserPK().getRoleId();
+                
+                List<RoleForBranch> list = (List<RoleForBranch>)em.createQuery("SELECT r FROM RoleForBranch r WHERE r.roleForBranchPK.roleId = :roleId").setParameter("roleId", roleId).getResultList();
+                if(list.size()>0){
+                    
+                    branchId=list.get(0).getRoleForBranchPK().getBranchId();
+                    branchName=commonFunctionEjb.getBranchName(branchId).getName();
+                }
+            }
+            
+        }
+        
         UserDetailsModel userDetails=new UserDetailsModel();
         userDetails.setDetails(u.getDetails());
         userDetails.setEmail(u.getEmail());
@@ -478,7 +503,8 @@ public class UserManager {
         userDetails.setPhoneNumber(u.getPhoneNumber());
         userDetails.setPermissions(u.getPermissions());
         userDetails.setUserId(u.getUserId());
-        
+        userDetails.setBranchId(branchId);
+        userDetails.setBranchName(branchName);
         
         //get list of roles this is user has
         Object object =getUserRoles(userDetails.getUserId()).getObject();

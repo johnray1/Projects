@@ -31,6 +31,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Nozzle.findByNozzleName", query = "SELECT n FROM Nozzle n WHERE n.nozzleName = :nozzleName"),
     @NamedQuery(name = "Nozzle.findByNozzleIndex", query = "SELECT n FROM Nozzle n WHERE n.nozzleIndex = :nozzleIndex"),
     @NamedQuery(name = "Nozzle.findByNozzleStatus", query = "SELECT n FROM Nozzle n WHERE n.nozzleStatus = :nozzleStatus"),
+    @NamedQuery(name = "Nozzle.findByBranchId", query = "SELECT n FROM Nozzle n WHERE n.branchId = :branchId"),
+    @NamedQuery(name = "Nozzle.findByTankId", query = "SELECT n FROM Nozzle n WHERE n.tankId = :tankId"),
     @NamedQuery(name = "Nozzle.findByPumpId", query = "SELECT n FROM Nozzle n WHERE n.pumpId = :pumpId"),
     @NamedQuery(name = "Nozzle.findByProductId", query = "SELECT n FROM Nozzle n WHERE n.productId = :productId")})
 public class Nozzle implements Serializable {
@@ -48,6 +50,10 @@ public class Nozzle implements Serializable {
     private Double nozzleIndex=0.0;
     @Column(name = "nozzle_status")
     private Integer nozzleStatus=7;
+    @Column(name = "branch_id")
+    private Integer branchId;
+    @Column(name = "tank_id")
+    private Integer tankId;
     @Column(name = "pump_id")
     private Integer pumpId;
     @Column(name = "product_id")
@@ -90,6 +96,22 @@ public class Nozzle implements Serializable {
 
     public void setNozzleStatus(Integer nozzleStatus) {
         this.nozzleStatus = nozzleStatus;
+    }
+
+    public Integer getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(Integer branchId) {
+        this.branchId = branchId;
+    }
+
+    public Integer getTankId() {
+        return tankId;
+    }
+
+    public void setTankId(Integer tankId) {
+        this.tankId = tankId;
     }
 
     public Integer getPumpId() {

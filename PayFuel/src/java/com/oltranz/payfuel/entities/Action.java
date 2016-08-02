@@ -43,13 +43,13 @@ public class Action implements Serializable {
     @Column(name = "descr", length = 255)
     private String descr;
 
-    public Action() {
-    }
-
     public Action(Integer id, String name, String descr) {
         this.id = id;
         this.name = name;
         this.descr = descr;
+    }
+
+    public Action() {
     }
 
     public Action(Integer id) {

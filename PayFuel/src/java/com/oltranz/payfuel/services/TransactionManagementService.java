@@ -55,17 +55,7 @@ public class TransactionManagementService {
     }
     
     
-    @GET
-    @Path("transactions/{userId}")
-    @Consumes({"application/xml", "application/json"})
-    public String getTransactionList(@PathParam("userId") Integer userId) {
-        
-        ResultObject result= transactionManager.getTransactionList(userId);
-        
-        String jsonResult=result.getJsonFormat();
-        
-        return jsonResult;
-    }
+    
     
     @POST
     @Path("transactions/filter")

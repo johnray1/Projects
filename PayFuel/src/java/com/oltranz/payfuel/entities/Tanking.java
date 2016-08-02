@@ -18,6 +18,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -32,8 +33,16 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Tanking.findById", query = "SELECT t FROM Tanking t WHERE t.id = :id"),
     @NamedQuery(name = "Tanking.findByUserId", query = "SELECT t FROM Tanking t WHERE t.userId = :userId"),
     @NamedQuery(name = "Tanking.findByTankId", query = "SELECT t FROM Tanking t WHERE t.tankId = :tankId"),
-    @NamedQuery(name = "Tanking.findByQuantity", query = "SELECT t FROM Tanking t WHERE t.quantity = :quantity"),
-    @NamedQuery(name = "Tanking.findByDatetime", query = "SELECT t FROM Tanking t WHERE t.datetime = :datetime")})
+    @NamedQuery(name = "Tanking.findByPreTankingMeasuredDip", query = "SELECT t FROM Tanking t WHERE t.preTankingMeasuredDip = :preTankingMeasuredDip"),
+    @NamedQuery(name = "Tanking.findByPreTankingCalculatedDip", query = "SELECT t FROM Tanking t WHERE t.preTankingCalculatedDip = :preTankingCalculatedDip"),
+    @NamedQuery(name = "Tanking.findByDeliveredBy", query = "SELECT t FROM Tanking t WHERE t.deliveredBy = :deliveredBy"),
+    @NamedQuery(name = "Tanking.findByTheoriticalTanked", query = "SELECT t FROM Tanking t WHERE t.theoriticalTanked = :theoriticalTanked"),
+    @NamedQuery(name = "Tanking.findByPlatenumber", query = "SELECT t FROM Tanking t WHERE t.platenumber = :platenumber"),
+    @NamedQuery(name = "Tanking.findByPostTankingMeasuredDip", query = "SELECT t FROM Tanking t WHERE t.postTankingMeasuredDip = :postTankingMeasuredDip"),
+    @NamedQuery(name = "Tanking.findByPostTankingCalculatedDip", query = "SELECT t FROM Tanking t WHERE t.postTankingCalculatedDip = :postTankingCalculatedDip"),
+    @NamedQuery(name = "Tanking.findByDatetime", query = "SELECT t FROM Tanking t WHERE t.datetime = :datetime"),
+    @NamedQuery(name = "Tanking.findByDeviceDatetime", query = "SELECT t FROM Tanking t WHERE t.deviceDatetime = :deviceDatetime"),
+    @NamedQuery(name = "Tanking.findByQuantity", query = "SELECT t FROM Tanking t WHERE t.quantity = :quantity")})
 public class Tanking implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,11 +55,30 @@ public class Tanking implements Serializable {
     @Column(name = "tank_id")
     private Integer tankId;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "quantity", precision = 22)
-    private Double quantity;
+    @Column(name = "pre_tanking_measured_dip", precision = 22)
+    private Double preTankingMeasuredDip;
+    @Column(name = "pre_tanking_calculated_dip", precision = 22)
+    private Double preTankingCalculatedDip;
+    @Size(max = 100)
+    @Column(name = "delivered_by", length = 100)
+    private String deliveredBy;
+    @Column(name = "theoritical_tanked", precision = 22)
+    private Double theoriticalTanked;
+    @Size(max = 100)
+    @Column(name = "platenumber", length = 100)
+    private String platenumber;
+    @Column(name = "post_tanking_measured_dip", precision = 22)
+    private Double postTankingMeasuredDip;
+    @Column(name = "post_tanking_calculated_dip", precision = 22)
+    private Double postTankingCalculatedDip;
     @Column(name = "datetime")
     @Temporal(TemporalType.TIMESTAMP)
     private Date datetime;
+    @Column(name = "device_datetime")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date deviceDatetime;
+    @Column(name = "quantity", precision = 22)
+    private Double quantity;
 
     public Tanking() {
     }
@@ -83,12 +111,60 @@ public class Tanking implements Serializable {
         this.tankId = tankId;
     }
 
-    public Double getQuantity() {
-        return quantity;
+    public Double getPreTankingMeasuredDip() {
+        return preTankingMeasuredDip;
     }
 
-    public void setQuantity(Double quantity) {
-        this.quantity = quantity;
+    public void setPreTankingMeasuredDip(Double preTankingMeasuredDip) {
+        this.preTankingMeasuredDip = preTankingMeasuredDip;
+    }
+
+    public Double getPreTankingCalculatedDip() {
+        return preTankingCalculatedDip;
+    }
+
+    public void setPreTankingCalculatedDip(Double preTankingCalculatedDip) {
+        this.preTankingCalculatedDip = preTankingCalculatedDip;
+    }
+
+    public String getDeliveredBy() {
+        return deliveredBy;
+    }
+
+    public void setDeliveredBy(String deliveredBy) {
+        this.deliveredBy = deliveredBy;
+    }
+
+    public Double getTheoriticalTanked() {
+        return theoriticalTanked;
+    }
+
+    public void setTheoriticalTanked(Double theoriticalTanked) {
+        this.theoriticalTanked = theoriticalTanked;
+    }
+
+    public String getPlatenumber() {
+        return platenumber;
+    }
+
+    public void setPlatenumber(String platenumber) {
+        this.platenumber = platenumber;
+    }
+
+    public Double getPostTankingMeasuredDip() {
+        return postTankingMeasuredDip;
+    }
+
+    public void setPostTankingMeasuredDip(Double postTankingMeasuredDip) {
+        this.postTankingMeasuredDip = postTankingMeasuredDip;
+    }
+
+    public Double getPostTankingCalculatedDip() {
+        return postTankingCalculatedDip;
+    }
+
+    public void setPostTankingCalculatedDip(Double postTankingCalculatedDip) {
+        this.postTankingCalculatedDip = postTankingCalculatedDip;
     }
 
     public Date getDatetime() {
@@ -97,6 +173,22 @@ public class Tanking implements Serializable {
 
     public void setDatetime(Date datetime) {
         this.datetime = datetime;
+    }
+
+    public Date getDeviceDatetime() {
+        return deviceDatetime;
+    }
+
+    public void setDeviceDatetime(Date deviceDatetime) {
+        this.deviceDatetime = deviceDatetime;
+    }
+
+    public Double getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Double quantity) {
+        this.quantity = quantity;
     }
 
     @Override

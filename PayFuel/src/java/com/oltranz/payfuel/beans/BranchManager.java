@@ -9,9 +9,7 @@ import com.oltranz.payfuel.entities.Branch;
 import com.oltranz.payfuel.entities.Role;
 import com.oltranz.payfuel.entities.RoleForBranch;
 import com.oltranz.payfuel.entities.RoleForBranchPK;
-import com.oltranz.payfuel.entities.User;
 import com.oltranz.payfuel.models.ResultObject;
-import com.oltranz.payfuel.models.UserDetailsModel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -127,7 +125,7 @@ public class BranchManager {
     public ResultObject getBranchList(){
         
         ResultObject resultObject= new ResultObject();
-        List<Branch> branchesList=(List<Branch>)em.createNamedQuery("SELECT b FROM Branch b").getResultList();
+        List<Branch> branchesList=(List<Branch>)em.createQuery("SELECT b FROM Branch b").getResultList();
         
         resultObject.setObject(branchesList);
         resultObject.setObjectClass(Branch.class);
@@ -145,76 +143,28 @@ public class BranchManager {
         
     }
     
-    public ResultObject getBranchList(Integer userId){
+    public ResultObject getBranchListById(Integer branchId){
         
-        ResultObject resultObject=new ResultObject();
+        ResultObject resultObject= new ResultObject();
+        List<Branch> branchesList=(List<Branch>)em.createQuery("SELECT b FROM Branch b WHERE b.branchId = :branchId").setParameter("branchId", branchId).getResultList();
+        
+        resultObject.setObject(branchesList);
         resultObject.setObjectClass(Branch.class);
         
-        //check if user is available
-        User user=em.find(User.class,userId);
-        if(user==null){
-            resultObject.setMessage("User is not Created To Access The Branch");
-            resultObject.setObject(null);
+        if(branchesList.isEmpty()){
+            resultObject.setMessage("There are no Branch in the system");
             resultObject.setStatusCode(500);
-            return resultObject;
         }
-        
-        
-        List<Branch> branchesList=(List<Branch>)em.createQuery("SELECT b FROM Branch b").getResultList();
-        //if user id 1 bring all branch
-        if(user.getUserId()==1){
-            resultObject.setObject(branchesList);
+        else{
             resultObject.setMessage(branchesList.size()+" Branches were found");
             resultObject.setStatusCode(100);
-            return resultObject;
         }
         
-        
-        //get the user details,roles and its branch
-        UserDetailsModel userDetails= (UserDetailsModel) userManager.getUserDetails(user.getUserId()).getObject();
-        List<Role> roles=userDetails.getRoles();
-        Integer branchId=-1;
-        for(Role r: roles){
-            
-            if(r.getTypeId()==1){
-                resultObject.setObject(branchesList);
-                resultObject.setMessage(branchesList.size()+" Branches were found");
-                resultObject.setStatusCode(100);
-                return resultObject;
-            }
-            
-            if(r.getTypeId()==2){
-                
-                List<RoleForBranch> list = (List<RoleForBranch>)em.createQuery("SELECT r FROM RoleForBranch r WHERE r.roleForBranchPK.roleId = :roleId").setParameter("roleId", r.getRoleId()).getResultList();
-                if(list.size()>0)
-                    
-                    branchId=list.get(0).getRoleForBranchPK().getBranchId();
-            }
-        }
-        
-        if(branchId==-1){
-            resultObject.setObject(null);
-            resultObject.setMessage("You are not a staff of any branch");
-            resultObject.setObjectClass(Branch.class);
-            resultObject.setStatusCode(500);
-            return resultObject;
-        }
-        
-        
-        //get the branch from userbranchid
-        branchesList=(List<Branch>)em.createQuery("SELECT b FROM Branch b WHERE b.branchId = :branchId").setParameter("branchId", branchId).getResultList();
-        if(branchesList.size()>0){
-            resultObject.setObject(branchesList);
-            resultObject.setMessage(branchesList.size()+" Branches were found");
-            resultObject.setStatusCode(100);
-            return resultObject;
-        }
-        
-        resultObject.setObject(null);
-        resultObject.setMessage("There are no Branch in the system");
-        resultObject.setStatusCode(500);
         return resultObject;
+        
     }
+    
+    
     
     public ResultObject getBranchByItsId(Integer branchId){
         
@@ -225,11 +175,13 @@ public class BranchManager {
             resultObject.setMessage("Branch Well found and returned!");
             resultObject.setObject(branch);
             resultObject.setObjectClass(Branch.class);
+            resultObject.setStatusCode(100);
             return resultObject;
         }else{
             resultObject.setMessage("Branch with given Id not found!");
             resultObject.setObject(null);
             resultObject.setObjectClass(Branch.class);
+            resultObject.setStatusCode(500);
             return resultObject;
         }
     }
@@ -284,5 +236,24 @@ public class BranchManager {
         resultObject.setObjectClass(Branch.class);
         return resultObject;
     }
+    
+    //------------------------------------------------web------------------------------------------------------------------
+    
+    
+    public ResultObject getBranchList(Integer branchId){
+        
+        ResultObject resultObject;
+        if(branchId==0){
+            resultObject=getBranchList();
+        }
+        else{
+            resultObject=getBranchListById(branchId);
+        }
+        return resultObject;
+    }
+    
+    
+    
+    
     
 }

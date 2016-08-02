@@ -76,9 +76,6 @@ public class User implements Serializable {
     @Column(name = "details", length = 255)
     private String details;
 
-    public User() {
-    }
-
     public User(String fname, String otherNames, String email, String password, String pin, String permissions, String phoneNumber, String gender, String details) {
         this.fname = fname;
         this.otherNames = otherNames;
@@ -89,6 +86,9 @@ public class User implements Serializable {
         this.phoneNumber = phoneNumber;
         this.gender = gender;
         this.details = details;
+    }
+
+    public User() {
     }
 
     public User(Integer userId) {

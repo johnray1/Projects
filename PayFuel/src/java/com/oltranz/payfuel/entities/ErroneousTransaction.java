@@ -40,6 +40,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ErroneousTransaction.findByBranchId", query = "SELECT e FROM ErroneousTransaction e WHERE e.branchId = :branchId"),
     @NamedQuery(name = "ErroneousTransaction.findByUserId", query = "SELECT e FROM ErroneousTransaction e WHERE e.userId = :userId"),
     @NamedQuery(name = "ErroneousTransaction.findByDeviceId", query = "SELECT e FROM ErroneousTransaction e WHERE e.deviceId = :deviceId"),
+    @NamedQuery(name = "ErroneousTransaction.findByTankId", query = "SELECT e FROM ErroneousTransaction e WHERE e.tankId = :tankId"),
     @NamedQuery(name = "ErroneousTransaction.findByPumpId", query = "SELECT e FROM ErroneousTransaction e WHERE e.pumpId = :pumpId"),
     @NamedQuery(name = "ErroneousTransaction.findByNozzleId", query = "SELECT e FROM ErroneousTransaction e WHERE e.nozzleId = :nozzleId"),
     @NamedQuery(name = "ErroneousTransaction.findByProductId", query = "SELECT e FROM ErroneousTransaction e WHERE e.productId = :productId"),
@@ -62,7 +63,7 @@ public class ErroneousTransaction implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "transaction_id", nullable = false)
-    private Long transactionId;
+    private long transactionId;
     @Column(name = "checksum")
     private Integer checksum;
     @Column(name = "device_transaction_id")
@@ -76,6 +77,8 @@ public class ErroneousTransaction implements Serializable {
     private Integer userId;
     @Column(name = "device_id")
     private Integer deviceId;
+    @Column(name = "tank_id")
+    private Integer tankId;
     @Column(name = "pump_id")
     private Integer pumpId;
     @Column(name = "nozzle_id")
@@ -127,11 +130,11 @@ public class ErroneousTransaction implements Serializable {
         this.id = id;
     }
 
-    public Long getTransactionId() {
+    public long getTransactionId() {
         return transactionId;
     }
 
-    public void setTransactionId(Long transactionId) {
+    public void setTransactionId(long transactionId) {
         this.transactionId = transactionId;
     }
 
@@ -181,6 +184,14 @@ public class ErroneousTransaction implements Serializable {
 
     public void setDeviceId(Integer deviceId) {
         this.deviceId = deviceId;
+    }
+
+    public Integer getTankId() {
+        return tankId;
+    }
+
+    public void setTankId(Integer tankId) {
+        this.tankId = tankId;
     }
 
     public Integer getPumpId() {

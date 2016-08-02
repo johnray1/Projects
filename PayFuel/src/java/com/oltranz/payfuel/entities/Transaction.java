@@ -38,6 +38,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Transaction.findByBranchId", query = "SELECT t FROM Transaction t WHERE t.branchId = :branchId"),
     @NamedQuery(name = "Transaction.findByUserId", query = "SELECT t FROM Transaction t WHERE t.userId = :userId"),
     @NamedQuery(name = "Transaction.findByDeviceId", query = "SELECT t FROM Transaction t WHERE t.deviceId = :deviceId"),
+    @NamedQuery(name = "Transaction.findByTankId", query = "SELECT t FROM Transaction t WHERE t.tankId = :tankId"),
     @NamedQuery(name = "Transaction.findByPumpId", query = "SELECT t FROM Transaction t WHERE t.pumpId = :pumpId"),
     @NamedQuery(name = "Transaction.findByNozzleId", query = "SELECT t FROM Transaction t WHERE t.nozzleId = :nozzleId"),
     @NamedQuery(name = "Transaction.findByProductId", query = "SELECT t FROM Transaction t WHERE t.productId = :productId"),
@@ -68,6 +69,8 @@ public class Transaction implements Serializable {
     private Integer userId;
     @Column(name = "device_id")
     private Integer deviceId;
+    @Column(name = "tank_id")
+    private Integer tankId;
     @Column(name = "pump_id")
     private Integer pumpId;
     @Column(name = "nozzle_id")
@@ -152,6 +155,14 @@ public class Transaction implements Serializable {
 
     public void setDeviceId(Integer deviceId) {
         this.deviceId = deviceId;
+    }
+
+    public Integer getTankId() {
+        return tankId;
+    }
+
+    public void setTankId(Integer tankId) {
+        this.tankId = tankId;
     }
 
     public Integer getPumpId() {

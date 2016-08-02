@@ -35,7 +35,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Pump.findByStatus", query = "SELECT p FROM Pump p WHERE p.status = :status"),
     @NamedQuery(name = "Pump.findByPreCalibrationDate", query = "SELECT p FROM Pump p WHERE p.preCalibrationDate = :preCalibrationDate"),
     @NamedQuery(name = "Pump.findByNextCalibrationDate", query = "SELECT p FROM Pump p WHERE p.nextCalibrationDate = :nextCalibrationDate"),
-    @NamedQuery(name = "Pump.findByTankId", query = "SELECT p FROM Pump p WHERE p.tankId = :tankId")})
+    @NamedQuery(name = "Pump.findByTankId", query = "SELECT p FROM Pump p WHERE p.tankId = :tankId"),
+    @NamedQuery(name = "Pump.findByBranchId", query = "SELECT p FROM Pump p WHERE p.branchId = :branchId")})
 public class Pump implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -56,6 +57,8 @@ public class Pump implements Serializable {
     private Date nextCalibrationDate;
     @Column(name = "tank_id")
     private Integer tankId;
+    @Column(name = "branch_id")
+    private Integer branchId;
 
     public Pump() {
     }
@@ -110,6 +113,14 @@ public class Pump implements Serializable {
 
     public void setTankId(Integer tankId) {
         this.tankId = tankId;
+    }
+
+    public Integer getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(Integer branchId) {
+        this.branchId = branchId;
     }
 
     @Override

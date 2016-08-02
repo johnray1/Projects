@@ -28,9 +28,9 @@ public class ChartManagementService {
     @GET
     @Path("dailyProductChart")
     @Produces({"application/xml", "application/json"})
-    public void getDailyProductSaleChart() {
+    public String getDailyProductSaleChart() {
         
-        chartManager.getDailyProductSaleChart();
+        return chartManager.getDailyProductSaleChart();
     }
     
     
@@ -60,14 +60,7 @@ public class ChartManagementService {
         return chartManager.getTankDashboard(tankId);
     }
     
-    @GET
-    @Path("getday")
-    @Produces({"application/xml", "application/json"})
-    public void test() {
-        
-       
-        chartManager.test();
-    }
+    
     
     
     

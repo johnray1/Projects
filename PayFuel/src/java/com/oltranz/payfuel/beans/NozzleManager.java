@@ -9,6 +9,7 @@ package com.oltranz.payfuel.beans;
 import com.oltranz.payfuel.entities.Nozzle;
 import com.oltranz.payfuel.entities.Product;
 import com.oltranz.payfuel.entities.Pump;
+import com.oltranz.payfuel.entities.Tank;
 import com.oltranz.payfuel.models.ResultObject;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -38,6 +39,14 @@ public class NozzleManager {
             return resultObject;
         }
         
+        Tank tank=em.find(Tank.class, pump.getTankId());
+        if(tank==null){
+            resultObject.setObject(null);
+            resultObject.setMessage("TankId is not created, to which Our Pump Is connect");
+            resultObject.setStatusCode(500);
+            return resultObject;
+        }
+        
         Product product=em.find(Product.class, createNozzle.getProductId());
         if(product==null){
             resultObject.setObject(null);
@@ -49,6 +58,8 @@ public class NozzleManager {
         Nozzle nozzle=new Nozzle();
         
         nozzle.setNozzleName(createNozzle.getNozzleName());
+        nozzle.setTankId(tank.getTankId());
+        nozzle.setBranchId(tank.getBranchId());
         nozzle.setPumpId(createNozzle.getPumpId());
         nozzle.setProductId(createNozzle.getProductId());
         em.persist(nozzle);

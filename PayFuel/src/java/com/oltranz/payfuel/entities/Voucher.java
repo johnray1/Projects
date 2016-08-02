@@ -69,7 +69,7 @@ public class Voucher implements Serializable {
     @Column(name = "status")
     private Integer status=7;
     @Column(name = "customer_id")
-    private BigInteger customerId;
+    private Long customerId;
 
     public Voucher() {
     }
@@ -142,11 +142,11 @@ public class Voucher implements Serializable {
         this.status = status;
     }
 
-    public BigInteger getCustomerId() {
+    public Long getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(BigInteger customerId) {
+    public void setCustomerId(Long customerId) {
         this.customerId = customerId;
     }
 

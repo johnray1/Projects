@@ -25,17 +25,18 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author John
  */
 @Entity
-@Table(name = "deeping", catalog = "PayFuelDB", schema = "")
+@Table(name = "diping", catalog = "PayFuelDB", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Deeping.findAll", query = "SELECT d FROM Deeping d"),
-    @NamedQuery(name = "Deeping.findById", query = "SELECT d FROM Deeping d WHERE d.id = :id"),
-    @NamedQuery(name = "Deeping.findByUserId", query = "SELECT d FROM Deeping d WHERE d.userId = :userId"),
-    @NamedQuery(name = "Deeping.findByTankId", query = "SELECT d FROM Deeping d WHERE d.tankId = :tankId"),
-    @NamedQuery(name = "Deeping.findByQuantityBefore", query = "SELECT d FROM Deeping d WHERE d.quantityBefore = :quantityBefore"),
-    @NamedQuery(name = "Deeping.findByQuantityAfter", query = "SELECT d FROM Deeping d WHERE d.quantityAfter = :quantityAfter"),
-    @NamedQuery(name = "Deeping.findByDatetime", query = "SELECT d FROM Deeping d WHERE d.datetime = :datetime")})
-public class Deeping implements Serializable {
+    @NamedQuery(name = "Diping.findAll", query = "SELECT d FROM Diping d"),
+    @NamedQuery(name = "Diping.findById", query = "SELECT d FROM Diping d WHERE d.id = :id"),
+    @NamedQuery(name = "Diping.findByUserId", query = "SELECT d FROM Diping d WHERE d.userId = :userId"),
+    @NamedQuery(name = "Diping.findByTankId", query = "SELECT d FROM Diping d WHERE d.tankId = :tankId"),
+    @NamedQuery(name = "Diping.findByMeasuredDip", query = "SELECT d FROM Diping d WHERE d.measuredDip = :measuredDip"),
+    @NamedQuery(name = "Diping.findByCalculatedDip", query = "SELECT d FROM Diping d WHERE d.calculatedDip = :calculatedDip"),
+    @NamedQuery(name = "Diping.findByDatetime", query = "SELECT d FROM Diping d WHERE d.datetime = :datetime"),
+    @NamedQuery(name = "Diping.findByDeviceDatetime", query = "SELECT d FROM Diping d WHERE d.deviceDatetime = :deviceDatetime")})
+public class Diping implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,18 +48,21 @@ public class Deeping implements Serializable {
     @Column(name = "tank_id")
     private Integer tankId;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "quantity_before", precision = 22)
-    private Double quantityBefore;
-    @Column(name = "quantity_after", precision = 22)
-    private Double quantityAfter;
+    @Column(name = "measured_dip", precision = 22)
+    private Double measuredDip;
+    @Column(name = "calculated_dip", precision = 22)
+    private Double calculatedDip;
     @Column(name = "datetime")
     @Temporal(TemporalType.TIMESTAMP)
     private Date datetime;
+    @Column(name = "device_datetime")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date deviceDatetime;
 
-    public Deeping() {
+    public Diping() {
     }
 
-    public Deeping(Integer id) {
+    public Diping(Integer id) {
         this.id = id;
     }
 
@@ -86,20 +90,20 @@ public class Deeping implements Serializable {
         this.tankId = tankId;
     }
 
-    public Double getQuantityBefore() {
-        return quantityBefore;
+    public Double getMeasuredDip() {
+        return measuredDip;
     }
 
-    public void setQuantityBefore(Double quantityBefore) {
-        this.quantityBefore = quantityBefore;
+    public void setMeasuredDip(Double measuredDip) {
+        this.measuredDip = measuredDip;
     }
 
-    public Double getQuantityAfter() {
-        return quantityAfter;
+    public Double getCalculatedDip() {
+        return calculatedDip;
     }
 
-    public void setQuantityAfter(Double quantityAfter) {
-        this.quantityAfter = quantityAfter;
+    public void setCalculatedDip(Double calculatedDip) {
+        this.calculatedDip = calculatedDip;
     }
 
     public Date getDatetime() {
@@ -108,6 +112,14 @@ public class Deeping implements Serializable {
 
     public void setDatetime(Date datetime) {
         this.datetime = datetime;
+    }
+
+    public Date getDeviceDatetime() {
+        return deviceDatetime;
+    }
+
+    public void setDeviceDatetime(Date deviceDatetime) {
+        this.deviceDatetime = deviceDatetime;
     }
 
     @Override
@@ -120,10 +132,10 @@ public class Deeping implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Deeping)) {
+        if (!(object instanceof Diping)) {
             return false;
         }
-        Deeping other = (Deeping) object;
+        Diping other = (Diping) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -132,7 +144,7 @@ public class Deeping implements Serializable {
 
     @Override
     public String toString() {
-        return "com.oltranz.payfuel.entities.Deeping[ id=" + id + " ]";
+        return "com.oltranz.payfuel.entities.Diping[ id=" + id + " ]";
     }
     
 }

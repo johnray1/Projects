@@ -251,6 +251,7 @@ public class AndroidDataManager {
             transaction.setDeviceTransactionTime(deviceDate);
             transaction.setBranchId(saleDetailsModel.getBranchId());
             transaction.setUserId(saleDetailsModel.getUserId());
+            transaction.setTankId(commonFunctionEjb.getPumpName(saleDetailsModel.getPumpId()).getTankId());
             transaction.setPumpId(saleDetailsModel.getPumpId());
             transaction.setProductId(saleDetailsModel.getProductId());
             transaction.setPlatenumber(saleDetailsModel.getPlateNumber());
@@ -565,6 +566,7 @@ public class AndroidDataManager {
                 createTransaction.setBranchId(saleDetailsModel.getBranchId());
                 createTransaction.setUserId(saleDetailsModel.getUserId());
                 createTransaction.setDeviceId(device.getDeviceId());
+                createTransaction.setTankId(commonFunctionEjb.getPumpName(saleDetailsModel.getPumpId()).getTankId());
                 createTransaction.setPumpId(saleDetailsModel.getPumpId());
                 createTransaction.setNozzleId(saleDetailsModel.getNozzleId());
                 createTransaction.setProductId(saleDetailsModel.getProductId());

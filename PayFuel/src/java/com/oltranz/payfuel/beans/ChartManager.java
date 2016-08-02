@@ -7,6 +7,7 @@ package com.oltranz.payfuel.beans;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.oltranz.payfuel.chartmodel.DailyChartProductModel;
 import com.oltranz.payfuel.chartmodel.NozzleDash;
 import com.oltranz.payfuel.chartmodel.ProductChartModel;
 import com.oltranz.payfuel.chartmodel.PumpDash;
@@ -44,6 +45,9 @@ public class ChartManager {
     @EJB
             PumpManager pumpManager;
     
+    @EJB
+            CommonFunctionEjb commonFunctionEjb;
+    
     public String getDailyProductSaleChart(){
         
         Calendar cal = Calendar.getInstance();
@@ -56,25 +60,61 @@ public class ChartManager {
         Date monthEndDate = cal.getTime();
         
         
+        String [] dayOfMonth=commonFunctionEjb.dayOfMonth();
+        double [] superOfDay=productSalePerDay(1);
+        double [] gasoilOfDay=productSalePerDay(2);
         
+        DailyChartProductModel dcp=new DailyChartProductModel();
+        dcp.setDay(dayOfMonth);
+        dcp.setSuperList(superOfDay);
+        dcp.setGasoilList(gasoilOfDay);
         
+        ObjectMapper mapper=new ObjectMapper();
         
+        try {
+            String json = mapper.writeValueAsString(dcp);
+            return json;
+        }
+        catch (JsonProcessingException ex) {
+            Logger.getLogger(ChartManager.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
         
-        return null;
     }
     
-    public void superSalePerDay(int productId,Date monthStartDate,Date monthEndDate){
-        
-        String sqlString="SELECT DAY(t.date),SUM(t.quantity) FROM Transaction t WHERE t.productId = :productId GROUP BY t.date HAVING t.date BETWEEN :monthStartDate AND :monthEndDate";
-        
-        Query query = em.createQuery(sqlString);
-        query.setParameter("productId", productId);
-        query.setParameter("monthStartDate", monthStartDate);
-        query.setParameter("monthEndDate", monthEndDate);
+    
+    
+    public double [] productSalePerDay(int productId){
         
         
+        Calendar cal = Calendar.getInstance();
+        int maxDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        double [] productOfMonth=new double[maxDay];
         
+        for (int i = 0; i < maxDay; i++) {
+            cal.set(Calendar.DAY_OF_MONTH, i + 1);
+            Date date=cal.getTime();
+            
+            String sqlString="SELECT SUM(t.quantity) FROM Transaction t WHERE t.productId = :productId AND t.date = :date";
+            Query query = em.createQuery(sqlString);
+            query.setParameter("productId", productId);
+            query.setParameter("date", date);
+            List<Double> quantityList=(List<Double>)query.getResultList();
+            
+            if(quantityList.get(0)==null){
+                productOfMonth[i]=0;
+            }
+            else{
+                productOfMonth[i]=quantityList.get(0);
+            }
+        }
+        
+        return productOfMonth;
     }
+    
+    
+    
+    
     
     
 //--------------------------------------------------------------------------------------------------------------------------------
@@ -101,11 +141,11 @@ public class ChartManager {
             String curMonth=dateFormat.format(curMonthEndDate);
             String preMonth=dateFormat.format(preMonthEndDate);
             
-            double preSuperQuantity=superSalePerMonth(1,preMonthStartDate,preMonthEndDate);
-            double preGasoilQuantity=gasoilSalePerMonth(2,preMonthStartDate,preMonthEndDate);
+            double preSuperQuantity=productSalePerMonth(1,preMonthStartDate,preMonthEndDate);
+            double preGasoilQuantity=productSalePerMonth(2,preMonthStartDate,preMonthEndDate);
             
-            double curSuperQuantity=superSalePerMonth(1,curMonthStartDate,curMonthEndDate);
-            double curGasoilQuantity=gasoilSalePerMonth(2,curMonthStartDate,curMonthEndDate);
+            double curSuperQuantity=productSalePerMonth(1,curMonthStartDate,curMonthEndDate);
+            double curGasoilQuantity=productSalePerMonth(2,curMonthStartDate,curMonthEndDate);
             
             
             
@@ -136,7 +176,7 @@ public class ChartManager {
         }
     }
     
-    public double superSalePerMonth(int productId,Date monthStartDate,Date monthEndDate){
+    public double productSalePerMonth(int productId,Date monthStartDate,Date monthEndDate){
         
         Query query=em.createQuery("SELECT t FROM Transaction t WHERE t.productId = :productId and t.date BETWEEN :monthStartDate AND :monthEndDate");
         query.setParameter("productId", productId);
@@ -153,22 +193,7 @@ public class ChartManager {
         return quantity;
     }
     
-    public double gasoilSalePerMonth(int productId,Date monthStartDate,Date monthEndDate){
-        
-        Query query=em.createQuery("SELECT t FROM Transaction t WHERE t.productId = :productId and t.date BETWEEN :monthStartDate AND :monthEndDate");
-        query.setParameter("productId", productId);
-        query.setParameter("monthStartDate", monthStartDate);
-        query.setParameter("monthEndDate", monthEndDate);
-        
-        List<Transaction> transactionList=(List<Transaction>)query.getResultList();
-        double quantity=0;
-        
-        for(Transaction transaction : transactionList){
-            quantity+=transaction.getQuantity();
-        }
-        
-        return quantity;
-    }
+    
     
 //-------------------------------------------------------------------------------------------------------------------------------
     
@@ -262,23 +287,7 @@ public class ChartManager {
     }
     
     
-    public void test(){
-        
-        
-        
-        
-        Calendar cal = Calendar.getInstance();
-// Set the day of the month to the first day of the month
-        
-        cal.set(Calendar.DAY_OF_MONTH,cal.getActualMinimum(Calendar.DAY_OF_MONTH));
-        
-// Extract the Date from the Calendar instance
-        
-        Date firstDayOfTheMonth = cal.getTime();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String s=dateFormat.format(firstDayOfTheMonth);
-        
-    }
+    
     
     
 }

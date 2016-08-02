@@ -43,13 +43,13 @@ public class CustomerType implements Serializable {
     @Column(name = "descr", length = 255)
     private String descr;
 
-    public CustomerType() {
-    }
-
     public CustomerType(Integer customerTypeId, String name, String descr) {
         this.customerTypeId = customerTypeId;
         this.name = name;
         this.descr = descr;
+    }
+
+    public CustomerType() {
     }
 
     public CustomerType(Integer customerTypeId) {

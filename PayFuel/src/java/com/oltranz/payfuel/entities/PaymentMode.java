@@ -48,13 +48,13 @@ public class PaymentMode implements Serializable {
     @Column(name = "status")
     private Integer status=7;
 
-    public PaymentMode() {
-    }
-
     public PaymentMode(Integer paymentModeId, String name, String descr) {
         this.paymentModeId = paymentModeId;
         this.name = name;
         this.descr = descr;
+    }
+
+    public PaymentMode() {
     }
 
     public PaymentMode(Integer paymentModeId) {

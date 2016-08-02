@@ -9,7 +9,7 @@ import com.oltranz.payfuel.entities.Branch;
 import com.oltranz.payfuel.entities.Device;
 import com.oltranz.payfuel.entities.Role;
 import com.oltranz.payfuel.entities.RoleForBranch;
-import com.oltranz.payfuel.entities.User;
+
 import com.oltranz.payfuel.models.DeviceRegistrationModel;
 import com.oltranz.payfuel.models.DeviceRegistrationResponse;
 import com.oltranz.payfuel.models.Devices;
@@ -18,7 +18,6 @@ import com.oltranz.payfuel.models.UserDetailsModel;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -221,142 +220,49 @@ public class DeviceManager {
         return resultObject;
     }
     
-    public ResultObject getDeviceList(int userId){
-        
-        ResultObject resultObject=new ResultObject();
-        resultObject.setObjectClass(Device.class);
-        
-        //check if user is available
-        User user=em.find(User.class,userId);
-        if(user==null){
-            resultObject.setMessage("User is not Created To Access The Device");
-            resultObject.setObject(null);
-            resultObject.setStatusCode(500);
-            return resultObject;
-        }
-        
-        List<Devices> devicesList=new ArrayList<>();
-        Device device;
-        List<Device> deviceList=(List<Device>)em.createNamedQuery("Device.findAll").getResultList();
-        //if user id 1 bring all branch
-        if(user.getUserId()==1){
-            Iterator i=deviceList.iterator();
-            while (i.hasNext()){
-                device=(Device) i.next();
-                
-                Devices devices=new Devices();
-                devices.setDeviceId(device.getDeviceId());
-                devices.setDeviceNo(device.getDeviceName());
-                devices.setBranchId(device.getBranchId());
-                Branch branch=commonFunctionEjb.getBranchName(device.getBranchId());
-                devices.setBranchName(branch.getName());
-                devices.setStatus(device.getStatus());
-                if(device.getStatus()==7){
-                    devices.setStatusName("ACTIVE");
-                }
-                else{
-                    devices.setStatusName("DEACTIVE");
-                }
-                
-                devicesList.add(devices);
-            }
-            resultObject.setObject(devicesList);
-            resultObject.setMessage(devicesList.size()+" Devices are found");
-            resultObject.setStatusCode(100);
-            return resultObject;
-        }
-        
-        //get the user details,roles and its branch
-        UserDetailsModel userDetails= (UserDetailsModel) userManager.getUserDetails(user.getUserId()).getObject();
-        List<Role> roles=userDetails.getRoles();
-        Integer branchId=-1;
-        for(Role r: roles){
-            
-            if(r.getTypeId()==1){
-                
-                Iterator i=deviceList.iterator();
-                while (i.hasNext()){
-                    device=(Device) i.next();
-                    
-                    Devices devices=new Devices();
-                    devices.setDeviceId(device.getDeviceId());
-                    devices.setDeviceNo(device.getDeviceName());
-                    devices.setBranchId(device.getBranchId());
-                    Branch branch=commonFunctionEjb.getBranchName(device.getBranchId());
-                    devices.setBranchName(branch.getName());
-                    devices.setStatus(device.getStatus());
-                    if(device.getStatus()==7){
-                        devices.setStatusName("ACTIVE");
-                    }
-                    else{
-                        devices.setStatusName("DEACTIVE");
-                    }
-                    
-                    devicesList.add(devices);
-                }
-                resultObject.setObject(devicesList);
-                resultObject.setMessage(devicesList.size()+" Devices are found");
-                resultObject.setStatusCode(100);
-                return resultObject;
-            }
-            
-            if(r.getTypeId()==2){
-                
-                List<RoleForBranch> list = (List<RoleForBranch>)em.createQuery("SELECT r FROM RoleForBranch r WHERE r.roleForBranchPK.roleId = :roleId").setParameter("roleId", r.getRoleId()).getResultList();
-                if(list.size()>0)
-                    
-                    branchId=list.get(0).getRoleForBranchPK().getBranchId();
-            }
-        }
-        
-        if(branchId==-1){
-            resultObject.setObject(null);
-            resultObject.setMessage("You are not a staff of any branch to access the Devices");
-            resultObject.setObjectClass(Branch.class);
-            resultObject.setStatusCode(500);
-            return resultObject;
-        }
-        
-        //get the branch from userbranchid
-        deviceList=(List<Device>)em.createQuery("SELECT d FROM Device d WHERE d.branchId = :branchId").setParameter("branchId", branchId).getResultList();
-        if(deviceList.size()>0){
-            Iterator i=deviceList.iterator();
-            while (i.hasNext()){
-                device=(Device) i.next();
-                
-                Devices devices=new Devices();
-                devices.setDeviceId(device.getDeviceId());
-                devices.setDeviceNo(device.getDeviceName());
-                devices.setBranchId(device.getBranchId());
-                Branch branch=commonFunctionEjb.getBranchName(device.getBranchId());
-                devices.setBranchName(branch.getName());
-                devices.setStatus(device.getStatus());
-                
-                if(device.getStatus()==7){
-                    devices.setStatusName("ACTIVE");
-                }
-                else{
-                    devices.setStatusName("DEACTIVE");
-                }
-                
-                devicesList.add(devices);
-            }
-            resultObject.setObject(devicesList);
-            resultObject.setMessage(devicesList.size()+" Devices are found");
-            resultObject.setStatusCode(100);
-            return resultObject;
-        }
-        
-        resultObject.setObject(null);
-        resultObject.setMessage("There are no Devices in the system");
-        resultObject.setStatusCode(500);
-        return resultObject;
-    }
+    
     
     public ResultObject getDeviceByItsId(Integer deviceId){
         
         ResultObject resultObject=new ResultObject();
         Device device=em.find(Device.class,deviceId);
+        
+        if(device!=null){
+            
+            Devices devices=new Devices();
+            devices.setDeviceId(device.getDeviceId());
+            devices.setDeviceNo(device.getDeviceName());
+            devices.setBranchId(device.getBranchId());
+            Branch branch=commonFunctionEjb.getBranchName(device.getBranchId());
+            devices.setBranchName(branch.getName());
+            devices.setStatus(device.getStatus());
+            if(device.getStatus()==7){
+                devices.setStatusName("ACTIVE");
+            }
+            else{
+                devices.setStatusName("DEACTIVE");
+            }
+            
+            resultObject.setMessage("Device Well found and returned!");
+            resultObject.setObject(devices);
+            resultObject.setObjectClass(Device.class);
+            resultObject.setStatusCode(100);
+            return resultObject;
+        }
+        else{
+            resultObject.setMessage("Device with given Id not found!");
+            resultObject.setObject(null);
+            resultObject.setObjectClass(Device.class);
+            resultObject.setStatusCode(500);
+            return resultObject;
+        }
+    }
+    
+    
+    public ResultObject getDeviceByBranchId(Integer branchId){
+        
+        ResultObject resultObject=new ResultObject();
+        Device device=commonFunctionEjb.getDevice(branchId);
         
         if(device!=null){
             
@@ -416,6 +322,61 @@ public class DeviceManager {
         return resultObject;
     }
     
+    //------------------------------------------web-------------------------------------------------------------------
     
     
+    public ResultObject getDeviceList(int branchId){
+        
+        ResultObject resultObject = new ResultObject();
+        resultObject.setObjectClass(Device.class);
+        
+        
+        List<Device> deviceList;
+        
+        if(branchId==0){
+            deviceList=(List<Device>) em.createQuery("SELECT d FROM Device d ").getResultList();
+            if(deviceList.isEmpty()){
+                resultObject.setObject(null);
+                resultObject.setMessage("There are no Device in the system");
+                resultObject.setStatusCode(500);
+            }
+        }
+        else{
+            deviceList=(List<Device>) em.createQuery("SELECT d FROM Device d WHERE d.branchId = :branchId").setParameter("branchId", branchId).getResultList();
+            if(deviceList.isEmpty()){
+                resultObject.setObject(null);
+                resultObject.setMessage("There are no Device in the system");
+                resultObject.setStatusCode(500);
+            }
+        }
+        
+        List<Devices> devicesList=new ArrayList<>();
+        for(Device device : deviceList){
+            Devices devices=new Devices();
+            devices.setDeviceId(device.getDeviceId());
+            devices.setDeviceNo(device.getDeviceName());
+            devices.setBranchId(device.getBranchId());
+            Branch branch=commonFunctionEjb.getBranchName(device.getBranchId());
+            devices.setBranchName(branch.getName());
+            devices.setStatus(device.getStatus());
+            if(device.getStatus()==7){
+                devices.setStatusName("ACTIVE");
+            }
+            else{
+                devices.setStatusName("DEACTIVE");
+            }
+            devicesList.add(devices);
+        }
+        
+        resultObject.setObject(devicesList);
+        resultObject.setMessage(devicesList.size()+" Devices are found");
+        resultObject.setStatusCode(100);
+        
+        return resultObject;
+    }
+    
+    
+    
+    
+
 }

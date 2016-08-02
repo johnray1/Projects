@@ -60,14 +60,7 @@ public class BranchManagementService {
     }
     
     
-    @GET
-    @Path("branches/{userId}")
-    @Produces({"application/xml", "application/json"})
-    public String getBranchesByUserId(@PathParam("userId") Integer userId) {
-        
-        ResultObject result= branchManager.getBranchList(userId);
-        return result.getJsonFormat();
-    }
+    
     
     
     @GET
@@ -88,5 +81,14 @@ public class BranchManagementService {
         return result.getJsonFormat();
     }
     
+    //----------------------------------------web----------------------------------------------------------------------
     
+    @GET
+    @Path("branches/{branchId}")
+    @Produces({"application/xml", "application/json"})
+    public String getBranchesByUserId(@PathParam("branchId") Integer branchId) {
+        
+        ResultObject result= branchManager.getBranchList(branchId);
+        return result.getJsonFormat();
+    }
 }

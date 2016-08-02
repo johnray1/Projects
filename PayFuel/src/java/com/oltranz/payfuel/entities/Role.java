@@ -54,13 +54,13 @@ public class Role implements Serializable {
     @Column(name = "descr", length = 255)
     private String descr;
 
-    public Role() {
-    }
-
     public Role(String name, Integer typeId, String descr) {
         this.name = name;
         this.typeId = typeId;
         this.descr = descr;
+    }
+
+    public Role() {
     }
 
     public Role(Integer roleId) {

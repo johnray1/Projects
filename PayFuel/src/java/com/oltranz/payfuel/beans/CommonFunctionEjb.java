@@ -27,6 +27,7 @@ import com.oltranz.payfuel.entities.Voucher;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -270,6 +271,18 @@ public class CommonFunctionEjb {
         return null;
     }
     
+    public Device getDevice(int branchId){
+        
+        Device device=null;
+        List<Device> dl=(List<Device>)em.createQuery("SELECT d FROM Device d WHERE d.branchId = :branchId").setParameter("branchId", branchId).getResultList();
+        if(dl.size()>0){
+            device=dl.get(0);
+            return device;
+        }else{
+            return device;
+        }
+    }
+    
     public Double getProductPrice(Integer branchId,Integer productId){
         
         BranchProductPrice branchProductPrice=(BranchProductPrice) em.createQuery("SELECT b FROM BranchProductPrice b WHERE b.branchProductPricePK.branchId = :branchId and b.branchProductPricePK.productId = :productId").setParameter("branchId", branchId).setParameter("productId", productId).getSingleResult();
@@ -376,18 +389,7 @@ public class CommonFunctionEjb {
         return null;
     }
     
-    public Date getDate(){
-        try{
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date = new Date();
-            String dt=dateFormat.format(date);
-            Date dtt=dateFormat.parse(dt);
-            return dtt;
-        }
-        catch(ParseException pe){
-            return null;
-        }
-    }
+    
     
     
     
@@ -448,6 +450,7 @@ public class CommonFunctionEjb {
         erroneousTransaction.setBranchId(transaction.getBranchId());
         erroneousTransaction.setUserId(transaction.getUserId());
         erroneousTransaction.setDeviceId(transaction.getDeviceId());
+        erroneousTransaction.setPumpId(transaction.getTankId());
         erroneousTransaction.setPumpId(transaction.getPumpId());
         erroneousTransaction.setNozzleId(transaction.getNozzleId());
         erroneousTransaction.setProductId(transaction.getProductId());
@@ -483,6 +486,34 @@ public class CommonFunctionEjb {
         
     }
     
+    public String [] dayOfMonth(){
+        
+        
+        Calendar cal = Calendar.getInstance();
+        int maxDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        SimpleDateFormat df = new SimpleDateFormat("d");
+        String [] dayOfMonth=new String[maxDay];
+        
+        for (int i = 0; i < maxDay; i++) {
+            cal.set(Calendar.DAY_OF_MONTH, i + 1);
+            
+            dayOfMonth[i]=df.format(cal.getTime());
+            
+        }
+         return dayOfMonth;
+    }
     
+    public Date getDate(){
+        try{
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = new Date();
+            String dt=dateFormat.format(date);
+            Date dtt=dateFormat.parse(dt);
+            return dtt;
+        }
+        catch(ParseException pe){
+            return null;
+        }
+    }
     
 }

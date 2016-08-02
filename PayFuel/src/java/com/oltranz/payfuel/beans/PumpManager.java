@@ -60,7 +60,14 @@ public class PumpManager {
         Tank tank=em.find(Tank.class, newPump.getTankId());
         if(tank==null){
             resultObject.setObject(null);
-            resultObject.setMessage("TankId is not created, to which we want to set our Pump");
+            resultObject.setMessage("Tank is not created, to which we want to set our Pump");
+            resultObject.setStatusCode(500);
+            return resultObject;
+        }
+        Branch branch=em.find(Branch.class, tank.getBranchId());
+        if(branch==null){
+            resultObject.setObject(null);
+            resultObject.setMessage("Branch is not created, to which we want to set our Pump");
             resultObject.setStatusCode(500);
             return resultObject;
         }
@@ -68,6 +75,7 @@ public class PumpManager {
         Pump pump=new Pump();
         pump.setName(newPump.getName());
         pump.setTankId(newPump.getTankId());
+        pump.setBranchId(branch.getBranchId());
         em.persist(pump);
         em.flush();
         
@@ -85,15 +93,31 @@ public class PumpManager {
         resultObject.setObjectClass(Pump.class);
         
         Pump pump=em.find(Pump.class, editPump.getPumpId());
-        
         if(pump==null){
             resultObject.setMessage("No Pump with id of the given one is found!");
             resultObject.setObject(null);
             return resultObject;
         }
         
+        Tank tank=em.find(Tank.class, editPump.getTankId());
+        if(tank==null){
+            resultObject.setObject(null);
+            resultObject.setMessage("Tank is not created, to which we want to set our Pump");
+            resultObject.setStatusCode(500);
+            return resultObject;
+        }
+        
+        Branch branch=em.find(Branch.class, tank.getBranchId());
+        if(branch==null){
+            resultObject.setObject(null);
+            resultObject.setMessage("BranchId is not created, to which we want to set our Pump");
+            resultObject.setStatusCode(500);
+            return resultObject;
+        }
+        
         pump.setName(editPump.getName());
         pump.setTankId(editPump.getTankId());
+        pump.setBranchId(branch.getBranchId());
         pump.setStatus(editPump.getStatus());//default value of a device status is 7 even if i dont post status the 7 is coming in this object
         em.merge(pump);
         
@@ -205,6 +229,56 @@ public class PumpManager {
         List<PumpNozzleProductModel> pumpNozzleProductModelList=new ArrayList<>();
         Nozzle nozzle;
         List<Nozzle> nozzleList=(List<Nozzle>)em.createQuery("SELECT n FROM Nozzle n").getResultList();
+        if(nozzleList.isEmpty()){
+            resultObject.setObject(null);
+            resultObject.setMessage("No Pumps Found");
+            resultObject.setStatusCode(500);
+            return resultObject;
+        }
+        else{
+            Iterator i=nozzleList.iterator();
+            while(i.hasNext()){
+                nozzle=(Nozzle) i.next();
+                
+                PumpNozzleProductModel pumpNozzleProductModel=new PumpNozzleProductModel();
+                
+                pumpNozzleProductModel.setPumpId(nozzle.getPumpId());
+                Pump pump=commonFunctionEjb.getPumpName(nozzle.getPumpId());
+                pumpNozzleProductModel.setPumpName(pump.getName());
+                pumpNozzleProductModel.setPreCalibrationDate(pump.getPreCalibrationDate());
+                pumpNozzleProductModel.setNextCalibrationDate(pump.getNextCalibrationDate());
+                pumpNozzleProductModel.setNozzleNo(commonFunctionEjb.getNozzleNo(pump.getPumpId()));
+                pumpNozzleProductModel.setNozzleId(nozzle.getNozzleId());
+                pumpNozzleProductModel.setNozzleName(nozzle.getNozzleName());
+                pumpNozzleProductModel.setIndex(nozzle.getNozzleIndex());
+                pumpNozzleProductModel.setProductId(nozzle.getProductId());
+                Product product=commonFunctionEjb.getProductName(nozzle.getProductId());
+                pumpNozzleProductModel.setProductName(product.getName());
+                Tank tank=commonFunctionEjb.getTank(pump.getTankId());
+                pumpNozzleProductModel.setBranchId(tank.getBranchId());
+                Branch branch=commonFunctionEjb.getBranchName(tank.getBranchId());
+                pumpNozzleProductModel.setBranchName(branch.getName());
+                pumpNozzleProductModel.setStatus(pump.getStatus());
+                pumpNozzleProductModel.setTankId(pump.getTankId());
+                pumpNozzleProductModel.setTankName(tank.getName());
+                
+                pumpNozzleProductModelList.add(pumpNozzleProductModel);
+            }
+            resultObject.setObject(pumpNozzleProductModelList);
+            resultObject.setMessage(pumpNozzleProductModelList.size()+" "+"Data found");
+            resultObject.setStatusCode(100);
+            return resultObject;
+        }
+    }
+    
+    public ResultObject getPumpNozzleProductListByBranchId(Integer branchId){
+        
+        ResultObject resultObject=new ResultObject();
+        resultObject.setObjectClass(PumpNozzleProductModel.class);
+        
+        List<PumpNozzleProductModel> pumpNozzleProductModelList=new ArrayList<>();
+        Nozzle nozzle;
+        List<Nozzle> nozzleList=(List<Nozzle>)em.createQuery("SELECT n FROM Nozzle n WHERE n.branchId = :branchId").setParameter("branchId", branchId).getResultList();
         if(nozzleList.isEmpty()){
             resultObject.setObject(null);
             resultObject.setMessage("No Pumps Found");
@@ -518,52 +592,17 @@ public class PumpManager {
     }
     
     
-//---------------------------------------------------------------------demo test mode--------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------web--------------------------------------------------------------------------------------------
     
-    public ResultObject getPumpNozzleProductList(int userId){
+    public ResultObject getPumpNozzleProductListForWeb(int branchId){
         
-        ResultObject resultObject=new ResultObject();
-        resultObject.setObjectClass(PumpNozzleProductModel.class);
-        
-        List<PumpNozzleProductModel> pumpNozzleProductModelList=new ArrayList<>();
-        Nozzle nozzle;
-        List<Nozzle> nozzleList=(List<Nozzle>)em.createQuery("SELECT n FROM Nozzle n").getResultList();
-        if(nozzleList.isEmpty()){
-            resultObject.setObject(null);
-            resultObject.setMessage("No Pumps Found");
-            resultObject.setStatusCode(500);
-            return resultObject;
+        ResultObject resultObject;
+        if(branchId==0){
+            resultObject=getPumpNozzleProductList();
         }
         else{
-            Iterator i=nozzleList.iterator();
-            while(i.hasNext()){
-                nozzle=(Nozzle) i.next();
-                
-                PumpNozzleProductModel pumpNozzleProductModel=new PumpNozzleProductModel();
-                
-                pumpNozzleProductModel.setPumpId(nozzle.getPumpId());
-                Pump pump=commonFunctionEjb.getPumpName(nozzle.getPumpId());
-                pumpNozzleProductModel.setPumpName(pump.getName());
-                pumpNozzleProductModel.setNozzleId(nozzle.getNozzleId());
-                pumpNozzleProductModel.setNozzleName(nozzle.getNozzleName());
-                pumpNozzleProductModel.setIndex(nozzle.getNozzleIndex());
-                pumpNozzleProductModel.setProductId(nozzle.getProductId());
-                Product product=commonFunctionEjb.getProductName(nozzle.getProductId());
-                pumpNozzleProductModel.setProductName(product.getName());
-                Tank tank=commonFunctionEjb.getTank(pump.getTankId());
-                pumpNozzleProductModel.setBranchId(tank.getBranchId());
-                Branch branch=commonFunctionEjb.getBranchName(tank.getBranchId());
-                pumpNozzleProductModel.setBranchName(branch.getName());
-                pumpNozzleProductModel.setStatus(pump.getStatus());
-                pumpNozzleProductModel.setTankId(pump.getTankId());
-                pumpNozzleProductModel.setTankName(tank.getName());
-                
-                pumpNozzleProductModelList.add(pumpNozzleProductModel);
-            }
-            resultObject.setObject(pumpNozzleProductModelList);
-            resultObject.setMessage(pumpNozzleProductModelList.size()+" "+"Data found");
-            resultObject.setStatusCode(100);
-            return resultObject;
+            resultObject=getPumpNozzleProductListByBranchId(branchId);
         }
+        return resultObject;
     }
 }

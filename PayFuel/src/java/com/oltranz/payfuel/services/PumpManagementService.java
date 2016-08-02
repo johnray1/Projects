@@ -123,14 +123,14 @@ public class PumpManagementService {
         return result.getJsonFormat();
     }
     
-  //------------------------------------------------------------------------demo-----------------------------------------------------------------------------------  
+  //------------------------------------------------------------------------web-----------------------------------------------------------------------------------  
     
     @GET
-    @Path("getPumpNozzleProductList/{userId}")
+    @Path("getPumpNozzleProductList/{branchId}")
     @Produces({"application/xml", "application/json"})
-    public String getPumpNozzleProductList(@PathParam("userId") Integer userId) {
+    public String getPumpNozzleProductList(@PathParam("branchId") Integer branchId) {
         
-        ResultObject result= pumpManager.getPumpNozzleProductList(userId);
+        ResultObject result= pumpManager.getPumpNozzleProductListForWeb(branchId);
         return result.getJsonFormat();
     }
     

@@ -6,7 +6,7 @@
 package com.oltranz.payfuel.services;
 
 import com.oltranz.payfuel.beans.TankManager;
-import com.oltranz.payfuel.entities.Deeping;
+import com.oltranz.payfuel.entities.Diping;
 import com.oltranz.payfuel.entities.Tank;
 import com.oltranz.payfuel.entities.Tanking;
 import com.oltranz.payfuel.models.ResultObject;
@@ -60,14 +60,7 @@ public class TankManagementService {
         return result.getJsonFormat();
     }
     
-    @GET
-    @Path("tanks/{userId}")
-    @Produces({"application/xml", "application/json"})
-    public String getDeviceListByUserId(@PathParam("userId") Integer userId) {
-        
-        ResultObject result= tankManager.getTankList(userId);
-        return result.getJsonFormat();
-    }
+    
     
     @GET
     @Path("tank/{tankId}")
@@ -79,22 +72,33 @@ public class TankManagementService {
     }
     
     @POST
-    @Path("tanking/create")
+    @Path("tanking")
     @Consumes({"application/xml", "application/json"})
-    public String createTanking(Tanking newTanking) {
+    public String createTanking(Tanking tanking) {
         
-        ResultObject result=tankManager.createTanking(newTanking);
+        ResultObject result=tankManager.tanking(tanking);
         return result.getJsonFormat();
         
     }
     
     @POST
-    @Path("deeping/create")
+    @Path("diping")
     @Consumes({"application/xml", "application/json"})
-    public String createDeeping(Deeping newDeeping) {
+    public String createDeeping(Diping diping) {
         
-        ResultObject result=tankManager.createDeeping(newDeeping);
+        ResultObject result=tankManager.diping(diping);
         return result.getJsonFormat();
         
+    }
+    
+    //---------------------web----------------------------------------------
+    
+    @GET
+    @Path("tanks/{branchId}")
+    @Produces({"application/xml", "application/json"})
+    public String getDeviceListByUserId(@PathParam("branchId") Integer branchId) {
+        
+        ResultObject result= tankManager.getTankListById(branchId);
+        return result.getJsonFormat();
     }
 }

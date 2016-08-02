@@ -67,14 +67,7 @@ public class DeviceManagementService {
         return result.getJsonFormat();
     }
     
-    @GET
-    @Path("devices/{userId}")
-    @Produces({"application/xml", "application/json"})
-    public String getDeviceListByUserId(@PathParam("userId") Integer userId) {
-        
-        ResultObject result= deviceManager.getDeviceList(userId);
-        return result.getJsonFormat();
-    }
+    
     
     
     @GET
@@ -92,6 +85,18 @@ public class DeviceManagementService {
     @Produces({"application/xml", "application/json"})
     public String removeDevice(@PathParam("id") Integer id) {
         ResultObject result= deviceManager.deleteDevice(id);
+        return result.getJsonFormat();
+    }
+    
+    
+    //-----------------web
+    
+    @GET
+    @Path("devices/{branchId}")
+    @Produces({"application/xml", "application/json"})
+    public String getDeviceListByUserId(@PathParam("branchId") Integer branchId) {
+        
+        ResultObject result= deviceManager.getDeviceList(branchId);
         return result.getJsonFormat();
     }
     

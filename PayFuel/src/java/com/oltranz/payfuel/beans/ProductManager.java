@@ -360,121 +360,7 @@ public class ProductManager {
     
 //---------------------------------------------------------------------------------Branch Product--------------------------------------------
     
-    public ResultObject getBranchProductList(Integer userId){
-        ResultObject resultObject=new ResultObject();
-        resultObject.setObjectClass(BranchProduct.class);
-        
-        //check if user is available
-        User user=em.find(User.class,userId);
-        if(user==null){
-            resultObject.setMessage("User is not Created To Access The PRODUCT");
-            resultObject.setObject(null);
-            resultObject.setStatusCode(500);
-            return resultObject;
-        }
-        
-        List<BranchProduct> branchProductModelList=new ArrayList<>();
-        BranchProductPrice branchProductPrice;
-        List<BranchProductPrice> branchProductPriceList=(List<BranchProductPrice>)em.createQuery("SELECT b FROM BranchProductPrice b").getResultList();
-        
-        //if user id 1 bring all branch
-        if(user.getUserId()==1){
-            Iterator i=branchProductPriceList.iterator();
-            while (i.hasNext()){
-                branchProductPrice=(BranchProductPrice) i.next();
-                
-                BranchProduct branchProductModel=new BranchProduct();
-                branchProductModel.setBranchId(branchProductPrice.getBranchProductPricePK().getBranchId());
-                Branch branch=commonFunctionEjb.getBranchName(branchProductPrice.getBranchProductPricePK().getBranchId());
-                branchProductModel.setBranchName(branch.getName());
-                branchProductModel.setProductId(branchProductPrice.getBranchProductPricePK().getProductId());
-                Product product=commonFunctionEjb.getProductName(branchProductPrice.getBranchProductPricePK().getProductId());
-                branchProductModel.setProductName(product.getName());
-                branchProductModel.setUnitPrice(branchProductPrice.getBPrice());
-                
-                branchProductModelList.add(branchProductModel);
-            }
-            resultObject.setObject(branchProductModelList);
-            resultObject.setMessage(branchProductModelList.size()+" "+"BranchProduct Found");
-            resultObject.setStatusCode(100);
-            return resultObject;
-        }
-        
-        //get the user details,roles and its branch
-        UserDetailsModel userDetails= (UserDetailsModel) userManager.getUserDetails(user.getUserId()).getObject();
-        List<Role> roles=userDetails.getRoles();
-        Integer branchId=-1;
-        for(Role r: roles){
-            
-            if(r.getTypeId()==1){
-                Iterator i=branchProductPriceList.iterator();
-                while (i.hasNext()){
-                    branchProductPrice=(BranchProductPrice) i.next();
-                    
-                    BranchProduct branchProductModel=new BranchProduct();
-                    branchProductModel.setBranchId(branchProductPrice.getBranchProductPricePK().getBranchId());
-                    Branch branch=commonFunctionEjb.getBranchName(branchProductPrice.getBranchProductPricePK().getBranchId());
-                    branchProductModel.setBranchName(branch.getName());
-                    branchProductModel.setProductId(branchProductPrice.getBranchProductPricePK().getProductId());
-                    Product product=commonFunctionEjb.getProductName(branchProductPrice.getBranchProductPricePK().getProductId());
-                    branchProductModel.setProductName(product.getName());
-                    branchProductModel.setUnitPrice(branchProductPrice.getBPrice());
-                    
-                    branchProductModelList.add(branchProductModel);
-                }
-                resultObject.setObject(branchProductModelList);
-                resultObject.setMessage(branchProductModelList.size()+" "+"BranchProduct Found");
-                resultObject.setStatusCode(100);
-                return resultObject;
-            }
-            
-            if(r.getTypeId()==2){
-                
-                List<RoleForBranch> list = (List<RoleForBranch>)em.createQuery("SELECT r FROM RoleForBranch r WHERE r.roleForBranchPK.roleId = :roleId").setParameter("roleId", r.getRoleId()).getResultList();
-                if(list.size()>0)
-                    
-                    branchId=list.get(0).getRoleForBranchPK().getBranchId();
-            }
-        }
-        
-        if(branchId==-1){
-            resultObject.setObject(null);
-            resultObject.setMessage("There is no branch product");
-            resultObject.setStatusCode(500);
-            return resultObject;
-        }
-        
-        //get the branch from userbranchid
-        branchProductPriceList=(List<BranchProductPrice>)em.createQuery("SELECT b FROM BranchProductPrice b WHERE b.branchProductPricePK.branchId = :branchId").setParameter("branchId", branchId).getResultList();
-        if(branchProductPriceList.size()>0){
-            Iterator i=branchProductPriceList.iterator();
-            while (i.hasNext()){
-                branchProductPrice=(BranchProductPrice) i.next();
-                
-                BranchProduct branchProductModel=new BranchProduct();
-                branchProductModel.setBranchId(branchProductPrice.getBranchProductPricePK().getBranchId());
-                Branch branch=commonFunctionEjb.getBranchName(branchProductPrice.getBranchProductPricePK().getBranchId());
-                branchProductModel.setBranchName(branch.getName());
-                branchProductModel.setProductId(branchProductPrice.getBranchProductPricePK().getProductId());
-                Product product=commonFunctionEjb.getProductName(branchProductPrice.getBranchProductPricePK().getProductId());
-                branchProductModel.setProductName(product.getName());
-                branchProductModel.setUnitPrice(branchProductPrice.getBPrice());
-                
-                branchProductModelList.add(branchProductModel);
-            }
-            resultObject.setObject(branchProductModelList);
-            resultObject.setMessage(branchProductModelList.size()+" "+"BranchProduct Found");
-            resultObject.setStatusCode(100);
-            return resultObject;
-        }
-        
-        
-        resultObject.setObject(null);
-        resultObject.setMessage("There are no BranchProduct in the system");
-        resultObject.setStatusCode(500);
-        return resultObject;
-        
-    }
+    
     
     public ResultObject getBranchProduct(Integer branchId,Integer productId){
         
@@ -509,6 +395,45 @@ public class ProductManager {
             resultObject.setStatusCode(100);
             return resultObject;
         }
+        
+    }
+    
+    public ResultObject getBranchProductByBranchId(Integer branchId){
+        
+        ResultObject resultObject=new ResultObject();
+        resultObject.setObjectClass(BranchProduct.class);
+        
+        List<BranchProduct> branchProductModelList=new ArrayList<>();
+        
+        BranchProductPrice branchProductPrice;
+        List<BranchProductPrice> branchProductPriceList=(List<BranchProductPrice>)em.createQuery("SELECT b FROM BranchProductPrice b WHERE b.branchProductPricePK.branchId = :branchId").setParameter("branchId", branchId).getResultList();
+        if(branchProductPriceList.isEmpty()){
+            resultObject.setObject(null);
+            resultObject.setMessage("No BranchProduct Found");
+            resultObject.setStatusCode(500);
+            
+            return resultObject;
+        }
+        Iterator i=branchProductPriceList.iterator();
+        while (i.hasNext()){
+            branchProductPrice=(BranchProductPrice) i.next();
+            
+            BranchProduct branchProductModel=new BranchProduct();
+            branchProductModel.setBranchId(branchProductPrice.getBranchProductPricePK().getBranchId());
+            Branch branch=commonFunctionEjb.getBranchName(branchProductPrice.getBranchProductPricePK().getBranchId());
+            branchProductModel.setBranchName(branch.getName());
+            branchProductModel.setProductId(branchProductPrice.getBranchProductPricePK().getProductId());
+            Product product=commonFunctionEjb.getProductName(branchProductPrice.getBranchProductPricePK().getProductId());
+            branchProductModel.setProductName(product.getName());
+            branchProductModel.setUnitPrice(branchProductPrice.getBPrice());
+            
+            branchProductModelList.add(branchProductModel);
+        }
+        resultObject.setObject(branchProductModelList);
+        resultObject.setMessage(branchProductModelList.size()+" "+"BranchProduct Found");
+        resultObject.setStatusCode(100);
+        
+        return resultObject;
         
     }
     
@@ -558,7 +483,6 @@ public class ProductManager {
             return resultObject;
         }
     }
-    
     
     public ResultObject editProductPriceToBranch(BranchProductPriceModel branchProductPriceModel){
         
@@ -612,9 +536,6 @@ public class ProductManager {
             return resultObject;
         }
     }
-    
-    
-    
     
     public ResultObject removeProduct(Integer productId){
         
@@ -682,6 +603,147 @@ public class ProductManager {
     }
     
     
+    
+    
+//-----------------------web------------------------------------------------------
+    
+    public ResultObject getBranchProductList(Integer branchId){
+        ResultObject resultObject;
+        if(branchId==0){
+            resultObject=getBranchProductList();
+            return resultObject;
+        }
+        else{
+            resultObject=getBranchProductByBranchId(branchId);
+            return resultObject;
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//    public ResultObject getBranchProductList(Integer userId){
+//        ResultObject resultObject=new ResultObject();
+//        resultObject.setObjectClass(BranchProduct.class);
+//
+//        //check if user is available
+//        User user=em.find(User.class,userId);
+//        if(user==null){
+//            resultObject.setMessage("User is not Created To Access The PRODUCT");
+//            resultObject.setObject(null);
+//            resultObject.setStatusCode(500);
+//            return resultObject;
+//        }
+//
+//        List<BranchProduct> branchProductModelList=new ArrayList<>();
+//        BranchProductPrice branchProductPrice;
+//        List<BranchProductPrice> branchProductPriceList=(List<BranchProductPrice>)em.createQuery("SELECT b FROM BranchProductPrice b").getResultList();
+//
+//        //if user id 1 bring all branch
+//        if(user.getUserId()==1){
+//            Iterator i=branchProductPriceList.iterator();
+//            while (i.hasNext()){
+//                branchProductPrice=(BranchProductPrice) i.next();
+//
+//                BranchProduct branchProductModel=new BranchProduct();
+//                branchProductModel.setBranchId(branchProductPrice.getBranchProductPricePK().getBranchId());
+//                Branch branch=commonFunctionEjb.getBranchName(branchProductPrice.getBranchProductPricePK().getBranchId());
+//                branchProductModel.setBranchName(branch.getName());
+//                branchProductModel.setProductId(branchProductPrice.getBranchProductPricePK().getProductId());
+//                Product product=commonFunctionEjb.getProductName(branchProductPrice.getBranchProductPricePK().getProductId());
+//                branchProductModel.setProductName(product.getName());
+//                branchProductModel.setUnitPrice(branchProductPrice.getBPrice());
+//
+//                branchProductModelList.add(branchProductModel);
+//            }
+//            resultObject.setObject(branchProductModelList);
+//            resultObject.setMessage(branchProductModelList.size()+" "+"BranchProduct Found");
+//            resultObject.setStatusCode(100);
+//            return resultObject;
+//        }
+//
+//        //get the user details,roles and its branch
+//        UserDetailsModel userDetails= (UserDetailsModel) userManager.getUserDetails(user.getUserId()).getObject();
+//        List<Role> roles=userDetails.getRoles();
+//        Integer branchId=-1;
+//        for(Role r: roles){
+//
+//            if(r.getTypeId()==1){
+//                Iterator i=branchProductPriceList.iterator();
+//                while (i.hasNext()){
+//                    branchProductPrice=(BranchProductPrice) i.next();
+//
+//                    BranchProduct branchProductModel=new BranchProduct();
+//                    branchProductModel.setBranchId(branchProductPrice.getBranchProductPricePK().getBranchId());
+//                    Branch branch=commonFunctionEjb.getBranchName(branchProductPrice.getBranchProductPricePK().getBranchId());
+//                    branchProductModel.setBranchName(branch.getName());
+//                    branchProductModel.setProductId(branchProductPrice.getBranchProductPricePK().getProductId());
+//                    Product product=commonFunctionEjb.getProductName(branchProductPrice.getBranchProductPricePK().getProductId());
+//                    branchProductModel.setProductName(product.getName());
+//                    branchProductModel.setUnitPrice(branchProductPrice.getBPrice());
+//
+//                    branchProductModelList.add(branchProductModel);
+//                }
+//                resultObject.setObject(branchProductModelList);
+//                resultObject.setMessage(branchProductModelList.size()+" "+"BranchProduct Found");
+//                resultObject.setStatusCode(100);
+//                return resultObject;
+//            }
+//
+//            if(r.getTypeId()==2){
+//
+//                List<RoleForBranch> list = (List<RoleForBranch>)em.createQuery("SELECT r FROM RoleForBranch r WHERE r.roleForBranchPK.roleId = :roleId").setParameter("roleId", r.getRoleId()).getResultList();
+//                if(list.size()>0)
+//
+//                    branchId=list.get(0).getRoleForBranchPK().getBranchId();
+//            }
+//        }
+//
+//        if(branchId==-1){
+//            resultObject.setObject(null);
+//            resultObject.setMessage("There is no branch product");
+//            resultObject.setStatusCode(500);
+//            return resultObject;
+//        }
+//
+//        //get the branch from userbranchid
+//        branchProductPriceList=(List<BranchProductPrice>)em.createQuery("SELECT b FROM BranchProductPrice b WHERE b.branchProductPricePK.branchId = :branchId").setParameter("branchId", branchId).getResultList();
+//        if(branchProductPriceList.size()>0){
+//            Iterator i=branchProductPriceList.iterator();
+//            while (i.hasNext()){
+//                branchProductPrice=(BranchProductPrice) i.next();
+//
+//                BranchProduct branchProductModel=new BranchProduct();
+//                branchProductModel.setBranchId(branchProductPrice.getBranchProductPricePK().getBranchId());
+//                Branch branch=commonFunctionEjb.getBranchName(branchProductPrice.getBranchProductPricePK().getBranchId());
+//                branchProductModel.setBranchName(branch.getName());
+//                branchProductModel.setProductId(branchProductPrice.getBranchProductPricePK().getProductId());
+//                Product product=commonFunctionEjb.getProductName(branchProductPrice.getBranchProductPricePK().getProductId());
+//                branchProductModel.setProductName(product.getName());
+//                branchProductModel.setUnitPrice(branchProductPrice.getBPrice());
+//
+//                branchProductModelList.add(branchProductModel);
+//            }
+//            resultObject.setObject(branchProductModelList);
+//            resultObject.setMessage(branchProductModelList.size()+" "+"BranchProduct Found");
+//            resultObject.setStatusCode(100);
+//            return resultObject;
+//        }
+//
+//
+//        resultObject.setObject(null);
+//        resultObject.setMessage("There are no BranchProduct in the system");
+//        resultObject.setStatusCode(500);
+//        return resultObject;
+//
+//    }
     
     
     
