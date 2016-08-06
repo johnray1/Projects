@@ -5,10 +5,7 @@
 */
 package com.oltranz.airtimeweb.bean;
 
-import com.oltranz.airtimeweb.model.TopUpBean;
-import com.oltranz.airtimeweb.model.TopUpRequest;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 /**
@@ -22,97 +19,178 @@ public class RechargeBean {
     private Boolean faceMessage=false;
     
     
-    private TopUpRequest topUpRequest;
     
-    @ManagedProperty(value="#{TopUpBean}")
-    private TopUpBean topUpBean;
+    private String phone1;
+    private Double amount1;
     
-    @ManagedProperty(value="#{TopUpBean}")
-    private TopUpBean topUpBean2;
+    private String phone2;
+    private Double amount2;
     
-    @ManagedProperty(value="#{TopUpBean}")
-    private TopUpBean topUpBean3;
-    
+    private String phone3;
+    private Double amount3;
     
     
-    public void confirm(){
+//-------------------------------------------------SEND ONE---------------------------------------------------------------------------
+    
+    public void confirmViewOne(){
         
     }
     
-    public void approve(){
-        String s=topUpBean.getMsisdn();
-        String z="";
+    public void approveOne(){
+        String msisdn=phone1;
+        Double amt=amount1;
+    }
+    
+    public void cancelOne(){
+        this.phone1=null;
+        this.amount1=null;
+        
+    }
+    
+    
+    
+//-----------------------------------------------SEND MANY-----------------------------------------------------------------------------
+    
+    public void confirmViewMany(){
+        
+    }
+    
+    public void approveMany(){
+        
+        
+        
+    }
+    
+    public void cancelMany(){
+        
+        this.phone1=null;
+        this.amount1=null;
+        
+        this.phone2=null;
+        this.amount2=null;
+        
+        this.phone3=null;
+        this.amount3=null;
+        
+        
     }
 
+    
+//-----------------------------------------------SEND FAVOURITE-----------------------------------------------------------------------------    
+    
+    public void confirmViewFav(){
+        
+    }
+    
+    public void approveFav(){
+        
+    }
+    
+    public void cancelFav(){
+        
+    }
+    
+    
+    
     /**
      * @return the faceMessage
      */
     public Boolean getFaceMessage() {
         return faceMessage;
     }
-
+    
     /**
      * @param faceMessage the faceMessage to set
      */
     public void setFaceMessage(Boolean faceMessage) {
         this.faceMessage = faceMessage;
     }
-
+    
+    
     /**
-     * @return the topUpRequest
+     * @return the phone2
      */
-    public TopUpRequest getTopUpRequest() {
-        return topUpRequest;
+    public String getPhone2() {
+        return phone2;
     }
 
     /**
-     * @param topUpRequest the topUpRequest to set
+     * @param phone2 the phone2 to set
      */
-    public void setTopUpRequest(TopUpRequest topUpRequest) {
-        this.topUpRequest = topUpRequest;
+    public void setPhone2(String phone2) {
+        this.phone2 = phone2;
     }
 
     /**
-     * @return the topUpBean
+     * @return the amount2
      */
-    public TopUpBean getTopUpBean() {
-        return topUpBean;
+    public Double getAmount2() {
+        return amount2;
     }
 
     /**
-     * @param topUpBean the topUpBean to set
+     * @param amount2 the amount2 to set
      */
-    public void setTopUpBean(TopUpBean topUpBean) {
-        this.topUpBean = topUpBean;
+    public void setAmount2(Double amount2) {
+        this.amount2 = amount2;
     }
 
     /**
-     * @return the topUpBean2
+     * @return the phone3
      */
-    public TopUpBean getTopUpBean2() {
-        return topUpBean2;
+    public String getPhone3() {
+        return phone3;
     }
 
     /**
-     * @param topUpBean2 the topUpBean2 to set
+     * @param phone3 the phone3 to set
      */
-    public void setTopUpBean2(TopUpBean topUpBean2) {
-        this.topUpBean2 = topUpBean2;
+    public void setPhone3(String phone3) {
+        this.phone3 = phone3;
     }
 
     /**
-     * @return the topUpBean3
+     * @return the amount3
      */
-    public TopUpBean getTopUpBean3() {
-        return topUpBean3;
+    public Double getAmount3() {
+        return amount3;
     }
 
     /**
-     * @param topUpBean3 the topUpBean3 to set
+     * @param amount3 the amount3 to set
      */
-    public void setTopUpBean3(TopUpBean topUpBean3) {
-        this.topUpBean3 = topUpBean3;
+    public void setAmount3(Double amount3) {
+        this.amount3 = amount3;
     }
+
+    /**
+     * @return the phone1
+     */
+    public String getPhone1() {
+        return phone1;
+    }
+
+    /**
+     * @param phone1 the phone1 to set
+     */
+    public void setPhone1(String phone1) {
+        this.phone1 = phone1;
+    }
+
+    /**
+     * @return the amount1
+     */
+    public Double getAmount1() {
+        return amount1;
+    }
+
+    /**
+     * @param amount1 the amount1 to set
+     */
+    public void setAmount1(Double amount1) {
+        this.amount1 = amount1;
+    }
+
     
     
 }

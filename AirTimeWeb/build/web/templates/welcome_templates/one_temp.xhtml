@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition> 
+            
+            <div id="toone" class="tab-pane fade in active">
+                
+                <!-- FORM -->
+                <h:form class="container-fluid login_form" id="send_one"  style="margin-top:45px;">
+                    
+                    <div class="col-xs-12 login_theinput">
+                        <h:inputText id="number" class="user" a:placeholder="Enter Phone Number" value="#{RechargeBean.phone1}"/>
+                    </div>
+                    <div class="col-xs-12 login_theinput">
+                        <h:inputText id="amount" class="pass" a:placeholder="Enter Amount" value="#{RechargeBean.amount1}"/>
+                    </div>
+                    
+                    <div class="col-xs-12 login_submitinput">
+                        <h:commandButton value="Send" action="#{RechargeBean.confirmViewOne()}">
+                            <f:ajax execute="send_one" onevent="notifyEdit()"  rendererType="postValidate" render=":editDetailsContentPanel :edit_form" />
+                        </h:commandButton>
+                    </div>
+                    
+                </h:form>
+                <!-- End FORM -->
+                
+                
+                <div id="warning" class="col-xs-12 warning">
+                    <h:outputText value="Your access code doesn't match, Please Try again!" rendered="#{RechargeBean.faceMessage}"/>
+                </div>
+                
+            </div>
+            
+        </ui:composition> 
+    </h:body>
+</html>
+

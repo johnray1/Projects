@@ -35,8 +35,7 @@
                             <h:commandLink action="#{WelcomeBean.welcomes()}" class="#{TemplateBean.welcomeClassName}" value="Welcome"/>
                             <h:commandLink action="#{CustomerBean.customerAccount()}" class="#{TemplateBean.accountClassName}" value="My Account"/>
                             <h:commandLink action="#{TransactionBean.customerTransactions()}" class="#{TemplateBean.transactionClassName}" value="Transactions"/>
-                            <h:commandLink action="notification.xhtml" class="omenu" value="Notifications"/>
-                            
+                            <h:commandLink action="notification.xhtml" class="#{TemplateBean.notificationClassName}" value="Notification"/>
                         </div>
                     </div>
                 </nav>

@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:cc="http://xmlns.jcp.org/jsf/composite">
+        
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="msisdn1" />
+        <cc:attribute name="amount1" />
+        
+        <cc:attribute name="msisdn2" />
+        <cc:attribute name="amount2" />
+        
+        <cc:attribute name="msisdn3" />
+        <cc:attribute name="amount3" />
+        
+        <cc:attribute name="proceedButtonAction" 
+                      method-signature="java.lang.String approveMany()"/>
+        <cc:attribute name="cancelButtonAction" 
+                      method-signature="java.lang.String cancelMany()"/>
+    </cc:interface>
+        
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        
+        <div class="container-fluid" style="margin:0px;padding:0px;border:0px solid red;">
+            
+            <div class="col-xs-12 col-sm-12 holderinbox_popup" style="margin:0px;padding:0px;min-height:200px;">
+                
+                <h2 style="text-align:center;font-size:18px;color:#FFFFFF;">CONFIRMATION</h2>
+                    
+                <!-- FORM -->
+                <div class="textinput" style="text-align:center;font-weight:bold;margin-bottom:40px;">
+                    Do you want to confirm this transaction below: <br>
+                        phone: <h:outputText value="#{cc.attrs.msisdn1}"/> </br>
+                    amount: <h:outputText value="#{cc.attrs.amount1}"/>
+                </div>
+                
+                <div class="textinput" style="text-align:center;font-weight:bold;margin-bottom:40px;">
+                    Do you want to confirm this transaction below: <br>
+                        phone: <h:outputText value="#{cc.attrs.msisdn2}"/> </br>
+                    amount: <h:outputText value="#{cc.attrs.amount2}"/>
+                </div>
+                
+                <div class="textinput" style="text-align:center;font-weight:bold;margin-bottom:40px;">
+                    Do you want to confirm this transaction below: <br>
+                        phone: <h:outputText value="#{cc.attrs.msisdn3}"/> </br>
+                    amount: <h:outputText value="#{cc.attrs.amount3}"/>
+                </div>
+                
+                <div class="submitinput">
+                    <h:commandButton class="approve" value="CANCEL" action="#{cc.attrs.cancelButtonAction}"/>
+                        
+                    <h:commandButton class="approve" value="APPROVE" action="#{cc.attrs.proceedButtonAction}"/>
+                </div> 
+                <!-- End FORM -->
+                
+            </div>
+        </div>
+            
+    </cc:implementation>
+</html>

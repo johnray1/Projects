@@ -1,12 +1,48 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        
         <title>AIRTIME - Website</title>
+        <link href="css_cust/bootstrap.css" rel="stylesheet"/> 
+        <link href="css_cust/style.css" rel="stylesheet"/>
+        <link href="css_cust/easy-responsive-tabs.css" rel="stylesheet" />
+        <link href="css_cust/jquery.dataTables.min.css" rel="stylesheet" />
+        <link href="css_cust/buttons.dataTables.min.css" rel="stylesheet" />
+        <link href="css_cust/forms.css" rel="stylesheet" />
+        <link href="css_cust/lightcase.css" rel="stylesheet" type="text/css" />
+        
+        <script type="text/javascript" src="js_cust/jquery-1.12.0.min.js"></script>	
+        <script type="text/javascript" src="js_cust/bootstrap.min2.js"></script>
+        <script type="text/javascript" src="js_cust/easy-responsive-tabs.js"></script>
+        <script type="text/javascript" src="js_cust/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="js_cust/dataTables.buttons.min.js"></script>	
+        <script type="text/javascript" src="js_cust/buttons.flash.min.js"></script>	
+        <script type="text/javascript" src="js_cust/jszip.min.js"></script>	
+        <script type="text/javascript" src="js_cust/pdfmake.min.js"></script>	
+        <script type="text/javascript" src="js_cust/vfs_fonts.js"></script>	
+        <script type="text/javascript" src="js_cust/buttons.html5.min.js"></script>
+        <script src="js_cust/customScripts.js" type="text/javascript"></script>
+        
+        <script>
+            
+            $(document).ready(function() {
+                turn2DataTable('dataTableList');
+            } );
+        </script>
+        
+        
+        <script type="text/javascript" src="js_cust/lightcase.js"></script>
+        <script type="text/javascript" src="js_cust/lightcase.init.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
     </h:head>
     <h:body>
-        Hello from Facelets
+        <ui:include src="templates/header.xhtml" /> 
     </h:body>
 </html>
 

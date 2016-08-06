@@ -9,8 +9,8 @@ import com.oltranz.airtimeweb.dao.LoginDAO;
 import com.oltranz.airtimeweb.model.LoginModel;
 import com.oltranz.airtimeweb.model.RegisterRequest;
 import com.oltranz.airtimeweb.model.RegisterResponse;
-import java.io.IOException;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
@@ -27,6 +27,7 @@ import javax.servlet.http.HttpSession;
 @SessionScoped
 public class LoginBean implements Serializable{
     
+    private Date date=new Date();
     private String username;
     private String msisdn;
     private String pin;
@@ -82,7 +83,7 @@ public class LoginBean implements Serializable{
             }
             
         }
-        catch (IOException ex) {
+        catch (Exception ex) {
             Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -96,7 +97,7 @@ public class LoginBean implements Serializable{
         
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -141,7 +142,7 @@ public class LoginBean implements Serializable{
                 }
             }
         }
-        catch (IOException ex) {
+        catch (Exception ex) {
             Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -293,7 +294,21 @@ public class LoginBean implements Serializable{
     public void setMsg(String msg) {
         this.msg = msg;
     }
-    
+
+    /**
+     * @return the date
+     */
+    public Date getDate() {
+        return date;
+    }
+
+    /**
+     * @param date the date to set
+     */
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     
     
     

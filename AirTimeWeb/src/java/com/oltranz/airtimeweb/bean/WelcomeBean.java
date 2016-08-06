@@ -45,7 +45,7 @@ public class WelcomeBean {
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("welcome.xhtml");
         }
-        catch (IOException ex) {
+        catch (Exception ex) {
             Logger.getLogger(WelcomeBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -9,7 +9,6 @@ import com.oltranz.airtimeweb.library.CommonLibrary;
 import com.oltranz.airtimeweb.model.LoginModel;
 import com.oltranz.airtimeweb.model.RegisterRequest;
 import com.oltranz.airtimeweb.model.RegisterResponse;
-import java.io.IOException;
 import java.net.InetAddress;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,7 +23,7 @@ import org.codehaus.jackson.map.ObjectMapper;
  */
 public class LoginDAO {
     
-    public static LoginModel validate(String msisdn, String pin)throws IOException{
+    public static LoginModel validate(String msisdn, String pin)throws Exception{
         
         Date currentDate = new Date();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -32,7 +31,7 @@ public class LoginDAO {
         String nul=null;
         InetAddress IP=InetAddress.getLocalHost();
         
-        String loginUrl="http://41.74.172.132:8080/AirtimeRechargeSystem/customer/login";
+        String loginUrl="http://localhost:8080/AirtimeRechargeSystem/customer/login";
         String  jsonData = "{\n" +
                 "\"pin\":\""+pin+"\",\n" +
                 "\"msisdn\":\""+msisdn+"\",\n" +
@@ -52,7 +51,7 @@ public class LoginDAO {
         
     }
     
-    public static RegisterResponse validateRegister(RegisterRequest registerRequest)throws IOException{
+    public static RegisterResponse validateRegister(RegisterRequest registerRequest)throws Exception{
         
         Date currentDate = new Date();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -60,11 +59,11 @@ public class LoginDAO {
         
         InetAddress IP=InetAddress.getLocalHost();
         ObjectMapper mapper=new ObjectMapper();
-        
+        registerRequest.setOtherNames(registerRequest.getfName());
         registerRequest.setOSversion(IP.toString());
         registerRequest.setCurrentTime(date);
         
-        String url="http://41.74.172.132:8080/AirtimeRechargeSystem/customer/register";
+        String url="http://localhost:8080/AirtimeRechargeSystem/customer/register";
         String  jsonData = mapper.writeValueAsString(registerRequest);
         
         Response response = CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");

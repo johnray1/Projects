@@ -43,12 +43,13 @@ public class TransactionBean {
     public void transactions(String msisd){
         
         try{
+            
             currentDate = new Date();
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String from=dateFormat.format(currentDate)+"  00:00";
             String to=dateFormat.format(currentDate)+"  23:59";
             
-            String url="http://41.74.172.132:8080/AirtimeRechargeSystem/wallettransactions/walletstatement";
+            String url="http://localhost:8080/AirtimeRechargeSystem/wallettransactions/walletstatement";
             String  jsonData = "{\n" +
                     "\"from\":\""+from+"\",\n" +
                     "\"to\":\""+to+"\",\n" +
@@ -80,7 +81,7 @@ public class TransactionBean {
             String from=dateFormat.format(currentDate);
             String to=dateFormat.format(currentDate)+"  23:59";
             
-            String url="http://41.74.172.132:8080/AirtimeRechargeSystem/wallettransactions/walletstatement";
+            String url="http://localhost:8080/AirtimeRechargeSystem/wallettransactions/walletstatement";
             String  jsonData = "{\n" +
                     "\"from\":\""+from+"\",\n" +
                     "\"to\":\""+to+"\",\n" +
@@ -122,7 +123,7 @@ public class TransactionBean {
             String from = start.replace('/', '-');  
             String to = end.replace('/', '-');
             
-            String url="http://41.74.172.132:8080/AirtimeRechargeSystem/wallettransactions/walletstatement";
+            String url="http://localhost:8080/AirtimeRechargeSystem/wallettransactions/walletstatement";
             String  jsonData = "{\n" +
                     "\"from\":\""+from+"\",\n" +
                     "\"to\":\""+to+"\",\n" +
