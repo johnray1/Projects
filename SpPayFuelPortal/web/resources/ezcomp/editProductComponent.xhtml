@@ -8,13 +8,11 @@
     <!-- INTERFACE -->
     <cc:interface>
         <cc:attribute name="productIdValue" />
-        <cc:attribute name="productNameLabel" />
         <cc:attribute name="productNameValue" />
-        <cc:attribute name="priceLabel" />
         <cc:attribute name="priceValue" />
-        <cc:attribute name="measureUnityLabel" />
         <cc:attribute name="measureUnityValue" />
         <cc:attribute name="productTypeIdValue" />
+        <cc:attribute name="popUpLabel" />
         <cc:attribute name="saveActionName" />
         <cc:attribute name="saveButtonAction" 
                       method-signature="java.lang.String update()"/>
@@ -27,7 +25,9 @@
         <div class="container-fluid" style="margin:0px;padding:0px;border:0px solid red;;min-height:400px;">
             
             <div class="col-xs-12 col-sm-12 holderinbox_popup" style="margin:0px;padding:0px;">
-                <h2 style="text-align:center;font-size:18px;background-color:rgb(26, 140, 53);">EDIT PRODUCT</h2>
+                <h2 style="text-align:center;font-size:18px;background-color:rgb(26, 140, 53);">
+                    <h:outputText value="#{cc.attrs.popUpLabel}"/>
+                </h2>
                 
                 
                 <!-- FORM -->
@@ -35,17 +35,17 @@
                 
                     
                 <div class="col-xs-12 theinput">
-                    <h:outputLabel value="#{cc.attrs.productNameLabel}"/>
+                    <h:outputLabel value="PRODUCT NAME"/>
                     <h:inputText id="field2" value="#{cc.attrs.productNameValue}"/>
                 </div>
                 
                 <div class="col-xs-12 theinput">
-                    <h:outputLabel value="#{cc.attrs.priceLabel}"/>
+                    <h:outputLabel value="PRICE"/>
                     <h:inputText id="field3" value="#{cc.attrs.priceValue}"/>
                 </div>
                     
                 <div class="col-xs-12 theinput">
-                    <h:outputLabel value="#{cc.attrs.measureUnityLabel}"/>
+                    <h:outputLabel value="UNITY"/>
                     <h:inputText id="field4" value="#{cc.attrs.measureUnityValue}"/>
                 </div>
                     
@@ -58,7 +58,7 @@
                 </div>    
                     
                 <div  class="col-xs-12 submitinput" >
-                    <h:commandButton onclick="notifiyViewDetails();notifiyDatatableRefresh()" value="UPDATE" action="#{cc.attrs.saveButtonAction}">
+                    <h:commandButton onclick="notifiyViewDetails();notifiyDatatableRefresh()" value="#{cc.attrs.saveActionName}" action="#{cc.attrs.saveButtonAction}">
                         <f:ajax execute="@form" render="#{cc.attrs.renderedOnsuccess}" />
                     </h:commandButton>
                 </div>

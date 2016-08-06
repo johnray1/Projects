@@ -32,7 +32,6 @@
                                 <div class="col-xs-6 col-sm-3 col-md-2 dropdown" style="margin:0px;padding:0px;">
                                     
                                     <span>
-                                        <h:graphicImage value="images/icon_notifications.png" style="float: left"/>
                                         <label>000</label>
                                     </span>
                                     
@@ -79,9 +78,14 @@
                                 
                                 <ul class="mainmenu">
                                     
-                                    <li class="#{TemplateBean.dashboardClassName}">
+                                    <li class="#{TemplateBean.dashboardClassName} #{TemplateBean.hideDash}">
                                         <h:commandLink action="#{DashBean.dashBoard()}">Dashboard</h:commandLink>
                                     </li>
+                                    
+                                    <li class="#{TemplateBean.dashboardClassName} #{TemplateBean.hideDashHq}">
+                                        <h:commandLink action="#{DashBean.dashBoardHq()}">Dashboard</h:commandLink>
+                                    </li>
+                                    
                                     
                                     
                                     <li class="#{TemplateBean.branchClassName} #{TemplateBean.hideClassName}">

@@ -70,7 +70,12 @@
                             
                         <!-- -->
                         <label class="form_toggle" for="formcontent-toggle">
-                            <a data-rel="lightcase_edit" href="popup/popup_product_add.xhtml" style="color: #ffffff" onclick="#{ProductTypeBean.productTypes()}">ADD PRODUCT</a>
+                            <h:form >
+                                <h:commandLink onclick="notifyEdit()" id="addDetails" style="color: #ffffff"> 
+                                    Add Product
+                                    <f:ajax event="click"  listener="#{ProductBean.productForCreate()}" rendererType="postValidate" render=":editDetailsContentPanel :edit_form" />
+                                </h:commandLink>
+                            </h:form>  
                         </label>
                         <!-- -->
                             
@@ -138,13 +143,11 @@
                                     <h:form class="container-fluid edit_form" id="edit_form">
                                         <tp:editProductComponent 
                                             productIdValue="#{ProductBean.productId}"
-                                            productNameLabel="PRODUCT NAME" 
                                             productNameValue="#{ProductBean.productName}"
-                                            priceLabel="PRICE"
                                             priceValue="#{ProductBean.price}"
-                                            measureUnityLabel="UNITY"
                                             measureUnityValue="#{ProductBean.measureUnity}"
                                             productTypeIdValue="#{ProductBean.productTypeId}"
+                                            popUpLabel="#{ProductBean.popUpLabel}"
                                             saveActionName="#{ProductBean.saveActionName}"
                                             saveButtonAction="#{ProductBean.saveProduct()}"
                                             renderedOnsuccess=":viewDetailsContentPanel :productsList"
@@ -170,6 +173,7 @@
        <!--Start Scripts -->
             
         <script type="text/javascript" src="js/chosen.jquery.min.js"></script>
+        
         <script type="text/javascript">
             var showEdit=false;
             var showDetails=false;
@@ -257,6 +261,7 @@
             })
             
         </script>   
+        
         <script type="text/javascript">
             var config = {
                 '.chosen-select'           : {},

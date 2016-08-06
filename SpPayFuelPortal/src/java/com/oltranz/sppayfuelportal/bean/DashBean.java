@@ -42,6 +42,19 @@ public class DashBean implements Serializable{
         return "dashboard?faces-redirect=true";
     }
     
+    public String dashBoardHq(){
+        
+        templateBean.setDashboardClassName("active");
+        templateBean.setBranchClassName("deactive");
+        templateBean.setProductClassName("deactive");
+        templateBean.setGoalClassName("deactive");
+        templateBean.setTransactionClassName("deactive");
+        templateBean.setSettingClassName("deactive");
+        
+        
+        return "dashboard_hq?faces-redirect=true";
+    }
+    
     
     
     /**
@@ -57,14 +70,14 @@ public class DashBean implements Serializable{
     public void setTemplateBean(TemplateBean templateBean) {
         this.templateBean = templateBean;
     }
-
+    
     /**
      * @return the tankBean
      */
     public TankBean getTankBean() {
         return tankBean;
     }
-
+    
     /**
      * @param tankBean the tankBean to set
      */

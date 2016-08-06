@@ -70,7 +70,12 @@
                         
                         <!-- -->
                         <label class="form_toggle" for="formcontent-toggle">
-                            <a data-rel="lightcase_edit" href="popup/popup_product_type_add.xhtml" style="color: #ffffff">ADD  TYPE</a>
+                            <h:form >
+                                <h:commandLink onclick="notifyEdit()" id="addDetails" style="color: #ffffff"> 
+                                    Add Product Type
+                                    <f:ajax event="click"  listener="#{ProductTypeBean.productTypeForCreate()}" rendererType="postValidate" render=":editDetailsContentPanel :edit_form" />
+                                </h:commandLink>
+                            </h:form>  
                         </label>
                         <!-- -->
                             
@@ -133,10 +138,9 @@
                                     <h:form class="container-fluid edit_form" id="edit_form">
                                         <tp:editProductTypeComponent 
                                             productTypeIdValue="#{ProductTypeBean.productTypeId}"
-                                            productTypeNameLabel="PRODUCT TYPE NAME" 
                                             productTypeNameValue="#{ProductTypeBean.productTypeName}"
-                                            descLabel="DESCRIPTION"
                                             descValue="#{ProductTypeBean.descr}"
+                                            popUpLabel="#{ProductTypeBean.popUpLabel}"
                                             saveActionName="#{ProductTypeBean.saveActionName}"
                                             saveButtonAction="#{ProductTypeBean.saveProductType()}"
                                             renderedOnsuccess=":viewDetailsContentPanel :productTypesList"

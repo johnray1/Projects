@@ -26,6 +26,9 @@ public class TemplateBean implements Serializable{
     private String transactionClassName;
     private String settingClassName;
     private String hideClassName;
+    
+    private String hideDash;
+    private String hideDashHq;
 
     /**
      * @return the dashboardClassName
@@ -124,6 +127,35 @@ public class TemplateBean implements Serializable{
     public void setHideClassName(String hideClassName) {
         this.hideClassName = hideClassName;
     }
+
+    /**
+     * @return the hideDash
+     */
+    public String getHideDash() {
+        return hideDash;
+    }
+
+    /**
+     * @param hideDash the hideDash to set
+     */
+    public void setHideDash(String hideDash) {
+        this.hideDash = hideDash;
+    }
+
+    /**
+     * @return the hideDashHq
+     */
+    public String getHideDashHq() {
+        return hideDashHq;
+    }
+
+    /**
+     * @param hideDashHq the hideDashHq to set
+     */
+    public void setHideDashHq(String hideDashHq) {
+        this.hideDashHq = hideDashHq;
+    }
+
     
     
     

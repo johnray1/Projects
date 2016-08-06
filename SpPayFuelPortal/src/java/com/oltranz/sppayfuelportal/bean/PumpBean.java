@@ -23,6 +23,9 @@ import org.codehaus.jackson.map.ObjectMapper;
 @SessionScoped
 public class PumpBean {
     
+    //TO KEEP USER BRANCH DATA
+    private int bId;
+    
     private String nozzleId;
     private String nozzleName;
     private String index;
@@ -31,8 +34,7 @@ public class PumpBean {
     
     private PumpNozzleProductModelSingle pumpNozzleProductModelSingle;
     
-    @ManagedProperty(value="#{LoginBean}")
-    private LoginBean loginBean;
+    
     
     @ManagedProperty(value="#{TemplateBean}")
     private TemplateBean templateBean;
@@ -51,7 +53,7 @@ public class PumpBean {
         templateBean.setSettingClassName("active");
         
         try{
-            String getBranchUrl="http://localhost:8080/PayFuel/PumpManagementService/getPumpNozzleProductList/"+loginBean.getbId();
+            String getBranchUrl="http://localhost:8080/PayFuel/PumpManagementService/getPumpNozzleProductList/"+bId;
             Response response = CommonLibrary.sendRESTRequest(getBranchUrl, "empty data", MediaType.APPLICATION_JSON, "GET");
             //System.out.println(response.getHeaders());
             String jsonResponse = response.readEntity(String.class);
@@ -157,20 +159,7 @@ public class PumpBean {
         this.pumpNozzleProductModelList = pumpNozzleProductModelList;
     }
 
-    /**
-     * @return the loginBean
-     */
-    public LoginBean getLoginBean() {
-        return loginBean;
-    }
-
-    /**
-     * @param loginBean the loginBean to set
-     */
-    public void setLoginBean(LoginBean loginBean) {
-        this.loginBean = loginBean;
-    }
-
+    
     /**
      * @return the templateBean
      */
@@ -253,6 +242,20 @@ public class PumpBean {
      */
     public void setNozzleName(String nozzleName) {
         this.nozzleName = nozzleName;
+    }
+
+    /**
+     * @return the bId
+     */
+    public int getbId() {
+        return bId;
+    }
+
+    /**
+     * @param bId the bId to set
+     */
+    public void setbId(int bId) {
+        this.bId = bId;
     }
     
     

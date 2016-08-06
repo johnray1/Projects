@@ -1,0 +1,338 @@
+
+/************************************
+ * Index
+************************************/
+
+h1 {
+    height: 100%;
+    width: 90%;
+    font-size: 18px;
+    text-align: center;
+    margin: 0 0 0 15%;
+    text-align: left;
+    color: #1a8c35;
+}
+
+.containermap {
+    width: 100%;
+    height:600px;
+    margin: auto;
+	font-family:ubuntu;
+}
+
+
+
+
+.branchsearch{border:0px solid red;font-size:17px;padding:7px;}
+.branchsearch span.line{display:block;width:100%;padding:7px;}
+
+.branchsearch span.line h2{display:block;width:100%;text-align:center;font-size:22px;color:#1a8c35;line-height:45px;}
+.branchsearch span.line h3{display:block;width:100%;text-align:center;font-size:20px;color:#1a8c35;line-height:45px;}
+
+
+.branchsearch span.line span.left{display:block;width:50%;float:left;text-align:right;padding-right:7px;color:#a2a2a2;border-bottom:1px solid #f8f8f8;line-height:35px;}
+.branchsearch span.line span.right{display:block;width:50%;float:left;text-align:left;padding-left:7px;color:#000000;font-weight:bold;border-bottom:1px solid #f8f8f8;line-height:35px;}
+
+
+
+
+
+
+/************************************
+SEARCH
+************************************/
+.myplaces-searcher {
+    width: 100%;
+    margin: 7px 0;
+}
+
+.myplaces-searcher ul, .myplaces-searcher input{
+
+}
+
+.myplaces-searcher input{
+    	display:inline-block;width:100%;font-family:ubuntu;font-size:16px;padding:7px;outline:none;    border: 1px solid #ffffff;
+}
+
+button.myplaces-buscar{
+font-family:ubuntu;
+font-size:16px;
+    padding: 8px;
+	padding-right:14px;
+	padding-left:14px;
+margin:0px;
+background: #1a8c35;
+    border: 0px solid red;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+
+    transition: all 0.70s ease;
+    outline: none;
+    cursor: pointer;	
+	text-align:center
+	}  
+
+/************************************
+MAP
+************************************/
+.myplaces-places {
+    border: 2px solid #d6e8da;
+    display: inline-block;
+    font-family: 'ubuntu', sans-serif;
+    min-height: 500px;
+    vertical-align: top;
+    width: 50%;
+}
+
+.myplaces-placesList {
+    display: inline-block;
+    font-family: ubuntu;
+    height: 500px;
+    overflow: auto;
+    width: 40%;
+}
+
+.myplaces-placesList  ul  {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+.myplaces-placesList  ul > li {
+    background-color: #d6e8da;
+    border-bottom: 2px solid #ffffff;
+    list-style: none outside none;
+    margin: 0;
+    cursor: pointer;
+}
+
+.myplaces-placesList  ul > li:hover {
+    background-color: #1a8c35;
+    border-bottom: 2px solid #ffffff;
+    list-style: none outside none;
+    margin: 0;
+    cursor: pointer;
+}
+
+
+.myplaces-placesList  ul > li:hover > h1{
+    color:#1a8c35;
+}
+
+.myplaces-placesList  ul > li.myplaces-selectedPlaces {
+    background-color:#1a8c35;
+}
+
+
+.myplaces-placesList  ul > li.myplaces-selectedPlaces h1{
+    color:#ffffff;
+	text-align:right;
+}
+
+
+.myplaces-placesList  ul > li > h1{
+    font-family: ubuntu;
+    font-size: 16px;
+    margin: 0 0 0 10px;
+    color: #1a8c35;
+    text-align: left;
+    text-shadow: none;
+    padding: 10px 0 0;
+}
+
+
+.myplaces-placesList  ul > li:hover > h1{
+color:#ffffff;
+}
+
+.myplaces-placesList  ul > li > h3{
+    font-size: 12px;
+    margin: 0 0 0 10px;
+}
+.myplaces-placesList  ul > li > h5{
+    margin: 0 0 0 10px;
+    font-size: 11px;
+}
+.myplaces-placesList  ul > li > p{
+    margin: 0 0 0 10px;
+    font-size: 11px;
+    padding: 0 0 8px;
+}
+
+.myplaces-placeInfo {
+    border-left: 1px solid #D6EBE7;
+    display: inline-block;
+    font-family: ubuntu;
+    overflow: auto;
+    height: 500px;
+    margin: 0;
+    vertical-align: top;
+    width: 59.8%;
+}
+
+.myplaces-placeInfo  h3{
+    font-size: 13px;
+    margin: 13% 15px 0 15px;
+}
+
+.myplaces-placeInfo  p{
+    font-size: 13px;
+    margin: 0 15px 0 15px;
+}
+
+.myplaces-placeInfo  ul{
+    font-size: 13px;
+    margin: 0;
+    margin: 0 15px 0 15px;
+}
+
+.myplaces-placeInfo  ul > li {
+    background: url("../img/flicon.gif") no-repeat scroll 0 7px transparent;
+    list-style: none outside none;
+    margin-left: 10px;
+    padding: 0 0 0 10px;
+}
+
+.myplaces-placeInfo .myplaces-placeEmail {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.myplaces-placeInfo .myplaces-placeEmail > h3 {
+    display: inline;
+    font-size: 12px;
+    margin: 0 15px 0 15px;
+}
+
+.myplaces-placeInfo .myplaces-placeEmail > p {
+    color: #8CBEE7;
+    display: inline;
+    font-size: 13px;
+}
+
+/************************************
+ * Mapa
+************************************/
+.myplaces-map {
+    display: inline-block;
+    min-height: 500px;
+    border: 1px solid gray;
+}
+
+/************************************
+ * Categories
+************************************/
+.myplaces-categories {
+    list-style: none;
+    padding: 0;
+}
+
+.myplaces-category {
+    color: #0084c7;
+    display:inline;
+    font-size:15px;
+    padding:7px;
+    margin: 0 1px;
+    cursor: pointer;
+    font-family: ubuntu;
+    -moz-box-shadow: -1px 3px 11px #fcfefd;
+    -webkit-box-shadow: -1px 3px 11px #fcfefd;
+    box-shadow: -1px 3px 11px #fcfefd;
+    border-left: 1px solid #cee2e0;
+}
+
+.myplaces-category:nth-child(1) {
+    border-left: 0;
+}
+
+.myplaces-category:hover {
+    color: #0E6C8F;
+    text-shadow:2px 0px 10px #0084c7;
+}
+
+.myplaces-category.active {
+    color: #0E6C8F;
+}
+
+.myplaces-category label {
+    margin: 0 0 0 5px;
+}
+
+.myplaces-category label:hover {
+    cursor: pointer;
+}
+
+.myplaces-check{ padding-left: 25px; margin-left: 10px}
+.myplaces-check { background: url(../img/check-off.png) no-repeat; }
+.myplaces-check-on { background: url(../img/check-on.png) no-repeat; }
+.myplaces-check input{ position: absolute; left: -9999px; }
+
+/*****************************************************
+* Info
+*****************************************************/
+.myplaces-info {
+    font-family: ubuntu;
+}
+
+p.myplaces-info-results {
+    color: #b7b7b7;
+    font-family: ubuntu;
+    margin: 25px;
+    text-align: center;
+}
+
+
+/*****************************************************
+* Scroll
+*****************************************************/
+/*dark-thick*/
+.mCS-dark-thick>.mCSB_scrollTools .mCSB_draggerRail{
+    width:6px;
+    background:#FFFFFF; 
+    -webkit-border-radius:2px;
+    -moz-border-radius:2px;
+    border-radius:2px;
+    border: 1px solid #DEEBE7;
+}
+.mCS-dark-thick>.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{
+    width:6px;
+    background:#0082C6; 
+    -webkit-border-radius:2px;
+    -moz-border-radius:2px;
+    border-radius:2px;
+}
+.mCS-dark-thick.mCSB_horizontal>.mCSB_scrollTools .mCSB_draggerRail{
+    width:100%;
+    height:4px;
+    margin:6px 0;
+}
+.mCS-dark-thick.mCSB_horizontal>.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{
+    width:100%;
+    height:6px;
+    margin:5px auto;
+}
+.mCS-dark-thick>.mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar{
+    background:#0082C6;
+}
+.mCS-dark-thick>.mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar,
+.mCS-dark-thick>.mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar{
+    background:#0082C6;
+}
+.mCS-dark-thick>.mCSB_scrollTools .mCSB_buttonUp{
+    background-position:-96px 0;
+}
+.mCS-dark-thick>.mCSB_scrollTools .mCSB_buttonDown{
+    background-position:-96px -20px;
+}
+.mCS-dark-thick>.mCSB_scrollTools .mCSB_buttonLeft{
+    background-position:-100px -40px;
+}
+.mCS-dark-thick>.mCSB_scrollTools .mCSB_buttonRight{
+    background-position:-100px -56px;
+}
+.mCustomScrollBox>.mCSB_scrollTools {
+    width: 9px;
+}

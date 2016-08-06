@@ -19,13 +19,13 @@ $(function () {
             gasoilList.push(data.gasoilList[k]);
         }
     
-        $('#sp_soldquantiesperday').highcharts({
+        $('#sp_productsaleperday').highcharts({
             chart: {
                 type: 'column',
                 style: {	fontFamily: 'ubuntu'}
             },
             title: {
-                text: 'Products Quantities Sold per DAY'
+                text: 'Product Quantities Sold/Day'
             },
         
             xAxis: {
@@ -79,9 +79,7 @@ $(function () {
 
 });
 
-
-
-// product sale goal
+// product sale 2 month
 $(function () {
     
     var monthName = new Array();
@@ -96,14 +94,14 @@ $(function () {
             gasoil.push([data[i].gasoil]);
         }
     
-        $('#sp_goals').highcharts({
+        $('#sp_productsalepermonth').highcharts({
             chart: {
                 type: 'column',
                 style: {	fontFamily: 'ubuntu'}
             },
         
             title: {
-                text: 'Product Sale PreMonth  vs  Product Sale CurMonth'
+                text: 'Product Sale :- Previous Month vs Current Month'
             },
         
             xAxis: {
@@ -123,7 +121,7 @@ $(function () {
                         color: '#137cce',
                         dashStyle: 'longdashdot',
                         width: 2,
-                        value:100,
+                        value:20,
                         label: {
                             align: 'right',
                             style: {
@@ -132,7 +130,7 @@ $(function () {
                                 fontSize: '15',
                                 fontStyle: 'italic'
                             },
-                            text: 'Goal for Super :100 L',
+                            text: 'Goal for Super :20 L',
                             x: -10
                         },
                         zIndex: 111
@@ -140,7 +138,7 @@ $(function () {
                         color: '#eddb11',
                         dashStyle: 'longdashdot',
                         width:2,
-                        value:90,
+                        value:15,
                         label: {
                             align: 'right',
                             style: {
@@ -149,7 +147,7 @@ $(function () {
                                 fontSize: '15',
                                 fontStyle: 'italic'
                             },
-                            text: 'Goal for Gasoil: 90 L',
+                            text: 'Goal for Gasoil: 15 L',
                             x: -10
                         },
                         zIndex: 111
@@ -198,8 +196,6 @@ $(function () {
         });
     });
 });
-
-
 
 //tank
 $(function () {
@@ -298,8 +294,99 @@ $(function () {
 });
 
 
+//tank mobile chart
+$(function () {
+    
+    var tankName = new Array();
+    var maxCap = new Array();
+    var curCap = new Array();
+    $.getJSON('http://41.74.172.132:8080/PayFuel/ChartManagementService/tankChart', function(data) {
+        
+        // Populate series
+        for (i = 0; i < data.length; i++){
+            tankName.push([data[i].name]);
+            maxCap.push([data[i].max]);
+            curCap.push([data[i].current]);
+        }
+        
+        $('#sp_tanks_mobile').highcharts({
+        
+            chart: {
+                type: 'column',
+                style: {	fontFamily: 'ubuntu'}
+            },
+        
+            title: {
+                fontSize:'14',
+                text: 'Current Quantitiy vs Maximum Capacity'
+            },
+        
+            xAxis: {
+                categories: tankName
+            },
+        
+            yAxis: {
+                min: 0,
+                labels: {
+                    align: 'right',
+                    format: '{value:.,0f} L'
+                },
+                title: {
+                    text: 'Tank Quantities in Liters'
+                }
+            },
+        
+            credits: {
+                enabled: false
+            },
+        
+            tooltip: {
+                valueSuffix: ' Liters',
+                headerFormat: '<span style="font-size:11px">Quantity Status</span><br>',
+                pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b><br/>',
+                shared: true
+            },
+        
+            plotOptions: {
+                colorByPoint: true,
+                series: {
+                    animation: {duration: 2000}
+                },
+                column: {
+                    grouping: false,
+                    shadow: false,
+                    borderWidth: 0,				
+                    dataLabels: {
+                        enabled: true,
+                        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b><br/>',
+                        format: '{point.y:,.0f} Liters'
+                    }
+                }
+            },
+        
+            series: [{
+                    name: 'Full Quantity',
+                    color:'#e6e6e6',
+                    borderRadius: '7',
+                    data: maxCap
+                }, {
+                    name: 'Current Quantity',
+                    colors: [
+                        '#137cce', 
+                        '#137cce', 
+                        '#eddb11'
+                    ],
+                    colorByPoint: true,
+                    borderRadius: '7',
+                    data: curCap
+                }]
+        });
+    });
+});
 
-//payment mode
+
+
+/*CHART ALL PAYMENTS METHODS*/
 $(function () {
     $('#sp_payments').highcharts({
         
@@ -308,16 +395,20 @@ $(function () {
         },
         
         title: {
-            text: 'Payment Methods Usage per Products'
+            text: 'Sales'
         },
         
         yAxis: {
+            labels: {
+                align: 'right',
+                format: '{value:.,0f} FRW'
+            },
             title: {
-                text: 'Transaction Counts'
+                text: 'Amount'
             }
         },
         xAxis: {
-            categories: ['Super', 'Gasoil']
+            categories: ['-']
         },
         
         credits: {
@@ -332,7 +423,7 @@ $(function () {
                 name: 'CASH',
                 color:'#000000',
                 borderRadius: '7',
-                data: [2200, 700]
+                data: [2200]
             }, 
             
             {
@@ -340,7 +431,7 @@ $(function () {
                 name: 'MTN',
                 color:'#ffc508',
                 borderRadius: '4',
-                data: [2000, 800]
+                data: [2000]
             }, 
             
             {
@@ -348,7 +439,7 @@ $(function () {
                 name: 'TIGO',
                 color:'#193370',
                 borderRadius: '4',
-                data: [1500, 400]
+                data: [1500]
             },
             
             {
@@ -356,7 +447,7 @@ $(function () {
                 name: 'AIRTEL',
                 color:'#ec1f27',
                 borderRadius: '4',
-                data: [1400, 600]
+                data: [1400]
             },
             
             {
@@ -364,7 +455,7 @@ $(function () {
                 name: 'Voucher',
                 color:'#7aaa75',
                 borderRadius: '4',
-                data: [2000, 350]
+                data: [2000]
             },
             
             {
@@ -372,7 +463,7 @@ $(function () {
                 name: 'Debt',
                 color:'#808080',
                 borderRadius: '4',
-                data: [200, 100]
+                data: [200]
             },
             
             {
@@ -380,7 +471,7 @@ $(function () {
                 name: 'Visa',
                 color:'#1a1f71',
                 borderRadius: '4',
-                data: [1100, 200]
+                data: [1100]
             },
             
             {
@@ -388,7 +479,7 @@ $(function () {
                 name: 'Mastercard',
                 color:'#fcbb37',
                 borderRadius: '4',
-                data: [1000, 300]
+                data: [1000]
             },
             
             {
@@ -396,10 +487,9 @@ $(function () {
                 name: 'SP Card',
                 color:'#1a8c35',
                 borderRadius: '4',
-                data: [500, 200]
+                data: [500]
             }
             
         ]
     });
 });
-

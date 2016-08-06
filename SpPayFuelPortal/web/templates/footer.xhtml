@@ -13,32 +13,15 @@
         
         <ui:composition>
             <h:form>
-            <!-- Footer -->
-            <div class="clear" style="margin-top:20px;"></div>
-            <footer class="footerlong">
-                <!--
-                <div class="container hidden-xs hidden-sm">
-                    <p class="col-xs-12" style="text-align:center;margin:0px;padding:5px;">
-                        
-                        <h:commandLink action="dashboard.xhtml" class="omenu_footer">Dashboard</h:commandLink>
-                        <h:commandLink action="#{BranchBean.branches()}" class="omenu_footer">Branches</h:commandLink>
-                        <h:commandLink action="#{DeviceBean.devices()}" class="omenu_footer">Devices</h:commandLink>
-                        <h:commandLink action="#{ProductBean.products()}" class="omenu_footer">Products</h:commandLink>
-                        <h:commandLink action="#{UserBean.users()}" class="omenu_footer">Users</h:commandLink>
-                        <h:commandLink action="#{UserBean.roles()}" class="omenu_footer">Roles</h:commandLink>
-                        <h:commandLink action="#{TransactionBean.transactions()}" class="omenu_footer">Transactions</h:commandLink>
-                        <h:commandLink action="innerpage_logs.xhtml" class="omenu_footer">Logs</h:commandLink>
-                        
-                    </p>
-                </div>
-                -->
-                <div class="container" style="padding:0px;">
-                    <p class="col-xs-5" style="text-align:left;font-family:ubuntu;"> &copy; Copyright 2016</p>
-                    <p class="col-xs-7" style="text-align:right;font-family:ubuntu;">Powered by oltranz.com</p>
-                </div>
-            </footer>
-            <!-- Footer -->
-           </h:form> 
+                <!-- Footer -->
+                <footer class="container-fluid footer">
+                    <div class="container">
+                        <p class="col-xs-12 col-sm-5" style="text-align:left;"><a href="#"><img src="images/footerlogo.png" /></a></p>
+                        <p class="col-xs-12 col-sm-7" style="text-align:right;"><a href="#">Terms and Conditions</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<span>&copy; Copyright 2016</span></p>
+                    </div>
+                </footer>
+                <!-- Footer -->
+            </h:form> 
         </ui:composition>
     </h:body>
 </html>

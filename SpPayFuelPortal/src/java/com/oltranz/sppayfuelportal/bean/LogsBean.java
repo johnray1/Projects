@@ -25,6 +25,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 @ManagedBean(name="LogsBean")
 @SessionScoped
 public class LogsBean {
+    
     private int usId;
     private int actionId;
     private String source;
@@ -85,11 +86,9 @@ public class LogsBean {
         
     }
     
-    public void logForView(long logId){
-        logById(logId);
-    }
+   
     
-    public void logById(long logId){
+    public void logForView(long logId){
         
         try{
             String getUrl="http://localhost:8080/PayFuel/LogManagementService/log/"+logId;

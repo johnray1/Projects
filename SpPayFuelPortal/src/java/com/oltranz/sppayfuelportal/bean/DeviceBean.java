@@ -26,6 +26,9 @@ import org.codehaus.jackson.map.ObjectMapper;
 @SessionScoped
 public class DeviceBean implements Serializable{
     
+    //TO KEEP USER BRANCH DATA
+    private int bId;
+    
     private String branchId;
     private String deviceId;
     private String deviceNo;
@@ -33,9 +36,6 @@ public class DeviceBean implements Serializable{
     
     private DeviceSingle deviceSingle;
     private DeviceList deviceList;
-    
-    @ManagedProperty(value="#{LoginBean}")
-    private LoginBean loginBean;
     
     @ManagedProperty(value="#{TemplateBean}")
     private TemplateBean templateBean;
@@ -55,7 +55,7 @@ public class DeviceBean implements Serializable{
         
         
         try{
-            String getBranchUrl="http://localhost:8080/PayFuel/DeviceManagementService/devices/"+loginBean.getbId();
+            String getBranchUrl="http://localhost:8080/PayFuel/DeviceManagementService/devices/"+bId;
             Response response = CommonLibrary.sendRESTRequest(getBranchUrl, "empty data", MediaType.APPLICATION_JSON, "GET");
             //System.out.println(response.getHeaders());
             String jsonResponse = response.readEntity(String.class);
@@ -204,20 +204,7 @@ public class DeviceBean implements Serializable{
         this.deviceList = deviceList;
     }
     
-    /**
-     * @return the loginBean
-     */
-    public LoginBean getLoginBean() {
-        return loginBean;
-    }
-    
-    /**
-     * @param loginBean the loginBean to set
-     */
-    public void setLoginBean(LoginBean loginBean) {
-        this.loginBean = loginBean;
-    }
-    
+   
     /**
      * @return the deviceSingle
      */
@@ -260,6 +247,20 @@ public class DeviceBean implements Serializable{
      */
     public void setSaveActionName(String saveActionName) {
         this.saveActionName = saveActionName;
+    }
+
+    /**
+     * @return the bId
+     */
+    public int getbId() {
+        return bId;
+    }
+
+    /**
+     * @param bId the bId to set
+     */
+    public void setbId(int bId) {
+        this.bId = bId;
     }
 
     

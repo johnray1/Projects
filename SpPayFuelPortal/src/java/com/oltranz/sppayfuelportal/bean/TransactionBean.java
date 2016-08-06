@@ -29,6 +29,9 @@ import org.codehaus.jackson.map.ObjectMapper;
 @SessionScoped
 public class TransactionBean implements Serializable{
     
+    //TO KEEP USER BRANCH DATA
+    private int bId;
+    
     private int branchId;
     private int usId;
     private int deviceId;
@@ -43,9 +46,7 @@ public class TransactionBean implements Serializable{
     
     @ManagedProperty(value="#{TemplateBean}")
     private TemplateBean templateBean;
-    
-    @ManagedProperty(value="#{LoginBean}")
-    private LoginBean loginBean;
+   
     
     @ManagedProperty(value="#{PaymentModeBean}")
     private PaymentModeBean paymentModeBean;
@@ -68,12 +69,9 @@ public class TransactionBean implements Serializable{
         templateBean.setGoalClassName("deactive");
         templateBean.setTransactionClassName("active");
         templateBean.setSettingClassName("deactive");
-        
         paymentModeBean.paymentModes();
         
-        
         try{
-            
             
             Date currentDate = new Date();
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
@@ -81,8 +79,8 @@ public class TransactionBean implements Serializable{
             String endDate=dateFormat.format(currentDate)+"  23:59";
             date=startDate+" - "+endDate;
             
-            if(loginBean.getbId()!=0){
-                branchId=loginBean.getbId();
+            if(bId!=0){
+                branchId=bId;
             }
             
             String url="http://localhost:8080/PayFuel/TransactionManagementService/transactions/filter";
@@ -111,11 +109,9 @@ public class TransactionBean implements Serializable{
     
     
     
-    public void transactionForView(long transactionId){
-        transactionById(transactionId);
-    }
     
-    public void transactionById(long transactionId){
+    
+    public void transactionForView(long transactionId){
         
         try{
             String getUrl="http://localhost:8080/PayFuel/TransactionManagementService/transaction/"+transactionId;
@@ -198,19 +194,6 @@ public class TransactionBean implements Serializable{
         this.templateBean = templateBean;
     }
     
-    /**
-     * @return the loginBean
-     */
-    public LoginBean getLoginBean() {
-        return loginBean;
-    }
-    
-    /**
-     * @param loginBean the loginBean to set
-     */
-    public void setLoginBean(LoginBean loginBean) {
-        this.loginBean = loginBean;
-    }
     
     /**
      * @return the transactionSingle
@@ -353,6 +336,20 @@ public class TransactionBean implements Serializable{
      */
     public void setPaymentModeBean(PaymentModeBean paymentModeBean) {
         this.paymentModeBean = paymentModeBean;
+    }
+
+    /**
+     * @return the bId
+     */
+    public int getbId() {
+        return bId;
+    }
+
+    /**
+     * @param bId the bId to set
+     */
+    public void setbId(int bId) {
+        this.bId = bId;
     }
 
     

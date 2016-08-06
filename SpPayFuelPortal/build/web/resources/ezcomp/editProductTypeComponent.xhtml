@@ -8,10 +8,9 @@
     <!-- INTERFACE -->
     <cc:interface>
         <cc:attribute name="productTypeIdValue" />
-        <cc:attribute name="productTypeNameLabel" />
         <cc:attribute name="productTypeNameValue" />
-        <cc:attribute name="descLabel" />
         <cc:attribute name="descValue" />
+        <cc:attribute name="popUpLabel" />
         <cc:attribute name="saveActionName" />
         <cc:attribute name="saveButtonAction" 
                       method-signature="java.lang.String update()"/>
@@ -24,7 +23,9 @@
         <div class="container-fluid" style="margin:0px;padding:0px;border:0px solid red;;min-height:400px;">
             
             <div class="col-xs-12 col-sm-12 holderinbox_popup" style="margin:0px;padding:0px;">
-                <h2 style="text-align:center;font-size:18px;background-color:rgb(26, 140, 53);">EDIT TYPE</h2>
+                <h2 style="text-align:center;font-size:18px;background-color:rgb(26, 140, 53);">
+                    <h:outputText value="#{cc.attrs.popUpLabel}"/>
+                </h2>
                     
                     
                 <!-- FORM -->
@@ -32,19 +33,19 @@
                 
                 
                 <div class="col-xs-12 theinput">
-                    <h:outputLabel value="#{cc.attrs.productTypeNameLabel}"/>
+                    <h:outputLabel value="PRODUCT TYPE NAME"/>
                     <h:inputText id="field2" value="#{cc.attrs.productTypeNameValue}"/>
                 </div>
                     
                <div class="col-xs-12 theinput">
-                    <h:outputLabel value="#{cc.attrs.descLabel}"/>
+                    <h:outputLabel value="DESCRIPTION"/>
                     <h:inputText id="field3" value="#{cc.attrs.descValue}"/>
                 </div>
                         
                         
                 
                 <div  class="col-xs-12 submitinput" >
-                    <h:commandButton onclick="notifiyViewDetails();notifiyDatatableRefresh()" value="UPDATE" action="#{cc.attrs.saveButtonAction}">
+                    <h:commandButton onclick="notifiyViewDetails();notifiyDatatableRefresh()" value="#{cc.attrs.saveActionName}" action="#{cc.attrs.saveButtonAction}">
                         <f:ajax execute="@form" render="#{cc.attrs.renderedOnsuccess}" />
                     </h:commandButton>
                 </div>

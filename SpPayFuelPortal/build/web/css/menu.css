@@ -19,7 +19,6 @@
     z-index:999999999999;
     box-shadow: 0px 7px 14px rgba(0,0, 0, .3);
     background-color:#ffffff;
-    -webkit-transition: all 800ms ease-in-out;-moz-transition: all 800ms ease-in-out;	-ms-transition: all 800ms ease-in-out;-o-transition: all 800ms ease-in-out;transition: all 800ms ease-in-out;
 }
 
 .mainmenu { position: relative; font-family: ubuntu; border:0px solid green;}

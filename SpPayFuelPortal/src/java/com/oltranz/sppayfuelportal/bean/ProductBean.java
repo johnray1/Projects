@@ -9,6 +9,7 @@ import com.oltranz.sppayfuelportal.library.Common;
 import com.oltranz.sppayfuelportal.library.CommonLibrary;
 import com.oltranz.sppayfuelportal.model.ProductList;
 import com.oltranz.sppayfuelportal.model.ProductSingle;
+import java.io.IOException;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -33,16 +34,15 @@ public class ProductBean implements Serializable{
     private String productName;
     private String productTypeId;
     private String measureUnity;
+    
     private String saveActionName="Save";
+    private String popUpLabel;
     
     private ProductSingle productSingle;
     private ProductList productList;
     
     @ManagedProperty(value="#{TemplateBean}")
     private TemplateBean templateBean;
-    
-    @ManagedProperty(value="#{LoginBean}")
-    private LoginBean loginBean;
     
     private Boolean productMenuItemRendered;
     
@@ -66,7 +66,7 @@ public class ProductBean implements Serializable{
     public void init() {
         setSaveActionName("Save");
     }
-
+    
     
     
     public String products(){
@@ -104,7 +104,19 @@ public class ProductBean implements Serializable{
     
     public void productForEdit(int productId){
         productById(productId);
-        saveActionName="Add";
+        saveActionName="EDIT";
+        popUpLabel="EDIT PRODUCT";
+    }
+    
+    public void productForCreate(){
+        this.productId="-1";
+        this.productName="";
+        this.price="";
+        this.measureUnity="";
+        this.productTypeId="";
+        
+        saveActionName="ADD";
+        popUpLabel="ADD PRODUCT";
     }
     
     public String saveProduct(){
@@ -139,24 +151,27 @@ public class ProductBean implements Serializable{
     }
     
     public String createProduct(){
+        try{
+            String url="http://localhost:8080/PayFuel/ProductManagementService/product/create";
+            String  jsonData = "{\n" +
+                    "\"name\":\""+productName+"\",\n" +
+                    "\"hqPrice\":\""+price+"\",\n" +
+                    "\"measureUnity\":\""+measureUnity+"\",\n" +
+                    "\"productTypeId\":\""+productTypeId+"\"\n" +
+                    "}";
+            Response response=CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
+            String jsonResponse=response.readEntity(String.class);
+            
+            ObjectMapper mapper=new ObjectMapper();
+            productSingle=(ProductSingle)mapper.readValue(jsonResponse, ProductSingle.class);
+            
+            productById(productSingle.getProduct().getProductId());
+        }
+        catch(IOException | NumberFormatException ex){
+            System.out.println(ex.getMessage());
+        }
         
-        String url="http://localhost:8080/PayFuel/ProductManagementService/product/create";
-        String  jsonData = "{\n" +
-                "\"name\":\""+productName+"\",\n" +
-                "\"hqPrice\":\""+price+"\",\n" +
-                "\"measureUnity\":\""+measureUnity+"\",\n" +
-                "\"productTypeId\":\""+productTypeId+"\"\n" +
-                "}";
-        Response response=CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
-        String jsonResponse=response.readEntity(String.class);
-        //System.out.println(jsonResponse);
-        
-        this.productName=null;
-        this.price=null;
-        this.measureUnity=null;
-        this.productTypeId=null;
-        
-        return "innerpage_product.xhtml";
+        return products();
     }
     
     public String updateProduct(){
@@ -171,14 +186,14 @@ public class ProductBean implements Serializable{
                 "}";
         Response response=CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
         String jsonResponse=response.readEntity(String.class);
-        //System.out.println(jsonResponse);
+        
         
         productById(Integer.parseInt(productId));
         
         return products();
     }
     
-
+    
     
     
     /**
@@ -281,19 +296,6 @@ public class ProductBean implements Serializable{
     }
     
     
-    /**
-     * @return the loginBean
-     */
-    public LoginBean getLoginBean() {
-        return loginBean;
-    }
-    
-    /**
-     * @param loginBean the loginBean to set
-     */
-    public void setLoginBean(LoginBean loginBean) {
-        this.loginBean = loginBean;
-    }
     
     /**
      * @return the productMenuItemRendered
@@ -355,6 +357,20 @@ public class ProductBean implements Serializable{
         this.saveActionName = saveActionName;
     }
     
-   
+    /**
+     * @return the popUpLabel
+     */
+    public String getPopUpLabel() {
+        return popUpLabel;
+    }
+    
+    /**
+     * @param popUpLabel the popUpLabel to set
+     */
+    public void setPopUpLabel(String popUpLabel) {
+        this.popUpLabel = popUpLabel;
+    }
+    
+    
     
 }

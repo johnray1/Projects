@@ -9,11 +9,9 @@ import com.oltranz.sppayfuelportal.dao.LoginDAO;
 import com.oltranz.sppayfuelportal.model.UserDetails;
 import java.io.Serializable;
 import java.util.Date;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -27,13 +25,28 @@ public class LoginBean implements Serializable{
     private String pwd;
     private String msg;
     private String user;
-    private String branchName;
+    private Boolean faceMessage=false;
+    
     private Integer userId;
     private Integer bId;
+    private String branchName;
+    
     private Date date;
     
     @ManagedProperty(value="#{TemplateBean}")
     private TemplateBean templateBean;
+    
+    @ManagedProperty(value="#{BranchBean}")
+    private BranchBean branchBean;
+    
+    @ManagedProperty(value="#{DeviceBean}")
+    private DeviceBean deviceBean;
+    
+    @ManagedProperty(value="#{PumpBean}")
+    private PumpBean pumpBean;
+    
+    @ManagedProperty(value="#{TransactionBean}")
+    private TransactionBean transactionBean;
     
     @ManagedProperty(value="#{TankBean}")
     private TankBean tankBean;
@@ -61,12 +74,14 @@ public class LoginBean implements Serializable{
                 user=ud.getUserDetailsModel().getFname();
                 branchName=ud.getUserDetailsModel().getBranchName();
                 
-                if(userId!=1){
-                    
-                    templateBean.setHideClassName("hide");
-                }
+                //set branch Id For Beans
                 
+                branchBean.setbId(bId);
+                deviceBean.setbId(bId);
                 tankBean.setbId(bId);
+                pumpBean.setbId(bId);
+                transactionBean.setbId(bId);
+                
                 tankBean.tank1Dashboard();
                 tankBean.tank2Dashboard();
                 tankBean.tank3Dashboard();
@@ -75,31 +90,27 @@ public class LoginBean implements Serializable{
                 HttpSession session = SessionBean.getSession();
                 session.setAttribute("username",user );
                 session.setAttribute("permissions", ud.getUserDetailsModel().getPermissions());
-                
-                
-                //setting session to expiry in 8 mins
                 session.setMaxInactiveInterval(30*60);
-                FacesContext context = FacesContext.getCurrentInstance();
-                context.getExternalContext().redirect("dashboard.xhtml");
                 
-                return "dashboard?faces-redirect=true";
+                if(userId!=1){
+                    
+                    templateBean.setHideClassName("hide");
+                    templateBean.setHideDashHq("hide");
+                    return "dashboard?faces-redirect=true";
+                }
+                else{
+                    templateBean.setHideDash("hide");
+                    return "dashboard_hq?faces-redirect=true";
+                }
+                
             }
             else {
-                FacesContext.getCurrentInstance().addMessage(
-                        null,
-                        new FacesMessage(
-                                FacesMessage.SEVERITY_WARN,
-                                "Incorrect Username and Passowrd",
-                                "Please enter correct username and Password"
-                        )
-                        
-                );
-                return "login.xhtml";
+                
+                return "login.xhtml?faces-redirect=true";
             }
         }
         catch(Exception ex){
-            System.out.println("Login error -->" + ex.getMessage());
-            return "login";
+            return "login.xhtml?faces-redirect=true";
         }
     }
     
@@ -107,7 +118,7 @@ public class LoginBean implements Serializable{
     public String logout() {
         HttpSession session = SessionBean.getSession();
         session.invalidate();
-        return "login";
+        return "login.xhtml?faces-redirect=true";
     }
     
     
@@ -209,35 +220,107 @@ public class LoginBean implements Serializable{
     public void setDate(Date date) {
         this.date = date;
     }
-
+    
     /**
      * @return the branchName
      */
     public String getBranchName() {
         return branchName;
     }
-
+    
     /**
      * @param branchName the branchName to set
      */
     public void setBranchName(String branchName) {
         this.branchName = branchName;
     }
-
+    
     /**
      * @return the bId
      */
     public Integer getbId() {
         return bId;
     }
-
+    
     /**
      * @param bId the bId to set
      */
     public void setbId(Integer bId) {
         this.bId = bId;
     }
-
+    
+    
+    
+    /**
+     * @return the deviceBean
+     */
+    public DeviceBean getDeviceBean() {
+        return deviceBean;
+    }
+    
+    /**
+     * @param deviceBean the deviceBean to set
+     */
+    public void setDeviceBean(DeviceBean deviceBean) {
+        this.deviceBean = deviceBean;
+    }
+    
+    /**
+     * @return the transactionBean
+     */
+    public TransactionBean getTransactionBean() {
+        return transactionBean;
+    }
+    
+    /**
+     * @param transactionBean the transactionBean to set
+     */
+    public void setTransactionBean(TransactionBean transactionBean) {
+        this.transactionBean = transactionBean;
+    }
+    
+    /**
+     * @return the pumpBean
+     */
+    public PumpBean getPumpBean() {
+        return pumpBean;
+    }
+    
+    /**
+     * @param pumpBean the pumpBean to set
+     */
+    public void setPumpBean(PumpBean pumpBean) {
+        this.pumpBean = pumpBean;
+    }
+    
+    /**
+     * @return the branchBean
+     */
+    public BranchBean getBranchBean() {
+        return branchBean;
+    }
+    
+    /**
+     * @param branchBean the branchBean to set
+     */
+    public void setBranchBean(BranchBean branchBean) {
+        this.branchBean = branchBean;
+    }
+    
+    /**
+     * @return the faceMessage
+     */
+    public Boolean getFaceMessage() {
+        return faceMessage;
+    }
+    
+    /**
+     * @param faceMessage the faceMessage to set
+     */
+    public void setFaceMessage(Boolean faceMessage) {
+        this.faceMessage = faceMessage;
+    }
+    
     
     
     

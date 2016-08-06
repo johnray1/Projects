@@ -9,7 +9,6 @@ import com.oltranz.sppayfuelportal.library.CommonLibrary;
 import com.oltranz.sppayfuelportal.model.PaymentModeList;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -25,15 +24,12 @@ public class PaymentModeBean implements Serializable{
     
     private PaymentModeList paymentModeList;
     
-    @ManagedProperty(value="#{LoginBean}")
-    private LoginBean loginBean;
+    
     
     public void paymentModes(){
         
-        int userId=loginBean.getUserId();
-        System.out.println(loginBean.getUserId());
         try{
-            String url="http://localhost:8080/PayFuel/PaymentModeManagementService/paymentmodes/"+userId;
+            String url="http://localhost:8080/PayFuel/PaymentModeManagementService/paymentmodes";
             Response response = CommonLibrary.sendRESTRequest(url, "empty data", MediaType.APPLICATION_JSON, "GET");
             //System.out.println(response.getHeaders());
             String jsonResponse = response.readEntity(String.class);
@@ -62,20 +58,7 @@ public class PaymentModeBean implements Serializable{
         this.paymentModeList = paymentModeList;
     }
 
-    /**
-     * @return the loginBean
-     */
-    public LoginBean getLoginBean() {
-        return loginBean;
-    }
-
-    /**
-     * @param loginBean the loginBean to set
-     */
-    public void setLoginBean(LoginBean loginBean) {
-        this.loginBean = loginBean;
-    }
-    
+   
     
     
 }

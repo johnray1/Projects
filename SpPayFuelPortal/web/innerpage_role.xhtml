@@ -5,17 +5,17 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-          
-          
+      
+      
       xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-          
+      
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta charset="utf-8"></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <title>SP - PayFuel Adminstration</title>
-            
+        
         
         <link href="css/style.css" rel="stylesheet" type="text/css" />
         <link href="css/menu.css" rel="stylesheet"/>
@@ -28,15 +28,15 @@
         <link href="css/jquery.dataTables.min.css" rel="stylesheet" />
         <link href="css/buttons.dataTables.min.css" rel="stylesheet" /> 
         <script src="js/jquery-2.0.3.min.js"></script> 
-            
+        
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
         <script type="text/javascript" src="js/jquery.events.touch.js"></script>
         <script type="text/javascript" src="js/lightcase.js"></script>
         <script type="text/javascript" src="js/lightcase.init.js"></script>
-            
-            
-            
+        
+        
+        
         <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>			
         <script type="text/javascript" src="js/dataTables.buttons.min.js"></script>	
         <script type="text/javascript" src="js/buttons.flash.min.js"></script>	
@@ -46,10 +46,10 @@
         <script type="text/javascript" src="js/buttons.html5.min.js"></script>
         <script src="js/bootstrap-editable.min.js"></script>
         <script src="js/xeditable_functions.js"></script>    
-            
-            
         
-            
+        
+        
+        
         <script>
             $(document).ready(function() {
                 $('#example').DataTable( {
@@ -78,10 +78,10 @@
                 
             } );
         </script>
-            
-            
+        
+        
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
-            
+        
     </h:head>
     
     
@@ -123,14 +123,15 @@
                                 <h:column>
                                     <f:facet name="header">ACTIONS</f:facet>
                                     <h:form>
-                                        <h:commandLink onclick="showDatails()"  id="viewDetails"> <h:graphicImage value="images/icon_view.png" />
+                                        <h:commandLink onclick="showDatails()"  id="viewDetails"> 
+                                            <h:graphicImage value="images/icon_view.png" />
                                             <f:ajax event="click" listener="#" render="viewDetailsContentPanel" />
                                         </h:commandLink>
-                                        <a data-rel="lightcase_edit" href="popup/popup_user_edit.xhtml"><img src="images/icon_edit.png"/></a>
                                     </h:form>
                                 </h:column>
                             </h:dataTable>
-                            <!-- End DataTable--> 
+                            <!-- End DataTable-->
+                            
                             <!--Start Pop Up-->      
                             <div id="viewDetailsContent" style="display: none">
                                 
@@ -138,6 +139,7 @@
                                     <ui:include src="popup/popup_role_details_view.xhtml" /> 
                                 </h:panelGroup>
                             </div>
+                            
                         </div>
                     </span>
                 </div>

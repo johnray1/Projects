@@ -72,14 +72,14 @@
                         <!-- -->
                         <label class="form_toggle" for="formcontent-toggle">
                             <h:form >
-                                <h:commandLink onclick="notifyAdd()" id="addDetails" style="color: #ffffff"> 
+                                <h:commandLink onclick="notifyEdit()" id="addDetails" style="color: #ffffff"> 
                                     Add Branch
-                                    <f:ajax event="click"  listener="#{BranchBean.branchForCreate()}" rendererType="postValidate" render=":addDetailsContentPanel :add_form" />
+                                    <f:ajax event="click"  listener="#{BranchBean.branchForCreate()}" rendererType="postValidate" render=":editDetailsContentPanel :edit_form" />
                                 </h:commandLink>
                             </h:form>  
                         </label>
                         <!-- -->
-                        <!-- -->
+                        
                         
                     </h2>
                     <span class="container-fluid" style="overflow: auto;">
@@ -144,25 +144,13 @@
                                             branchNameValue="#{BranchBean.branchName}"
                                             branchAddressValue="#{BranchBean.address}"
                                             saveActionName="#{BranchBean.saveActionName}"
+                                            popUpLabel="#{BranchBean.popUpLabel}"
                                             saveButtonAction="#{BranchBean.saveBranch()}"
                                             renderedOnsuccess=":viewDetailsContentPanel :branchesList"
                                             /> 
                                     </h:form>
                                 </h:panelGroup>
-                                    
-                                <h:panelGroup id="addDetailsContentPanel">
-                                    <h:form class="container-fluid edit_form" id="add_form">
-                                        <tp:addBranchComponent 
-                                            branchIdValue="#{BranchBean.branchId}"
-                                            branchNameValue="#{BranchBean.branchName}"
-                                            branchAddressValue="#{BranchBean.address}"
-                                            saveActionName="#{BranchBean.saveActionName}"
-                                            saveButtonAction="#{BranchBean.saveBranch()}"
-                                            renderedOnsuccess=":viewDetailsContentPanel :branchesList"
-                                            /> 
-                                    </h:form>
-                                </h:panelGroup>
-                                    
+                               
                             </div>
                             
                             
@@ -186,31 +174,19 @@
         
         <script type="text/javascript" src="js/chosen.jquery.min.js"></script>
             
-        <script type="text/javascript">
-            
-            
-            var showDetails=false;
-            var showAdd=false;
+         <script type="text/javascript">
             var showEdit=false;
+            var showDetails=false;
             var turnDataTable=false;
             var content2Show="";
             
             function notifiyViewDetails(){
-                
+                showEdit=false;
                 showDetails=true;
-                showAdd=false;
-                showEdit=false;
-            }
-            
-            function notifyAdd(){
-                showAdd=true;
-                showEdit=false;
-                showDetails=false;
             }
             
             function notifyEdit(){
                 showEdit=true;
-                showAdd=false;
                 showDetails=false;
             }
             
@@ -230,13 +206,13 @@
                         break;
                     
                     case "complete": // This is called right after ajax response is received.
-                        
+                     
                         break;
                     case "success": // This is called when ajax response is successfully processed.
                         
                         lightcase.start({
                             href: '#',
-                            maxWidth: '640',
+                            maxWidth: 640,
                             maxHeight: '700',
                             transition: 'scrollTop',
                             speedIn:'600',
@@ -245,21 +221,18 @@
                             swipe: true,
                             useKeys: true,
                             overlayOpacity:0.8,
+                            title:'',
                             showSequenceInfo: false,
                             onFinish: {
                                 function () {
                                     
                                     if(showDetails){
+                                        
                                         content2Show= $('#viewDetailsContentPanel').html();
                                     }
                                     
-                                    if(showAdd){
-                                        content2Show= $('#addDetailsContentPanel').html();
-                                    }
-                                    
-                                    if(showEdit){
+                                    if(showEdit)
                                         content2Show= $('#editDetailsContentPanel').html();
-                                    }
                                     
                                     if(turnDataTable){
                                         turn2DataTable('dataTableList');
@@ -267,6 +240,7 @@
                                     }
                                     
                                     lightcase.get('contentInner').children().html(content2Show);
+                                    // Do a resize now after filling in the content
                                     lightcase.resize();
                                 }
                             }
@@ -277,15 +251,16 @@
             });
             
             
+            
             $(".textinput input").change(function() {
                 if ($(this).val() != "") {
                     $(this).addClass('filled');
                 } else {
                     $(this).removeClass('filled');
                 }
-            });
+            })
             
-        </script>   
+        </script>    
             
         <script type="text/javascript">
             var config = {

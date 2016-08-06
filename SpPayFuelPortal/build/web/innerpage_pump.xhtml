@@ -66,15 +66,7 @@
                 
                 
                 <div class="col-xs-12 col-sm-12 sholderinbox" style="margin:0px;margin-top:20px;padding:0px;min-height:400px;font-family:ubuntu;overflow-x:auto;">
-                    <h2>PUMP LIST
-                        
-                        <!-- -->
-                        <label class="form_toggle" for="formcontent-toggle">
-                            <a data-rel="lightcase_edit" href="popup/popup_device_add.xhtml" style="color: #ffffff" onclick="#{BranchBean.branches()}">Add Pump</a>
-                        </label>
-                        <!-- -->
-                        
-                    </h2>
+                    <h2>PUMP LIST</h2>
                     <span class="container-fluid" style="overflow: auto;">
                         <div  class="container-fluid" style="padding:10px;">
                             
@@ -125,7 +117,7 @@
                                                 <f:ajax event="click" listener="#{PumpBean.pumpForView(pump.nozzleId)}" render="viewDetailsContentPanel" />
                                             </h:commandLink>
                                             
-                                            <h:commandLink onclick="notifyEdit()"    id="editDetails" > <h:graphicImage value="images/icon_edit.png" />
+                                            <h:commandLink onclick="notifyEdit()"    id="editDetails" rendered="false"> <h:graphicImage value="images/icon_edit.png" />
                                                 <f:ajax event="click"  listener="#{PumpBean.pumpForEdit(pump.nozzleId)}" rendererType="postValidate" render=":editDetailsContentPanel :edit_form" />
                                             </h:commandLink>
                                             

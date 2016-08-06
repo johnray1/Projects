@@ -5,7 +5,6 @@
 */
 package com.oltranz.sppayfuelportal.bean;
 
-import com.oltranz.sppayfuelportal.library.Common;
 import com.oltranz.sppayfuelportal.library.CommonLibrary;
 import com.oltranz.sppayfuelportal.model.BranchList;
 import com.oltranz.sppayfuelportal.model.BranchSingle;
@@ -13,7 +12,6 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -26,18 +24,20 @@ import org.codehaus.jackson.map.ObjectMapper;
 @SessionScoped
 public class BranchBean implements Serializable{
     
+    //TO KEEP USER BRANCH DATA
+    private int bId;
+    
     private String branchId;
     private String branchName;
     private String address;
     private Boolean branchMenuItemRendered;
-    private String saveActionName="Save";
     
+    private String saveActionName="Save";
+    private String popUpLabel;
     
     private BranchSingle branchSingle;
     private BranchList branchList;
     
-    @ManagedProperty(value="#{LoginBean}")
-    private LoginBean loginBean;
     
     @ManagedProperty(value="#{TemplateBean}")
     private TemplateBean templateBean;
@@ -45,19 +45,12 @@ public class BranchBean implements Serializable{
     
     public BranchBean(){
         
-        
-        HttpSession session = SessionBean.getSession();
-        String permissions=(String)session.getAttribute("permissions");
-        
-        byte[] permissionBytes =Common.shared.hexStringToByteArray(permissions);
-        
-        String s=Common.shared.byteArrayToString(permissionBytes);
-        
-        int bitValue=Common.shared.GetBit(permissionBytes, 1);//1 means 2nd Position bit in permisson like array
-        
-        
-        branchMenuItemRendered=bitValue==1;
-        
+//        HttpSession session = SessionBean.getSession();
+//        String permissions=(String)session.getAttribute("permissions");
+//        byte[] permissionBytes =Common.shared.hexStringToByteArray(permissions);
+//        String s=Common.shared.byteArrayToString(permissionBytes);
+//        int bitValue=Common.shared.GetBit(permissionBytes, 1);//1 means 2nd Position bit in permisson like array
+//        branchMenuItemRendered=bitValue==1;
         
     }
     
@@ -76,7 +69,7 @@ public class BranchBean implements Serializable{
        
         
         try{
-            String getUrl="http://localhost:8080/PayFuel/BranchManagementService/branches/"+loginBean.getbId();
+            String getUrl="http://localhost:8080/PayFuel/BranchManagementService/branches/"+bId;
             Response response = CommonLibrary.sendRESTRequest(getUrl, "empty data", MediaType.TEXT_PLAIN, "GET");
             String jsonResponse = response.readEntity(String.class);
             
@@ -99,14 +92,18 @@ public class BranchBean implements Serializable{
     
     public void branchForEdit(int branchId){
         branchById(branchId);
-        saveActionName="Add";
+        
+        popUpLabel="EDIT BRANCH";
+        saveActionName="UPDATE";
     }
     
     public void branchForCreate(){
         this.branchId="-1";
         this.branchName="";
         this.address="";
-        saveActionName="Add";
+        
+        popUpLabel="ADD BRANCH";
+        saveActionName="CREATE";
     }
     
     public String saveBranch(){
@@ -255,19 +252,7 @@ public class BranchBean implements Serializable{
         this.branchList = branchList;
     }
     
-    /**
-     * @return the loginBean
-     */
-    public LoginBean getLoginBean() {
-        return loginBean;
-    }
     
-    /**
-     * @param loginBean the loginBean to set
-     */
-    public void setLoginBean(LoginBean loginBean) {
-        this.loginBean = loginBean;
-    }
     
     /**
      * @return the branchMenuItemRendered
@@ -310,7 +295,35 @@ public class BranchBean implements Serializable{
     public void setSaveActionName(String saveActionName) {
         this.saveActionName = saveActionName;
     }
-    
-    
+
+    /**
+     * @return the popUpLabel
+     */
+    public String getPopUpLabel() {
+        return popUpLabel;
+    }
+
+    /**
+     * @param popUpLabel the popUpLabel to set
+     */
+    public void setPopUpLabel(String popUpLabel) {
+        this.popUpLabel = popUpLabel;
+    }
+
+    /**
+     * @return the bId
+     */
+    public int getbId() {
+        return bId;
+    }
+
+    /**
+     * @param bId the bId to set
+     */
+    public void setbId(int bId) {
+        this.bId = bId;
+    }
+
+   
     
 }

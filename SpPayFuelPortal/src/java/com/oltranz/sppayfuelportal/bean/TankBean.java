@@ -11,6 +11,7 @@ import com.oltranz.sppayfuelportal.model.PumpDash;
 import com.oltranz.sppayfuelportal.model.TankDash;
 import com.oltranz.sppayfuelportal.model.TankList;
 import com.oltranz.sppayfuelportal.model.TankSingle;
+import java.io.IOException;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -27,14 +28,27 @@ import org.codehaus.jackson.map.ObjectMapper;
 @SessionScoped
 public class TankBean {
     
+    //TO KEEP USER BRANCH DATA
+    private int bId;
+    
     private String tankId;
+    private String branchId;
     private String tankName;
     private String maxCapacity;
     private String currentCapacity;
     private String preCalibrationDate;
     private String nextCalibrationDate;
-    private String branchId;
-    private int bId;
+    
+    
+    private String saveActionName="Save";
+    private String popUpLabel;
+    
+    private TankSingle tankSingle;
+    private TankList tankList;
+    
+    @ManagedProperty(value="#{TemplateBean}")
+    private TemplateBean templateBean;
+    
     
     private TankDash tankDash1;
     private PumpDash pumpDash1;
@@ -57,14 +71,8 @@ public class TankBean {
     private NozzleDash nozzleDash8;
     
     
-    private String saveActionName="Save";
-    private TankSingle tankSingle;
-    private TankList tankList;
     
     
-    
-    @ManagedProperty(value="#{TemplateBean}")
-    private TemplateBean templateBean;
     
     
     public void init() {
@@ -105,7 +113,19 @@ public class TankBean {
     
     public void tankForEdit(int branchId){
         tankById(branchId);
-        saveActionName="Add";
+        saveActionName="UPDATE";
+        popUpLabel="EDIT TANK";
+    }
+    
+    public void tankForCreate(){
+        this.tankId="-1";
+        this.tankName="";
+        this.maxCapacity="";
+        this.currentCapacity="";
+        this.branchId="";
+        
+        saveActionName="CREATE";
+        popUpLabel="ADD TANK";
     }
     
     public String saveTank(){
@@ -137,6 +157,61 @@ public class TankBean {
         }
         
     }
+    
+    public String create(){
+        try{
+            String url="http://localhost:8080/PayFuel/TankManagementService/tank/create";
+            String  jsonData ="{\n" +
+                    "\"name\":\""+tankName+"\",\n" +
+                    "\"maxCapacity\":\""+maxCapacity+"\",\n" +
+                    "\"currentCapacity\":\""+currentCapacity+"\",\n" +
+                    "\"preCalibrationDate\":\""+preCalibrationDate+"\",\n" +
+                    "\"nextCalibrationDate\":\""+nextCalibrationDate+"\",\n" +
+                    "\"branchId\":\""+branchId+"\"\n" +
+                    "}";
+            Response response=CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
+            String jsonResponse=response.readEntity(String.class);
+            
+            ObjectMapper mapper=new ObjectMapper();
+            tankSingle=(TankSingle)mapper.readValue(jsonResponse, TankSingle.class);
+            
+            tankById(tankSingle.getTank().getTankId());
+        }
+        catch(IOException | NumberFormatException ex){
+            System.out.println(ex.getMessage());
+        }
+        
+        return tanks();
+    }
+    
+    
+    
+    public String update(){
+        
+        
+        String url="http://localhost:8080/PayFuel/TankManagementService/tank/edit";
+        String  jsonData ="{\n" +
+                "\"tankId\":\""+tankId+"\",\n" +
+                "\"name\":\""+tankName+"\",\n" +
+                "\"maxCapacity\":\""+maxCapacity+"\",\n" +
+                "\"currentCapacity\":\""+currentCapacity+"\",\n" +
+                "\"preCalibrationDate\":\""+preCalibrationDate+"\",\n" +
+                "\"nextCalibrationDate\":\""+nextCalibrationDate+"\",\n" +
+                "\"branchId\":\""+branchId+"\"\n" +
+                "}";
+        Response response=CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
+        String jsonResponse=response.readEntity(String.class);
+        
+        tankById(Integer.parseInt(tankId));
+        
+        return tanks();
+    }
+    
+    
+    
+    
+    
+    
     
     public void tank1Dashboard(){
         try{
@@ -213,56 +288,7 @@ public class TankBean {
         }
     }
     
-    public String create(){
-        return null;
-        
-//        String url="http://localhost:8080/PayFuel/BranchManagementService/branch/create";
-//        String  jsonData = "{\n" +
-//                "\"name\":\""+branchName+"\",\n" +
-//                "\"descr\":\""+address+"\"\n" +
-//                "}";
-//        Response response=CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
-//        String jsonResponse=response.readEntity(String.class);
-//        System.out.println(jsonResponse);
-//
-//        ObjectMapper mapper=new ObjectMapper();
-//        try{
-//            branchSingle=(BranchSingle)mapper.readValue(jsonResponse, BranchSingle.class);
-//
-//            this.branchId=branchSingle.getBranch().getBranchId().toString();
-//            this.branchName=branchSingle.getBranch().getName();
-//            this.address=branchSingle.getBranch().getDescr();
-//
-//        }
-//        catch(Exception ex){
-//            System.out.println(ex.getMessage());
-//
-//        }
-//        return branches();
-    }
     
-    
-    
-    public String update(){
-        
-        
-        String url="http://localhost:8080/PayFuel/TankManagementService/tank/edit";
-        String  jsonData ="{\n" +
-                "\"tankId\":\""+tankId+"\",\n" +
-                "\"name\":\""+tankName+"\",\n" +
-                "\"maxCapacity\":\""+maxCapacity+"\",\n" +
-                "\"currentCapacity\":\""+currentCapacity+"\",\n" +
-                "\"preCalibrationDate\":\""+preCalibrationDate+"\",\n" +
-                "\"nextCalibrationDate\":\""+nextCalibrationDate+"\",\n" +
-                "\"branchId\":\""+branchId+"\"\n" +
-                "}";
-        Response response=CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
-        String jsonResponse=response.readEntity(String.class);
-        
-        tankById(Integer.parseInt(tankId));
-        
-        return tanks();
-    }
     
     /**
      * @return the tankId
@@ -473,193 +499,207 @@ public class TankBean {
     }
     
     
-
+    
     /**
      * @return the pumpDash1
      */
     public PumpDash getPumpDash1() {
         return pumpDash1;
     }
-
+    
     /**
      * @param pumpDash1 the pumpDash1 to set
      */
     public void setPumpDash1(PumpDash pumpDash1) {
         this.pumpDash1 = pumpDash1;
     }
-
     
-
+    
+    
     /**
      * @return the nozzleDash1
      */
     public NozzleDash getNozzleDash1() {
         return nozzleDash1;
     }
-
+    
     /**
      * @param nozzleDash1 the nozzleDash1 to set
      */
     public void setNozzleDash1(NozzleDash nozzleDash1) {
         this.nozzleDash1 = nozzleDash1;
     }
-
+    
     /**
      * @return the nozzleDash2
      */
     public NozzleDash getNozzleDash2() {
         return nozzleDash2;
     }
-
+    
     /**
      * @param nozzleDash2 the nozzleDash2 to set
      */
     public void setNozzleDash2(NozzleDash nozzleDash2) {
         this.nozzleDash2 = nozzleDash2;
     }
-
+    
     /**
      * @return the pumpDash2
      */
     public PumpDash getPumpDash2() {
         return pumpDash2;
     }
-
+    
     /**
      * @param pumpDash2 the pumpDash2 to set
      */
     public void setPumpDash2(PumpDash pumpDash2) {
         this.pumpDash2 = pumpDash2;
     }
-
+    
     /**
      * @return the nozzleDash3
      */
     public NozzleDash getNozzleDash3() {
         return nozzleDash3;
     }
-
+    
     /**
      * @param nozzleDash3 the nozzleDash3 to set
      */
     public void setNozzleDash3(NozzleDash nozzleDash3) {
         this.nozzleDash3 = nozzleDash3;
     }
-
+    
     /**
      * @return the nozzleDash4
      */
     public NozzleDash getNozzleDash4() {
         return nozzleDash4;
     }
-
+    
     /**
      * @param nozzleDash4 the nozzleDash4 to set
      */
     public void setNozzleDash4(NozzleDash nozzleDash4) {
         this.nozzleDash4 = nozzleDash4;
     }
-
+    
     /**
      * @return the pumpDash3
      */
     public PumpDash getPumpDash3() {
         return pumpDash3;
     }
-
+    
     /**
      * @param pumpDash3 the pumpDash3 to set
      */
     public void setPumpDash3(PumpDash pumpDash3) {
         this.pumpDash3 = pumpDash3;
     }
-
+    
     /**
      * @return the pumpDash4
      */
     public PumpDash getPumpDash4() {
         return pumpDash4;
     }
-
+    
     /**
      * @param pumpDash4 the pumpDash4 to set
      */
     public void setPumpDash4(PumpDash pumpDash4) {
         this.pumpDash4 = pumpDash4;
     }
-
+    
     /**
      * @return the nozzleDash5
      */
     public NozzleDash getNozzleDash5() {
         return nozzleDash5;
     }
-
+    
     /**
      * @param nozzleDash5 the nozzleDash5 to set
      */
     public void setNozzleDash5(NozzleDash nozzleDash5) {
         this.nozzleDash5 = nozzleDash5;
     }
-
+    
     /**
      * @return the nozzleDash6
      */
     public NozzleDash getNozzleDash6() {
         return nozzleDash6;
     }
-
+    
     /**
      * @param nozzleDash6 the nozzleDash6 to set
      */
     public void setNozzleDash6(NozzleDash nozzleDash6) {
         this.nozzleDash6 = nozzleDash6;
     }
-
+    
     /**
      * @return the nozzleDash7
      */
     public NozzleDash getNozzleDash7() {
         return nozzleDash7;
     }
-
+    
     /**
      * @param nozzleDash7 the nozzleDash7 to set
      */
     public void setNozzleDash7(NozzleDash nozzleDash7) {
         this.nozzleDash7 = nozzleDash7;
     }
-
+    
     /**
      * @return the nozzleDash8
      */
     public NozzleDash getNozzleDash8() {
         return nozzleDash8;
     }
-
+    
     /**
      * @param nozzleDash8 the nozzleDash8 to set
      */
     public void setNozzleDash8(NozzleDash nozzleDash8) {
         this.nozzleDash8 = nozzleDash8;
     }
-
     
-
+    
+    
     /**
      * @return the bId
      */
     public int getbId() {
         return bId;
     }
-
+    
     /**
      * @param bId the bId to set
      */
     public void setbId(int bId) {
         this.bId = bId;
     }
-
+    
+    /**
+     * @return the popUpLabel
+     */
+    public String getPopUpLabel() {
+        return popUpLabel;
+    }
+    
+    /**
+     * @param popUpLabel the popUpLabel to set
+     */
+    public void setPopUpLabel(String popUpLabel) {
+        this.popUpLabel = popUpLabel;
+    }
+    
     
     
     

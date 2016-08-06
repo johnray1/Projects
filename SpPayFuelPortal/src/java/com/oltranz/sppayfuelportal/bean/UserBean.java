@@ -8,7 +8,6 @@ package com.oltranz.sppayfuelportal.bean;
 import com.oltranz.sppayfuelportal.library.CommonLibrary;
 import com.oltranz.sppayfuelportal.model.RoleList;
 import com.oltranz.sppayfuelportal.model.RoleSingle;
-import com.oltranz.sppayfuelportal.model.RoleUserList;
 import com.oltranz.sppayfuelportal.model.UserList;
 import com.oltranz.sppayfuelportal.model.UserSingle;
 import java.io.Serializable;
@@ -27,6 +26,9 @@ import org.codehaus.jackson.map.ObjectMapper;
 @SessionScoped
 public class UserBean implements Serializable{
     
+    //TO KEEP USER BRANCH DATA
+    private int bId;
+    
     private String userId;
     private String fname;
     private String otherNames;
@@ -42,7 +44,6 @@ public class UserBean implements Serializable{
     private UserList userList;
     
     private RoleSingle roleSingle;
-    private RoleUserList roleUserList;
     private RoleList roleList;
     
     @ManagedProperty(value="#{TemplateBean}")
@@ -161,7 +162,7 @@ public class UserBean implements Serializable{
         return users();
     }
     
-    
+ //------------------------------------------------------Roles--------------------------------------------------------------------------   
     
     
     
@@ -202,7 +203,6 @@ public class UserBean implements Serializable{
             
             ObjectMapper mapper=new ObjectMapper();
             roleSingle=(RoleSingle)mapper.readValue(jsonResponse, RoleSingle.class);
-            roleUserList=(RoleUserList) roleSingle.getRoleDetailsModel().getUsers();
         }
         catch(Exception ex){
             System.out.println(ex.getMessage());
@@ -316,19 +316,7 @@ public class UserBean implements Serializable{
         this.roleSingle = roleSingle;
     }
 
-    /**
-     * @return the roleUserList
-     */
-    public RoleUserList getRoleUserList() {
-        return roleUserList;
-    }
-
-    /**
-     * @param roleUserList the roleUserList to set
-     */
-    public void setRoleUserList(RoleUserList roleUserList) {
-        this.roleUserList = roleUserList;
-    }
+    
 
     /**
      * @return the fname
@@ -468,6 +456,20 @@ public class UserBean implements Serializable{
      */
     public void setSaveActionName(String saveActionName) {
         this.saveActionName = saveActionName;
+    }
+
+    /**
+     * @return the bId
+     */
+    public int getbId() {
+        return bId;
+    }
+
+    /**
+     * @param bId the bId to set
+     */
+    public void setbId(int bId) {
+        this.bId = bId;
     }
     
     

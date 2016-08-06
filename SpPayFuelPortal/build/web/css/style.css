@@ -5,9 +5,21 @@ body {margin-bottom: 60px;font-family:ubuntu, "times new roman", times, roman, s
 a, li, label, article, tr, span, input, select, textarea, h2, table, th, tr{-webkit-transition: all 800ms ease-in-out;	-moz-transition: all 800ms ease-in-out; -ms-transition: all 800ms ease-in-out; -o-transition: all 800ms ease-in-out; transition: all 800ms ease-in-out;}
 
 
-/*FOOTER */
-.footer {position: absolute;    bottom: 10px;   left: 0px;    width: 100%;    min-height: 30px;    line-height: 30px;    background-color: #f5f5f5;    color: #c0c0c0;}
-.footerlong {position: relative;  bottom: 10px;    left: 0px;    width: 100%;    min-height: 30px;    line-height: 30px;    background-color: #f5f5f5;  color: #c0c0c0;}
+/*FOOTER*/
+.footer {position: absolute;    bottom: 10px;   left: 0px;    width: 100%;    min-height: 30px;margin-top:40px;    line-height: 30px;    background-color: transparent;    color: #c0c0c0;}
+.footerlong {position: relative;  bottom: 10px;    left: 0px;    width: 100%;    min-height: 30px;margin-top:40px;     line-height: 30px;    background-color: transparent;  color: #c0c0c0;}
+
+
+/*
+.footer{position: relative;bottom:10px;left:0px;width: 100%;min-height: 30px;line-height: 30px;background-color:#ffffff;color: #808080;}
+.footerlong{position: relative;left:0px;width: 100%;min-height: 30px;line-height:30px;background-color: #d0d0f0;color:#808080;}
+*/
+
+.footer a{display:inline-block;font-family:ubuntu;margin:0px;color:#636363;font-size:16px;text-decoration:none;}
+.footer a:hover{display:inline-block;font-family:ubuntu;margin:0px;color:#000000;font-size:16px;text-decoration:none;}
+.footer span{display:inline-block;font-family:ubuntu;margin:0px;color:#636363;font-size:16px;text-decoration:none;}
+
+
 
 
 
@@ -425,15 +437,62 @@ div.form_content{
 }
 
 
+
+
+/*SALES PAYMENTS*/
+
+.salesper{}
+.salesper div{margin:0px;padding:0px;}
+
+.sales{ width: 100%;    margin: 7px;    margin-left: 0px;    margin-bottom: 7px;    margin-right: 0px;    padding: 0px;    border-radius: 7px;    overflow: hidden;   font-family:ubuntu;  font-size: 13px;    text-align: center; cursor: pointer;}
+.sales:hover{ transform: scale(1.05);  transition: all 200ms ease-in;  box-shadow: 0 0 0px #000;}
+.sales strong{font-size:20px;}
+
+.hqsales{ width: 100%;    margin: 7px;    margin-left: 0px;    margin-bottom:30px; margin-right: 0px; padding: 0px;padding-bottom:17px;  border-radius: 7px;    overflow: hidden;   font-family:ubuntu;  font-size: 13px;    text-align: center; cursor: pointer;}
+.hqsales:hover{ transform: scale(1.05);  transition: all 200ms ease-in;  box-shadow: 0 0 0px #000;}
+.hqsales strong{font-size:20px;padding-top:27px;  }
+
+
+.pcash{background-color:#ffffff;border: 2px solid #000000;}
+.pcash label{background-color:#000000;color:#d4d4d4;width:100%;padding-left:5px;border-bottom:1px solid rgba(255,255,255,0.2);font-size:16px;text-align:center;}
+
+.pmtn{background-color:#ffffff;border: 2px solid #ffc508;}
+.pmtn label{background-color:#ffc508;color:#303030;width:100%;padding-left:5px;border-bottom:1px solid rgba(255,255,255,0.2);font-size:16px;text-align:center;}
+
+.pairtel{background-color:#ffffff;border: 2px solid #ec1f27;}
+.pairtel label{background-color:#ec1f27;color:#fcd6d8;width:100%;padding-left:5px;border-bottom:1px solid rgba(255,255,255,0.2);font-size:16px;text-align:center;}
+
+.ptigo{background-color:#ffffff;border: 2px solid #193370;}
+.ptigo label{background-color:#193370;color:#cbd7f3;width:100%;padding-left:5px;border-bottom:1px solid rgba(255,255,255,0.2);font-size:16px;text-align:center;}
+
+.pvoucher{background-color:#ffffff;border: 2px solid #7aaa75;}
+.pvoucher label{background-color:#7aaa75;color:#e7f0e6;width:100%;padding-left:5px;border-bottom:1px solid rgba(255,255,255,0.2);font-size:16px;text-align:center;}
+
+.pdebt{background-color:#ffffff;border: 2px solid #808080;}
+.pdebt label{background-color:#808080;color:#ebebeb;width:100%;padding-left:5px;border-bottom:1px solid rgba(255,255,255,0.2);font-size:16px;text-align:center;}
+
+.pvisa{background-color:#ffffff;border: 2px solid #1a1f71;}
+.pvisa label{background-color:#1a1f71;color:#dbdcf7;width:100%;padding-left:5px;border-bottom:1px solid rgba(255,255,255,0.2);font-size:16px;text-align:center;}
+
+.pmastercard{background-color:#ffffff;border: 2px solid #fcbb37;}
+.pmastercard label{background-color:#fcbb37;color:#6f4b02;width:100%;padding-left:5px;border-bottom:1px solid rgba(255,255,255,0.2);font-size:16px;text-align:center;}
+
+.pspacard{background-color:#ffffff;border: 2px solid #1a8c35;}
+.pspacard label{background-color:#1a8c35;color:#cbf5d5;width:100%;padding-left:5px;border-bottom:1px solid rgba(255,255,255,0.2);font-size:16px;text-align:center;}
+
+
+
+
+
 /* MEDIA QUERIES */
 
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (min-width : 320px) and (max-width : 480px) {
-
+    
 }
 
 @media only screen and (min-width :480px) and (max-width : 768px) {
-
+    
 }
 
 
@@ -445,11 +504,11 @@ div.form_content{
 
 /* Desktops and laptops ----------- */
 @media only screen  and (min-width : 1224px) {
-
+    
 }
 
 
 /* Large screens ----------- */
 @media only screen  and (min-width : 1824px) {
-
+    
 }
