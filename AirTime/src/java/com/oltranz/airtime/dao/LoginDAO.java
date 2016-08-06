@@ -7,7 +7,6 @@ package com.oltranz.airtime.dao;
 
 import com.oltranz.airtime.library.CommonLibrary;
 import com.oltranz.airtime.model.LoginModel;
-import java.io.IOException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -18,9 +17,9 @@ import org.codehaus.jackson.map.ObjectMapper;
  */
 public class LoginDAO {
     
-    public static LoginModel validate(String email, String password)throws IOException{
+    public static LoginModel validate(String email, String password)throws Exception{
         
-        String loginUrl="http://41.74.172.132:8080/AirtimeRechargeSystem/users/login";
+        String loginUrl="http://localhost:8080/AirtimeRechargeSystem/users/login";
         String  jsonData = "{\n";
         jsonData+="\"email\":\""+email+"\",\n" ;
         jsonData+="\"password\":\""+password+"\"\n" ;

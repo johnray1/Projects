@@ -8,9 +8,13 @@ package com.oltranz.airtime.bean;
 import com.oltranz.airtime.dao.LoginDAO;
 import com.oltranz.airtime.model.LoginModel;
 import java.io.Serializable;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -25,6 +29,7 @@ public class LoginBean implements Serializable{
     private String password;
     private String message;
     private Boolean faceMessage=false;
+    private Date date=new Date();
     
     @ManagedProperty(value="#{TemplateBean}")
     private TemplateBean templateBean;
@@ -35,7 +40,7 @@ public class LoginBean implements Serializable{
     @ManagedProperty(value="#{TransactionBean}")
     private TransactionBean transactionBean;
     
-    public String login(){
+    public void login(){
         
         templateBean.setDashboardClassName("omenu_active");
         templateBean.setUserClassName("omenu");
@@ -59,25 +64,28 @@ public class LoginBean implements Serializable{
                 session.setAttribute("username",username );
                 session.setMaxInactiveInterval(30*60);
                 
-                return "dashboard.xhtml?faces-redirect=true";
+                FacesContext.getCurrentInstance().getExternalContext().redirect("dashboard.xhtml");
             }
             else{
                 faceMessage=true;
-                return "login.xhtml?faces-redirect=true";
+                FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
             }
         }
         catch(Exception ex){
-            return "login.xhtml?faces-redirect=true";
+            Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
     
-    public String logout(){
+    public void logout(){
         
         HttpSession session = SessionBean.getSession();
         session.invalidate();
-        return "login.xhtml?faces-redirect=true";
-        
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
+        } catch (Exception ex) {
+            Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     /**
@@ -149,33 +157,47 @@ public class LoginBean implements Serializable{
     public void setFaceMessage(Boolean faceMessage) {
         this.faceMessage = faceMessage;
     }
-
+    
     /**
      * @return the customerBean
      */
     public CustomerBean getCustomerBean() {
         return customerBean;
     }
-
+    
     /**
      * @param customerBean the customerBean to set
      */
     public void setCustomerBean(CustomerBean customerBean) {
         this.customerBean = customerBean;
     }
-
+    
     /**
      * @return the transactionBean
      */
     public TransactionBean getTransactionBean() {
         return transactionBean;
     }
-
+    
     /**
      * @param transactionBean the transactionBean to set
      */
     public void setTransactionBean(TransactionBean transactionBean) {
         this.transactionBean = transactionBean;
+    }
+    
+    /**
+     * @return the date
+     */
+    public Date getDate() {
+        return date;
+    }
+    
+    /**
+     * @param date the date to set
+     */
+    public void setDate(Date date) {
+        this.date = date;
     }
     
     

@@ -9,6 +9,8 @@ import com.oltranz.airtime.library.CommonLibrary;
 import com.oltranz.airtime.model.Customer;
 import com.oltranz.airtime.model.CustomerList;
 import com.oltranz.airtime.model.CustomerSingle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -42,7 +44,7 @@ public class CustomerBean {
         templateBean.setLogClassName("omenu");
         try{
             
-            String url="http://41.74.172.132:8080/AirtimeRechargeSystem/customer/listcustomers";
+            String url="http://localhost:8080/AirtimeRechargeSystem/customer/listcustomers";
             
             Response response = CommonLibrary.sendRESTRequest(url, "empty data", MediaType.APPLICATION_JSON, "GET");
             String jsonResponse = response.readEntity(String.class);
@@ -67,7 +69,7 @@ public class CustomerBean {
     
     public void customerById(String msisdn){
         try{
-            String url="http://41.74.172.132:8080/AirtimeRechargeSystem/wallettransactions/webwalletbalance/"+msisdn;
+            String url="http://localhost:8080/AirtimeRechargeSystem/wallettransactions/webwalletbalance/"+msisdn;
             Response response=CommonLibrary.sendRESTRequest(url, "empty data", MediaType.APPLICATION_JSON, "GET");
             String jsonResponse = response.readEntity(String.class);
             
@@ -89,7 +91,7 @@ public class CustomerBean {
             status=false;
         }
         
-        String url="http://41.74.172.132:8080/AirtimeRechargeSystem/customer/editcustomer";
+        String url="http://localhost:8080/AirtimeRechargeSystem/customer/editcustomer";
         String  jsonData ="{\n" +
                 "\"OSversion\":\""+customer.getOSversion()+"\",\n" +
                 "\"creationTime\":\""+customer.getCreationTime()+"\",\n" +
@@ -110,11 +112,14 @@ public class CustomerBean {
     }
     
     public void totalCustomers(){
-        
-        String url="http://41.74.172.132:8080/AirtimeRechargeSystem/customer/counting";
-        Response response = CommonLibrary.sendRESTRequest(url, "empty data", MediaType.APPLICATION_JSON, "GET");
-        customerNo=response.readEntity(String.class);
-        
+        try{
+            String url="http://localhost:8080/AirtimeRechargeSystem/customer/counting";
+            Response response = CommonLibrary.sendRESTRequest(url, "empty data", MediaType.APPLICATION_JSON, "GET");
+            customerNo=response.readEntity(String.class);
+        }
+        catch(Exception ex){
+            Logger.getLogger(CustomerBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     

@@ -66,7 +66,7 @@ public class TransactionBean {
             String startDate=dateFormat.format(currentDate)+"  00:00";
             String endDate=dateFormat.format(currentDate)+"  23:59";
             
-            String url="http://41.74.172.132:8080/AirtimeRechargeSystem/wallettransactions/webtransactions";
+            String url="http://localhost:8080/AirtimeRechargeSystem/wallettransactions/webtransactions";
             
             String  jsonData = "{\n" +
                     "\"sender\":\""+""+"\",\n" +
@@ -110,7 +110,7 @@ public class TransactionBean {
             String startDate = start.replace('/', '-');
             String enddate = end.replace('/', '-');
             
-            String url="http://41.74.172.132:8080/AirtimeRechargeSystem/wallettransactions/webtransactions";
+            String url="http://localhost:8080/AirtimeRechargeSystem/wallettransactions/webtransactions";
             
             String  jsonData = "{\n" +
                     "\"sender\":\""+sender+"\",\n" +
@@ -141,7 +141,7 @@ public class TransactionBean {
             String startDate=dateFormat.format(currentDate)+"  00:00";
             String endDate=dateFormat.format(currentDate)+"  23:59";
             amount=0.0;
-            String url="http://41.74.172.132:8080/AirtimeRechargeSystem/wallettransactions/webtransactions";
+            String url="http://localhost:8080/AirtimeRechargeSystem/wallettransactions/webtransactions";
             
             String  jsonData = "{\n" +
                     "\"sender\":\""+""+"\",\n" +
@@ -165,214 +165,221 @@ public class TransactionBean {
     }
     
     public void traPerToday(){
-        
-        String url="http://41.74.172.132:8080/AirtimeRechargeSystem/wallettransactions/todaypurchases";
-        
-        Response response=CommonLibrary.sendRESTRequest(url, "empty data", MediaType.APPLICATION_JSON, "GET");
-        
-        airtimeToday= response.readEntity(String.class);
-        
-        if(airtimeToday.equals("null")){
-            at=0;
+        try{
+            String url="http://localhost:8080/AirtimeRechargeSystem/wallettransactions/todaypurchases";
+            
+            Response response=CommonLibrary.sendRESTRequest(url, "empty data", MediaType.APPLICATION_JSON, "GET");
+            
+            airtimeToday= response.readEntity(String.class);
+            
+            if(airtimeToday.equals("null")){
+                at=0;
+            }
+            else{
+                at=Double.parseDouble(airtimeToday);
+            }
         }
-        else{
-            at=Double.parseDouble(airtimeToday);
+        catch(Exception ex){
+            Logger.getLogger(TransactionBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void traPerWeek(){
+        try{
+            String url="http://localhost:8080/AirtimeRechargeSystem/wallettransactions/weeklypurchases";
+            
+            Response response=CommonLibrary.sendRESTRequest(url, "empty data", MediaType.APPLICATION_JSON, "GET");
+            
+            airtimeWeek= response.readEntity(String.class);
+            
+            if(airtimeWeek.equals("null")){
+                aw=0;
+            }
+            else{
+                aw=Double.parseDouble(airtimeWeek);
+            }
+        }
+        catch(Exception ex){
+            Logger.getLogger(TransactionBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
     
-    public void traPerWeek(){
-        
-        String url="http://41.74.172.132:8080/AirtimeRechargeSystem/wallettransactions/weeklypurchases";
-        
-        Response response=CommonLibrary.sendRESTRequest(url, "empty data", MediaType.APPLICATION_JSON, "GET");
-        
-        airtimeWeek= response.readEntity(String.class);
-        
-        if(airtimeWeek.equals("null")){
-            aw=0;
-        }
-        else{
-            aw=Double.parseDouble(airtimeWeek);
-        }
-        
-    }
-
     /**
      * @return the id
      */
     public String getId() {
         return id;
     }
-
+    
     /**
      * @param id the id to set
      */
     public void setId(String id) {
         this.id = id;
     }
-
+    
     /**
      * @return the sender
      */
     public String getSender() {
         return sender;
     }
-
+    
     /**
      * @param sender the sender to set
      */
     public void setSender(String sender) {
         this.sender = sender;
     }
-
+    
     /**
      * @return the receiver
      */
     public String getReceiver() {
         return receiver;
     }
-
+    
     /**
      * @param receiver the receiver to set
      */
     public void setReceiver(String receiver) {
         this.receiver = receiver;
     }
-
+    
     /**
      * @return the amount
      */
     public double getAmount() {
         return amount;
     }
-
+    
     /**
      * @param amount the amount to set
      */
     public void setAmount(double amount) {
         this.amount = amount;
     }
-
+    
     /**
      * @return the date
      */
     public String getDate() {
         return date;
     }
-
+    
     /**
      * @param date the date to set
      */
     public void setDate(String date) {
         this.date = date;
     }
-
+    
     /**
      * @return the currentDate
      */
     public Date getCurrentDate() {
         return currentDate;
     }
-
+    
     /**
      * @param currentDate the currentDate to set
      */
     public void setCurrentDate(Date currentDate) {
         this.currentDate = currentDate;
     }
-
+    
     /**
      * @return the airtimeToday
      */
     public String getAirtimeToday() {
         return airtimeToday;
     }
-
+    
     /**
      * @param airtimeToday the airtimeToday to set
      */
     public void setAirtimeToday(String airtimeToday) {
         this.airtimeToday = airtimeToday;
     }
-
+    
     /**
      * @return the airtimeWeek
      */
     public String getAirtimeWeek() {
         return airtimeWeek;
     }
-
+    
     /**
      * @param airtimeWeek the airtimeWeek to set
      */
     public void setAirtimeWeek(String airtimeWeek) {
         this.airtimeWeek = airtimeWeek;
     }
-
+    
     /**
      * @return the transaction
      */
     public Transaction getTransaction() {
         return transaction;
     }
-
+    
     /**
      * @param transaction the transaction to set
      */
     public void setTransaction(Transaction transaction) {
         this.transaction = transaction;
     }
-
+    
     /**
      * @return the transactionList
      */
     public TransactionList getTransactionList() {
         return transactionList;
     }
-
+    
     /**
      * @param transactionList the transactionList to set
      */
     public void setTransactionList(TransactionList transactionList) {
         this.transactionList = transactionList;
     }
-
+    
     /**
      * @return the templateBean
      */
     public TemplateBean getTemplateBean() {
         return templateBean;
     }
-
+    
     /**
      * @param templateBean the templateBean to set
      */
     public void setTemplateBean(TemplateBean templateBean) {
         this.templateBean = templateBean;
     }
-
+    
     /**
      * @return the at
      */
     public double getAt() {
         return at;
     }
-
+    
     /**
      * @param at the at to set
      */
     public void setAt(double at) {
         this.at = at;
     }
-
+    
     /**
      * @return the aw
      */
     public double getAw() {
         return aw;
     }
-
+    
     /**
      * @param aw the aw to set
      */

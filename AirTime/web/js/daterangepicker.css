@@ -181,7 +181,7 @@
 }
 
 .daterangepicker td.in-range {
-  background: #ff8a65;
+  background: rgba(255, 138, 101, 0.27);
   border-radius: 0;
 }
 

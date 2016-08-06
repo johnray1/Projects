@@ -129,7 +129,12 @@
                     <div class="col-xs-12 col-sm-12">
                         <div class="col-xs-12 dashboardbox" style="padding:0px;min-height:420px;overflow-x:auto;">
                             <!-- IN -->
-                            <h2>Latest Transactions</h2>
+                            <h2>
+                                <h:outputText value="#{LoginBean.date}">
+                                    <f:convertDateTime type="date" pattern="EEE, d MMM yyyy" />
+                                </h:outputText>/ 
+                                Transactions
+                            </h2>
                             <span>
                                 <div  class="container-fluid" style="padding:0px;font-family:ubuntu;font-size:13px;">
                                     

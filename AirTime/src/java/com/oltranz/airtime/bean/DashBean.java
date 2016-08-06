@@ -5,9 +5,12 @@
 */
 package com.oltranz.airtime.bean;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -26,7 +29,7 @@ public class DashBean {
     @ManagedProperty(value="#{TransactionBean}")
     private TransactionBean transactionBean;
     
-    public String dashBoard(){
+    public void dashBoard(){
         
         templateBean.setDashboardClassName("omenu_active");
         templateBean.setUserClassName("omenu");
@@ -38,9 +41,12 @@ public class DashBean {
         transactionBean.dayTransactions();
         transactionBean.traPerToday();
         transactionBean.traPerWeek();
-        
-        
-        return "dashboard.xhtml?faces-redirect=true";
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("dashboard.xhtml");
+        }
+        catch (Exception ex) {
+            Logger.getLogger(DashBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     

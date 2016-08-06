@@ -46,8 +46,7 @@ public class LogBean {
         getTemplateBean().setLogClassName("omenu_active");
         try{
             
-            String url="http://41.74.172.132:8080/AirtimeRechargeSystem/customer/listcustomers";
-            //String url="http://41.74.172.132:8080/AirtimeRechargeSystem/customer/listcustomers";
+            String url="http://localhost:8080/AirtimeRechargeSystem/customer/listcustomers";
             Response response = CommonLibrary.sendRESTRequest(url, "empty data", MediaType.APPLICATION_JSON, "GET");
             String jsonResponse = response.readEntity(String.class);
             
