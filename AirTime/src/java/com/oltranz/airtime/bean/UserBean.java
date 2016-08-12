@@ -59,7 +59,7 @@ public class UserBean implements Serializable{
         
         try{
             
-            String url="http://localhost:8080/AirtimeRechargeSystem/users/list";
+            String url="http://41.74.172.132:8080/AirtimeRechargeSystem/users/list";
             Response response = CommonLibrary.sendRESTRequest(url, "empty data", MediaType.APPLICATION_JSON, "GET");
             String jsonResponse = response.readEntity(String.class);
             
@@ -117,7 +117,7 @@ public class UserBean implements Serializable{
     
     public String create(){
         
-        String url="http://localhost:8080/AirtimeRechargeSystem/users/newuser";
+        String url="http://41.74.172.132:8080/AirtimeRechargeSystem/users/newuser";
         String  jsonData ="{\n" +
                 "\"createdBy\":\""+loginBean.getUsername()+"\",\n" +
                 "\"email\":\""+email+"\",\n" +
@@ -141,7 +141,7 @@ public class UserBean implements Serializable{
     
     public String update(){
         
-        String url="http://localhost:8080/AirtimeRechargeSystem/users/edit";
+        String url="http://41.74.172.132:8080/AirtimeRechargeSystem/users/edit";
         String  jsonData ="{\n" +
                 "\"createdBy\":\""+createdBy+"\",\n" +
                 "\"email\":\""+email+"\",\n" +

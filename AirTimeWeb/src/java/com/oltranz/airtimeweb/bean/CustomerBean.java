@@ -42,7 +42,7 @@ public class CustomerBean {
         date=new Date();
         
         try{
-            String url="http://localhost:8080/AirtimeRechargeSystem/wallettransactions/webwalletbalance/"+msisdn;
+            String url="http://41.74.172.132:8080/AirtimeRechargeSystem/wallettransactions/webwalletbalance/"+msisdn;
             Response response=CommonLibrary.sendRESTRequest(url, "empty data", MediaType.APPLICATION_JSON, "GET");
             String jsonResponse = response.readEntity(String.class);
             

@@ -10,31 +10,38 @@
     <h:body>
         <ui:composition> 
             
-            <h:dataTable value="#{TransactionBean.transactionList.transactionList}" var="tra"
+            <h:dataTable value="#{TransactionBean.walletTransactionList.transactionList}" var="tra"
                          id="dataTableList"
                          styleClass="display" 
                          cellspacing="0" 
                          width="100%" 
                          style="padding: 0px;
                          margin-bottom: 30px;">
+                <h:column>
+                    <f:facet name="header">DATE</f:facet>
+                    <h:outputText value="#{tra.walletTransaction.transTime}">
+                        <f:convertDateTime pattern="EEE, d MMM yyyy"/>
+                    </h:outputText>
+                </h:column>
                 
                 <h:column>
-                    <f:facet name="header">SENDER</f:facet>
+                    <f:facet name="header">TIME</f:facet>
+                    <h:outputText value="#{tra.walletTransaction.transTime}">
+                        <f:convertDateTime pattern="HH:mm:ss"/>
+                    </h:outputText>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">ACCOUNT NO.</f:facet>
                         #{tra.walletTransaction.srcrefId}
                 </h:column>
-                <h:column>
-                    <f:facet name="header">RECEIVER</f:facet>
-                        #{tra.walletTransaction.destRefId}
-                </h:column>
+               
                 <h:column>
                     <f:facet name="header">AMOUNT</f:facet>
                     &#8358; #{tra.walletTransaction.amount}
                 </h:column>
                 
-                <h:column>
-                    <f:facet name="header">TRANSACTION DATE</f:facet>
-                        #{tra.walletTransaction.transTime}
-                </h:column>
+               
                 <h:column>
                     <f:facet name="header">ACTION</f:facet>
                     <h:form>

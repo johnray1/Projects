@@ -13,6 +13,7 @@
         <title>AIRTIME - Website</title>
         <link href="css_cust/bootstrap.css" rel="stylesheet"/> 
         <link href="css_cust/style.css" rel="stylesheet"/>
+        <link href="css_cust/footer.css" rel="stylesheet"/>
         <link href="css_cust/easy-responsive-tabs.css" rel="stylesheet" />
         <link href="css_cust/jquery.dataTables.min.css" rel="stylesheet" />
         <link href="css_cust/buttons.dataTables.min.css" rel="stylesheet" />
@@ -57,7 +58,9 @@
                 <!-- ROW 1 -->
                 
                 <!-- customer details-->
-                <ui:include src="templates/welcome_templates/cust_temp.xhtml" /> 
+                <div class="col-xs-12 col-sm-6">
+                    <ui:include src="templates/welcome_templates/cust_temp.xhtml" /> 
+                </div>
                 <!-- end customer details-->
                 
                 
@@ -107,9 +110,9 @@
                 <!-- ROW 2 -->
                 
                 <!-- wallet -->
-                
-                <ui:include src="templates/welcome_templates/wallet_temp.xhtml" /> 
-                
+                <div class="col-xs-12 col-sm-6">
+                    <ui:include src="templates/welcome_templates/wallet_temp.xhtml" /> 
+                </div>
                 <!-- wallet -->
                 
                 <!-- transaction -->
@@ -119,8 +122,8 @@
                         <h2> 
                             <h:outputText value="#{LoginBean.date}">
                                 <f:convertDateTime type="date" pattern="EEE, d MMM yyyy" />
-                            </h:outputText>/ 
-                            Transactions
+                            </h:outputText>/
+                            Wallet Activity
                         </h2>
                         <span>
                             <div  class="container-fluid" style="padding:0px;font-family:ubuntu;font-size:13px;">
@@ -178,7 +181,7 @@
         
         <!-- End CONTENTS -->
         
-        
+        <ui:include src="templates/footer.xhtml" /> 
         
         
         

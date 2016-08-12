@@ -126,34 +126,6 @@ a.button_add:hover i{
     color:#ff5700;
 }
 
-.footer{
-    position: absolute;
-    bottom:10px;
-    left:0px;
-    width: 100%;
-    min-height: 30px;
-    line-height: 30px;
-    background-color: #ffffff;
-    color: #808080;
-    z-index: 999;
-}
-
-.footerlong{
-    position: relative;
-    left:0px;
-    width: 100%;
-    min-height: 30px;
-    line-height:30px;
-    background-color: #d0d0f0;
-    color:#808080;
-}
-
-
-.footer a{display:inline-block;font-family:ubuntu;margin:0px;color:#636363;font-size:16px;text-decoration:none;}
-.footer a:hover{display:inline-block;font-family:ubuntu;margin:0px;color:#000000;font-size:16px;text-decoration:none;}
-
-.footer span{display:inline-block;font-family:ubuntu;margin:0px;color:#636363;font-size:16px;text-decoration:none;}
-
 
 
 input:-webkit-autofill{background-color:#fff !important;}

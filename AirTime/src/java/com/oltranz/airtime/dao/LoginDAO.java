@@ -19,7 +19,7 @@ public class LoginDAO {
     
     public static LoginModel validate(String email, String password)throws Exception{
         
-        String loginUrl="http://localhost:8080/AirtimeRechargeSystem/users/login";
+        String loginUrl="http://41.74.172.132:8080/AirtimeRechargeSystem/users/login";
         String  jsonData = "{\n";
         jsonData+="\"email\":\""+email+"\",\n" ;
         jsonData+="\"password\":\""+password+"\"\n" ;

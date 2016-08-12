@@ -33,16 +33,16 @@ public class WelcomeBean {
     private TransactionBean transactionBean;
     
     public void welcomes(){
-        
-        templateBean.setWelcomeClassName("omenu_active");
-        templateBean.setAccountClassName("omenu");
-        templateBean.setTransactionClassName("omenu");
-        templateBean.setNotificationClassName("omenu");
-        
-        customerBean.customer(msisdn);
-        transactionBean.transactions(msisdn);
-        
         try {
+            templateBean.setWelcomeClassName("omenu_active");
+            templateBean.setAccountClassName("omenu");
+            templateBean.setTransactionClassName("omenu");
+            templateBean.setNotificationClassName("omenu");
+            
+            customerBean.customer(msisdn);
+            transactionBean.customerCreditTransactions();
+            
+            
             FacesContext.getCurrentInstance().getExternalContext().redirect("welcome.xhtml");
         }
         catch (Exception ex) {

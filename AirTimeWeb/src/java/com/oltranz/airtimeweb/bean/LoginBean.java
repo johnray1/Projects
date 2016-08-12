@@ -67,8 +67,8 @@ public class LoginBean implements Serializable{
                 username=lm.getCustomerDetails().getfName();
                 welcomeBean.setMsisdn(msisdn);
                 customerBean.customer(msisdn);
-                transactionBean.transactions(msisdn);
                 transactionBean.setMsisdn(msisdn);
+                transactionBean.customerCreditTransactions();
                 
                 HttpSession session = SessionBean.getSession();
                 session.setAttribute("username",username);
@@ -126,8 +126,8 @@ public class LoginBean implements Serializable{
                     username=rr.getCustomerDetails().getfName();
                     welcomeBean.setMsisdn(registerRequest.getMsisdn());
                     customerBean.customer(registerRequest.getMsisdn());
-                    transactionBean.transactions(registerRequest.getMsisdn());
                     transactionBean.setMsisdn(registerRequest.getMsisdn());
+                    transactionBean.customerCreditTransactions();
                     
                     HttpSession session = SessionBean.getSession();
                     session.setAttribute("username",username);

@@ -66,7 +66,7 @@ public class TransactionBean {
             String startDate=dateFormat.format(currentDate)+"  00:00";
             String endDate=dateFormat.format(currentDate)+"  23:59";
             
-            String url="http://localhost:8080/AirtimeRechargeSystem/wallettransactions/webtransactions";
+            String url="http://41.74.172.132:8080/AirtimeRechargeSystem/wallettransactions/webtransactions";
             
             String  jsonData = "{\n" +
                     "\"sender\":\""+""+"\",\n" +
@@ -110,7 +110,7 @@ public class TransactionBean {
             String startDate = start.replace('/', '-');
             String enddate = end.replace('/', '-');
             
-            String url="http://localhost:8080/AirtimeRechargeSystem/wallettransactions/webtransactions";
+            String url="http://41.74.172.132:8080/AirtimeRechargeSystem/wallettransactions/webtransactions";
             
             String  jsonData = "{\n" +
                     "\"sender\":\""+sender+"\",\n" +
@@ -141,7 +141,7 @@ public class TransactionBean {
             String startDate=dateFormat.format(currentDate)+"  00:00";
             String endDate=dateFormat.format(currentDate)+"  23:59";
             amount=0.0;
-            String url="http://localhost:8080/AirtimeRechargeSystem/wallettransactions/webtransactions";
+            String url="http://41.74.172.132:8080/AirtimeRechargeSystem/wallettransactions/webtransactions";
             
             String  jsonData = "{\n" +
                     "\"sender\":\""+""+"\",\n" +
@@ -166,7 +166,7 @@ public class TransactionBean {
     
     public void traPerToday(){
         try{
-            String url="http://localhost:8080/AirtimeRechargeSystem/wallettransactions/todaypurchases";
+            String url="http://41.74.172.132:8080/AirtimeRechargeSystem/wallettransactions/todaypurchases";
             
             Response response=CommonLibrary.sendRESTRequest(url, "empty data", MediaType.APPLICATION_JSON, "GET");
             
@@ -186,7 +186,7 @@ public class TransactionBean {
     
     public void traPerWeek(){
         try{
-            String url="http://localhost:8080/AirtimeRechargeSystem/wallettransactions/weeklypurchases";
+            String url="http://41.74.172.132:8080/AirtimeRechargeSystem/wallettransactions/weeklypurchases";
             
             Response response=CommonLibrary.sendRESTRequest(url, "empty data", MediaType.APPLICATION_JSON, "GET");
             
