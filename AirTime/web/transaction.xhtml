@@ -13,6 +13,7 @@
         <title>AIRTIME - MANAGEMENT</title>
         
         <link href="css/style.css" rel="stylesheet"/>
+        <link href="css/footer.css" rel="stylesheet"/>
         <link href="css/bootstrap.css" rel="stylesheet"/>
         <link href="css/jquery.dataTables.min.css" rel="stylesheet" />
         <link href="css/buttons.dataTables.min.css" rel="stylesheet" />
@@ -136,16 +137,12 @@
                         <h:form id="form" class="container-fluid sforminput"  style="margin:0px;padding:0px;" rendered="true">
                             
                             
-                            <div class="col-xs-12 col-sm-4 stextinput_date">
+                            <div class="col-xs-12 col-sm-6 stextinput_date">
                                 <h:inputText  value="#{TransactionBean.sender}" a:placeholder="SENDER"/>
                             </div>
                             
-                            <div class="col-xs-12 col-sm-4 stextinput_date">
+                            <div class="col-xs-12 col-sm-6 stextinput_date">
                                 <h:inputText  value="#{TransactionBean.receiver}" a:placeholder="RECEIVER"/>
-                            </div>
-                            
-                            <div class="col-xs-12 col-sm-4 stextinput_date">
-                                <h:inputText  value="#{TransactionBean.amount}" a:placeholder="AMOUNT"/>
                             </div>
                             
                             <div class="col-xs-12 col-sm-12 stextinput_date">
@@ -271,7 +268,9 @@
             </div></div>
         <!-- End CONTENTS -->
         
-        <div class="clear" style="margin-top:100px;"/>
+        
+        
+        <ui:include src="templates/footer.xhtml" /> 
         
         <script>
             $(document).ready(function () {

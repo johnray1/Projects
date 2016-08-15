@@ -1,0 +1,61 @@
+.footer{position: absolute;bottom:10px;left:0px;width: 100%;min-height: 40px;line-height: 40px;color: #b1b1b1;border:0px solid red;}
+.footerlong{position: relative;left:0px;width: 100%;min-height:40px;line-height:40px;background-color: #d0d0f0;color:#808080;border:0px solid red;}
+
+.footer a{display:inline-block;font-family:ubuntu;margin:0px;color:#5050a9;font-size:16px;text-decoration:none;}
+.footer a:hover{display:inline-block;font-family:ubuntu;margin:0px;color:#ff5700;font-size:16px;text-decoration:none;}
+
+.footer span{display:inline-block;font-family:ubuntu;margin:0px;color:#b1b1b1;font-size:16px;text-decoration:none;}
+.footer span p{display:inline-block;font-family:ubuntu;margin:0px;color:#b1b1b1;font-size:16px;text-decoration:none;}
+
+.footer span.separator{display:inline-block;font-family:ubuntu;margin:0px;margin-left:17px;margin-right:17px;color:#ff0000;font-size:16px;text-decoration:none;}
+
+.footer div.left{text-align:left}
+.footer div.right{text-align:right;}
+
+
+
+
+
+
+/* MEDIA QUERIES */
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+.footer a{display:block;width:100%;border-top:1px solid #dfdfdf;font-family:ubuntu;margin:0px;padding:4px;color:#5050a9;font-size:18px;text-decoration:none;}
+.footer a:hover{display:block;width:100%;border-top:1px solid #dfdfdf;font-family:ubuntu;margin:0px;color:#ff5700;font-size:18px;text-decoration:none;}
+.footer span.separator{display:none;}
+.footer div.left, .footer div.right {text-align:center}
+}
+
+
+@media only screen and (min-width :480px) and (max-width : 768px) {
+.footer span{display:inline-block;font-family:ubuntu;margin:0px;color:#b1b1b1;font-size:14px;text-decoration:none;}
+.footer span p{display:block;width:100%;font-family:ubuntu;margin:0px;color:#b1b1b1;font-size:14px;text-decoration:none;}
+.footer a{display:block;width:100%;border-top:1px solid #dfdfdf;font-family:ubuntu;margin:0px;padding:4px;color:#5050a9;font-size:18px;text-decoration:none;}
+.footer a:hover{display:block;width:100%;border-top:1px solid #dfdfdf;font-family:ubuntu;margin:0px;color:#ff5700;font-size:18px;text-decoration:none;}
+.footer span.separator{display:none;}
+.footer div.left, .footer div.right {text-align:center}
+}
+
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-width : 768px) and (max-width : 769px){
+.footer span{display:block;width:100%;font-family:ubuntu;margin:0px;color:#b1b1b1;font-size:12px;text-decoration:none;}
+.footer a{display:block;float:left;width:100%;border-top:1px solid #dfdfdf;font-family:ubuntu;margin:0px;padding:4px;color:#5050a9;font-size:18px;text-decoration:none;}
+.footer a:hover{display:block;float:left;width:100%;border-top:1px solid #dfdfdf;font-family:ubuntu;margin:0px;color:#ff5700;font-size:18px;text-decoration:none;}
+.footer span.separator{display:none;}
+.footer div.left, .footer div.right {text-align:center}
+}
+
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-width : 1024px)and (max-width : 1028px) {
+.footer span{display:block;width:100%;font-family:ubuntu;margin:0px;color:#b1b1b1;font-size:12px;text-decoration:none;}
+.footer a{display:block;float:left;width:48%;border-top:1px solid #dfdfdf;font-family:ubuntu;margin:0px;padding:4px;color:#5050a9;font-size:18px;text-decoration:none;}
+.footer a:hover{display:block;float:left;width:48%;border-top:1px solid #dfdfdf;font-family:ubuntu;margin:0px;color:#ff5700;font-size:18px;text-decoration:none;}
+.footer span.separator{display:none;}
+.footer div.left, .footer div.right {text-align:center}
+.footer div.right a{text-align:center;margin-top:17px;border-top:0px solid #dfdfdf;}
+}
+
+

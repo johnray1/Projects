@@ -12,6 +12,7 @@
         <title>AIRTIME - MANAGEMENT</title>
         
         <link href="css/style.css" rel="stylesheet"/>
+        <link href="css/footer.css" rel="stylesheet"/>
         <link href="css/bootstrap.css" rel="stylesheet"/>
         <link href="css/jquery.dataTables.min.css" rel="stylesheet" />
         <link href="css/buttons.dataTables.min.css" rel="stylesheet" />
@@ -95,6 +96,10 @@
                                                     #{customer.email}
                                             </h:column>
                                             <h:column>
+                                                <f:facet name="header">BALANCE</f:facet>
+                                                    #{customer.msisdn}
+                                            </h:column>
+                                            <h:column>
                                                 <f:facet name="header">STATUS</f:facet>
                                                     #{customer.status}
                                             </h:column>
@@ -135,9 +140,10 @@
                 <!-- TABS -->
                 
                 
-            </div></div>
+            </div>
+        </div>
         <!-- End CONTENTS -->
-        
+        <ui:include src="templates/footer.xhtml" /> 
         
         
         <script>
