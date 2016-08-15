@@ -7,65 +7,120 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <ui:composition> 
-            <!-- HEADER -->
+        <ui:composition>
             <h:form>
-                <!-- Top -->
-                <div class="container-fluid" style="margin:0px;padding:0px;">
-                    <div style="height:65px;font-family:ubuntu;margin:0px;padding:0px;background-color:#ff5700">
-                        <div class="col-xs-3"  style="padding-top:7px;"><img src="images/toplogo.jpg" class="logo hidden-xs"/><img src="images/toplogo.jpg" class="logo hidden-lg hidden-md hidden-sm visible-xs"/></div>
-                        <div class="col-xs-9" style="margin:0px;padding:0px;line-height:65px;text-align:right;font-size:30px;color:#ffffff;"><strong class="hidden-xs">My Account&nbsp;&nbsp;&nbsp;</strong> 
+                <!-- HEADER -->
+                <div id="menufloat0">
+                    
+                    <!-- Top -->
+                    <div class="container-fluid topheader" style="margin:0px;padding:0px;">
+                        
+                        <div>
+                            <div class="col-xs-3 col-sm-1 logo">
+                                <h:graphicImage value="images/toplogo_cust.jpg" class="img-responsive logo"/>
+                            </div>
                             
-                            <h:commandLink action="#{LoginBean.logout()}" class="logout"> 
-                                <h:graphicImage value="images/icon_logout.png" style="float: right"/>
-                                <span>WELCOME</span> 
-                                #{LoginBean.username}
-                            </h:commandLink>
+                            <div class="col-xs-9 col-sm-11 name"  style="margin:0px;padding:0px;">
+                                
+                                <strong class="col-xs-7 col-sm-5 col-md-8 hidden-xs">AirtimeAPP </strong> 
+                                
+                                <div class="col-xs-6 col-sm-3 col-md-2 dropdown" style="margin:0px;padding:0px;">
+                                    <span><label>000</label></span>
+                                    <div class="dropdown-content">
+                                        <h4>Notifications</h4>
+                                        <a href="#"><div>NOTIFICATION TYPE <em>dd/mm/yyyy - 00:00:00</em></div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamt. </a>
+                                        <a href="#"><div>NOTIFICATION TYPE <em>dd/mm/yyyy - 00:00:00</em></div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamt. </a>
+                                        <a href="#"><div>NOTIFICATION TYPE <em>dd/mm/yyyy - 00:00:00</em></div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamt. </a>
+                                        <a href="#" class="more">view more</a>
+                                    </div>
+                                </div>
+                                
+                                <h:commandLink action="#{LoginBean.logout()}" class="col-xs-6 col-sm-4 col-md-2 logout" style="margin:0px;padding:0px;"> 
+                                    <h:graphicImage value="images/icon_user.png" style="float: left"/>
+                                    <label>Welcome<strong>Administrator</strong></label>
+                                </h:commandLink>
+                                
+                            </div>
+                            
                         </div>
                     </div>
+                    <!-- End Top -->
+                    
+                    
+                    <!-- Navbar -->
+                    <nav class="navbar navbar-default hidden-xs" style="background-color:#ffffff;height:65px;font-family:ubuntu;color:#ffffff;text-align:center;padding-bottom:0px;margin-bottom:0px;border-bottom:0px solid #1a8c35;border-radius:0px;">
+                        <div class="container-fluid" style="margin:0px;padding:0px;">
+                            
+                            <div class="col-xs-12" style="margin:0px;padding:0px;border:0px solid red;">		
+                                
+                                <ul class="mainmenu">
+                                    
+                                    <li class="#{TemplateBean.welcomeClassName}">
+                                        <h:commandLink action="#{WelcomeBean.welcomes()}"  value="Home"/>
+                                    </li>
+                                    
+                                    <li class="#{TemplateBean.accountClassName}">
+                                        <h:commandLink action="#{CustomerBean.customerAccount()}"  value="My Account"/>
+                                    </li>
+                                    
+                                    <li class="#{TemplateBean.transactionClassName}">
+                                        <h:commandLink action="#{TransactionBean.customerTransactions()}"  value="Transactions"/>
+                                    </li>
+                                    
+                                    <li class="#{TemplateBean.notificationClassName}">
+                                        <h:commandLink action="#{NotifyBean.notifys()}"  value="Notification"/>
+                                    </li>
+                                    
+                                </ul>
+                                
+                            </div>
+                            
+                        </div>
+                    </nav>
+                    <!-- End Navbar -->
+                    
+                    
+                    <!-- MobileMenu -->
+                    <nav id="myNavbar" class="navbar navbar-default visible-xs hidden-sm hidden-md hidden-lg" style="text-align:left;margin-top:5px;" role="navigation">
+                        <div class="container">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                    <span class="sr-only"> </span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="#">MENU</a>
+                            </div>
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <ul class="nav navbar-nav">
+                                    
+                                    <li class="#{TemplateBean.welcomeClassName}">
+                                        <h:commandLink action="#{WelcomeBean.welcomes()}"  value="Home"/>
+                                    </li>
+                                    
+                                    <li class="#{TemplateBean.accountClassName}">
+                                        <h:commandLink action="#{CustomerBean.customerAccount()}"  value="My Account"/>
+                                    </li>
+                                    
+                                    <li class="#{TemplateBean.transactionClassName}">
+                                        <h:commandLink action="#{TransactionBean.customerTransactions()}"  value="Transactions"/>
+                                    </li>
+                                    
+                                    <li class="#{TemplateBean.notificationClassName}">
+                                        <h:commandLink action="notification.xhtml"  value="Notification"/>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <!-- End MobileMenu -->
+                    
                 </div>
-                <!-- End Top -->
+                <!-- End HEADER-->
                 
-                
-                <!-- Navbar -->
-                <nav class="navbar navbar-default hidden-xs" style="background-color:#ffffff;height:70px;font-family:ubuntu;color:#ffffff;text-align:center;padding-bottom:0px;margin-bottom:0px;border-bottom:0px solid #012d90;border-radius:0px;">
-                    <div class="container-fluid">
-                        <div class="col-xs-12" style="margin:0px;padding:0px;border:0px solid red;">
-                            
-                            <h:commandLink action="#{WelcomeBean.welcomes()}" class="#{TemplateBean.welcomeClassName}" value="Welcome"/>
-                            <h:commandLink action="#{CustomerBean.customerAccount()}" class="#{TemplateBean.accountClassName}" value="My Account"/>
-                            <h:commandLink action="#{TransactionBean.customerTransactions()}" class="#{TemplateBean.transactionClassName}" value="Transactions"/>
-                            <h:commandLink action="notification.xhtml" class="#{TemplateBean.notificationClassName}" value="Notification"/>
-                        </div>
-                    </div>
-                </nav>
-                <!-- End Navbar -->
-                
-                <!-- MobileMenu -->
-                <nav id="myNavbar" class="navbar navbar-default visible-xs hidden-sm hidden-md hidden-lg" style="text-align:left;margin-top:5px;" role="navigation">
-                    <div class="container">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                                <span class="sr-only"> </span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="#">MENU</a>
-                        </div>
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <ul class="nav navbar-nav">
-                                <li><a href="#">Dashboard</a></li>
-                                <li><a href="#">My Account</a></li>
-                                <li><a href="#">Transactions</a></li>
-                                <li><a href="#">Notifications</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-                <!-- End MobileMenu -->
             </h:form>
-            <!-- End HEADER--> 
         </ui:composition> 
     </h:body>
 </html>

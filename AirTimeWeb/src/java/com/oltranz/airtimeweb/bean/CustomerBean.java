@@ -58,10 +58,10 @@ public class CustomerBean {
     
     public void customerAccount(){
         
-        templateBean.setWelcomeClassName("omenu");
-        templateBean.setAccountClassName("omenu_active");
-        templateBean.setTransactionClassName("omenu");
-        templateBean.setNotificationClassName("omenu");
+        templateBean.setWelcomeClassName("deactive");
+        templateBean.setAccountClassName("active");
+        templateBean.setTransactionClassName("deactive");
+        templateBean.setNotificationClassName("deactive");
         
         try{
             

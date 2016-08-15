@@ -5,7 +5,6 @@
 */
 package com.oltranz.airtimeweb.bean;
 
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
@@ -34,10 +33,10 @@ public class WelcomeBean {
     
     public void welcomes(){
         try {
-            templateBean.setWelcomeClassName("omenu_active");
-            templateBean.setAccountClassName("omenu");
-            templateBean.setTransactionClassName("omenu");
-            templateBean.setNotificationClassName("omenu");
+            templateBean.setWelcomeClassName("active");
+            templateBean.setAccountClassName("deactive");
+            templateBean.setTransactionClassName("deactive");
+            templateBean.setNotificationClassName("deactive");
             
             customerBean.customer(msisdn);
             transactionBean.customerCreditTransactions();

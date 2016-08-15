@@ -13,6 +13,8 @@
         <title>AIRTIME - Website</title>
         <link href="css_cust/bootstrap.css" rel="stylesheet"/> 
         <link href="css_cust/style.css" rel="stylesheet"/>
+        <link href="css_cust/menu.css" rel="stylesheet"/>
+        <link href="css_cust/topheader.css" rel="stylesheet"/>
         <link href="css_cust/footer.css" rel="stylesheet"/>
         <link href="css_cust/easy-responsive-tabs.css" rel="stylesheet" />
         <link href="css_cust/jquery.dataTables.min.css" rel="stylesheet" />
@@ -313,8 +315,7 @@
                 }
             })
             
-        </script>  
-        
+        </script> 
         
         <script type="text/javascript">
             var config = {
@@ -327,6 +328,20 @@
             for (var selector in config) {
                 $(selector).chosen(config[selector]);
             }
+        </script>
+        
+        <script type="text/javascript">
+            $("document").ready(function ($) {
+                var nav = $('#menufloat0');
+                
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > 200) {
+                        nav.addClass("menufloat");
+                    } else {
+                        nav.removeClass("menufloat");
+                    }
+                });
+            });
         </script>
         
         <!-- Script End -->

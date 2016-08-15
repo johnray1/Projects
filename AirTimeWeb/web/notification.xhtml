@@ -11,6 +11,8 @@
         <title>AIRTIME - Website</title>
         <link href="css_cust/bootstrap.css" rel="stylesheet"/> 
         <link href="css_cust/style.css" rel="stylesheet"/>
+        <link href="css_cust/menu.css" rel="stylesheet"/>
+        <link href="css_cust/topheader.css" rel="stylesheet"/>
         <link href="css_cust/footer.css" rel="stylesheet"/>
         <link href="css_cust/easy-responsive-tabs.css" rel="stylesheet" />
         <link href="css_cust/jquery.dataTables.min.css" rel="stylesheet" />
@@ -44,6 +46,29 @@
     </h:head>
     <h:body>
         <ui:include src="templates/header.xhtml" /> 
+        
+        <!-- CONTENTS-->
+        <div class="container-fluid">
+            <div class="col-xs-12" style="display:inline-block;padding:10px;padding-top:25px;height:100%;border:0px solid red;">
+                
+                <!-- ROW -->
+                <div class="col-xs-12 col-sm-12">
+                    <div class="col-xs-12 dashboardbox" style="padding:0px;min-height:620px;overflow-x:auto;">
+                        <!-- IN -->
+                        <h2>&nbsp;</h2>
+                        <span>
+                            <div  class="container-fluid" style="padding:0px;font-family:ubuntu;text-align:center;">
+                                ...
+                            </div>
+                        </span>
+                        <!-- IN -->
+                    </div>
+                </div>
+                <!-- End ROW -->
+            </div>
+        </div>
+        <!-- End CONTENTS -->
+        
         <ui:include src="templates/footer.xhtml" /> 
     </h:body>
 </html>

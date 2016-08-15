@@ -47,10 +47,10 @@ public class TransactionBean {
 //------------------------------------------Customer Transaction------------------------------------------------------------- 
     public void customerTransactions(){
         
-        templateBean.setWelcomeClassName("omenu");
-        templateBean.setAccountClassName("omenu");
-        templateBean.setTransactionClassName("omenu_active");
-        templateBean.setNotificationClassName("omenu");
+        templateBean.setWelcomeClassName("deactive");
+        templateBean.setAccountClassName("deactive");
+        templateBean.setTransactionClassName("active");
+        templateBean.setNotificationClassName("deactive");
         
         try {
             customerCreditTransactions();
@@ -115,10 +115,10 @@ public class TransactionBean {
 //-----------------------------------------------filter------------------------------------------------------------------------
     public void filterTransactions(){
         
-        templateBean.setWelcomeClassName("omenu");
-        templateBean.setAccountClassName("omenu");
-        templateBean.setTransactionClassName("omenu_active");
-        templateBean.setNotificationClassName("omenu");
+        templateBean.setWelcomeClassName("deactive");
+        templateBean.setAccountClassName("deactive");
+        templateBean.setTransactionClassName("active");
+        templateBean.setNotificationClassName("deactive");
         
         try {
             filterCreditTransactions();

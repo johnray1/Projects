@@ -52,10 +52,10 @@ public class LoginBean implements Serializable{
     
     public void login(){
         
-        templateBean.setWelcomeClassName("omenu_active");
-        templateBean.setAccountClassName("omenu");
-        templateBean.setTransactionClassName("omenu");
-        templateBean.setNotificationClassName("omenu");
+        templateBean.setWelcomeClassName("active");
+        templateBean.setAccountClassName("deactive");
+        templateBean.setTransactionClassName("deactive");
+        templateBean.setNotificationClassName("deactive");
         
         try {
             LoginModel lm=LoginDAO.validate(msisdn, pin);
@@ -105,10 +105,10 @@ public class LoginBean implements Serializable{
     
     public void register(){
         
-        templateBean.setWelcomeClassName("omenu_active");
-        templateBean.setAccountClassName("omenu");
-        templateBean.setTransactionClassName("omenu");
-        templateBean.setNotificationClassName("omenu");
+        templateBean.setWelcomeClassName("active");
+        templateBean.setAccountClassName("deactive");
+        templateBean.setTransactionClassName("deactive");
+        templateBean.setNotificationClassName("deactive");
         
         try {
             if(!pin.equals(registerRequest.getPin())){
@@ -294,21 +294,21 @@ public class LoginBean implements Serializable{
     public void setMsg(String msg) {
         this.msg = msg;
     }
-
+    
     /**
      * @return the date
      */
     public Date getDate() {
         return date;
     }
-
+    
     /**
      * @param date the date to set
      */
     public void setDate(Date date) {
         this.date = date;
     }
-
+    
     
     
     
