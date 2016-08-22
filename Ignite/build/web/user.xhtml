@@ -1,0 +1,253 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        
+        <title>AIRTIME - MANAGEMENT</title>
+        <link href="css_cust/bootstrap.css" rel="stylesheet"/>
+        <link href="css_cust/style.css" rel="stylesheet"/>
+        <link href="css_cust/menu.css" rel="stylesheet"/>
+        <link href="css_cust/topheader.css" rel="stylesheet"/>
+        <link href="css_cust/footer.css" rel="stylesheet"/>
+        <link href="css_cust/jquery.dataTables.min.css" rel="stylesheet" />
+        <link href="css_cust/buttons.dataTables.min.css" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="js_cust/daterangepicker.css" />
+        <link href="css_cust/chosen.css" rel="stylesheet" type="text/css" />
+        <link href="css_cust/lightcase.css" rel="stylesheet" type="text/css" />
+        <link href="css_cust/easy-responsive-tabs.css" rel="stylesheet" />
+        
+        <script type="text/javascript" src="js_cust/jquery-1.12.0.min.js"></script>	
+        <script type="text/javascript" src="js_cust/bootstrap.min2.js"></script>
+        <script src="js_cust/easy-responsive-tabs.js"></script>
+        <script type="text/javascript" src="js_cust/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="js_cust/dataTables.buttons.min.js"></script>	
+        <script type="text/javascript" src="js_cust/buttons.flash.min.js"></script>	
+        <script type="text/javascript" src="js_cust/jszip.min.js"></script>	
+        <script type="text/javascript" src="js_cust/pdfmake.min.js"></script>	
+        <script type="text/javascript" src="js_cust/vfs_fonts.js"></script>	
+        <script type="text/javascript" src="js_cust/buttons.html5.min.js"></script>	
+        <script type="text/javascript" src="js_cust/buttons.print.min."></script>
+        <script type="text/javascript" src="js_cust/moment.min.js"></script>
+        <script type="text/javascript" src="js_cust/daterangepicker.js"></script>
+        <script type="text/javascript" src="js_cust/lightcase.js"></script>
+        <script type="text/javascript" src="js_cust/lightcase.init.js"></script>
+        <script type="text/javascript" src="js_cust/customScripts.js" ></script>
+        
+        <script>
+            
+            $(document).ready(function() {
+                turn2DataTable('dataTableList');
+                turn2DataTable('dataTableList2');
+            } );
+        </script>
+        
+        
+       
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+    </h:head>
+    <h:body>
+        
+        <ui:include src="templates/header.xhtml" /> 
+        
+        
+        <!-- CONTENTS-->
+        <div class="container-fluid">
+            <div class="col-xs-12" style="display:inline-block;padding:10px;padding-top:25px;height:100%;">
+                
+                <!-- TABS -->
+                <div style="border:0px solid red;">
+                    
+                    <div id="parentVerticalTab">
+                        
+                        <ul class="resp-tabs-list">
+                            <li id="tablist1">TRANSACTION</li>
+                            
+                        </ul>
+                        
+                        
+                        <div class="resp-tabs-container">
+                            
+                            <div id="tabcontent1">
+                                <!-- In -->
+                                <div class="col-xs-12" style="float: none;margin: 0 auto;padding:5px;min-height:400px;border:0px solid #f0f0f0;overflow-x:auto;font-family:ubuntu;">
+                                    <div  class="container-fluid" style="padding:0px;font-family:ubuntu;">
+                                        
+                                        
+                                        <!--table start-->
+                                        <h:dataTable value="#" var="tra"
+                                                     id="dataTableList"
+                                                     styleClass="display" 
+                                                     cellspacing="0" 
+                                                     width="100%" 
+                                                     style="padding: 0px;
+                                                     margin-bottom: 30px;">
+                                            
+                                            <h:column>
+                                                <f:facet name="header">NAME</f:facet>
+                                                
+                                            </h:column>
+                                            
+                                            <h:column>
+                                                <f:facet name="header">PHONE NO.</f:facet>
+                                                
+                                            </h:column>
+                                            
+                                            <h:column>
+                                                <f:facet name="header">EMAIL</f:facet>
+                                                
+                                            </h:column>
+                                            
+                                            <h:column>
+                                                <f:facet name="header">ADDRESS</f:facet>
+                                                
+                                            </h:column>
+                                            
+                                            <h:column>
+                                                <f:facet name="header">ACTION</f:facet>
+                                                <h:form>
+                                                    <h:commandLink   onclick="notifiyViewDetails()" id="viewDetails"> 
+                                                        <h:graphicImage value="images/icon_view.png" />
+                                                        <f:ajax event="click" listener="#" render="viewDetailsContentPanel" />
+                                                    </h:commandLink>
+                                                </h:form>
+                                            </h:column>
+                                        </h:dataTable>
+                                        <!-- table end-->
+                                        
+                                    </div>
+                                    
+                                </div>
+                                <!-- EnIn-->
+                            </div>
+                            
+                            
+                            
+                            <div id="viewDetailsContent" style="display:none">
+                                
+                                <h:panelGroup id="viewDetailsContentPanel" >
+                                    <ui:include src="popup/view_tra.xhtml" /> 
+                                </h:panelGroup>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                <!-- TABS -->
+                
+                
+            </div>
+        </div>
+        <!-- End CONTENTS -->
+        
+        
+        <ui:include src="templates/footer.xhtml" /> 
+        
+        <script>
+            $(document).ready(function () {
+
+                //Vertical Tab
+                $('#parentVerticalTab').easyResponsiveTabs({
+                    type: 'vertical', //Types: default, vertical, accordion
+                    width: 'auto', //auto or any width like 600px
+                    fit: true, // 100% fit in a container
+                    closed: 'accordion', // Start closed if in accordion view
+                    tabidentify: 'hor_1', // The tab groups identifier
+                    activate: function(event) { // Callback function if tab is switched
+                        var $tab = $(this);
+                        var $info = $('#nested-tabInfo2');
+                        var $name = $('span', $info);
+                        $name.text($tab.text());
+                        $info.show();
+                    }
+                });
+       
+		
+            });
+        </script>
+        
+        
+        <script type="text/javascript" src="js/chosen.jquery.min.js"></script>
+        
+        <script type="text/javascript">
+            
+            var showDetails=false;
+            var content2Show="";
+            
+            function notifiyViewDetails(){
+               
+                showDetails=true;
+            }
+            
+            
+            
+            
+            jsf.ajax.addOnEvent(function(data) {                  
+                switch (data.status) { //Can be "begin", "complete" and "success"
+                    
+                    case "begin": // This is called right before ajax request is been sent.
+                        
+                        break;
+                    
+                    case "complete": // This is called right after ajax response is received.
+                        
+                        break;
+                    case "success": // This is called when ajax response is successfully processed.
+                        
+                        lightcase.start({
+                            href: '#',
+                            maxWidth: '640',
+                            maxHeight: '700',
+                            transition: 'scrollTop',
+                            speedIn:'600',
+                            speedOut:'600',
+                            forceWidth:true,
+                            swipe: true,
+                            useKeys: true,
+                            overlayOpacity:0.8,
+                            showSequenceInfo: false,
+                            onFinish: {
+                                function () {
+                                    
+                                    if(showDetails){
+                                        
+                                        content2Show= $('#viewDetailsContentPanel').html();
+                                    }
+                                    
+                                    lightcase.get('contentInner').children().html(content2Show);
+                                    lightcase.resize();
+                                }
+                            }
+                        });
+                        
+                        break;
+                }
+            });
+            
+        </script> 
+        
+        <script type="text/javascript">
+            var config = {
+                '.chosen-select'           : {},
+                '.chosen-select-deselect'  : {allow_single_deselect:true},
+                '.chosen-select-no-single' : {disable_search_threshold:10},
+                '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+                '.chosen-select-width'     : {width:"95%"}
+            }
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+        </script>
+        
+    </h:body>
+</html>
+
