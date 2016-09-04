@@ -1,0 +1,55 @@
+/*USER */
+.omenu_active{display:inline-block;margin-left:5px;margin-right:5px;width:20%;height:74px;line-height:80px;color:#ffffff;font-size:24px;text-align:center;text-decoration:none;border-bottom:5px solid #323b96;}
+.omenu_active:hover{display:inline-block;margin-left:5px;margin-right:5px;width:20%;height:74px;;line-height:80px;color:#ffffff;font-size:24px;text-align:center;text-decoration:none;border-bottom:5px solid #000000;}
+.omenu_active:focus{display:inline-block;margin-left:5px;margin-right:5px;width:20%;height:74px;;line-height:80px;color:#ffffff;font-size:24px;text-align:center;text-decoration:none;border-bottom:5px solid #000000;}
+
+.omenu{display:inline-block;margin-left:5px;margin-right:5px;width:20%;height:74px;line-height:80px;color:#ffffff;font-size:24px;text-align:center;text-decoration:none;border-bottom:5px solid #ffffff;}
+.omenu:hover{display:inline-block;margin-left:5px;margin-right:5px;width:20%;height:74px;;line-height:80px;color:#fffffff;font-size:24px;text-align:center;text-decoration:none;border-bottom:5px solid #ffffff;}
+.omenu:focus{display:inline-block;margin-left:5px;margin-right:5px;width:20%;height:74px;;line-height:80px;color:#ffffff;font-size:24px;text-align:center;text-decoration:none;border-bottom:5px solid #ffffff;}
+
+a.omenu_footer{display:inline-block;font-family:ubuntu;margin-left:10px;margin-right:10px;line-height:20px;color:#3d67c7;font-size:18px;text-align:center;text-decoration:none;}
+a:hover.omenu_footer{display:inline-block;font-family:ubuntu;margin-left:10px;margin-right:10px;line-height:20px;color:#ffffff;font-size:18px;text-align:center;text-decoration:none;}
+
+
+/* MEDIA QUERIES */
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+
+
+}
+
+@media only screen and (min-width :480px) and (max-width : 768px) {
+
+
+}
+
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-width : 768px) and (max-width : 1024px) {
+
+img.logo{}/*border:1px solid yellow;float:center;margin-left:20px;*/
+
+.omenu_active{display:inline-block;margin-left:5px;margin-right:5px;width:20%;height:74px;line-height:80px;color:#ffffff;font-size:20px;text-align:center;text-decoration:none;border-bottom:5px solid #323b96;}
+.omenu_active:hover{display:inline-block;margin-left:5px;margin-right:5px;width:20%;height:74px;;line-height:80px;color:#ffffff;font-size:20px;text-align:center;text-decoration:none;border-bottom:5px solid #000000;}
+.omenu_active:focus{display:inline-block;margin-left:5px;margin-right:5px;width:20%;height:74px;;line-height:80px;color:#ffffff;font-size:20px;text-align:center;text-decoration:none;border-bottom:5px solid #000000;}
+
+.omenu{display:inline-block;margin-left:5px;margin-right:5px;width:20%;height:74px;line-height:80px;color:#ffffff;font-size:20px;text-align:center;text-decoration:none;border-bottom:5px solid #ffffff;}
+.omenu:hover{display:inline-block;margin-left:5px;margin-right:5px;width:20%;height:74px;;line-height:80px;color:#323b96;font-size:20px;text-align:center;text-decoration:none;border-bottom:5px solid #ffffff;}
+.omenu:focus{display:inline-block;margin-left:5px;margin-right:5px;width:20%;height:74px;;line-height:80px;color:#323b96;font-size:20px;text-align:center;text-decoration:none;border-bottom:5px solid #ffffff;}
+
+}
+
+
+/* Desktops and laptops ----------- */
+@media only screen  and (min-width : 1224px) {
+
+}
+
+
+
+/* Large screens ----------- */
+@media only screen  and (min-width : 1824px) {
+
+}
+

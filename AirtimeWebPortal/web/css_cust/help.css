@@ -1,0 +1,7 @@
+ .helpbox_web{margin:0px;padding:0px;padding-bottom:7px;margin-bottom:7px;border:0px solid green;border-bottom:2px solid #eeeeee}
+ .helpbox_web:hover{margin:0px;padding:0px;padding-bottom:7px;margin-bottom:7px;border:0px solid green;border-bottom:2px solid #ff5700}
+ .helpbox_web h2{margin:0px;padding:7px;color:#323b96;font-size:17px;font-style:italic;background-color:#d7d7d7;font-weight:bold;color:#000000;}
+ .helpbox_web:hover h2{margin:0px;padding:7px;color:#323b96;font-size:17px;font-style:italic;background-color:#ff5700;font-weight:bold;color:#ffffff;}
+ .helpbox_web span.text{display:table;margin:0px;margin-top:7px;padding:7px;min-height:200px;border-right:1px dashed #e4e4e4;vertical-align:middle;line-height:27px;}
+ .helpbox_web span.image{margin:0px;margin-top:7px;padding:7px;border:0px solid green;text-align:center;}
+ .helpbox_web span.image p{text-align:center;font-size: 13px; color: #c2c2c2;line-height:200px;}

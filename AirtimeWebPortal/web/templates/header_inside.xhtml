@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <h:form>
+                <!-- HEADER -->
+                <div>
+                    <!-- Top Header -->
+                    <div class="container-fluid topheader" style="margin:0px;padding:0px;">
+                        
+                        <div>
+                            <div class="col-xs-3 col-sm-1 logo">
+                                <h:graphicImage value="images_cust/toplogo.jpg" class="logo hidden-xs"/>
+                                <h:graphicImage value="images_cust/toplogo.jpg" class="logo hidden-lg hidden-md hidden-sm visible-xs"/>
+                            </div>
+                            
+                            <div class="col-xs-9 col-sm-11 name"  style="margin:0px;padding:0px;border:0px solid red;">
+                                
+                                <strong class="col-xs-7 col-sm-5 col-md-5 col-lg-8 hidden-xs">AirtimeAPP </strong> 
+                                
+                                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 dropdown" style="margin:0px;padding:0px;">
+                                    <span><label>000</label></span>
+                                    
+                                    <!-- Latest Notifications List -->
+                                    <div class="dropdown-content">
+                                        <h4>Notifications</h4>
+                                        <a href="#"><div>NOTIFICATION TYPE <em>dd/mm/yyyy - 00:00:00</em></div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamt. </a>
+                                        <a href="#"><div>NOTIFICATION TYPE <em>dd/mm/yyyy - 00:00:00</em></div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamt. </a>
+                                        <a href="#"><div>NOTIFICATION TYPE <em>dd/mm/yyyy - 00:00:00</em></div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamt. </a>
+                                        <a href="#" class="more">view more</a>
+                                    </div>
+                                    <!-- End Latest Notifications List -->
+                                    
+                                </div>
+                                
+                                
+                                
+                                <h:commandLink action="#{LoginBean.logout()}" class="col-xs-6 col-sm-4 col-md-4 col-lg-2 logout"  style="margin:0px;padding:0px;"> 
+                                    <h:graphicImage value="images_cust/icon_user.png" style="float: left"/>
+                                    <label>Welcome<strong>#{LoginBean.username}</strong></label>
+                                </h:commandLink>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!-- End Top Header -->
+                    
+                    
+                    <!-- Menu -->
+                    <nav class="navbar navbar-default hidden-xs" style="background-color:#ffffff;height:65px;font-family:ubuntu;color:#ffffff;text-align:center;padding-bottom:0px;margin-bottom:0px;border-bottom:0px solid #1a8c35;border-radius:0px;">
+                        <div class="container-fluid" style="margin:0px;padding:0px;">
+                            
+                            <div class="col-xs-12" style="margin:0px;padding:0px;border:0px solid red;">		
+                                
+                                <ul class="mainmenu">
+                                    <li class="#{TemplateBean.welcomeClassName}">
+                                        <h:commandLink action="#{WelcomeBean.welcomes()}"  value="Welcome"/>
+                                    </li >
+                                    
+                                    <li class="#{TemplateBean.accountClassName}">
+                                        <h:commandLink action="#{CustomerBean.customerAccount()}"  value="My Account"/>
+                                    </li>
+                                    
+                                    <li class="#{TemplateBean.transactionClassName}">
+                                        <h:commandLink action="#{TransactionBean.customerTransactions()}"  value="Transactions"/>
+                                    </li>
+                                    
+                                    <li class="#{TemplateBean.notificationClassName}">
+                                        <h:commandLink action="#{NotifyBean.notifys()}"  value="Notifications"/>
+                                    </li>
+                                </ul>
+                                
+                            </div>
+                            
+                        </div>
+                    </nav>
+                    <!-- End Menu -->
+                    
+                </div>
+                <!-- End HEADER-->
+                
+                
+                
+                <!-- HEADER MOB -->
+                <div class="col-xs-12 col-sm-12 col-md-12 visible-xs visible-sm hidden-md hidden-lg" style="margin:0px;padding:0px;">
+                    
+                    <nav class="screen">
+                        
+                        <div class="toggle col-xs-12" style="margin:0px;padding:0px;padding-left:18px;">
+                            <span class="col-xs-2" style="margin:0px;padding:0px;">Menu</span><div class="col-xs-10 logomob" style="margin:0px;padding:0px;text-align:right"><img src="images/toplogo.jpg" style="margin-right:-30px" class="logo" /><strong>&nbsp;</strong> </div>
+                        </div>
+                        
+                        <div class="menu-container">
+                            <ul class="menu visually-hidden">
+                                <li>
+                                    <h:commandLink action="#{WelcomeBean.welcomes()}"  value="Welcome"/>
+                                </li>
+                                <li>
+                                    <h:commandLink action="#{CustomerBean.customerAccount()}"  value="My Account"/>
+                                </li>
+                                <li>
+                                    <h:commandLink action="#{TransactionBean.customerTransactions()}"  value="Transactions"/>
+                                </li>
+                                <li>
+                                    <h:commandLink action="#{NotifyBean.notifys()}"  value="Notifications"/>
+                                </li>
+                                <li>
+                                    <h:commandLink action="#{LoginBean.logout()}"  value="Logout"/>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="screenbox"> &nbsp; </div>
+                        
+                    </nav>
+                    
+                </div>
+                <!-- End HEADER MOB-->
+            </h:form>
+        </ui:composition>
+    </h:body>
+</html>
+

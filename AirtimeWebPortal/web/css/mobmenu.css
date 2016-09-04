@@ -1,0 +1,307 @@
+
+.logomob{font-size:20px;color:#ffffff;font-family:ubuntu;font-weight:bold;}
+.logomob strong{font-size:20px;color:#ffffffb;font-family:ubuntu;font-weight:bold;}
+
+
+.screenbox {
+  display:block;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  font-family:ubuntu;
+}
+
+
+.screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background-color: #ff5700;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  z-index: 99;
+  font-family:ubuntu;
+}
+
+.menu-container {
+  position: relative;
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  -webkit-transition: -webkit-transform 0.25s ease-out;
+  transition: -webkit-transform 0.25s ease-out;
+  transition: transform 0.25s ease-out;
+  transition: transform 0.25s ease-out, -webkit-transform 0.25s ease-out;
+    background-color:rgba(0,0,0,0.8);
+}
+
+.view-submenu .menu-container {
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+}
+
+.screen ul {
+  position: absolute;
+  top: 63px;
+  padding: 13px;
+  width: 100%;
+  height: 1024px;
+  color: #ededed;
+background: -moz-linear-gradient(top, rgba(255,87,0,1) 0%, rgba(255,87,0,0.6) 70%, rgba(255,87,0,0.6) 71%, rgba(255,87,0,0) 100%);
+background: -webkit-linear-gradient(top, rgba(255,87,0,1) 0%,rgba(255,87,0,0.6) 70%,rgba(255,87,0,0.6) 71%,rgba(255,87,0,0) 100%);
+background: linear-gradient(to bottom, rgba(255,87,0,1) 0%,rgba(255,87,0,0.6) 70%,rgba(255,87,0,0.6) 71%,rgba(255,87,0,0) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', endColorstr='#00000000',GradientType=0 );
+  list-style: none;
+}
+
+.screen ul li a {
+  opacity: 0;
+  display: block;
+  padding: 15px 12px;
+  position: relative;
+  cursor: pointer;
+  border-radius: 3px;
+  -webkit-transform: translateY(12px);
+  transform: translateY(12px);
+  -webkit-transition: opacity 0.15s 0.1s ease-out, -webkit-transform 0.15s 0.1s ease-out;
+  transition: opacity 0.15s 0.1s ease-out, -webkit-transform 0.15s 0.1s ease-out;
+  transition: opacity 0.15s 0.1s ease-out, transform 0.15s 0.1s ease-out;
+  transition: opacity 0.15s 0.1s ease-out, transform 0.15s 0.1s ease-out, -webkit-transform 0.15s 0.1s ease-out;
+  text-decoration:none;
+}
+
+.screen ul li a:hover {
+background-color: #323b96;
+  text-decoration:none;
+}
+
+
+.screen ul li.has-children span {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  padding: 12px 16px;
+  text-indent: -9999px;
+}
+
+.screen ul li.has-children span:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 12px;
+  bottom: 0;
+  margin: auto;
+  padding: 4px;
+  width: 0px;
+  height: 0px;
+  cursor: pointer;
+  font-size: 0;
+  border-bottom: 2px solid #ededed;
+  border-right: 2px solid #ededed;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.screen ul li.has-children span:hover:after { border-color: #bababa; }
+
+.menu {
+  opacity: 0;
+  -webkit-transition: background-color 0.25s ease-out, opacity 0.15s ease-out;
+  transition: background-color 0.25s ease-out, opacity 0.15s ease-out;
+}
+
+.menu.is-visible { opacity: 1;margin-top: 7px; }
+
+.menu.is-visible li a {
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+  color:#ffffff;
+font-size:22px;
+}
+
+.view-submenu .menu { background-color: #3e3e3e; }
+
+.view-submenu .menu > li > a {
+  opacity: 0;
+  -webkit-transition: opacity 0.15s ease-out;
+  transition: opacity 0.15s ease-out;
+}
+
+.submenu {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background-color: #313131;
+      margin-top: -63px;
+}
+
+.submenu li { margin-left: 60px; }
+
+.hide-submenu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 736px;
+  cursor: pointer;
+  background-color: #313131;
+  -webkit-transition: background-color 0.25s ease-out;
+  transition: background-color 0.25s ease-out;
+}
+
+.hide-submenu:before {
+  opacity: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 12px;
+  bottom: 0;
+  margin: auto;
+  padding: 4px;
+  width: 6px;
+  height: 6px;
+  cursor: pointer;
+  font-size: 0;
+  border-bottom: 2px solid #ededed;
+  border-right: 2px solid #ededed;
+  -webkit-transform: rotate(135deg);
+  transform: rotate(135deg);
+  left: 0;
+  right: -6px;
+  -webkit-transition: opacity 0.1s ease-out;
+  transition: opacity 0.1s ease-out;
+}
+
+.view-submenu .hide-submenu { background-color: #3e3e3e; }
+
+.view-submenu .hide-submenu:before {
+  opacity: 1;
+  -webkit-transition: opacity 0.15s 0.3s ease-out;
+  transition: opacity 0.15s 0.3s ease-out;
+}
+
+.toggle {
+  position: absolute;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  top: 0;
+  left: 0px;
+  bottom: 0;
+  margin: auto;
+  cursor: pointer;
+}
+
+.toggle span {
+  position: relative;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  font-size: 0;
+  width: 26px;
+  height: 2px;
+  background-color: #ededed;
+  border-radius: 100px;
+  -webkit-transition: background-color 0.2s ease-out;
+  transition: background-color 0.2s ease-out;
+}
+
+.toggle span:before, .toggle span:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #ededed;
+  border-radius: 100px;
+  -webkit-transition: -webkit-transform .2s ease-out;
+  transition: -webkit-transform .2s ease-out;
+  transition: transform .2s ease-out;
+  transition: transform .2s ease-out, -webkit-transform .2s ease-out;
+}
+
+.toggle span:before { bottom: calc(100% + 6px); }
+
+.toggle span:after { top: calc(100% + 6px); }
+
+.is-visible .toggle span { background-color: transparent; }
+
+.is-visible .toggle span:before {
+  bottom: auto;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.is-visible .toggle span:after {
+  top: auto;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+
+.is-visible div.screenbox{z-index:999989}
+
+
+/* MEDIA QUERIES */
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+.logomob {
+    font-size: 17px;
+    color: #ffffff;
+    font-family: ubuntu;
+    font-weight: bold;
+}
+}
+
+@media only screen and (min-width :480px) and (max-width : 768px) {
+
+
+}
+
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-width : 768px) and (max-width : 1024px) {
+
+}
+
+
+/* Desktops and laptops ----------- */
+@media only screen  and (min-width : 1224px) {
+
+}
+
+
+
+/* Large screens ----------- */
+@media only screen  and (min-width : 1824px) {
+
+}
+
+
+
+
+
+

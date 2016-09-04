@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>Welcome - AIRTIME App</title>
+        
+        <link href="css/bootstrap.css" rel="stylesheet"/>
+        <link href="css/style.css" rel="stylesheet"/>
+        <link href="css/hover.css" rel="stylesheet" />
+        <link href="css/menu.css" rel="stylesheet" />
+        <link href="css/mobmenu.css" rel="stylesheet" />
+        <link href="css/footer.css" rel="stylesheet" type="text/css"/>
+        
+        <link href="css/lightcase.css" rel="stylesheet" type="text/css" />
+        <link href="css/chosen.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>
+        <script type="text/javascript" src="js/jquery.events.touch.js"></script>
+        <script type="text/javascript" src="js/lightcase.js"></script>
+        <script type="text/javascript" src="js/lightcase.init.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    </h:head>
+    <h:body>
+        
+        
+        <ui:include src="templates/header_front.xhtml" /> 
+        
+        
+        <!-- CONTENTS-->
+        <div class="container-fluid" style="border:0px solid red;margin:0px;padding:0px;">
+            
+            
+            
+            <!-- SLIDESHOW -->
+            <div class="col-xs-12 homeslides">
+                
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <h:graphicImage value="images/slide1.jpg" class="max-width: 100%;height: auto;"/>
+                        </div>
+                        <div class="item">
+                            <h:graphicImage value="images/slide2.jpg" class="max-width: 100%;height: auto;"/>
+                        </div>
+                        <div class="item">
+                            <h:graphicImage value="images/slide3.jpg" class="max-width: 100%;height: auto;"/>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- End SLIDESHOW -->
+            
+            
+            
+            
+            <!-- BOXES -->
+            <div class="col-xs-12 homeboxes">                
+                
+                <div class="col-xs-12 col-sm-12 col-md-8 homesep">&nbsp;</div>                    
+                
+                <div class="col-xs-12 col-sm-12 col-md-4 hometab">
+                    <!-- Tabs -->
+                    <ul class="nav nav-tabs" style="padding:17px;text-align:center;">
+                        <li class="active">
+                            <a data-toggle="tab" href="#login">Login</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#register">Register</a>
+                        </li>
+                    </ul>
+                    
+                    
+                    <div class="tab-content">
+                        
+                        <!-- tab 1 -->
+                        <div id="login" class="tab-pane fade in active">
+                            
+                            <!-- FORM -->
+                            <h:form class="container-fluid login_form" id="login_form"  style="margin-top:45px;">
+                                <div class="col-xs-12 login_theinput">
+                                    <h:inputText id="user" class="user" a:placeholder="Enter Phone Number" value="#{LoginBean.msisdn}"/>
+                                </div>
+                                <div class="col-xs-12 login_theinput">
+                                    <h:inputSecret id="pass"  class="pass" a:placeholder="Enter Pin" value="#{LoginBean.pin}"/>
+                                </div>
+                                <div class="col-xs-12 login_submitinput">
+                                    <h:commandButton value="LOGIN" action="#{LoginBean.login()}"/>
+                                </div>
+                            </h:form>
+                            <!-- End FORM -->
+                            
+                            <div id="warning" class="col-xs-12 warning">
+                                <h:outputText value="#{LoginBean.msg}" rendered="#{LoginBean.faceMessage}"/>
+                            </div>
+                            
+                            <div class="col-xs-12 forgotpass">
+                                <a data-rel="lightcase_forgot" href="forgotpswd.xhtml" style="color:#a3a3a3;text-decoration:none;">
+                                    * Forgot Password ?
+                                </a>
+                            </div>
+                            
+                        </div>
+                        <!-- end tab 1 -->
+                        
+                        
+                        <!-- tab 2 -->
+                        <div id="register" class="tab-pane fade">
+                            <!-- FORM -->
+                            <h:form class="container-fluid login_form" id="register_form"  style="margin-top:15px;">
+                                <div class="col-xs-12 login_theinput">
+                                    <h:inputText id="fname" class="user" a:placeholder="Enter FirstName" value="#{LoginBean.registerRequest.fName}"/>
+                                </div>
+                                <div class="col-xs-12 login_theinput">
+                                    <h:inputText id="lname" class="user" a:placeholder="Enter LastName" value="#{LoginBean.registerRequest.otherNames}"/>
+                                </div>
+                                <div class="col-xs-12 login_theinput">
+                                    <h:inputText id="phno" class="user" a:placeholder="Enter Phone" value="#{LoginBean.registerRequest.msisdn}"/>
+                                </div>
+                                <div class="col-xs-12 login_theinput">
+                                    <h:inputText id="email" class="user" a:placeholder="Enter Email" value="#{LoginBean.registerRequest.email}"/>
+                                </div>
+                                <div class="col-xs-12 login_theinput">
+                                    <h:inputSecret id="pin"  class="pass" a:placeholder="Enter Pin" value="#{LoginBean.registerRequest.pin}"/>
+                                </div>
+                                <div class="col-xs-12 login_theinput">
+                                    <h:inputSecret id="repin"  class="pass" a:placeholder="ReEnter Pin" value="#{LoginBean.pin}"/>
+                                </div>
+                                <div class="col-xs-12 login_submitinput">
+                                    <h:commandButton value="REGISTER" action="#{LoginBean.register()}"/>
+                                </div>
+                            </h:form>
+                            <!-- End FORM -->
+                            
+                        </div>
+                        <!-- end tab 2 -->
+                        
+                    </div>
+                    <!-- Tabs -->
+                    
+                </div>
+                
+            </div>
+        </div>
+        <!-- End CONTENTS -->
+        
+        
+        
+        <div class="clear" style="margin-bottom:50px;border:0px solid blue;"></div>
+        
+        
+        <ui:include src="templates/footer.xhtml" /> 
+        
+        
+        <!-- Scripts -->
+        <script type="text/javascript" src="js/mobmenu.js"></script>
+        <!-- End Scripts -->
+        
+    </h:body>
+</html>
+
