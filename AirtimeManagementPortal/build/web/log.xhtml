@@ -1,0 +1,378 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>Oltranz - Payment Gateway - Administration</title>
+        
+        
+        <!--  -->
+        <link href="css/bootstrap.css" rel="stylesheet"/>
+        <link href="css/style.css" rel="stylesheet"/>
+        <link href="css/menu.css" rel="stylesheet"/>
+        <link href="css/topheader.css" rel="stylesheet"/>
+        <link href="css/footer.css" rel="stylesheet"/>
+        <link href="css/mobmenu.css" rel="stylesheet"/>
+        <link href="css/message.css" rel="stylesheet"/>
+        <link href="css/filter.css" rel="stylesheet" type="text/css" />
+        <link href="css/forms.css" rel="stylesheet" type="text/css"/>
+        
+        <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>	
+        <script type="text/javascript" src="js/bootstrap.min2.js"></script> 
+        
+        <script type="text/javascript" src="js/datatable/jquery.dataTables.min.js"></script>			
+        <script type="text/javascript" src="js/datatable/dataTables.buttons.min.js"></script>	
+        <script type="text/javascript" src="js/datatable/buttons.flash.min.js"></script>	
+        <script type="text/javascript" src="js/datatable/jszip.min.js"></script>	
+        <script type="text/javascript" src="js/datatable/pdfmake.min.js"></script>	
+        <script type="text/javascript" src="js/datatable/vfs_fonts.js"></script>	
+        <script type="text/javascript" src="js/datatable/buttons.html5.min.js"></script>
+        
+        <link href="js/datatable/jquery.dataTables.min.css" rel="stylesheet" />
+        <link href="js/datatable/buttons.dataTables.min.css" rel="stylesheet" />
+        <script type="text/javascript" src="js/datatable/customScripts.js" ></script>
+        
+        <script>
+            
+            $(document).ready(function() {
+                turn2DataTable('dataTableList');
+            } );
+            
+        </script>
+        
+        <link type="text/css" href="js/lightcase/lightcase.css" rel="stylesheet"  />
+        <script type="text/javascript" src="js/lightcase/lightcase.js"></script>
+        <script type="text/javascript" src="js/lightcase/lightcase.init.js"></script>
+        
+        <script type="text/javascript" src="js/datepicker/moment.min.js"></script>
+        <script type="text/javascript" src="js/datepicker/daterangepicker.js"></script>
+        <link rel="stylesheet" type="text/css" href="js/datepicker/daterangepicker.css" />
+        <link rel="stylesheet" type="text/css" href="js/datepicker/chosen.css" />	
+        
+        <script type="text/javascript">
+            $(function() {
+                
+                $('#form\\:daterangepicker').daterangepicker({
+                    "showDropdowns": true,
+                    autoUpdateInput: true,
+                    "timePicker": true,
+                    "timePicker24Hour": true,
+                    "autoApply": true,
+                    ranges: {
+                        'Today': [moment(), moment()],
+                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')] 
+                    },
+                    "locale": {
+                        "format": "YYYY/MM/DD  HH:mm",
+                        "separator": " - ",
+                        "applyLabel": "Apply",
+                        "cancelLabel": "Cancel",
+                        "fromLabel": "From",
+                        "toLabel": "To",
+                        "customRangeLabel": "Custom",
+                        "daysOfWeek": [
+                            "Su",
+                            "Mo",
+                            "Tu",
+                            "We",
+                            "Th",
+                            "Fr",
+                            "Sa"
+                        ],
+                        "monthNames": [
+                            "January",
+                            "February",
+                            "March",
+                            "April",
+                            "May",
+                            "June",
+                            "July",
+                            "August",
+                            "September",
+                            "October",
+                            "November",
+                            "December"
+                        ],
+                        "firstDay": 1
+                    },
+                    
+                    "opens": "center"
+                }, 
+                
+                function(start, end, label) {
+                    console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
+                });
+                
+                $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
+                    $(this).val(picker.startDate.format('MM/DD/YYYY h:mm A') + ' - ' + picker.endDate.format('MM/DD/YYYY h:mm A'));
+                });
+                
+                $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
+                    $(this).val('');
+                });
+            });
+        </script>
+        <script type="text/javascript" src="js/datepicker/chosen.jquery.min.js"></script>
+        <script type="text/javascript">
+            var config = {
+                '.chosen-select': {},
+                '.chosen-select-deselect': {allow_single_deselect: true},
+                '.chosen-select-no-single': {disable_search_threshold: 10},
+                '.chosen-select-no-results': {no_results_text: 'Oops, nothing found!'},
+                '.chosen-select-width': {width: "95%"}
+            };
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+        </script>
+        
+    </h:head>
+    <h:body>
+        
+        <ui:include src="templates/header.xhtml" /> 
+        
+        
+        <!-- CONTENTS-->
+        <div class="container-fluid">
+            <div class="col-xs-12" style="display:inline-block;padding:10px;padding-top:25px;height:100%;">
+                
+                <!--FILTER START-->
+                <div class="col-xs-12 col-sm-12">
+                    
+                    <div class="col-xs-12 col-sm-12 sholderinbox" style="margin:0px;padding:0px;min-height:100px;">
+                        
+                        
+                        <h2>Filter Log</h2>
+                        
+                        <!-- FORM -->
+                        <h:form id="form" class="container-fluid sforminput"  style="margin:0px;padding:0px;" rendered="true">
+                            
+                            <div class="col-xs-12 col-sm-3 stextinput" style="margin:0px;padding:0px;">
+                                <h:selectOneMenu value="#{LogBean.a}" class="chosen-select">
+                                    <f:selectItem itemLabel="USER" />
+                                    <f:selectItems  var="user"/>
+                                </h:selectOneMenu>
+                            </div>
+                            
+                            <div class="col-xs-12 col-sm-3 stextinput" style="margin:0px;padding:0px;">
+                                <h:selectOneMenu value="#{LogBean.a}" class="chosen-select">
+                                    <f:selectItem itemLabel="USER ACTION" />
+                                    <f:selectItems  var="user"/>
+                                </h:selectOneMenu>
+                            </div>
+                            
+                            <div class="col-xs-12 col-sm-3 stextinput" style="margin:0px;padding:0px;">
+                                <h:selectOneMenu value="#{LogBean.a}" class="chosen-select">
+                                    <f:selectItem itemLabel="SOURCE" />
+                                    <f:selectItems  var="user"/>
+                                </h:selectOneMenu>
+                            </div>
+                            
+                            <div class="col-xs-12 col-sm-3 stextinput" style="margin:0px;padding:0px;">
+                                <h:selectOneMenu value="#{LogBean.a}" class="chosen-select">
+                                    <f:selectItem itemLabel="IP ADDRESS" />
+                                    <f:selectItems  var="user"/>
+                                </h:selectOneMenu>
+                            </div>
+                            
+                            <!-- DateRange -->
+                            <div class="col-xs-12 col-sm-12 stextinput_date">
+                                <h:inputText id="daterangepicker" value="#{LogBean.date}"/>
+                            </div>	
+                            <!-- End DateRange -->
+                            
+                            <div class="col-xs-12 col-sm-12 ssubmitinput" style="margin:0px;padding:0px;">
+                                <h:commandButton action="#{LogBean.filterLog()}" value="Filter" class="ssubmitinput"/>
+                            </div>
+                            
+                        </h:form>
+                        <!-- End FORM -->
+                        
+                    </div>
+                </div>
+                <!--FILTER END--> 
+                
+                <div class="clear"></div>
+                
+                <!-- In -->
+                <div class="col-xs-12 col-sm-12" style="border:0px solid red;margin-top: 30px">
+                    <div class="col-xs-12 sholderinbox" style="float: none;margin: 0 auto;padding:7px;min-height:400px;overflow-x:auto;font-family:ubuntu;">
+                        <div  class="container-fluid" style="padding:0px;font-family:ubuntu;">
+                            
+                            <!--table start-->
+                            <h:dataTable value="#" var="log"
+                                         id="dataTableList"
+                                         styleClass="display" 
+                                         cellspacing="0" 
+                                         width="100%" 
+                                         style="padding: 0px;
+                                         margin-bottom: 30px;">
+                                
+                                <h:column>
+                                    <f:facet name="header">LOG NO</f:facet>
+                                    747374637623
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">USER</f:facet>
+                                    JOHN RAY
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">USER ACTION</f:facet>
+                                    LOGIN
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">SOURCE</f:facet>
+                                    MOZILLA FIREFOX
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">IP ADDRESS</f:facet>
+                                    JohnRays-MacBook-Air.local/192.168.1.17
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">DATE - TIME - ZONE</f:facet>
+                                    Tue Jul 12 14:20:32 CAT 2016
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">ACTION</f:facet>
+                                    <h:form >
+                                        <h:commandLink   onclick="notifiyViewDetails()" id="viewDetails"> 
+                                            <h:graphicImage value="images/icon_view.png" />
+                                            <f:ajax event="click" listener="#{LogBean.logForView(customer.msisdn)}" render="viewDetailsContentPanel" />
+                                        </h:commandLink>
+                                    </h:form> 
+                                    
+                                </h:column>
+                            </h:dataTable>
+                            <!-- table end-->
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+                <!-- EnIn-->
+                
+                
+            </div>
+        </div>
+        <!-- End CONTENTS -->
+        
+        <div id="viewDetailsContent" style="display:none">
+            
+            <h:panelGroup id="viewDetailsContentPanel" >
+                <ui:include src="popup/view_log.xhtml" /> 
+            </h:panelGroup>
+            
+        </div>
+        
+        
+        <ui:include src="templates/footer.xhtml" /> 
+        
+        
+        
+        <script type="text/javascript">
+            var showEdit=false;
+            var showEditMany=false;
+            var showDetails=false;
+            var turnDataTable=false;
+            var content2Show="";
+            
+            function notifiyViewDetails(){
+                showEdit=false;
+                showEditMany=false;
+                showDetails=true;
+            }
+            
+            function notifyEdit(){
+                showEdit=true;
+                showEditMany=false;
+                showDetails=false;
+            }
+            
+            function notifyEditMany(){
+                showEdit=false;
+                showEditMany=true;
+                showDetails=false;
+                
+            }
+            
+            function notifiyDatatableRefresh(){
+                
+                turnDataTable=true;
+                
+            }
+            
+            
+            
+            jsf.ajax.addOnEvent(function(data) {                  
+                switch (data.status) { //Can be "begin", "complete" and "success"
+                    
+                    case "begin": // This is called right before ajax request is been sent.
+                        
+                        break;
+                    
+                    case "complete": // This is called right after ajax response is received.
+                     
+                        break;
+                    case "success": // This is called when ajax response is successfully processed.
+                        
+                        lightcase.start({
+                            href: '#',
+                            maxWidth: 640,
+                            maxHeight: '700',
+                            transition: 'scrollTop',
+                            speedIn:'600',
+                            speedOut:'600',
+                            forceWidth:true,
+                            swipe: true,
+                            useKeys: true,
+                            overlayOpacity:0.8,
+                            title:'',
+                            showSequenceInfo: false,
+                            onFinish: {
+                                function () {
+                                    
+                                    if(showDetails){
+                                        
+                                        content2Show= $('#viewDetailsContentPanel').html();
+                                    }
+                                    
+                                    if(showEdit){
+                                        content2Show= $('#editDetailsContentPanel').html();
+                                    }
+                                    
+                                    if(showEditMany){
+                                        content2Show= $('#editDetailsManyContentPanel').html();
+                                    }
+                                    
+                                    if(turnDataTable){
+                                        turn2DataTable('dataTableList');
+                                        turnDataTable=false;
+                                    }
+                                    
+                                    lightcase.get('contentInner').children().html(content2Show);
+                                    // Do a resize now after filling in the content
+                                    lightcase.resize();
+                                }
+                            }
+                        });
+                        
+                        break;
+                }
+            });
+            
+        </script> 
+        
+        <script type="text/javascript" src="js/mobmenu.js"></script>
+    </h:body>
+</html>
+

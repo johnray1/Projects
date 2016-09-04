@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite">
+        
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="userIdValue" />
+        <cc:attribute name="firstNameValue" />
+        <cc:attribute name="otherNameValue" />
+        <cc:attribute name="emailValue" />
+        <cc:attribute name="phoneNumberValue" />
+        <cc:attribute name="passwordValue" />
+        <cc:attribute name="saveActionName" />
+        <cc:attribute name="saveButtonAction" 
+                      method-signature="java.lang.String update()"/>
+        <cc:attribute name="renderedOnsuccess" />
+    </cc:interface>
+        
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        
+        <div class="container-fluid" style="margin:0px;padding:0px;border:0px solid red;;min-height:300px;">
+            
+            <div class="col-xs-12 col-sm-12 holderinbox_popup" style="margin:0px;padding:0px;">
+                <h2 style="text-align:center;font-size:18px;background-color:#ff5700;">ADD USER</h2>
+                    
+                <!-- FORM -->
+                
+                <div class="col-xs-12 theinput">
+                    <h:outputLabel value="FIRST NAME"/>
+                    <h:inputText id="field2" value="#{cc.attrs.firstNameValue}"/>
+                </div>
+                
+                <div class="col-xs-12 theinput">
+                    <h:outputLabel value="OTHER NAME"/>
+                    <h:inputText id="field3" value="#{cc.attrs.otherNameValue}"/>
+                </div>
+                
+                <div class="col-xs-12 theinput">
+                    <h:outputLabel value="EMAIL"/>
+                    <h:inputText id="field6" value="#{cc.attrs.emailValue}"/>
+                </div>
+                
+                <div class="col-xs-12 theinput">
+                    <h:outputLabel value="PHONE NUMBER"/>
+                    <h:inputText id="field8" value="#{cc.attrs.phoneNumberValue}"/>
+                </div>
+                
+                <div class="col-xs-12 theinput">
+                    <h:outputLabel value="PASSWORD"/>
+                    <h:inputText id="field4" value="#{cc.attrs.passwordValue}"/>
+                </div>
+                
+                
+                <div  class="col-xs-12 submitinput" >
+                    <h:commandButton onclick="notifiyViewDetails(); notifiyDatatableRefresh();" value="CREATE" action="#{cc.attrs.saveButtonAction}">
+                        <f:ajax execute="@form" render="#{cc.attrs.renderedOnsuccess}" />
+                    </h:commandButton>
+                </div>
+                
+                <div class="col-xs-12 theinput">
+                    <h:inputHidden  id="field1" value="#{cc.attrs.userIdValue}"/>
+                </div>
+                <!-- End FORM -->
+                
+                
+            </div>
+        </div>
+    </cc:implementation>
+</html>

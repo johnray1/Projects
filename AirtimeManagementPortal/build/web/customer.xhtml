@@ -1,0 +1,251 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>Oltranz - Payment Gateway - Administration</title>
+        
+        
+        <!--  -->
+        <link href="css/bootstrap.css" rel="stylesheet"/>
+        <link href="css/style.css" rel="stylesheet"/>
+        <link href="css/menu.css" rel="stylesheet"/>
+        <link href="css/topheader.css" rel="stylesheet"/>
+        <link href="css/footer.css" rel="stylesheet"/>
+        <link href="css/mobmenu.css" rel="stylesheet"/>
+        <link href="css/message.css" rel="stylesheet"/>
+        <link href="css/filter.css" rel="stylesheet" type="text/css" />
+        <link href="css/forms.css" rel="stylesheet" type="text/css"/>
+        
+        <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>	
+        <script type="text/javascript" src="js/bootstrap.min2.js"></script> 
+        
+        <script type="text/javascript" src="js/datatable/jquery.dataTables.min.js"></script>			
+        <script type="text/javascript" src="js/datatable/dataTables.buttons.min.js"></script>	
+        <script type="text/javascript" src="js/datatable/buttons.flash.min.js"></script>	
+        <script type="text/javascript" src="js/datatable/jszip.min.js"></script>	
+        <script type="text/javascript" src="js/datatable/pdfmake.min.js"></script>	
+        <script type="text/javascript" src="js/datatable/vfs_fonts.js"></script>	
+        <script type="text/javascript" src="js/datatable/buttons.html5.min.js"></script>
+        
+        <link href="js/datatable/jquery.dataTables.min.css" rel="stylesheet" />
+        <link href="js/datatable/buttons.dataTables.min.css" rel="stylesheet" />
+        <script type="text/javascript" src="js/datatable/customScripts.js" ></script>
+        
+        <script>
+            
+            $(document).ready(function() {
+                turn2DataTable('dataTableList');
+            } );
+            
+        </script>
+        
+        <link type="text/css" href="js/lightcase/lightcase.css" rel="stylesheet"  />
+        <script type="text/javascript" src="js/lightcase/lightcase.js"></script>
+        <script type="text/javascript" src="js/lightcase/lightcase.init.js"></script>
+        
+        
+        <link href="css/fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <link href="css/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        
+    </h:head>
+    <h:body>
+        
+        <ui:include src="templates/header.xhtml" /> 
+        
+        
+        <!-- CONTENTS-->
+        <div class="container-fluid">
+            <div class="col-xs-12" style="display:inline-block;padding:10px;padding-top:25px;height:100%;">
+                
+                
+                
+                <!-- In -->
+                <div class="col-xs-12 sholderinbox" style="float: none;margin: 0 auto;padding:7px;min-height:400px;overflow-x:auto;font-family:ubuntu;">
+                    <div  class="container-fluid" style="padding:0px;font-family:ubuntu;">
+                        
+                        
+                        <!--table start-->
+                        
+                        <h:dataTable value="#{CustomerBean.customerList.customerList}" var="customer"
+                                     id="dataTableList"
+                                     styleClass="display" 
+                                     cellspacing="0" 
+                                     width="100%" 
+                                     style="padding: 0px;
+                                     margin-bottom: 30px;">
+                            
+                            <h:column>
+                                <f:facet name="header">NAME</f:facet>
+                                    #{customer.getfName()} #{customer.otherNames}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">PHONE NUMBER</f:facet>
+                                    #{customer.msisdn}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">EMAIL</f:facet>
+                                    #{customer.email}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">BALANCE</f:facet>
+                                    #{customer.msisdn}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">STATUS</f:facet>
+                                    #{customer.status}
+                            </h:column>
+                            
+                            <h:column>
+                                <f:facet name="header">Actions</f:facet>
+                                <h:form >
+                                    <h:commandLink   onclick="notifiyViewDetails()" id="viewDetails"> 
+                                        <h:graphicImage value="images/icon_view.png" />
+                                        <f:ajax event="click" listener="#{CustomerBean.customerForView(customer.msisdn)}" render="viewDetailsContentPanel" />
+                                    </h:commandLink>
+                                    <h:commandLink action="#{CustomerBean.activeDeactive(customer)}" rendered="false"> 
+                                        <h:graphicImage value="images/icon_delete.png" />
+                                    </h:commandLink>
+                                </h:form> 
+                            </h:column>
+                            
+                        </h:dataTable>
+                        
+                        <!-- table end-->
+                        
+                    </div>
+                </div>
+                <!-- EnIn-->
+                
+                
+            </div>
+        </div>
+        <!-- End CONTENTS -->
+        
+        <div id="viewDetailsContent" style="display:none">
+            
+            <h:panelGroup id="viewDetailsContentPanel" >
+                <ui:include src="popup/view_cust.xhtml" /> 
+            </h:panelGroup>
+            
+        </div>
+        
+        <div class="clear" style="margin-bottom:80px;border:0px solid blue;"></div>
+        <ui:include src="templates/footer.xhtml" /> 
+        
+        
+        
+        
+        <script type="text/javascript">
+            var showEdit=false;
+            var showEditMany=false;
+            var showDetails=false;
+            var turnDataTable=false;
+            var content2Show="";
+            
+            function notifiyViewDetails(){
+                showEdit=false;
+                showEditMany=false;
+                showDetails=true;
+            }
+            
+            function notifyEdit(){
+                showEdit=true;
+                showEditMany=false;
+                showDetails=false;
+            }
+            
+            function notifyEditMany(){
+                showEdit=false;
+                showEditMany=true;
+                showDetails=false;
+                
+            }
+            
+            function notifiyDatatableRefresh(){
+                
+                turnDataTable=true;
+                
+            }
+            
+            
+            
+            jsf.ajax.addOnEvent(function(data) {                  
+                switch (data.status) { //Can be "begin", "complete" and "success"
+                    
+                    case "begin": // This is called right before ajax request is been sent.
+                        
+                        break;
+                    
+                    case "complete": // This is called right after ajax response is received.
+                     
+                        break;
+                    case "success": // This is called when ajax response is successfully processed.
+                        
+                        lightcase.start({
+                            href: '#',
+                            maxWidth: 640,
+                            maxHeight: '700',
+                            transition: 'scrollTop',
+                            speedIn:'600',
+                            speedOut:'600',
+                            forceWidth:true,
+                            swipe: true,
+                            useKeys: true,
+                            overlayOpacity:0.8,
+                            title:'',
+                            showSequenceInfo: false,
+                            onFinish: {
+                                function () {
+                                    
+                                    if(showDetails){
+                                        
+                                        content2Show= $('#viewDetailsContentPanel').html();
+                                    }
+                                    
+                                    if(showEdit){
+                                        content2Show= $('#editDetailsContentPanel').html();
+                                    }
+                                    
+                                    if(showEditMany){
+                                        content2Show= $('#editDetailsManyContentPanel').html();
+                                    }
+                                    
+                                    if(turnDataTable){
+                                        turn2DataTable('dataTableList');
+                                        turnDataTable=false;
+                                    }
+                                    
+                                    lightcase.get('contentInner').children().html(content2Show);
+                                    // Do a resize now after filling in the content
+                                    lightcase.resize();
+                                }
+                            }
+                        });
+                        
+                        break;
+                }
+            });
+            
+            
+            
+            $(".textinput input").change(function() {
+                if ($(this).val() != "") {
+                    $(this).addClass('filled');
+                } else {
+                    $(this).removeClass('filled');
+                }
+            })
+            
+        </script> 
+        
+        <script type="text/javascript" src="js/mobmenu.js"></script>
+        
+    </h:body>
+</html>
+

@@ -1,0 +1,86 @@
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('fontawesome/fonts/fontawesome-webfont.eot');
+    src: url('fontawesome/fonts/fontawesome-webfont.eot') format('embedded-opentype'),
+        url('fontawesome/fonts/fontawesome-webfont.woff') format('woff'),
+        url('fontawesome/fonts/fontawesome-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.menufloat{
+    top: 0;
+    margin:0px;
+    padding:0px;
+    width: 100%;
+    height: 130px;
+    position: fixed;
+    border:0px solid green;
+    z-index:999999999999;
+    box-shadow: 0px 7px 14px rgba(0,0, 0, .3);
+    background-color:#ffffff;
+}
+
+.mainmenu { position: relative; font-family: ubuntu; border:0px solid green;}
+.mainmenu li {display:inline-block;margin-left:5px;margin-right:5px;width:13%;height:64px;background-color:#ffffff;text-align:center;border-bottom:5px solid #ffffff;-webkit-transition: all 800ms ease-in-out;-moz-transition: all 800ms ease-in-out;	-ms-transition: all 800ms ease-in-out;-o-transition: all 800ms ease-in-out;transition: all 800ms ease-in-out;}
+.mainmenu li:hover{display:inline-block;margin-left:5px;margin-right:5px;width:13%;height:64px;background-color:#ffffff;text-align:center;border-bottom:5px solid #666666;}
+.mainmenu li.active{display:inline-block;margin-left:5px;margin-right:5px;width:13%;height:64px;background-color:#ffffff;text-align:center;border-bottom:5px solid #666666;}
+.mainmenu li a{display:block;margin:0px;padding:0px;width:100%;line-height:64px;color:#666666;font-size:19px;text-decoration:none;-webkit-transition: all 800ms ease-in-out;-moz-transition: all 800ms ease-in-out;	-ms-transition: all 800ms ease-in-out;-o-transition: all 800ms ease-in-out;transition: all 800ms ease-in-out;z-index:9999;}
+.mainmenu li:hover a{display:block;margin:0px;padding:0px;width:100%;line-height:64px;color:#000000;font-size:19px;font-weight:bold;text-decoration:none;}
+
+.sub-menu {position:absolute;display:none;width:100%;height:60px;margin:0px;padding:0px;top:64px;left:0;z-index:999999999;border:0px solid blue;box-shadow: 0px 7px 14px rgba(0,0, 0, .3);-webkit-transition: all 800ms ease-in-out;-moz-transition: all 800ms ease-in-out;	-ms-transition: all 800ms ease-in-out;-o-transition: all 800ms ease-in-out;transition: all 800ms ease-in-out;}
+
+.sub-menu li{display:inline-block;width:13%;height:60px;line-height:74px;margin:0px;padding:0px;margin-left:5px;margin-right:5px;background-color:transparent;color:#666666;font-size:16px;text-align:center;text-decoration:none;border-bottom:5px solid #c0c0c0;}
+.sub-menu li:hover{display:inline-block;width:13%;height:60px;line-height:74px;margin:0px;padding:0px;margin-left:5px;margin-right:5px;background-color:transparent;color:#666666;font-size:16px;text-align:center;text-decoration:none;border-bottom:5px solid #666666;}
+.mainmenu li .sub-menu li a{display:block;margin:0px;padding:0px;width:100%;line-height:64px;color:#666666;font-size:17px;font-weight:normal;text-decoration:none;}
+.mainmenu li .sub-menu li:hover a{display:block;margin:0px;padding:0px;width:100%;line-height:64px;color:#000000;font-size:17px;font-weight:bold;text-decoration:none;}
+
+.mainmenu li:hover .sub-menu {display: block;background-color:#f2f2f2;}
+
+.dashboard::after{content: "\f200";font-family:'FontAwesome';font-size:20px; color:#808080; position:absolute;margin:0px auto; top:10%;z-index:99;border:1px solid red;}
+
+
+/* MEDIA QUERIES */
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+
+
+}
+
+@media only screen and (min-width :480px) and (max-width : 768px) {
+
+
+}
+
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-width : 768px) and (max-width : 1024px) {
+
+    .mainmenu { position: relative; font-family: ubuntu; border:0px solid green;}
+    .mainmenu li {display:inline-block;margin-left:5px;margin-right:5px;width:13%;height:64px;background-color:#ffffff;text-align:center;border-bottom:5px solid #ffffff;-webkit-transition: all 800ms ease-in-out;-moz-transition: all 800ms ease-in-out;	-ms-transition: all 800ms ease-in-out;-o-transition: all 800ms ease-in-out;transition: all 800ms ease-in-out;}
+    .mainmenu li:hover{display:inline-block;margin-left:5px;margin-right:5px;width:13%;height:64px;background-color:#ffffff;text-align:center;border-bottom:5px solid #666666;}
+    .mainmenu li.active{display:inline-block;margin-left:5px;margin-right:5px;width:13%;height:64px;background-color:#ffffff;text-align:center;border-bottom:5px solid #666666;}
+    .mainmenu li a{display:block;margin:0px;padding:0px;width:100%;line-height:64px;color:#666666;font-size:15px;text-decoration:none;-webkit-transition: all 800ms ease-in-out;-moz-transition: all 800ms ease-in-out;	-ms-transition: all 800ms ease-in-out;-o-transition: all 800ms ease-in-out;transition: all 800ms ease-in-out;z-index:9999;}
+    .mainmenu li:hover a{display:block;margin:0px;padding:0px;width:100%;line-height:64px;color:#000000;font-size:15px;font-weight:bold;text-decoration:none;}
+    .sub-menu {position:absolute;display:none;width:100%;height:60px;margin:0px;padding:0px;top:64px;left:0;z-index:999999999;border:0px solid blue;box-shadow: 0px 7px 14px rgba(0,0, 0, .3);-webkit-transition: all 800ms ease-in-out;-moz-transition: all 800ms ease-in-out;	-ms-transition: all 800ms ease-in-out;-o-transition: all 800ms ease-in-out;transition: all 800ms ease-in-out;}
+    .sub-menu li{display:inline-block;width:13%;height:60px;line-height:74px;margin:0px;padding:0px;margin-left:5px;margin-right:5px;background-color:transparent;color:#666666;font-size:16px;text-align:center;text-decoration:none;border-bottom:5px solid #c0c0c0;}
+    .sub-menu li:hover{display:inline-block;width:13%;height:60px;line-height:74px;margin:0px;padding:0px;margin-left:5px;margin-right:5px;background-color:transparent;color:#666666;font-size:14px;text-align:center;text-decoration:none;border-bottom:5px solid #666666;}
+    .mainmenu li .sub-menu li a{display:block;margin:0px;padding:0px;width:100%;line-height:64px;color:#666666;font-size:14px;font-weight:normal;text-decoration:none;}
+    .mainmenu li .sub-menu li:hover a{display:block;margin:0px;padding:0px;width:100%;line-height:64px;color:#000000;font-size:14px;font-weight:bold;text-decoration:none;}
+
+
+}
+
+
+/* Desktops and laptops ----------- */
+@media only screen  and (min-width : 1224px) {
+
+}
+
+
+
+/* Large screens ----------- */
+@media only screen  and (min-width : 1824px) {
+
+}

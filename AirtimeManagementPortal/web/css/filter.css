@@ -1,0 +1,171 @@
+.filterbox{margin:0px;padding:0px;min-height:45px;border:0px solid red;padding-top:20px;}
+
+
+
+.filterbox h3{text-transform:uppercase;color:#cccccc;font-size:27px;text-align:center;padding:0px;}
+
+.filterbox a.shortdate{line-height:47px;background-color:#dfdfdf;border-right:2px solid #f4f4f4;text-transform:uppercase;color:#000000;font-size:11px;text-align:center;text-decoration:none;}
+.filterbox a.active{background-color:#cccccc;}
+
+
+.filterbox span.customdate{display:inline-block;float:right;line-height:45px;background-color:transparent;color:#000000;text-align:center;text-decoration:none;}
+.filterbox span.customdate button{display:inline-block;float:right;margin:0px;padding:0px;width:100px;line-height:45px;background-color:#dfdfdf;color:#000000;font-size:18px;text-align:center;border:1px solid #666666;text-decoration:none;}
+
+
+
+
+.sholderbox{display:inline-block;padding:10px;}
+
+.sholderinbox{display:block;background-color:#ffffff;border:1px solid #d0d0f0;}
+.sholderinbox:hover{display:block;background-color:#ffffff;border:1px solid #ff5700;}
+
+.sholderinbox h2{display:block;width:100%;background-color:#fafafa;margin:0px;padding:10px;text-align:left;font-size:22px;color:#8d8d8d;font-family:ubuntu;}
+.sholderinbox:hover h2{display:block;width:100%;background-color:#ff5700;margin:0px;padding:10px;text-align:left;font-size:22px;color:#58621b;font-family:ubuntu;}
+
+
+	
+.sforminput{
+	border:0px solid red;
+	font-family:ubuntu;
+	font-weight:normal;
+	padding:7px;
+}
+
+.stextinput {
+  text-align:center;padding:3px;
+}
+
+.stextinput select{
+  border:1px solid #c0c0c0;
+  text-align:left;
+  width:99%;
+  height:40px;
+  line-height:40px;
+  outline:none;
+}
+
+.stextinput_date{
+  text-align:center;
+  padding:5px;
+}
+
+.stextinput_date input{
+  border:0px;
+  border-bottom:2px solid black;
+  text-align:center;
+  padding:10px;
+  margin-top:10px;
+  width:100%;
+  outline:0px;
+  background-color:transparent;
+  font-weight:bold;
+}
+
+.ssubmitinput{
+	text-align:center;  
+	margin:10px;
+	border:0px solid red;
+	}
+
+input.ssubmitinput {
+  width:200px;
+  background: #ffffff;
+  border: 2px solid #cccccc;
+  border-radius: 0px;
+  cursor: pointer;
+  font-size: 18px;;
+  color:#afafaf;
+  padding:5px;
+  transition: all 0.15s ease;
+  outline:none;  
+	}
+
+input.ssubmitinput:hover {
+  width:210px;
+  background: #000000;
+  border: 2px solid #000000;
+  border-radius: 0px;
+  cursor: pointer;
+  font-size: 18px;
+  color:#ffffff;
+  padding:5px;
+  outline:none;  
+}
+
+input.ssubmitinput:active {
+  width:210px;
+  background: #363636;
+  border: 2px solid #363636;
+  border-radius: 0px;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;;
+  color:#ffffff;
+  padding:5px;
+  outline:none;  
+}
+
+
+.sholderinbox:hover input.ssubmitinput {
+  width:210px;
+  background: #363636;
+  border: 2px solid #363636;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 18px;;
+  color:#ffffff;
+  padding:5px;
+  outline:none;  
+}
+
+
+
+
+
+
+/* MEDIA QUERIES */
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+.filterbox a.shortdate {
+    line-height: 47px;
+    background-color: #dfdfdf;
+    border-right: 2px solid #f4f4f4;
+    text-transform: uppercase;
+    color: #000000;
+    font-size: 9px;
+    text-align: center;
+    text-decoration: none;
+}
+
+}
+
+@media only screen and (min-width :480px) and (max-width : 768px) {
+
+
+}
+
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-width : 768px) and (max-width : 1024px) {
+
+}
+
+
+/* Desktops and laptops ----------- */
+@media only screen  and (min-width : 1224px) {
+
+}
+
+
+
+/* Large screens ----------- */
+@media only screen  and (min-width : 1824px) {
+
+}
+
+
+
+
+
+

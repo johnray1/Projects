@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>AIRTIME WebPortal for Managers</title>
+        
+        <!--  -->
+        
+        <link href="css/style.css" rel="stylesheet"/>
+        <link href="css/menu.css" rel="stylesheet"/>
+        <link href="css/tanks.css" rel="stylesheet"/>
+        <link href="css/topheader.css" rel="stylesheet"/>
+        <link href="css/bootstrap.css" rel="stylesheet"/>
+        <link href="css/footer.css" rel="stylesheet"/>
+        <link href="css/filter.css" rel="stylesheet"/>
+        <link href="css/mobmenu.css" rel="stylesheet"/>
+        <link href="css/message.css" rel="stylesheet"/>
+        
+        <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>	
+        <script type="text/javascript" src="js/bootstrap.min2.js"></script>
+        
+        <script src="js/charts.js" type="text/javascript"></script>
+        
+    </h:head>
+    <h:body>
+        
+        
+        <ui:include src="templates/header.xhtml" /> 
+        
+        <div class="clear"></div>
+        
+        
+        <!-- FILTER -->
+        <div class="container-fluid filterbox">
+            <div class="col-xs-12" style="margin:0px;padding:0px;background-color:#f4f4f4;">
+                
+                <span  class="col-xs-12 col-sm-12 col-md-5" style="margin:0px;padding:0px;border:0px solid red;">
+                    <a href="#" class="col-xs-3 shortdate active">Today</a>
+                    <a href="#" class="col-xs-3 shortdate">Yesterday</a>
+                    <a href="#" class="col-xs-3 shortdate">By Weeks</a>
+                    <a href="#" class="col-xs-3 shortdate">By Months</a>
+                </span>
+                
+                <span  class="col-xs-12 col-sm-12 col-md-7 customdate" style="margin:0px;padding:0px;border:0px solid green;">&nbsp;</span>
+                
+                
+            </div>
+        </div>
+        <!-- END FILTER -->
+        
+        
+        
+        <div class="clear"></div>
+        
+        
+        <!-- CONTENTS-->
+        <div class="container-fluid">
+            <div class="col-xs-12" style="padding:10px;padding-top:25px;padding-bottom:25px;height:100%;">
+                
+                
+                <!-- In -->
+                <div class="col-xs-12" style="float: none;margin: 0 auto;padding:5px;min-height:600px;border:0px solid #f0f0f0;overflow-x:auto;font-family:ubuntu;">
+                    
+                    
+                    <!--  -->      
+                    
+                    
+                    <div class="col-xs-12 col-sm-12 col-md-6 holderbox_summary">
+                        <div class="col-xs-12 col-sm-12 holderinbox_summary" style="margin:0px;padding:0px;min-height:200px;">
+                            <h3>TOTAL CUSTOMERS</h3>
+                            <h2>
+                                <h:outputText value="#{CustomerBean.customerNo}"/>
+                            </h2>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    <div class="col-xs-12 col-sm-12 col-md-6 holderbox_summary">
+                        <div class="col-xs-12 col-sm-12 holderinbox_summary" style="margin:0px;padding:0px;min-height:200px;">
+                            <h3>AIRTIME PURCHASE/Today</h3>
+                            <h2><label>&#8358;</label> <h:outputText value="#{TransactionBean.at}"/> </h2>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    <div class="clear"></div>
+                    
+                    
+                    <div class="col-xs-12 col-sm-12 col-md-12 holderbox">
+                        <div class="col-xs-12 col-sm-12 holderinbox" style="margin:0px;padding:0px;min-height:500px;">
+                            
+                            <span>
+                                <div  class="container-fluid" style="padding:0px;font-family:ubuntu;font-size:13px;">
+                                    <!--  -->
+                                    <div id="containerpm" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                                    <!--  -->
+                                </div>
+                            </span>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="clear"></div>
+                    
+                    <!-- -->
+                    
+                </div>
+                <!-- End In-->
+                
+            </div>
+        </div>
+        <!-- End CONTENTS- -->
+        
+        
+        <div class="clear"></div>
+        
+        <ui:include src="templates/footer.xhtml" /> 
+        
+        
+        <!-- Scripts -->        
+        <script type="text/javascript" src="js/mobmenu.js"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        
+        <!-- End Scripts -->
+        
+    </h:body>
+</html>
+
