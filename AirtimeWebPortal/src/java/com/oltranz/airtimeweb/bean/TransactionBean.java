@@ -71,7 +71,7 @@ public class TransactionBean {
             String from=dateFormat.format(currentDate);
             String to=dateFormat.format(currentDate)+"  23:59";
             
-            String url="http://localhost:8080/AirtimeRechargeSystem/wallettransactions/walletcredits";
+            String url="http://41.74.172.132:8080/AirtimeRechargeSystem/wallettransactions/walletcredits";
             String  jsonData = "{\n" +
                     "\"from\":\""+from+"\",\n" +
                     "\"to\":\""+to+"\",\n" +
@@ -93,7 +93,7 @@ public class TransactionBean {
             String from=dateFormat.format(currentDate);
             String to=dateFormat.format(currentDate)+"  23:59";
             
-            String url="http://localhost:8080/AirtimeRechargeSystem/wallettransactions/walletdebits";
+            String url="http://41.74.172.132:8080/AirtimeRechargeSystem/wallettransactions/walletdebits";
             String  jsonData = "{\n" +
                     "\"from\":\""+from+"\",\n" +
                     "\"to\":\""+to+"\",\n" +
@@ -143,7 +143,7 @@ public class TransactionBean {
             String to = end.replace('/', '-');
             
             
-            String url="http://localhost:8080/AirtimeRechargeSystem/wallettransactions/walletcredits";
+            String url="http://41.74.172.132:8080/AirtimeRechargeSystem/wallettransactions/walletcredits";
             String  jsonData = "{\n" +
                     "\"from\":\""+from+"\",\n" +
                     "\"to\":\""+to+"\",\n" +
@@ -173,7 +173,7 @@ public class TransactionBean {
             String to = end.replace('/', '-');
             
             
-            String url="http://localhost:8080/AirtimeRechargeSystem/wallettransactions/walletdebits";
+            String url="http://41.74.172.132:8080/AirtimeRechargeSystem/wallettransactions/walletdebits";
             String  jsonData = "{\n" +
                     "\"from\":\""+from+"\",\n" +
                     "\"to\":\""+to+"\",\n" +

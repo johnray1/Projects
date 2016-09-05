@@ -269,24 +269,32 @@
                         <span>
                             <div  class="container-fluid" style="padding:0px;font-family:ubuntu;font-size:13px;">
                                 <!-- FORM -->
-                                <form class="container-fluid" action="" style="margin-top:45px;">
+                                <h:form id="walletform" class="container-fluid"  style="margin-top:45px;">
                                     
-                                    <div class="col-xs-12 dashboardbox_addamount_input"><input type="text" id="amount" name="amount" class="amount" placeholder='Enter Amount'/></div>
+                                    <div class="col-xs-12 dashboardbox_addamount_input">
+                                        
+                                        <h:inputText id="walletamount" class="amount" a:placeholder='&#8358; Enter Amount' value=""/>
+                                    </div>
                                     
                                     <fieldset class="col-xs-12 dashboardbox_addamount_input"> 
                                         <legend>PAYMENT METHODS</legend>
                                         <div class="cc-selector">
-                                            <br /><br /><br /><br />
                                             
                                         </div>
                                     </fieldset>
                                     
                                     <div class="col-xs-12 dashboardbox_addamount_submit">
-                                        <a data-rel="lightcase_forgot" href="confirm.html" style="color:#a3a3a3;text-decoration:none;">
-                                            <input type="submit" name="submit" value="Send"/>
-                                        </a>
+                                        <!-- End QT Button -->
+                                        <em>
+                                            <small>
+                                                <a class="quickteller-checkout-anchor" id="90106" style="text-align:left;">
+                                                    payment button will appear here shortly...
+                                                </a>
+                                            </small>
+                                        </em>
+                                        <!-- End QT Button -->
                                     </div>
-                                </form>
+                                </h:form>
                                 <!-- End FORM -->
                                 
                                 <div id="warning" class="col-xs-12 warning">This is where warnings are displayed!</div>
@@ -516,7 +524,50 @@
         </script> 
         <!-- End SCRIPTS -->
         
-        
+        <!--Payment Script-->
+        <script type="text/javascript">
+            
+            var QTCheckout = QTCheckout || {};
+            QTCheckout.paymentItems = QTCheckout.paymentItems || [];
+            QTCheckout.paymentItems.push({
+                paymentCode: 90106,
+                extraData: {
+                    amount: "10000",
+                    buttonSize: "medium",
+                    customerId: "001",
+                    mobileNumber: "08080808080",
+                    emailAddress: "test@test.com",
+                    redirectUrl: "default",
+                    requestReference: "default"
+                }
+            });
+            
+            
+            //var baseUrl = "https://pwq.sandbox.interswitchng.com/scripts/quickteller-checkout-min.js?v=";
+                
+            
+            var baseUrl = "https://paywith.quickteller.com/scripts/quickteller-checkout-min.js?v=";
+           
+            
+            if (!QTCheckout.qtScript) {
+                
+                var qtScript = document.createElement('script');
+                qtScript.type = 'text/javascript';
+                qtScript.async = true;
+                qtScript.src = baseUrl + new Date().getDay();
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(qtScript, s);
+                QTCheckout.qtScript = qtScript;
+                
+            }
+            
+            else if (QTCheckout.buildPaymentItemsUI) {
+                
+                QTCheckout.buildPaymentItemsUI();
+            }
+
+        </script>
+        <!--End Payment Script-->
         
     </h:body>
 </html>

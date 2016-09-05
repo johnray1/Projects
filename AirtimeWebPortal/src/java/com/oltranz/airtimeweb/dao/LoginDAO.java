@@ -31,7 +31,7 @@ public class LoginDAO {
         String nul=null;
         InetAddress IP=InetAddress.getLocalHost();
         
-        String loginUrl="http://localhost:8080/AirtimeRechargeSystem/customer/login";
+        String loginUrl="http://41.74.172.132:8080/AirtimeRechargeSystem/customer/login";
         String  jsonData = "{\n" +
                 "\"pin\":\""+pin+"\",\n" +
                 "\"msisdn\":\""+msisdn+"\",\n" +
@@ -63,7 +63,7 @@ public class LoginDAO {
         registerRequest.setOSversion(IP.toString());
         registerRequest.setCurrentTime(date);
         
-        String url="http://localhost:8080/AirtimeRechargeSystem/customer/register";
+        String url="http://41.74.172.132:8080/AirtimeRechargeSystem/customer/register";
         String  jsonData = mapper.writeValueAsString(registerRequest);
         
         Response response = CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
