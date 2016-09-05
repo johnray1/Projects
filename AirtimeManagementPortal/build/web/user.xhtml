@@ -9,7 +9,7 @@
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <title>Oltranz - Payment Gateway - Administration</title>
+        <title>User - Airtime Management</title>
         
         
         <!--  -->
@@ -68,7 +68,7 @@
                     <div  class="container-fluid" style="padding:0px;font-family:ubuntu;">
                         
                         
-                        <h:form >
+                        <h:form>
                             <h:commandLink onclick="notifyAdd()" id="addDetails" class="button_add"> 
                                 <i class="fa fa-plus"/> ADD USER
                                 <f:ajax event="click"  listener="#{UserBean.userForCreate()}" rendererType="postValidate" render=":addDetailsContentPanel :add_form" />
@@ -99,7 +99,7 @@
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">Actions</f:facet>
-                                    <h:form >
+                                    <h:form>
                                         <h:commandLink   onclick="notifiyViewDetails()" id="viewDetails"> 
                                             <h:graphicImage value="images/icon_view.png" />
                                             <f:ajax event="click" listener="#{UserBean.userForView(user)}" render="viewDetailsContentPanel" />
@@ -133,7 +133,7 @@
             </h:panelGroup>
             
             <h:panelGroup id="addDetailsContentPanel">
-                <h:form class="container-fluid edit_form" id="add_form">
+                <h:form id="add_form">
                     <tp:addUserComponent 
                         userIdValue="#{UserBean.id}"
                         firstNameValue="#{UserBean.firstName}"
@@ -145,11 +145,11 @@
                         saveButtonAction="#{UserBean.saveUser()}"
                         renderedOnsuccess=":viewDetailsContentPanel :userList"
                         /> 
-                </h:form>
+               </h:form>
             </h:panelGroup>
             
             <h:panelGroup id="editDetailsContentPanel">
-                <h:form class="container-fluid edit_form" id="edit_form">
+                <h:form id="edit_form">
                     <tp:editUserComponent 
                         userIdValue="#{UserBean.id}"
                         firstNameValue="#{UserBean.firstName}"
@@ -162,7 +162,7 @@
                         saveButtonAction="#{UserBean.saveUser()}"
                         renderedOnsuccess=":viewDetailsContentPanel :userList"
                         /> 
-                </h:form>
+                 </h:form>
             </h:panelGroup>
             
             
@@ -220,17 +220,20 @@
                         
                         lightcase.start({
                             href: '#',
-                            maxWidth: '640',
-                            maxHeight: '700',
-                            transition: 'scrollTop',
-                            speedIn:'600',
-                            speedOut:'600',
-                            forceWidth:true,
-                            swipe: true,
-                            useKeys: true,
-                            overlayOpacity:0.8,
-                            showSequenceInfo: false,
-                            onFinish: {
+                    transition: 'scrollTop',
+                    speedIn:'600',
+                    speedOut:'600',
+                    forceWidth:true,
+                    swipe: true,
+                    useKeys: true,
+                    overlayOpacity:0.8,
+                    title:'',
+                    showSequenceInfo: false,
+                    inline: {
+                        width:'577',
+                        height:'auto'
+                    },
+                    onFinish: {
                                 function () {
                                     
                                     if(showDetails){

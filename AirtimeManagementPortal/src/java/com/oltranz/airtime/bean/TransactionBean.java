@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -80,7 +81,8 @@ public class TransactionBean {
             
             ObjectMapper mapper=new ObjectMapper();
             transactionList=(TransactionList)mapper.readValue(jsonResponse, TransactionList.class);
-            this.date=null;
+            
+            this.date=null;this.sender=null;this.receiver=null;
             
         }
         catch(Exception ex){
@@ -203,6 +205,30 @@ public class TransactionBean {
             Logger.getLogger(TransactionBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+    
+    public void traPerFilter(int check){
+        
+        if(check==1){
+            templateBean.setToday("col-xs-3 shortdate active");templateBean.setYesterday("col-xs-3 shortdate");templateBean.setWeek("col-xs-3 shortdate");templateBean.setMonth("col-xs-3 shortdate");
+        }
+        if(check==2){
+            templateBean.setToday("col-xs-3 shortdate");templateBean.setYesterday("col-xs-3 shortdate active");templateBean.setWeek("col-xs-3 shortdate");templateBean.setMonth("col-xs-3 shortdate");
+        }
+        if(check==3){
+            templateBean.setToday("col-xs-3 shortdate");templateBean.setYesterday("col-xs-3 shortdate");templateBean.setWeek("col-xs-3 shortdate active");templateBean.setMonth("col-xs-3 shortdate");
+        }
+        if(check==4){
+            templateBean.setToday("col-xs-3 shortdate");templateBean.setYesterday("col-xs-3 shortdate");templateBean.setWeek("col-xs-3 shortdate");templateBean.setMonth("col-xs-3 shortdate active");
+        }
+        
+        
+        try{
+            FacesContext.getCurrentInstance().getExternalContext().redirect("dashboard.xhtml");
+        }
+        catch(Exception ex){
+            Logger.getLogger(TransactionBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     /**

@@ -55,12 +55,74 @@ img.logologin{display:block;border:0px solid red;margin-left:auto;margin-right:a
 .warning{font-family:ubuntu;color:red;text-align:center;margin:0px;margin-top:3px;padding:0px;font-size:12px;}
 .forgotpass{font-family:ubuntu;color:red;text-align:center;margin:0px;margin-top:3px;padding:0px;font-size:14px}
 
+/*popup*/
+
+.holderbox_popup{display:inline-block;padding:10px;}
+
+.holderinbox_popup{display:block;background-color:#ffffff;overflow:hidden;}
+.holderinbox_popup:hover{display:block;background-color:#ffffff;overflow:hidden;}
+
+.holderinbox_popup h2{display:block;width:100%;background-color:#ff5700;margin:0px;padding:10px;text-align:left;font-size:22px;color:#ffffff;font-family:ubuntu;}
+.holderinbox_popup:hover h2{display:block;width:100%;background-color:#ff5700;margin:0px;padding:10px;text-align:left;font-size:22px;color:#ffffff;font-family:ubuntu;}
+
+
+table.innertable_popups {font-family:ubuntu;font-weight:normal;}
+table.innertable_popups thead{border-bottom:0px solid white;color:#000000;font-size:12px;}
+table.innertable_popups tbody.row:nth-child(odd){margin-top:5px;border:0px solid red;background-color:#f7f7f7;height:30px;}
+table.innertable_popups tbody.row:hover:nth-child(odd){margin-top:5px;border:0px solid red;background-color:#e7ebcf;height:30px;color:#000000;cursor:pointer;}
+
+table.innertable_popups  tbody.row:nth-child(even){margin-top:5px;border:0px solid red;background-color:#ececec;height:30px;color:#666666; }
+table.innertable_popups tbody.row:hover:nth-child(even){margin-top:5px;border:0px solid red;background-color:#e7ebcf;height:30px;color:#000000;cursor:pointer;}
+
+.inner_popups_wallet{font-family:ubuntu;font-weight:normal;padding:5px;}
+.inner_popups_wallet div{padding:5px;}
+.inner_popups_wallet div div.amount1{margin:0px;padding:5px;text-align:center;font-size:13px;height:80px;border:2px solid #ff5700;}
+.inner_popups_wallet div div.amount1 h4{text-align:center;font-size:30px;font-weight:bold;color:red;}
+.inner_popups_wallet div div.amount2{margin:0px;padding:5px;text-align:center;font-size:13px;height:80px;border:2px solid #ff5700;}
+.inner_popups_wallet div div.amount2 h4{text-align:center;font-size:30px;font-weight:bold;color:#666666;}
+
+.inner_popups_wallet div div.amount1 h4 label{margin:5px;font-size:14px;color:#c0c0c0;}
+.inner_popups_wallet div div.amount2 h4 label{margin:5px;font-size:14px;color:#c0c0c0;}
 
 
 
+.resend {font-family:ubuntu;
+         display:block;
+         width:160px;
+         
+         float:center;
+         background: #ffffff;
+         border: 2px solid #ff5700;
+         border-radius: 0px;
+         cursor: pointer;
+         font-size: 18px;
+         color:#ff5700;
+         padding:5px;
+         margin:7px; 
+         margin-left:auto;
+         margin-right:auto;
+         transition: all 0.15s ease;
+         outline:none;  
+         
+}
 
-
-
+.resend:hover {
+    display:block;
+    width:160px;
+    
+    background: #ff5700;
+    border: 2px solid #ff5700;
+    border-radius: 0px;
+    cursor: pointer;
+    font-size: 18px;
+    color:#ffffff;
+    padding:5px;
+    margin:7px; 
+    margin-left:auto;
+    margin-right:auto;
+    transition: all 0.15s ease;
+    outline:none;  
+}
 
 
 
