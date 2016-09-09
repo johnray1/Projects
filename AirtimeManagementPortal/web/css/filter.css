@@ -110,7 +110,7 @@ input.ssubmitinput:active {
   width:210px;
   background: #363636;
   border: 2px solid #363636;
-  border-radius: 15px;
+  border-radius: 0px;
   cursor: pointer;
   font-size: 18px;;
   color:#ffffff;

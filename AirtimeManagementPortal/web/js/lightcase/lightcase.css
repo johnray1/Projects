@@ -319,10 +319,11 @@ box-shadow: 0px 0px 34px 3px rgba(0,0,0,0.75); */
 }
 @media screen and (min-width: 641px) {
   /* line 114, ../scss/components/modules/_content.scss */
-  #lightcase-content h1, #lightcase-content h2, #lightcase-content h3, #lightcase-content h4, #lightcase-content h5, #lightcase-content h6, #lightcase-content p {
-    color: #ff5700;
+  #lightcase-content h1, #lightcase-content h2, #lightcase-content h3, #lightcase-content h5, #lightcase-content h6, #lightcase-content p {
+    color: #ffffff;
   }
 }
+
 
 /* line 3, ../scss/components/modules/_error.scss */
 #lightcase-case p.lightcase-error {

@@ -57,67 +57,69 @@
     <h:body>
         
         <ui:include src="templates/header.xhtml" /> 
-        
+        <div class="clear" style="margin-bottom:80px;border:0px solid blue;"></div>
         
         <!-- CONTENTS-->
         <div class="container-fluid">
-            <div class="col-xs-12" style="display:inline-block;padding:10px;padding-top:25px;height:100%;">
+            <div class="col-xs-12 maincontents">
                 
                 <!-- In -->
-                <div class="col-xs-12 sholderinbox" style="float: none;margin: 0 auto;padding:7px;min-height:400px;overflow-x:auto;font-family:ubuntu;">
-                    <div  class="container-fluid" style="padding:0px;font-family:ubuntu;">
-                        
-                        
-                        <h:form>
-                            <h:commandLink onclick="notifyAdd()" id="addDetails" class="button_add"> 
-                                <i class="fa fa-plus"/> ADD USER
-                                <f:ajax event="click"  listener="#{UserBean.userForCreate()}" rendererType="postValidate" render=":addDetailsContentPanel :add_form" />
-                            </h:commandLink>
-                        </h:form> 
-                        
-                        <!--table start-->
-                        <h:panelGroup id="userList">
-                            <h:dataTable value="#{UserBean.userList.userList}" var="user"
-                                         id="dataTableList"
-                                         styleClass="display" 
-                                         cellspacing="0" 
-                                         width="100%" 
-                                         style="padding: 0px;
-                                         margin-bottom: 30px;">
-                                
-                                <h:column>
-                                    <f:facet name="header">NAME</f:facet>
-                                        #{user.getfName()} #{user.otherName}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">PHONE NUMBER</f:facet>
-                                        #{user.msisdn}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">EMAIL</f:facet>
-                                        #{user.email}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">Actions</f:facet>
-                                    <h:form>
-                                        <h:commandLink   onclick="notifiyViewDetails()" id="viewDetails"> 
-                                            <h:graphicImage value="images/icon_view.png" />
-                                            <f:ajax event="click" listener="#{UserBean.userForView(user)}" render="viewDetailsContentPanel" />
-                                        </h:commandLink>
-                                        
-                                        <h:commandLink onclick="notifyEdit()" id="editDetails" > 
-                                            <h:graphicImage value="images/icon_edit.png" />
-                                            <f:ajax event="click"  listener="#{UserBean.userForView(user)}" rendererType="postValidate" render=":editDetailsContentPanel :edit_form" />
-                                        </h:commandLink>
-                                    </h:form>  
+                <div class="col-xs-12 col-sm-12 thebox">
+                    <div class="col-xs-12 sholderinbox" style="float: none;margin: 0 auto;padding:7px;min-height:400px;overflow-x:auto;font-family:ubuntu;">
+                        <div  class="container-fluid" style="padding:0px;font-family:ubuntu;">
+                            
+                            
+                            <h:form>
+                                <h:commandLink onclick="notifyAdd()" id="addDetails" class="button_add"> 
+                                    <i class="fa fa-plus"/> ADD USER
+                                    <f:ajax event="click"  listener="#{UserBean.userForCreate()}" rendererType="postValidate" render=":addDetailsContentPanel :add_form" />
+                                </h:commandLink>
+                            </h:form> 
+                            
+                            <!--table start-->
+                            <h:panelGroup id="userList">
+                                <h:dataTable value="#{UserBean.userList.userList}" var="user"
+                                             id="dataTableList"
+                                             styleClass="display" 
+                                             cellspacing="0" 
+                                             width="100%" 
+                                             style="padding: 0px;
+                                             margin-bottom: 30px;">
                                     
-                                </h:column>
-                            </h:dataTable>
-                        </h:panelGroup>
-                        <!-- table end-->
-                        
-                        
-                        
+                                    <h:column>
+                                        <f:facet name="header">NAME</f:facet>
+                                            #{user.getfName()} #{user.otherName}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">PHONE NUMBER</f:facet>
+                                            #{user.msisdn}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">EMAIL</f:facet>
+                                            #{user.email}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Actions</f:facet>
+                                        <h:form>
+                                            <h:commandLink   onclick="notifiyViewDetails()" id="viewDetails"> 
+                                                <h:graphicImage value="images/icon_view.png" />
+                                                <f:ajax event="click" listener="#{UserBean.userForView(user)}" render="viewDetailsContentPanel" />
+                                            </h:commandLink>
+                                            
+                                            <h:commandLink onclick="notifyEdit()" id="editDetails" > 
+                                                <h:graphicImage value="images/icon_edit.png" />
+                                                <f:ajax event="click"  listener="#{UserBean.userForView(user)}" rendererType="postValidate" render=":editDetailsContentPanel :edit_form" />
+                                            </h:commandLink>
+                                        </h:form>  
+                                        
+                                    </h:column>
+                                </h:dataTable>
+                            </h:panelGroup>
+                            <!-- table end-->
+                            
+                            
+                            
+                        </div>
                     </div>
                 </div>
                 <!-- EnIn-->
@@ -145,7 +147,7 @@
                         saveButtonAction="#{UserBean.saveUser()}"
                         renderedOnsuccess=":viewDetailsContentPanel :userList"
                         /> 
-               </h:form>
+                </h:form>
             </h:panelGroup>
             
             <h:panelGroup id="editDetailsContentPanel">
@@ -162,14 +164,14 @@
                         saveButtonAction="#{UserBean.saveUser()}"
                         renderedOnsuccess=":viewDetailsContentPanel :userList"
                         /> 
-                 </h:form>
+                </h:form>
             </h:panelGroup>
             
             
         </div>
         
         
-        <div class="clear" style="margin-bottom:80px;border:0px solid blue;"></div>
+        <div class="clear" style="margin-bottom:100px;border:0px solid blue;"></div>
         <ui:include src="templates/footer.xhtml" /> 
         
         <script type="text/javascript">
@@ -220,20 +222,20 @@
                         
                         lightcase.start({
                             href: '#',
-                    transition: 'scrollTop',
-                    speedIn:'600',
-                    speedOut:'600',
-                    forceWidth:true,
-                    swipe: true,
-                    useKeys: true,
-                    overlayOpacity:0.8,
-                    title:'',
-                    showSequenceInfo: false,
-                    inline: {
-                        width:'577',
-                        height:'auto'
-                    },
-                    onFinish: {
+                            transition: 'scrollTop',
+                            speedIn:'600',
+                            speedOut:'600',
+                            forceWidth:true,
+                            swipe: true,
+                            useKeys: true,
+                            overlayOpacity:0.8,
+                            title:'',
+                            showSequenceInfo: false,
+                            inline: {
+                                width:'577',
+                                height:'auto'
+                            },
+                            onFinish: {
                                 function () {
                                     
                                     if(showDetails){
