@@ -280,10 +280,10 @@ table.innertable_popups tbody.row:hover:nth-child(even){margin-top:5px;border:0p
 
 
 
-.Success{color:green;}
-.Failed{color:red;}
-.ACTIVE{color:green}
-.DEACTIVE{color:red}
+.success{color:green;}
+.failed{color:red;}
+.active{color:green}
+.deactive{color:red}
 
 
 /* BUTTONS */
@@ -380,10 +380,9 @@ img.logologin{display:block;border:0px solid red;margin-left:auto;margin-right:a
 .login_form{font-family:ubuntu;font-size:14px;font-weigth:normal;margin-top:10px;}
 .login_theinput{min-height:50px;margin:10px;margin-bottom:25px;margin-top:0px;border:0px solid red;text-align:center;}
 
-.login_theinput input.user{width:70%;min-height:50px;padding:5px;color:#000000;font-size:17px;text-align:center;font-weight:bold;border:2px solid #dfdfdf;outline:none;background:url(../images/login_username.png)top left no-repeat;opacity:1;background-color:#ffffff;-webkit-transition: all 0.60s ease-out;-moz-transition: all 0.60s ease-out; -o-transition: all 0.60s ease-out;transition: all 0.60s ease-out;}
+.login_theinput input.user{width:70%;min-height:50px;padding:5px;padding-left:45px; color:#000000;font-size:17px;text-align:center;font-weight:bold;border:2px solid #dfdfdf;outline:none;background:url(../images/login_username.png)top left no-repeat;opacity:1;background-color:#ffffff;-webkit-transition: all 0.60s ease-out;-moz-transition: all 0.60s ease-out; -o-transition: all 0.60s ease-out;transition: all 0.60s ease-out;}
 .login_theinput input.pass{width:70%;min-height:50px;padding:5px;color:#000000;font-size:17px;text-align:center;font-weight:bold;border:2px solid #dfdfdf;outline:none;background:url(../images/login_pass.png)top left no-repeat;opacity:1;background-color:#ffffff;-webkit-transition: all 0.60s ease-out;-moz-transition: all 0.60s ease-out; -o-transition: all 0.60s ease-out;transition: all 0.60s ease-out;}
 .login_theinput input.filled{width:70%;min-height:50px;padding:5px;color:#000000;font-size:17px;text-align:center;font-weight:bold;border:2px solid #dfdfdf;outline:none;background-color:#ffffff;}
-
 
 .sendairtime{min-height:50px;margin:10px;margin-bottom:25px;margin-top:0px;border:0px solid red;text-align:center;}
 .sendairtime input.user{width:99%;min-height:50px;padding:5px;color:#000000;font-size:17px;text-align:center;font-weight:bold;border:2px solid #dfdfdf;outline:none;background:url(../images/login_username.png)top left no-repeat;opacity:1;background-color:#ffffff;-webkit-transition: all 0.60s ease-out;-moz-transition: all 0.60s ease-out; -o-transition: all 0.60s ease-out;transition: all 0.60s ease-out;}
@@ -391,14 +390,31 @@ img.logologin{display:block;border:0px solid red;margin-left:auto;margin-right:a
 .sendairtime input.filled{width:99%;min-height:50px;padding:5px;color:#000000;font-size:17px;text-align:center;font-weight:bold;border:2px solid #dfdfdf;outline:none;background-color:#ffffff;}
 
 
+.fav_theinput div div h4{display:inline-block;width:100%;margin:0px;padding:3px; font-size:17px;text-align:left;font-weight:bold;color:#000000}
+.fav_theinput div div h4 em{font-size:16px;text-align:left;color:#ff5700;font-weight:bold;}
+.fav_theinput div div h4:after{content: "\f0a9";font-family: FontAwesome;font-weight:normal; font-size:17px; color:#ff5700;padding-right:7px;float:right; }
+
+.send_theinput{margin:0px; margin-top:5px;margin-bottom:5px;padding:0px;}
+
+span.send_tomany{margin:0px;padding:0px;margin-top:4px;}
+span:hover.send_tomany{margin:0px;padding:0px;padding-top:7px;background:#9f9f9f}
+
+span.send_tomany div.sendairtime{min-height: 20px; margin: 10px; margin-top: 0px; border: 0px solid red;    text-align: center;}
+span.send_tomany div.send_theinput{margin:0px; margin-top:0px;margin-bottom:0px;padding:0px;}
+span:hover.send_tomany div.sendairtime{min-height: 20px; margin: 10px; margin-top: 0px; border: 0px solid red;    text-align: center;}
+
+
 .login_submitinput{min-height:50px;margin:10px;margin-top:0px;border:0px solid red;text-align:center;}
 .login_submitinput input[type="submit"] {width:70%;min-height:50px;background: #ffffff;border: 2px solid #339900;border-radius: 0px; cursor: pointer; font-size:20px;color:#339900;padding:4px;outline:none;transition:all 0.70s ease;}
 .login_submitinput input[type="submit"]:hover  { width:70%;min-height:50px;background:#339900;border: 2px solid #339900;border-radius: 0px; cursor: pointer; font-size:20px;letter-spacing:2px;color:#ffffff;padding:4px;outline:none;}
 
 
+
 .warning{font-family:ubuntu;color:red;text-align:center;margin:0px;margin-top:3px;padding:0px;font-size:12px;}
 .forgotpass{font-family:ubuntu;color:red;text-align:center;margin:0px;margin-top:3px;padding:0px;font-size:14px}
 
+
+.login_submitinput input.update{padding-left:137px;text-align:left}
 
 
 
@@ -994,7 +1010,7 @@ input:active.cancel{
          margin-left:auto;
          margin-right:auto;
          transition: all 0.15s ease;
-         outline:none;  
+         outline:none;  text-decoration:none;
          
 }
 
@@ -1013,7 +1029,7 @@ input:active.cancel{
     margin-left:auto;
     margin-right:auto;
     transition: all 0.15s ease;
-    outline:none;  
+    outline:none;  text-decoration:none;
 }
 
 
@@ -1240,19 +1256,129 @@ fieldset.dashboardbox_addamount_input{border:2px solid white;}
 fieldset.dashboardbox_addamount_input legend{padding:7px; color:#c0c0c0;font-size:12px;}
 
 
-.homeamount{line-height:200px;font-size:50px;color:#ff5700;border:0px solid red;font-family:arial;}
-.homeamount strong{font-size:90px;color:#ff5700;font-family:ubuntu;}
+.homeamount{line-height:200px;font-size:80px;color:#9f9f9f;border:0px solid red;font-family:arial;}
+.homeamount strong{font-size:110px;color:#ff5700;font-family:ubuntu;}
 
 .hidemob{}
+
+
+/*THEBOX*/
+.maincontents{display:inline-block;padding:10px;padding-top:25px;height:100%;border:0px solid red;}
+.thebox{}
+
 
 /* MEDIA QUERIES */
 
 
 /* Smartphones (portrait and landscape) ----------- */
 
-@media only screen and (min-width : 320px) and (max-width : 480px) 
+@media only screen and (min-width : 220px) and (max-width : 360px) 
 {
     .hidemob{display:none}
+    
+    .homeamount {
+        line-height: 200px;
+        font-size: 30px;
+        color: #9f9f9f;
+        border: 0px solid red;
+        font-family: arial;
+    }
+    
+    .homeamount strong {
+        font-size: 55px;
+        color: #ff5700;
+        font-family: ubuntu;
+    }
+    
+    .thebox{margin:0px;padding:0px;border:0px solid pink;}
+    .maincontents{display:inline-block;padding:0px;padding-top:25px;height:100%;border:0px solid red;}
+    
+    form.login_form{ font-size:14px;margin:0px;padding:0px;border:0px solid pink;}
+    .login_theinput {margin:0px; margin-bottom: 25px;padding:0px;}
+    .login_theinput input.user{width:95%;}
+    .login_theinput input.pass{width:95%;}
+    
+    .login_submitinput{margin:0px; margin-bottom: 25px;padding:0px;}
+    .login_submitinput input[type="submit"]{width:95%;}
+    .login_submitinput:hover input[type="submit"]{width:95%;}
+    
+    form.pay_form{ font-size:14px;margin:0px;padding:0px;border:0px solid pink;}
+    .dashboardbox_addamount_input{margin:0px; margin-bottom: 25px;padding:0px;}
+    .dashboardbox_addamount_input input.amount{width:95%;}
+    
+    .send_theinput{margin:0px; margin-bottom: 25px;padding:0px;}
+    .sendairtime {margin:0px; padding:0px;padding-left:7px;padding-right:7px;}
+    
+    .fav_theinput{margin:0px; margin-bottom: 25px;padding:0px;}
+    .fav_theinput div{margin:0px;padding:0px;padding-left:7px;padding-right:0px;}
+    .fav_theinput div div.sendairtime{margin:0px;padding:0px;min-height: 20px;}
+    .fav_theinput div div h4{margin:0px;padding:0px; font-size:17px;text-align:left;font-weight:bold;}
+    .fav_theinput div div h4:before{content: "\f0ab";font-family: FontAwesome;font-weight:normal; font-size:17px; color:#ff5700;padding-right:7px; }
+    .fav_theinput div div h4:after{content: "\f0ab";font-family: FontAwesome;font-weight:normal; font-size:17px; color:#ffffff;padding-right:7px;}
+    
+    .dt-buttons{display:none;}
+    .dataTables_filter{display:none;}
+    
+}
+
+
+
+@media only screen and (min-width : 360px) and (max-width : 480px) 
+{
+    .hidemob{display:none}
+    
+    .homeamount {
+        line-height: 200px;
+        font-size: 40px;
+        color: #9f9f9f;
+        border: 0px solid red;
+        font-family: arial;
+    }
+    
+    .homeamount strong {
+        font-size: 65px;
+        color: #ff5700;
+        font-family: ubuntu;
+    }
+    
+    
+    
+    .thebox{margin:0px;padding:0px;border:0px solid pink;}
+    .maincontents{display:inline-block;padding:0px;padding-top:25px;height:100%;border:0px solid red;}
+    
+    form.login_form{ font-size:14px;margin:0px;padding:0px;border:0px solid pink;}
+    .login_theinput {margin:0px; margin-bottom: 25px;padding:0px;}
+    .login_theinput input.user{width:95%;}
+    .login_theinput input.pass{width:95%;}
+    
+    .login_theinput label i{font-size:27px;}
+    
+    .login_submitinput{margin:0px; margin-bottom: 25px;padding:0px;}
+    .login_submitinput input[type="submit"]{width:95%;}
+    .login_submitinput:hover input[type="submit"]{width:95%;}
+    
+    form.pay_form{ font-size:14px;margin:0px;padding:0px;border:0px solid pink;}
+    .dashboardbox_addamount_input{margin:0px; margin-bottom: 25px;padding:0px;}
+    .dashboardbox_addamount_input input.amount{width:95%;}
+    
+    .send_theinput{margin:0px; margin-bottom: 25px;padding:0px;}
+    .sendairtime {margin:0px; padding:0px;padding-left:7px;padding-right:7px;}
+    
+    .fav_theinput{margin:0px; margin-bottom: 25px;padding:0px;}
+    .fav_theinput div{margin:0px;padding:0px;padding-left:7px;padding-right:0px;}
+    .fav_theinput div div.sendairtime{margin:0px;padding:0px;min-height: 20px;}
+    .fav_theinput div div h4{margin:0px;padding:0px; font-size:17px;text-align:left;}
+    .fav_theinput div div h4 em{font-size:12px;text-align:left;color:red;font-weight:bold;}
+    
+    .fav_theinput div div h4:before{content: "\f0ab";font-family: FontAwesome;font-weight:normal; font-size:17px; color:#ff5700;padding-right:7px; }
+    .fav_theinput div div h4:after{content: "\f0ab";font-family: FontAwesome;font-weight:normal; font-size:17px; color:#ffffff;padding-right:7px;}
+    
+    
+    .dt-buttons{display:none;}
+    .dataTables_filter{display:none;}
+    
+    .login_submitinput input.update{padding-left:137px;text-align:left}
+    
     
 }
 
@@ -1260,6 +1386,26 @@ fieldset.dashboardbox_addamount_input legend{padding:7px; color:#c0c0c0;font-siz
 @media only screen and (min-width :480px) and (max-width : 768px) 
 {
     .hidemob{display:none}
+    
+    .homeamount {
+        line-height: 200px;
+        font-size: 40px;
+        color: #9f9f9f;
+        border: 0px solid green;
+        font-family: arial;
+    }
+    
+    .homeamount strong {
+        
+        color: #ff5700;
+        font-family: ubuntu;
+    }
+    
+    
+    .thebox{margin:0px;padding:0px;border:0px solid pink;}
+    .maincontents{display:inline-block;padding:0px;padding-top:25px;height:100%;border:0px solid red;}
+    
+    
     
 }
 
@@ -1269,6 +1415,20 @@ fieldset.dashboardbox_addamount_input legend{padding:7px; color:#c0c0c0;font-siz
 {
     
     .hidemob{display:none}
+    
+    .homeamount {
+        line-height: 200px;
+        font-size: 50px;
+        color: #ff5700;
+        border: 0px solid green;
+        font-family: arial;
+    }
+    
+    .homeamount strong {
+        font-size: 75px;
+        color: #ff5700;
+        font-family: ubuntu;
+    }
     
     .omenu_active{display:inline-block;margin-left:5px;margin-right:5px;width:10%;height:64px;line-height:80px;background-color:#ffffff;color:#ff5700;font-size:14px;text-align:center;text-decoration:none;border-bottom:5px solid #ff5700;}
     .omenu_active:hover{display:inline-block;margin-left:5px;margin-right:5px;width:10%;height:64px;;line-height:80px;background-color:#ffffff;color:#5caedd;font-size:14px;text-align:center;text-decoration:none;border-bottom:5px solid #ff5700;}

@@ -123,5 +123,67 @@ input {
 
 
 p.addr{font-size:14px;line-height:37px;}
-p.addr i{color:#ff5700}
-p.addr strong{color:#323b96}
+p.addr span{display:block;margin-bottom:7px; border-bottom:1px solid #ffffff;}
+p.addr span i{color:#ff5700}
+p.addr span strong{color:#323b96}
+
+
+
+
+/* MEDIA QUERIES */
+
+
+/* Smartphones (portrait and landscape) ----------- */
+
+@media only screen and (min-width : 220px) and (max-width : 360px) 
+{
+p.addr{font-size:14px;line-height:27px;text-align:center;}
+p.addr span{display:block;margin-bottom:7px; border-bottom:1px solid #efefef;}
+p.addr span i{display:block;position:relative;left:0px;color:#ff5700;font-size:22px;}
+p.addr span strong{display:block;color:#323b96}
+
+}
+
+
+@media only screen and (min-width : 360px) and (max-width : 480px) 
+{
+
+p.addr{font-size:14px;line-height:37px;text-align:center;}
+p.addr span{display:block;margin-bottom:7px; border-bottom:1px solid #efefef;}
+p.addr span i{display:block;position:relative;left:0px;color:#ff5700;font-size:28px;}
+p.addr span strong{display:block;color:#323b96}
+}
+
+
+@media only screen and (min-width :480px) and (max-width : 768px) 
+{
+
+p.addr{font-size:14px;line-height:27px;text-align:center;}
+p.addr span{display:block;margin-bottom:2px; border-bottom:1px solid #efefef;}
+p.addr span i{color:#ff5700;font-size:18px;}
+p.addr span strong{display:block;color:#323b96}
+
+
+}
+
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-width : 768px) and (max-width : 1024px) 
+{
+
+}
+
+
+/* Desktops and laptops ----------- */
+@media only screen  and (min-width : 1224px) 
+{
+    
+}
+
+
+
+/* Large screens ----------- */
+@media only screen  and (min-width : 1824px) 
+{
+    
+}

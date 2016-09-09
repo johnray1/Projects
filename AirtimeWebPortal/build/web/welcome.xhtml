@@ -68,12 +68,12 @@
         
         <!-- CONTENTS-->
         <div class="container-fluid">
-            <div class="col-xs-12" style="display:inline-block;padding:10px;padding-top:25px;height:100%;border:0px solid red;">
+            <div class="col-xs-12 maincontents">
                 
                 <!-- ROW 1 -->
                 
                 <!-- customer box -->
-                <div class="col-xs-12 col-sm-12 col-md-6">
+                <div class="col-xs-12 col-sm-12 col-md-6 thebox">
                     <div class="col-xs-12 dashboardbox_account" style="margin:0px;margin-top:27px;padding:0px;min-height:420px">
                         <!-- IN -->
                         <h2>Account Status</h2>
@@ -103,16 +103,26 @@
                 
                 
                 <!-- buy airtime box -->
-                <div class="col-xs-12 col-sm-12 col-md-6">
+                <div class="col-xs-12 col-sm-12 col-md-6 thebox">
                     <div class="col-xs-12 dashboardbox" style="margin:0px;margin-top:27px;padding:0px;min-height:420px">
                         <!-- IN -->
                         <span style="padding:0px;margin:0px;">
                             <div  class="container-fluid" style="padding:0px;font-family:ubuntu;font-size:13px;">
                                 <!-- Tabs -->
                                 <ul class="nav nav-tabs">
-                                    <li class="active"><a data-toggle="tab" href="#toone"><strong class="hidemob">Send</strong> To One</a></li>
-                                    <li><a data-toggle="tab" href="#tomany"><strong class="hidemob">Send</strong> To Many</a></li>
-                                    <li><a data-toggle="tab" href="#favorites">Favorites</a></li>
+                                    <li class="active">
+                                        <a data-toggle="tab" href="#toone">
+                                            <strong class="hidemob">Send</strong> To One
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#tomany">
+                                            <strong class="hidemob">Send</strong> To Many
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#favorites">Favorites</a>
+                                    </li>
                                     
                                 </ul>
                                 
@@ -262,7 +272,7 @@
                 
                 <!-- ROW 2 -->
                 
-                <div class="col-xs-12 col-sm-6">
+                <div class="col-xs-12 col-sm-12 col-md-6 thebox">
                     <div class="col-xs-12 dashboardbox_addamount" style="margin:0px;margin-top:27px;padding:0px;min-height:420px">
                         <!-- IN -->
                         <h2>Add amount in your Account</h2>
@@ -284,15 +294,20 @@
                                     </fieldset>
                                     
                                     <div class="col-xs-12 dashboardbox_addamount_submit">
+                                        
+                                        
+                                        
                                         <!-- End QT Button -->
                                         <em>
                                             <small>
-                                                <a class="quickteller-checkout-anchor" id="90106" style="text-align:left;">
+                                                <a class="quickteller-checkout-anchor" id="95101" style="text-align:left;">
                                                     payment button will appear here shortly...
                                                 </a>
                                             </small>
                                         </em>
                                         <!-- End QT Button -->
+                                        
+                                        
                                     </div>
                                 </h:form>
                                 <!-- End FORM -->
@@ -306,7 +321,7 @@
                 
                 
                 
-                <div class="col-xs-12 col-sm-6">
+                <div class="col-xs-12 col-sm-12 col-md-6 thebox">
                     <div class="col-xs-12 dashboardbox" style="margin:0px;margin-top:27px;padding:0px;min-height:420px;overflow-x:auto;">
                         <!-- IN -->
                         <h2>Latest transactions</h2>
@@ -528,26 +543,33 @@
         <script type="text/javascript">
             
             var QTCheckout = QTCheckout || {};
+            var testMode = true;
+            var baseUrl = "";
+            var reqRef = "6065" + (Math.floor(Math.random() * 16065065560056061)).toString();
+
             QTCheckout.paymentItems = QTCheckout.paymentItems || [];
             QTCheckout.paymentItems.push({
-                paymentCode: 90106,
+                paymentCode: 95101,
                 extraData: {
                     amount: "10000",
                     buttonSize: "medium",
                     customerId: "001",
                     mobileNumber: "08080808080",
                     emailAddress: "test@test.com",
-                    redirectUrl: "default",
+                    redirectUrl: "http://localhost:8080/AirtimeWebPortal/paymentServlet",
                     requestReference: "default"
                 }
             });
             
             
-            //var baseUrl = "https://pwq.sandbox.interswitchng.com/scripts/quickteller-checkout-min.js?v=";
+            if (testMode == true) {
+                baseUrl = "https://pwq.sandbox.interswitchng.com/scripts/quickteller-checkout-min.js?v=";
                 
-            
-            var baseUrl = "https://paywith.quickteller.com/scripts/quickteller-checkout-min.js?v=";
-           
+            }
+            else {
+                baseUrl = "https://paywith.quickteller.com/scripts/quickteller-checkout-min.js?v=";
+            }
+
             
             if (!QTCheckout.qtScript) {
                 

@@ -46,6 +46,8 @@ public class AuthorizationFilter implements Filter {
             if (    reqURI.contains("/how.xhtml")
                     ||reqURI.contains("/download.xhtml")
                     ||reqURI.contains("/contacts.xhtml")
+                    ||reqURI.contains("/term.xhtml")
+                    ||reqURI.contains("/privacy.xhtml")
                     ||reqURI.contains("/forgotpswd.xhtml")
                     || reqURI.contains("/login.xhtml")
                     || (ses != null && ses.getAttribute("username") != null)

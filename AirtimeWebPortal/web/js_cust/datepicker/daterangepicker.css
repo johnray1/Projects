@@ -281,15 +281,27 @@
 
 .btn-success{
     color: #fff;
-    background-color: #ff8a65;
-    border-color: #ff8a65;}
+    background-color: #323b96;
+    border-color: #323b96;
+	outline:none;}
 
 .btn-success:hover {
     color: #fff;
-    background-color: #ff5700;
-    border-color: #ff5700;
+    background-color: #323b96;
+    border-color: #323b96;
 }
 
+.btn-success:focus{
+    color: #fff;
+    background-color: #000000;
+    border-color: #323b96;
+}
+
+.btn-success:active{
+    color: #fff;
+    background-color: #000000;
+    border-color: #323b96;
+}
 
 /* Predefined Ranges */
 

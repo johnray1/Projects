@@ -5,6 +5,7 @@
 */
 package com.oltranz.airtimeweb.bean;
 
+import com.oltranz.airtimeweb.library.Common;
 import com.oltranz.airtimeweb.library.CommonLibrary;
 import com.oltranz.airtimeweb.model.Customer;
 import com.oltranz.airtimeweb.model.CustomerSingle;
@@ -87,8 +88,9 @@ public class CustomerBean {
         templateBean.setNotificationClassName("deactive");
         
         try{
+            String securepin=Common.shared.get_SHA_512_SecurePassword(oldpin, "726");
             
-            if(!oldpin.equals(customerSingle.getCustomer().getPin())){
+            if(!securepin.equals(customerSingle.getCustomer().getPin())){
                 faceMessage=true;
                 msg="wrong current pin";
             }

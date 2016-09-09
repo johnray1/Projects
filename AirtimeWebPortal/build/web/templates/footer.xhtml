@@ -8,24 +8,30 @@
     </h:head>
     <h:body>
         <ui:composition>
-            
-            <!-- Footer -->
-            <footer class="footer" ><div class="container">                
-                    
-                    <div class="col-xs-12 col-sm-12 col-md-10 left">
-                        <span>&copy; Copyright 2016 - AIRTIME Networks <p> All Rights Reserved</p><span class="separator">|</span></span>
-                        <a href="#">Terms and Conditions<span class="separator">|</span></a>
-                        <a href="#">Privacy Policy</a>
+            <h:form>
+                <!-- Footer -->
+                <footer class="footer" ><div class="container">                
+                        
+                        <div class="col-xs-12 col-sm-12 col-md-10 left">
+                            
+                            <span>&copy; Copyright 2016 - AIRTIME Networks <p> All Rights Reserved</p><span class="separator">|</span></span>
+                            
+                            <h:commandLink action="#{TemplateBean.term()}" value="Terms and Conditions"/>
+                            
+                            <span class="separator">|</span>
+                            
+                            <h:commandLink action="#{TemplateBean.privacy()}"  value="Privacy Policy"/>
+                            
+                        </div>
+                        
+                        <div class="col-xs-12 col-sm-12 col-md-2 right">
+                            <a href="#"><img src="images/poweredbyoltranz.png" /></a>
+                        </div>
+                        
                     </div>
-                    
-                    <div class="col-xs-12 col-sm-12 col-md-2 right">
-                        <a href="#"><img src="images/poweredbyoltranz.png" /></a>
-                    </div>
-                    
-                </div>
-            </footer>
-            <!-- Footer -->
-            
+                </footer>
+                <!-- Footer -->
+            </h:form>
         </ui:composition>
     </h:body>
 </html>

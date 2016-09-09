@@ -1,0 +1,55 @@
+.text_paragraph{color: #333;font-size:16px;padding:0px;}
+.text_paragraph h5{color:#ff5700;font-weight:bold; font-size:19px;padding:0px;}
+
+.letters li{list-style-type: lower-alpha;list-style-position:inside;color:#ff5700;font-weight:bold;}
+.letters li p{display:block;color:#000000;font-weight:normal;padding:7px;padding-bottom:27px;background-color:transparent}
+.letters li p:hover{display:block;color:#000000;font-weight:normal;padding:7px;padding-bottom:27px;background-color:#ebebeb}
+
+.numbers li{list-style-type:decimal;list-style-position:outside;color:#ff5700;font-weight:bold;}
+.numbers li p{display:block;color:#000000;font-weight:normal;padding:7px;padding-bottom:27px;background-color:transparent}
+.numbers li p:hover{display:block;color:#000000;font-weight:normal;padding:7px;padding-bottom:27px;background-color:#ebebeb}
+
+
+
+
+
+
+/* MEDIA QUERIES */
+
+
+/* Smartphones (portrait and landscape) ----------- */
+
+@media only screen and (min-width : 220px) and (max-width : 360px) 
+{
+}
+
+
+@media only screen and (min-width : 360px) and (max-width : 480px) 
+{
+
+
+@media only screen and (min-width :480px) and (max-width : 768px) 
+{
+}
+
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-width : 768px) and (max-width : 1024px) 
+{
+
+}
+
+
+/* Desktops and laptops ----------- */
+@media only screen  and (min-width : 1224px) 
+{
+    
+}
+
+
+
+/* Large screens ----------- */
+@media only screen  and (min-width : 1824px) 
+{
+    
+}

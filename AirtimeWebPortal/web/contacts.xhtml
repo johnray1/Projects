@@ -15,7 +15,7 @@
         <link href="css/contactform.css" rel="stylesheet" />
         <link href="css/menu.css" rel="stylesheet" />
         <link href="css/mobmenu.css" rel="stylesheet" />
-        <link href="css/footer.css" rel="stylesheet" type="text/css"/>
+        <link href="css/footer.css" rel="stylesheet" />
         
         <link href="css/lightcase.css" rel="stylesheet" type="text/css" />
         <link href="css/chosen.css" rel="stylesheet" type="text/css" />
@@ -35,7 +35,7 @@
         <!-- CONTENTS-->
         <div class="container-fluid" style="border:0px solid red;margin:0px;padding:0px;">
             
-            <div class="col-xs-12 innercontent" style="border:0px solid red;margin:0px;padding:0px;">
+            <div class="col-xs-12 innercontent" style="margin:0px;padding:0px;">
                 
                 <div class="container" style="font-family:ubuntu;min-height:400px;" >
                     
@@ -43,18 +43,22 @@
                     <h1 class="col-xs-12" style="color:#323b96;">Contacts</h1>
                     
                     
-                    
-                    <div class="col-xs-12 col-sm-6"  style="border-right:1px dashed #eeeeee;">
+                    <div class="col-xs-12 col-sm-12 col-md-6"  style="border-right:1px dashed #eeeeee;">
                         
                         <h3 style="color:#ff5700;text-align:center;">ADDRESS</h3>
                         
                         <p class="addr">
                             
-                            <i class="glyphicon glyphicon-earphone"></i>&nbsp;&nbsp;Customer Help Desk number <strong>09035000700</strong><br />
-                            <i class="glyphicon glyphicon-headphones"></i>&nbsp;&nbsp;Support time from <strong>8am till 6pm</strong> <br />
-                            <i class="glyphicon glyphicon-calendar"></i>&nbsp;&nbsp;working days and from <strong>10am till 3pm on Saturdays</strong><br />
-                            <i class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Customer support email address : <strong>customer_care@airtimenetworks.com</strong><br />
-                            <i class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Physical address : <strong>N5C, Murtala Mohammed way,  Kano</strong><br />
+                            <span><i class="glyphicon glyphicon-earphone"></i>&nbsp;&nbsp;Customer Help Desk number <strong>09035000700</strong></span>
+                            
+                            <span><i class="glyphicon glyphicon-headphones"></i>&nbsp;&nbsp;Support time from <strong>Mon - Fri From 8am till 6pm</strong></span>
+                            
+                            <span><i class="glyphicon glyphicon-calendar"></i>&nbsp;&nbsp;working days and from <strong>Sat - Sun From 10am till 3pm</strong></span>
+                            
+                            <span><i class="glyphicon glyphicon-envelope"></i>&nbsp;&nbsp;Customer support email address : <strong>customer_care@airtimenetworks.com</strong></span>
+                            
+                            <span><i class="glyphicon glyphicon-map-marker"></i>&nbsp;&nbsp;Physical address : <strong>N5C, Murtala Mohammed way,  Kano</strong></span>
+                            
                             
                         </p>
                         
@@ -62,14 +66,15 @@
                     
                     
                     
-                    <div class="col-xs-12 col-sm-6" style="padding-bottom:17px;">
+                    <div class="col-xs-12 col-sm-12 col-md-6" style="padding-bottom:17px;">
                         
                         <h3 style="color:#ff5700;text-align:center;">FEEDBACK FORM</h3>
                         
                         <!-- Form -->
                         <h:form id="contact-us">
+                            
                             <!-- Left Inputs -->
-                            <div class="col-xs-6 wow animated slideInLeft">
+                            <div class="col-xs-12 col-sm-6">
                                 <!-- Name -->
                                 <h:inputText id="name" class="form" a:placeholder="Name" value="#{LoginBean.msisdn}"/>
                                 <!-- Email -->
@@ -78,17 +83,22 @@
                                 <h:inputText id="subject" class="form" a:placeholder="Subject" value="#{LoginBean.msisdn}"/>
                             </div>
                             <!-- End Left Inputs -->
+                            
                             <!-- Right Inputs -->
-                            <div class="col-xs-6 wow animated slideInRight">
+                            <div class="col-xs-12 col-sm-6">
                                 <!-- Message -->
                                 <h:inputTextarea id="message" class="form textarea"  a:placeholder="Message"/>
                             </div>
                             <!-- End Right Inputs -->
+                            
+                            
                             <!-- Bottom Submit -->
                             <div class="relative fullwidth col-xs-12">
-                                <!-- Send Button -->
+                                <!-- Send Button --> 
                                 <h:button id="submit"  class="form-btn semibold" value="Send Message"/>
-                            </div><!-- End Bottom Submit -->
+                            </div>
+                            <!-- End Bottom Submit -->
+                            
                             <!-- Clear -->
                             <div class="clear"></div>
                         </h:form>
@@ -97,8 +107,7 @@
                         <div class="mail-message-area">
                             <!-- Message -->
                             <div class="alert gray-bg mail-message not-visible-message">
-                                <strong>Thank You !</strong> 
-                                Your email has been delivered.
+                                <strong>Thank You !</strong> Your email has been delivered.
                             </div>
                         </div>
                         
@@ -107,7 +116,7 @@
                 
                 
                 
-                <div class="container-fluid" style="border:0px solid red;margin:0px;margin-bottom:60px;padding:0px;height:400px;background-color:#e2e2e2;" >
+                <div class="container-fluid" style="margin:0px;padding:0px;min-height:450px;background-color:#e2e2e2;" >
                     <iframe src="map.html"  height="450" frameborder="0" style="width:100%;border:0"></iframe>
                 </div>
                 
@@ -121,16 +130,11 @@
         
         <div class="clear" style="margin-bottom:50px;border:0px solid blue;"></div>
         
-        
-        <ui:include src="templates/footer.xhtml" /> 
-        
+        <ui:include src="templates/footer.xhtml" />  
         
         
         <!-- Scripts -->
         <script type="text/javascript" src="js/mobmenu.js"></script>
-        <!-- End Scripts -->
-        
-        
     </h:body>
 </html>
 

@@ -1,4 +1,5 @@
 /*FORMS ELEMENTS*/
+
 .edit_form{font-family:ubuntu;font-size:14px;font-weight:normal;margin-top:10px;}
 .edit_form  label{font-family:ubuntu;font-size:13px;color:#303192;text-transform:uppercase;font-weight:normal;}
 .edit_form  fieldset{margin:0px;padding:5px;border:1px solid #d7d7f2;border-bottom:3px solid #d7d7f2;background-color:#ffffff;}

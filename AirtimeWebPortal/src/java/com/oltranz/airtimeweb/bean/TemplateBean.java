@@ -63,6 +63,7 @@ public class TemplateBean implements Serializable{
         }
     }
     
+    
     public void download(){
         
         loginClassName="omenu";
@@ -91,7 +92,34 @@ public class TemplateBean implements Serializable{
         }
     }
     
+    public void term(){
+        
+        loginClassName="omenu";
+        howClassName="omenu_active";
+        downloadClassName="omenu";
+        contactClassName="omenu";
+        
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("term.xhtml");
+        } catch (Exception ex) {
+            Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
+    
+    public void privacy(){
+        
+        loginClassName="omenu";
+        howClassName="omenu_active";
+        downloadClassName="omenu";
+        contactClassName="omenu";
+        
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("privacy.xhtml");
+        } catch (Exception ex) {
+            Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     /**
      * @return the transactionClassName
