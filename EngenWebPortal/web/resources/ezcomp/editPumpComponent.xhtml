@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite">
+    
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="pumpIdValue" />
+        <cc:attribute name="pumpNameValue" />
+        <cc:attribute name="branchIdValue" />
+        <cc:attribute name="popUpLabel" />
+        <cc:attribute name="saveActionName" />
+        <cc:attribute name="saveButtonAction" 
+                      method-signature="java.lang.String update()"/>
+        <cc:attribute name="renderedOnsuccess" />
+    </cc:interface>
+    
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        
+        <div class="container-fluid" style="margin:0px;padding:0px;border:0px solid red;;min-height:400px;">
+            
+            <div class="col-xs-12 col-sm-12 holderinbox_popup" style="margin:0px;padding:0px;">
+                <h2 style="text-align:center;font-size:18px;background-color:#042c90">
+                    <h:outputText value="#{cc.attrs.popUpLabel}"/>
+                </h2>
+                
+                
+                <!-- FORM -->
+                    
+                    
+                    
+                <div class="col-xs-12 theinput">
+                    <h:outputLabel value="PUMP NAME"/>
+                    <h:inputText id="field2" value="#{cc.attrs.pumpNameValue}"/>
+                </div>
+                    
+                <div class="col-xs-12 selectinput">
+                    <h:outputLabel value="BRANCH"/>
+                    <h:selectOneMenu value="#{cc.attrs.branchIdValue}" id="field6">
+                        <f:selectItems value="#{TemplateBean.braList.branchList}" var="bra"
+                                       itemLabel="#{bra.name}" itemValue="#{bra.branchId}"/>
+                    </h:selectOneMenu>
+                </div>
+                    
+                <div  class="col-xs-12 submitinput" >
+                    <h:commandButton onclick="notifiyViewDetails();notifiyDatatableRefresh()" value="#{cc.attrs.saveActionName}" action="#{cc.attrs.saveButtonAction}">
+                        <f:ajax execute="@form" render="#{cc.attrs.renderedOnsuccess}" />
+                    </h:commandButton>
+                </div>
+                    
+                <div class="col-xs-12 theinput">
+                    <h:inputHidden  id="field1" value="#{cc.attrs.pumpIdValue}"/>
+                </div>
+                <!-- End FORM -->
+                    
+                    
+            </div>
+        </div>
+    </cc:implementation>
+</html>

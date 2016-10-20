@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    
+    
+    <h:body>
+        <ui:composition> 
+            <div class="col-xs-12 col-sm-12 col-md-6"><div class="sales pcash"><label>CASH</label><strong><h:outputText value="#{TemplateBean.paymentChartModel.cash}"/></strong> FRW</div></div>
+            <div class="col-xs-12 col-sm-12 col-md-6"><div class="sales pmtn"><label>MTN</label><strong><h:outputText value="#{TemplateBean.paymentChartModel.mtn}"/></strong> FRW</div></div>
+            
+            <div class="col-xs-12 col-sm-12 col-md-6"><div class="sales ptigo"><label>TIGO</label><strong><h:outputText value="#{TemplateBean.paymentChartModel.tigo}"/></strong> FRW</div></div>
+            <div class="col-xs-12 col-sm-12 col-md-6"><div class="sales pairtel"><label>AIRTEL</label><strong><h:outputText value="#{TemplateBean.paymentChartModel.airtel}"/></strong> FRW</div></div>
+            
+            
+            <div class="col-xs-12 col-sm-12 col-md-6"><div class="sales pmastercard"><label>MASTERCARD</label><strong><h:outputText value="#{TemplateBean.paymentChartModel.master}"/></strong> FRW</div></div>
+            <div class="col-xs-12 col-sm-12 col-md-6"><div class="sales pvisa"><label>VISA</label><strong><h:outputText value="#{TemplateBean.paymentChartModel.visa}"/></strong> FRW</div></div>
+            
+            <div class="col-xs-12 col-sm-12 col-md-6"><div class="sales pvoucher"><label>Voucher</label><strong><h:outputText value="#{TemplateBean.paymentChartModel.voucher}"/></strong> FRW</div></div>
+            <div class="col-xs-12 col-sm-12 col-md-6"><div class="sales pdebt"><label>DEBT</label><strong><h:outputText value="#{TemplateBean.paymentChartModel.debt}"/></strong> FRW</div></div>
+            <div class="col-xs-12 col-sm-12 col-md-6"><div class="sales pdebt"><label>ENGEN CARD</label><strong><h:outputText value="#{TemplateBean.paymentChartModel.engenCard}"/></strong> FRW</div></div>
+            
+        </ui:composition>
+    </h:body>
+</html>
+

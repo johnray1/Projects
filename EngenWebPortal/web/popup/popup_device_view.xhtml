@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <div class="container-fluid" style="margin:0px;padding:0px;border:0px solid red;min-width:480px;min-height:480px">
+                                        
+                                        <div class="col-xs-12 col-sm-12 holderinbox_popup" style="margin:0px;padding:0px;min-height:300px;">
+                                            <h2 style="text-align:center;font-size:18px;">Device</h2>
+                                            
+                                            
+                                            <!-- Table -->
+                                            <span class="container-fluid">
+                                                
+                                                <table class="col-xs-12 innertable">
+                                                    
+                                                    <tbody class="row">
+                                                        <tr>
+                                                            <th class="col-xs-6" style="text-align:right;padding:7px;border-right:2px solid white;">Branch Name</th>
+                                                            <th class="col-xs-6" style="text-align:left;padding:7px;font-size:14px;color:#000000;">#{DeviceBean.device.branchName}</th>
+                                                        </tr>
+                                                    </tbody>
+                                                    
+                                                    <tbody class="row">
+                                                        <tr>
+                                                            <th class="col-xs-6" style="text-align:right;padding:7px;border-right:2px solid white;">Device Name</th>
+                                                            <th class="col-xs-6" style="text-align:left;padding:7px;font-size:14px;color:#000000;">#{DeviceBean.device.deviceName}</th>
+                                                        </tr>
+                                                    </tbody>
+                                                    
+                                                     <tbody class="row">
+                                                        <tr>
+                                                            <th class="col-xs-6" style="text-align:right;padding:7px;border-right:2px solid white;">Serial No.</th>
+                                                            <th class="col-xs-6" style="text-align:left;padding:7px;font-size:14px;color:#000000;">#{DeviceBean.device.serialNo}</th>
+                                                        </tr>
+                                                    </tbody>
+                                                    
+                                                    
+                                                    
+                                                    <tbody class="row">
+                                                        <tr>
+                                                            <th class="col-xs-6" style="text-align:right;padding:7px;border-right:2px solid white;">Status</th>
+                                                            <th class="col-xs-6" style="text-align:left;padding:7px;font-size:14px;color:#000000;">#{DeviceBean.device.statusName}</th>
+                                                        </tr>
+                                                    </tbody>
+                                                    
+                                                </table>
+                                                
+                                            </span>
+                                            <!--End  Table -->
+                                            <button onclick="lightcase.close()" class="print">CLOSE</button>
+                                        </div>
+                                    </div>
+        </ui:composition>
+    </h:body>
+</html>
+

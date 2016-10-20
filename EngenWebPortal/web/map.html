@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>SP - PayFuel Adminstration</title>
+        <link href="css/style.css" rel="stylesheet"/>
+        <link href="css/footer.css" rel="stylesheet"/>
+        <link href="css/menu.css" rel="stylesheet"/>
+        <link href="css/topheader.css" rel="stylesheet"/>
+        <link href="css/bootstrap.css" rel="stylesheet"/>
+        <link href="css/easy-responsive-tabs.css" rel="stylesheet" />
+        
+        <script src="js/jquery-1.12.0.min.js" type="text/javascript" ></script>	
+        <script src="js/bootstrap.min2.js" type="text/javascript" ></script>
+        <script src="js/jquery.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="js/easy-responsive-tabs.js" type="text/javascript"></script>
+        <link href="js/map/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css" />
+        <link href="js/map/myplaces.css" type="text/css" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Patua+One' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+        
+        
+        
+        
+    </head>
+    <body>
+        
+        
+        <div class="containermap"></div>
+        
+        
+        <script type="text/javascript" src="js/map/jsrender.min.js"></script> 
+        <script type="text/javascript" src="js/map/google-docs-simple-parser.js"></script> 
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMpGrFDGeNp4gL3jjvH_l8YxtF9NPC4BQ&libraries=places,geometry&sensor=true"></script> 
+        <script src="js/map/jquery.mCustomScrollbar.min.js"></script> 
+        <script type="text/javascript" src="js/map/jquery.myplaces.min-1.0.js"></script> 
+        <script>
+            $(document).ready(function() {
+                var places = [
+                    {
+                        "id": "1",
+                        "name": "Branch01",
+                        "manager": "Firstname Lastname 01",
+                        "managerphone": "+250 70000000 ",
+                        "manageremail": "name@sp.co.rw",
+                        "quantitysuper": "12325",
+                        "quantitygasoil": "5325",
+                        "mapIcon": "js/map/img/Home-icon.png",
+                        "lat": -1.966299,
+                        "lng":  30.084122
+                    },
+                    
+                    {
+                        "id": "2",
+                        "name": "Branch02",
+                        "manager": "Firstname Lastname 02",
+                        "managerphone": "+250 70000000 ",
+                        "manageremail": "name@sp.co.rw",
+                        "quantitysuper": "12325",
+                        "quantitygasoil": "5325",
+                        "mapIcon": "js/map/img/Home-icon.png",
+                        "lat": -1.966771, 
+                        "lng": 30.086611
+                    },
+                    
+                    {
+                        "id": "3",
+                        "name": "Branch03",
+                        "manager": "Firstname Lastname 03",
+                        "managerphone": "+250 70000000 ",
+                        "manageremail": "name@sp.co.rw",
+                        "quantitysuper": "12325",
+                        "quantitygasoil": "5325",
+                        "mapIcon": "js/map/img/Home-icon.png",
+                        "lat": -1.968444, 
+                        "lng": 30.070515
+                    },
+                    
+                    {
+                        "id": "4",
+                        "name": "Branch04",
+                        "manager": "Firstname Lastname 04",
+                        "managerphone": "+250 70000000 ",
+                        "manageremail": "name@sp.co.rw",
+                        "quantitysuper": "12325",
+                        "quantitygasoil": "5325",
+                        "mapIcon": "js/map/img/Home-icon.png",
+                        "lat": -1.977708, 
+                        "lng": 30.092831
+                    },
+                    
+                    {
+                        "id": "5",
+                        "name": "Branch05",
+                        "manager": "Firstname Lastname 05",
+                        "managerphone": "+250 70000000 ",
+                        "manageremail": "name@sp.co.rw",
+                        "quantitysuper": "12325",
+                        "quantitygasoil": "5325",
+                        "mapIcon": "js/map/img/Home-icon.png",
+                        "lat": -1.9879329,
+                        "lng": 30.0977034
+                    },
+                    
+                    {
+                        "id": "6",
+                        "name": "Branch06",
+                        "manager": "Firstname Lastname 06",
+                        "managerphone": "+250 70000000 ",
+                        "manageremail": "name@sp.co.rw",
+                        "quantitysuper": "12325",
+                        "quantitygasoil": "5325",
+                        "mapIcon": "js/map/img/Home-icon.png",
+                        "lat": -1.9879329,
+                        "lng": 30.0977034
+                    },
+                    
+                    
+                    {
+                        "id": "7",
+                        "name": "Branch07",
+                        "manager": "Firstname Lastname 07",
+                        "managerphone": "+250 70000000 ",
+                        "manageremail": "name@sp.co.rw",
+                        "quantitysuper": "12325",
+                        "quantitygasoil": "5325",
+                        "mapIcon": "js/map/img/Home-icon.png",
+                        "lat": -1.9879329,
+                        "lng": 30.0977034
+                    },
+                    
+                    
+                    {
+                        "id": "8",
+                        "name": "Branch08",
+                        "manager": "Firstname Lastname 08",
+                        "managerphone": "+250 70000000 ",
+                        "manageremail": "name@sp.co.rw",
+                        "quantitysuper": "12325",
+                        "quantitygasoil": "5325",
+                        "mapIcon": "js/map/img/Home-icon.png",
+                        "lat": -2.243343, 
+                        "lng": 29.884400
+                    },
+                    
+                    
+                    {
+                        "id": "9",
+                        "name": "Branch09",
+                        "manager": "Firstname Lastname 09",
+                        "managerphone": "+250 70000000 ",
+                        "manageremail": "name@sp.co.rw",
+                        "quantitysuper": "12325",
+                        "quantitygasoil": "5325",
+                        "mapIcon": "js/map/img/Home-icon.png",
+                        "lat":-1.707079, 
+                        "lng": 29.296126
+                    },
+                    
+                    {
+                        "id": "10",
+                        "name": "Branch10",
+                        "manager": "Firstname Lastname 10",
+                        "managerphone": "+250 70000000 ",
+                        "manageremail": "name@sp.co.rw",
+                        "quantitysuper": "11385",
+                        "quantitygasoil": "5125",
+                        "mapIcon": "js/map/img/Home-icon.png",
+                        "lat": -1.9869329,
+                        "lng": 30.0987034
+                    }
+                ];
+                
+                $(".containermap").myplaces({
+                    country: "RW",
+                    places: places,
+                    placeListTemplate: '<li><h1>{{:name}}</h1><h3>{{:address}}</h3><h5>{{:state}}</h5><p>{{:shortDescription}}</p></li>',
+                    placeInfoTemplate: '#placeInfoTemplate',
+                    popUpMapTemplate: '#infowindowTemplate',
+                    onLoad: createSrollBar
+                    //onPlacesChange: callback,
+                    //onClickPlace: callback
+                });
+                
+                function createSrollBar() {
+                    
+                    $(".myplaces-placesList, .myplaces-placeInfo").mCustomScrollbar({
+                        theme: "dark-thick",
+                        advanced: {
+                            updateOnContentResize: true
+                        }
+                    });
+                    
+                }
+            });
+        </script> 
+        
+        
+        
+        <script id="placeInfoTemplate" type="text/x-jsrender">
+                    <div class="branchsearch">
+                    <span class="line"><span class="left">Branch name</span><span class="right">{{:name}}</span></span>
+                    <span class="line"><span class="left">Manager's name</span><span class="right">{{:manager}}</span></span>
+                    <span class="line"><span class="left">Manager's phone</span><span class="right">{{:managerphone}}</span></span>
+            
+                    <span class="line"><span class="left">Super</span><span class="right">{{:quantitysuper}} L</span></span>
+                    <span class="line"><span class="left">Gasoil</span><span class="right">{{:quantitygasoil}} L</span></span>      
+                    </div
+        </script> 
+        
+        
+        <script id="infowindowTemplate" type="text/x-jsrender">
+            <div class="myplaces-info">
+            <strong> 
+            {{:name}}
+            </strong>
+            <br> 
+            {{:address}}
+            </div>
+        </script>
+        
+        <script type="text/javascript">
+            $("document").ready(function ($) {
+                var nav = $('#menufloat0');
+                
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > 200) {
+                        nav.addClass("menufloat");
+                    } else {
+                        nav.removeClass("menufloat");
+                    }
+                });
+            });</script>
+        
+        <!-- <div class="branchsearch">
+                            <span class="line"><h2>{{:name}}</h2></span>
+                            <span class="line"><span class="left">Branch name</span><span class="right">{{:name}}</span></span>
+                            <span class="line"><span class="left">Manager's name</span><span class="right">{{:manager}}</span></span>
+                            <span class="line"><span class="left">Manager's phone</span><span class="right">{{:managerphone}}</span></span>
+                                
+                            <span class="line"><h3>Current Tanks Quantities</h3></span>
+                            <span class="line"><span class="left">Super</span><span class="right">{{:quantitysuper}} L</span></span>
+                            <span class="line"><span class="left">Gasoil</span><span class="right">{{:quantitygasoil}} L</span></span>      
+                    </div -->
+        
+        
+    </body>
+</html>

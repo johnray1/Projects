@@ -1,0 +1,141 @@
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('fontawesome/fonts/fontawesome-webfont.eot');
+    src: url('fontawesome/fonts/fontawesome-webfont.eot') format('embedded-opentype'),
+        url('fontawesome/fonts/fontawesome-webfont.woff') format('woff'),
+        url('fontawesome/fonts/fontawesome-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+.themenu{margin:0px;padding:0px;border:0px solid red;}
+.themenu div{display: inline-block;    margin-left: 5px;    margin-right: 5px;    width: 17%;    height: 64px;    background-color: #ffffff;    text-align: center;    border-bottom: 5px solid #ffffff;    -webkit-transition: all 800ms ease-in-out;    -moz-transition: all 800ms ease-in-out;    -ms-transition: all 800ms ease-in-out; -o-transition: all 800ms ease-in-out;    transition: all 800ms ease-in-out;}
+
+
+.omenu{display:inline-block;margin-left:0px;margin-right:0px;width:100%;height:64px;line-height:80px;background-color:#ffffff;color:#042c90;font-size:19px;text-align:center;text-decoration:none;border-bottom:5px solid #ffffff;}
+.omenu:hover{display:inline-block;margin-left:0px;margin-right:0px;width:100%;height:64px;;line-height:80px;background-color:#ffffff;color:#f30032;font-size:19px;text-align:center;text-decoration:none;border-bottom:5px solid #042c90;}
+.omenu:focus{display:inline-block;margin-left:0px;margin-right:0px;width:100%;height:64px;;line-height:80px;background-color:#ffffff;color:#f30032;font-size:19px;text-align:center;text-decoration:none;border-bottom:5px solid #042c90;}
+.omenu:active{display:inline-block;margin-left:0px;margin-right:0px;width:100%;height:64px;;line-height:80px;background-color:#ffffff;color:#f30032;font-size:19px;text-align:center;text-decoration:none;border-bottom:5px solid #042c90;}
+
+.omenu_active{display:inline-block;margin-left:0px;margin-right:0px;width:100%;height:64px;line-height:80px;background-color:#ffffff;color:#042c90;font-size:19px;text-align:center;text-decoration:none;border-bottom:5px solid #042c90;}
+.omenu_active:hover{display:inline-block;margin-left:0px;margin-right:0px;width:100%;height:64px;;line-height:80px;background-color:#ffffff;color:#042c90;font-size:19px;text-align:center;text-decoration:none;border-bottom:5px solid #042c90;}
+.omenu_active:focus{display:inline-block;margin-left:0px;margin-right:0px;width:100%;height:64px;;line-height:80px;background-color:#ffffff;color:#042c90;font-size:22px;font-weight:bold;text-align:center;text-decoration:none;border-bottom:5px solid #042c90;}
+
+a.omenu_footer{display:inline-block;font-family:ubuntu;margin-left:10px;margin-right:10px;line-height:20px;color:#3d67c7;font-size:18px;text-align:center;text-decoration:none;}
+a:hover.omenu_footer{display:inline-block;font-family:ubuntu;margin-left:10px;margin-right:10px;line-height:20px;color:#ffffff;font-size:18px;text-align:center;text-decoration:none;}
+
+
+
+.themenu div.dropdown{margin:0px;padding:0px;}
+
+.dropdown-menu {
+    display: block;
+	position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+    width: 100%;
+    padding:5px;
+    margin:0px;
+    font-size: 16px;
+    text-align: left;
+    list-style: none;
+    background-color: #042c90;
+  -webkit-background-clip: padding-box;
+ background-clip: padding-box;
+  border: 0px solid #ccc;
+  border: 0px solid rgba(0, 0, 0, .15);
+  border-radius: 0px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
+
+.dropdown-menu > li > a {
+  display: block;
+  padding: 7px 7px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.42857143;
+  color: #ffffff;
+  white-space: nowrap;
+}
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  color: #042c90;
+  text-decoration: none;
+  background-color:#ffffff;
+}
+
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {
+  color: #042c90;
+  text-decoration: none;
+  background-color: #ffffff;
+  outline: 0;
+}
+
+
+
+
+.dashboard::after{content: "\f200";font-family:'FontAwesome';font-size:20px; color:#0095c0; position:absolute;margin:0px auto; top:10%;z-index:99;border:1px solid red;}
+
+
+
+/* MENU ICON */
+#menu_icon{width: 40px;  height: 20px;  position: relative;  margin: 17px;  -webkit-transform: rotate(0deg);  -moz-transform: rotate(0deg);  -o-transform: rotate(0deg);  transform: rotate(0deg);  -webkit-transition: .5s ease-in-out;  -moz-transition: .5s ease-in-out;  -o-transition: .5s ease-in-out;  transition: .5s ease-in-out;  cursor: pointer;}
+#menu_icon span{display: block;  position: absolute;  height: 3px;  width: 100%;  background: #ffffff;  border-radius:2px;  opacity: 1;  left: 0;  -webkit-transform: rotate(0deg);  -moz-transform: rotate(0deg);  -o-transform: rotate(0deg);  transform: rotate(0deg);  -webkit-transition: .25s ease-in-out;  -moz-transition: .25s ease-in-out;  -o-transition: .25s ease-in-out;  transition: .25s ease-in-out;}
+#menu_icon span:nth-child(1) {top: 0px;}
+#menu_icon span:nth-child(2),#menu_icon span:nth-child(3) {top: 13px;}
+#menu_icon span:nth-child(4) {top: 26px;}
+#menu_icon.open span:nth-child(1) {top: 18px; width:0%; left: 50%;}
+#menu_icon.open span:nth-child(2) {-webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -o-transform: rotate(45deg); transform: rotate(45deg);}
+#menu_icon.open span:nth-child(3) {-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -o-transform: rotate(-45deg); transform: rotate(-45deg);}
+#menu_icon.open span:nth-child(4) {top: 18px; width: 0%; left: 50%;}
+
+
+
+
+.mm-menu>.mm-navbar .mfooter{font-family: ubuntu; font-size:12px; text-transform:none;color:#4253af;}
+.mm-menu>.mm-navbar .mfooter strong{font-family: ubuntu; font-size:12px; text-transform:none;color:#6b7dde;}
+.mm-listview span.notifications{display:block;float:right;border-radius:7px;background-color:#ef043e;margin:0px;padding:7px;padding-top:0px;padding-bottom:0px;color:#ffffff;font-size:14px;font-weight:bold;text-align:center;text-decoration:none;}
+
+
+
+
+
+/* MEDIA QUERIES */
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+
+
+}
+
+@media only screen and (min-width :480px) and (max-width : 768px) {
+
+
+}
+
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-width : 768px) and (max-width : 1024px) {
+
+}
+
+
+/* Desktops and laptops ----------- */
+@media only screen  and (min-width : 1224px) {
+
+}
+
+
+
+/* Large screens ----------- */
+@media only screen  and (min-width : 1824px) {
+
+}

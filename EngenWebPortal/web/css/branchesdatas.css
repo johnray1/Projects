@@ -1,0 +1,72 @@
+input.fetchdata {
+    font-family: ubuntu;
+    font-size: 16px;
+    padding: 8px;
+    padding-right: 14px;
+    padding-left: 14px;
+    margin: 0px;
+    background: #042c90;
+    border: 0px solid red;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.70s ease;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+
+.tanks_branchdatas {border:0px solid green;}
+div.sholderinbox div.tanks_branchdatas div.resp-tabs-container h2{display:none;border:0px solid red;}
+div.sholderinbox:hover div.tanks_branchdatas div.resp-tabs-container h2{display:none;border:0px solid red;}
+
+.branchdescription{padding:0px;min-height:222px;background-color:#ffffff;color:#000000;}
+.branchdescription div{border-top:2px solid #ffffff;padding:7px;padding-bottom:17px;}
+.branchdescription h3{font-size:27px;color:#042c90;}
+.branchdescription label{display:block;font-size:13px;color:#042c90;letter-spacing:2px;}
+.branchdescription p{display:block;font-size:13px;color:#a3a3a3;padding-top:7px;}
+.branchdescription p strong{display:block;font-size:13px;color:#000000}
+
+
+a.ss26{font-family: ubuntu;
+       float:right;
+       font-size: 16px;
+       padding: 1px;
+       padding-right: 14px;
+       padding-left: 14px;
+       margin: 0px;
+       background: #042c90;
+       border: 0px solid red;
+       border-radius: 20px;
+       color: white;
+       cursor: pointer;
+       font-size: 16px;
+       transition: all 0.70s ease;
+       outline: none;
+       cursor: pointer;
+       text-align: center;
+       text-decoration:none;}
+
+a.ss26:hover{font-family: ubuntu;
+             float:right;
+             font-size: 16px;
+             padding: 1px;
+             padding-right: 14px;
+             padding-left: 14px;
+             margin: 0px;
+             background:#000000;
+             border: 0px solid red;
+             border-radius: 20px;
+             color: white;
+             cursor: pointer;
+             font-size: 16px;
+             transition: all 0.70s ease;
+             outline: none;
+             cursor: pointer;
+             text-align: center;
+             text-decoration:none;}
+
+a.ss26:before{content: "\f0ce "; font-family:fontawesome;margin:0px; padding:0px;padding-right:7px; font-size:17px;}
+a.ss26 strong{color:#f93360;font-weight:bold;}

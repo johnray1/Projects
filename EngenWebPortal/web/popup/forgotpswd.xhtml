@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+      
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>SP - Retreive Password</title>
+            
+        <link href="../css/style.css" rel="stylesheet" type="text/css" />
+        <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../js/jquery-1.12.0.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+            
+    </h:head>
+        
+        
+    <h:body>
+        
+        <div class="container-fluid" style="margin:0px;padding:0px;border:0px solid red;">
+            
+            <div class="col-xs-12 col-sm-12 holderinbox_popup" style="margin:0px;padding:0px;min-height:200px;">
+                <h2 style="text-align:center;font-size:18px;">RESET PASSWORD</h2>
+                    
+                    
+                <!-- FORM -->
+                <h:form class="container-fluid forminput">
+                    <div class="textinput" style="text-align:center;font-weight:bold;margin-bottom:40px;">In order to receive your PASSWORD please enter the EMAIL address provided during the registration.</div>
+                    <div class="textinput">
+                        <h:inputText   id="field1" value="#{EmailBean.email}" />
+                        <h:outputLabel for="field1" value="Enter email"/>
+                    </div>
+                    <div class="submitinput">
+                        <h:commandButton  value="Submit" action="forgotpswd.xhtml" actionListener="#{EmailBean.email()}" />
+                    </div>
+                </h:form>
+                <!-- End FORM -->
+                    
+                    
+            </div>
+        </div>
+            
+            
+       
+            
+    </h:body>
+</html>

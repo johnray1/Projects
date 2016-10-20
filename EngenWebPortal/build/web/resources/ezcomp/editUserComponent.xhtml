@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite">
+    
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="userIdValue" />
+        <cc:attribute name="fNameValue" />
+        <cc:attribute name="otherNameValue" />
+        <cc:attribute name="emailValue" />
+        <cc:attribute name="phoneValue" />
+        <cc:attribute name="genderValue" />
+        <cc:attribute name="branchRoleIdValue" />
+        <cc:attribute name="detailValue" />
+        <cc:attribute name="pwdValue" />
+        <cc:attribute name="rePwdValue" />
+        <cc:attribute name="popUpLabel" />
+        <cc:attribute name="saveActionName" />
+        <cc:attribute name="saveButtonAction" 
+                      method-signature="java.lang.String update()"/>
+        <cc:attribute name="renderedOnsuccess" />
+    </cc:interface>
+    
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        
+        <div class="container-fluid" style="margin:0px;padding:0px;border:0px solid red;;min-height:400px;">
+            
+            <div class="col-xs-12 col-sm-12 holderinbox_popup" style="margin:0px;padding:0px;">
+                <h2 style="text-align:center;font-size:18px;background-color:#042c90">
+                    <h:outputText value="#{cc.attrs.popUpLabel}"/>
+                </h2>
+                
+                
+                <!-- FORM -->
+                
+                <div class="col-xs-12 theinput">
+                    <h:outputLabel value="Name"/>
+                    <h:inputText id="field2" value="#{cc.attrs.fNameValue}"/>
+                </div>
+                
+                <div class="col-xs-12 theinput">
+                    <h:outputLabel value="Email"/>
+                    <h:inputText id="field3" value="#{cc.attrs.emailValue}"/>
+                </div>
+                
+                <div class="col-xs-12 theinput">
+                    <h:outputLabel value="PhoneNo"/>
+                    <h:inputText id="field4" value="#{cc.attrs.phoneValue}"/>
+                </div>
+                
+                 <div class="col-xs-12 selectinput">
+                    <h:outputLabel value="BRANCH NAME"/>
+                    <h:selectOneMenu value="#{cc.attrs.branchRoleIdValue}" id="field5">
+                        <f:selectItem itemLabel="NO ROLE" itemValue="0"/>
+                        <f:selectItems value="#{TemplateBean.braList.branchList}" var="bra"
+                                       itemLabel="#{bra.name} - Staff Role" itemValue="#{bra.branchId}"/>
+                    </h:selectOneMenu>
+                </div>
+                
+                <div class="col-xs-12 theinput">
+                    <h:outputLabel value="Password"/>
+                    <h:inputText id="field8" value="#{cc.attrs.pwdValue}"/>
+                </div>
+                
+                <div class="col-xs-12 theinput">
+                    <h:outputLabel value="ReEnterPassword"/>
+                    <h:inputText id="field9" value="#{cc.attrs.rePwdValue}"/>
+                </div>
+               
+                <div  class="col-xs-12 submitinput" >
+                    <h:commandButton onclick="notifiyViewDetails()1;notifiyDatatableRefresh();" value="#{cc.attrs.saveActionName}" action="#{cc.attrs.saveButtonAction}">
+                        <f:ajax execute="@form" render="#{cc.attrs.renderedOnsuccess}" />
+                    </h:commandButton>
+                </div>
+                
+                <div class="col-xs-12 theinput">
+                    <h:inputHidden  id="field1" value="#{cc.attrs.userIdValue}"/>
+                </div>
+                
+                <!-- End FORM -->
+                
+                
+            </div>
+        </div>
+    </cc:implementation>
+    
+</html>
+

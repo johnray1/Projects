@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    
+    
+    <h:body>
+        <ui:composition> 
+            <h:form>
+                <!--START HEADER -->
+                <div class="hidden-xs hidden-sm">                   
+                    
+                    <!-- TopHeader -->
+                    <div class="container-fluid topheader" style="margin:0px;padding:0px;">
+                        <div>
+                            <div class="col-xs-12 col-sm-12 col-md-2  logo" style="text-align:center;"> 
+                                <h:graphicImage value="images/engenpayfuel_logo.jpg" class="logo hidden-xs hidden-sm"/>
+                                <h:graphicImage value="images/engenpayfuelmin_logo.jpg" class="logo hidden-md hidden-lg"/>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-10 name" style="margin:0px;padding:0px;">
+                                <strong class="col-xs-7 col-sm-5 col-md-8 hidden-xs">
+                                    <h:outputText value="#{LoginBean.branchName}"/>
+                                </strong>
+                                <strong class="col-xs-4 col-sm-4 hidden-md hidden-lg"></strong> 
+                                
+                                <div class="col-xs-4 col-sm-4 col-md-2 dropdown" style="margin:0px;padding:0px;"><span> <label>000</label></span>
+                                    <div class="dropdown-content hide">
+                                        <h4>Notifications</h4>
+                                        <a href="#"><div>NOTIFICATION TYPE <em>dd/mm/yyyy - 00:00:00</em> </div> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamt. </a>
+                                        <a href="#"><div>NOTIFICATION TYPE <em>dd/mm/yyyy - 00:00:00</em> </div> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamt. </a>
+                                        <a href="#"><div>NOTIFICATION TYPE <em>dd/mm/yyyy - 00:00:00</em> </div> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamt. </a>
+                                        <a href="#" class="more">view more</a>
+                                    </div>                                            
+                                </div>
+                                
+                                <h:commandLink action="#{LoginBean.logout()}" style="margin:0px;padding:0px;" class="col-xs-4 col-sm-4 col-md-2 logout">
+                                    <h:graphicImage value="images/icon_user.png" style="float: left"/>
+                                    <label>Welcome
+                                        <strong>#{LoginBean.userName}</strong>
+                                    </label>
+                                </h:commandLink>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!-- End TopHeader -->
+                    
+                    <!-- Navbar -->
+                    <nav class="navbar navbar-default hidden-xs" style="background-color:#ffffff;height:65px;font-family:ubuntu;color:#ffffff;text-align:center;padding-bottom:0px;margin-bottom:0px;border-bottom:0px solid #1a8c35;border-radius:0px;">
+                        <div class="container">                                    
+                            <div class="col-xs-12 themenu">
+                                <!-- TheMenu -->
+                                <div class="#{TemplateBean.hideDash}">
+                                    <h:commandLink action="#{DashBean.dashBoard()}" class="#{TemplateBean.dashboardClassName} ">Dashboard</h:commandLink>
+                                </div>
+                                <div class="#{TemplateBean.hideDashHq}">
+                                    <h:commandLink action="#{DashBean.dashBoardHq()}" class="#{TemplateBean.dashboardClassName}">Dashboard</h:commandLink>
+                                </div>
+                                <div class="#{TemplateBean.hideClassName}">
+                                    <h:commandLink action="#{BranchBean.branches()}" class="#{TemplateBean.branchClassName}">Branch</h:commandLink>
+                                </div>
+                                <div class="dropdown">
+                                    <a class="#{TemplateBean.productsClassName}" data-toggle="dropdown">Items</a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <h:commandLink action="#{ProductBean.products()}">Product</h:commandLink>
+                                        </li>
+                                        <li>
+                                            <h:commandLink action="#{DeviceBean.devices()}">Pos</h:commandLink>
+                                        </li>
+                                        <li>
+                                            <h:commandLink action="#{TpnBean.tpn()}">Tank-Pump-Nozzle</h:commandLink>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h:commandLink action="#{TransactionBean.transactions()}" class="#{TemplateBean.transactionClassName}">Transaction</h:commandLink>
+                                </div>
+                                <div class="dropdown">
+                                    <a class="#{TemplateBean.settingClassName}" data-toggle="dropdown">Settings</a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <h:commandLink action="#{UserRoleBean.userrole()}">User-Role</h:commandLink>
+                                        </li>
+                                        <li class="#{TemplateBean.hideClassName}">
+                                            <h:commandLink action="#{LogsBean.logs()}">Log</h:commandLink>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- End TheMenu -->
+                            </div>
+                        </div>
+                    </nav>
+                    <!-- End Navbar -->
+                    
+                    
+                </div>
+                <!-- End HEADER--> 
+                
+                
+                
+                <!--START HEADERMOB -->
+                <div class="hidden-md hidden-lg">
+                    
+                    <!-- TopHeader-->
+                    <div class="container-fluid topheader" style="margin:0px;padding:0px;">
+                        <div class="col-xs-4" style="margin:0px;padding:0px;border:0px solid red;">
+                            <a href="#menu">
+                                <div id="menu_icon">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xs-4" style="margin:0px;padding:0px;border:0px solid red;text-align:center;">
+                            <a href="#menu">
+                                <img src="images/engenpayfuelmin_logo.jpg" class="logo hidden-md hidden-lg"/>
+                            </a>
+                        </div>
+                        <div class="col-xs-4" style="margin:0px;padding:0px;border:0px solid red;text-align:right;">
+                            <h:commandLink action="#{LoginBean.logout()}">
+                                <h:graphicImage value="images/icon_mlogout.png" style="margin:15px;padding:0px;border:0px solid red;" width="48" height="38"/>
+                            </h:commandLink>
+                        </div>
+                    </div>
+                    <!-- End TopHeader-->
+                    
+                    <!-- NavBar-->
+                    <nav id="menu">
+                        <ul>
+                            <!-- TheMobileMenu -->
+                            
+                            <li class="#{TemplateBean.hideDash}">
+                                <h:commandLink action="#{DashBean.dashBoard()}">Dashboard</h:commandLink>
+                            </li >
+                            
+                            <li class="#{TemplateBean.hideDashHq}">
+                                <h:commandLink action="#{DashBean.dashBoardHq()}">Dashboard</h:commandLink>
+                            </li>
+                            
+                            <li class="#{TemplateBean.hideClassName}">
+                                <h:commandLink action="#{BranchBean.branches()}">Branch</h:commandLink>
+                            </li>
+                            
+                            <li>
+                                <span>Item</span>
+                                <ul>
+                                    <li>
+                                        <h:commandLink action="#{ProductBean.products()}">Product</h:commandLink>
+                                    </li>
+                                    <li>
+                                        <h:commandLink action="#{DeviceBean.devices()}">Pos</h:commandLink>
+                                    </li>
+                                    <li>
+                                        <h:commandLink action="#{TpnBean.tpn()}" rendered="false">Tank-Pump-Nozzle</h:commandLink>
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                            <li>
+                                <h:commandLink action="#{TransactionBean.transactions()}">Transaction</h:commandLink>
+                            </li>
+                            
+                            <li><span>Settings</span>
+                                <ul>
+                                    <li>
+                                        <h:commandLink action="#{UserRoleBean.userrole()}">User-Role</h:commandLink>
+                                    </li>
+                                    <li>
+                                        <h:commandLink action="#{LogsBean.logs()}">Log</h:commandLink>
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                            <li>
+                                <a href="#">Notifications 
+                                    <span class="notifications">000</span>
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <h:commandLink action="#{LoginBean.logout()}">Logout</h:commandLink>
+                            </li>
+                            
+                            <!-- End TheMobileMenu -->
+                            
+                        </ul>
+                    </nav>
+                    <!-- End NavBar-->
+                </div>
+                <!-- End HEADERMOB --> 
+                
+            </h:form>
+        </ui:composition> 
+    </h:body>
+</html>
+
