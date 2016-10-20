@@ -8,7 +8,6 @@ package com.oltranz.airtimeweb.bean;
 import com.oltranz.airtimeweb.dao.LoginDAO;
 import com.oltranz.airtimeweb.model.LoginModel;
 import com.oltranz.airtimeweb.model.RegisterRequest;
-import com.oltranz.airtimeweb.model.RegisterResponse;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.logging.Level;
@@ -28,11 +27,11 @@ import javax.servlet.http.HttpSession;
 public class LoginBean implements Serializable{
     
     private Date date=new Date();
-    private String username;
     private String msisdn;
     private String pin;
     private Boolean faceMessage=false;
     private String msg;
+    private LoginModel lm;
     
     @ManagedProperty(value="#{TemplateBean}")
     private TemplateBean templateBean;
@@ -40,8 +39,8 @@ public class LoginBean implements Serializable{
     @ManagedProperty(value="#{WelcomeBean}")
     private WelcomeBean welcomeBean;
     
-    @ManagedProperty(value="#{CustomerBean}")
-    private CustomerBean customerBean;
+    @ManagedProperty(value="#{RechargeBean}")
+    private RechargeBean rechargeBean;
     
     @ManagedProperty(value="#{TransactionBean}")
     private TransactionBean transactionBean;
@@ -58,21 +57,21 @@ public class LoginBean implements Serializable{
         templateBean.setNotificationClassName("deactive");
         
         try {
-            LoginModel lm=LoginDAO.validate(msisdn, pin);
+            lm=LoginDAO.validate(msisdn, pin);
             int statusCode=lm.getResponseStatusSimpleBean().getStatusCode();
             
             if (statusCode==400) {
                 
-                
-                username=lm.getCustomerDetails().getfName();
-                welcomeBean.setMsisdn(msisdn);
-                customerBean.customer(msisdn);
-                transactionBean.setMsisdn(msisdn);
-                transactionBean.customerCreditTransactions();
-                
                 HttpSession session = SessionBean.getSession();
-                session.setAttribute("username",username);
+                session.setAttribute("username",lm.getCustomerDetails().getfName());
+                session.setAttribute("msisdn",msisdn);
+                session.setAttribute("email",lm.getCustomerDetails().getEmail());
+                session.setAttribute("token",lm.getCustomerDetails().getToken());
                 session.setMaxInactiveInterval(30*60);
+                
+                
+                welcomeBean.customerWalletBalance();
+                welcomeBean.latestTransaction();
                 
                 FacesContext.getCurrentInstance().getExternalContext().redirect("welcome.xhtml");
             }
@@ -117,21 +116,20 @@ public class LoginBean implements Serializable{
                 FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
             }
             else{
-                RegisterResponse rr=LoginDAO.validateRegister(registerRequest);
-                int statusCode=rr.getResponseStatusSimpleBean().getStatusCode();
+                lm=LoginDAO.validateRegister(registerRequest);
+                int statusCode=lm.getResponseStatusSimpleBean().getStatusCode();
                 
                 if (statusCode==400) {
                     
-                    
-                    username=rr.getCustomerDetails().getfName();
-                    welcomeBean.setMsisdn(registerRequest.getMsisdn());
-                    customerBean.customer(registerRequest.getMsisdn());
-                    transactionBean.setMsisdn(registerRequest.getMsisdn());
-                    transactionBean.customerCreditTransactions();
-                    
                     HttpSession session = SessionBean.getSession();
-                    session.setAttribute("username",username);
+                    session.setAttribute("username",lm.getCustomerDetails().getfName());
+                    session.setAttribute("msisdn",msisdn);
+                    session.setAttribute("email",lm.getCustomerDetails().getEmail());
+                    session.setAttribute("token",lm.getCustomerDetails().getToken());
                     session.setMaxInactiveInterval(30*60);
+                    
+                    welcomeBean.customerWalletBalance();
+                    welcomeBean.latestTransaction();
                     
                     FacesContext.getCurrentInstance().getExternalContext().redirect("welcome.xhtml");
                 }
@@ -209,49 +207,7 @@ public class LoginBean implements Serializable{
         this.pin = pin;
     }
     
-    /**
-     * @return the username
-     */
-    public String getUsername() {
-        return username;
-    }
     
-    /**
-     * @param username the username to set
-     */
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    
-    
-    
-    /**
-     * @return the transactionBean
-     */
-    public TransactionBean getTransactionBean() {
-        return transactionBean;
-    }
-    
-    /**
-     * @param transactionBean the transactionBean to set
-     */
-    public void setTransactionBean(TransactionBean transactionBean) {
-        this.transactionBean = transactionBean;
-    }
-    
-    /**
-     * @return the customerBean
-     */
-    public CustomerBean getCustomerBean() {
-        return customerBean;
-    }
-    
-    /**
-     * @param customerBean the customerBean to set
-     */
-    public void setCustomerBean(CustomerBean customerBean) {
-        this.customerBean = customerBean;
-    }
     
     /**
      * @return the welcomeBean
@@ -309,6 +265,47 @@ public class LoginBean implements Serializable{
         this.date = date;
     }
     
+    /**
+     * @return the transactionBean
+     */
+    public TransactionBean getTransactionBean() {
+        return transactionBean;
+    }
+    
+    /**
+     * @param transactionBean the transactionBean to set
+     */
+    public void setTransactionBean(TransactionBean transactionBean) {
+        this.transactionBean = transactionBean;
+    }
+    
+    /**
+     * @return the rechargeBean
+     */
+    public RechargeBean getRechargeBean() {
+        return rechargeBean;
+    }
+    
+    /**
+     * @param rechargeBean the rechargeBean to set
+     */
+    public void setRechargeBean(RechargeBean rechargeBean) {
+        this.rechargeBean = rechargeBean;
+    }
+    
+    /**
+     * @return the lm
+     */
+    public LoginModel getLm() {
+        return lm;
+    }
+    
+    /**
+     * @param lm the lm to set
+     */
+    public void setLm(LoginModel lm) {
+        this.lm = lm;
+    }
     
     
     

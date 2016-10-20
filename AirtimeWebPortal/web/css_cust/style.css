@@ -206,13 +206,6 @@ table.innertable tbody tr:nth-child(even){margin-top:5px;border:0px solid red;ba
 table.innertable tbody tr:hover:nth-child(even){margin-top:5px;border:0px solid red;background-color:#f2f5e2;height:30px;color:#000000;cursor:pointer;}
 
 
-background:-moz-linear-gradient(left, rgba(247,247,247,0) 0%, rgba(247,247,247,0.47) 47%, rgba(255,255,255,1) 100%),
-background:-webkit-gradient(left top, right top, color-stop(0%, rgba(247,247,247,0)), color-stop(47%, rgba(247,247,247,0.47)), color-stop(100%, rgba(255,255,255,1))),
-background:-webkit-linear-gradient(left, rgba(247,247,247,0) 0%, rgba(247,247,247,0.47) 47%, rgba(255,255,255,1) 100%),
-background:-o-linear-gradient(left, rgba(247,247,247,0) 0%, rgba(247,247,247,0.47) 47%, rgba(255,255,255,1) 100%),
-background:-ms-linear-gradient(left, rgba(247,247,247,0) 0%, rgba(247,247,247,0.47) 47%, rgba(255,255,255,1) 100%),
-background:linear-gradient(to right, rgba(247,247,247,0) 0%, rgba(247,247,247,0.47) 47%, rgba(255,255,255,1) 100%),
-filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', endColorstr='#ffffff', GradientType=1 );border:0px;border-top:4px solid white;text-align:center;}
 
 
 table.innertablelong thead{border-bottom:0px solid white;color:#000000;font-size:11px;}
@@ -225,7 +218,7 @@ table.innertablelong tbody > tr> th.action{background: rgba(236,236,236,0);
                                            background: -webkit-linear-gradient(left, rgba(236,236,236,0) 0%, rgba(236,236,236,0.47) 47%, rgba(255,255,255,1) 100%);
                                            background: -o-linear-gradient(left, rgba(236,236,236,0) 0%, rgba(236,236,236,0.47) 47%, rgba(255,255,255,1) 100%);
                                            background: -ms-linear-gradient(left, rgba(236,236,236,0) 0%, rgba(236,236,236,0.47) 47%, rgba(255,255,255,1) 100%);
-                                           background: linear-gradient(to right, rgba(236,236,236,0) 0%, rgba(236,236,236,0.47) 47%, rgba(255,255,255,1) 100%);
+                                           background: linear-gradient(right, rgba(236,236,236,0) 0%, rgba(236,236,236,0.47) 47%, rgba(255,255,255,1) 100%);
                                            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ececec', endColorstr='#ffffff', GradientType=1 );border:0px;border-top:2px solid white;text-align:center;}
 
 
@@ -380,14 +373,13 @@ img.logologin{display:block;border:0px solid red;margin-left:auto;margin-right:a
 .login_form{font-family:ubuntu;font-size:14px;font-weigth:normal;margin-top:10px;}
 .login_theinput{min-height:50px;margin:10px;margin-bottom:25px;margin-top:0px;border:0px solid red;text-align:center;}
 
-.login_theinput input.user{width:70%;min-height:50px;padding:5px;padding-left:45px; color:#000000;font-size:17px;text-align:center;font-weight:bold;border:2px solid #dfdfdf;outline:none;background:url(../images/login_username.png)top left no-repeat;opacity:1;background-color:#ffffff;-webkit-transition: all 0.60s ease-out;-moz-transition: all 0.60s ease-out; -o-transition: all 0.60s ease-out;transition: all 0.60s ease-out;}
-.login_theinput input.pass{width:70%;min-height:50px;padding:5px;color:#000000;font-size:17px;text-align:center;font-weight:bold;border:2px solid #dfdfdf;outline:none;background:url(../images/login_pass.png)top left no-repeat;opacity:1;background-color:#ffffff;-webkit-transition: all 0.60s ease-out;-moz-transition: all 0.60s ease-out; -o-transition: all 0.60s ease-out;transition: all 0.60s ease-out;}
+.login_theinput input.user{width:90%;min-height:50px;padding:5px;padding-left: 37px;color:#000000;font-size:17px;text-align:center;font-weight:bold;border:2px solid #dfdfdf;outline:none;background:url(../images/login_username.png)top left no-repeat;opacity:1;background-color:#ffffff;-webkit-transition: all 0.60s ease-out;-moz-transition: all 0.60s ease-out; -o-transition: all 0.60s ease-out;transition: all 0.60s ease-out;}
+.login_theinput input.pass{width:90%;min-height:50px;padding:5px;color:#000000;font-size:17px;text-align:center;font-weight:bold;border:2px solid #dfdfdf;outline:none;background:url(../images/login_pass.png)top left no-repeat;opacity:1;background-color:#ffffff;-webkit-transition: all 0.60s ease-out;-moz-transition: all 0.60s ease-out; -o-transition: all 0.60s ease-out;transition: all 0.60s ease-out;}
 .login_theinput input.filled{width:70%;min-height:50px;padding:5px;color:#000000;font-size:17px;text-align:center;font-weight:bold;border:2px solid #dfdfdf;outline:none;background-color:#ffffff;}
 
 .sendairtime{min-height:50px;margin:10px;margin-bottom:25px;margin-top:0px;border:0px solid red;text-align:center;}
-.sendairtime input.user{width:99%;min-height:50px;padding:5px;color:#000000;font-size:17px;text-align:center;font-weight:bold;border:2px solid #dfdfdf;outline:none;background:url(../images/login_username.png)top left no-repeat;opacity:1;background-color:#ffffff;-webkit-transition: all 0.60s ease-out;-moz-transition: all 0.60s ease-out; -o-transition: all 0.60s ease-out;transition: all 0.60s ease-out;}
-.sendairtime input.pass{width:99%;min-height:50px;padding:5px;color:#000000;font-size:17px;text-align:center;font-weight:bold;border:2px solid #dfdfdf;outline:none;background:url(../images/login_pass.png)top left no-repeat;opacity:1;background-color:#ffffff;-webkit-transition: all 0.60s ease-out;-moz-transition: all 0.60s ease-out; -o-transition: all 0.60s ease-out;transition: all 0.60s ease-out;}
-.sendairtime input.filled{width:99%;min-height:50px;padding:5px;color:#000000;font-size:17px;text-align:center;font-weight:bold;border:2px solid #dfdfdf;outline:none;background-color:#ffffff;}
+
+.sendairtime input{width:99%;min-height:50px;padding:5px;padding-left:35px;color:#000000;font-size:15px;text-align:center;font-weight:normal;border:2px solid #dfdfdf;outline:none;opacity:1;background-color:#ffffff;-webkit-transition: all 0.60s ease-out;-moz-transition: all 0.60s ease-out; -o-transition: all 0.60s ease-out;transition: all 0.60s ease-out;}
 
 
 .fav_theinput div div h4{display:inline-block;width:100%;margin:0px;padding:3px; font-size:17px;text-align:left;font-weight:bold;color:#000000}
@@ -404,9 +396,9 @@ span.send_tomany div.send_theinput{margin:0px; margin-top:0px;margin-bottom:0px;
 span:hover.send_tomany div.sendairtime{min-height: 20px; margin: 10px; margin-top: 0px; border: 0px solid red;    text-align: center;}
 
 
-.login_submitinput{min-height:50px;margin:10px;margin-top:0px;border:0px solid red;text-align:center;}
-.login_submitinput input[type="submit"] {width:70%;min-height:50px;background: #ffffff;border: 2px solid #339900;border-radius: 0px; cursor: pointer; font-size:20px;color:#339900;padding:4px;outline:none;transition:all 0.70s ease;}
-.login_submitinput input[type="submit"]:hover  { width:70%;min-height:50px;background:#339900;border: 2px solid #339900;border-radius: 0px; cursor: pointer; font-size:20px;letter-spacing:2px;color:#ffffff;padding:4px;outline:none;}
+.login_submitinput{min-height:57px;margin:10px;margin-top:0px;border:0px solid red;text-align:center;}
+.login_submitinput input[type="submit"] {width:90%;min-height:57px;background: #ffffff;border: 2px solid #339900;border-radius: 0px; cursor: pointer; font-size:27px;color:#339900;padding:4px;outline:none;transition:all 0.70s ease;}
+.login_submitinput input[type="submit"]:hover  { width:90%;min-height:57px;background:#339900;border: 2px solid #339900;border-radius: 0px; cursor: pointer; font-size:27px;letter-spacing:2px;color:#ffffff;padding:4px;outline:none;}
 
 
 
@@ -415,6 +407,16 @@ span:hover.send_tomany div.sendairtime{min-height: 20px; margin: 10px; margin-to
 
 
 .login_submitinput input.update{padding-left:137px;text-align:left}
+
+.login_theinput input{width:90%;min-height:50px;padding:5px;padding-left:35px;color:#000000;font-size:17px;text-align:center;font-weight:normal;border:2px solid #dfdfdf;outline:none;opacity:1;background-color:#ffffff;-webkit-transition: all 0.60s ease-out;-moz-transition: all 0.60s ease-out; -o-transition: all 0.60s ease-out;transition: all 0.60s ease-out;}
+.ico_phone{background-image:url(../images/icon_input_phone.png); background-size: auto 100%;background-position:left middle; background-repeat:no-repeat;}
+.ico_name{background-image:url(../images/icon_input_name.png); background-size: auto 100%;background-position:left middle; background-repeat:no-repeat;}
+.ico_pass{background-image:url(../images/icon_input_pass.png); background-size: auto 100%;background-position:left middle; background-repeat:no-repeat;}
+.ico_email{background-image:url(../images/icon_input_email.png); background-size: auto 100%;background-position:left middle; background-repeat:no-repeat;}
+.ico_naira{background-image:url(../images/icon_input_naira.png); background-size: auto 100%;background-position:left middle; background-repeat:no-repeat;}
+
+
+
 
 
 
@@ -1068,11 +1070,25 @@ div.form_content{
 
 /* DASHBOARD*/
 
+
+.dashboardbox_addamount_input input.amountdisabled {   width: 85%;    min-height: 50px;    background: #ffffff;    border: 2px solid #c0c0c0;    border-radius: 0px;    font-size: 20px;    font-weight: bold;    color: #c0c0c0;    padding: 4px;    outline: none;    transition: all 0.70s ease;    text-align: center;}
+.dashboardbox_addamount_input input.amountdisabled:hover{   width: 85%;    min-height: 50px;    background: #ffffff;    border: 2px solid #c0c0c0;    border-radius: 0px;    font-size: 20px;    font-weight: bold;    color: #c0c0c0;    padding: 4px;    outline: none; text-align: center;}
+
+.dashboardbox_addamountcancel_submit input[type="submit"]{width:180px; min-height: 50px;margin-top:0px; margin-bottom: 17px;background: #c0c0c0; border: 2px solid #c0c0c0; border-radius: 6px; cursor: pointer; font-size: 20px; color: #ffffff;font-weight:bold; padding: 4px; border-radius: 2px; outline: none; transition: all 0.70s ease;}
+.dashboardbox_addamountcancel_submit input[type="submit"]:hover{ width:180px;min-height: 50px; margin-top: 0px;margin-bottom: 17px;background: #303192;border: 2px solid #303192;border-radius: 6px;cursor: pointer;font-weight:bold;font-size: 20px;color: #ffffff;padding: 4px;border-radius: 2px;outline: none;}
+
+.dashboardbox_addamountpay_submit input{width: 180px; min-height: 50px;margin-top: 17px; background: #c0c0c0; border: 2px solid #c0c0c0; border-radius: 6px; cursor: pointer; font-size: 20px; color: #ffffff;font-weight:bold; padding: 4px; border-radius: 2px; outline: none; transition: all 0.70s ease;}
+.dashboardbox_addamountpay_submit input{width: 180px;min-height: 50px; margin-top: 17px;background: #303192;border: 2px solid #303192;border-radius: 6px;cursor: pointer;font-weight:bold;font-size: 20px;color: #ffffff;padding: 4px;border-radius: 2px;outline: none;}		
+
+
+
 .dashboardbox{margin:0px;padding:0px;margin-bottom:15px;background-color:#ffffff;border:1px solid #d0d0f0;}
 .dashboardbox:hover{margin:0px;padding:0px;margin-bottom:15px;background-color:#ffffff;border:1px solid #ff5700;}
 .dashboardbox span{display:inline-block;width:100%;margin:0px;padding:5px;background-color:transparent;}
 
-.dashboardbox span div.dt-buttons{left: -5px;}
+.dashboardbox span div.dt-buttons{left: -5px;    display: none;}
+.dashboardbox span div.dataTables_filter{display: none;}
+
 .dashboardbox span div.dt-buttons span{display:inline-block;width:100%;margin:0px;padding:0px;background-color:transparent;}
 .dashboardbox span div.dataTables_paginate span{display:inline;margin:0px;padding:0px;font-size: 12px;}
 .dashboardbox span div.dataTables_info{margin:0px;padding:5px;font-size: 12px;color:#c0c0c0;}
@@ -1138,14 +1154,13 @@ div.form_content{
 
 
 .dashboardbox_addamount_input input.amount {
-    width: 70%;
+    width: 95%;
     min-height: 50px;
-    background: #ffffff;
     border: 2px solid #c0c0c0;
     border-radius: 0px;
     font-size: 20px;
     font-weight:bold;
-    color: #00000;
+    color: #000000;
     padding: 4px;
     outline: none;
     transition: all 0.70s ease;
@@ -1154,9 +1169,8 @@ div.form_content{
 
 
 .dashboardbox_addamount_input:hover input.amount {
-    width: 70%;
+    width: 95%;
     min-height: 50px;
-    background: #ffffff;
     border: 2px solid #323b96;
     border-radius: 0px;
     font-size: 20px;
@@ -1178,7 +1192,7 @@ div.form_content{
 
 
 .dashboardbox_addamount_submit input[type="submit"] {
-    width: 70%;
+    width: 95%;
     min-height: 50px;
     background: #ffffff;
     border: 2px solid #339900;
@@ -1193,7 +1207,7 @@ div.form_content{
 
 
 .dashboardbox_addamount_submit:hover input[type="submit"] {
-    width: 70%;
+    width: 95%;
     min-height: 50px;
     background: #339900;
     border: 2px solid #339900;
@@ -1256,8 +1270,8 @@ fieldset.dashboardbox_addamount_input{border:2px solid white;}
 fieldset.dashboardbox_addamount_input legend{padding:7px; color:#c0c0c0;font-size:12px;}
 
 
-.homeamount{line-height:200px;font-size:80px;color:#9f9f9f;border:0px solid red;font-family:arial;}
-.homeamount strong{font-size:110px;color:#ff5700;font-family:ubuntu;}
+.homeamount{line-height:200px;font-size:80px;color:#303192;border:0px solid red;font-family:arial;}
+.homeamount strong{font-size:110px;color:#303192;font-family:ubuntu;}
 
 .hidemob{}
 
@@ -1265,6 +1279,12 @@ fieldset.dashboardbox_addamount_input legend{padding:7px; color:#c0c0c0;font-siz
 /*THEBOX*/
 .maincontents{display:inline-block;padding:10px;padding-top:25px;height:100%;border:0px solid red;}
 .thebox{}
+
+
+
+
+/*Quickteller*/
+
 
 
 /* MEDIA QUERIES */
@@ -1279,14 +1299,14 @@ fieldset.dashboardbox_addamount_input legend{padding:7px; color:#c0c0c0;font-siz
     .homeamount {
         line-height: 200px;
         font-size: 30px;
-        color: #9f9f9f;
+        color:#303192;
         border: 0px solid red;
         font-family: arial;
     }
     
     .homeamount strong {
         font-size: 55px;
-        color: #ff5700;
+        color: #303192;
         font-family: ubuntu;
     }
     
@@ -1307,6 +1327,7 @@ fieldset.dashboardbox_addamount_input legend{padding:7px; color:#c0c0c0;font-siz
     .dashboardbox_addamount_input input.amount{width:95%;}
     
     .send_theinput{margin:0px; margin-bottom: 25px;padding:0px;}
+    
     .sendairtime {margin:0px; padding:0px;padding-left:7px;padding-right:7px;}
     
     .fav_theinput{margin:0px; margin-bottom: 25px;padding:0px;}
@@ -1319,6 +1340,8 @@ fieldset.dashboardbox_addamount_input legend{padding:7px; color:#c0c0c0;font-siz
     .dt-buttons{display:none;}
     .dataTables_filter{display:none;}
     
+    div.logomob img.logo{border:0px solid red;width:auto;height:70px;image-rendering: crisp-edges;-webkit-transform: translateZ(0);padding:3px;margin-right:-30px}
+    
 }
 
 
@@ -1330,14 +1353,14 @@ fieldset.dashboardbox_addamount_input legend{padding:7px; color:#c0c0c0;font-siz
     .homeamount {
         line-height: 200px;
         font-size: 40px;
-        color: #9f9f9f;
+        color:#303192;
         border: 0px solid red;
         font-family: arial;
     }
     
     .homeamount strong {
         font-size: 65px;
-        color: #ff5700;
+        color: #303192;
         font-family: ubuntu;
     }
     
@@ -1379,6 +1402,8 @@ fieldset.dashboardbox_addamount_input legend{padding:7px; color:#c0c0c0;font-siz
     
     .login_submitinput input.update{padding-left:137px;text-align:left}
     
+    div.logomob img.logo{border:0px solid red;width:auto;height:70px;image-rendering: crisp-edges;-webkit-transform: translateZ(0);padding:3px;margin-right:-30px}
+    
     
 }
 
@@ -1390,21 +1415,25 @@ fieldset.dashboardbox_addamount_input legend{padding:7px; color:#c0c0c0;font-siz
     .homeamount {
         line-height: 200px;
         font-size: 40px;
-        color: #9f9f9f;
+        color:#303192;
         border: 0px solid green;
         font-family: arial;
     }
     
     .homeamount strong {
         
-        color: #ff5700;
+        color:#303192;
         font-family: ubuntu;
     }
     
     
     .thebox{margin:0px;padding:0px;border:0px solid pink;}
     .maincontents{display:inline-block;padding:0px;padding-top:25px;height:100%;border:0px solid red;}
+    .fav_theinput div div h4:before{content: "\f0ab";font-family: FontAwesome;font-weight:normal; font-size:17px; color:#ff5700;padding-right:7px; }
+    .fav_theinput div div h4:after{content: "\f0ab";font-family: FontAwesome;font-weight:normal; font-size:17px; color:#ffffff;padding-right:7px;}
     
+    
+    div.logomob img.logo{border:0px solid blue;width:auto;height:70px;image-rendering: crisp-edges;-webkit-transform: translateZ(0);padding:3px;margin-right:-65px}
     
     
 }
@@ -1419,14 +1448,14 @@ fieldset.dashboardbox_addamount_input legend{padding:7px; color:#c0c0c0;font-siz
     .homeamount {
         line-height: 200px;
         font-size: 50px;
-        color: #ff5700;
+        color: #303192;
         border: 0px solid green;
         font-family: arial;
     }
     
     .homeamount strong {
         font-size: 75px;
-        color: #ff5700;
+        color: #303192;
         font-family: ubuntu;
     }
     
@@ -1435,6 +1464,12 @@ fieldset.dashboardbox_addamount_input legend{padding:7px; color:#c0c0c0;font-siz
     .omenu{display:inline-block;margin-left:5px;margin-right:5px;width:10%;height:64px;line-height:80px;background-color:#ffffff;color:#ff5700;font-size:14px;text-align:center;text-decoration:none;border-bottom:5px solid #ffffff;}
     .omenu:hover{display:inline-block;margin-left:5px;margin-right:5px;width:10%;height:64px;;line-height:80px;background-color:#ffffff;color:#5caedd;font-size:14px;text-align:center;text-decoration:none;border-bottom:5px solid #ff5700;}
     table.innertable tbody > tr> th.action img{width:30%;margin:0px;border:0px solid red;}
+    
+    .fav_theinput div div h4:before{content: "\f0ab";font-family: FontAwesome;font-weight:normal; font-size:17px; color:#ff5700;padding-right:7px; }
+    .fav_theinput div div h4:after{content: "\f0ab";font-family: FontAwesome;font-weight:normal; font-size:17px; color:#ffffff;padding-right:7px;}
+    
+    div.logomob img.logo{border:0px solid #ff00cc;width:auto;height:70px;image-rendering: crisp-edges;-webkit-transform: translateZ(0);margin-right:-90px}
+    
 }
 
 

@@ -44,6 +44,8 @@ public class AuthorizationFilter implements Filter {
             String reqURI = reqt.getRequestURI();
             
             if (    reqURI.contains("/how.xhtml")
+                    ||reqURI.contains("/mhelp.xhtml")
+                    ||reqURI.contains("/mterm.xhtml")
                     ||reqURI.contains("/download.xhtml")
                     ||reqURI.contains("/contacts.xhtml")
                     ||reqURI.contains("/term.xhtml")

@@ -9,8 +9,17 @@
 
 .footer span.separator{display:inline-block;font-family:ubuntu;margin:0px;margin-left:17px;margin-right:17px;color:#ff0000;font-size:16px;text-decoration:none;}
 
-.footer div.left{text-align:left}
-.footer div.right{text-align:right;}
+.footer div.left{text-align:center;border:0px solid red}
+.footer div.left a{width:35px;font-size:25px;border:0px solid red;padding:0px 5px;margin:0px 2px;color:#cccccc;}
+.footer div.left a:hover.facebook{color:#3b5998;}
+.footer div.left a:hover.twitter{color:#55acee;}
+.footer div.left a:hover.linkedin{color:#0077b5;}
+.footer div.left a:hover.instagram{color:#000000;}
+.footer div.left a:hover.youtube{color:#b31217;}
+.footer div.left a:hover.rss{color:#FF6600;}
+
+.footer div.right{text-align:right;border:0px solid red}
+.footer div.center{text-align:center;border:0px solid red}
 
 
 
@@ -19,32 +28,79 @@
 
 /* MEDIA QUERIES */
 
+
 /* Smartphones (portrait and landscape) ----------- */
-@media only screen and (min-width : 320px) and (max-width : 480px) {
+@media only screen and (min-width : 200px) and (max-width : 321px) {
 .footer a{display:block;width:100%;border-top:1px solid #dfdfdf;font-family:ubuntu;margin:0px;padding:4px;color:#5050a9;font-size:18px;text-decoration:none;}
 .footer a:hover{display:block;width:100%;border-top:1px solid #dfdfdf;font-family:ubuntu;margin:0px;color:#ff5700;font-size:18px;text-decoration:none;}
+.footer span{display:inline-block;font-family:ubuntu;margin:0px;color:#b1b1b1;font-size:8px;text-decoration:none;}
 .footer span.separator{display:none;}
-.footer div.left, .footer div.right {text-align:center}
+.footer div.left {text-align:center;text-transform:uppercase;} 
+.footer div.right {text-align:center}
+
+.footer div.left a{display:inline-block;width:15%;border:1px solid #dfdfdf;margin: 0px 5px;margin-bottom:17px; }
+
+.footer div.left a.facebook{color:#3b5998;}
+.footer div.left a.twitter{color:#55acee;}
+.footer div.left a.linkedin{color:#0077b5;}
+.footer div.left a.instagram{color:#000000;}
+.footer div.left a.youtube{color:#b31217;}
+.footer div.left a.rss{color:#FF6600;}
+}
+
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-width : 322px) and (max-width : 480px) {
+.footer a{display:block;width:100%;border-top:1px solid #dfdfdf;font-family:ubuntu;margin:0px;padding:4px;color:#5050a9;font-size:18px;text-decoration:none;}
+.footer a:hover{display:block;width:100%;border-top:1px solid #dfdfdf;font-family:ubuntu;margin:0px;color:#ff5700;font-size:18px;text-decoration:none;}
+.footer span{display:inline-block;font-family:ubuntu;margin:0px;color:#b1b1b1;font-size:11px;text-decoration:none;}
+.footer span.separator{display:none;}
+.footer div.left {text-align:center;text-transform:uppercase;} 
+.footer div.right {text-align:center}
+
+.footer div.left a{display:inline-block;width:13.5%;border:1px solid #dfdfdf;margin: 0px 8px;margin-bottom:17px; }
+
+.footer div.left a.facebook{color:#3b5998;}
+.footer div.left a.twitter{color:#55acee;}
+.footer div.left a.linkedin{color:#0077b5;}
+.footer div.left a.instagram{color:#000000;}
+.footer div.left a.youtube{color:#b31217;}
+.footer div.left a.rss{color:#FF6600;}
 }
 
 
 @media only screen and (min-width :480px) and (max-width : 768px) {
-.footer span{display:inline-block;font-family:ubuntu;margin:0px;color:#b1b1b1;font-size:14px;text-decoration:none;}
-.footer span p{display:block;width:100%;font-family:ubuntu;margin:0px;color:#b1b1b1;font-size:14px;text-decoration:none;}
+.footer span{display:inline-block;font-family:ubuntu;margin:0px;color:#b1b1b1;font-size:12px;text-decoration:none;}
+.footer span p{display:block;width:100%;font-family:ubuntu;margin:0px;color:#b1b1b1;font-size:12px;text-decoration:none;}
 .footer a{display:block;width:100%;border-top:1px solid #dfdfdf;font-family:ubuntu;margin:0px;padding:4px;color:#5050a9;font-size:18px;text-decoration:none;}
 .footer a:hover{display:block;width:100%;border-top:1px solid #dfdfdf;font-family:ubuntu;margin:0px;color:#ff5700;font-size:18px;text-decoration:none;}
 .footer span.separator{display:none;}
-.footer div.left, .footer div.right {text-align:center}
+.footer div.left {text-align:center;text-transform:uppercase;} 
+.footer div.right {text-align:center}
+
+
+.footer div.left a{display:inline-block;width:15.5%;border:1px solid #dfdfdf;margin: 0px 8px;margin-bottom:17px; }
+.footer div.left a.facebook{color:#3b5998;}
+.footer div.left a.twitter{color:#55acee;}
+.footer div.left a.linkedin{color:#0077b5;}
+.footer div.left a.instagram{color:#000000;}
+.footer div.left a.youtube{color:#b31217;}
+.footer div.left a.rss{color:#FF6600;}
+
 }
 
 
 /* iPads (portrait and landscape) ----------- */
 @media only screen and (min-width : 768px) and (max-width : 769px){
-.footer span{display:block;width:100%;font-family:ubuntu;margin:0px;color:#b1b1b1;font-size:12px;text-decoration:none;}
+.footer span{display:block;width:100%;font-family:ubuntu;margin:0px;color:#b1b1b1;font-size:14px;text-decoration:none;}
 .footer a{display:block;float:left;width:100%;border-top:1px solid #dfdfdf;font-family:ubuntu;margin:0px;padding:4px;color:#5050a9;font-size:18px;text-decoration:none;}
 .footer a:hover{display:block;float:left;width:100%;border-top:1px solid #dfdfdf;font-family:ubuntu;margin:0px;color:#ff5700;font-size:18px;text-decoration:none;}
 .footer span.separator{display:none;}
-.footer div.left, .footer div.right {text-align:center}
+.footer div.left {text-align:center;text-transform:uppercase;} 
+.footer div.right {text-align:center}
+.footer div.left a{display:inline-block;width:17.5%;border:1px solid #dfdfdf;margin: 0px 8px;margin-bottom:17px; }
+
+
 }
 
 

@@ -5,192 +5,198 @@
 */
 package com.oltranz.airtimeweb.bean;
 
+import com.oltranz.airtimeweb.library.CommonLibrary;
+import com.oltranz.airtimeweb.model.PaymentInitResponse;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.servlet.http.HttpSession;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import org.codehaus.jackson.map.ObjectMapper;
 
 /**
  *
- * @author John
+ * @author manzi
  */
 @ManagedBean(name="RechargeBean")
 @SessionScoped
 public class RechargeBean {
     
-    private Boolean faceMessage=false;
+    private String txInitId;
+    private String customer;
+    private String email;
+    private Integer amount;
+    private Integer qamount;
+    private Boolean addAmountVisible=true;
+    private Boolean checkoutVisible;
     
+    private HttpSession session = SessionBean.getSession();
+    private String tokenname;
     
-    
-    private String phone1;
-    private Double amount1;
-    
-    private String phone2;
-    private Double amount2;
-    
-    private String phone3;
-    private Double amount3;
-    
-    
-//-------------------------------------------------SEND ONE---------------------------------------------------------------------------
-    
-    public void confirmViewOne(){
-        
+    public void cancel(){
+        this.checkoutVisible=false;
+        this.addAmountVisible=true;
     }
     
-    public void approveOne(){
-        String msisdn=phone1;
-        Double amt=amount1;
-    }
-    
-    public void cancelOne(){
-        this.phone1=null;
-        this.amount1=null;
-        
-    }
-    
-    
-    
-//-----------------------------------------------SEND MANY-----------------------------------------------------------------------------
-    
-    public void confirmViewMany(){
-        
-    }
-    
-    public void approveMany(){
-        
-        
-        
-    }
-    
-    public void cancelMany(){
-        
-        this.phone1=null;
-        this.amount1=null;
-        
-        this.phone2=null;
-        this.amount2=null;
-        
-        this.phone3=null;
-        this.amount3=null;
-        
-        
-    }
-
-    
-//-----------------------------------------------SEND FAVOURITE-----------------------------------------------------------------------------    
-    
-    public void confirmViewFav(){
-        
-    }
-    
-    public void approveFav(){
-        
-    }
-    
-    public void cancelFav(){
-        
-    }
-    
-    
-    
-    /**
-     * @return the faceMessage
-     */
-    public Boolean getFaceMessage() {
-        return faceMessage;
-    }
-    
-    /**
-     * @param faceMessage the faceMessage to set
-     */
-    public void setFaceMessage(Boolean faceMessage) {
-        this.faceMessage = faceMessage;
+    public String createReqRef(String msisdn,double amt){
+        try{
+            String token=(String) getSession().getAttribute("token");
+            String url="http://localhost:8080/QuickTeller/PaymentInitService/init";
+            String  jsonData = "{\n" +
+                    "\"paymentSPId\":\""+3847+"\",\n" +
+                    "\"paymentTypeId\":\""+4+"\",\n" +
+                    "\"amount\":\""+amt+"\",\n" +
+                    "\"msisdn\":\""+msisdn+"\"\n" +
+                    "}";
+            
+            Response response = CommonLibrary.sendAirRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST", token);
+            String jsonResponse = response.readEntity(String.class);
+            ObjectMapper mapper=new ObjectMapper();
+            PaymentInitResponse paymentInitResponse=(PaymentInitResponse)mapper.readValue(jsonResponse, PaymentInitResponse.class);
+            
+            return paymentInitResponse.getInitUid();
+        }
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
+            return ex.getLocalizedMessage();
+        }
     }
     
     
     /**
-     * @return the phone2
+     * @return the txInitId
      */
-    public String getPhone2() {
-        return phone2;
+    public String getTxInitId() {
+        return txInitId;
     }
-
+    
     /**
-     * @param phone2 the phone2 to set
+     * @param txInitId the txInitId to set
      */
-    public void setPhone2(String phone2) {
-        this.phone2 = phone2;
+    public void setTxInitId(String txInitId) {
+        this.txInitId = txInitId;
     }
-
+    
     /**
-     * @return the amount2
+     * @return the amount
      */
-    public Double getAmount2() {
-        return amount2;
+    public Integer getAmount() {
+        return amount;
     }
-
+    
     /**
-     * @param amount2 the amount2 to set
+     * @param amount the amount to set
      */
-    public void setAmount2(Double amount2) {
-        this.amount2 = amount2;
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+        this.qamount=amount*100;
+        this.email=(String) getSession().getAttribute("email");
+        this.customer=(String) getSession().getAttribute("msisdn");
+        this.txInitId=createReqRef(customer,amount);
+        this.tokenname=(String) getSession().getAttribute("token");
+        this.checkoutVisible=true;
+        this.addAmountVisible=false;
     }
-
+    
     /**
-     * @return the phone3
+     * @return the addAmountVisible
      */
-    public String getPhone3() {
-        return phone3;
+    public Boolean getAddAmountVisible() {
+        return addAmountVisible;
     }
-
+    
     /**
-     * @param phone3 the phone3 to set
+     * @param addAmountVisible the addAmountVisible to set
      */
-    public void setPhone3(String phone3) {
-        this.phone3 = phone3;
+    public void setAddAmountVisible(Boolean addAmountVisible) {
+        this.addAmountVisible = addAmountVisible;
     }
-
+    
     /**
-     * @return the amount3
+     * @return the checkoutVisible
      */
-    public Double getAmount3() {
-        return amount3;
+    public Boolean getCheckoutVisible() {
+        return checkoutVisible;
     }
-
+    
     /**
-     * @param amount3 the amount3 to set
+     * @param checkoutVisible the checkoutVisible to set
      */
-    public void setAmount3(Double amount3) {
-        this.amount3 = amount3;
+    public void setCheckoutVisible(Boolean checkoutVisible) {
+        this.checkoutVisible = checkoutVisible;
     }
-
+    
     /**
-     * @return the phone1
+     * @return the customer
      */
-    public String getPhone1() {
-        return phone1;
+    public String getCustomer() {
+        return customer;
+    }
+    
+    /**
+     * @param customer the customer to set
+     */
+    public void setCustomer(String customer) {
+        this.customer = customer;
+    }
+    
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+    
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    /**
+     * @return the qamount
+     */
+    public Integer getQamount() {
+        return qamount;
+    }
+    
+    /**
+     * @param qamount the qamount to set
+     */
+    public void setQamount(Integer qamount) {
+        this.qamount = qamount;
     }
 
     /**
-     * @param phone1 the phone1 to set
+     * @return the session
      */
-    public void setPhone1(String phone1) {
-        this.phone1 = phone1;
+    public HttpSession getSession() {
+        return session;
     }
 
     /**
-     * @return the amount1
+     * @param session the session to set
      */
-    public Double getAmount1() {
-        return amount1;
+    public void setSession(HttpSession session) {
+        this.session = session;
     }
 
     /**
-     * @param amount1 the amount1 to set
+     * @return the tokenname
      */
-    public void setAmount1(Double amount1) {
-        this.amount1 = amount1;
+    public String getTokenname() {
+        return tokenname;
     }
 
+    /**
+     * @param tokenname the tokenname to set
+     */
+    public void setTokenname(String tokenname) {
+        this.tokenname = tokenname;
+    }
+    
+    
     
     
 }

@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            
+            <div class="col-xs-12 dashboardbox_addamount" style="margin:0px;margin-top:27px;padding:0px;min-height:420px">
+                <!-- IN -->
+                <h2>Load Wallet</h2>
+                <span>
+                    <div class="container-fluid" style="padding:0px;font-family:ubuntu;font-size:13px;">
+                        
+                        <!-- FORM -->
+                        <h:form id="walletform"  class="container-fluid pay_form"  style="margin-top:45px;">
+                            
+                            <div class="col-xs-12 dashboardbox_addamount_input">
+                                <h:inputText id="walletamount" value="#{RechargeBean.amount}" class="amount ico_naira" a:placeholder="Enter Amount" style="height:80px;font-size:40px;"/>
+                            </div>
+                            
+                            <fieldset class="col-xs-12 dashboardbox_addamount_input"> 
+                                <div class="cc-selector">&nbsp;</div>
+                            </fieldset>
+                            
+                            <div class="col-xs-12 dashboardbox_addamount_submit">
+                                <h:commandButton value="Proceed for Payment" onclick="lightcaseON=false">
+                                    <f:ajax execute="walletamount" render="overAll" />
+                                </h:commandButton>
+                            </div>
+                            
+                        </h:form>
+                        <!-- End FORM -->
+                       
+                    </div>
+                </span>
+                <!-- IN -->
+            </div>
+            
+        </ui:composition>
+    </h:body>
+</html>
+

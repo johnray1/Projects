@@ -10,7 +10,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         
-        <title>Transactions - AIRTIME WebPortal for Customer</title>
+        <title>Transaction - Mobile A</title>
         
         <link href="css_cust/bootstrap.css" rel="stylesheet"/> 
         <link href="css_cust/fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
@@ -77,7 +77,7 @@
                         'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')] 
                     },
                     "locale": {
-                        "format": "YYYY/MM/DD  HH:mm",
+                        "format": "YYYY/MM/DD  HH:mm:ss",
                         "separator": " - ",
                         "applyLabel": "Apply",
                         "cancelLabel": "Cancel",
@@ -192,20 +192,13 @@
                                                      cellspacing="0" 
                                                      width="100%" 
                                                      style="padding: 0px;">
-                                            
                                             <h:column>
-                                                <f:facet name="header">DATE</f:facet>
+                                                <f:facet name="header">DATE/TIME</f:facet>
                                                 <h:outputText value="#{tra.walletTransaction.transTime}">
-                                                    <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                                    <f:convertDateTime pattern="yyyy/MM/dd  ,  HH:mm:ss" timeZone="CAT"/>
                                                 </h:outputText>
                                             </h:column>
                                             
-                                            <h:column>
-                                                <f:facet name="header">TIME</f:facet>
-                                                <h:outputText value="#{tra.walletTransaction.transTime}">
-                                                    <f:convertDateTime pattern="HH:mm:ss"/>
-                                                </h:outputText>
-                                            </h:column>
                                             
                                             <h:column>
                                                 <f:facet name="header">RECEIVER NO.</f:facet>
@@ -220,9 +213,6 @@
                                             <h:column>
                                                 <f:facet name="header">ACTION</f:facet>
                                                 <h:form>
-                                                    <h:commandLink   onclick="notifiyViewDetails()" id="viewDetails" class="icon_view"> 
-                                                        <f:ajax event="click" listener="#{TransactionBean.transactionForView(tra)}" render="viewDetailsContentPanel" />
-                                                    </h:commandLink>
                                                     <h:commandLink   onclick="notifyEdit()" id="resendDetails" class="icon_resend"> 
                                                         <f:ajax event="click" listener="#{TransactionBean.transactionForView(tra)}" render="editDetailsContentPanel" />
                                                     </h:commandLink>
@@ -254,18 +244,12 @@
                                                      style="padding: 0px;
                                                      margin-bottom: 30px;">
                                             <h:column>
-                                                <f:facet name="header">DATE</f:facet>
+                                                <f:facet name="header">DATE/TIME</f:facet>
                                                 <h:outputText value="#{tra.walletTransaction.transTime}">
-                                                    <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                                    <f:convertDateTime pattern="yyyy/MM/dd  ,  HH:mm:ss"/>
                                                 </h:outputText>
                                             </h:column>
                                             
-                                            <h:column>
-                                                <f:facet name="header">TIME</f:facet>
-                                                <h:outputText value="#{tra.walletTransaction.transTime}">
-                                                    <f:convertDateTime pattern="HH:mm:ss"/>
-                                                </h:outputText>
-                                            </h:column>
                                             
                                             <h:column>
                                                 <f:facet name="header">ACCOUNT NO.</f:facet>
@@ -280,9 +264,6 @@
                                             <h:column>
                                                 <f:facet name="header">ACTION</f:facet>
                                                 <h:form>
-                                                    <h:commandLink   onclick="notifiyViewDetails()" id="viewDetails" class="icon_view"> 
-                                                        <f:ajax event="click" listener="#{TransactionBean.transactionForView(tra)}" render="viewDetailsContentPanel" />
-                                                    </h:commandLink>
                                                     <h:commandLink   onclick="notifyEdit()" id="resendDetails" class="icon_resend"> 
                                                         <f:ajax event="click" listener="#{TransactionBean.transactionForView(tra)}" render="editDetailsContentPanel" />
                                                     </h:commandLink>
@@ -313,15 +294,17 @@
         
         <div id="viewDetailsContent" style="display:none">
             
-            <h:panelGroup id="viewDetailsContentPanel" >
-                <ui:include src="popup/view_tra.xhtml" /> 
+            
+            <h:panelGroup id="editDetailsContentPanel" >
+                <ui:include src="popup/view_con.xhtml" /> 
             </h:panelGroup>
             
         </div>
         
         
+        <div class="clear" style="margin-bottom:60px;border:0px solid blue;"></div>
         
-        <ui:include src="templates/footer.xhtml" />  
+        <ui:include src="templates/footer_inside.xhtml" />  
         
         
         <!-- SCRIPTS -->

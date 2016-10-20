@@ -14,15 +14,15 @@
                     <!-- Top Header -->
                     <div class="container-fluid topheader" style="margin:0px;padding:0px;">
                         
-                        <div>
-                            <div class="col-xs-3 col-sm-1 logo">
+                        <div class="inheader">
+                            <div class="col-xs-3 col-sm-1">
                                 <h:graphicImage value="images_cust/toplogo.jpg" class="logo hidden-xs"/>
                                 <h:graphicImage value="images_cust/toplogo.jpg" class="logo hidden-lg hidden-md hidden-sm visible-xs"/>
                             </div>
                             
                             <div class="col-xs-9 col-sm-11 name"  style="margin:0px;padding:0px;border:0px solid red;">
                                 
-                                <strong class="col-xs-7 col-sm-5 col-md-5 col-lg-8 hidden-xs">AirtimeAPP </strong> 
+                                <strong class="col-xs-7 col-sm-5 col-md-5 col-lg-8 hidden-xs"></strong> 
                                 
                                 <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2 dropdown" style="margin:0px;padding:0px;">
                                     <span><label>000</label></span>
@@ -30,9 +30,9 @@
                                     <!-- Latest Notifications List -->
                                     <div class="dropdown-content">
                                         <h4>Notifications</h4>
-                                        <a href="#"><div>NOTIFICATION TYPE <em>dd/mm/yyyy - 00:00:00</em></div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamt. </a>
-                                        <a href="#"><div>NOTIFICATION TYPE <em>dd/mm/yyyy - 00:00:00</em></div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamt. </a>
-                                        <a href="#"><div>NOTIFICATION TYPE <em>dd/mm/yyyy - 00:00:00</em></div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniamt. </a>
+                                        <a href="#"><div>NOTIFICATION TYPE <em>dd/mm/yyyy - 00:00:00</em></div>Send Airtime Successful</a>
+                                        <a href="#"><div>NOTIFICATION TYPE <em>dd/mm/yyyy - 00:00:00</em></div>Wallet Recharge Successful</a>
+                                        <a href="#"><div>NOTIFICATION TYPE <em>dd/mm/yyyy - 00:00:00</em></div>Wallet Ballance is too low</a>
                                         <a href="#" class="more">view more</a>
                                     </div>
                                     <!-- End Latest Notifications List -->
@@ -43,7 +43,7 @@
                                 
                                 <h:commandLink action="#{LoginBean.logout()}" class="col-xs-6 col-sm-4 col-md-4 col-lg-2 logout"  style="margin:0px;padding:0px;"> 
                                     <h:graphicImage value="images_cust/icon_user.png" style="float: left"/>
-                                    <label>Welcome<strong>#{LoginBean.username}</strong></label>
+                                    <label>Welcome<strong>#{LoginBean.lm.customerDetails.fName}</strong></label>
                                 </h:commandLink>
                                 
                             </div>

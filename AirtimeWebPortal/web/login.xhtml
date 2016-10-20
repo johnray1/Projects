@@ -8,9 +8,10 @@
         <meta charset="utf-8"></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <title>Welcome - AIRTIME App</title>
+        <title>Welcome - Mobile A</title>
         
         <link href="css/bootstrap.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/fontawesome/css/font-awesome.min.css" />
         <link href="css/style.css" rel="stylesheet"/>
         <link href="css/hover.css" rel="stylesheet" />
         <link href="css/menu.css" rel="stylesheet" />
@@ -24,6 +25,22 @@
         <script type="text/javascript" src="js/lightcase.js"></script>
         <script type="text/javascript" src="js/lightcase.init.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        
+        
+        <!-- favicons -->
+        <link rel="apple-touch-icon" sizes="180x180" href="images/favicons/apple-touch-icon.png"/>
+        <link rel="icon" type="image/png" href="images/favicons/favicon-32x32.png" sizes="32x32"/>
+        <link rel="icon" type="image/png" href="images/favicons/android-chrome-192x192.png" sizes="192x192"/>
+        <link rel="icon" type="image/png" href="images/favicons/favicon-16x16.png" sizes="16x16"/>
+        <link rel="manifest" href="images/favicons/manifest.json"/>
+        <link rel="mask-icon" href="images/favicons/safari-pinned-tab.svg" color="#5bbad5"/>
+        <meta name="apple-mobile-web-app-title" content="AIRTIME App"/>
+        <meta name="application-name" content="AIRTIME App"/>
+        <meta name="msapplication-TileColor" content="#da532c"/>
+        <meta name="msapplication-TileImage" content="images/favicons/mstile-144x144.png"/>
+        <meta name="theme-color" content="#ff5700"/>
+        <!-- favicons -->
+        
     </h:head>
     <h:body>
         
@@ -37,24 +54,31 @@
             
             
             <!-- SLIDESHOW -->
-            <div class="col-xs-12 homeslides">
+            <div class="col-xs-12 col-sm-12 col-md-12 visible-md visible-lg hidden-xs hidden-sm homeslides">
                 
                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">
-                        <div class="item active">
-                            <h:graphicImage value="images/slide1.jpg" class="max-width: 100%;height: auto;"/>
-                        </div>
-                        <div class="item">
-                            <h:graphicImage value="images/slide2.jpg" class="max-width: 100%;height: auto;"/>
-                        </div>
-                        <div class="item">
-                            <h:graphicImage value="images/slide3.jpg" class="max-width: 100%;height: auto;"/>
-                        </div>
+                        <div class="item active"><img src="images/slide2.jpg" class="max-width: 100%;height: auto;" /></div>
+                        <div class="item"><img src="images/slide1.jpg" class="max-width: 100%;height: auto;" /></div>
                     </div>
                 </div>
                 
             </div>
             <!-- End SLIDESHOW -->
+            
+            
+            <!-- SLIDESHOW MOBILE -->
+            <div class="col-xs-12 col-sm-12 col-md-12 visible-xs visible-sm hidden-md hidden-lg homeslides" style="top:-2px;">
+                
+                <div id="myCarouselMobile" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active"><img src="images/slidem2.jpg" class="max-width: 100%;height: auto;" /></div>
+                        <div class="item"><img src="images/slidem1.jpg" class="max-width: 100%;height: auto;" /></div>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- End SLIDESHOW MOBILE -->
             
             
             
@@ -82,12 +106,12 @@
                         <div id="login" class="tab-pane fade in active">
                             
                             <!-- FORM -->
-                            <h:form class="container-fluid login_form" id="login_form"  style="margin-top:45px;">
+                            <h:form class="container-fluid login_form login" id="login_form">
                                 <div class="col-xs-12 login_theinput">
-                                    <h:inputText id="user" class="user" a:placeholder="Enter Phone Number" value="#{LoginBean.msisdn}"/>
+                                    <h:inputText id="user" class="ico_phone" a:placeholder="Enter Phone Number" value="#{LoginBean.msisdn}"/>
                                 </div>
                                 <div class="col-xs-12 login_theinput">
-                                    <h:inputSecret id="pass"  class="pass" a:placeholder="Enter Pin" value="#{LoginBean.pin}"/>
+                                    <h:inputSecret id="pass"  class="ico_pass" a:placeholder="Enter Pin" value="#{LoginBean.pin}"/>
                                 </div>
                                 <div class="col-xs-12 login_submitinput">
                                     <h:commandButton value="LOGIN" action="#{LoginBean.login()}"/>
@@ -112,24 +136,21 @@
                         <!-- tab 2 -->
                         <div id="register" class="tab-pane fade">
                             <!-- FORM -->
-                            <h:form class="container-fluid login_form" id="register_form"  style="margin-top:15px;">
+                            <h:form class="container-fluid login_form register" id="register_form">
                                 <div class="col-xs-12 login_theinput">
-                                    <h:inputText id="fname" class="user" a:placeholder="Enter FirstName" value="#{LoginBean.registerRequest.fName}"/>
+                                    <h:inputText id="fname" class="ico_name" a:placeholder="Enter Fullname" value="#{LoginBean.registerRequest.fName}"/>
                                 </div>
                                 <div class="col-xs-12 login_theinput">
-                                    <h:inputText id="lname" class="user" a:placeholder="Enter LastName" value="#{LoginBean.registerRequest.otherNames}"/>
+                                    <h:inputText id="phno" class="ico_phone" a:placeholder="Enter Phone" value="#{LoginBean.registerRequest.msisdn}"/>
                                 </div>
                                 <div class="col-xs-12 login_theinput">
-                                    <h:inputText id="phno" class="user" a:placeholder="Enter Phone" value="#{LoginBean.registerRequest.msisdn}"/>
+                                    <h:inputText id="email" class="ico_email" a:placeholder="Enter Email" value="#{LoginBean.registerRequest.email}"/>
                                 </div>
                                 <div class="col-xs-12 login_theinput">
-                                    <h:inputText id="email" class="user" a:placeholder="Enter Email" value="#{LoginBean.registerRequest.email}"/>
+                                    <h:inputSecret id="pin"  class="ico_pass" a:placeholder="Enter Pin" value="#{LoginBean.registerRequest.pin}"/>
                                 </div>
                                 <div class="col-xs-12 login_theinput">
-                                    <h:inputSecret id="pin"  class="pass" a:placeholder="Enter Pin" value="#{LoginBean.registerRequest.pin}"/>
-                                </div>
-                                <div class="col-xs-12 login_theinput">
-                                    <h:inputSecret id="repin"  class="pass" a:placeholder="ReEnter Pin" value="#{LoginBean.pin}"/>
+                                    <h:inputSecret id="repin"  class="ico_pass" a:placeholder="ReEnter Pin" value="#{LoginBean.pin}"/>
                                 </div>
                                 <div class="col-xs-12 login_submitinput">
                                     <h:commandButton value="REGISTER" action="#{LoginBean.register()}"/>

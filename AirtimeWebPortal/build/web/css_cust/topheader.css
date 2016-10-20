@@ -37,6 +37,9 @@
 
 .topheader > div div.name a:hover.logout{background-color:#d24900;background-image:url(../images_cust/icon_logout.png);background-repeat:no-repeat;background-position:right center;}
 
+/* HEADER */
+.topheader > div.inheader{height:70px;font-family:ubuntu;margin:0px;padding:0px;background-color:#ff5700}
+.topheader > div.inheader div img.logo{border:0px solid red;width:auto;height:70px;image-rendering: crisp-edges;-webkit-transform: translateZ(0)}
 
 
 /* MEDIA QUERIES */

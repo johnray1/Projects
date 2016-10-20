@@ -5,16 +5,13 @@
  */
 package com.oltranz.airtimeweb.model;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
  *
  * @author John
  */
-@ManagedBean(name="TopUpBean")
-@SessionScoped
+
 public class TopUpBean {
     
     @JsonProperty("msisdn")

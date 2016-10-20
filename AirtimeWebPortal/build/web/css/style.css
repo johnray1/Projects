@@ -166,6 +166,18 @@ a, label, article, span, input, select, textarea, h2, table, th, img, tr{
 }
 
 
+
+/* HEADER */
+div.inheader{height:70px;font-family:ubuntu;margin:0px;padding:0px;background-color:#ff5700}
+div.inheader div img.logo{border:0px solid red;width:auto;height:70px;image-rendering: crisp-edges;-webkit-transform: translateZ(0)}
+
+
+
+
+
+
+
+
 /*USER */
 .logout{display:inline-block;float:right;width:200px;height:65px;margin-left:10px;background-color:#e04c00;color:#ffffff;outline:none;font-size:17px;line-height:13px;text-align:center;text-decoration:none}
 .logout span{display:block;margin-top:10px;padding:5px;color:#e66f33;font-size:13px;}
@@ -214,15 +226,6 @@ table.innertable tbody tr:nth-child(even){margin-top:5px;border:0px solid red;ba
 table.innertable tbody tr:hover:nth-child(even){margin-top:5px;border:0px solid red;background-color:#f2f5e2;height:30px;color:#000000;cursor:pointer;}
 
 
-background:-moz-linear-gradient(left, rgba(247,247,247,0) 0%, rgba(247,247,247,0.47) 47%, rgba(255,255,255,1) 100%),
-background:-webkit-gradient(left top, right top, color-stop(0%, rgba(247,247,247,0)), color-stop(47%, rgba(247,247,247,0.47)), color-stop(100%, rgba(255,255,255,1))),
-background:-webkit-linear-gradient(left, rgba(247,247,247,0) 0%, rgba(247,247,247,0.47) 47%, rgba(255,255,255,1) 100%),
-background:-o-linear-gradient(left, rgba(247,247,247,0) 0%, rgba(247,247,247,0.47) 47%, rgba(255,255,255,1) 100%),
-background:-ms-linear-gradient(left, rgba(247,247,247,0) 0%, rgba(247,247,247,0.47) 47%, rgba(255,255,255,1) 100%),
-background:linear-gradient(to right, rgba(247,247,247,0) 0%, rgba(247,247,247,0.47) 47%, rgba(255,255,255,1) 100%),
-filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', endColorstr='#ffffff', GradientType=1 );border:0px;border-top:4px solid white;text-align:center;}
-
-
 table.innertablelong thead{border-bottom:0px solid white;color:#000000;font-size:11px;}
 table.innertablelong thead th{border:0px solid white;border-top:4px solid white;text-align:center;border-bottom:4px solid #c9c9c9;}
 table.innertablelong thead td{border:0px solid white;border-top:4px solid white;text-align:center;border-bottom:4px solid #c9c9c9;}
@@ -233,7 +236,7 @@ table.innertablelong tbody > tr> th.action{background: rgba(236,236,236,0);
                                            background: -webkit-linear-gradient(left, rgba(236,236,236,0) 0%, rgba(236,236,236,0.47) 47%, rgba(255,255,255,1) 100%);
                                            background: -o-linear-gradient(left, rgba(236,236,236,0) 0%, rgba(236,236,236,0.47) 47%, rgba(255,255,255,1) 100%);
                                            background: -ms-linear-gradient(left, rgba(236,236,236,0) 0%, rgba(236,236,236,0.47) 47%, rgba(255,255,255,1) 100%);
-                                           background: linear-gradient(to right, rgba(236,236,236,0) 0%, rgba(236,236,236,0.47) 47%, rgba(255,255,255,1) 100%);
+                                           background: linear-gradient(right, rgba(236,236,236,0) 0%, rgba(236,236,236,0.47) 47%, rgba(255,255,255,1) 100%);
                                            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ececec', endColorstr='#ffffff', GradientType=1 );border:0px;border-top:2px solid white;text-align:center;}
 
 
@@ -382,17 +385,30 @@ img.logologin{display:block;border:0px solid red;margin-left:auto;margin-right:a
 .login_form{font-family:ubuntu;font-size:14px;font-weigth:normal;margin-top:10px;}
 .login_theinput{min-height:50px;margin:10px;margin-bottom:25px;margin-top:0px;border:0px solid red;text-align:center;}
 
-.login_theinput input.user{width:90%;min-height:50px;padding:5px;color:#000000;font-size:17px;text-align:center;font-weight:bold;border:2px solid #dfdfdf;outline:none;opacity:1;background-color:#ffffff;-webkit-transition: all 0.60s ease-out;-moz-transition: all 0.60s ease-out; -o-transition: all 0.60s ease-out;transition: all 0.60s ease-out;}
-.login_theinput input.pass{width:90%;min-height:50px;padding:5px;color:#000000;font-size:17px;text-align:center;font-weight:bold;border:2px solid #dfdfdf;outline:none;background-color:#ffffff;-webkit-transition: all 0.60s ease-out;-moz-transition: all 0.60s ease-out; -o-transition: all 0.60s ease-out;transition: all 0.60s ease-out;}
-.login_theinput input.filled{width:90%;min-height:50px;padding:5px;color:#000000;font-size:17px;text-align:center;font-weight:bold;border:2px solid #dfdfdf;outline:none;background-color:#ffffff;}
+.login{margin-top:45px}
+.register{margin-top:15px;}
 
-.login_submitinput{min-height:50px;margin:10px;margin-top:0px;border:0px solid red;text-align:center;}
-.login_submitinput input[type="submit"] {width:90%;min-height:50px;background: #ffffff;border: 2px solid #339900;border-radius: 0px; cursor: pointer; font-size:20px;color:#339900;padding:4px;outline:none;transition:all 0.70s ease;}
-.login_submitinput input[type="submit"]:hover  { width:90%;min-height:50px;background:#339900;border: 2px solid #339900;border-radius: 0px; cursor: pointer; font-size:20px;letter-spacing:2px;color:#ffffff;padding:4px;outline:none;}
+
+.login_theinput input.user{width:90%;min-height:50px;padding:5px;color:#000000;font-size:17px;text-align:center;font-weight:normal;border:2px solid #dfdfdf;outline:none;opacity:1;background-color:#ffffff;-webkit-transition: all 0.60s ease-out;-moz-transition: all 0.60s ease-out; -o-transition: all 0.60s ease-out;transition: all 0.60s ease-out;}
+.login_theinput input.pass{width:90%;min-height:50px;padding:5px;color:#000000;font-size:17px;text-align:center;font-weight:normal;border:2px solid #dfdfdf;outline:none;background-color:#ffffff;-webkit-transition: all 0.60s ease-out;-moz-transition: all 0.60s ease-out; -o-transition: all 0.60s ease-out;transition: all 0.60s ease-out;}
+.login_theinput input.filled{width:90%;min-height:50px;padding:5px;color:#000000;font-size:17px;text-align:center;font-weight:normal;border:2px solid #dfdfdf;outline:none;background-color:#ffffff;}
+
+.login_submitinput{min-height:57px;margin:10px;margin-top:0px;border:0px solid red;text-align:center;}
+.login_submitinput input[type="submit"] {width:90%;min-height:57px;background: #ffffff;border: 2px solid #339900;border-radius: 0px; cursor: pointer; font-size:27px;color:#339900;padding:4px;outline:none;transition:all 0.70s ease;}
+.login_submitinput input[type="submit"]:hover  { width:90%;min-height:57px;background:#339900;border: 2px solid #339900;border-radius: 0px; cursor: pointer; font-size:27px;letter-spacing:2px;color:#ffffff;padding:4px;outline:none;}
 
 
 .warning{font-family:ubuntu;color:red;text-align:center;margin:0px;margin-top:15px;padding:0px;font-size:12px;}
 .forgotpass{font-family:ubuntu;color:red;text-align:center;margin:0px;margin-top:15px;padding:0px;font-size:14px}
+
+
+.login_theinput input{width:90%;min-height:50px;padding:5px;padding-left:35px;color:#000000;font-size:17px;text-align:center;font-weight:normal;border:2px solid #dfdfdf;outline:none;opacity:1;background-color:#ffffff;-webkit-transition: all 0.60s ease-out;-moz-transition: all 0.60s ease-out; -o-transition: all 0.60s ease-out;transition: all 0.60s ease-out;}
+.ico_phone{background-image:url(../images/icon_input_phone.png); background-size: auto 100%;background-position:left middle; background-repeat:no-repeat;}
+.ico_name{background-image:url(../images/icon_input_name.png); background-size: auto 100%;background-position:left middle; background-repeat:no-repeat;}
+.ico_pass{background-image:url(../images/icon_input_pass.png); background-size: auto 100%;background-position:left middle; background-repeat:no-repeat;}
+.ico_email{background-image:url(../images/icon_input_email.png); background-size: auto 100%;background-position:left middle; background-repeat:no-repeat;}
+.ico_naira{background-image:url(../images/icon_input_naira.png); background-size: auto 100%;background-position:left middle; background-repeat:no-repeat;}
+
 
 
 
@@ -953,7 +969,7 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
     color: #323b96;
     font-size:15px;
     line-height:30px;
-    font-weight:bold;
+    font-weight:normal;
     cursor: default;
     border: 3px solid #ff5700;	
     border-radius:0px;
@@ -969,7 +985,7 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
     text-transform:uppercase;
     font-size:15px;
     line-height:30px;
-    font-weight:bold;
+    font-weight:normal;
     cursor: default;
     border: 3px solid #ff5700;
     border-radius:0px;
@@ -1394,6 +1410,32 @@ div.form_content{
 
 /* MEDIA QUERIES */
 
+
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-width : 200px) and (max-width : 319px) {
+    
+    .homeslides{margin:0px;margin-top:-8px;padding:0px;border:0px solid yellow;margin-top:70px;}
+    .homeboxes{position:relative;z-index:0;margin:0px;margin-top:0px;padding:0px;border:0px solid green;}
+    .homesep{display:none;}
+    .hometab{border:0px solid green;padding-top:20px;}
+    .innercontent{position:relative;z-index:0;margin:0px;margin-top:70px;padding:0px;min-height:400px;border:0px solid green;}
+    
+	div.logomob img.logo{border:0px solid red;width:auto;height:70px;image-rendering: crisp-edges;-webkit-transform: translateZ(0);padding:3px;margin-right:-30px}
+	.login_theinput {    min-height: 50px;    margin: 0px;    margin-bottom: 15px;    margin-top: 0px;	 padding: 0px;    border: 0px solid red;    text-align: center;}
+	.login_theinput input {    width: 98%;    min-height: 50px;    padding: 5px;    padding-left: 35px;    color: #000000;    font-size: 17px;    text-align: center;    font-weight: normal;    border: 2px solid #dfdfdf;    outline: none;    opacity: 1;    background-color: #ffffff;    -webkit-transition: all 0.60s ease-out;    -moz-transition: all 0.60s ease-out;    -o-transition: all 0.60s ease-out;    transition: all 0.60s ease-out;}
+	
+	.login_submitinput {min-height: 50px;    margin: 0px;    margin-top: 0px;	padding: 0px;    border: 0px solid red;    text-align: center;}
+	.login_submitinput input[type="submit"] {    width: 98%;    min-height: 57px;    background: #ffffff;    border: 2px solid #339900;    border-radius: 0px;    cursor: pointer;    font-size: 27px;    color: #339900;    padding: 4px;    outline: none;    transition: all 0.70s ease;}
+	.login_submitinput:hover input[type="submit"] {    width: 98%;  }
+    
+	.login{margin-top:15px}
+	.register{margin-top:15px;}
+
+}
+
+
+
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (min-width : 320px) and (max-width : 480px) {
     
@@ -1403,7 +1445,17 @@ div.form_content{
     .hometab{border:0px solid green;padding-top:20px;}
     .innercontent{position:relative;z-index:0;margin:0px;margin-top:70px;padding:0px;min-height:400px;border:0px solid green;}
     
+	div.logomob img.logo{border:0px solid red;width:auto;height:70px;image-rendering: crisp-edges;-webkit-transform: translateZ(0);padding:3px;margin-right:-30px}
+	.login_theinput {    min-height: 50px;    margin: 0px;    margin-bottom: 15px;    margin-top: 0px;	 padding: 0px;    border: 0px solid red;    text-align: center;}
+	.login_theinput input {    width: 98%;    min-height: 50px;    padding: 5px;    padding-left: 35px;    color: #000000;    font-size: 17px;    text-align: center;    font-weight: normal;    border: 2px solid #dfdfdf;    outline: none;    opacity: 1;    background-color: #ffffff;    -webkit-transition: all 0.60s ease-out;    -moz-transition: all 0.60s ease-out;    -o-transition: all 0.60s ease-out;    transition: all 0.60s ease-out;}
+	
+	.login_submitinput {min-height: 50px;    margin: 0px;    margin-top: 0px;	padding: 0px;    border: 0px solid red;    text-align: center;}
+	.login_submitinput input[type="submit"] {    width: 98%;    min-height: 57px;    background: #ffffff;    border: 2px solid #339900;    border-radius: 0px;    cursor: pointer;    font-size: 27px;    color: #339900;    padding: 4px;    outline: none;    transition: all 0.70s ease;}
+	.login_submitinput:hover input[type="submit"] {    width: 98%;  }
     
+	.login{margin-top:15px}
+	.register{margin-top:15px;}
+
 }
 
 @media only screen and (min-width :480px) and (max-width : 768px) {
@@ -1414,7 +1466,16 @@ div.form_content{
     .hometab{border:0px solid green;padding-top:20px;}
     .innercontent{position:relative;z-index:0;margin:0px;margin-top:70px;padding:0px;min-height:400px;border:0px solid green;}
     
-    
+	div.logomob img.logo{border:0px solid blue;width:auto;height:70px;image-rendering: crisp-edges;-webkit-transform: translateZ(0);padding:3px;margin-right:-65px}
+	.login_theinput {    min-height: 50px;    margin: 0px;    margin-bottom: 15px;    margin-top: 0px;	 padding: 0px;    border: 0px solid red;    text-align: center;}
+	.login_theinput input {    width: 98%;    min-height: 50px;    padding: 5px;    padding-left: 35px;    color: #000000;    font-size: 17px;    text-align: center;    font-weight: normal;    border: 2px solid #dfdfdf;    outline: none;    opacity: 1;    background-color: #ffffff;    -webkit-transition: all 0.60s ease-out;    -moz-transition: all 0.60s ease-out;    -o-transition: all 0.60s ease-out;    transition: all 0.60s ease-out;}
+
+	.login_submitinput {min-height: 50px;    margin: 0px;    margin-top: 0px;	padding: 0px;    border: 0px solid red;    text-align: center;}
+	.login_submitinput input[type="submit"] {    width: 98%;    min-height: 57px;    background: #ffffff;    border: 2px solid #339900;    border-radius: 0px;    cursor: pointer;    font-size: 27px;    color: #339900;    padding: 4px;    outline: none;    transition: all 0.70s ease;}
+	.login_submitinput:hover input[type="submit"] {    width: 98%;  }
+        .login{margin-top:15px}
+	.register{margin-top:15px;}
+
 }
 
 
@@ -1428,6 +1489,17 @@ div.form_content{
     
     .innercontent{position:relative;z-index:0;margin:0px;margin-top:70px;padding:0px;min-height:400px;border:0px solid green;}
     
+	div.logomob img.logo{border:0px solid #ff00cc;width:auto;height:70px;image-rendering: crisp-edges;-webkit-transform: translateZ(0);margin-right:-90px}
+	.login_theinput {    min-height: 50px;    margin: 0px;    margin-bottom: 15px;    margin-top: 0px;	 padding: 0px;    border: 0px solid red;    text-align: center;}
+	.login_theinput input {    width: 99%;    min-height: 50px;    padding: 5px;    padding-left: 35px;    color: #000000;    font-size: 17px;    text-align: center;    font-weight: normal;    border: 2px solid #dfdfdf;    outline: none;    opacity: 1;    background-color: #ffffff;    -webkit-transition: all 0.60s ease-out;    -moz-transition: all 0.60s ease-out;    -o-transition: all 0.60s ease-out;    transition: all 0.60s ease-out;}
+
+	.login_submitinput {min-height: 50px;    margin: 0px;    margin-top: 0px;	padding: 0px;    border: 0px solid red;    text-align: center;}
+	.login_submitinput input[type="submit"] {    width: 99%;    min-height: 57px;    background: #ffffff;    border: 2px solid #339900;    border-radius: 0px;    cursor: pointer;    font-size: 27px;    color: #339900;    padding: 4px;    outline: none;    transition: all 0.70s ease;}
+	.login_submitinput:hover input[type="submit"] {    width: 99%;  }
+        .login{margin-top:15px}
+	.register{margin-top:15px;}
+
+
 }
 
 

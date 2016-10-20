@@ -228,6 +228,38 @@ public class CommonLibrary {
         
     }
     
+    public static Response sendAirRESTRequest(String url,String requestStr, String MediaType, String method, String token)
+    {
+        try
+        {
+            Response response=null;
+            Client client =ClientBuilder.newClient();
+            WebTarget target =client.target(url);
+            switch (method){
+                case "POST":
+                    response = target.request().header("Content-type", "text/xml").header("Signature", "43AD232FD45FF").header("Token", token).post(Entity.entity(requestStr, MediaType));
+                    
+                    break;
+                    
+                case "GET":
+                    response = target.request().header("Token", token).get();
+                    break;
+                    
+            }
+            
+            return response;
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error send request: "+e.getMessage());
+            return null;
+        }
+        
+        
+    }
+    
+    
+    
     public static class shared{
         
         private static List<selectListItemint> pageSizeList;

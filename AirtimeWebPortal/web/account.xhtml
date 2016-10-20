@@ -8,10 +8,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         
-        <title>My Account - AIRTIME WebPortal for Customer</title>
+        <title>Account - Mobile A</title>
         
         <link href="css_cust/bootstrap.css" rel="stylesheet"/> 
-        <link rel="stylesheet" href="css_cust/fontawesome/css/font-awesome.min.css" />
+        <link href="css_cust/fontawesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <link href="css_cust/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         
         <link href="css_cust/style.css" rel="stylesheet"/>
         <link href="css_cust/menu.css" rel="stylesheet"/>
@@ -83,9 +84,12 @@
                                     </h:form>
                                     <!-- End FORM -->
                                     
+                                    <div id="warning" class="col-xs-12 warning">
+                                        <h:outputText value="warning will show" rendered="true"/>
+                                    </div>
                                 </div>
                                 <span style="color:#c0c0c0;">
-                                    Account created on dd/mm/yyyy - 00:00:00
+                                    Latest profile updated on dd/mm/yyyy - 00:00:00
                                 </span>
                             </div>
                         </span>
@@ -101,30 +105,35 @@
                         <h2>Change Password</h2>
                         <span>
                             <div class="container-fluid" style="padding:0px;font-family:ubuntu;text-align:center;">
-                                
-                                <!-- FORM -->
-                                <h:form id="pass_form"  class="container-fluid login_form"  style="margin-top:45px;">
+                                <div class="col-xs-12" style="padding:0px;font-family:ubuntu;text-align:left;border-bottom:1px solid #f0f0f0">
                                     
-                                    <div class="col-xs-12 login_theinput">
-                                        <h:inputSecret id="curpin"  class="pass" a:placeholder="Enter Current Password" value="#{CustomerBean.oldpin}"/>
-                                    </div>
-                                    <div class="col-xs-12 login_theinput">
-                                        <h:inputSecret id="newpin"  class="pass" a:placeholder="Enter New Password" value="#{CustomerBean.newpin}"/>
-                                    </div>
-                                    <div class="col-xs-12 login_theinput">
-                                        <h:inputSecret id="renewpin"  class="pass" a:placeholder="Retype New Password" value="#{CustomerBean.repin}"/>
-                                    </div>
-                                    <div class="col-xs-12 login_submitinput">
-                                        <h:commandButton value="UPDATE" action="#{CustomerBean.updatePin()}"/>
-                                    </div>
+                                    <!-- FORM -->
+                                    <h:form id="pass_form"  class="container-fluid login_form"  style="margin-top:45px;">
+                                        
+                                        <div class="col-xs-12 login_theinput">
+                                            <h:inputSecret id="curpin"  class="ico_pass" a:placeholder="Enter Current Password" value="#{CustomerBean.oldpin}"/>
+                                        </div>
+                                        <div class="col-xs-12 login_theinput">
+                                            <h:inputSecret id="newpin"  class="ico_pass" a:placeholder="Enter New Password" value="#{CustomerBean.newpin}"/>
+                                        </div>
+                                        <div class="col-xs-12 login_theinput">
+                                            <h:inputSecret id="renewpin"  class="ico_pass" a:placeholder="Retype New Password" value="#{CustomerBean.repin}"/>
+                                        </div>
+                                        <div class="col-xs-12 login_submitinput">
+                                            <h:commandButton value="UPDATE" action="#{CustomerBean.updatePin()}"/>
+                                        </div>
+                                        
+                                    </h:form>
+                                    <!-- End FORM -->
                                     
-                                </h:form>
-                                <!-- End FORM -->
-                                
-                                
-                                <div id="warning" class="col-xs-12 warning">
-                                    <h:outputText value="#{CustomerBean.msg}" rendered="#{CustomerBean.faceMessage}"/>
+                                    
+                                    <div id="warning" class="col-xs-12 warning">
+                                        <h:outputText value="warning will show" rendered="true"/>
+                                    </div>
                                 </div>
+                                <span style="color:#c0c0c0;">
+                                    Latest password updated on dd/mm/yyyy - 00:00:00
+                                </span>
                             </div>
                         </span>
                         
@@ -138,9 +147,9 @@
         </div>
         <!-- End CONTENTS -->
         
-        <div class="clear" style="margin-top:70px;"></div>
+        <div class="clear" style="margin-bottom:60px;border:0px solid blue;"></div>
         
-        <ui:include src="templates/footer.xhtml" /> 
+        <ui:include src="templates/footer_inside.xhtml" /> 
         
         <!-- SCRIPTS -->
         <script type="text/javascript" src="js_cust/mobmenu.js"></script>

@@ -26,8 +26,14 @@ public class TemplateBean implements Serializable{
     private String downloadClassName="omenu";
     private String howClassName="omenu";
     private String contactClassName="omenu";
+    
     private String logtabClassName="active";
     private String regtabClassName;
+    
+    private String sendOneClassName="active";
+    private String sendManyClassName;
+    private String sendFavClassName;
+    
     
     private String welcomeClassName;
     private String accountClassName;
@@ -265,6 +271,48 @@ public class TemplateBean implements Serializable{
      */
     public void setRegtabClassName(String regtabClassName) {
         this.regtabClassName = regtabClassName;
+    }
+
+    /**
+     * @return the sendOneClassName
+     */
+    public String getSendOneClassName() {
+        return sendOneClassName;
+    }
+
+    /**
+     * @param sendOneClassName the sendOneClassName to set
+     */
+    public void setSendOneClassName(String sendOneClassName) {
+        this.sendOneClassName = sendOneClassName;
+    }
+
+    /**
+     * @return the sendManyClassName
+     */
+    public String getSendManyClassName() {
+        return sendManyClassName;
+    }
+
+    /**
+     * @param sendManyClassName the sendManyClassName to set
+     */
+    public void setSendManyClassName(String sendManyClassName) {
+        this.sendManyClassName = sendManyClassName;
+    }
+
+    /**
+     * @return the sendFavClassName
+     */
+    public String getSendFavClassName() {
+        return sendFavClassName;
+    }
+
+    /**
+     * @param sendFavClassName the sendFavClassName to set
+     */
+    public void setSendFavClassName(String sendFavClassName) {
+        this.sendFavClassName = sendFavClassName;
     }
     
     

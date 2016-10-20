@@ -9,19 +9,35 @@
     <h:body>
         <ui:composition>
             <h:form>
+                
+                
                 <!-- Footer -->
-                <footer class="footer" ><div class="container">                
+                <footer class="footer"><div class="container">
                         
-                        <div class="col-xs-12 col-sm-12 col-md-10 left">
+                        <div class="col-xs-12 col-sm-12 col-md-3 left">
+                          
+                            <a href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#" class="linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                            <a href="#" class="instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                            <a href="#" class="youtube"><i class="fa fa-youtube" aria-hidden="true"></i></a>
+                        </div>
+                        
+                        
+                        <div class="col-xs-12 col-sm-12 col-md-7 center">                          
                             
-                            <span>&copy; Copyright 2016 - AIRTIME Networks <p> All Rights Reserved</p><span class="separator">|</span></span>
+                            <a href="http://airtimenetworks.com/">About Us</a>
+                            <span class="separator">|</span>
                             
                             <h:commandLink action="#{TemplateBean.term()}" value="Terms and Conditions"/>
-                            
                             <span class="separator">|</span>
                             
                             <h:commandLink action="#{TemplateBean.privacy()}"  value="Privacy Policy"/>
+                            <span class="separator">|</span>
                             
+                            <h:commandLink action="#{TemplateBean.contacts()}" value="Contacts"/>
+                            
+                            <span class="col-xs-12">&copy; Copyright 2016 - AIRTIME Networks All Rights Reserved</span>
                         </div>
                         
                         <div class="col-xs-12 col-sm-12 col-md-2 right">

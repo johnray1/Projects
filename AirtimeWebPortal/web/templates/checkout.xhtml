@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            
+            <div class="col-xs-12 dashboardbox_addamount" style="margin:0px;margin-top:27px;padding:0px;min-height:420px">
+                <h2>Check Amount</h2>
+                <span>
+                    <div class="container-fluid" style="padding:0px;font-family:ubuntu;font-size:13px;">
+                        <h:form id="checkoutform"  class="container-fluid pay_form"  style="margin-top:45px;">
+                            <div class="col-xs-12 dashboardbox_addamount_input">
+                                <h:inputText id="checkoutamount" value="#{RechargeBean.amount}" class="amount ico_naira" a:placeholder="Enter Amount in &#8358;" style="height:80px;font-size:40px;" readonly="true"/>
+                            </div>
+                            <fieldset class="col-xs-12 dashboardbox_addamount_input"> 
+                                <div class="cc-selector"></div>
+                            </fieldset>
+                            <div class="col-xs-12 col-sm-12 col-md-6 dashboardbox_addamountcancel_submit">
+                                <h:commandButton value="CANCEL" >
+                                    <f:ajax execute="#{RechargeBean.cancel()}" render="overAll" />
+                                </h:commandButton>
+                            </div>
+                            
+                            <div class="col-xs-12 col-sm-12 col-md-6 dashboardbox_addamountpay_submit">
+                                <!-- End QT Button -->
+                                <em>
+                                    <small>
+                                        <a class="quickteller-checkout-anchor " id="04277101" style="text-align:left;">
+                                            payment button will appear here shortly...
+                                        </a>
+                                    </small>
+                                </em>
+                                <!-- End QT Button -->
+                            </div>
+                            
+                        </h:form>
+                    </div>
+                </span>
+            </div>
+            
+            <!--Payment Script-->
+            <script type="text/javascript">
+            
+                var QTCheckout = QTCheckout || {};
+                var testMode = false;
+                var baseUrl = "";
+                var reqRef = "#{RechargeBean.txInitId}";
+            
+                QTCheckout.paymentItems = QTCheckout.paymentItems || [];
+                QTCheckout.paymentItems.push({
+                    paymentCode: "04277101",
+                    extraData: {
+                        amount: "#{RechargeBean.qamount}",
+                        buttonSize: "medium",
+                        customerId: "001",
+                        mobileNumber: "08080808080",
+                        emailAddress: "#{RechargeBean.email}",
+                        redirectUrl: "https://airtimeweb.oltranz.com/paymentServlet?req_Ref="+reqRef,
+                        requestReference: reqRef
+                    }
+                });
+            
+            
+                if (testMode == true) {
+                    baseUrl = "https://pwq.sandbox.interswitchng.com/scripts/quickteller-checkout-min.js?v=";
+                
+                }
+                else {
+                    baseUrl = "https://paywith.quickteller.com/scripts/quickteller-checkout-min.js?v=";
+                }
+
+            
+                if (!QTCheckout.qtScript) {
+                
+                    var qtScript = document.createElement('script');
+                    qtScript.type = 'text/javascript';
+                    qtScript.async = true;
+                    qtScript.src = baseUrl + new Date().getDay();
+                    var s = document.getElementsByTagName('script')[0];
+                    s.parentNode.insertBefore(qtScript, s);
+                    QTCheckout.qtScript = qtScript;
+                
+                }
+            
+                else if (QTCheckout.buildPaymentItemsUI) {
+                
+                    QTCheckout.buildPaymentItemsUI();
+                }
+
+            </script>
+            <!--End Payment Script-->
+            
+        </ui:composition>
+    </h:body>
+</html>
+

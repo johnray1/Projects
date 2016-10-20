@@ -21,7 +21,7 @@ public class Common {
     
     
     public static class shared{
-    
+        
         private static List<selectListItemint> pageSizeList;
         
         
@@ -75,7 +75,7 @@ public class Common {
         }
         
         public static int GetBit(byte[] data, int pos){
-        
+            
             int posByte = pos/8;
             byte thebyte = data[posByte];
             return ((thebyte >> 8-(pos+1)) & 1);
@@ -116,6 +116,8 @@ public class Common {
             }
             return generatedPassword;
         }
+        
+        
     }
     
     
@@ -123,7 +125,7 @@ public class Common {
     
     
     public class selectListItemInteger{
-    
+        
         private Integer value ;
         private String text ;
         
@@ -166,7 +168,7 @@ public class Common {
     
     
     public class selectListItemString{
-    
+        
         private String value ;
         private String text ;
         
@@ -209,7 +211,7 @@ public class Common {
     
     
     public class selectListItemBoolean{
-  
+        
         private Boolean value ;
         private String text ;
         
@@ -253,7 +255,7 @@ public class Common {
     
     
     public static class selectListItemint{
-    
+        
         private int value ;
         private String text ;
         
