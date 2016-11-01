@@ -370,6 +370,7 @@ public class TpnBean implements Serializable{
             
             ObjectMapper mapper=new ObjectMapper();
             tankDashList=(TankDashList)mapper.readValue(jsonResponse, TankDashList.class);
+            
             String s=null;
            
             
