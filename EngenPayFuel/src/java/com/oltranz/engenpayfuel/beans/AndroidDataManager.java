@@ -698,7 +698,8 @@ public class AndroidDataManager {
             LoginOpModel loginOpModel=new LoginOpModel();
             loginOpModel.setUserId(userDetails.getUserId());
             loginOpModel.setName(userDetails.getFname());
-            
+            loginOpModel.setBranchId(userDetails.getBranchId());
+            loginOpModel.setBranchName(userDetails.getBranchName());
             
             //set logs
             Log log=new Log();

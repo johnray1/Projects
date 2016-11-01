@@ -5,6 +5,7 @@
 */
 package com.oltranz.engenpayfuel.chartmodel;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,14 +13,15 @@ import java.util.List;
  * @author John
  */
 public class TankDash {
+    
     private int tankId;
     private String tankName;
+    private String productName;
     private double maxCapacity;
     private double currentCapacity;
+    private double dippedCapacity;
+    private Date dippedTime;
     private List<PumpDash> pumpDash;
-
-    
-    
     
     /**
      * @return the tankName
@@ -91,6 +93,48 @@ public class TankDash {
      */
     public void setTankId(int tankId) {
         this.tankId = tankId;
+    }
+
+    /**
+     * @return the dippedCapacity
+     */
+    public double getDippedCapacity() {
+        return dippedCapacity;
+    }
+
+    /**
+     * @param dippedCapacity the dippedCapacity to set
+     */
+    public void setDippedCapacity(double dippedCapacity) {
+        this.dippedCapacity = dippedCapacity;
+    }
+
+    /**
+     * @return the productName
+     */
+    public String getProductName() {
+        return productName;
+    }
+
+    /**
+     * @param productName the productName to set
+     */
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    /**
+     * @return the dippedTime
+     */
+    public Date getDippedTime() {
+        return dippedTime;
+    }
+
+    /**
+     * @param dippedTime the dippedTime to set
+     */
+    public void setDippedTime(Date dippedTime) {
+        this.dippedTime = dippedTime;
     }
 
     

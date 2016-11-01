@@ -18,6 +18,7 @@ import com.oltranz.engenpayfuel.models.ResultObject;
 import com.oltranz.engenpayfuel.models.Tanks;
 import com.oltranz.engenpayfuel.models.UserDetailsModel;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -65,6 +66,7 @@ public class TankManager {
         tank.setName(newTank.getName());
         tank.setMaxCapacity(newTank.getMaxCapacity());
         tank.setCurrentCapacity(newTank.getCurrentCapacity());
+        tank.setDippedCapacity(newTank.getCurrentCapacity());
         tank.setPreCalibrationDate(newTank.getPreCalibrationDate());
         tank.setNextCalibrationDate(newTank.getNextCalibrationDate());
         tank.setBranchId(newTank.getBranchId());
@@ -103,6 +105,7 @@ public class TankManager {
         tank.setName(editTank.getName());
         tank.setMaxCapacity(editTank.getMaxCapacity());
         tank.setCurrentCapacity(editTank.getCurrentCapacity());
+        tank.setDippedCapacity(editTank.getCurrentCapacity());
         tank.setPreCalibrationDate(editTank.getPreCalibrationDate());
         tank.setNextCalibrationDate(editTank.getNextCalibrationDate());
         tank.setBranchId(editTank.getBranchId());
@@ -123,6 +126,26 @@ public class TankManager {
         resultObject.setObjectClass(Tank.class);
         
         List<Tank> tankList=(List<Tank>)em.createQuery("SELECT t FROM Tank t").getResultList();
+        if(tankList.isEmpty()){
+            resultObject.setObject(null);
+            resultObject.setMessage("There are no Tank in the system");
+            resultObject.setStatusCode(500);
+        }
+        else{
+            resultObject.setObject(tankList);
+            resultObject.setMessage(tankList.size()+" Tanks are found");
+            resultObject.setStatusCode(100);
+        }
+        
+        return resultObject;
+    }
+    
+    public ResultObject getTankListByBranchId(int branchId){
+        
+        ResultObject resultObject= new ResultObject();
+        resultObject.setObjectClass(Tank.class);
+        
+        List<Tank> tankList=(List<Tank>)em.createQuery("SELECT t FROM Tank t WHERE t.branchId = :branchId").setParameter("branchId", branchId).getResultList();
         if(tankList.isEmpty()){
             resultObject.setObject(null);
             resultObject.setMessage("There are no Tank in the system");
@@ -263,7 +286,9 @@ public class TankManager {
         em.persist(diping);
         em.flush();
         
-        tank.setCurrentCapacity(diping.getCalculatedDip());
+        Date date=new Date();
+        tank.setDippedCapacity(diping.getCalculatedDip());
+        tank.setDippedTime(date);
         em.merge(tank);
         em.flush();
         
@@ -357,6 +382,7 @@ public class TankManager {
             tanks.setName(tank.getName());
             tanks.setMaxCapacity(tank.getMaxCapacity());
             tanks.setCurrentCapacity(tank.getCurrentCapacity());
+            tanks.setDippedCapacity(tank.getDippedCapacity());
             tanks.setPreCalibrationDate(tank.getPreCalibrationDate());
             tanks.setNextCalibrationDate(tank.getNextCalibrationDate());
             tanks.setBranchId(tank.getBranchId());

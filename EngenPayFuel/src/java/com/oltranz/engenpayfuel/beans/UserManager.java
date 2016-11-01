@@ -237,7 +237,9 @@ public class UserManager {
             em.flush();
             
             //call the function getUserDetails and set user object
-            resultObject.setObject(getUserDetails(u));
+            resultObject=getUserDetails(u);
+            
+            
             
             
             Log log=new Log();
@@ -255,7 +257,6 @@ public class UserManager {
             log.setIp(IP.toString());
             em.persist(log);
             
-            resultObject.setObject(u);
             resultObject.setMessage("User details well updated");
             
             return resultObject;
@@ -379,6 +380,7 @@ public class UserManager {
         
         //get Branch Role
         RoleForBranch roleForBranch=(RoleForBranch) em.createQuery("SELECT r FROM RoleForBranch r WHERE r.roleForBranchPK.branchId = :branchId").setParameter("branchId", branchId).getSingleResult();
+        
         //get user assign to that role
         List<RoleForUser> usersInRoleList=em.createQuery("SELECT r FROM RoleForUser r WHERE r.roleForUserPK.roleId = :roleId").setParameter("roleId", roleForBranch.getRoleForBranchPK().getRoleId()).getResultList();
         
@@ -393,7 +395,7 @@ public class UserManager {
         resultObject.setObjectClass(User.class);
         
         if(usersWithDetailsList.size()>0){
-            resultObject.setMessage("User list well found");
+            resultObject.setMessage(usersWithDetailsList.size()+"  Users  found");
             resultObject.setStatusCode(100);
         }
         else{
@@ -1078,7 +1080,8 @@ public class UserManager {
     
     public ResultObject editUserFromWeb(UserWebEditModel ube){
         
-        ResultObject resultObject;
+        ResultObject resultObject=new ResultObject();
+        resultObject.setObjectClass(UserDetailsModel.class);
         
         UserEditModel editUser =new UserEditModel();
         editUser.setActionUserId(ube.getActionUserId());
@@ -1091,27 +1094,30 @@ public class UserManager {
         editUser.setGender(ube.getGender());
         editUser.setPhoneNumber(ube.getPhoneNumber());
         editUser.setDetails(ube.getDetails());
-        
         resultObject=updateUser(editUser);
         
         UserDetailsModel udm=(UserDetailsModel) resultObject.getObject();
+        
         int userId=udm.getUserId();
         int branchId=ube.getBranchRoleId();
         
+        List<RoleForUser> roleForUserList=em.createQuery("SELECT r FROM RoleForUser r WHERE r.roleForUserPK.userId = :userId").setParameter("userId", userId).getResultList();
+        if(roleForUserList.isEmpty()){
+            resultObject=addUserToABranchRole(userId,branchId);
+            resultObject.setObjectClass(UserDetailsModel.class);
+            return resultObject;
+        }
+        for(RoleForUser roleForUser:roleForUserList){
+            em.remove(roleForUser);
+        }
+        
         if(branchId!=0){
-            RoleForBranch roleForBranch=(RoleForBranch) em.createQuery("SELECT r FROM RoleForBranch r WHERE r.roleForBranchPK.branchId = :branchId").setParameter("branchId", branchId);
-            if(roleForBranch==null){
-                resultObject=addUserToABranchRole(userId,branchId);
-            }
-            else{
-                removeUser4rmRole(userId,roleForBranch.getRoleForBranchPK().getRoleId());
-                resultObject=addUserToABranchRole(userId,branchId);
-            }
+            resultObject=addUserToABranchRole(userId,branchId);
             resultObject.setObjectClass(UserDetailsModel.class);
             return resultObject;
         }
         
-        return resultObject;
+        return getUserDetails(userId);
     }
     
     

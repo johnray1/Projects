@@ -54,6 +54,13 @@ public class Tank implements Serializable {
     private Double maxCapacity;
     @Column(name = "current_capacity", precision = 22)
     private Double currentCapacity;
+    @Column(name = "dipped_capacity", precision = 22)
+    private Double dippedCapacity=0.0;
+    
+    @Column(name = "dipped_time")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dippedTime;
+    
     @Column(name = "pre_calibration_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date preCalibrationDate;
@@ -145,6 +152,9 @@ public class Tank implements Serializable {
     public void setProductId(Integer productId) {
         this.productId = productId;
     }
+    
+    
+    
 
     @Override
     public int hashCode() {
@@ -169,6 +179,34 @@ public class Tank implements Serializable {
     @Override
     public String toString() {
         return "com.oltranz.engenpayfuel.entities.Tank[ tankId=" + tankId + " ]";
+    }
+
+    /**
+     * @return the dippedCapacity
+     */
+    public Double getDippedCapacity() {
+        return dippedCapacity;
+    }
+
+    /**
+     * @param dippedCapacity the dippedCapacity to set
+     */
+    public void setDippedCapacity(Double dippedCapacity) {
+        this.dippedCapacity = dippedCapacity;
+    }
+
+    /**
+     * @return the dippedTime
+     */
+    public Date getDippedTime() {
+        return dippedTime;
+    }
+
+    /**
+     * @param dippedTime the dippedTime to set
+     */
+    public void setDippedTime(Date dippedTime) {
+        this.dippedTime = dippedTime;
     }
     
 }

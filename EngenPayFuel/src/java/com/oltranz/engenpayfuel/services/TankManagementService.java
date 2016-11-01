@@ -61,7 +61,14 @@ public class TankManagementService {
         return result.getJsonFormat();
     }
     
-    
+    @GET
+    @Path("tanks/{braId}")
+    @Produces({"application/xml", "application/json"})
+    public String getTankListByBranchId(@PathParam("braId") Integer braId) {
+        
+        ResultObject result= tankManager.getTankListByBranchId(braId);
+        return result.getJsonFormat();
+    }
     
     @GET
     @Path("tank/{tankId}")
@@ -107,7 +114,7 @@ public class TankManagementService {
     //---------------------web----------------------------------------------
     
     @GET
-    @Path("tanks/{branchId}")
+    @Path("tanklist/{branchId}")
     @Produces({"application/xml", "application/json"})
     public String getTankListByUserId(@PathParam("branchId") Integer branchId) {
         

@@ -347,15 +347,18 @@ public class ChartManager {
     }
     
     public double salePerPayment(int paymentModeId,int branchId){
+        Date currentDate = new Date();
         Query query;
         if(branchId==0){
-            query=em.createQuery("SELECT t FROM Transaction t WHERE t.paymentModeId = :paymentModeId");
+            query=em.createQuery("SELECT t FROM Transaction t WHERE t.paymentModeId = :paymentModeId and t.date = :date");
             query.setParameter("paymentModeId", paymentModeId);
+            query.setParameter("date", currentDate);
         }
         else{
-            query=em.createQuery("SELECT t FROM Transaction t WHERE t.paymentModeId = :paymentModeId and t.branchId = :branchId");
+            query=em.createQuery("SELECT t FROM Transaction t WHERE t.paymentModeId = :paymentModeId and t.branchId = :branchId and t.date = :date");
             query.setParameter("paymentModeId", paymentModeId);
             query.setParameter("branchId", branchId);
+            query.setParameter("date", currentDate);
         }
         List<Transaction> transactionList=(List<Transaction>)query.getResultList();
         double amount=0;
@@ -621,8 +624,11 @@ public class ChartManager {
             TankDash tankDash=new TankDash();
             tankDash.setTankId(tank.getTankId());
             tankDash.setTankName(tank.getName());
+            tankDash.setProductName(commonFunctionEjb.getProductName(tank.getProductId()).getName().toLowerCase());
             tankDash.setCurrentCapacity(tank.getCurrentCapacity());
             tankDash.setMaxCapacity(tank.getMaxCapacity());
+            tankDash.setDippedCapacity(tank.getDippedCapacity());
+            tankDash.setDippedTime(tank.getDippedTime());
             tankDash.setPumpDash(pumpList(tank.getTankId()));
             tankDashList.add(tankDash);
         }
