@@ -93,11 +93,7 @@
                                     <f:facet name="header">EMAIL</f:facet>
                                         #{customer.email}
                                 </h:column>
-                                <h:column>
-                                    <f:facet name="header">BALANCE</f:facet>
-                                        #{customer.msisdn}
-                                </h:column>
-                                <h:column>
+                                <h:column rendered="false">
                                     <f:facet name="header">STATUS</f:facet>
                                         #{customer.status}
                                 </h:column>

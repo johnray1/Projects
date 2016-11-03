@@ -9,6 +9,7 @@ import com.oltranz.airtime.library.CommonLibrary;
 import com.oltranz.airtime.model.Customer;
 import com.oltranz.airtime.model.CustomerList;
 import com.oltranz.airtime.model.CustomerSingle;
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
@@ -24,7 +25,7 @@ import org.codehaus.jackson.map.ObjectMapper;
  */
 @ManagedBean(name="CustomerBean")
 @SessionScoped
-public class CustomerBean {
+public class CustomerBean implements Serializable{
     
     private String customerNo;
     private Customer customer;
@@ -45,7 +46,7 @@ public class CustomerBean {
         
         try{
             
-            String url="http://41.74.172.132:8080/AirtimeRechargeSystem/customer/listcustomers";
+            String url="http://localhost:8080/AirtimeRechargeSystemCore/customer/listcustomers";
             
             Response response = CommonLibrary.sendRESTRequest(url, "empty data", MediaType.APPLICATION_JSON, "GET");
             String jsonResponse = response.readEntity(String.class);

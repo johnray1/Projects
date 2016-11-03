@@ -1,0 +1,73 @@
+.subsim{    
+	background-color: #ffffff;
+    border: 2px solid #ff5700;
+	border-radius:7px;
+    margin: 0px;
+    padding: 7px;
+    padding-left: 0px;
+    padding-right: 10px;
+	min-height:230px;
+	}
+
+.subsim h3{margin:0px;padding:7px;padding-bottom:17px;color:#ff5700;font-size:23px;text-align:center;}
+.subsim:hover h3{margin:0px;padding:7px;padding-bottom:17px;color:#000000;font-size:23px;font-weight:bold;text-align:center;}
+
+div.subsimt{margin:0px;padding:0px;border:0px solid red;text-align:center;}
+div.subsimt h5{margin:0px;padding:0px;color:#999999;text-transform:uppercase;font-size:13px;font-weight:bold;text-align:center;}
+div.subsimt h4{margin:0px;padding:7px;color:#2e3a93;text-transform:uppercase;font-size:43px;font-weight:bold;text-align:center;}
+div.subsimt h6{margin:0px;padding:7px;color:#5b5b5b;font-size:17px;font-style:italic;font-weight:bold;text-align:center;}
+
+div.subsimt label.fails{display:inline-block;width:70px;margin:3px;padding:7px;font-size:16px;font-weight:bold;text-align:center;color:#000000;border:1px solid red;}
+div.subsimt label.fails:before{color: red;font-family:fontawesome;  content: "\f00d";  font-size: 14px; float:left; font-weight: normal;text-rendering: auto;  -webkit-font-smoothing: antialiased;}
+
+div.subsimt label.success{display:inline-block;width:70px;margin:3px;padding:7px;font-size:16px;font-weight:bold;text-align:center;color:#000000;border:1px solid green;}
+div.subsimt label.success:before{color:green;font-family:fontawesome;  content: "\f00c";  font-size: 14px; float:left; font-weight: normal;text-rendering: auto;  -webkit-font-smoothing: antialiased;}
+
+
+
+div.subsims{margin:0px;padding:0px;padding-left:10px;border-left:2px solid #f0f0f0;}
+div.subsims p{margin:0px;padding:0px;color:#999999;text-transform:uppercase;font-size:13px;font-weight:bold;text-align:left;}
+div.subsims p strong{display:block;margin:0px;padding:7px;color:#ff5700;text-transform:uppercase;font-size:30px;font-weight:bold;text-align:left;}
+
+
+
+/*MEDIAQUERIES*/
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+div.subsimt h4{margin:0px;padding:7px;color:#2e3a93;text-transform:uppercase;font-size:33px;font-weight:bold;text-align:center;}
+
+.subsim h3{margin:0px;padding:7px;padding-left:33px;padding-bottom:17px;color:#ff5700;font-size:20px;text-align:center;}
+.subsim:hover h3{margin:0px;padding:7px;padding-left:33px;padding-bottom:17px;color:#000000;font-size:20px;font-weight:bold;text-align:center;}
+
+div.subsims p{margin:0px;margin-bottom:27px;padding:0px;color:#999999;text-transform:uppercase;font-size:13px;font-weight:bold;text-align:left;}
+div.subsims p strong{display:block;margin:0px;padding:7px;color:#ff5700;text-transform:uppercase;font-size:22px;font-weight:bold;text-align:left;}
+}
+
+
+
+@media only screen and (min-width :480px) and (max-width : 768px) {
+
+}
+
+
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-width : 768px) and (max-width : 1024px) {
+
+}
+
+
+
+/* Desktops and laptops ----------- */
+@media only screen  and (min-width : 1224px) {
+
+}
+
+
+
+
+/* Large screens ----------- */
+@media only screen  and (min-width : 1824px) {
+
+}

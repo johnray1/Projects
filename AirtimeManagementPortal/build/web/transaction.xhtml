@@ -26,6 +26,9 @@
         <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>	
         <script type="text/javascript" src="js/bootstrap.min2.js"></script> 
         
+        <link href="js/easyresponsivetabs/easy-responsive-tabs.css" rel="stylesheet" type="text/css"/>
+        <script src="js/easyresponsivetabs/easy-responsive-tabs.js" type="text/javascript"></script>
+        
         <script type="text/javascript" src="js/datatable/jquery.dataTables.min.js"></script>			
         <script type="text/javascript" src="js/datatable/dataTables.buttons.min.js"></script>	
         <script type="text/javascript" src="js/datatable/buttons.flash.min.js"></script>	
@@ -41,7 +44,8 @@
         <script>
             
             $(document).ready(function() {
-                turn2DataTable('dataTableList');
+                turn2DataTable('dataTableList1');
+                turn2DataTable('dataTableList2');
             } );
             
         </script>
@@ -184,73 +188,93 @@
                 <div class="clear"></div>
                 
                 <!-- In -->
+                <!-- TABS START-->
                 <div class="col-xs-12 col-sm-12 thebox" style="border:0px solid red;margin-top: 30px">
-                    <div class="col-xs-12 sholderinbox" style="float: none;margin: 0 auto;padding:7px;min-height:400px;overflow-x:auto;font-family:ubuntu;">
-                        <div  class="container-fluid" style="padding:0px;font-family:ubuntu;">
+                    
+                    <div id="parentVerticalTab">
+                        
+                        <ul class="resp-tabs-list">
+                            <li id="tablist1">AIRTIME HISTORY</li>
+                            <li id="tablist2">WALLET HISTORY</li>
+                        </ul>
+                        
+                        <div class="resp-tabs-container">
                             
-                            <!--table start-->
-                            <h:dataTable value="#{TransactionBean.transactionList.transactionList}" var="tra"
-                                         id="dataTableList"
-                                         styleClass="display" 
-                                         cellspacing="0" 
-                                         width="100%" 
-                                         style="padding: 0px;
-                                         margin-bottom: 30px;">
+                            <div id="tabcontent1">
                                 
-                                <h:column>
-                                    <f:facet name="header">TXN. NO</f:facet>
-                                        #{tra.walletTransaction.id}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">SENDER</f:facet>
-                                        #{tra.walletTransaction.srcrefId}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">RECEIVER</f:facet>
-                                        #{tra.walletTransaction.destRefId}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">AMOUNT</f:facet>
-                                    &#8358; #{tra.walletTransaction.amount}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">PRE BALANCE</f:facet>
-                                    &#8358; 
-                                    <h:outputText value="#{tra.walletTransaction.prevBalance}">
-                                        <f:convertNumber pattern="##,###"/>
-                                    </h:outputText>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">CUR BALANCE</f:facet>
-                                    &#8358; 
-                                    <h:outputText value="#{tra.walletTransaction.newBalance}">
-                                        <f:convertNumber pattern="##,###"/>
-                                    </h:outputText>
-                                </h:column>
+                                <!-- In -->
+                                <div class="col-xs-12" style="float: none;margin: 0 auto;padding:5px;min-height:400px;border:0px solid #f0f0f0;overflow-x:auto;font-family:ubuntu;">
+                                    <div class="container-fluid" style="padding:0px;font-family:ubuntu;">
+                                        
+                                        
+                                        <!--table start-->
+                                        <h:dataTable value="#{TransactionBean.topUpListFilteredResponse.tx}" var="tra"
+                                                     id="dataTableList1"
+                                                     styleClass="display" 
+                                                     cellspacing="0" 
+                                                     width="100%" 
+                                                     style="padding: 0px;
+                                                     margin-bottom: 30px;">
+                                            
+                                            <h:column>
+                                                <f:facet name="header">DATE/TIME</f:facet>
+                                                    #{tra.txTime}
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">SENDER</f:facet>
+                                                    #{tra.source}
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">RECEIVER</f:facet>
+                                                    #{tra.destination}
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">AMOUNT</f:facet>
+                                                &#8358; #{tra.amount}
+                                            </h:column>
+                                            
+                                            <!--
+                                            <h:column>
+                                                <f:facet name="header">ACTION</f:facet>
+                                                <h:form>
+                                                    <h:commandLink   onclick="notifiyViewDetails()" id="viewDetails"> 
+                                                        <h:graphicImage value="images/icon_view.png" />
+                                                        <f:ajax event="click" listener="" render="viewDetailsContentPanel" />
+                                                    </h:commandLink>
+                                                </h:form>
+                                            </h:column>
+                                            table end-->
+                                        </h:dataTable>
+                                        
+                                        
+                                        
+                                    </div>
+                                </div>
                                 
-                                <h:column>
-                                    <f:facet name="header">TRANSACTION DATE</f:facet>
-                                    <h:outputText value="#{tra.walletTransaction.transTime}">
-                                        <f:convertDateTime pattern="EEE, d MMM yyyy HH:mm"/>
-                                    </h:outputText>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">ACTION</f:facet>
-                                    <h:form>
-                                        <h:commandLink   onclick="notifiyViewDetails()" id="viewDetails"> 
-                                            <h:graphicImage value="images/icon_view.png" />
-                                            <f:ajax event="click" listener="#{TransactionBean.transactionForView(tra)}" render="viewDetailsContentPanel" />
-                                        </h:commandLink>
-                                    </h:form>
-                                </h:column>
-                            </h:dataTable>
-                            <!-- table end-->
+                            </div>
+                            
+                            <div id="tabcontent2">
+                                
+                                <!-- In -->
+                                <div class="col-xs-12" style="float: none;margin: 0 auto;padding:5px;min-height:400px;border:0px solid #f0f0f0;overflow-x:auto;font-family:ubuntu;">
+                                    <div class="container-fluid" style="padding:0px;font-family:ubuntu;">
+                                        
+                                        
+                                       
+                                        
+                                        
+                                    </div>
+                                </div>
+                                
+                            </div>
                             
                             
                         </div>
+                        
                     </div>
+                    
                 </div>
-                <!-- EnIn-->
+                <!-- TABS END-->
                 
                 
             </div>
@@ -362,6 +386,29 @@
             });
             
         </script> 
+        
+        <script>
+            $(document).ready(function () {
+
+                //Vertical Tab
+                $('#parentVerticalTab').easyResponsiveTabs({
+                    type: 'vertical', //Types: default, vertical, accordion
+                    width: 'auto', //auto or any width like 600px
+                    fit: true, // 100% fit in a container
+                    closed: 'accordion', // Start closed if in accordion view
+                    tabidentify: 'hor_1', // The tab groups identifier
+                    activate: function (event) { // Callback function if tab is switched
+                        var $tab = $(this);
+                        var $info = $('#nested-tabInfo2');
+                        var $name = $('span', $info);
+                        $name.text($tab.text());
+                        $info.show();
+                    }
+                });
+
+
+            });
+        </script>
         
         <script type="text/javascript" src="js/mobmenu.js"></script>
     </h:body>

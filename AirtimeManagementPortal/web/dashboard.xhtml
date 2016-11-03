@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -20,6 +21,8 @@
         <link href="css/filter.css" rel="stylesheet"/>
         <link href="css/mobmenu.css" rel="stylesheet"/>
         <link href="css/message.css" rel="stylesheet"/>
+        
+        <link href="css/subsim.css" rel="stylesheet"/>
         
         <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>	
         <script type="text/javascript" src="js/bootstrap.min2.js"></script>
@@ -40,11 +43,12 @@
             <div class="col-xs-12" style="margin:0px;padding:0px;background-color:#f4f4f4;">
                 
                 <span  class="col-xs-12 col-sm-12 col-md-5" style="margin:0px;padding:0px;border:0px solid red;">
+                    
                     <h:form>
-                        <h:commandLink class="#{TemplateBean.today}" value="Today" action="#{TransactionBean.traPerFilter(1)}"/>
-                        <h:commandLink class="#{TemplateBean.yesterday}" value="Yesterday" action="#{TransactionBean.traPerFilter(2)}"/>
-                        <h:commandLink class="#{TemplateBean.week}" value="By Weeks" action="#{TransactionBean.traPerFilter(3)}"/>
-                        <h:commandLink class="#{TemplateBean.month}" value="By Months" action="#{TransactionBean.traPerFilter(4)}"/>
+                        <h:commandLink class="#{TemplateBean.today}" value="Today" action="#{DashBean.traPerFilter(1)}"/>
+                        <h:commandLink class="#{TemplateBean.yesterday}" value="Yesterday" action="#{DashBean.traPerFilter(2)}"/>
+                        <h:commandLink class="#{TemplateBean.week}" value="By Weeks" action="#{DashBean.traPerFilter(3)}"/>
+                        <h:commandLink class="#{TemplateBean.month}" value="By Months" action="#{DashBean.traPerFilter(4)}"/>
                     </h:form>
                 </span>
                 
@@ -68,16 +72,39 @@
                 <!-- In -->
                 <div class="col-xs-12" style="float: none;margin: 0 auto;padding:5px;min-height:600px;border:0px solid #f0f0f0;overflow-x:auto;font-family:ubuntu;">
                     
-                    
+                    <div class="clear"></div>
                     <!--  -->      
-                    
-                    
                     <div class="col-xs-12 col-sm-12 col-md-6 holderbox_summary">
                         <div class="col-xs-12 col-sm-12 holderinbox_summary" style="margin:0px;padding:0px;min-height:200px;">
-                            <h3>TOTAL TRANSACTION</h3>
-                            <h2>
-                                <h:outputText value="no data"/>
-                            </h2>
+                            <h3>WALLET LOADING</h3>
+                            <span class="col-xs-12 " style="margin:0px;padding:0px;">
+                                <div class="col-xs-6 subsimt">
+                                    <h5>Total No.</h5>
+                                    <h4>#{DashBean.combinedSalesReport.walletsLoadingTotal.txCount}</h4>
+                                    <label class="success"></label>
+                                    <label class="fails"></label>
+                                    <h6></h6>
+                                </div>
+                                
+                                <div class="col-xs-6 subsims">
+                                    <p>Total Amount<strong>&#8358;  
+                                            <h:outputText value="#{DashBean.combinedSalesReport.walletsLoadingTotal.sum}">
+                                                <f:convertNumber integerOnly="true"/>
+                                            </h:outputText>
+                                        </strong></p>
+                                    <p>Success Amount<strong>&#8358;  
+                                            <h:outputText value="">
+                                                <f:convertNumber integerOnly="true"/>
+                                            </h:outputText>
+                                        </strong></p>
+                                    <p>Failure Amount<strong>&#8358;  
+                                            <h:outputText value="">
+                                                <f:convertNumber integerOnly="true"/>
+                                            </h:outputText>
+                                        </strong></p>
+                                </div>							
+                            </span>
+                            
                         </div>
                     </div>
                     
@@ -85,8 +112,35 @@
                     
                     <div class="col-xs-12 col-sm-12 col-md-6 holderbox_summary">
                         <div class="col-xs-12 col-sm-12 holderinbox_summary" style="margin:0px;padding:0px;min-height:200px;">
-                            <h3>TOTAL AMOUNT</h3>
-                            <h2><label>&#8358;</label> <h:outputText value="no data"/> </h2>
+                            <h3>AIRTIME PURCHASE</h3>
+                            <span class="col-xs-12 " style="margin:0px;padding:0px;">
+                                <div class="col-xs-6 subsimt">
+                                    <h5>Total No.</h5>
+                                    <h4>#{DashBean.combinedSalesReport.airtimePurchasesTotals.txCount}</h4>
+                                    <label class="success">#{DashBean.combinedSalesReport.successfulAirtimePurchasesTotals.txCount}</label>
+                                    <label class="fails">#{DashBean.combinedSalesReport.failedAirtimePurchasesTotals.txCount}</label>
+                                    <h6></h6>
+                                </div>
+                                
+                                <div class="col-xs-6 subsims">
+                                    <p>Total Amount<strong>&#8358;  
+                                            <h:outputText value="#{DashBean.combinedSalesReport.airtimePurchasesTotals.sum}">
+                                                <f:convertNumber integerOnly="true"/>
+                                            </h:outputText>
+                                        </strong></p>
+                                    <p>Success Amount<strong>&#8358;  
+                                            <h:outputText value="#{DashBean.combinedSalesReport.successfulAirtimePurchasesTotals.sum}">
+                                                <f:convertNumber integerOnly="true"/>
+                                            </h:outputText>
+                                        </strong></p>
+                                    <p>Failure Amount<strong>&#8358;  
+                                            <h:outputText value="#{DashBean.combinedSalesReport.failedAirtimePurchasesTotals.sum}">
+                                                <f:convertNumber integerOnly="true"/>
+                                            </h:outputText>
+                                        </strong></p>
+                                </div>							
+                            </span>
+                            
                         </div>
                     </div>
                     
@@ -94,6 +148,61 @@
                     
                     <div class="clear"></div>
                     
+                    <div class="col-xs-12 col-sm-12 col-md-12 holderbox">
+                        <div class="col-xs-12 col-sm-12 holderinbox" style="margin:0px;padding:0px;min-height:200px;">
+                            
+                            <h2><center>SUB ACCOUNTS DETAILS</center></h2>
+                            
+                            
+                            <!-- SUBSIMS  -->
+                            
+                            <!--  -->
+                            <ui:repeat value="#{DashBean.combinedSalesReport.vtuSalesReport.agentSIMSalesReport}" var="sim">
+                                <div class="col-xs-12 col-sm-12 col-md-6 holderbox_summary">
+                                    <div class="col-xs-12 col-sm-12 subsim">
+                                        <img src="images/simcorner.png" width="54" height="50" alt="" style="display:block;position:absolute;border:0px solid red; top: -2px;left: -2px;z-index: 9;"/>
+                                        <h3>SIM  : #{sim.MSISDN}</h3>
+                                        
+                                        <span class="col-xs-12 " style="margin:0px;padding:0px;">
+                                            <div class="col-xs-6 subsimt">
+                                                <h5>Transactions</h5>
+                                                <h4>#{sim.totalTx}</h4>
+                                                <label class="success">#{sim.totalSuccessfulTx}</label>
+                                                <label class="fails">#{sim.totalFailuresfulTx}</label>
+                                                <h6></h6>
+                                            </div>
+                                            
+                                            <div class="col-xs-6 subsims">
+                                                <p>Sales<strong>&#8358;  
+                                                        <h:outputText value="#{sim.totalSoldAmount}">
+                                                            <f:convertNumber integerOnly="true"/>
+                                                        </h:outputText>
+                                                    </strong></p>
+                                                <p>Balance<strong>&#8358;  
+                                                        <h:outputText value="#{sim.balance}">
+                                                            <f:convertNumber integerOnly="true"/>
+                                                        </h:outputText>
+                                                    </strong></p>
+                                            </div>							
+                                        </span>
+                                        
+                                    </div>
+                                </div>
+                            </ui:repeat>
+                            <!--  -->
+                            
+                            
+                            
+                            
+                            <!-- SUBSIMS  -->
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    
+                    
+                    <div class="clear"></div>
                     
                     <div class="col-xs-12 col-sm-12 col-md-12 holderbox">
                         <div class="col-xs-12 col-sm-12 holderinbox" style="margin:0px;padding:0px;min-height:500px;">
@@ -108,11 +217,8 @@
                             
                         </div>
                     </div>
-                    
-                    <div class="clear"></div>
-                    
                     <!-- -->
-                    
+                    <div class="clear"></div>
                 </div>
                 <!-- End In-->
                 

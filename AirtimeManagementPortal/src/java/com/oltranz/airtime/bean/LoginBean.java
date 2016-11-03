@@ -31,6 +31,9 @@ public class LoginBean implements Serializable{
     private Boolean faceMessage=false;
     private Date date=new Date();
     
+    @ManagedProperty(value="#{DashBean}")
+    private DashBean dashBean;
+    
     @ManagedProperty(value="#{TemplateBean}")
     private TemplateBean templateBean;
     
@@ -55,10 +58,7 @@ public class LoginBean implements Serializable{
             if (statusCode==200) {
                 
                 username=lm.getUser().getfName();
-                customerBean.totalCustomers();
-                transactionBean.dayTransactions();
-                transactionBean.traPerToday();
-                transactionBean.traPerWeek();
+                dashBean.traPerFilter(1);
                 
                 HttpSession session = SessionBean.getSession();
                 session.setAttribute("username",username );
@@ -198,6 +198,20 @@ public class LoginBean implements Serializable{
      */
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    /**
+     * @return the dashBean
+     */
+    public DashBean getDashBean() {
+        return dashBean;
+    }
+
+    /**
+     * @param dashBean the dashBean to set
+     */
+    public void setDashBean(DashBean dashBean) {
+        this.dashBean = dashBean;
     }
     
     

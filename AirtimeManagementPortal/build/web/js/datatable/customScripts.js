@@ -6,7 +6,7 @@ function  turn2DataTable(tableId){
         "searching": true,
         "ordering": true,
         "order": [[ 0, "desc" ]],
-        "lengthMenu": [5, 10, 20, 50],
+        "lengthMenu": [20, 50],
         dom: 'B<"clear">lfrtip',
         buttons: [
             'excelHtml5',

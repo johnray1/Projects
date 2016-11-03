@@ -101,14 +101,14 @@
                                     <h:column>
                                         <f:facet name="header">Actions</f:facet>
                                         <h:form>
-                                            <h:commandLink   onclick="notifiyViewDetails()" id="viewDetails"> 
+                                            <h:commandLink   onclick="notifiyViewDetails()" id="viewDetails" rendered="false"> 
                                                 <h:graphicImage value="images/icon_view.png" />
                                                 <f:ajax event="click" listener="#{UserBean.userForView(user)}" render="viewDetailsContentPanel" />
                                             </h:commandLink>
                                             
                                             <h:commandLink onclick="notifyEdit()" id="editDetails" > 
                                                 <h:graphicImage value="images/icon_edit.png" />
-                                                <f:ajax event="click"  listener="#{UserBean.userForView(user)}" rendererType="postValidate" render=":editDetailsContentPanel :edit_form" />
+                                                <f:ajax event="click"  listener="#{UserBean.userForEdit(user)}" rendererType="postValidate" render=":editDetailsContentPanel :edit_form" />
                                             </h:commandLink>
                                         </h:form>  
                                         

@@ -5,12 +5,21 @@
 */
 package com.oltranz.airtime.bean;
 
+import com.oltranz.airtime.library.CommonLibrary;
+import com.oltranz.airtime.model.CombinedSalesReport;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import org.codehaus.jackson.map.ObjectMapper;
 
 /**
  *
@@ -20,14 +29,11 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class DashBean {
     
+    private CombinedSalesReport combinedSalesReport;
+    
     @ManagedProperty(value="#{TemplateBean}")
     private TemplateBean templateBean;
     
-    @ManagedProperty(value="#{CustomerBean}")
-    private CustomerBean customerBean;
-    
-    @ManagedProperty(value="#{TransactionBean}")
-    private TransactionBean transactionBean;
     
     public void dashBoard(){
         
@@ -37,15 +43,86 @@ public class DashBean {
         templateBean.setTransactionClassName("deactive");
         templateBean.setLogClassName("deactive");
         
-        customerBean.totalCustomers();
-        transactionBean.dayTransactions();
-        transactionBean.traPerToday();
-        transactionBean.traPerWeek();
+        
+        
+        
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("dashboard.xhtml");
         }
         catch (Exception ex) {
             Logger.getLogger(DashBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    public void traPerFilter(int check){
+        
+        String startDate = null,endDate = null;
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+        
+        if(check==1){
+            templateBean.setToday("col-xs-3 shortdate active");templateBean.setYesterday("col-xs-3 shortdate");templateBean.setWeek("col-xs-3 shortdate");templateBean.setMonth("col-xs-3 shortdate");
+            
+            startDate=dateFormat.format(cal.getTime())+"  00:00";
+            endDate=dateFormat.format(cal.getTime())+"  23:59";
+        }
+        if(check==2){
+            templateBean.setYesterday("col-xs-3 shortdate active");templateBean.setToday("col-xs-3 shortdate");templateBean.setWeek("col-xs-3 shortdate");templateBean.setMonth("col-xs-3 shortdate");
+            cal.add(Calendar.DATE, -1);
+            startDate=dateFormat.format(cal.getTime())+"  00:00";
+            endDate=dateFormat.format(cal.getTime())+"  23:59";
+        }
+        if(check==3){
+            templateBean.setWeek("col-xs-3 shortdate active");templateBean.setToday("col-xs-3 shortdate");templateBean.setYesterday("col-xs-3 shortdate");templateBean.setMonth("col-xs-3 shortdate");
+            cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+            startDate=dateFormat.format(cal.getTime())+"  00:00";
+            cal.add(Calendar.DATE, 6);
+            endDate=dateFormat.format(cal.getTime())+"  23:59";
+            
+        }
+        if(check==4){
+            templateBean.setMonth("col-xs-3 shortdate active");templateBean.setToday("col-xs-3 shortdate");templateBean.setYesterday("col-xs-3 shortdate");templateBean.setWeek("col-xs-3 shortdate");
+            
+            cal.set(Calendar.DAY_OF_MONTH,cal.getActualMinimum(Calendar.DAY_OF_MONTH));
+            Date curMonthStartDate = cal.getTime();
+            
+            cal.set(Calendar.DAY_OF_MONTH,cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+            Date curMonthEndDate = cal.getTime();
+            
+            startDate=dateFormat.format(curMonthStartDate)+"  00:00";
+            endDate=dateFormat.format(curMonthEndDate)+"  23:59";
+        }
+        
+        report(startDate,endDate);
+        
+        try{
+            FacesContext.getCurrentInstance().getExternalContext().redirect("dashboard.xhtml");
+        }
+        catch(Exception ex){
+            Logger.getLogger(TransactionBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    public void report(String startDate,String endDate){
+        
+        try{
+            
+            String url="http://localhost:8080/AirtimeRechargeSystemCore/reports/getreport";
+            String  jsonData = "{\n" +
+                    "\"startDate\":\""+startDate+"\",\n" +
+                    "\"endDate\":\""+endDate+"\"\n" +
+                    "}";
+            Response response = CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
+            String jsonResponse = response.readEntity(String.class);
+            
+            ObjectMapper mapper=new ObjectMapper();
+            combinedSalesReport=(CombinedSalesReport)mapper.readValue(jsonResponse, CombinedSalesReport.class);
+            String s=null;
+        }
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
         }
     }
     
@@ -65,32 +142,20 @@ public class DashBean {
         this.templateBean = templateBean;
     }
     
+    
+    
     /**
-     * @return the customerBean
+     * @return the combinedSalesReport
      */
-    public CustomerBean getCustomerBean() {
-        return customerBean;
+    public CombinedSalesReport getCombinedSalesReport() {
+        return combinedSalesReport;
     }
     
     /**
-     * @param customerBean the customerBean to set
+     * @param combinedSalesReport the combinedSalesReport to set
      */
-    public void setCustomerBean(CustomerBean customerBean) {
-        this.customerBean = customerBean;
-    }
-    
-    /**
-     * @return the transactionBean
-     */
-    public TransactionBean getTransactionBean() {
-        return transactionBean;
-    }
-    
-    /**
-     * @param transactionBean the transactionBean to set
-     */
-    public void setTransactionBean(TransactionBean transactionBean) {
-        this.transactionBean = transactionBean;
+    public void setCombinedSalesReport(CombinedSalesReport combinedSalesReport) {
+        this.combinedSalesReport = combinedSalesReport;
     }
     
     
