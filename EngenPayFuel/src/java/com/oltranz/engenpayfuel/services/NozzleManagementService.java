@@ -7,6 +7,7 @@ package com.oltranz.engenpayfuel.services;
 
 import com.oltranz.engenpayfuel.beans.NozzleManager;
 import com.oltranz.engenpayfuel.entities.Nozzle;
+import com.oltranz.engenpayfuel.models.NozzleAdjust;
 import com.oltranz.engenpayfuel.models.ResultObject;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -48,6 +49,16 @@ public class NozzleManagementService {
     public String editNozzle(Nozzle editNozzle) {
         
         ResultObject result=nozzleManager.editNozzle(editNozzle);
+        return result.getJsonFormat();
+        
+    }
+    
+    @POST
+    @Path("nozzle/adjust")
+    @Consumes({"application/xml", "application/json"})
+    public String adjustNozzle(NozzleAdjust nozzleAdjust) {
+        
+        ResultObject result=nozzleManager.adjustNozzle(nozzleAdjust);
         return result.getJsonFormat();
         
     }

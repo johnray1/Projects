@@ -6,12 +6,17 @@
 package com.oltranz.engenpayfuel.beans;
 
 
+import com.oltranz.engenpayfuel.entities.IndexAdjust;
+import com.oltranz.engenpayfuel.entities.IndexTracking;
 import com.oltranz.engenpayfuel.entities.Nozzle;
 import com.oltranz.engenpayfuel.entities.Pump;
 import com.oltranz.engenpayfuel.entities.Tank;
+import com.oltranz.engenpayfuel.entities.TankTracking;
+import com.oltranz.engenpayfuel.models.NozzleAdjust;
 import com.oltranz.engenpayfuel.models.Nozzles;
 import com.oltranz.engenpayfuel.models.ResultObject;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -27,7 +32,7 @@ public class NozzleManager {
     
     @PersistenceContext
     private EntityManager em;
-     @EJB
+    @EJB
             CommonFunctionEjb commonFunctionEjb;
     public ResultObject createNozzle(Nozzle createNozzle) {
         
@@ -131,6 +136,82 @@ public class NozzleManager {
         
     }
     
+    public ResultObject adjustNozzle(NozzleAdjust nozzleAdjust) {
+        
+        
+        ResultObject resultObject=new ResultObject();
+        resultObject.setObjectClass(NozzleAdjust.class);
+        try{
+            Nozzle nozzle=em.find(Nozzle.class, nozzleAdjust.getNozzleId());
+            if((nozzle==null)||(nozzle.getTankId()==null)){
+                resultObject.setObject(null);
+                resultObject.setMessage("NozzleId is not created, to which we want to Update");
+                resultObject.setStatusCode(500);
+                return resultObject;
+            }
+            
+            Tank tank=em.find(Tank.class, nozzle.getTankId());
+            if(tank==null){
+                resultObject.setObject(null);
+                resultObject.setMessage("TankId is not created, to which we want to Update");
+                resultObject.setStatusCode(500);
+                return resultObject;
+            }
+            
+            //index diffrence
+            double indexDiff=nozzleAdjust.getIndex()-nozzle.getNozzleIndex();
+            
+            IndexAdjust indexAdjust=new IndexAdjust();
+            indexAdjust.setNozzleId(nozzleAdjust.getNozzleId());
+            indexAdjust.setIndexadjust(nozzleAdjust.getIndex());
+            indexAdjust.setUserId(nozzleAdjust.getUserId());
+            indexAdjust.setDateTime(new Date());
+            em.persist(indexAdjust);
+            em.flush();
+            
+            //set Index Tracking
+            IndexTracking indexTracking=new IndexTracking();
+            indexTracking.setTransactionId(indexAdjust.getId());
+            indexTracking.setTransactionTypeId(6);
+            indexTracking.setUserId(nozzleAdjust.getUserId());
+            indexTracking.setDateTime(new Date());
+            indexTracking.setIndexbefore(nozzle.getNozzleIndex());
+            nozzle.setNozzleIndex(nozzleAdjust.getIndex());
+            em.merge(nozzle);
+            em.flush();
+            indexTracking.setIndexafter(nozzle.getNozzleIndex());
+            em.persist(indexTracking);
+            
+            
+            //set Tank Tracking
+            TankTracking tankTracking=new TankTracking();
+            tankTracking.setTankId(nozzle.getTankId());
+            tankTracking.setTransactionId(indexAdjust.getId());
+            tankTracking.setTransactionTypeId(6);
+            tankTracking.setUserId(nozzleAdjust.getUserId());
+            tankTracking.setDateTime(new Date());
+            tankTracking.setQuantitybefore(tank.getCurrentCapacity());
+            tank.setCurrentCapacity(tank.getCurrentCapacity()-indexDiff);
+            em.merge(tank);
+            em.flush();
+            tankTracking.setQuantityafter(tank.getCurrentCapacity());
+            em.persist(tankTracking);
+            
+            
+            resultObject.setObject(nozzleAdjust);
+            resultObject.setMessage("Nozzle Succefully Adjusted");
+            resultObject.setStatusCode(100);
+            
+            return resultObject;
+        }
+        catch(Exception e){
+            resultObject.setObject(null);
+            resultObject.setMessage(e.getMessage());
+            return resultObject;
+        }
+        
+    }
+    
     public ResultObject getNozzleList(){
         
         List<Nozzle> nozzleList=(List<Nozzle>)em.createNamedQuery("Nozzle.findAll").getResultList();
@@ -208,7 +289,7 @@ public class NozzleManager {
         resultObject.setMessage(nozzlesList.size()+" Nozzles are found");
         resultObject.setStatusCode(100);
         return resultObject;
-       
+        
     }
     
     

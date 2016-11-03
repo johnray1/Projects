@@ -176,6 +176,10 @@ public class InitialData {
             em.flush();
             em.persist(new TransactionType(4,"DEEPING","Deeping Type"));
             em.flush();
+            em.persist(new TransactionType(5,"TANKING","Tanking Type"));
+            em.flush();
+            em.persist(new TransactionType(6,"INDEX ADJUSTMENT","Index Adjustment Type"));
+            em.flush();
             
             initializationLog+="\n "+" Added successfully";
             
