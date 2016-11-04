@@ -6,6 +6,7 @@
 package com.oltranz.quickteller.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -49,6 +52,10 @@ public class PaymentInit implements Serializable {
     @Size(max = 255)
     @Column(name = "msisdn", length = 255)
     private String msisdn;
+    
+    @Column(name = "server_time")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date serverTime;
 
     public PaymentInit() {
     }
@@ -96,6 +103,22 @@ public class PaymentInit implements Serializable {
     public void setMsisdn(String msisdn) {
         this.msisdn = msisdn;
     }
+    
+    /**
+     * @return the serverTime
+     */
+    public Date getServerTime() {
+        return serverTime;
+    }
+
+    /**
+     * @param serverTime the serverTime to set
+     */
+    public void setServerTime(Date serverTime) {
+        this.serverTime = serverTime;
+    }
+    
+    
 
     @Override
     public int hashCode() {
@@ -121,5 +144,7 @@ public class PaymentInit implements Serializable {
     public String toString() {
         return "com.oltranz.quickteller.entities.PaymentInit[ initUid=" + initUid + " ]";
     }
+
+    
     
 }

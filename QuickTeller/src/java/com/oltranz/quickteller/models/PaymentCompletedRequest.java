@@ -30,6 +30,9 @@ public class PaymentCompletedRequest {
     @JsonProperty("amount")
     private Double amount;
     
+    @JsonProperty("msisdn")
+    private String msisdn;
+    
 
     /**
      * @return the initUid
@@ -99,6 +102,20 @@ public class PaymentCompletedRequest {
      */
     public void setAmount(Double amount) {
         this.amount = amount;
+    }
+
+    /**
+     * @return the msisdn
+     */
+    public String getMsisdn() {
+        return msisdn;
+    }
+
+    /**
+     * @param msisdn the msisdn to set
+     */
+    public void setMsisdn(String msisdn) {
+        this.msisdn = msisdn;
     }
 
     

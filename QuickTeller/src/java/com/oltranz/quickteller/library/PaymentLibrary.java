@@ -34,58 +34,10 @@ public class PaymentLibrary {
     
     
     
-    public static PaymentCompletedResponse postPaymentModule(PaymentCompletedRequest pcr,String token){
-        
-        PaymentCompletedResponse pcres=new PaymentCompletedResponse();
-        try {
-            ObjectMapper mapper=new ObjectMapper();
-            String jsonData=mapper.writeValueAsString(pcr);
-            String url="http://localhost:8080/AirtimeRechargeSystemCore/payments/completedPayment";
-            Response response=sendPaymentModuleRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST", token);
-            String jsonResponse = response.readEntity(String.class);
-            pcres=(PaymentCompletedResponse)mapper.readValue(jsonResponse, PaymentCompletedResponse.class);
-        }
-        catch (IOException ex) {
-            Logger.getLogger(QuickTellerManager.class.getName()).log(Level.SEVERE, null, ex);
-            
-        }
-        return pcres;
-    }
+    
+//-----------------------------------------------------Quickteller------------------------------------------------------------
     
     
-    
-    public static Response sendPaymentModuleRequest(String url,String requestStr, String MediaType, String method, String token){
-        try
-        {
-            Response response=null;
-            Client client =ClientBuilder.newClient();
-            WebTarget target =client.target(url);
-            switch (method){
-                case "POST":
-                    response = target.request().header("Content-type", "text/xml").header("Signature", "43AD232FD45FF").header("Token", token).post(Entity.entity(requestStr, MediaType));
-                    
-                    break;
-                    
-                case "GET":
-                    response = target.request().get();
-                    break;
-                    
-            }
-            
-            return response;
-        }
-        catch(Exception e)
-        {
-            System.out.println("Error send request: "+e.getMessage());
-            return null;
-        }
-    }
-    
-    
-//-----------------------------------------------------Quickteller------------------------------------------------------------    
-    
-    
-    //String testkey="E9300DJLXKJLQJ2993N1190023";// String testUrl="https://pwq.sandbox.interswitchng.com/api/v2/transaction/"+paymentReference+"?isRequestRef=false";
     public static QuickPaymentRes getpaymentConfirmFromQuickteller(String paymentReference){
         
         QuickPaymentRes quickPaymentRes = new QuickPaymentRes();
@@ -96,7 +48,9 @@ public class PaymentLibrary {
             String key="ERTYUIOOHHGF87654323344HGFT";
             String hash=get_SHA_512ForQuickTeller(paymentReference+key);
             
-            String liveUrl="https://paywith.quickteller.com/api/v2/transaction/"+paymentReference+"?isRequestRef=false";
+            String liveUrl="https://paywith.quickteller.com/api/v2/transaction/"+paymentReference+"?isRequestRef=true";
+            //String liveUrl="https://paywith.quickteller.com/api/v2/transaction/"+paymentReference+"?isRequestRef=false";
+            
             out.print("QUICKTELLER: url:"+liveUrl);
             Response response =sendQuicktellerRequest(liveUrl, clientId, hash);
             String qtjsonRes=response.readEntity(String.class);
@@ -104,12 +58,16 @@ public class PaymentLibrary {
             quickPaymentRes=(QuickPaymentRes)mapper.readValue(qtjsonRes, QuickPaymentRes.class);
         }
         catch (IOException ex) {
+            out.print("QUICKTELLER PROCESSING CATCH BLOCK:");
+            ex.printStackTrace();
             Logger.getLogger(QuickTellerManager.class.getName()).log(Level.SEVERE, null, ex);
             
         }
         return quickPaymentRes;
         
     }
+    
+    
     
     public  static String get_SHA_512ForQuickTeller(String passwordToHash){
         String generatedPassword = null;
@@ -181,6 +139,58 @@ public class PaymentLibrary {
         KeyStore store = KeyStore.getInstance("JKS");
         store.load(new FileInputStream(trustStoreFile), password.toCharArray());
         return store;
+    }
+    
+    
+    
+//-----------------------------------------------------Airtime Recharge Server------------------------------------------------------------
+    
+    //when we posting to payment module we dont use the token
+    public static PaymentCompletedResponse postPaymentModule(PaymentCompletedRequest pcr,String token){
+        
+        PaymentCompletedResponse pcres=new PaymentCompletedResponse();
+        try {
+            ObjectMapper mapper=new ObjectMapper();
+            String jsonData=mapper.writeValueAsString(pcr);
+            String url="http://localhost:8080/AirtimeRechargeSystemCore/payments/completedPayment";
+            Response response=sendPaymentModuleRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST", token);
+            String jsonResponse = response.readEntity(String.class);
+            pcres=(PaymentCompletedResponse)mapper.readValue(jsonResponse, PaymentCompletedResponse.class);
+        }
+        catch (IOException ex) {
+            out.print("AIRTIME CORE: PAYMENT RESPONSE CATCH BLOCK:");
+            ex.printStackTrace();
+            Logger.getLogger(QuickTellerManager.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+        return pcres;
+    }
+    
+    public static Response sendPaymentModuleRequest(String url,String requestStr, String MediaType, String method, String token){
+        try
+        {
+            Response response=null;
+            Client client =ClientBuilder.newClient();
+            WebTarget target =client.target(url);
+            switch (method){
+                case "POST":
+                    response = target.request().header("Content-type", "text/xml").header("Signature", "1a81d70dc87b469090ab61c306c18f01").header("Token", token).post(Entity.entity(requestStr, MediaType));
+                    
+                    break;
+                    
+                case "GET":
+                    response = target.request().get();
+                    break;
+                    
+            }
+            
+            return response;
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error send request: "+e.getMessage());
+            return null;
+        }
     }
     
     

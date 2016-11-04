@@ -44,11 +44,6 @@ public class PaymentInitService {
         
         if(tokens!=null)
             token= tokens.get(0);
-//        int status=paymentInitManager.getCustomerSession(token);
-//        
-//        if(status!=200){
-//            return Response.status(Response.Status.FORBIDDEN).entity("Invalid Token").build();
-//        }
         
         pIResponse=paymentInitManager.initializePayment(request);
         resultObject.setObject(pIResponse.getInitUid());
@@ -61,3 +56,45 @@ public class PaymentInitService {
     }
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        int status=paymentInitManager.getCustomerSession(token);
+//        
+//        if(status!=200){
+//            return Response.status(Response.Status.FORBIDDEN).entity("Invalid Token").build();
+//        }

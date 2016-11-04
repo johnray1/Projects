@@ -12,6 +12,8 @@ import com.oltranz.quickteller.models.PaymentCompletedResponse;
 import com.oltranz.quickteller.models.QuickPaymentRes;
 import com.oltranz.quickteller.models.QuicktellerPayment;
 import com.oltranz.quickteller.models.SimpleStatus;
+import static java.lang.System.out;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
@@ -34,6 +36,7 @@ public class QuickTellerManager {
         
         try {
             PaymentCompletedResponse pres=new PaymentCompletedResponse();
+            Date date=new Date();
             
             //Persist
             Quickteller newQuickteller=new Quickteller();
@@ -46,13 +49,16 @@ public class QuickTellerManager {
             newQuickteller.setSignature(qp.getSignature());
             newQuickteller.setResponseCode(qp.getResponseCode());
             newQuickteller.setResponseDescription(qp.getResponseDescription());
+            newQuickteller.setServerTime(date);
             
             em.persist(newQuickteller);
             em.flush();
             
-            //Getting the transaction confirmation response from quickteller by passing payment reference
-            QuickPaymentRes qr=PaymentLibrary.getpaymentConfirmFromQuickteller(newQuickteller.getPaymentReference());
             
+            //QuickPaymentRes qr=PaymentLibrary.getpaymentConfirmFromQuickteller(newQuickteller.getPaymentReference());
+            
+            
+            QuickPaymentRes qr=PaymentLibrary.getpaymentConfirmFromQuickteller(newQuickteller.getRequestReference());
             
             //Posting To PaymentModule Function
             if(qr.getResponseCode().equals("00")){
@@ -62,6 +68,7 @@ public class QuickTellerManager {
                 preq.setAmount(Double.valueOf(qr.getAmount())/100);
                 preq.setPaymentSPId(3847);
                 preq.setPaymentTypeId(4);
+                preq.setMsisdn(qp.getMsisdn());
                 
                 pres=PaymentLibrary.postPaymentModule(preq,qp.getToken());
             }
@@ -77,10 +84,15 @@ public class QuickTellerManager {
             return jsonData;
         }
         catch (Exception ex) {
+            
+            out.print("AIRTIME CORE: PAYMENT PROCESSING CATCH BLOCK:");
+            ex.printStackTrace();
             Logger.getLogger(QuickTellerManager.class.getName()).log(Level.SEVERE, null, ex);
             return ex.getMessage()+ex.getLocalizedMessage();
         }
     }
+    
+    
     
     
     
