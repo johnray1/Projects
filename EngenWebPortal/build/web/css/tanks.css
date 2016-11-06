@@ -8,11 +8,13 @@
 .super button{display:inline-block;float:left;width:80%;height:70px;margin:0px;padding:3px;text-align:left;font-weight:bold;background:url(../images/nozzle_super.png) no-repeat center top;border:0px solid blue;outline:none;}
 button.super {display:inline-block;float:left;width:80%;height:70px;margin:0px;padding:3px;text-align:left;font-weight:bold;background:url(../images/nozzle_super.png) no-repeat center top;border:0px solid blue;outline:none;}
 .super div.pumpr_deactive button{display:inline-block;float:left;width:80%;height:70px;margin:0px;padding:3px;text-align:left;font-weight:bold;background:url(../images/nozzle_super.png) no-repeat center top;border:0px solid blue;outline:none;-webkit-filter: grayscale(100%);filter: grayscale(100%);}
-.super div.pumpl_active{border:0px solid green;height:300px;padding-top:50px;background:url(../images/pump_super_left_active.gif) no-repeat;background-position:right 22% top 0px;background-size:46% 100%;}
-.super div.pumpr_active{border:0px solid green;height:300px;padding-top:50px;background:url(../images/pump_super_right_active.gif) no-repeat;background-position:left 22% bottom 0px;background-size:46% 100%;}
-.super div.pumpl_deactive{border:0px solid green;height:300px;padding-top:50px;background:url(../images/pump_left_deactive.gif) no-repeat;background-position:right 22% top 0px;background-size:46% 100%;}
-.super div.pumpr_deactive{border:0px solid green;height:300px;padding-top:50px;background:url(../images/pump_right_deactive.gif) no-repeat;background-position:left 22% bottom 0px;background-size:46% 100%;}
 
+
+.super div.pump_active:nth-child(even){border:0px solid green;min-height:300px;padding-top:50px;background:url(../images/pump_super_left_active.gif) no-repeat;background-position:right 5% top 0px;background-size:48% 100%;}
+.super div.pump_active:nth-child(odd){border:0px solid green;min-height:300px;padding-top:50px;background:url(../images/pump_super_right_active.gif) no-repeat;background-position:left 5% bottom 0px;background-size:48% 100%;}
+
+.super div.pump_deactive:nth-child(even){border:0px solid green;height:300px;padding-top:50px;background:url(../images/pump_left_deactive.gif) no-repeat;background-position:right 5% top 0px;background-size:48% 100%;}
+.super div.pump_deactive:nth-child(even){border:0px solid green;height:300px;padding-top:50px;background:url(../images/pump_right_deactive.gif) no-repeat;background-position:left 5% bottom 0px;background-size:48% 100%;}
 
 
 
@@ -23,12 +25,15 @@ button.super {display:inline-block;float:left;width:80%;height:70px;margin:0px;p
 .gasoil div.tankmeter{display:block;position: absolute;left:-90px;bottom:-4px;width: 70px;height: 240px;margin:0px;padding:0px; border:0px solid red;}
 .gasoil button{display:inline-block;float:left;width:80%;height:70px;margin:0px;padding:3px;text-align:left;font-weight:bold;background:url(../images/nozzle_gasoil.png) no-repeat center top;border:0px solid blue;outline:none;}
 button.gasoil{display:inline-block;float:left;width:80%;height:70px;margin:0px;padding:3px;text-align:left;font-weight:bold;background:url(../images/nozzle_gasoil.png) no-repeat center top;border:0px solid blue;outline:none;}
-.gasoil div.pumpr_deactive button{display:inline-block;float:left;width:80%;height:70px;margin:0px;padding:3px;text-align:left;font-weight:bold;background:url(../images/nozzle_gasoil.png) no-repeat center top;border:0px solid blue;outline:none;-webkit-filter: grayscale(100%);filter: grayscale(100%);}
-.gasoil div.pumpl_active{border:0px solid green;height:300px;padding-top:50px;background:url(../images/pump_gasoil_left_active.gif) no-repeat;background-position:right 22% top 0px;background-size:46% 100%;}
-.gasoil div.pumpr_active{border:0px solid green;height:300px;padding-top:50px;background:url(../images/pump_gasoil_right_active.gif) no-repeat;background-position:left 22% bottom 0px;background-size:46% 100%;}
-.gasoil div.pumpl_deactive{border:0px solid green;height:300px;padding-top:50px;background:url(../images/pump_left_deactive.gif) no-repeat;background-position:right 22% top 0px;background-size:46% 100%;}
-.gasoil div.pumpr_deactive{border:0px solid green;height:300px;padding-top:50px;background:url(../images/pump_right_deactive.gif) no-repeat;background-position:left 22% bottom 0px;background-size:46% 100%;}
 
+.gasoil div.pumpr_deactive button{display:inline-block;float:left;width:80%;height:70px;margin:0px;padding:3px;text-align:left;font-weight:bold;background:url(../images/nozzle_gasoil.png) no-repeat center top;border:0px solid blue;outline:none;-webkit-filter: grayscale(100%);filter: grayscale(100%);}
+
+
+.gasoil div.pump_active:nth-child(even){border:0px solid green;min-height:300px;padding-top:50px;background:url(../images/pump_gasoil_left_active.gif) no-repeat;background-position:right 5% top 0px;background-size:48% 100%;}
+.gasoil div.pump_active:nth-child(odd){border:0px solid green;min-height:300px;padding-top:50px;background:url(../images/pump_gasoil_right_active.gif) no-repeat;background-position:left 5% bottom 0px;background-size:48% 100%;}
+
+.gasoil div.pump_deactive:nth-child(even){border:0px solid green;height:300px;padding-top:50px;background:url(../images/pump_left_deactive.gif) no-repeat;background-position:right 5% top 0px;background-size:48% 100%;}
+.gasoil div.pump_deactive:nth-child(even){border:0px solid green;height:300px;padding-top:50px;background:url(../images/pump_right_deactive.gif) no-repeat;background-position:left 5% bottom 0px;background-size:48% 100%;}
 
 
 .kerosene{border:0px solid red;text-align:center;font-weight:normal;font-family:ubuntu;}
@@ -39,13 +44,64 @@ button.gasoil{display:inline-block;float:left;width:80%;height:70px;margin:0px;p
 .kerosene button{display:inline-block;float:left;width:80%;height:70px;margin:0px;padding:3px;text-align:left;font-weight:bold;background:url(../images/nozzle_kerosene.png) no-repeat center top;border:0px solid blue;outline:none;}
 button.kerosene{display:inline-block;float:left;width:80%;height:70px;margin:0px;padding:3px;text-align:left;font-weight:bold;background:url(../images/nozzle_kerosene.png) no-repeat center top;border:0px solid blue;outline:none;}
 .kerosene div.pumpr_deactive button{display:inline-block;float:left;width:80%;height:70px;margin:0px;padding:3px;text-align:left;font-weight:bold;background:url(../images/nozzle_kerosene.png) no-repeat center top;border:0px solid blue;outline:none;-webkit-filter: grayscale(100%);filter: grayscale(100%);}
-.kerosene div.pumpl_active{border:0px solid green;height:300px;padding-top:50px;background:url(../images/pump_kerosene_left_active.gif) no-repeat;background-position:right 22% top 0px;background-size:46% 100%;}
-.kerosene div.pumpr_active{border:0px solid green;height:300px;padding-top:50px;background:url(../images/pump_kerosene_right_active.gif) no-repeat;background-position:left 22% bottom 0px;background-size:46% 100%;}
-.kerosene div.pumpl_deactive{border:0px solid green;height:300px;padding-top:50px;background:url(../images/pump_left_deactive.gif) no-repeat;background-position:right 22% top 0px;background-size:46% 100%;}
-.kerosene div.pumpr_deactive{border:0px solid green;height:300px;padding-top:50px;background:url(../images/pump_right_deactive.gif) no-repeat;background-position:left 22% bottom 0px;background-size:46% 100%;}
+
+.kerosene div.pump_active:nth-child(even){border:0px solid green;min-height:300px;padding-top:50px;background:url(../images/pump_kerosene_left_active.gif) no-repeat;background-position:right 5% top 0px;background-size:48% 100%;}
+.kerosene div.pump_active:nth-child(odd){border:0px solid green;min-height:300px;padding-top:50px;background:url(../images/pump_kerosene_right_active.gif) no-repeat;background-position:left 5% bottom 0px;background-size:48% 100%;}
+
+.kerosene div.pump_deactive:nth-child(even){border:0px solid green;height:300px;padding-top:50px;background:url(../images/pump_left_deactive.gif) no-repeat;background-position:right 5% top 0px;background-size:48% 100%;}
+.kerosene div.pump_deactive:nth-child(even){border:0px solid green;height:300px;padding-top:50px;background:url(../images/pump_right_deactive.gif) no-repeat;background-position:left 5% bottom 0px;background-size:48% 100%;}
+
+
+.flex-container {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    -flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    -flex-wrap: nowrap;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    -justify-content: center;
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    -align-content: stretch;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    -align-items: flex-start;
+}
+
+.flex-item:nth-child(even) {
+    border:0px solid red;
+    -webkit-order: 1;
+    -ms-flex-order: 1;
+    -order: 1;
+    -webkit-flex: 0 1 auto;
+    -ms-flex: 0 1 auto;
+    -flex: 0 1 auto;
+}
 
 
 
+.flex-item:nth-child(odd) {
+    border:0px solid green;
+    -webkit-order: 2;
+    -ms-flex-order: 2;
+    -order:2;
+    -webkit-flex: 0 1 auto;
+    -ms-flex: 0 1 auto;
+    -flex: 0 1 auto;
+    -webkit-align-self: auto;
+    -ms-flex-item-align: auto;
+    -align-self: auto;
+}
+
+
+
+div.tank_pump{display:block;border:0px solid red;width:145px;min-height:320px;background:url(../images/tank_pumpbg.png) no-repeat center top;background-size:contain;text-align:center;padding:0px;padding-top:37px;font-weight:bold;font-size:20px;}
+span.nozzle_box{display:block;width:120px;margin:0px;padding:5px;border:0px solid blue;margin-bottom:17px;background-color: #fff;z-index:99;}
 
 
 .quantities{display:inline-block;position: relative;margin:0px auto;margin-top:50px;padding:0px; border:0px solid red;}
@@ -54,9 +110,6 @@ button.kerosene{display:inline-block;float:left;width:80%;height:70px;margin:0px
 .quantity_t input, .quantity_d input{display:inline-block;width:90%;margin-bottom:5px;padding:0px; border:0px  solid green;font-size:25px;font-weight:bold;color:black;text-align:center;outline:none;background-color:transparent;overflow:hidden;}
 .quantity_diff{display:block;width: 100px;height:50px;margin:0px auto;margin-top:17px;padding:1px; border:1px  solid #000000;border-radius:27px;font-size:12px;text-transform:uppercase;font-weight:bold;background-color:rgba(0,0,0,0.8);color:#808080;}
 
-div.tank_pump{min-height:207px;background:url(../images/tank_pumpbg.png) no-repeat center top;background-size:contain;text-align:center;padding:0px;padding-top:37px;font-weight:bold;font-size:20px;}
-
-span.nozzle_box{margin:0px;padding:0px;border:0px solid red;margin-bottom:17px;background-color: #fff;}
 
 span.nozzle_box label.indexes{border-radius:7px;width:100%;height:25px;margin:0px;padding:3px;border:1px solid #c1c1c1;text-align:center;background-color:#f1f1f1}
 span.nozzle_box em.lastusage{height:25px;margin:0px;padding:3px;text-align:center;font-size:10px;color:#8f8f8f;text-transform:none;}
@@ -73,25 +126,23 @@ span.nozzle_inbox button.flip{-moz-transform: scaleX(-1);-o-transform: scaleX(-1
 .disable{opacity:0.4;-webkit-filter: grayscale(100%);filter: grayscale(100%);}
 .disable:after{content: "DISABLED";  display: block;  position: absolute;  width:100%;  height:100%;  top: 0;  left: 0;  background-color: rgba(0,0,0,0.8);  color:white;  font-size:20px;  text-align:center;  line-height:100%;  z-index:999999;  border-radius:7px;  padding-top:37px;}
 
-#levelbg_pms1{position: absolute; bottom: 0; left: 0;width: 100%; margin: 0; padding:0; border: 0px solid green; background-color:#000000;background:url(../images/tank_levelbg.png) repeat-x bottom;box-sizing: border-box;}
-#levelbg_ago1{position: absolute; bottom: 0; left: 0;width: 100%; margin: 0; padding:0; border: 0px solid green; background-color:#000000;background:url(../images/tank_levelbg.png) repeat-x bottom;box-sizing: border-box;}
-#levelbg_ker1{position: absolute; bottom: 0; left: 0;width: 100%; margin: 0; padding:0; border: 0px solid green; background-color:#000000;background:url(../images/tank_levelbg.png) repeat-x bottom;box-sizing: border-box;}
+#levelbg{position: absolute; bottom: 0; left: 0;width: 100%; margin: 0; padding:0; border: 0px solid green; background-color:#000000;background:url(../images/tank_levelbg.png) repeat-x bottom;box-sizing: border-box;}
 
-#quantity_diff_pms1, #quantity_diff_ker1,#quantity_diff_ago1{display:inline-block;width:90%;margin-bottom:5px;padding:0px; border:0px  solid green;font-size:18px;font-weight:bold;color:#ffff00;text-align:center;outline:none;background-color:transparent;overflow:hidden;}
-#quantity_diff_pms1 span, #quantity_diff_ker1 span,#quantity_diff_ago1 span{color:#c0c0c0;}
+#quantity_diff{display:inline-block;width:90%;margin-bottom:5px;padding:0px; border:0px  solid green;font-size:18px;font-weight:bold;color:#ffff00;text-align:center;outline:none;background-color:transparent;overflow:hidden;}
+#quantity_diff span{color:#c0c0c0;}
 
 
 /*MEDIAQUERIES*/
 
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (min-width : 320px) and (max-width : 480px) {
-
+    
 }
 
 
 
 @media only screen and (min-width :480px) and (max-width : 768px) {
-
+    
 }
 
 
@@ -100,17 +151,17 @@ span.nozzle_inbox button.flip{-moz-transform: scaleX(-1);-o-transform: scaleX(-1
 @media only screen and (min-width : 768px) and (max-width : 1024px) {
     .super button{display:inline-block;float:left;width:76%;height:70px;margin:0px;padding:3px;text-align:left;font-weight:bold;background:url(../images/nozzle_super.png) no-repeat center top;border:0px solid blue;outline:none;}
     .super div.pumpr_deactive button{display:inline-block;float:left;width:76%;height:70px;margin:0px;padding:3px;text-align:left;font-weight:bold;background:url(../images/nozzle_super.png) no-repeat center top;border:0px solid blue;outline:none;-webkit-filter: grayscale(100%);filter: grayscale(100%);}
-
+    
     .disable{opacity:0.4;-webkit-filter: grayscale(100%);filter: grayscale(100%);}
     .disable:after{content: "DISABLED";  display: block;  position: absolute;  width:100%;  height:100%;  top: 0;  left: 0;  background-color: rgba(0,0,0,0.8);  color:white;  font-size:16px;  text-align:center;  line-height:100%;  z-index:999999;  border-radius:7px;  padding-top:50%;}
-
+    
 }
 
 
 
 /* Desktops and laptops ----------- */
 @media only screen  and (min-width : 1224px) {
-
+    
 }
 
 
@@ -118,5 +169,5 @@ span.nozzle_inbox button.flip{-moz-transform: scaleX(-1);-o-transform: scaleX(-1
 
 /* Large screens ----------- */
 @media only screen  and (min-width : 1824px) {
-
+    
 }

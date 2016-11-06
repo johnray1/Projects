@@ -9,6 +9,7 @@ import com.oltranz.engen.library.CommonLibrary;
 import com.oltranz.engen.model.Nozzle;
 import com.oltranz.engen.model.NozzleList;
 import com.oltranz.engen.model.Pump;
+import com.oltranz.engen.model.PumpDashList;
 import com.oltranz.engen.model.PumpList;
 import com.oltranz.engen.model.Tank;
 import com.oltranz.engen.model.TankDashList;
@@ -37,6 +38,8 @@ public class TpnBean implements Serializable{
     //TO KEEP USER BRANCH DATA
     private String saveActionName="Save",popUpLabel;
     
+    private Boolean actionRendered;
+    
     private HttpSession session = SessionBean.getSession();
     
     
@@ -63,6 +66,7 @@ public class TpnBean implements Serializable{
     /*TANK DASHBOARD*/
     
     private TankDashList tankDashList;
+    private PumpDashList pumpDashList;
     
    
     
@@ -82,6 +86,12 @@ public class TpnBean implements Serializable{
         templateBean.branchList();
         templateBean.productList();
         try{
+            if(((int) session.getAttribute("branchId"))==0){
+                actionRendered=true;
+            }
+            else{
+                actionRendered=false;
+            }
             tanks();
             pumps();
             nozzles();
@@ -95,7 +105,7 @@ public class TpnBean implements Serializable{
     public void tanks() throws IOException{
         
         int braId=(int) getSession().getAttribute("branchId");
-        String getBranchUrl="http://localhost:8080/EngenPayFuel/TankManagementService/tanks/"+braId;
+        String getBranchUrl="http://localhost:8080/EngenPayFuel/TankManagementService/tanklist/"+braId;
         Response response = CommonLibrary.sendRESTRequest(getBranchUrl, "empty data", MediaType.APPLICATION_JSON, "GET");
         String jsonResponse = response.readEntity(String.class);
         ObjectMapper mapper=new ObjectMapper();
@@ -371,8 +381,6 @@ public class TpnBean implements Serializable{
             ObjectMapper mapper=new ObjectMapper();
             tankDashList=(TankDashList)mapper.readValue(jsonResponse, TankDashList.class);
             
-            String s=null;
-           
             
         }
         catch(Exception ex){
@@ -799,7 +807,36 @@ public class TpnBean implements Serializable{
         this.tankDashList = tankDashList;
     }
 
-   
+    /**
+     * @return the actionRendered
+     */
+    public Boolean getActionRendered() {
+        return actionRendered;
+    }
+
+    /**
+     * @param actionRendered the actionRendered to set
+     */
+    public void setActionRendered(Boolean actionRendered) {
+        this.actionRendered = actionRendered;
+    }
+
+    /**
+     * @return the pumpDashList
+     */
+    public PumpDashList getPumpDashList() {
+        return pumpDashList;
+    }
+
+    /**
+     * @param pumpDashList the pumpDashList to set
+     */
+    public void setPumpDashList(PumpDashList pumpDashList) {
+        this.pumpDashList = pumpDashList;
+    }
+
+    
+
     
     
     

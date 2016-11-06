@@ -5,8 +5,8 @@ function  turn2DataTable(tableId){
         "paging":true,
         "searching": true,
         "ordering": true,
-        "lengthMenu": [ [10, 25, 50, "All"]],
-        
+        "order": [[ 0, "desc" ]],
+        "lengthMenu": [ [25, 50, 100, "All"]],
         dom: 'Bfrtip',		 
         buttons: [
             'excelHtml5',

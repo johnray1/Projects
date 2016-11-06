@@ -71,23 +71,22 @@
                     <!-- End ONLY MOBILE -->
                     
                     
-                    
                     <!-- TABS -->
                     <div style="border:0px solid red;" class="hidden-xs hidden-sm visible-md visible-lg">
                         <div id="parentVerticalTab">
                             
                             <ul class="resp-tabs-list">
-                                <li id="tablist1">Summary</li>
-                                <li id="tablist2">Tank : PMS1 </li>
-                                <li id="tablist3">Tank : PMS2 </li>
-                                <li id="tablist4">Tank : AGO1 </li>
+                                <li id="tablist">Summary</li>
+                                <ui:repeat value="#{TpnBean.tankDashList.tankDashList}" var="tab">
+                                    <li id="tablist#{tab.tankId}">Tank : #{tab.tankName} </li>
+                                </ui:repeat>
                             </ul>
                             
                             
                             <div class="resp-tabs-container">
                                 
                                 
-                                <div id="tabcontent1">
+                                <div id="tabcontent">
                                     
                                     <!-- In -->
                                     <div class="col-xs-12" style="float: none;margin: 0 auto;padding:5px;min-height:400px;border:0px solid #f0f0f0;overflow-x:auto;font-family:ubuntu;">
@@ -141,514 +140,87 @@
                                     <!-- End In-->
                                     
                                 </div>
-                                
-                                
-                                
-                                <div id="tabcontent2">
-                                    <!-- In -->
-                                    <div class="col-xs-12"  style="float:none;margin:0px;padding:5px;padding-top:17px;padding-bottom:27px;min-height:400px;overflow-x:auto;font-family:ubuntu;">
-                                        
-                                        <!-- TANK -->
-                                        <div  class="container-fluid super">
+                                <ui:repeat value="#{TpnBean.tankDashList.tankDashList}" var="tank">
+                                    <div id="tabcontent#{tank.tankId}">
+                                        <!-- In -->
+                                        <div class="col-xs-12"  style="float:none;margin:0px;padding:5px;padding-top:17px;padding-bottom:27px;min-height:400px;overflow-x:auto;font-family:ubuntu;">
                                             
-                                            
-                                            <!-- a tank -->
-                                            <div  class="col-xs-12">
-                                                <div  class="tankstructure">
-                                                    
-                                                    <div class="thetank"><div id='levelbg_pms1'></div></div>
-                                                    <div class="tankmeter" style="background:url(images/tank_levelsnumbers.png) no-repeat bottom right;">&nbsp;</div>
-                                                    <label>PMS1</label>
-                                                    
-                                                    <div class="quantities">
-                                                        <span class="quantity_t">Theoretical Quantity
-                                                            <input type="number" id="quantity_theo_pms1" value="20000" oninput="mySuperDiff()" disabled="disabled"/>
-                                                        </span>
-                                                        <span class="quantity_d">Diped Quantity
-                                                            <input type="number" id="quantity_dip_pms1"  value="20000" oninput="mySuperDiff()" disabled="disabled"/>
-                                                            <em style="width:200px;border:0px solid red;font-size:11px;color:#3c3c3c;text-transform:none;position:absolute;top:60px;left:0px;">
-                                                                Latest : dd/mm/yyyy - 00:00:00 
-                                                            </em>
-                                                        </span>
-                                                        <span class="quantity_diff">Difference <p id="quantity_diff_pms1"></p></span>
+                                            <!-- TANK -->
+                                            <div  class="container-fluid #{tank.productName}">
+                                                
+                                                
+                                                <!-- a tank -->
+                                                <div  class="col-xs-12">
+                                                    <div  class="tankstructure">
+                                                        
+                                                        <div class="thetank">
+                                                            <div id='levelbg'></div>
+                                                        </div>
+                                                        <div class="tankmeter" style="background:url(images/tank_levelsnumbers.png) no-repeat bottom right;">&nbsp;</div>
+                                                        <label>#{tank.tankName}</label>
+                                                        
+                                                        <div class="quantities">
+                                                            <span class="quantity_t">Theoretical Quantity
+                                                                <input type="number" id="quantity_theo" min="0" max="30000" value="#{tank.currentCapacity}" oninput="mySuperDiff()" disabled="disabled"/>
+                                                            </span>
+                                                            <span class="quantity_d">Diped Quantity
+                                                                <input type="number" id="quantity_dip" min="0" max="30000" value="#{tank.dippedCapacity}" oninput="mySuperDiff()" disabled="disabled"/>
+                                                                <em style="width:200px;border:0px solid red;font-size:11px;color:#3c3c3c;text-transform:none;position:absolute;top:60px;left:0px;">
+                                                                    Latest : <h:outputText value="#{tank.dippedTime}">
+                                                                                <f:convertDateTime type="date" pattern="EEE, d MMM yyyy HH:mm" timeZone="CAT"/>
+                                                                            </h:outputText>
+                                                                </em>
+                                                            </span>
+                                                            <span class="quantity_diff">Difference <p id="quantity_diff"></p></span>
+                                                        </div>
+                                                        
                                                     </div>
-                                                    
                                                 </div>
-                                            </div>
-                                            <!--  end a tank-->
-                                            
-                                            <!-- PUMP -->
-                                            <div  class="col-xs-6 pumpl_active"> 
+                                                <!--  end a tank-->
                                                 
-                                                <div  class="col-xs-3">
-                                                    
-                                                    <!-- Nozzle -->
-                                                    <span id="nozzlep1n1" class="col-xs-12 nozzle_box">
-                                                        <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
-                                                        <label class="indexes">123456789</label>
-                                                        <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
-                                                    </span>
-                                                    <!-- End Nozzle -->
-                                                    
-                                                </div>
                                                 
-                                                <div class="col-xs-4 tank_pump">Pump 1</div>
-                                                
-                                                <div  class="col-xs-3">
-                                                    <!-- Nozzle -->
-                                                    <span class="col-xs-12 nozzle_box">
-                                                        <span class="nozzle_inbox"><button></button><strong>N2</strong></span>
-                                                        <label class="indexes">123456789</label>
-                                                        <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
-                                                    </span>
-                                                    <!-- End Nozzle -->
-                                                </div>
-                                                
-                                                <div  class="col-xs-2">&nbsp;</div>
-                                            </div>
-                                            
-                                            <!-- PUMP -->
-                                            <div  class="col-xs-6 pumpr_active">
-                                                
-                                                <div  class="col-xs-2">&nbsp;</div>
-                                                    
-                                                <div  class="col-xs-3">
-                                                    <!-- Nozzle -->
-                                                    <span id="nozzlep1n1" class="col-xs-12 nozzle_box">
-                                                        <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
-                                                        <label class="indexes">123456789</label>
-                                                        <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
-                                                    </span>
-                                                    <!-- End Nozzle -->
+                                                <ui:repeat value="#{tank.pumpDash}" var="pump">
+                                                    <!-- PUMP -->
+                                                    <div  class="col-xs-6 pump_active" style="border:0px solid red;">
                                                         
-                                                </div>
-                                                    
-                                                <div class="col-xs-4 tank_pump">Pump 2</div>
-                                                    
-                                                <div  class="col-xs-3">
-                                                    
-                                                    <!-- Nozzle -->
-                                                    <span class="col-xs-12 nozzle_box">
-                                                        <span class="nozzle_inbox"><button></button><strong>N2</strong></span>
-                                                        <label class="indexes">123456789</label>
-                                                        <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
-                                                    </span>
-                                                    <!-- End Nozzle -->
-                                                        
-                                                </div>
-                                                    
+                                                        <div class="flex-container">						
+                                                            
+                                                            <div class="flex-item"><div class="tank_pump">#{pump.pumpName}</div></div>
+                                                            
+                                                            <ui:repeat value="#{pump.nozzleDash}" var="nozzle">
+                                                                <!-- Nozzle -->
+                                                                <div class="flex-item">                             
+                                                                    <span  class="nozzle_box">
+                                                                        <span class="nozzle_inbox"><button class="flip"></button><strong>#{nozzle.nozzleName}</strong></span>
+                                                                        <label class="indexes">
+                                                                            <h:outputText value="#{nozzle.index}">
+                                                                                <f:convertNumber integerOnly="true"/>
+                                                                            </h:outputText>
+                                                                            
+                                                                        </label>
+                                                                        <em class="lastusage">Last usage: <br />
+                                                                            <h:outputText value="#{LoginBean.date}">
+                                                                                <f:convertDateTime type="date" pattern="EEE, d MMM yyyy HH:mm" timeZone="CAT"/>
+                                                                            </h:outputText>
+                                                                        </em>
+                                                                    </span>                           
+                                                                </div>
+                                                                <!-- End Nozzle -->
+                                                            </ui:repeat>
+                                                            
+                                                        </div>                        
+                                                    </div>
+                                                    <!-- PUMP -->
+                                                </ui:repeat> 
+                                                
                                             </div>
-                                            <!-- PUMP -->
-                                                
-                                                
-                                            <!-- PUMP -->
-                                            <div  class="col-xs-6 pumpl_active">
-                                                
-                                                <div  class="col-xs-3">
-                                                    
-                                                    <!-- Nozzle -->
-                                                    <span id="nozzlep1n1" class="col-xs-12 nozzle_box">
-                                                        <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
-                                                        <label class="indexes">123456789</label>
-                                                        <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
-                                                    </span>
-                                                    <!-- End Nozzle -->
-                                                        
-                                                </div>
-                                                    
-                                                    
-                                                <div class="col-xs-4 tank_pump">Pump 3</div>
-                                                    
-                                                <div  class="col-xs-3">
-                                                    <!-- Nozzle -->
-                                                    <span class="col-xs-12 nozzle_box">
-                                                        <span class="nozzle_inbox"><button></button><strong>N2</strong></span>
-                                                        <label class="indexes">123456789</label>
-                                                        <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
-                                                    </span>
-                                                    <!-- End Nozzle -->
-                                                </div>
-                                                    
-                                                <div  class="col-xs-2">&nbsp;</div>
-                                                    
-                                            </div>
-                                            <!-- PUMP -->
-                                                
-                                                
-                                            <!-- PUMP -->
-                                            <div  class="col-xs-6 pumpr_active">
-                                                
-                                                <div  class="col-xs-2">&nbsp;</div>
-                                                    
-                                                <div  class="col-xs-3">
-                                                    <!-- Nozzle -->
-                                                    <span id="nozzlep1n1" class="col-xs-12 nozzle_box">
-                                                        <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
-                                                        <label class="indexes">123456789</label>
-                                                        <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
-                                                    </span>
-                                                    <!-- End Nozzle -->
-                                                        
-                                                </div>
-                                                    
-                                                <div class="col-xs-4 tank_pump">Pump 4</div>
-                                                    
-                                                <div  class="col-xs-3">
-                                                    
-                                                    <!-- Nozzle -->
-                                                    <span class="col-xs-12 nozzle_box">
-                                                        <span class="nozzle_inbox"><button></button><strong>N2</strong></span>
-                                                        <label class="indexes">123456789</label>
-                                                        <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
-                                                    </span>
-                                                    <!-- End Nozzle -->
-                                                        
-                                                </div>
-                                                    
-                                            </div>
-                                            <!-- PUMP -->
-                                            
-                                            
+                                            <!-- TANK -->
                                             
                                         </div>
-                                        <!-- TANK -->
-                                        
+                                        <!-- End In-->
                                     </div>
-                                    <!-- End In-->
-                                </div>
+                                </ui:repeat>
                                 
-                                
-                                <div id="tabcontent3">
-                                    <!-- In -->
-                                    <div class="col-xs-12" style="float:none;margin:0px;padding:5px;padding-top:17px;padding-bottom:27px;min-height:400px;overflow-x:auto;font-family:ubuntu;">
-                                        <!-- -->
-                                        <!-- TANK -->
-                                        <div  class="container-fluid gasoil">
-                                            <!-- a tank -->
-                                            <div  class="col-xs-12"><div  class="tankstructure">
-                                                    
-                                                    <div class="thetank"><div id='levelbg_ago1'></div></div>
-                                                    <div class="tankmeter" style="background:url(images/tank_levelsnumbers.png) no-repeat bottom right;">&nbsp;</div>
-                                                    <label>AGO </label>
-                                                    
-                                                    <div class="quantities">
-                                                        <span class="quantity_t">Theoretical Quantity
-                                                            <input type="number" id="quantity_theo_ago1"  value="20000" oninput="mySuperDiff()" disabled="disabled"/>
-                                                        </span>
-                                                        <span class="quantity_d">Diped Quantity<input type="number" id="quantity_dip_ago1"  value="20000" oninput="mySuperDiff()" disabled="disabled"/>
-                                                            <em style="width:200px;border:0px solid red;font-size:11px;color:#3c3c3c;text-transform:none;position:absolute;top:60px;left:0px;">
-                                                                Latest : dd/mm/yyyy - 00:00:00 </em>
-                                                        </span>
-                                                        <span class="quantity_diff">Difference <p id="quantity_diff_ago1"></p></span>
-                                                    </div>
-                                                    
-                                                </div>
-                                            </div>
-                                            <!--  end a tank-->
-                                            
-                                            
-                                             <!-- PUMP -->
-                                            <div  class="col-xs-6 pumpl_active">
-                                                
-                                                <div  class="col-xs-3">
-                                                    
-                                                    <!-- Nozzle -->
-                                                    <span id="nozzlep1n1" class="col-xs-12 nozzle_box">
-                                                        <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
-                                                        <label class="indexes">123456789</label>
-                                                        <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
-                                                    </span>
-                                                    <!-- End Nozzle -->
-                                                        
-                                                </div>
-                                                    
-                                                    
-                                                <div class="col-xs-4 tank_pump">Pump 1</div>
-                                                    
-                                                <div  class="col-xs-3">
-                                                    <!-- Nozzle -->
-                                                    <span class="col-xs-12 nozzle_box">
-                                                        <span class="nozzle_inbox"><button></button><strong>N2</strong></span>
-                                                        <label class="indexes">123456789</label>
-                                                        <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
-                                                    </span>
-                                                    <!-- End Nozzle -->
-                                                </div>
-                                                    
-                                                <div  class="col-xs-2">&nbsp;</div>
-                                                    
-                                            </div>
-                                            <!-- PUMP -->
-                                                
-                                                
-                                            <!-- PUMP -->
-                                            <div  class="col-xs-6 pumpr_active">
-                                                
-                                                <div  class="col-xs-2">&nbsp;</div>
-                                                    
-                                                <div  class="col-xs-3">
-                                                    <!-- Nozzle -->
-                                                    <span id="nozzlep1n1" class="col-xs-12 nozzle_box">
-                                                        <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
-                                                        <label class="indexes">123456789</label>
-                                                        <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
-                                                    </span>
-                                                    <!-- End Nozzle -->
-                                                        
-                                                </div>
-                                                    
-                                                <div class="col-xs-4 tank_pump">Pump 2</div>
-                                                    
-                                                <div  class="col-xs-3">
-                                                    
-                                                    <!-- Nozzle -->
-                                                    <span class="col-xs-12 nozzle_box">
-                                                        <span class="nozzle_inbox"><button></button><strong>N2</strong></span>
-                                                        <label class="indexes">123456789</label>
-                                                        <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
-                                                    </span>
-                                                    <!-- End Nozzle -->
-                                                        
-                                                </div>
-                                                    
-                                            </div>
-                                            <!-- PUMP -->
-                                                
-                                                
-                                            <!-- PUMP -->
-                                            <div  class="col-xs-6 pumpl_active">
-                                                
-                                                <div  class="col-xs-3">
-                                                    
-                                                    <!-- Nozzle -->
-                                                    <span id="nozzlep1n1" class="col-xs-12 nozzle_box">
-                                                        <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
-                                                        <label class="indexes">123456789</label>
-                                                        <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
-                                                    </span>
-                                                    <!-- End Nozzle -->
-                                                        
-                                                </div>
-                                                    
-                                                    
-                                                <div class="col-xs-4 tank_pump">Pump 3</div>
-                                                    
-                                                <div  class="col-xs-3">
-                                                    <!-- Nozzle -->
-                                                    <span class="col-xs-12 nozzle_box">
-                                                        <span class="nozzle_inbox"><button></button><strong>N2</strong></span>
-                                                        <label class="indexes">123456789</label>
-                                                        <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
-                                                    </span>
-                                                    <!-- End Nozzle -->
-                                                </div>
-                                                    
-                                                <div  class="col-xs-2">&nbsp;</div>
-                                                    
-                                            </div>
-                                            <!-- PUMP -->
-                                                
-                                                
-                                            <!-- PUMP -->
-                                            <div  class="col-xs-6 pumpr_active">
-                                                
-                                                <div  class="col-xs-2">&nbsp;</div>
-                                                    
-                                                <div  class="col-xs-3">
-                                                    <!-- Nozzle -->
-                                                    <span id="nozzlep1n1" class="col-xs-12 nozzle_box">
-                                                        <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
-                                                        <label class="indexes">123456789</label>
-                                                        <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
-                                                    </span>
-                                                    <!-- End Nozzle -->
-                                                        
-                                                </div>
-                                                    
-                                                <div class="col-xs-4 tank_pump">Pump 4</div>
-                                                    
-                                                <div  class="col-xs-3">
-                                                    
-                                                    <!-- Nozzle -->
-                                                    <span class="col-xs-12 nozzle_box">
-                                                        <span class="nozzle_inbox"><button></button><strong>N2</strong></span>
-                                                        <label class="indexes">123456789</label>
-                                                        <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
-                                                    </span>
-                                                    <!-- End Nozzle -->
-                                                        
-                                                </div>
-                                                    
-                                            </div>
-                                            <!-- PUMP -->
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                
-                                <div id="tabcontent4">
-                                    <!-- In -->
-                                    <div class="col-xs-12" style="float:none;margin:0px;padding:5px;padding-top:17px;padding-bottom:27px;min-height:400px;overflow-x:auto;font-family:ubuntu;">
-                                        <!-- -->
-                                        <!-- TANK -->
-                                        <div  class="container-fluid kerosene">
-                                            
-                                            
-                                            <!-- a tank -->
-                                            <div  class="col-xs-12"><div  class="tankstructure">
-                                                    
-                                                    <div class="thetank"><div id='levelbg_ker1'></div></div>
-                                                    <div class="tankmeter" style="background:url(images/tank_levelsnumbers.png) no-repeat bottom right;">&nbsp;</div>
-                                                    <label>KEROSENE TANK</label>
-                                                    
-                                                    <div class="quantities">
-                                                        <span class="quantity_t">Theoretical Quantity<input type="number" id="quantity_theo_ker1"  value="20000" oninput="mySuperDiff()" /></span>
-                                                        <span class="quantity_d">Diped Quantity<input type="number" id="quantity_dip_ker1"  value="20000" oninput="mySuperDiff()" disabled="disabled"/><em style="width:200px;border:0px solid red;font-size:11px;color:#3c3c3c;text-transform:none;position:absolute;top:60px;left:0px;">Latest : dd/mm/yyyy - 00:00:00 </em></span>
-                                                        <span class="quantity_diff">Difference <p id="quantity_diff_ker1"></p></span>
-                                                    </div>
-                                                    
-                                                </div>
-                                            </div>
-                                            <!--  end a tank-->
-                                            
-                                            <!-- PUMP -->
-                                            <div  class="col-xs-6 pumpl_active">
-                                                
-                                                <div  class="col-xs-3">
-                                                    
-                                                    <!-- Nozzle -->
-                                                    <span id="nozzlep1n1" class="col-xs-12 nozzle_box">
-                                                        <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
-                                                        <label class="indexes">123456789</label>
-                                                        <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
-                                                    </span>
-                                                    <!-- End Nozzle -->
-                                                        
-                                                </div>
-                                                    
-                                                    
-                                                <div class="col-xs-4 tank_pump">Pump 1</div>
-                                                    
-                                                <div  class="col-xs-3">
-                                                    <!-- Nozzle -->
-                                                    <span class="col-xs-12 nozzle_box">
-                                                        <span class="nozzle_inbox"><button></button><strong>N2</strong></span>
-                                                        <label class="indexes">123456789</label>
-                                                        <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
-                                                    </span>
-                                                    <!-- End Nozzle -->
-                                                </div>
-                                                    
-                                                <div  class="col-xs-2">&nbsp;</div>
-                                                    
-                                            </div>
-                                            <!-- PUMP -->
-                                                
-                                                
-                                            <!-- PUMP -->
-                                            <div  class="col-xs-6 pumpr_active">
-                                                
-                                                <div  class="col-xs-2">&nbsp;</div>
-                                                    
-                                                <div  class="col-xs-3">
-                                                    <!-- Nozzle -->
-                                                    <span id="nozzlep1n1" class="col-xs-12 nozzle_box">
-                                                        <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
-                                                        <label class="indexes">123456789</label>
-                                                        <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
-                                                    </span>
-                                                    <!-- End Nozzle -->
-                                                        
-                                                </div>
-                                                    
-                                                <div class="col-xs-4 tank_pump">Pump 2</div>
-                                                    
-                                                <div  class="col-xs-3">
-                                                    
-                                                    <!-- Nozzle -->
-                                                    <span class="col-xs-12 nozzle_box">
-                                                        <span class="nozzle_inbox"><button></button><strong>N2</strong></span>
-                                                        <label class="indexes">123456789</label>
-                                                        <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
-                                                    </span>
-                                                    <!-- End Nozzle -->
-                                                        
-                                                </div>
-                                                    
-                                            </div>
-                                            <!-- PUMP -->
-                                                
-                                                
-                                            <!-- PUMP -->
-                                            <div  class="col-xs-6 pumpl_active">
-                                                
-                                                <div  class="col-xs-3">
-                                                    
-                                                    <!-- Nozzle -->
-                                                    <span id="nozzlep1n1" class="col-xs-12 nozzle_box">
-                                                        <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
-                                                        <label class="indexes">123456789</label>
-                                                        <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
-                                                    </span>
-                                                    <!-- End Nozzle -->
-                                                        
-                                                </div>
-                                                    
-                                                    
-                                                <div class="col-xs-4 tank_pump">Pump 3</div>
-                                                    
-                                                <div  class="col-xs-3">
-                                                    <!-- Nozzle -->
-                                                    <span class="col-xs-12 nozzle_box">
-                                                        <span class="nozzle_inbox"><button></button><strong>N2</strong></span>
-                                                        <label class="indexes">123456789</label>
-                                                        <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
-                                                    </span>
-                                                    <!-- End Nozzle -->
-                                                </div>
-                                                    
-                                                <div  class="col-xs-2">&nbsp;</div>
-                                                    
-                                            </div>
-                                            <!-- PUMP -->
-                                                
-                                                
-                                            <!-- PUMP -->
-                                            <div  class="col-xs-6 pumpr_active">
-                                                
-                                                <div  class="col-xs-2">&nbsp;</div>
-                                                    
-                                                <div  class="col-xs-3">
-                                                    <!-- Nozzle -->
-                                                    <span id="nozzlep1n1" class="col-xs-12 nozzle_box">
-                                                        <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
-                                                        <label class="indexes">123456789</label>
-                                                        <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
-                                                    </span>
-                                                    <!-- End Nozzle -->
-                                                        
-                                                </div>
-                                                    
-                                                <div class="col-xs-4 tank_pump">Pump 4</div>
-                                                    
-                                                <div  class="col-xs-3">
-                                                    
-                                                    <!-- Nozzle -->
-                                                    <span class="col-xs-12 nozzle_box">
-                                                        <span class="nozzle_inbox"><button></button><strong>N2</strong></span>
-                                                        <label class="indexes">123456789</label>
-                                                        <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
-                                                    </span>
-                                                    <!-- End Nozzle -->
-                                                        
-                                                </div>
-                                                    
-                                            </div>
-                                            <!-- PUMP -->
-                                        </div>
-                                    </div>
-                                </div>
                                 
                             </div>
                         </div>

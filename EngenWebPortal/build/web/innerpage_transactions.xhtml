@@ -147,7 +147,7 @@
                             <h:form class="container-fluid sforminput" style="margin:0px;padding:0px;" rendered="true" id="form">
                                 
                                 <div class="col-xs-12 col-sm-2 stextinput" style="margin:0px;padding:0px;">
-                                    <h:selectOneMenu value="#{TransactionBean.branchId}" class="chosen-select">
+                                    <h:selectOneMenu value="#{TransactionBean.branchId}" class="chosen-select" rendered="#{TransactionBean.actionRendered}">
                                         <f:selectItem itemLabel="BRANCH" />
                                         <f:selectItems value="#{TemplateBean.braList.branchList}" var="bra"
                                                        itemLabel="#{bra.name}" itemValue="#{bra.branchId}"/>
@@ -223,7 +223,7 @@
                         <div class="col-xs-12 col-sm-12 sholderinbox" style="margin:0px;margin-top:20px;padding:0px;min-height:400px;font-family:ubuntu;overflow-x:auto;">
                             <h2>TRANSACTIONS LIST</h2>
                             <span class="container-fluid" style="overflow: auto;">
-                                <div  class="container-fluid" style="padding:10px;">
+                                <div  class="container-fluid" style="padding:10px;font-size: 11px">
                                     
                                     <h:dataTable value="#{TransactionBean.transactionList.transactionList}" var="tra"
                                                  id="dataTableList"
@@ -303,9 +303,9 @@
                                 </div>
                             </span>
                         </div>
-                        <!-- End DataTable-->
                     </div>   
-                        
+                    <!-- End DataTable--> 
+                    
                 </div>
             </div>
             <!-- End CONTENTS -->

@@ -95,7 +95,7 @@ $(function () {
         return colors;
     }());
     
-    $.getJSON('http://localhost:8080/EngenPayFuel/ChartManagementService/productPie', function(data) {
+    $.getJSON('http://41.74.172.132:8080/EngenPayFuel/ChartManagementService/productPie', function(data) {
         
         // Build the chart
         $('#productpie').highcharts({
@@ -142,7 +142,7 @@ $(function () {
 
 $(function () {
     var branchList = new Array();
-    $.getJSON('http://localhost:8080/EngenPayFuel/ChartManagementService/branchChart', function(data) {
+    $.getJSON('http://41.74.172.132:8080/EngenPayFuel/ChartManagementService/branchChart', function(data) {
        
        // Populate series
         for (i = 0; i < data.length; i++){
@@ -211,7 +211,7 @@ $(function () {
     var cash = new Array();var voucher = new Array();var mtn = new Array();var tigo = new Array();
     var airtel = new Array();var visa = new Array();var master = new Array();var debt = new Array();var engenCard = new Array();
     
-    $.getJSON('http://localhost:8080/EngenPayFuel/ChartManagementService/paymentChart/'+branchId, function(data) {
+    $.getJSON('http://41.74.172.132:8080/EngenPayFuel/ChartManagementService/paymentChart/'+branchId, function(data) {
         cash.push(data.cash);voucher.push(data.voucher);mtn.push(data.mtn);tigo.push(data.tigo);
         airtel.push(data.airtel);visa.push(data.visa);master.push(data.master);debt.push(data.debt);engenCard.push(data.engenCard);
         

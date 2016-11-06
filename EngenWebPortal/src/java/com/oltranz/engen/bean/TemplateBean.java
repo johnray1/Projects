@@ -9,7 +9,7 @@ import com.oltranz.engen.library.CommonLibrary;
 import com.oltranz.engen.model.ActionList;
 import com.oltranz.engen.model.BranchList;
 import com.oltranz.engen.model.DeviceList;
-import com.oltranz.engen.model.PaymentChartModel;
+import com.oltranz.engen.model.PaymentModel;
 import com.oltranz.engen.model.PaymentModeList;
 import com.oltranz.engen.model.ProductList;
 import com.oltranz.engen.model.UserList;
@@ -56,7 +56,7 @@ public class TemplateBean implements Serializable{
     private String hideDashHq;
     
     
-    private PaymentChartModel paymentChartModel;
+    private PaymentModel paymentChartModel;
     
     private PaymentModeList paymentModeList;
     private ActionList actionList;
@@ -94,7 +94,7 @@ public class TemplateBean implements Serializable{
             String jsonResponse = response.readEntity(String.class);
             
             ObjectMapper mapper=new ObjectMapper();
-            paymentChartModel=(PaymentChartModel)mapper.readValue(jsonResponse, PaymentChartModel.class);
+            paymentChartModel=(PaymentModel)mapper.readValue(jsonResponse, PaymentModel.class);
         }
         catch(Exception ex){
             System.out.println(ex.getMessage());
@@ -446,14 +446,14 @@ public class TemplateBean implements Serializable{
     /**
      * @return the paymentChartModel
      */
-    public PaymentChartModel getPaymentChartModel() {
+    public PaymentModel getPaymentChartModel() {
         return paymentChartModel;
     }
     
     /**
      * @param paymentChartModel the paymentChartModel to set
      */
-    public void setPaymentChartModel(PaymentChartModel paymentChartModel) {
+    public void setPaymentChartModel(PaymentModel paymentChartModel) {
         this.paymentChartModel = paymentChartModel;
     }
     

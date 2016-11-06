@@ -9,6 +9,7 @@ import com.oltranz.engen.library.CommonLibrary;
 import com.oltranz.engen.model.Branch;
 import com.oltranz.engen.model.BranchList;
 import com.oltranz.engen.model.BranchSingle;
+import com.oltranz.engen.model.TankDashList;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,6 +45,8 @@ public class BranchBean implements Serializable{
     private BranchSingle branchSingle;
     private Branch branch;
     private BranchList branchList;
+    
+    private TankDashList tankDashList;
     
     
     @ManagedProperty(value="#{TemplateBean}")
@@ -176,6 +179,25 @@ public class BranchBean implements Serializable{
                     "}";
             Response response=CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
             branches();
+        }
+    }
+    
+    
+    
+    public void branchTankDashboard(){
+        try{
+            branchDashRendered=null;
+            String getUrl="http://localhost:8080/EngenPayFuel/ChartManagementService/tankDashboard/"+branchId;
+            Response response = CommonLibrary.sendRESTRequest(getUrl, "empty data", MediaType.APPLICATION_JSON, "GET");
+            String jsonResponse = response.readEntity(String.class);
+            
+            ObjectMapper mapper=new ObjectMapper();
+            tankDashList=(TankDashList)mapper.readValue(jsonResponse, TankDashList.class);
+            
+            
+        }
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
         }
     }
     
@@ -349,6 +371,20 @@ public class BranchBean implements Serializable{
      */
     public void setBranch(Branch branch) {
         this.branch = branch;
+    }
+
+    /**
+     * @return the tankDashList
+     */
+    public TankDashList getTankDashList() {
+        return tankDashList;
+    }
+
+    /**
+     * @param tankDashList the tankDashList to set
+     */
+    public void setTankDashList(TankDashList tankDashList) {
+        this.tankDashList = tankDashList;
     }
     
     

@@ -103,7 +103,7 @@ $(function () {
             },
         
             title: {
-                text: '   '
+                text: 'Product Sale :- Previous Month vs Current Month'
             },
         
             xAxis: {

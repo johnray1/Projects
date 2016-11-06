@@ -118,7 +118,7 @@
                                                                          width="100%" 
                                                                          style="padding:10px;">
                                                                 
-                                                                <h:column>
+                                                                <h:column rendered="#{TpnBean.actionRendered}">
                                                                     <f:facet name="header">Branch</f:facet>
                                                                         #{tank.branchName}
                                                                 </h:column>
@@ -143,6 +143,14 @@
                                                                     </h:outputText>
                                                                 </h:column>
                                                                 <h:column>
+                                                                    <f:facet name="header">Last Dip</f:facet>
+                                                                    
+                                                                </h:column>
+                                                                <h:column>
+                                                                    <f:facet name="header">Last OffLoading</f:facet>
+                                                                    
+                                                                </h:column>
+                                                                <h:column>
                                                                     <f:facet name="header">Previous Calibration</f:facet>
                                                                         #{tank.preCalibrationDate}
                                                                 </h:column>
@@ -153,9 +161,11 @@
                                                                 <h:column>
                                                                     <f:facet name="header">Actions</f:facet>
                                                                     <h:form >
+                                                                        <!--
                                                                         <h:commandLink   onclick="notifiyViewDetails1()" id="viewDetails1"> <h:graphicImage value="images/icon_view.png" />
                                                                             <f:ajax event="click" listener="#{TpnBean.tankView(tank)}" render="viewDetailsContentPanel1" />
                                                                         </h:commandLink>
+                                                                        --> 
                                                                         <h:commandLink onclick="notifyEdit1()"    id="editDetail1" > <h:graphicImage value="images/icon_edit.png" />
                                                                             <f:ajax event="click"  listener="#{TpnBean.tankEdit(tank)}" rendererType="postValidate" render=":editDetailsContentPanel1 :edit_form1" />
                                                                         </h:commandLink>
@@ -214,7 +224,7 @@
                                                                          width="100%" 
                                                                          style="padding:10px;">
                                                                 
-                                                                <h:column>
+                                                                <h:column rendered="#{TpnBean.actionRendered}">
                                                                     <f:facet name="header">Branch Name</f:facet>
                                                                         #{pump.branchName}
                                                                 </h:column>
@@ -222,16 +232,26 @@
                                                                     <f:facet name="header">Pump Name</f:facet>    				
                                                                         #{pump.name}
                                                                 </h:column>
-                                                                <h:column>
+                                                                <h:column>    				
+                                                                    <f:facet name="header">Previous Calibration</f:facet>    				
+                                                                    
+                                                                </h:column>
+                                                                <h:column>    				
+                                                                    <f:facet name="header">Next Calibration</f:facet>    				
+                                                                    
+                                                                </h:column>
+                                                                <h:column rendered="false">
                                                                     <f:facet name="header">Status</f:facet>
                                                                         #{pump.statusName}
                                                                 </h:column>
                                                                 <h:column>
                                                                     <f:facet name="header">Actions</f:facet>
                                                                     <h:form >
-                                                                        <h:commandLink   onclick="notifiyViewDetails2()" id="viewDetails2"> <h:graphicImage value="images/icon_view.png" />
-                                                                            <f:ajax event="click" listener="#{TpnBean.pumpView(pump)}" render="viewDetailsContentPanel2" />
-                                                                        </h:commandLink>
+                                                                        <!--
+                                                                       <h:commandLink   onclick="notifiyViewDetails2()" id="viewDetails2"> <h:graphicImage value="images/icon_view.png" />
+                                                                           <f:ajax event="click" listener="#{TpnBean.pumpView(pump)}" render="viewDetailsContentPanel2" />
+                                                                       </h:commandLink>
+                                                                        --> 
                                                                         <h:commandLink onclick="notifyEdit2()"    id="editDetail2" > <h:graphicImage value="images/icon_edit.png" />
                                                                             <f:ajax event="click"  listener="#{TpnBean.pumpEdit(pump)}" rendererType="postValidate" render=":editDetailsContentPanel2 :edit_form2" />
                                                                         </h:commandLink>
@@ -284,38 +304,41 @@
                                                                          width="100%" 
                                                                          style="padding:10px;">
                                                                 
-                                                                <h:column>
+                                                                <h:column rendered="#{TpnBean.actionRendered}">
                                                                     <f:facet name="header">Branch Name</f:facet>
                                                                         #{nozzle.branchName}
-                                                                </h:column>
-                                                                <h:column>    				
-                                                                    <f:facet name="header">Tank Name</f:facet>    				
-                                                                        #{nozzle.tankName}
-                                                                </h:column>
-                                                                <h:column>
-                                                                    <f:facet name="header">Pump Name</f:facet>
-                                                                        #{nozzle.pumpName}
                                                                 </h:column>
                                                                 <h:column>
                                                                     <f:facet name="header">Nozzle Name</f:facet>
                                                                         #{nozzle.nozzleName}
                                                                 </h:column>
+                                                                <h:column >
+                                                                    <f:facet name="header">Pump Name</f:facet>
+                                                                        #{nozzle.pumpName}
+                                                                </h:column>
+                                                                <h:column >    				
+                                                                    <f:facet name="header">Tank Name</f:facet>    				
+                                                                        #{nozzle.tankName}
+                                                                </h:column >
                                                                 <h:column>
                                                                     <f:facet name="header">Index</f:facet>
                                                                     <h:outputText value="#{nozzle.index}" >
                                                                         <f:convertNumber integerOnly="true"/>
                                                                     </h:outputText>
                                                                 </h:column>
-                                                                <h:column>
+                                                                
+                                                                <h:column rendered="false">
                                                                     <f:facet name="header">Status</f:facet>
                                                                         #{nozzle.statusName}
                                                                 </h:column>
                                                                 <h:column>
                                                                     <f:facet name="header">Actions</f:facet>
                                                                     <h:form >
+                                                                        <!--
                                                                         <h:commandLink   onclick="notifiyViewDetails3()" id="viewDetails3"> <h:graphicImage value="images/icon_view.png" />
                                                                             <f:ajax event="click" listener="#{TpnBean.nozzleView(nozzle)}" render="viewDetailsContentPanel3" />
                                                                         </h:commandLink>
+                                                                        --> 
                                                                         <h:commandLink onclick="notifyEdit3()"    id="editDetail2" > <h:graphicImage value="images/icon_edit.png" />
                                                                             <f:ajax event="click"  listener="#{TpnBean.nozzleEdit(nozzle)}" rendererType="postValidate" render=":editDetailsContentPanel3 :edit_form3" />
                                                                         </h:commandLink>

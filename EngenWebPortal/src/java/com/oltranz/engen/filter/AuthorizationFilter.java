@@ -44,7 +44,7 @@ public class AuthorizationFilter implements Filter {
             String reqURI = reqt.getRequestURI();
             
             if (    reqURI.contains("/forgotpswd.xhtml") 
-                    || reqURI.contains("/login.xhtml") 
+                    || reqURI.contains("/login.xhtml")
                     || (ses != null && ses.getAttribute("username") != null) 
                     || reqURI.contains("/public/") 
                     || reqURI.contains("javax.faces.resource") 

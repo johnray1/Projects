@@ -1,4 +1,76 @@
 
+/*CHART TANKS*/
+$(function () {
+    $('#tanks').highcharts({
+        
+		chart: {
+            type: 'column',
+			 style: {	fontFamily: 'ubuntu'}
+        },
+        
+        title: {
+            fontSize:'14',
+			text: ''
+        },
+        
+        xAxis: {
+            categories: ['Super', 'Gasoil','Kerosene']
+        },
+        
+        yAxis: {
+            min: 0,
+                labels: {
+                    align: 'right',
+                    format: '{value:.,0f} L'
+                },
+            title: {
+                text: 'Tank Quantities in Liters'
+            }
+        },
+
+        credits: {
+            enabled: false
+        },
+
+        tooltip: {
+			 valueSuffix: ' Liters',
+			 pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b><br/>',
+            shared: true
+        },
+
+        plotOptions: {
+			colorByPoint: true,
+			series: {
+                animation: {duration: 2000}
+            },
+            column: {
+                grouping: false,
+                shadow: false,
+                borderWidth: 0,				
+                dataLabels: {
+                    enabled: true,
+					pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b><br/>',
+                    format: '{point.y:,.0f} Liters'
+                }
+            }
+        },
+
+        series: [{
+            showInLegend: false,   
+			name: 'Current Quantity',
+			colors: [
+			'#057ac0', 
+			'#d9d928',
+			'#bf9e64'
+			],
+			colorByPoint: true,
+			borderRadius: '0',
+            data: [50000, 30000, 10000]
+        }]
+    });
+});
+/*End CHART TANKS*/
+
 
 
 /*CHART QUANTIES PER DAY*/
@@ -294,77 +366,7 @@ $(function () {
 
 
 
-/*CHART TANKS*/
-$(function () {
-    $('#demo_tanks').highcharts({
-        
-		chart: {
-            type: 'column',
-			 style: {	fontFamily: 'ubuntu'},
-        },
-        
-        title: {
-            fontSize:'14',
-			text: ''
-        },
-        
-        xAxis: {
-            categories: ['Super', 'Gasoil','Kerosene']
-        },
-        
-        yAxis: {
-            min: 0,
-                labels: {
-                    align: 'right',
-                    format: '{value:.,0f} L'
-                },
-            title: {
-                text: 'Tank Quantities in Liters'
-            }
-        },
 
-        credits: {
-            enabled: false
-        },
-
-        tooltip: {
-			 valueSuffix: ' Liters',
-			 pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b><br/>',
-            shared: true
-        },
-
-        plotOptions: {
-			colorByPoint: true,
-			series: {
-                animation: {duration: 2000},
-            },
-            column: {
-                grouping: false,
-                shadow: false,
-                borderWidth: 0,				
-                dataLabels: {
-                    enabled: true,
-					pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b><br/>',
-                    format: '{point.y:,.0f} Liters'
-                }
-            }
-        },
-
-        series: [{
-            showInLegend: false,   
-			name: 'Current Quantity',
-			colors: [
-			'#057ac0', 
-			'#d9d928',
-			'#bf9e64'
-			],
-			colorByPoint: true,
-			borderRadius: '0',
-            data: [50000, 30000, 10000]
-        }]
-    });
-});
-/*End CHART TANKS*/
 
 
 
@@ -374,7 +376,7 @@ $(function () {
     $('#demo_sales').highcharts({
 
         chart: {
-			 style: {	fontFamily: 'ubuntu'},
+			 style: {	fontFamily: 'ubuntu'}
         },
 
         title: {

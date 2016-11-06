@@ -39,6 +39,8 @@ public class TransactionBean implements Serializable{
     private String status;
     private String date;
     
+    private Boolean actionRendered;
+    
     private TransactionDetailsModel transactionDetailsModel;
     private TransactionList transactionList;
     
@@ -64,9 +66,17 @@ public class TransactionBean implements Serializable{
         templateBean.deviceList();
         templateBean.productList();
         templateBean.paymentModes();
+        
+        int braId=(int) session.getAttribute("branchId");
+        
+        if(braId==0){
+            actionRendered=true;
+        }
+        else{
+            actionRendered=false;
+        }
+        
         try{
-            
-            int braId=(int) session.getAttribute("branchId");
             String getUrl="http://localhost:8080/EngenPayFuel/TransactionManagementService/transactions/"+braId;
             Response response = CommonLibrary.sendRESTRequest(getUrl, "empty data", MediaType.TEXT_PLAIN, "GET");
             String jsonResponse = response.readEntity(String.class);
@@ -90,7 +100,15 @@ public class TransactionBean implements Serializable{
         templateBean.setSettingClassName("omenu");
         
         try{
-            transactionList(date,branchId);
+            int braId=(int) session.getAttribute("branchId");
+            
+            if(braId==0){
+                transactionList(date,branchId);
+            }
+            else{
+                transactionList(date,braId);
+            }
+            
             
             FacesContext.getCurrentInstance().getExternalContext().redirect("innerpage_transactions.xhtml");
         }
@@ -160,7 +178,7 @@ public class TransactionBean implements Serializable{
     }
     
     
-   
+    
     
     
     /**
@@ -260,19 +278,33 @@ public class TransactionBean implements Serializable{
     public void setPaymentModeId(int paymentModeId) {
         this.paymentModeId = paymentModeId;
     }
-
+    
     /**
      * @return the transactionDetailsModel
      */
     public TransactionDetailsModel getTransactionDetailsModel() {
         return transactionDetailsModel;
     }
-
+    
     /**
      * @param transactionDetailsModel the transactionDetailsModel to set
      */
     public void setTransactionDetailsModel(TransactionDetailsModel transactionDetailsModel) {
         this.transactionDetailsModel = transactionDetailsModel;
+    }
+    
+    /**
+     * @return the actionRendered
+     */
+    public Boolean getActionRendered() {
+        return actionRendered;
+    }
+    
+    /**
+     * @param actionRendered the actionRendered to set
+     */
+    public void setActionRendered(Boolean actionRendered) {
+        this.actionRendered = actionRendered;
     }
     
     

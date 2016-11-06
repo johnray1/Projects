@@ -27,6 +27,9 @@ public class Tank {
     @JsonProperty("currentCapacity")
     private Double currentCapacity;
     
+    @JsonProperty("dippedCapacity")
+    private double dippedCapacity;
+    
     @JsonProperty("preCalibrationDate")
     private Date preCalibrationDate;
     
@@ -217,6 +220,20 @@ public class Tank {
      */
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    /**
+     * @return the dippedCapacity
+     */
+    public double getDippedCapacity() {
+        return dippedCapacity;
+    }
+
+    /**
+     * @param dippedCapacity the dippedCapacity to set
+     */
+    public void setDippedCapacity(double dippedCapacity) {
+        this.dippedCapacity = dippedCapacity;
     }
     
     

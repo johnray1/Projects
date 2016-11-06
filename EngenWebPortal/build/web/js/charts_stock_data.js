@@ -7,7 +7,7 @@ $(function () {
     var superList = new Array();
     var gasoilList = new Array();
     
-    $.getJSON('http://localhost:8080/EngenPayFuel/ChartManagementService/dailyProductChart/'+branchId, function(data) {
+    $.getJSON('http://41.74.172.132:8080/EngenPayFuel/ChartManagementService/dailyProductChart/'+branchId, function(data) {
         
         // Populate series
         for (i = 0; i < data.day.length; i++){
@@ -132,7 +132,7 @@ $(function () {
     var monthName = new Array();
     var superr = new Array();
     var gasoil = new Array();
-    $.getJSON('http://localhost:8080/EngenPayFuel/ChartManagementService/monthlyProductChart/'+branchId, function(data) {
+    $.getJSON('http://41.74.172.132:8080/EngenPayFuel/ChartManagementService/monthlyProductChart/'+branchId, function(data) {
         
         // Populate series
        
@@ -257,7 +257,7 @@ $(function () {
     
     var name = new Array();
     var quantity = new Array();
-    $.getJSON('http://localhost:8080/EngenPayFuel/ChartManagementService/totalQuantityAllTankChart', function(data) {
+    $.getJSON('http://41.74.172.132:8080/EngenPayFuel/ChartManagementService/totalQuantityAllTankChart', function(data) {
         
         // Populate series
         for (i = 0; i < data.length; i++){

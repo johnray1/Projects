@@ -172,19 +172,21 @@ public class UserRoleBean implements Serializable{
     
     public void userUpdate(){
         
-        String url="http://localhost:8080/EngenPayFuel/UserManagementService/user/edit";
+        String url="http://localhost:8080/EngenPayFuel/UserManagementService/webUser/edit";
+        
         String  jsonData ="{\n" +
-                "\"actionUserId\":\""+1+"\",\n" +
+                    "\"actionUserId\":\""+1+"\",\n" +
                 "\"userId\":\""+userId+"\",\n" +
-                "\"fname\":\""+fname+"\",\n" +
-                "\"otherNames\":\""+fname+"\",\n" +
-                "\"password\":\""+password+"\",\n" +
-                "\"repeatPassword\":\""+repeatPassword+"\",\n" +
-                "\"email\":\""+email+"\",\n" +
-                "\"gender\":\""+"MALE/FEMALE"+"\",\n" +
-                "\"phoneNumber\":\""+phoneNumber+"\",\n" +
-                "\"details\":\""+"Engen Staff"+"\"\n" +
-                "}";
+                    "\"fname\":\""+fname+"\",\n" +
+                    "\"otherNames\":\""+fname+"\",\n" +
+                    "\"password\":\""+password+"\",\n" +
+                    "\"repeatPassword\":\""+repeatPassword+"\",\n" +
+                    "\"email\":\""+email+"\",\n" +
+                    "\"gender\":\""+"MALE/FEMALE"+"\",\n" +
+                    "\"phoneNumber\":\""+phoneNumber+"\",\n" +
+                    "\"details\":\""+"Engen Staff"+"\",\n" +
+                    "\"branchRoleId\":\""+branchRoleId+"\"\n" +
+                    "}";
         Response response=CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
         
         users();

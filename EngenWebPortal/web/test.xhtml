@@ -1,0 +1,349 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <div id="tabcontent3">
+            <!-- In -->
+            <div class="col-xs-12" style="float:none;margin:0px;padding:5px;padding-top:17px;padding-bottom:27px;min-height:400px;overflow-x:auto;font-family:ubuntu;">
+                <!-- -->
+                <!-- TANK -->
+                <div  class="container-fluid gasoil">
+                    
+                    
+                    <!-- a tank -->
+                    <div  class="col-xs-12"><div  class="tankstructure">
+                            
+                            <div class="thetank"><div id='levelbg_ago1'></div></div>
+                            <div class="tankmeter" style="background:url(images/tank_levelsnumbers.png) no-repeat bottom right;">&nbsp;</div>
+                            <label>AGO </label>
+                            
+                            <div class="quantities">
+                                <span class="quantity_t">Theoretical Quantity<input type="number" id="quantity_theo_ago1" min="0" max="20000" value="19600" oninput="mySuperDiff()" /></span>
+                                <span class="quantity_d">Diped Quantity<input type="number" id="quantity_dip_ago1" min="0" max="20000" value="19780" oninput="mySuperDiff()" disabled="disabled"/><em style="width:200px;border:0px solid red;font-size:11px;color:#3c3c3c;text-transform:none;position:absolute;top:60px;left:0px;">Latest : dd/mm/yyyy - 00:00:00 </em></span>
+                                <span class="quantity_diff">Difference <p id="quantity_diff_ago1"></p></span>
+                            </div>
+                            
+                        </div></div>
+                    <!--  end a tank-->
+                    
+                    
+                    
+                    <!-- PUMP -->
+                    <div  class="col-xs-6 pump_active" style="border:0px solid red;">
+                        
+                        <div class="flex-container">						
+                            
+                            <div class="flex-item"><div class="tank_pump">Pump 1</div></div>
+                            
+                            
+                            <!-- Nozzle -->
+                            <div class="flex-item">                             
+                                <span  class="nozzle_box">
+                                    <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
+                                    <label class="indexes">123456789</label>
+                                    <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                </span>                           
+                            </div>
+                            <!-- End Nozzle -->
+                            
+                            
+                            <!-- Nozzle -->
+                            <div class="flex-item">                             
+                                <span  class="nozzle_box">
+                                    <span class="nozzle_inbox"><button class="flip"></button><strong>N2</strong></span>
+                                    <label class="indexes">123456789</label>
+                                    <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                </span>                           
+                            </div>
+                            <!-- End Nozzle -->
+                            
+                            
+                            <!-- Nozzle -->
+                            <div class="flex-item">                             
+                                <span  class="nozzle_box">
+                                    <span class="nozzle_inbox"><button class="flip"></button><strong>N3</strong></span>
+                                    <label class="indexes">123456789</label>
+                                    <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                </span>                           
+                            </div>
+                            <!-- End Nozzle -->
+                            
+                            
+                            <!-- Nozzle -->
+                            <div class="flex-item">                             
+                                <span  class="nozzle_box">
+                                    <span class="nozzle_inbox"><button class="flip"></button><strong>N4</strong></span>
+                                    <label class="indexes">123456789</label>
+                                    <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                </span>                           
+                            </div>
+                            <!-- End Nozzle -->
+                            
+                        </div>                        
+                    </div>
+                    <!-- PUMP -->					
+                    
+                    
+                    
+                    
+                    <!-- PUMP -->
+                    <div  class="col-xs-6 pump_active" style="border:0px solid red;">
+                        
+                        
+                        <div class="flex-container">
+                            <div class="flex-item"><div class="tank_pump">Pump 2</div></div>
+                            
+                            
+                            <!-- Nozzle -->
+                            <div class="flex-item">                             
+                                <span  class="nozzle_box">
+                                    <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
+                                    <label class="indexes">123456789</label>
+                                    <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                </span>                           
+                            </div>
+                            <!-- End Nozzle -->
+                            
+                            
+                            <!-- Nozzle -->
+                            <div class="flex-item">                             
+                                <span  class="nozzle_box">
+                                    <span class="nozzle_inbox"><button class="flip"></button><strong>N2</strong></span>
+                                    <label class="indexes">123456789</label>
+                                    <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                </span>                           
+                            </div>
+                            <!-- End Nozzle -->
+                            
+                        </div>                        
+                    </div>
+                    <!-- PUMP -->
+                </div>
+                <!-- TANK -->
+                <!-- -->
+            </div>
+            <!-- End In-->
+        </div>
+        
+        <div id="tabcontent4">
+            <!-- In -->
+            <div class="col-xs-12" style="float:none;margin:0px;padding:5px;padding-top:17px;padding-bottom:27px;min-height:400px;overflow-x:auto;font-family:ubuntu;">
+                <!-- -->
+                <!-- TANK -->
+                <div  class="container-fluid kerosene">
+                    
+                    
+                    <!-- a tank -->
+                    <div  class="col-xs-12"><div  class="tankstructure">
+                            
+                            <div class="thetank"><div id='levelbg_ker1'></div></div>
+                            <div class="tankmeter" style="background:url(images/tank_levelsnumbers.png) no-repeat bottom right;">&nbsp;</div>
+                            <label>KEROSENE TANK</label>
+                            
+                            <div class="quantities">
+                                <span class="quantity_t">Theoretical Quantity<input type="number" id="quantity_theo_ker1" min="0" max="11000" value="5600" oninput="mySuperDiff()" /></span>
+                                <span class="quantity_d">Diped Quantity<input type="number" id="quantity_dip_ker1" min="0" max="11000" value="5000" oninput="mySuperDiff()" disabled="disabled"/><em style="width:200px;border:0px solid red;font-size:11px;color:#3c3c3c;text-transform:none;position:absolute;top:60px;left:0px;">Latest : dd/mm/yyyy - 00:00:00 </em></span>
+                                <span class="quantity_diff">Difference <p id="quantity_diff_ker1"></p></span>
+                            </div>
+                            
+                        </div></div>
+                    <!--  end a tank-->
+                    
+                    
+                    
+                    <!-- PUMP -->
+                    <div  class="col-xs-6 pump_active" style="border:0px solid red;">
+                        
+                        <div class="flex-container">						
+                            
+                            <div class="flex-item"><div class="tank_pump">Pump 1</div></div>
+                            
+                            
+                            <!-- Nozzle -->
+                            <div class="flex-item">                             
+                                <span  class="nozzle_box">
+                                    <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
+                                    <label class="indexes">123456789</label>
+                                    <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                </span>                           
+                            </div>
+                            <!-- End Nozzle -->
+                            
+                            
+                            <!-- Nozzle -->
+                            <div class="flex-item">                             
+                                <span  class="nozzle_box">
+                                    <span class="nozzle_inbox"><button class="flip"></button><strong>N2</strong></span>
+                                    <label class="indexes">123456789</label>
+                                    <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                </span>                           
+                            </div>
+                            <!-- End Nozzle -->
+                            
+                            
+                            <!-- Nozzle -->
+                            <div class="flex-item">                             
+                                <span  class="nozzle_box">
+                                    <span class="nozzle_inbox"><button class="flip"></button><strong>N3</strong></span>
+                                    <label class="indexes">123456789</label>
+                                    <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                </span>                           
+                            </div>
+                            <!-- End Nozzle -->
+                            
+                            
+                            <!-- Nozzle -->
+                            <div class="flex-item">                             
+                                <span  class="nozzle_box">
+                                    <span class="nozzle_inbox"><button class="flip"></button><strong>N4</strong></span>
+                                    <label class="indexes">123456789</label>
+                                    <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                </span>                           
+                            </div>
+                            <!-- End Nozzle -->
+                            
+                        </div>                        
+                    </div>
+                    <!-- PUMP -->					
+                    
+                    
+                    
+                    
+                    <!-- PUMP -->
+                    <div  class="col-xs-6 pump_active" style="border:0px solid red;">
+                        
+                        
+                        <div class="flex-container">
+                            <div class="flex-item"><div class="tank_pump">Pump 2</div></div>
+                            
+                            
+                            <!-- Nozzle -->
+                            <div class="flex-item">                             
+                                <span  class="nozzle_box">
+                                    <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
+                                    <label class="indexes">123456789</label>
+                                    <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                </span>                           
+                            </div>
+                            <!-- End Nozzle -->
+                            
+                            
+                            <!-- Nozzle -->
+                            <div class="flex-item">                             
+                                <span  class="nozzle_box">
+                                    <span class="nozzle_inbox"><button class="flip"></button><strong>N2</strong></span>
+                                    <label class="indexes">123456789</label>
+                                    <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                </span>                           
+                            </div>
+                            <!-- End Nozzle -->
+                            
+                        </div>                        
+                    </div>
+                    <!-- PUMP -->
+                    
+                    
+                    <!-- PUMP -->
+                    <div  class="col-xs-6 pump_active" style="border:0px solid red;">
+                        
+                        <div class="flex-container">						
+                            
+                            <div class="flex-item"><div class="tank_pump">Pump 1</div></div>
+                            
+                            
+                            <!-- Nozzle -->
+                            <div class="flex-item">                             
+                                <span  class="nozzle_box">
+                                    <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
+                                    <label class="indexes">123456789</label>
+                                    <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                </span>                           
+                            </div>
+                            <!-- End Nozzle -->
+                            
+                            
+                            <!-- Nozzle -->
+                            <div class="flex-item">                             
+                                <span  class="nozzle_box">
+                                    <span class="nozzle_inbox"><button class="flip"></button><strong>N2</strong></span>
+                                    <label class="indexes">123456789</label>
+                                    <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                </span>                           
+                            </div>
+                            <!-- End Nozzle -->
+                            
+                            
+                            <!-- Nozzle -->
+                            <div class="flex-item">                             
+                                <span  class="nozzle_box">
+                                    <span class="nozzle_inbox"><button class="flip"></button><strong>N3</strong></span>
+                                    <label class="indexes">123456789</label>
+                                    <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                </span>                           
+                            </div>
+                            <!-- End Nozzle -->
+                            
+                            
+                            <!-- Nozzle -->
+                            <div class="flex-item">                             
+                                <span  class="nozzle_box">
+                                    <span class="nozzle_inbox"><button class="flip"></button><strong>N4</strong></span>
+                                    <label class="indexes">123456789</label>
+                                    <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                </span>                           
+                            </div>
+                            <!-- End Nozzle -->
+                            
+                        </div>                        
+                    </div>
+                    <!-- PUMP -->					
+                    
+                    
+                    
+                    
+                    <!-- PUMP -->
+                    <div  class="col-xs-6 pump_active" style="border:0px solid red;">
+                        
+                        
+                        <div class="flex-container">
+                            <div class="flex-item"><div class="tank_pump">Pump 2</div></div>
+                            
+                            
+                            <!-- Nozzle -->
+                            <div class="flex-item">                             
+                                <span  class="nozzle_box">
+                                    <span class="nozzle_inbox"><button class="flip"></button><strong>N1</strong></span>
+                                    <label class="indexes">123456789</label>
+                                    <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                </span>                           
+                            </div>
+                            <!-- End Nozzle -->
+                            
+                            
+                            <!-- Nozzle -->
+                            <div class="flex-item">                             
+                                <span  class="nozzle_box">
+                                    <span class="nozzle_inbox"><button class="flip"></button><strong>N2</strong></span>
+                                    <label class="indexes">123456789</label>
+                                    <em class="lastusage">Last usage: <br />dd/mm/yyyy - 00:00:00 </em>
+                                </span>                           
+                            </div>
+                            <!-- End Nozzle -->
+                            
+                        </div>                        
+                    </div>
+                    <!-- PUMP -->
+                    
+                </div>
+                <!-- TANK -->
+                <!-- -->
+            </div>
+            <!-- End In-->
+        </div>
+    </h:body>
+</html>
+
