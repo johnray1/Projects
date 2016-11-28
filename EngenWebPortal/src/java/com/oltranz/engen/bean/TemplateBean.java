@@ -55,6 +55,11 @@ public class TemplateBean implements Serializable{
     private String hideDash;
     private String hideDashHq;
     
+    private String today="col-xs-3 shortdate active";
+    private String yesterday="col-xs-3 shortdate";
+    private String week="col-xs-3 shortdate";
+    private String month="col-xs-3 shortdate";
+    
     
     private PaymentModel paymentChartModel;
     
@@ -85,11 +90,11 @@ public class TemplateBean implements Serializable{
         
     }
     
-    public void paymentModeChart(){
+    public void paymentModeChart(String from,String to){
         
         try{
             int braId=(int) session.getAttribute("branchId");
-            String url="http://localhost:8080/EngenPayFuel/ChartManagementService/paymentChart/"+braId;
+            String url="http://localhost:8080/EngenPayFuel/ChartManagementService/paymentChart/"+braId+"/"+from+"/"+to;
             Response response = CommonLibrary.sendRESTRequest(url, "empty data", MediaType.APPLICATION_JSON, "GET");
             String jsonResponse = response.readEntity(String.class);
             
@@ -542,6 +547,62 @@ public class TemplateBean implements Serializable{
      */
     public void setBraList(BranchList braList) {
         this.braList = braList;
+    }
+
+    /**
+     * @return the today
+     */
+    public String getToday() {
+        return today;
+    }
+
+    /**
+     * @param today the today to set
+     */
+    public void setToday(String today) {
+        this.today = today;
+    }
+
+    /**
+     * @return the yesterday
+     */
+    public String getYesterday() {
+        return yesterday;
+    }
+
+    /**
+     * @param yesterday the yesterday to set
+     */
+    public void setYesterday(String yesterday) {
+        this.yesterday = yesterday;
+    }
+
+    /**
+     * @return the week
+     */
+    public String getWeek() {
+        return week;
+    }
+
+    /**
+     * @param week the week to set
+     */
+    public void setWeek(String week) {
+        this.week = week;
+    }
+
+    /**
+     * @return the month
+     */
+    public String getMonth() {
+        return month;
+    }
+
+    /**
+     * @param month the month to set
+     */
+    public void setMonth(String month) {
+        this.month = month;
     }
     
     

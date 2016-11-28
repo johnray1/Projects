@@ -95,7 +95,7 @@ $(function () {
         return colors;
     }());
     
-    $.getJSON('http://41.74.172.132:8080/EngenPayFuel/ChartManagementService/productPie', function(data) {
+    $.getJSON('http://41.74.172.132:8080/EngenPayFuel/ChartManagementService/productPie/'+branchId+'/'+from+'/'+to, function(data) {
         
         // Build the chart
         $('#productpie').highcharts({
@@ -130,8 +130,8 @@ $(function () {
                     name: 'Products',
                     data: [
                         { name: 'Super', color: '#057ac0', y: data.superAmount },
-                        { name: 'Gasoil', color: '#d9d928', y: data.gasoilAmount }
-                        
+                        { name: 'Gasoil', color: '#d9d928', y: data.gasoilAmount },
+                        { name: 'Kerosene', color: '#bf9e64', y: data.keroseneAmount }
                     ]
                 }]
         });
@@ -142,7 +142,7 @@ $(function () {
 
 $(function () {
     var branchList = new Array();
-    $.getJSON('http://41.74.172.132:8080/EngenPayFuel/ChartManagementService/branchChart', function(data) {
+    $.getJSON('http://41.74.172.132:8080/EngenPayFuel/ChartManagementService/branchChart/'+from+'/'+to, function(data) {
        
        // Populate series
         for (i = 0; i < data.length; i++){
@@ -175,14 +175,14 @@ $(function () {
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'Sells in RWF millions'
+                    text: 'Sells in RWF'
                 }
             },
             legend: {
                 enabled: false
             },
             tooltip: {
-                pointFormat: 'Sells: <b>{point.y:.1f} millions</b>'
+                pointFormat: 'Sells: <b>{point.y:.1f} rwf</b>'
             },
             series: [{
                     name: 'Branches',
@@ -211,7 +211,7 @@ $(function () {
     var cash = new Array();var voucher = new Array();var mtn = new Array();var tigo = new Array();
     var airtel = new Array();var visa = new Array();var master = new Array();var debt = new Array();var engenCard = new Array();
     
-    $.getJSON('http://41.74.172.132:8080/EngenPayFuel/ChartManagementService/paymentChart/'+branchId, function(data) {
+    $.getJSON('http://41.74.172.132:8080/EngenPayFuel/ChartManagementService/paymentChart/'+branchId+'/'+from+'/'+to, function(data) {
         cash.push(data.cash);voucher.push(data.voucher);mtn.push(data.mtn);tigo.push(data.tigo);
         airtel.push(data.airtel);visa.push(data.visa);master.push(data.master);debt.push(data.debt);engenCard.push(data.engenCard);
         

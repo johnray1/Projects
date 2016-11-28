@@ -14,7 +14,7 @@
 	to { background-position: 20% 0%;}
 }
 
-.topheader > div div.name div.dropdown span{display:inline-block;width:100%;height:65px;background-color:#052880;color:#f00739;outline:none;font-size:16px;text-align:center;text-transform:uppercase;text-decoration:none;background-image:url(../images/icon_notifications.png);background-repeat:no-repeat;animation: animatedBackground 1s linear infinite;}
+.topheader > div div.name div.dropdown span{display:inline-block;width:100%;height:65px;background-color:#052880;color:#f00739;outline:none;font-size:16px;text-align:center;text-transform:uppercase;text-decoration:none;background-image:url(../images/icon_notification.png);background-repeat:no-repeat;animation: animatedBackground 1s linear infinite;}
 .topheader > div div.name div.dropdown span:hover{display:inline-block;width:100%;height:65px;background-color:#002175;color:#f00739;outline:none;font-size:16px;text-align:center;text-transform:uppercase;text-decoration:none}
 .topheader > div div.name div.dropdown span label{display:inline-block;margin:17px;margin-left:auto;margin-right:auto;padding:3px 17px;background-color:#f00739;color:#ffffff;font-size:16px;text-align:center;font-weight:bold;border-radius:7px; }
 .topheader > div div.name div.dropdown span img{border:0px solid red;margin-left:7px;}

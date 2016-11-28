@@ -40,6 +40,9 @@ public class LoginBean implements Serializable{
     @ManagedProperty(value="#{TemplateBean}")
     private TemplateBean templateBean;
     
+    @ManagedProperty(value="#{DashBean}")
+    private DashBean dashBean;
+    
     
     @ManagedProperty(value="#{TransactionBean}")
     private TransactionBean transactionBean;
@@ -80,10 +83,8 @@ public class LoginBean implements Serializable{
                 session.setAttribute("branchId", ud.getUserDetailsModel().getBranchId());
                 session.setMaxInactiveInterval(30*60);
                 
-                
-                templateBean.paymentModeChart();
                 tpnBean.tankDashboard();
-                
+                dashBean.report(1);
                 if(ud.getUserDetailsModel().getUserId()!=1){
                     
                     templateBean.setHideClassName("hide");
@@ -298,6 +299,20 @@ public class LoginBean implements Serializable{
      */
     public void setTpnBean(TpnBean tpnBean) {
         this.tpnBean = tpnBean;
+    }
+
+    /**
+     * @return the dashBean
+     */
+    public DashBean getDashBean() {
+        return dashBean;
+    }
+
+    /**
+     * @param dashBean the dashBean to set
+     */
+    public void setDashBean(DashBean dashBean) {
+        this.dashBean = dashBean;
     }
     
     

@@ -126,7 +126,7 @@ span.nozzle_inbox button.flip{-moz-transform: scaleX(-1);-o-transform: scaleX(-1
 .disable{opacity:0.4;-webkit-filter: grayscale(100%);filter: grayscale(100%);}
 .disable:after{content: "DISABLED";  display: block;  position: absolute;  width:100%;  height:100%;  top: 0;  left: 0;  background-color: rgba(0,0,0,0.8);  color:white;  font-size:20px;  text-align:center;  line-height:100%;  z-index:999999;  border-radius:7px;  padding-top:37px;}
 
-#levelbg{position: absolute; bottom: 0; left: 0;width: 100%; margin: 0; padding:0; border: 0px solid green; background-color:#000000;background:url(../images/tank_levelbg.png) repeat-x bottom;box-sizing: border-box;}
+.levelbg{position: absolute; bottom: 0; left: 0;width: 100%; margin: 0; padding:0; border: 0px solid green; background-color:#000000;background:url(../images/tank_levelbg.png) repeat-x bottom;box-sizing: border-box;}
 
 #quantity_diff{display:inline-block;width:90%;margin-bottom:5px;padding:0px; border:0px  solid green;font-size:18px;font-weight:bold;color:#ffff00;text-align:center;outline:none;background-color:transparent;overflow:hidden;}
 #quantity_diff span{color:#c0c0c0;}

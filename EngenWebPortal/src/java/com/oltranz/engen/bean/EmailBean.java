@@ -24,7 +24,7 @@ public class EmailBean implements Serializable{
     
     public String email(){
         
-        String url="http://41.74.172.132:8080/PetroStationManager/portalmanager/sendmail/"+email;
+        String url="http://localhost:8080/PetroStationManager/portalmanager/sendmail/"+email;
         Response response = CommonLibrary.sendRESTRequest(url, "empty data", MediaType.TEXT_PLAIN, "GET");
         String jsonResponse = response.readEntity(String.class);
         this.setEmail(null);

@@ -30,6 +30,9 @@ public class Tank {
     @JsonProperty("dippedCapacity")
     private double dippedCapacity;
     
+    @JsonProperty("dippedTime")
+    private Date dippedTime;
+    
     @JsonProperty("preCalibrationDate")
     private Date preCalibrationDate;
     
@@ -234,6 +237,20 @@ public class Tank {
      */
     public void setDippedCapacity(double dippedCapacity) {
         this.dippedCapacity = dippedCapacity;
+    }
+
+    /**
+     * @return the dippedTime
+     */
+    public Date getDippedTime() {
+        return dippedTime;
+    }
+
+    /**
+     * @param dippedTime the dippedTime to set
+     */
+    public void setDippedTime(Date dippedTime) {
+        this.dippedTime = dippedTime;
     }
     
     

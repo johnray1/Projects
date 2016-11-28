@@ -1,18 +1,14 @@
 /*TANKS LEVELS*/
 
 window.onload = mySuperDiff;
-function mySuperDiff() {
-
-    var theo = document.getElementById("quantity_theo").value;
-    var dip = document.getElementById("quantity_dip").value;
-
-    document.getElementById("quantity_diff").innerHTML = "" + theo - dip + "<span>&nbsp;L</span>";
-
+function mySuperDiff(tankId) {
+    var theo = document.getElementById("quantity_theo"+tankId).value;
+    var dip = document.getElementById("quantity_dip"+tankId).value;
+    document.getElementById("quantity_diff"+tankId).innerHTML = "" + theo - dip + "<span>&nbsp;L</span>";
 
     var levelbg = (theo * 100) / 50000;
-
-    document.getElementById("levelbg").style.height = "" + levelbg + "%";
-
+    
+    document.getElementById("levelbg"+tankId).style.height = "" + levelbg + "%";
 };
 
 

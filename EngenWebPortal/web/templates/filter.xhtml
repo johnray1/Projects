@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+        <!-- FILTER -->
+        <div class="container-fluid filterbox">
+            <div class="col-xs-12" style="margin:0px;padding:0px;background-color:#f4f4f4;">
+                
+                <span  class="col-xs-12 col-sm-12 col-md-5" style="margin:0px;padding:0px;border:0px solid red;">
+                    <h:form>
+                        <h:commandLink class="#{TemplateBean.today}" value="Today" action="#{DashBean.report(1)}"/>
+                        <h:commandLink class="#{TemplateBean.yesterday}" value="Yesterday" action="#{DashBean.report(2)}"/>
+                        <h:commandLink class="#{TemplateBean.week}" value="This Weeks" action="#{DashBean.report(3)}"/>
+                        <h:commandLink class="#{TemplateBean.month}" value="This Months" action="#{DashBean.report(4)}"/>
+                    </h:form>
+                </span>
+                
+                <span  class="col-xs-12 col-sm-12 col-md-7 customdate" style="margin:0px;padding:0px;border:0px solid green;">
+                    <!-- FORM -->
+                    <h:form id="form"  class="container-fluid sforminput"  style="margin:0px;padding:0px;">
+                        
+                        <div class="col-xs-12 col-sm-8 stextinput_date">
+                            <h:inputText id="daterangepicker" value="#{DashBean.date}"/>
+                        </div>	
+                        <div class="col-xs-12 col-sm-4 ssubmitinput" style="margin:0px;padding:0px;">
+                            <h:commandButton action="#{DashBean.report(0)}" value="Filter" class="ssubmitinput"/>
+                        </div>
+                        
+                    </h:form>
+                    <!-- End FORM -->
+                </span>
+                
+                
+            </div>
+        </div>
+        <!-- END FILTER -->
+        </ui:composition>
+    </h:body>
+</html>
+

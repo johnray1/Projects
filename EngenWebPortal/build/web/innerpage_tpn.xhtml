@@ -143,20 +143,20 @@
                                                                     </h:outputText>
                                                                 </h:column>
                                                                 <h:column>
-                                                                    <f:facet name="header">Last Dip</f:facet>
+                                                                    <f:facet name="header">Last Dipped</f:facet>
+                                                                    #{tank.dippedTime}
+                                                                </h:column>
+                                                                <h:column>
+                                                                    <f:facet name="header">Last Tanked</f:facet>
                                                                     
                                                                 </h:column>
-                                                                <h:column>
-                                                                    <f:facet name="header">Last OffLoading</f:facet>
+                                                                <h:column>    				
+                                                                    <f:facet name="header">Previous Calibration</f:facet>    				
                                                                     
                                                                 </h:column>
-                                                                <h:column>
-                                                                    <f:facet name="header">Previous Calibration</f:facet>
-                                                                        #{tank.preCalibrationDate}
-                                                                </h:column>
-                                                                <h:column>
-                                                                    <f:facet name="header">Next Calibration</f:facet>
-                                                                        #{tank.nextCalibrationDate}
+                                                                <h:column>    				
+                                                                    <f:facet name="header">Next Calibration</f:facet>    				
+                                                                    
                                                                 </h:column>
                                                                 <h:column>
                                                                     <f:facet name="header">Actions</f:facet>

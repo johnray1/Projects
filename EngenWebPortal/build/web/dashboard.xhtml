@@ -15,6 +15,7 @@
         <link href="css/bootstrap.css" rel="stylesheet"/>
         <link href="css/style.css" rel="stylesheet"/>
         <link href="css/footer.css" rel="stylesheet"/>
+        <link href="css/filter.css" rel="stylesheet"/>
         <link href="css/menu.css" rel="stylesheet"/>
         <link href="css/topheader.css" rel="stylesheet"/>
         <link href="css/easy-responsive-tabs.css" rel="stylesheet" />
@@ -26,6 +27,8 @@
         
         <script>
             var branchId="#{LoginBean.ud.userDetailsModel.branchId}";
+            var from="#{DashBean.startDate}";
+            var to="#{DashBean.endDate}";
         </script>
         <script src="js/charts.js" type="text/javascript"></script>
         <script src="js/highcharts.js"></script>
@@ -37,12 +40,87 @@
         <link type="text/css" href="js/mmenu/jquery.mmenu.all.css" rel="stylesheet" />
         <script type="text/javascript" src="js/mmenu/jquery.mmenu.all.min.js"></script>
         <script type="text/javascript" src="js/mmenu/jquery.mmenu.init.js"></script>
+        
+        <script src="js/chosen.jquery.min.js" type="text/javascript"></script>
+        <script src="js/moment.min.js" type="text/javascript"></script>
+        <link href="js/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="js/daterangepicker.js"></script>
+        <script type="text/javascript">
+            $(function() {
+                
+                $('#form\\:daterangepicker').daterangepicker({
+                    "showDropdowns": true,
+                    "autoUpdateInput": true,
+                    "timePicker": true,
+                    "timePicker24Hour": true,
+                    "autoApply": true,
+                    ranges: {
+                        'Today': [moment(), moment()],
+                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')] 
+                    },
+                    "locale": {
+                        "format": "YYYY/MM/DD HH:mm",
+                        "separator": " - ",
+                        "applyLabel": "Apply",
+                        "cancelLabel": "Cancel",
+                        "fromLabel": "From",
+                        "toLabel": "To",
+                        "customRangeLabel": "Custom",
+                        "daysOfWeek": [
+                            "Su",
+                            "Mo",
+                            "Tu",
+                            "We",
+                            "Th",
+                            "Fr",
+                            "Sa"
+                        ],
+                        "monthNames": [
+                            "January",
+                            "February",
+                            "March",
+                            "April",
+                            "May",
+                            "June",
+                            "July",
+                            "August",
+                            "September",
+                            "October",
+                            "November",
+                            "December"
+                        ],
+                        "firstDay": 1
+                    },
+                    
+                    "opens": "center"
+                }, 
+                
+                function(start, end, label) {
+                    console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
+                });
+                
+                $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
+                    $(this).val(picker.startDate.format('MM/DD/YYYY h:mm A') + ' - ' + picker.endDate.format('MM/DD/YYYY h:mm A'));
+                });
+                
+                $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
+                    $(this).val('');
+                });
+            });
+        </script>
+        
     </h:head>
     
     <h:body>
         
         <div id="page"> 
             <ui:include src="templates/header.xhtml"/> 
+            
+            <div class="clear"></div>
             
             <!-- CONTENTS-->
             <div class="container-fluid">
@@ -87,11 +165,28 @@
                                 
                                 
                                 <div id="tabcontent">
-                                    
+                                    <ui:include src="templates/filter.xhtml"/> 
                                     <!-- In -->
                                     <div class="col-xs-12" style="float: none;margin: 0 auto;padding:5px;min-height:400px;border:0px solid #f0f0f0;overflow-x:auto;font-family:ubuntu;">
                                         
-                                        <!--  -->                   
+                                        <!--  -->  
+                                        <div class="col-xs-12 col-sm-12 col-md-4 hidden-xs hidden-sm visible-md visible-lg holderbox">
+                                            <div class="col-xs-12 holderinbox" style="margin:0px;padding:7px;min-height:417px;">
+                                                
+                                                <h2>Sales per Payment Method</h2>                           
+                                                
+                                                <ui:include src="templates/paymode_branch.xhtml" /> 
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        <div class="col-xs-12 col-sm-12 col-md-8 hidden-xs hidden-sm visible-md visible-lg holderbox">
+                                            <div class="col-xs-12 col-sm-12 holderinbox" style="margin:0px;padding:7px;padding-left:0px;padding-right:10px;min-height:300px;">
+                                                <div id="sp_payments" style="min-width: 300px; height: 400px; margin: 0 auto"></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="clear"></div>
                                         
                                         <div class="col-xs-12 col-sm-12 col-md-12 hidden-xs hidden-sm visible-md visible-lg holderbox">
                                             <div class="col-xs-12 col-sm-12 holderinbox" style="margin:0px;padding:7px;padding-left:0px;padding-right:10px;min-height:300px;">
@@ -116,30 +211,13 @@
                                         <div class="clear"></div>
                                         
                                         
-                                        <div class="col-xs-12 col-sm-12 col-md-4 hidden-xs hidden-sm visible-md visible-lg holderbox">
-                                            <div class="col-xs-12 holderinbox" style="margin:0px;padding:7px;min-height:417px;">
-                                                
-                                                <h2>Sales per Payment Method</h2>                           
-                                                
-                                                <ui:include src="templates/paymode_branch.xhtml" /> 
-                                            </div>
-                                        </div>
-                                        
-                                        
-                                        <div class="col-xs-12 col-sm-12 col-md-8 hidden-xs hidden-sm visible-md visible-lg holderbox">
-                                            <div class="col-xs-12 col-sm-12 holderinbox" style="margin:0px;padding:7px;padding-left:0px;padding-right:10px;min-height:300px;">
-                                                <div id="sp_payments" style="min-width: 300px; height: 400px; margin: 0 auto"></div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="clear"></div>
-                                        
                                         <!-- -->
                                         
                                     </div>
                                     <!-- End In-->
                                     
                                 </div>
+                                
                                 <ui:repeat value="#{TpnBean.tankDashList.tankDashList}" var="tank">
                                     <div id="tabcontent#{tank.tankId}">
                                         <!-- In -->
@@ -154,29 +232,30 @@
                                                     <div  class="tankstructure">
                                                         
                                                         <div class="thetank">
-                                                            <div id='levelbg'></div>
+                                                            <div id="levelbg#{tank.tankId}" class="levelbg"></div>
                                                         </div>
                                                         <div class="tankmeter" style="background:url(images/tank_levelsnumbers.png) no-repeat bottom right;">&nbsp;</div>
                                                         <label>#{tank.tankName}</label>
                                                         
                                                         <div class="quantities">
                                                             <span class="quantity_t">Theoretical Quantity
-                                                                <input type="number" id="quantity_theo" min="0" max="30000" value="#{tank.currentCapacity}" oninput="mySuperDiff()" disabled="disabled"/>
+                                                                <input type="number" id="quantity_theo#{tank.tankId}" min="0" max="30000" value="#{tank.currentCapacity}"  disabled="disabled"/>
                                                             </span>
                                                             <span class="quantity_d">Diped Quantity
-                                                                <input type="number" id="quantity_dip" min="0" max="30000" value="#{tank.dippedCapacity}" oninput="mySuperDiff()" disabled="disabled"/>
+                                                                <input type="number" id="quantity_dip#{tank.tankId}" min="0" max="30000" value="#{tank.dippedCapacity}"  disabled="disabled"/>
                                                                 <em style="width:200px;border:0px solid red;font-size:11px;color:#3c3c3c;text-transform:none;position:absolute;top:60px;left:0px;">
                                                                     Latest : <h:outputText value="#{tank.dippedTime}">
-                                                                                <f:convertDateTime type="date" pattern="EEE, d MMM yyyy HH:mm" timeZone="CAT"/>
-                                                                            </h:outputText>
+                                                                        <f:convertDateTime type="date" pattern="EEE, d MMM yyyy HH:mm" timeZone="CAT"/>
+                                                                    </h:outputText>
                                                                 </em>
                                                             </span>
-                                                            <span class="quantity_diff">Difference <p id="quantity_diff"></p></span>
+                                                            <span class="quantity_diff">Difference <p id="quantity_diff#{tank.tankId}"></p></span>
                                                         </div>
                                                         
                                                     </div>
                                                 </div>
                                                 <!--  end a tank-->
+                                                
                                                 
                                                 
                                                 <ui:repeat value="#{tank.pumpDash}" var="pump">
@@ -218,6 +297,11 @@
                                             
                                         </div>
                                         <!-- End In-->
+                                        
+                                        <script>
+                                            mySuperDiff(#{tank.tankId});
+                                        </script>
+                                        
                                     </div>
                                 </ui:repeat>
                                 

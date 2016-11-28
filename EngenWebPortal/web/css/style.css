@@ -130,7 +130,7 @@ table.innertable tbody > tr> th.action{background: rgba(236,236,236,0);
                                        background: -webkit-linear-gradient(left, rgba(236,236,236,0) 0%, rgba(236,236,236,0.47) 47%, rgba(255,255,255,1) 100%);
                                        background: -o-linear-gradient(left, rgba(236,236,236,0) 0%, rgba(236,236,236,0.47) 47%, rgba(255,255,255,1) 100%);
                                        background: -ms-linear-gradient(left, rgba(236,236,236,0) 0%, rgba(236,236,236,0.47) 47%, rgba(255,255,255,1) 100%);
-                                       background: linear-gradient(to right, rgba(236,236,236,0) 0%, rgba(236,236,236,0.47) 47%, rgba(255,255,255,1) 100%);
+                                       background: linear-gradient(right, rgba(236,236,236,0) 0%, rgba(236,236,236,0.47) 47%, rgba(255,255,255,1) 100%);
                                        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ececec', endColorstr='#ffffff', GradientType=1 );border:0px;border-top:4px solid white;text-align:center;}
 
 
