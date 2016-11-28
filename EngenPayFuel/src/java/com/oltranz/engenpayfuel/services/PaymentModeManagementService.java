@@ -7,6 +7,7 @@ package com.oltranz.engenpayfuel.services;
 
 import com.oltranz.engenpayfuel.beans.PaymentModeManager;
 import com.oltranz.engenpayfuel.entities.PaymentMode;
+import com.oltranz.engenpayfuel.models.ReportShift;
 import com.oltranz.engenpayfuel.models.ResultObject;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -86,6 +87,17 @@ public class PaymentModeManagementService {
         
         ResultObject result= paymentModeManager.removePaymentMode(id);
         return result.getJsonFormat();
+    }
+    
+    @POST
+    @Path("paymentmodeReport")
+    @Consumes({"application/xml", "application/json"})
+    public String getPaymentReportList(String rs) {
+        
+        ResultObject result=paymentModeManager.getPaymentReportList(rs);
+        
+        return result.getJsonFormat();
+        
     }
     
 }

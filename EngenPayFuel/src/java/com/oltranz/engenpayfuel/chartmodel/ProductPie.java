@@ -13,6 +13,7 @@ public class ProductPie {
     
     private double superAmount;
     private double gasoilAmount;
+    private double keroseneAmount;
 
     /**
      * @return the superAmount
@@ -40,6 +41,20 @@ public class ProductPie {
      */
     public void setGasoilAmount(double gasoilAmount) {
         this.gasoilAmount = gasoilAmount;
+    }
+
+    /**
+     * @return the keroseneAmount
+     */
+    public double getKeroseneAmount() {
+        return keroseneAmount;
+    }
+
+    /**
+     * @param keroseneAmount the keroseneAmount to set
+     */
+    public void setKeroseneAmount(double keroseneAmount) {
+        this.keroseneAmount = keroseneAmount;
     }
     
     

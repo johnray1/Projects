@@ -221,7 +221,7 @@ public class TankManager {
             return resultObject;
         }
         
-        
+        //set the tanking value
         Tanking tanking=new Tanking();
         tanking.setUserId(newTanking.getUserId());
         tanking.setTankId(newTanking.getTankId());
@@ -230,18 +230,16 @@ public class TankManager {
         tanking.setTheoriticalTanked(newTanking.getTheoriticalTanked());
         tanking.setWaterValue(newTanking.getWaterValue());
         tanking.setDatetime(commonFunctionEjb.getDate());
-        
         tanking.setPreTankingMeasuredDip(newTanking.getPreTankingCalculatedDip());
         tanking.setPreTankingCalculatedDip(newTanking.getPreTankingCalculatedDip());
-        
         tanking.setPostTankingMeasuredDip(newTanking.getPostTankingCalculatedDip());
         tanking.setPostTankingCalculatedDip(newTanking.getPostTankingCalculatedDip());
-        
         em.persist(tanking);
         em.flush();
         
-        
+        //set the tank value
         tank.setCurrentCapacity(tanking.getPostTankingCalculatedDip());
+        tank.setDippedCapacity(tanking.getPostTankingCalculatedDip());
         em.merge(tank);
         em.flush();
         
@@ -383,6 +381,7 @@ public class TankManager {
             tanks.setMaxCapacity(tank.getMaxCapacity());
             tanks.setCurrentCapacity(tank.getCurrentCapacity());
             tanks.setDippedCapacity(tank.getDippedCapacity());
+            tanks.setDippedTime(tank.getDippedTime());
             tanks.setPreCalibrationDate(tank.getPreCalibrationDate());
             tanks.setNextCalibrationDate(tank.getNextCalibrationDate());
             tanks.setBranchId(tank.getBranchId());

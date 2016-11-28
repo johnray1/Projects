@@ -23,7 +23,6 @@ public class NozzleAdjust {
     
     @JsonProperty("index")
     private double index;
-
     
 
     /**
@@ -69,9 +68,8 @@ public class NozzleAdjust {
     public void setIndex(double index) {
         this.index = index;
     }
-    
-    
-    
+
+   
     
     
 }

@@ -148,6 +148,7 @@ public class InitialData {
             
             
             
+            
             //RoleType(Integer id,String name, String descr)
             initializationLog+="\n Roles Types Initialization begins...";
             List<RoleType> roleTypeList= new ArrayList();

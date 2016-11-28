@@ -10,6 +10,7 @@ import com.oltranz.engenpayfuel.models.AuthenticationModel;
 import com.oltranz.engenpayfuel.models.ResultObject;
 import com.oltranz.engenpayfuel.models.UserCreateModel;
 import com.oltranz.engenpayfuel.models.UserEditModel;
+import com.oltranz.engenpayfuel.models.UserShiftModel;
 import com.oltranz.engenpayfuel.models.UserWebCreateModel;
 import com.oltranz.engenpayfuel.models.UserWebEditModel;
 import javax.ejb.EJB;
@@ -207,6 +208,22 @@ public class UserManagementService {
         String jsonResult=result.getJsonFormat();
         return jsonResult;
     }
+    
+    @POST
+    @Path("user/shift")
+    @Consumes({"application/xml", "application/json"})
+    public String shift(UserShiftModel userShiftModel) {
+        
+        ResultObject result= userManager.shift(userShiftModel);
+        
+        String jsonResult=result.getJsonFormat();
+        
+        return jsonResult;
+    }
+    
+    
+    
+    
    //-------------------------------------------web-------------------------------------------------------- 
     
     @POST

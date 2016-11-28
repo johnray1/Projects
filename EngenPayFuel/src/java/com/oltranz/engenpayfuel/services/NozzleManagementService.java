@@ -58,7 +58,8 @@ public class NozzleManagementService {
     @Consumes({"application/xml", "application/json"})
     public String adjustNozzle(NozzleAdjust nozzleAdjust) {
         
-        ResultObject result=nozzleManager.adjustNozzle(nozzleAdjust);
+        ResultObject  result=nozzleManager.adjustNozzle(nozzleAdjust);
+        
         return result.getJsonFormat();
         
     }
@@ -72,6 +73,19 @@ public class NozzleManagementService {
         return result.getJsonFormat();
         
     }
+    
+    
+    @POST
+    @Path("nozzlesReport")
+    @Consumes({"application/xml", "application/json"})
+    public String getNozzleReportList(String rs) {
+        
+        ResultObject result=nozzleManager.getNozzleReportList(rs);
+        
+        return result.getJsonFormat();
+        
+    }
+    
     
     //---------------------web----------------------------------------------
     

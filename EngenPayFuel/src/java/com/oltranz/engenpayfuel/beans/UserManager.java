@@ -12,6 +12,7 @@ import com.oltranz.engenpayfuel.entities.RoleForBranch;
 import com.oltranz.engenpayfuel.entities.RoleForUser;
 import com.oltranz.engenpayfuel.entities.RoleForUserPK;
 import com.oltranz.engenpayfuel.entities.User;
+import com.oltranz.engenpayfuel.entities.UserShift;
 import com.oltranz.engenpayfuel.library.Common;
 import com.oltranz.engenpayfuel.library.RandomPin;
 import com.oltranz.engenpayfuel.models.ResultObject;
@@ -21,6 +22,8 @@ import com.oltranz.engenpayfuel.models.RoleForUserModel;
 import com.oltranz.engenpayfuel.models.UserCreateModel;
 import com.oltranz.engenpayfuel.models.UserDetailsModel;
 import com.oltranz.engenpayfuel.models.UserEditModel;
+import com.oltranz.engenpayfuel.models.UserPaymentModel;
+import com.oltranz.engenpayfuel.models.UserShiftModel;
 import com.oltranz.engenpayfuel.models.UserWebCreateModel;
 import com.oltranz.engenpayfuel.models.UserWebEditModel;
 import java.net.InetAddress;
@@ -471,6 +474,8 @@ public class UserManager {
         
         return resultObject;
     }
+    
+    
     
     public ResultObject getUserDetails(Integer  userId){
         ResultObject resultObject;
@@ -1032,6 +1037,76 @@ public class UserManager {
         resultObject.setObject(userList);
         return resultObject;
     }
+    
+    
+    public ResultObject shift(UserShiftModel usm){
+        
+        ResultObject resultObject=new ResultObject();
+        resultObject.setObjectClass(UserShiftModel.class);
+        
+        UserShift us=new UserShift();
+        us.setUserId(usm.getUserId());
+        us.setDateTime(new Date());
+        
+        for(UserPaymentModel upm : usm.getPaymentReport()){
+            
+            if(upm.getPaymentModeId()==1){
+                us.setCash(upm.getAmount());
+            }
+            
+            if(upm.getPaymentModeId()==2){
+                us.setVoucher(upm.getAmount());
+            }
+            
+            if(upm.getPaymentModeId()==3){
+                us.setMtn(upm.getAmount());
+            }
+            
+            if(upm.getPaymentModeId()==4){
+                us.setTigo(upm.getAmount());
+            }
+            
+            if(upm.getPaymentModeId()==5){
+                us.setAirtel(upm.getAmount());
+            }
+            
+            if(upm.getPaymentModeId()==6){
+                us.setVisa(upm.getAmount());
+            }
+            
+            if(upm.getPaymentModeId()==7){
+                us.setMaster(upm.getAmount());
+            }
+            
+            if(upm.getPaymentModeId()==8){
+                us.setDebt(upm.getAmount());
+            }
+            
+            if(upm.getPaymentModeId()==9){
+                us.setEngenCard(upm.getAmount());
+            }
+            
+            
+        }
+        
+        em.persist(us);
+        em.flush();
+        
+        
+        
+        resultObject.setObject(usm);
+        resultObject.setMessage("User Shift Over Successfully");
+        resultObject.setStatusCode(100);
+        
+        return resultObject;
+    }
+    
+    
+    
+    
+    
+    
+    
     
     //------------------------------------------------web------------------------------------------------------------------
     

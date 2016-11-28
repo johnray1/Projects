@@ -16,7 +16,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -47,6 +46,8 @@ public class IndexAdjust implements Serializable{
     @Column(name = "date_time")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateTime;
+    
+    
     
     /**
      * @return the id
@@ -117,7 +118,7 @@ public class IndexAdjust implements Serializable{
     public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
-    
+
     
     
 }

@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oltranz.engenpayfuel.chartmodel.BranchBar;
 import com.oltranz.engenpayfuel.chartmodel.DailyChartProductModel;
 import com.oltranz.engenpayfuel.chartmodel.NozzleDash;
-import com.oltranz.engenpayfuel.chartmodel.PaymentChartModel;
+import com.oltranz.engenpayfuel.chartmodel.PaymentModel;
 import com.oltranz.engenpayfuel.chartmodel.ProductChartModel;
 import com.oltranz.engenpayfuel.chartmodel.ProductPie;
 import com.oltranz.engenpayfuel.chartmodel.PumpDash;
@@ -54,6 +54,207 @@ public class ChartManager {
     @EJB
             CommonFunctionEjb commonFunctionEjb;
     
+    
+    //-----------------------------------------------------------------PIE------------------------------------------------------------
+    
+    
+    public String productPie(int branchId,Date from, Date to){
+        try{
+            double amountsup=productPieData(1,branchId,from,to);
+            double amountgas=productPieData(2,branchId,from,to);
+            double amountker=productPieData(3,branchId,from,to);
+            
+            ProductPie productPie=new ProductPie();
+            productPie.setSuperAmount(amountsup);
+            productPie.setGasoilAmount(amountgas);
+            productPie.setKeroseneAmount(amountker);
+            
+            ObjectMapper om=new ObjectMapper();
+            String jsonString = om.writeValueAsString(productPie);
+            return jsonString;
+        }
+        catch(Exception e){
+            return null;
+        }
+    }
+    
+    public double productPieData(int productId,int branchId,Date from, Date to){
+        
+        Query query;
+        if(branchId==0){
+            query=em.createQuery("SELECT t FROM Transaction t WHERE t.productId = :productId and t.paymentStatus = :paymentStatus and t.serverReqTime BETWEEN :fromDate AND :toDate");
+            query.setParameter("productId", productId);
+            query.setParameter("paymentStatus", "SUCCESS");
+            query.setParameter("fromDate", from);
+            query.setParameter("toDate", to);
+        }
+        else{
+            query=em.createQuery("SELECT t FROM Transaction t WHERE t.productId = :productId and t.paymentStatus = :paymentStatus and t.branchId = :branchId and t.serverReqTime BETWEEN :fromDate AND :toDate");
+            query.setParameter("productId", productId);
+            query.setParameter("paymentStatus", "SUCCESS");
+            query.setParameter("branchId", branchId);
+            query.setParameter("fromDate", from);
+            query.setParameter("toDate", to);
+        }
+        
+        
+        List<Transaction> transactionList=(List<Transaction>)query.getResultList();
+        double amount=0;
+        if(transactionList.isEmpty()){
+            return amount;
+        }
+        else{
+            for(Transaction transaction : transactionList){
+                amount+=transaction.getAmount();
+            }
+            return amount;
+        }
+        
+    }
+    
+    
+    //-----------------------------------------------------------------BRANCH SALES------------------------------------------------------------
+    
+    public String allBranchChart(Date from, Date to){
+        try{
+            List<BranchBar> bbl=new ArrayList<>();
+            List<Branch> branchList=em.createQuery("SELECT b FROM Branch b").getResultList();
+            
+            for(Branch b:branchList){
+                BranchBar bb=new BranchBar();
+                double amount=branchIncome(b.getBranchId(),from,to);
+                String branchName=b.getName();
+                bb.setBranchName(branchName);
+                bb.setIncome(amount);
+                bbl.add(bb);
+            }
+            ObjectMapper om=new ObjectMapper();
+            String jsonString = om.writeValueAsString(bbl);
+            return jsonString;
+        }
+        catch(Exception e){
+            return null;
+        }
+        
+    }
+    
+    public double branchIncome(int branchId,Date from, Date to){
+        
+        Date currentDate = new Date();
+        Query query=em.createQuery("SELECT t FROM Transaction t WHERE t.branchId = :branchId and t.paymentStatus = :paymentStatus and t.serverReqTime BETWEEN :fromDate AND :toDate");
+        query.setParameter("branchId", branchId);
+        query.setParameter("paymentStatus", "SUCCESS");
+        query.setParameter("fromDate", from);
+        query.setParameter("toDate", to);
+        
+        List<Transaction> transactionList=(List<Transaction>)query.getResultList();
+        double amount=0;
+        if(transactionList.isEmpty()){
+            return amount;
+        }
+        else{
+            for(Transaction transaction : transactionList){
+                amount+=transaction.getAmount();
+            }
+            return amount;
+        }
+        
+    }
+    
+    //-----------------------------------------------------------------PAYMENT CHART FOR HQ------------------------------------------------------------
+    
+    public String allPaymentChart(int branchId,Date from, Date to){
+        try{
+            PaymentModel pcm=new PaymentModel();
+            List<PaymentMode> pmList=em.createQuery("SELECT p FROM PaymentMode p").getResultList();
+            
+            for(PaymentMode p:pmList){
+                double amount=salePerPayment(p.getPaymentModeId(),branchId,from,to);
+                int pId=p.getPaymentModeId();
+                
+                if(pId==1){
+                    pcm.setCash(amount);
+                }
+                
+                if(pId==2){
+                    pcm.setVoucher(amount);
+                }
+                
+                if(pId==3){
+                    pcm.setMtn(amount);
+                }
+                
+                if(pId==4){
+                    pcm.setTigo(amount);
+                }
+                
+                if(pId==5){
+                    pcm.setAirtel(amount);
+                }
+                
+                if(pId==6){
+                    pcm.setVisa(amount);
+                }
+                
+                if(pId==7){
+                    pcm.setMaster(amount);
+                }
+                
+                if(pId==8){
+                    pcm.setDebt(amount);
+                }
+                
+                if(pId==9){
+                    pcm.setEngenCard(amount);
+                }
+            }
+            
+            
+            ObjectMapper om=new ObjectMapper();
+            String jsonString = om.writeValueAsString(pcm);
+            return jsonString;
+        }
+        catch(Exception e){
+            return null;
+        }
+        
+    }
+    
+    public double salePerPayment(int paymentModeId,int branchId,Date from, Date to){
+        
+        Query query;
+        if(branchId==0){
+            query=em.createQuery("SELECT t FROM Transaction t WHERE t.paymentModeId = :paymentModeId and t.paymentStatus = :paymentStatus and t.serverReqTime BETWEEN :fromDate AND :toDate");
+            query.setParameter("paymentModeId", paymentModeId);
+            query.setParameter("paymentStatus", "SUCCESS");
+            query.setParameter("fromDate", from);
+            query.setParameter("toDate", to);
+        }
+        else{
+            query=em.createQuery("SELECT t FROM Transaction t WHERE t.paymentModeId = :paymentModeId and t.paymentStatus = :paymentStatus and t.branchId = :branchId and t.serverReqTime BETWEEN :fromDate AND :toDate");
+            query.setParameter("paymentModeId", paymentModeId);
+            query.setParameter("paymentStatus", "SUCCESS");
+            query.setParameter("branchId", branchId);
+            query.setParameter("fromDate", from);
+            query.setParameter("toDate", to);
+        }
+        List<Transaction> transactionList=(List<Transaction>)query.getResultList();
+        double amount=0;
+        if(transactionList.isEmpty()){
+            return amount;
+        }
+        else{
+            for(Transaction transaction : transactionList){
+                amount+=transaction.getAmount();
+            }
+            return amount;
+        }
+        
+    }
+    
+    //-----------------------------------------------------------------DAILY PRODUCT SALE CHART------------------------------------------------------------
+    
+    
     public String getDailyProductSaleChart(int branchId){
         
         Calendar cal = Calendar.getInstance();
@@ -88,8 +289,6 @@ public class ChartManager {
         
     }
     
-    
-    
     public double [] productSalePerDay(int productId,int branchId){
         
         
@@ -103,15 +302,17 @@ public class ChartManager {
             String sqlString;
             Query query;
             if(branchId==0){
-                sqlString="SELECT SUM(t.quantity) FROM Transaction t WHERE t.productId = :productId AND t.date = :date";
+                sqlString="SELECT SUM(t.quantity) FROM Transaction t WHERE t.productId = :productId and t.paymentStatus = :paymentStatus AND t.date = :date";
                 query = em.createQuery(sqlString);
                 query.setParameter("productId", productId);
+                query.setParameter("paymentStatus", "SUCCESS");
                 query.setParameter("date", date);
             }
             else{
-                sqlString="SELECT SUM(t.quantity) FROM Transaction t WHERE t.productId = :productId AND t.date = :date AND t.branchId = :branchId";
+                sqlString="SELECT SUM(t.quantity) FROM Transaction t WHERE t.productId = :productId and t.paymentStatus = :paymentStatus AND t.date = :date AND t.branchId = :branchId";
                 query = em.createQuery(sqlString);
                 query.setParameter("productId", productId);
+                query.setParameter("paymentStatus", "SUCCESS");
                 query.setParameter("date", date);
                 query.setParameter("branchId", branchId);
             }
@@ -129,7 +330,7 @@ public class ChartManager {
         return productOfMonth;
     }
     
-    
+    //-----------------------------------------------------------------MONTHLY PRODUCT SALE CHART------------------------------------------------------------
     
     
     public String getMonthlyProductSaleChart(int branchId){
@@ -192,14 +393,16 @@ public class ChartManager {
     public double productSalePerMonth(int productId,Date monthStartDate,Date monthEndDate,int branchId){
         Query query;
         if(branchId==0){
-            query=em.createQuery("SELECT t FROM Transaction t WHERE t.productId = :productId and t.date BETWEEN :monthStartDate AND :monthEndDate");
+            query=em.createQuery("SELECT t FROM Transaction t WHERE t.productId = :productId and t.paymentStatus = :paymentStatus and t.date BETWEEN :monthStartDate AND :monthEndDate");
             query.setParameter("productId", productId);
+            query.setParameter("paymentStatus", "SUCCESS");
             query.setParameter("monthStartDate", monthStartDate);
             query.setParameter("monthEndDate", monthEndDate);
         }
         else{
-            query=em.createQuery("SELECT t FROM Transaction t WHERE t.productId = :productId and t.branchId = :branchId and t.date BETWEEN :monthStartDate AND :monthEndDate");
+            query=em.createQuery("SELECT t FROM Transaction t WHERE t.productId = :productId and t.paymentStatus = :paymentStatus and t.branchId = :branchId and t.date BETWEEN :monthStartDate AND :monthEndDate");
             query.setParameter("productId", productId);
+            query.setParameter("paymentStatus", "SUCCESS");
             query.setParameter("monthStartDate", monthStartDate);
             query.setParameter("monthEndDate", monthEndDate);
             query.setParameter("branchId", branchId);
@@ -216,7 +419,9 @@ public class ChartManager {
     }
     
     
-    /*tank start*/
+    //-----------------------------------------------------------------ALL COMMULATIVE QUANTITY CHART HQ------------------------------------------------------------
+    
+    
     public String allTankQuantityCommulativeChart(){
         
         try{
@@ -260,6 +465,8 @@ public class ChartManager {
     }
     
     
+    //-----------------------------------------------------------------TANK CHART FOR BRANCH------------------------------------------------------------
+    
     public String tankChart(int branchId){
         try{
             
@@ -284,273 +491,171 @@ public class ChartManager {
     }
     
     
+    //-----------------------------------------------------------------TANK DASHBOARD------------------------------------------------------------
     
     
+    public ResultObject getTankDashboard(int branchId){
+        
+        ResultObject resultObject=new ResultObject();
+        resultObject.setObjectClass(TankDash.class);
+        
+        List<TankDash> tankDashList=new ArrayList<>();
+        List<Tank> tankList =em.createQuery("SELECT t FROM Tank t WHERE t.branchId = :branchId").setParameter("branchId", branchId).getResultList();
+        for(Tank tank:tankList){
+            TankDash tankDash=new TankDash();
+            tankDash.setTankId(tank.getTankId());
+            tankDash.setTankName(tank.getName());
+            tankDash.setProductName(commonFunctionEjb.getProductName(tank.getProductId()).getName().toLowerCase());
+            tankDash.setCurrentCapacity(tank.getCurrentCapacity());
+            tankDash.setMaxCapacity(tank.getMaxCapacity());
+            tankDash.setDippedCapacity(tank.getDippedCapacity());
+            tankDash.setDippedTime(tank.getDippedTime());
+            tankDash.setPumpDash(pumpList(tank.getTankId()));
+            tankDashList.add(tankDash);
+        }
+        
+        resultObject.setObject(tankDashList);
+        resultObject.setMessage("Success");
+        resultObject.setStatusCode(100);
+        
+        return resultObject;
+    }
     
-//payment
+    public List<PumpDash> pumpList(int tankId){
+        
+        List<PumpDash> pumpDashList=new ArrayList<>();
+        List<Integer> pumpIdList=em.createQuery("SELECT DISTINCT n.pumpId FROM Nozzle n WHERE n.tankId = :tankId").setParameter("tankId", tankId).getResultList();
+        for(int i:pumpIdList){
+            int j= i;
+            PumpDash pumpDash=new PumpDash();
+            pumpDash.setPumpId(i);
+            pumpDash.setPumpName(commonFunctionEjb.getPumpName(i).getName());
+            pumpDash.setNozzleDash(nozzleList(i,tankId));
+            pumpDashList.add(pumpDash);
+        }
+        
+        return pumpDashList;
+    }
     
-    public String allPaymentChart(int branchId){
-        try{
-            PaymentChartModel pcm=new PaymentChartModel();
-            List<PaymentMode> pmList=em.createQuery("SELECT p FROM PaymentMode p").getResultList();
+    public List<NozzleDash> nozzleList(int pumpId,int tankId){
+        
+        List<NozzleDash> nozzleDashList=new ArrayList<>();
+        List<Nozzle> nozzleList=em.createQuery("SELECT n FROM Nozzle n WHERE n.pumpId = :pumpId and n.tankId = :tankId").setParameter("pumpId", pumpId).setParameter("tankId", tankId).getResultList();
+        for(Nozzle n:nozzleList){
             
-            for(PaymentMode p:pmList){
-                double amount=salePerPayment(p.getPaymentModeId(),branchId);
-                int pId=p.getPaymentModeId();
-                
-                if(pId==1){
-                    pcm.setCash(amount);
-                }
-                
-                if(pId==2){
-                    pcm.setVoucher(amount);
-                }
-                
-                if(pId==3){
-                    pcm.setMtn(amount);
-                }
-                
-                if(pId==4){
-                    pcm.setTigo(amount);
-                }
-                
-                if(pId==5){
-                    pcm.setAirtel(amount);
-                }
-                
-                if(pId==6){
-                    pcm.setVisa(amount);
-                }
-                
-                if(pId==7){
-                    pcm.setMaster(amount);
-                }
-                
-                if(pId==8){
-                    pcm.setDebt(amount);
-                }
-                
-                if(pId==9){
-                    pcm.setEngenCard(amount);
-                }
-            }
+            NozzleDash nozzleDash=new NozzleDash();
+            nozzleDash.setNozzleId(n.getNozzleId());
+            nozzleDash.setNozzleName(n.getNozzleName());
+            nozzleDash.setIndex(n.getNozzleIndex());
             
-            
-            ObjectMapper om=new ObjectMapper();
-            String jsonString = om.writeValueAsString(pcm);
-            return jsonString;
-        }
-        catch(Exception e){
-            return null;
+            nozzleDashList.add(nozzleDash);
         }
         
-    }
-    
-    public double salePerPayment(int paymentModeId,int branchId){
-        Date currentDate = new Date();
-        Query query;
-        if(branchId==0){
-            query=em.createQuery("SELECT t FROM Transaction t WHERE t.paymentModeId = :paymentModeId and t.date = :date");
-            query.setParameter("paymentModeId", paymentModeId);
-            query.setParameter("date", currentDate);
-        }
-        else{
-            query=em.createQuery("SELECT t FROM Transaction t WHERE t.paymentModeId = :paymentModeId and t.branchId = :branchId and t.date = :date");
-            query.setParameter("paymentModeId", paymentModeId);
-            query.setParameter("branchId", branchId);
-            query.setParameter("date", currentDate);
-        }
-        List<Transaction> transactionList=(List<Transaction>)query.getResultList();
-        double amount=0;
-        if(transactionList.isEmpty()){
-            return amount;
-        }
-        else{
-            for(Transaction transaction : transactionList){
-                amount+=transaction.getAmount();
-            }
-            return amount;
-        }
-        
-    }
-    
-    
-    
-    public String paymentChartSaleProduct(){
-        try{
-            PaymentChartModel pcmsup=new PaymentChartModel();
-            PaymentChartModel pcmgas=new PaymentChartModel();
-            List<PaymentChartModel> pclist=new ArrayList<>();
-            List<PaymentMode> pmList=em.createQuery("SELECT p FROM PaymentMode p").getResultList();
-            
-            for(PaymentMode p:pmList){
-                
-                double amountsup=salePaymentPerProduct(p.getPaymentModeId(),1);
-                double amountgas=salePaymentPerProduct(p.getPaymentModeId(),2);
-                int pId=p.getPaymentModeId();
-                
-                if(pId==1){
-                    pcmsup.setCash(amountsup);
-                    pcmgas.setCash(amountgas);
-                }
-                
-                if(pId==2){
-                    pcmsup.setVoucher(amountsup);
-                    pcmgas.setVoucher(amountgas);
-                }
-                
-                if(pId==3){
-                    pcmsup.setMtn(amountsup);
-                    pcmgas.setMtn(amountgas);
-                }
-                
-                if(pId==4){
-                    pcmsup.setTigo(amountsup);
-                    pcmgas.setTigo(amountgas);
-                }
-                
-                if(pId==5){
-                    pcmsup.setAirtel(amountsup);
-                    pcmgas.setAirtel(amountgas);
-                }
-                
-                if(pId==6){
-                    pcmsup.setVisa(amountsup);
-                    pcmgas.setVisa(amountgas);
-                }
-                
-                if(pId==7){
-                    pcmsup.setMaster(amountsup);
-                    pcmgas.setMaster(amountgas);
-                }
-                
-                if(pId==8){
-                    pcmsup.setDebt(amountsup);
-                    pcmgas.setDebt(amountgas);
-                }
-                
-                if(pId==9){
-                    pcmsup.setEngenCard(amountsup);
-                    pcmgas.setEngenCard(amountgas);
-                }
-                
-            }
-            pclist.add(pcmsup);
-            pclist.add(pcmgas);
-            
-            ObjectMapper om=new ObjectMapper();
-            String jsonString = om.writeValueAsString(pclist);
-            return jsonString;
-        }
-        catch(Exception e){
-            return null;
-        }
-        
-    }
-    
-    public double salePaymentPerProduct(int paymentModeId,int productId){
-        
-        Query query=em.createQuery("SELECT t FROM Transaction t WHERE t.paymentModeId = :paymentModeId and t.productId = :productId");
-        query.setParameter("paymentModeId", paymentModeId);
-        query.setParameter("productId", productId);
-        List<Transaction> transactionList=(List<Transaction>)query.getResultList();
-        double amount=0;
-        if(transactionList.isEmpty()){
-            return amount;
-        }
-        else{
-            for(Transaction transaction : transactionList){
-                amount+=transaction.getAmount();
-            }
-            return amount;
-        }
-        
-    }
-    
-    
-    public String productPie(){
-        try{
-            double amountsup=productPieData(1);
-            double amountgas=productPieData(2);
-            ProductPie productPie=new ProductPie();
-            productPie.setSuperAmount(amountsup);
-            productPie.setGasoilAmount(amountgas);
-            
-            ObjectMapper om=new ObjectMapper();
-            String jsonString = om.writeValueAsString(productPie);
-            return jsonString;
-        }
-        catch(Exception e){
-            return null;
-        }
-    }
-    
-    public double productPieData(int productId){
-        
-        Query query=em.createQuery("SELECT t FROM Transaction t WHERE t.productId = :productId");
-        query.setParameter("productId", productId);
-        List<Transaction> transactionList=(List<Transaction>)query.getResultList();
-        double amount=0;
-        if(transactionList.isEmpty()){
-            return amount;
-        }
-        else{
-            for(Transaction transaction : transactionList){
-                amount+=transaction.getAmount();
-            }
-            return amount;
-        }
-        
-    }
-    
-    
-    public String allBranchChart(){
-        try{
-            List<BranchBar> bbl=new ArrayList<>();
-            List<Branch> branchList=em.createQuery("SELECT b FROM Branch b").getResultList();
-            
-            for(Branch b:branchList){
-                BranchBar bb=new BranchBar();
-                double amount=branchIncome(b.getBranchId());
-                String branchName=b.getName();
-                bb.setBranchName(branchName);
-                bb.setIncome(amount);
-                bbl.add(bb);
-            }
-            ObjectMapper om=new ObjectMapper();
-            String jsonString = om.writeValueAsString(bbl);
-            return jsonString;
-        }
-        catch(Exception e){
-            return null;
-        }
-        
-    }
-    
-    public double branchIncome(int branchId){
-        Query query=em.createQuery("SELECT t FROM Transaction t WHERE t.branchId = :branchId");
-        query.setParameter("branchId", branchId);
-        List<Transaction> transactionList=(List<Transaction>)query.getResultList();
-        double amount=0;
-        if(transactionList.isEmpty()){
-            return amount;
-        }
-        else{
-            for(Transaction transaction : transactionList){
-                amount+=transaction.getAmount();
-            }
-            return amount;
-        }
-        
+        return nozzleDashList;
     }
     
     
     
     
     
-    //-------------------------------------------------------------------------------------------------------------------------------
     
     
+    
+//    public String paymentChartSaleProduct(){
+//        try{
+//            PaymentModel pcmsup=new PaymentModel();
+//            PaymentModel pcmgas=new PaymentModel();
+//            List<PaymentModel> pclist=new ArrayList<>();
+//            List<PaymentMode> pmList=em.createQuery("SELECT p FROM PaymentMode p").getResultList();
+//
+//            for(PaymentMode p:pmList){
+//
+//                double amountsup=salePaymentPerProduct(p.getPaymentModeId(),1);
+//                double amountgas=salePaymentPerProduct(p.getPaymentModeId(),2);
+//                int pId=p.getPaymentModeId();
+//
+//                if(pId==1){
+//                    pcmsup.setCash(amountsup);
+//                    pcmgas.setCash(amountgas);
+//                }
+//
+//                if(pId==2){
+//                    pcmsup.setVoucher(amountsup);
+//                    pcmgas.setVoucher(amountgas);
+//                }
+//
+//                if(pId==3){
+//                    pcmsup.setMtn(amountsup);
+//                    pcmgas.setMtn(amountgas);
+//                }
+//
+//                if(pId==4){
+//                    pcmsup.setTigo(amountsup);
+//                    pcmgas.setTigo(amountgas);
+//                }
+//
+//                if(pId==5){
+//                    pcmsup.setAirtel(amountsup);
+//                    pcmgas.setAirtel(amountgas);
+//                }
+//
+//                if(pId==6){
+//                    pcmsup.setVisa(amountsup);
+//                    pcmgas.setVisa(amountgas);
+//                }
+//
+//                if(pId==7){
+//                    pcmsup.setMaster(amountsup);
+//                    pcmgas.setMaster(amountgas);
+//                }
+//
+//                if(pId==8){
+//                    pcmsup.setDebt(amountsup);
+//                    pcmgas.setDebt(amountgas);
+//                }
+//
+//                if(pId==9){
+//                    pcmsup.setEngenCard(amountsup);
+//                    pcmgas.setEngenCard(amountgas);
+//                }
+//
+//            }
+//            pclist.add(pcmsup);
+//            pclist.add(pcmgas);
+//
+//            ObjectMapper om=new ObjectMapper();
+//            String jsonString = om.writeValueAsString(pclist);
+//            return jsonString;
+//        }
+//        catch(Exception e){
+//            return null;
+//        }
+//
+//    }
+//
+//    public double salePaymentPerProduct(int paymentModeId,int productId){
+//
+//        Query query=em.createQuery("SELECT t FROM Transaction t WHERE t.paymentModeId = :paymentModeId and t.productId = :productId");
+//        query.setParameter("paymentModeId", paymentModeId);
+//        query.setParameter("productId", productId);
+//        List<Transaction> transactionList=(List<Transaction>)query.getResultList();
+//        double amount=0;
+//        if(transactionList.isEmpty()){
+//            return amount;
+//        }
+//        else{
+//            for(Transaction transaction : transactionList){
+//                amount+=transaction.getAmount();
+//            }
+//            return amount;
+//        }
+//
+//    }
+//
+//
+    
+    
+//-------------------------------------------------------------------------------------------------------------------------------
     
 //    public String getTankDashboard(int tankId){
 //
@@ -613,67 +718,7 @@ public class ChartManager {
     
     
     
-    public ResultObject getTankDashboard(int branchId){
-        
-        ResultObject resultObject=new ResultObject();
-        resultObject.setObjectClass(TankDash.class);
-        
-        List<TankDash> tankDashList=new ArrayList<>();
-        List<Tank> tankList =em.createQuery("SELECT t FROM Tank t WHERE t.branchId = :branchId").setParameter("branchId", branchId).getResultList();
-        for(Tank tank:tankList){
-            TankDash tankDash=new TankDash();
-            tankDash.setTankId(tank.getTankId());
-            tankDash.setTankName(tank.getName());
-            tankDash.setProductName(commonFunctionEjb.getProductName(tank.getProductId()).getName().toLowerCase());
-            tankDash.setCurrentCapacity(tank.getCurrentCapacity());
-            tankDash.setMaxCapacity(tank.getMaxCapacity());
-            tankDash.setDippedCapacity(tank.getDippedCapacity());
-            tankDash.setDippedTime(tank.getDippedTime());
-            tankDash.setPumpDash(pumpList(tank.getTankId()));
-            tankDashList.add(tankDash);
-        }
-        
-        resultObject.setObject(tankDashList);
-        resultObject.setMessage("Success");
-        resultObject.setStatusCode(100);
-        
-        return resultObject;
-    }
     
-    
-    
-    public List<PumpDash> pumpList(int tankId){
-        
-        List<PumpDash> pumpDashList=new ArrayList<>();
-        List<Integer> pumpIdList=em.createQuery("SELECT DISTINCT n.pumpId FROM Nozzle n WHERE n.tankId = :tankId").setParameter("tankId", tankId).getResultList();
-        for(int i:pumpIdList){
-            int j= i;
-            PumpDash pumpDash=new PumpDash();
-            pumpDash.setPumpId(i);
-            pumpDash.setPumpName(commonFunctionEjb.getPumpName(i).getName());
-            pumpDash.setNozzleDash(nozzleList(i,tankId));
-            pumpDashList.add(pumpDash);
-        }
-        
-        return pumpDashList;
-    }
-    
-    public List<NozzleDash> nozzleList(int pumpId,int tankId){
-        
-        List<NozzleDash> nozzleDashList=new ArrayList<>();
-        List<Nozzle> nozzleList=em.createQuery("SELECT n FROM Nozzle n WHERE n.pumpId = :pumpId and n.tankId = :tankId").setParameter("pumpId", pumpId).setParameter("tankId", tankId).getResultList();
-        for(Nozzle n:nozzleList){
-            
-            NozzleDash nozzleDash=new NozzleDash();
-            nozzleDash.setNozzleId(n.getNozzleId());
-            nozzleDash.setNozzleName(n.getNozzleName());
-            nozzleDash.setIndex(n.getNozzleIndex());
-            
-            nozzleDashList.add(nozzleDash);
-        }
-        
-        return nozzleDashList;
-    }
     
     
 }

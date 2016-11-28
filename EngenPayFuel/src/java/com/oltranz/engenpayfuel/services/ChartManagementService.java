@@ -1,12 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package com.oltranz.engenpayfuel.services;
 
 import com.oltranz.engenpayfuel.beans.ChartManager;
 import com.oltranz.engenpayfuel.models.ResultObject;
+import java.text.SimpleDateFormat;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
@@ -26,6 +27,53 @@ public class ChartManagementService {
             ChartManager chartManager;
     
     
+    
+    @GET
+    @Path("productPie/{branchId}/{from}/{to}")
+    @Produces({"application/xml", "application/json"})
+    public String productPie(@PathParam("branchId") Integer branchId, @PathParam("from")String from, @PathParam("to")String to) {
+        try{
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            return chartManager.productPie(branchId,sdf.parse(from), sdf.parse(to));
+        }
+        catch(Exception e){
+            return e.getMessage();
+            
+        }
+    }
+    
+    
+    @GET
+    @Path("branchChart/{from}/{to}")
+    @Produces({"application/xml", "application/json"})
+    public String allBranchChart(@PathParam("from")String from, @PathParam("to")String to) {
+        try{
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            return chartManager.allBranchChart(sdf.parse(from), sdf.parse(to));
+        }
+        catch(Exception e){
+            return e.getMessage();
+            
+        }
+    }
+    
+    
+    @GET
+    @Path("paymentChart/{branchId}/{from}/{to}")
+    @Produces({"application/xml", "application/json"})
+    public String allPaymentChart(@PathParam("branchId") Integer branchId,@PathParam("from")String from, @PathParam("to")String to) {
+        try{
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            return chartManager.allPaymentChart(branchId,sdf.parse(from), sdf.parse(to));
+        }
+        catch(Exception e){
+            return e.getMessage();
+            
+        }
+    }
+    
+    
+    
     @GET
     @Path("dailyProductChart/{branchId}")
     @Produces({"application/xml", "application/json"})
@@ -33,6 +81,7 @@ public class ChartManagementService {
         
         return chartManager.getDailyProductSaleChart(branchId);
     }
+    
     
     
     @GET
@@ -43,6 +92,8 @@ public class ChartManagementService {
         return chartManager.getMonthlyProductSaleChart(branchId);
     }
     
+    
+    
     @GET
     @Path("totalQuantityAllTankChart")
     @Produces({"application/xml", "application/json"})
@@ -50,6 +101,7 @@ public class ChartManagementService {
         
         return chartManager.allTankQuantityCommulativeChart();
     }
+    
     
     
     @GET
@@ -60,12 +112,16 @@ public class ChartManagementService {
     }
     
     
+    
+    
     @GET
-    @Path("paymentChart/{branchId}")
+    @Path("tankDashboard/{branchId}")
     @Produces({"application/xml", "application/json"})
-    public String allPaymentChart(@PathParam("branchId") Integer branchId) {
+    public String getTankDashboard(@PathParam("branchId") Integer branchId) {
         
-        return chartManager.allPaymentChart(branchId);
+        ResultObject result=chartManager.getTankDashboard(branchId);
+        return result.getJsonFormat();
+        
     }
     
     
@@ -75,46 +131,26 @@ public class ChartManagementService {
 //    @Path("tankDashboard/{tankId}")
 //    @Produces({"application/xml", "application/json"})
 //    public String getTankDashboard(@PathParam("tankId") Integer tankId) {
-//        
-//       
+//
+//
 //        return chartManager.getTankDashboard(tankId);
 //    }
     
     
-    @GET
-    @Path("tankDashboard/{branchId}")
-    @Produces({"application/xml", "application/json"})
-    public String getTankDashboard(@PathParam("branchId") Integer branchId) {
-        
-         ResultObject result=chartManager.getTankDashboard(branchId);
-         return result.getJsonFormat();
-         
-    }
     
     
-    @GET
-    @Path("paymentChartByProduct")
-    @Produces({"application/xml", "application/json"})
-    public String paymentChartSaleProduct() {
-        
-        return chartManager.paymentChartSaleProduct();
-    }
+//    
+//    @GET
+//    @Path("paymentChartByProduct")
+//    @Produces({"application/xml", "application/json"})
+//    public String paymentChartSaleProduct() {
+//        
+//        return chartManager.paymentChartSaleProduct();
+//    }
+//    
     
-    @GET
-    @Path("productPie")
-    @Produces({"application/xml", "application/json"})
-    public String productPie() {
-        
-        return chartManager.productPie();
-    }
     
-    @GET
-    @Path("branchChart")
-    @Produces({"application/xml", "application/json"})
-    public String allBranchChart() {
-        
-        return chartManager.allBranchChart();
-    }
+    
     
     
 }

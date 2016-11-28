@@ -21,12 +21,15 @@ import com.oltranz.engenpayfuel.entities.TankTracking;
 import com.oltranz.engenpayfuel.entities.Transaction;
 import com.oltranz.engenpayfuel.entities.User;
 import com.oltranz.engenpayfuel.entities.UserPumpNozzle;
+import com.oltranz.engenpayfuel.library.CommonLibrary;
 import com.oltranz.engenpayfuel.library.PaymentLibrary;
 import com.oltranz.engenpayfuel.models.AsyncTransaction;
 import com.oltranz.engenpayfuel.models.AuthenticationModel;
 import com.oltranz.engenpayfuel.models.LoginOpModel;
 import com.oltranz.engenpayfuel.models.LogoutOpModel;
 import com.oltranz.engenpayfuel.models.PaymentResponse;
+import com.oltranz.engenpayfuel.models.ReportModel;
+import com.oltranz.engenpayfuel.models.ReportShift;
 import com.oltranz.engenpayfuel.models.ResultObject;
 import com.oltranz.engenpayfuel.models.SaleDetailsModel;
 import com.oltranz.engenpayfuel.models.SaleDetailsModelList;
@@ -35,6 +38,7 @@ import com.oltranz.engenpayfuel.models.SyncTransaction;
 import com.oltranz.engenpayfuel.models.SaleCancelModel;
 import com.oltranz.engenpayfuel.models.SaleEditModel;
 import com.oltranz.engenpayfuel.models.UserDetailsModel;
+import java.io.IOException;
 import static java.lang.System.out;
 import java.net.InetAddress;
 import java.text.DateFormat;
@@ -43,11 +47,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import org.codehaus.jackson.map.ObjectMapper;
 
 /**
  *
@@ -111,6 +120,15 @@ public class AndroidDataManager {
             loginOpModel.setBranchId(branchId);
             Branch branch=commonFunctionEjb.getBranchName(branchId);
             loginOpModel.setBranchName(branch.getName());
+            
+            
+            /*  */
+            ReportModel rm=new ReportModel();
+            rm.setUserId(userDetails.getUserId());
+            rm.setBranchId(userDetails.getBranchId());
+            rm.setType(2);
+            postCreateReportModule(rm);
+            
             
             //set logs
             Log log=new Log();
@@ -191,6 +209,15 @@ public class AndroidDataManager {
             logoutOpModel.setBranchId(branchId);
             Branch branch=commonFunctionEjb.getBranchName(branchId);
             logoutOpModel.setBranchName(branch.getName());
+            
+            
+            /**/
+            ReportModel rm=new ReportModel();
+            rm.setUserId(userDetails.getUserId());
+            rm.setBranchId(userDetails.getBranchId());
+            rm.setType(2);
+            postEndReportModule(rm);
+            
             
             //set logs
             Log log=new Log();
@@ -774,6 +801,7 @@ public class AndroidDataManager {
             indexTracking.setIndexbefore(nozzle.getNozzleIndex());
             nozzle.setNozzleIndex(nozzle.getNozzleIndex()+transaction.getQuantity());
             em.merge(nozzle);
+            //need to check
             em.flush();
             indexTracking.setIndexafter(nozzle.getNozzleIndex());
             indexTracking.setTransactionTypeId(2);
@@ -806,6 +834,9 @@ public class AndroidDataManager {
             return resultObject;
         }
     }
+    
+    
+    
     
     public ResultObject saleCancel(SaleCancelModel saleCancelModel){
         
@@ -877,6 +908,40 @@ public class AndroidDataManager {
         }
         
     }
+    
+    
+    
+    public void postCreateReportModule(ReportModel rm){
+        try {
+            ObjectMapper mapper=new ObjectMapper();
+            String url="http://41.74.172.132:8080/ReportEngen/ReportWebService/report/create";
+            String jsonData = mapper.writeValueAsString(rm);
+            Response response=CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
+            String jsonResponse = response.readEntity(String.class);
+            ReportShift reportShift=(ReportShift)mapper.readValue(jsonResponse, ReportShift.class);
+        }
+        catch (IOException ex) {
+            Logger.getLogger(AndroidDataManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    
+    public void postEndReportModule(ReportModel rm){
+        try {
+            ObjectMapper mapper=new ObjectMapper();
+            String url="http://41.74.172.132:8080/ReportEngen/ReportWebService/report/end";
+            String jsonData = mapper.writeValueAsString(rm);
+            Response response=CommonLibrary.sendRESTRequest(url, jsonData, MediaType.APPLICATION_JSON, "POST");
+            String jsonResponse = response.readEntity(String.class);
+            ReportShift reportShift=(ReportShift)mapper.readValue(jsonResponse, ReportShift.class);
+        }
+        catch (IOException ex) {
+            Logger.getLogger(AndroidDataManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
     
 }
 

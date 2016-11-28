@@ -9,7 +9,7 @@ package com.oltranz.engenpayfuel.chartmodel;
  *
  * @author John
  */
-public class PaymentChartModel {
+public class PaymentModel {
     
     private double cash;
     private double voucher;

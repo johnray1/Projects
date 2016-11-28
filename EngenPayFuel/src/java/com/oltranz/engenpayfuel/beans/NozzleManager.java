@@ -12,16 +12,26 @@ import com.oltranz.engenpayfuel.entities.Nozzle;
 import com.oltranz.engenpayfuel.entities.Pump;
 import com.oltranz.engenpayfuel.entities.Tank;
 import com.oltranz.engenpayfuel.entities.TankTracking;
+import com.oltranz.engenpayfuel.entities.Transaction;
 import com.oltranz.engenpayfuel.models.NozzleAdjust;
 import com.oltranz.engenpayfuel.models.Nozzles;
+import com.oltranz.engenpayfuel.models.ReportShift;
 import com.oltranz.engenpayfuel.models.ResultObject;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TemporalType;
+import org.codehaus.jackson.map.ObjectMapper;
 
 /**
  *
@@ -138,7 +148,6 @@ public class NozzleManager {
     
     public ResultObject adjustNozzle(NozzleAdjust nozzleAdjust) {
         
-        
         ResultObject resultObject=new ResultObject();
         resultObject.setObjectClass(NozzleAdjust.class);
         try{
@@ -212,6 +221,8 @@ public class NozzleManager {
         
     }
     
+    
+    
     public ResultObject getNozzleList(){
         
         List<Nozzle> nozzleList=(List<Nozzle>)em.createNamedQuery("Nozzle.findAll").getResultList();
@@ -231,6 +242,34 @@ public class NozzleManager {
         }
         
         return resultObject;
+    }
+    
+    public ResultObject getNozzleReportList(String inRs){
+        
+        try {
+            ResultObject resultObject= new ResultObject();
+            resultObject.setObjectClass(Nozzle.class);
+            
+            ReportShift rs = new ObjectMapper().readValue(inRs, ReportShift.class);
+            List<Nozzle> nozzleList=new ArrayList<>();
+            List<Integer> nozzleIdList=em.createQuery("SELECT DISTINCT t.nozzleId FROM Transaction t WHERE t.userId = :userId and t.serverReqTime BETWEEN :fromDate AND :toDate").setParameter("userId",rs.getPumpistId()).setParameter("fromDate",rs.getStartTime(), TemporalType.TIMESTAMP).setParameter("toDate", rs.getEndTime(), TemporalType.TIMESTAMP).getResultList();
+            for(int nozzleId:nozzleIdList){
+                Nozzle nozzle=commonFunctionEjb.getNozzle(nozzleId);
+                nozzleList.add(nozzle);
+            }
+            
+            resultObject.setObject(nozzleList);
+            resultObject.setMessage(nozzleList.size()+" Nozzles were found");
+            resultObject.setStatusCode(100);
+            return resultObject;
+        }
+        catch (IOException ex) {
+            Logger.getLogger(NozzleManager.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        
+        
+        
     }
     
     

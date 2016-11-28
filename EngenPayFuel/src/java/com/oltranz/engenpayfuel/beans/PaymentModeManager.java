@@ -6,14 +6,23 @@
 package com.oltranz.engenpayfuel.beans;
 
 import com.oltranz.engenpayfuel.entities.PaymentMode;
+import com.oltranz.engenpayfuel.entities.Transaction;
 import com.oltranz.engenpayfuel.entities.User;
+import com.oltranz.engenpayfuel.models.ReportShift;
 import com.oltranz.engenpayfuel.models.ResultObject;
+import com.oltranz.engenpayfuel.models.UserPaymentModel;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TemporalType;
+import org.codehaus.jackson.map.ObjectMapper;
 
 /**
  *
@@ -26,7 +35,7 @@ public class PaymentModeManager {
     private EntityManager em;
     
     public ResultObject createPaymentMode(PaymentMode newPaymentMode) {
-       
+        
         //we dont set status and unity in a product object bcz it have default value 7 and "LITER"
         PaymentMode paymentMode=new PaymentMode();
         paymentMode.setName(newPaymentMode.getName());
@@ -137,7 +146,7 @@ public class PaymentModeManager {
         return resultObject;
     }
     
-   
+    
     //android need function
     public ResultObject getPaymentModeListByUserId(int userId){
         
@@ -165,5 +174,99 @@ public class PaymentModeManager {
         
         return resultObject;
     }
+    
+    
+    public ResultObject getPaymentReportList(String inRs){
+        
+        try {
+            ResultObject resultObject= new ResultObject();
+            resultObject.setObjectClass(UserPaymentModel.class);
+            
+            ReportShift rs = new ObjectMapper().readValue(inRs, ReportShift.class);
+            List<UserPaymentModel> userPaymentModelList=new ArrayList<>();
+            List<Integer> paymentModeList=em.createQuery("SELECT DISTINCT t.paymentModeId FROM Transaction t WHERE  t.serverReqTime BETWEEN :fromDate AND :toDate").setParameter("fromDate",rs.getStartTime(), TemporalType.TIMESTAMP).setParameter("toDate", rs.getEndTime(), TemporalType.TIMESTAMP).getResultList();
+            for(int pmId:paymentModeList){
+                double amount=reportAmount(rs.getPumpistId(),pmId,rs.getStartTime(),rs.getEndTime());
+                UserPaymentModel upm=new UserPaymentModel();
+                upm.setPaymentModeId(pmId);
+                upm.setAmount(amount);
+                
+                 if(pmId==1){
+                    upm.setPaymentMode("cash");
+                }
+                
+                if(pmId==2){
+                    upm.setPaymentMode("voucher");
+                }
+                
+                if(pmId==3){
+                    upm.setPaymentMode("mtn");
+                }
+                
+                if(pmId==4){
+                    upm.setPaymentMode("tigo");
+                }
+                
+                if(pmId==5){
+                    upm.setPaymentMode("airtel");
+                }
+                
+                if(pmId==6){
+                    upm.setPaymentMode("visa");
+                }
+                
+                if(pmId==7){
+                    upm.setPaymentMode("master");
+                }
+                
+                if(pmId==8){
+                    upm.setPaymentMode("debt");
+                }
+                
+                if(pmId==9){
+                    upm.setPaymentMode("engenCard");
+                }
+                
+                userPaymentModelList.add(upm);
+            }
+            
+            
+            resultObject.setObject(userPaymentModelList);
+            resultObject.setMessage(userPaymentModelList.size()+" PaymentMode were found");
+            resultObject.setStatusCode(100);
+            
+            return resultObject;
+        }
+        catch (Exception ex) {
+            Logger.getLogger(PaymentModeManager.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        
+    }
+    
+    public double reportAmount(int userId,int paymentModeId,Date from, Date to){
+        
+        Query query;
+        query=em.createQuery("SELECT t FROM Transaction t WHERE t.userId = :userId and t.paymentModeId = :paymentModeId and t.paymentStatus = :paymentStatus and t.serverReqTime BETWEEN :fromDate AND :toDate");
+        query.setParameter("userId", userId);
+        query.setParameter("paymentModeId", paymentModeId);
+        query.setParameter("paymentStatus", "SUCCESS");
+        query.setParameter("fromDate", from);
+        query.setParameter("toDate", to);
+        List<Transaction> transactionList=(List<Transaction>)query.getResultList();
+        
+        double amount=0;
+        if(transactionList.isEmpty()){
+            return amount;
+        }
+        else{
+            for(Transaction transaction : transactionList){
+                amount+=transaction.getAmount();
+            }
+            return amount;
+        }
+        
+    }
+    
     
 }
