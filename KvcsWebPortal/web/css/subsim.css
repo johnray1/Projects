@@ -1,0 +1,166 @@
+.subsim{    
+	background-color: #ffffff;
+    border: 2px solid #0ea6e2;
+	border-radius:0px;
+    margin: 0px;
+    padding: 7px;
+    padding-left: 0px;
+    padding-right: 10px;
+	min-height:230px;
+	}
+
+.subsim h3{margin:0px;padding:7px;padding-bottom:17px;color:#0ea6e2;font-size:23px;text-align:center;}
+.subsim:hover h3{margin:0px;padding:7px;padding-bottom:17px;color:#000000;font-size:23px;font-weight:bold;text-align:center;}
+
+div.subsimt{margin:0px;padding:0px;border:0px solid red;text-align:center;}
+div.subsimt h5{margin:0px;padding:0px;color:#999999;text-transform:uppercase;font-size:13px;font-weight:bold;text-align:center;}
+div.subsimt h4{margin:0px;padding:7px;color:#2e3a93;text-transform:uppercase;font-size:43px;font-weight:bold;text-align:center;}
+div.subsimt h6{margin:0px;padding:7px;color:#5b5b5b;font-size:17px;font-style:italic;font-weight:bold;text-align:center;}
+
+div.subsimt label.fails{display:inline-block;width:150px;margin:35px;padding:15px;font-size:16px;font-weight:bold;text-align:center;color:red;border:1px solid red;}
+div.subsimt label.fails:before{color: red;font-family:fontawesome;  content: "\f00d";  font-size: 14px; float:left; font-weight: normal;text-rendering: auto;  -webkit-font-smoothing: antialiased;}
+
+div.subsimt label.success{display:inline-block;width:150px;margin:35px;padding:15px;font-size:16px;font-weight:bold;text-align:center;color:green;border:1px solid green;}
+div.subsimt label.success:before{color:green;font-family:fontawesome;  content: "\f00c";  font-size: 14px; float:left; font-weight: normal;text-rendering: auto;  -webkit-font-smoothing: antialiased;}
+
+
+
+div.subsims{margin:0px;padding:0px;padding-left:10px;border-left:2px solid #f0f0f0;}
+div.subsims p{margin:0px;padding:0px;color:#999999;text-transform:uppercase;font-size:13px;font-weight:bold;text-align:left;}
+div.subsims p strong{display:block;margin:0px;padding:7px;color:#0ea6e2;text-transform:uppercase;font-size:30px;font-weight:bold;text-align:left;}
+
+
+.geninfomain {background-color: #ffffff;    border: 2px solid #26b2e9;	border-radius:7px;    margin: 0px;    padding: 7px;    padding-left: 0px;    padding-right: 10px;min-height:270px;	}
+div.geninfomain h3{margin:0px;padding:0px;color:#0ea6e2;font-size:20px;text-align:center;font-weight:bold;}
+
+.geninfomainin {background-color: #ffffff;    border: 2px solid #c0c0c0;	border-radius:7px;    margin: 0px;    padding: 7px;    padding-left: 0px;    padding-right: 10px;min-height:270px;	}
+div.geninfomainin h4{margin:0px;padding:7px;padding-bottom:17px;color:#0ea6e2;text-transform:uppercase;font-size:17px;font-weight:bold;text-align:center;}
+div.geninfomainin h5{margin:0px;padding:7px;color:#000000;text-transform:uppercase;font-size:50px;font-weight:bold;text-align:center;}
+div.geninfomainin h5.money{margin:0px;padding:7px;color:#000000;text-transform:uppercase;font-size:30px;font-weight:bold;text-align:center;}
+
+div.geninfomainin h6{margin:0px;padding:0px;color:#999999;font-size:13px;font-weight:bold;text-align:center;}
+div.geninfomain h4 label, h5 label{color:#dbdbdb;text-transform:uppercase;font-size:20px;}
+
+
+div.geninfomain hr{border:1px solid #f3f3f3;margin-top:17px;margin-bottom:17px;}
+
+
+
+.infomain{    
+	background-color: #ffffff;
+    border: 2px solid #dfdfdf;
+	border-radius:7px;
+    margin: 0px;
+    padding: 7px;
+    padding-left: 0px;
+    padding-right: 10px;
+	min-height:270px;
+	}
+
+.infomain h3{margin:0px;padding:7px;padding-bottom:17px;color:#cccccc;font-size:23px;text-align:center;font-weight:bold;}
+
+div.infomain h5{margin:0px;padding:0px;color:#999999;text-transform:uppercase;font-size:13px;font-weight:bold;text-align:center;}
+div.infomain h4{margin:0px;padding:7px;color:#000000;text-transform:uppercase;font-size:50px;font-weight:bold;text-align:center;}
+div.infomain h6{margin:0px;padding:7px;color:#0ea6e2;text-transform:uppercase;font-size:30px;font-weight:bold;text-align:center;}
+div.infomain h4 label, h6 label{color:#dbdbdb;text-transform:uppercase;font-size:20px;}
+
+div.infomain h6.paid{color:green;}
+div.infomain h6.unpaid{color:red;}
+
+
+div.infomain hr{border:1px solid #ffffff;margin-top:17px;margin-bottom:17px;}
+
+
+
+
+.searchboxes{    
+	background-color: #ffffff;
+    border: 0px solid #2e3a93;
+	    margin: 0px;
+    padding: 7px;
+    padding-left: 0px;
+    padding-right: 10px;
+	position:relative;
+	}
+
+.searchboxes form{margin:17px;padding:0px;border:3px solid #dfdfdf;	border-radius:7px;text-align:center;font-weight:bold;}
+.searchboxes form input{display:block;width:100%;height:60px;color:#0ea6e2;font-size:18px;font-weight:bold;text-align:center;outline:none;border:0px solid red;}
+.searchboxes form input[type="submit"]{display:block;width:100%;height:40px;color:#000000;background-color:#dfdfdf;text-transform:uppercase;font-size:16px;font-weight:bold;text-align:center;outline:none;
+-webkit-border-top-left-radius: 7px;
+-webkit-border-top-right-radius: 7px;
+-moz-border-radius-topleft: 7px;
+-moz-border-radius-topright: 7px;
+border-top-left-radius: 7px;
+border-top-right-radius: 7px;
+}
+
+
+
+
+/*MEDIAQUERIES*/
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+div.subsimt h4{margin:0px;padding:7px;color:#000000;text-transform:uppercase;font-size:43px;font-weight:bold;text-align:center;}
+
+.subsim h3{margin:0px;padding:7px;padding-left:33px;padding-bottom:17px;color:#0ea6e2;font-size:20px;text-align:center;}
+.subsim:hover h3{margin:0px;padding:7px;padding-left:33px;padding-bottom:17px;color:#000000;font-size:20px;font-weight:bold;text-align:center;}
+
+div.subsims p{margin:0px;margin-bottom:27px;padding:0px;color:#999999;text-transform:uppercase;font-size:13px;font-weight:bold;text-align:left;}
+div.subsims p strong{display:block;margin:0px;padding:7px;color:#0ea6e2;text-transform:uppercase;font-size:22px;font-weight:bold;text-align:left;}
+
+div.subsimt label.success{margin: 17px;}
+div.subsimt label.fails{margin: 17px;}
+
+.holderbox_summary { display: inline-block; padding: 2px;margin-bottom:27px;}
+
+div.infomain h6.success:before {
+    color: green;
+    font-family: fontawesome;
+    content: "\f00c";
+    font-size: 27px;
+    float: none;
+    font-weight: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;}
+
+div.infomain h6.fails:before {
+    color: red;
+    font-family: fontawesome;
+    content: "\f00d";
+    font-size: 27px;
+    float:none;
+    font-weight: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+}
+
+
+
+@media only screen and (min-width :480px) and (max-width : 768px) {
+
+}
+
+
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-width : 768px) and (max-width : 1024px) {
+
+}
+
+
+
+/* Desktops and laptops ----------- */
+@media only screen  and (min-width : 1224px) {
+
+}
+
+
+
+
+/* Large screens ----------- */
+@media only screen  and (min-width : 1824px) {
+
+}

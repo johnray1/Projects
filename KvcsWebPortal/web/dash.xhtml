@@ -1,0 +1,481 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>KVCS - Kigali Veterans Cooperative Society</title>
+        
+        <link href="css/style.css" rel="stylesheet"/>
+        <link href="css/menu.css" rel="stylesheet"/>
+        <link href="css/topheader.css" rel="stylesheet"/>
+        <link href="css/bootstrap.css" rel="stylesheet"/>
+        <link href="css/footer.css" rel="stylesheet"/>
+        <link href="css/filter.css" rel="stylesheet"/>
+        <link href="css/mobmenu.css" rel="stylesheet"/>
+        <link href="css/message.css" rel="stylesheet"/>
+        <link href="css/subsim.css" rel="stylesheet"/>
+        
+        <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>	
+        <script type="text/javascript" src="js/bootstrap.min2.js"></script>
+        
+        
+        <!-- DatePicker -->
+        <script type="text/javascript" src="js/datepicker/moment.min.js"></script>
+        <script type="text/javascript" src="js/datepicker/daterangepicker.js"></script>
+        <script type="text/javascript" src="js/datepicker/chosen.jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="js/datepicker/daterangepicker.css" />
+        <link rel="stylesheet" type="text/css" href="js/datepicker/chosen.css" />
+        
+        
+        <script type="text/javascript">
+            $(function() {
+                
+                $('#form\\:daterangepicker').daterangepicker({
+                    "showDropdowns": true,
+                    autoUpdateInput: true,
+                    "timePicker": true,
+                    "timePicker24Hour": true,
+                    "autoApply": true,
+                    ranges: {
+                        'Today': [moment(), moment()],
+                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')] 
+                    },
+                    "locale": {
+                        "format": "YYYY/MM/DD  HH:mm",
+                        "separator": " - ",
+                        "applyLabel": "Apply",
+                        "cancelLabel": "Cancel",
+                        "fromLabel": "From",
+                        "toLabel": "To",
+                        "customRangeLabel": "Custom",
+                        "daysOfWeek": [
+                            "Su",
+                            "Mo",
+                            "Tu",
+                            "We",
+                            "Th",
+                            "Fr",
+                            "Sa"
+                        ],
+                        "monthNames": [
+                            "January",
+                            "February",
+                            "March",
+                            "April",
+                            "May",
+                            "June",
+                            "July",
+                            "August",
+                            "September",
+                            "October",
+                            "November",
+                            "December"
+                        ],
+                        "firstDay": 1
+                    },
+                    
+                    "opens": "center"
+                }, 
+                
+                function(start, end, label) {
+                    console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
+                });
+                
+                $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
+                    $(this).val(picker.startDate.format('MM/DD/YYYY h:mm A') + ' - ' + picker.endDate.format('MM/DD/YYYY h:mm A'));
+                });
+                
+                $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
+                    $(this).val('');
+                });
+            });
+        </script>
+        <!-- DatePicker -->
+        
+    </h:head>
+    <h:body>
+        
+        
+        <ui:include src="templates/header.xhtml" />  
+        
+        
+        <div class="clear"></div>
+        
+        
+        <!-- FILTER -->
+        <div class="container-fluid filterbox">
+            <div class="col-xs-12" style="margin:0px;padding:0px;background-color:#f4f4f4;">
+                
+                <span  class="col-xs-12 col-sm-12 col-md-5" style="margin:0px;padding:0px;border:0px solid red;">
+                    <h:form>
+                        <h:commandLink class="#{TemplateBean.today}" value="Today" action="#{DashBean.dashFilter(1)}"/>
+                        <h:commandLink class="#{TemplateBean.yesterday}" value="Yesterday" action="#{DashBean.dashFilter(2)}"/>
+                        <h:commandLink class="#{TemplateBean.week}" value="By Weeks" action="#{DashBean.dashFilter(3)}"/>
+                        <h:commandLink class="#{TemplateBean.month}" value="By Months" action="#{DashBean.dashFilter(4)}"/>
+                    </h:form>
+                </span>
+                
+                <span  class="col-xs-12 col-sm-12 col-md-7 customdate" style="margin:0px;padding:0px;border:0px solid green;">
+                    
+                    <!-- FORM -->
+                    <h:form id="form"  class="container-fluid sforminput"  style="margin:0px;padding:0px;">
+                        
+                        <div class="col-xs-12 col-sm-8 stextinput_date">
+                            <h:inputText id="daterangepicker" value="#{DashBean.date}"/>
+                        </div>	
+                        <div class="col-xs-12 col-sm-4 ssubmitinput" style="margin:0px;padding:0px;">
+                            <h:commandButton  action="#{DashBean.dashFilter(0)}" value="Filter" class="ssubmitinput"/>
+                        </div>
+                        
+                    </h:form>
+                    <!-- End FORM -->
+                    
+                </span>
+                
+                
+            </div>
+        </div>
+        <!-- END FILTER -->
+        
+        
+        
+        <div class="clear"></div>
+        
+        
+        
+        
+        
+        <!-- CONTENTS-->
+        <div class="container-fluid">
+            <div class="col-xs-12" style="padding:10px;padding-top:25px;padding-bottom:25px;height:100%;">
+                
+                
+                <!-- In -->
+                <div class="col-xs-12" style="float: none;margin: 0 auto;padding:5px;min-height:600px;border:0px solid #f0f0f0;overflow-x:auto;font-family:ubuntu;">
+                    
+                    <!--  -->
+                    <div class="col-xs-12 col-sm-12 col-md-12 holderbox">
+                        <div class="col-xs-12 col-sm-12 holderinbox" style="margin:0px;padding:0px;min-height:200px;border:0px solid red;">
+                            
+                            <!-- SUMMARY  -->
+                            <div class="col-xs-12 col-sm-12 col-md-12 holderbox_gensummary">
+                                <div class="col-xs-12 col-sm-12 geninfomain">
+                                    <h3>GENERAL SUMMARY</h3>
+                                    <span class="col-xs-12 " style="margin:0px;padding:0px;min-height:300px;">
+                                        
+                                        
+                                        <!--  -->
+                                        <div class="col-xs-12 col-sm-12 col-md-4 holderbox_summary" >
+                                            <div class="col-xs-12 col-sm-12 geninfomainin">
+                                                <h4> Defaulted Tickets</h4>
+                                                <span class="col-xs-12 " style="margin:0px;padding:0px;">
+                                                    <div class="col-xs-12">
+                                                        <h6>Count</h6>
+                                                        <h5>
+                                                            <h:outputText value="#{DashBean.dashboardNumbersResponse.paidTicketsCount}">
+                                                                <f:convertNumber integerOnly="true"/>
+                                                            </h:outputText>
+                                                        </h5>
+                                                        <hr></hr>
+                                                        <div class="col-xs-12" >
+                                                            <h6>Value in RWF </h6>
+                                                            <h5 class="money">
+                                                                <h:outputText value="#{DashBean.dashboardNumbersResponse.paidTicketsValue}">
+                                                                    <f:convertNumber integerOnly="true"/>
+                                                                </h:outputText>
+                                                            </h5>
+                                                        </div>
+                                                    </div>									
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        
+                                        
+                                        
+                                        <!--  -->
+                                        <div class="col-xs-12 col-sm-12 col-md-4 holderbox_summary" >
+                                            <div class="col-xs-12 col-sm-12 geninfomainin">
+                                                <h4>Penalties Paid</h4>
+                                                <span class="col-xs-12 " style="margin:0px;padding:0px;">
+                                                    <div class="col-xs-12">
+                                                        <h6>Count</h6>
+                                                        <h5>
+                                                            <h:outputText value="#{DashBean.dashboardNumbersResponse.paidPenaltiesCount}">
+                                                                <f:convertNumber integerOnly="true"/>
+                                                            </h:outputText>
+                                                        </h5>
+                                                        <hr></hr>
+                                                        <div class="col-xs-12" >
+                                                            <h6>Value in RWF </h6>
+                                                            <h5 class="money">
+                                                                <h:outputText value="#{DashBean.dashboardNumbersResponse.paidPenaltiesValue}">
+                                                                    <f:convertNumber integerOnly="true"/>
+                                                                </h:outputText>
+                                                            </h5>
+                                                        </div>
+                                                    </div>									
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        
+                                        
+                                        
+                                        <!--  -->
+                                        <div class="col-xs-12 col-sm-12 col-md-4 holderbox_summary" >
+                                            <div class="col-xs-12 col-sm-12 geninfomainin">
+                                                <h4>Payments Methods</h4>
+                                                <span class="col-xs-12 " style="margin:0px;padding:0px;">
+                                                    
+                                                    <div class="col-xs-12 col-sm-12 col-md-6">
+                                                        <div class="hqsales pcash">
+                                                            <label>CASH</label>
+                                                            <strong>0,000,000
+                                                            </strong> FRW
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-6">
+                                                        <div class="hqsales pmtn">
+                                                            <label>MTN</label>
+                                                            <strong>
+                                                                <h:outputText value="#{DashBean.mtn}">
+                                                                    <f:convertNumber integerOnly="true"/>
+                                                                </h:outputText>
+                                                            </strong> FRW
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-6"><div class="hqsales ptigo"><label>TIGO</label>
+                                                            <strong>
+                                                                <h:outputText value="#{DashBean.tigo}">
+                                                                    <f:convertNumber integerOnly="true"/>
+                                                                </h:outputText>
+                                                            </strong> FRW
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-12 col-md-6"><div class="hqsales pairtel"><label>AIRTEL</label><strong>0,000,000</strong> FRW</div></div>
+                                                    
+                                                    
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        
+                                        
+                                        
+                                        
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- SUMMARY -->
+                            
+                            
+                            <!-- FILTERABLE INFOS -->
+                            
+                            <!--  -->
+                            <div class="col-xs-12 col-sm-12 col-md-6 holderbox_summary" >
+                                <img src="images/equal.png" width="60" height="61" class="hidden-xs hidden-sm" style="display:block;position:absolute;right:-6%;z-index:999;top:38%;border:0px solid red;" />
+                                <div class="col-xs-12 col-sm-12 infomain">
+                                    <h3>TICKETS</h3>
+                                    <span class="col-xs-12 " style="margin:0px;padding:0px;">
+                                        <div class="col-xs-12">
+                                            <h4>
+                                                <h:outputText value="#{DashBean.dashboardNumbersResponse.paidTicketsCount + DashBean.dashboardNumbersResponse.unPaidTicketsCount}">
+                                                    <f:convertNumber integerOnly="true"/>
+                                                </h:outputText>
+                                            </h4>
+                                            <hr></hr>
+                                            <div class="col-xs-12 col-sm-6"><h5>PAID</h5>
+                                                <h6 class="paid">
+                                                    <h:outputText value="#{DashBean.dashboardNumbersResponse.paidTicketsCount}">
+                                                        <f:convertNumber integerOnly="true"/>
+                                                    </h:outputText>
+                                                </h6>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6"><h5>UNPAID</h5>
+                                                <h6 class="unpaid">
+                                                    <h:outputText value="#{DashBean.dashboardNumbersResponse.unPaidTicketsCount}">
+                                                        <f:convertNumber integerOnly="true"/>
+                                                    </h:outputText>
+                                                </h6>
+                                            </div>
+                                        </div>									
+                                    </span>
+                                </div>
+                            </div>
+                            <!--  -->
+                            
+                            <!--  -->
+                            <div class="col-xs-12 col-sm-12 col-md-6 holderbox_summary" >
+                                <div class="col-xs-12 col-sm-12 infomain">
+                                    <h3>AMOUNTS</h3>
+                                    <span class="col-xs-12 " style="margin:0px;padding:0px;">
+                                        <div class="col-xs-12">
+                                            <h4>
+                                                <h:outputText value="#{DashBean.dashboardNumbersResponse.paidTicketsValue + DashBean.dashboardNumbersResponse.unPaidTicketsValue}">
+                                                    <f:convertNumber integerOnly="true"/>
+                                                </h:outputText>
+                                                <label>RWF</label>
+                                            </h4>
+                                            <hr></hr>
+                                            <div class="col-xs-12 col-sm-6"><h5>PAID in RWF </h5>
+                                                <h6 class="paid"> 
+                                                    <h:outputText value="#{DashBean.dashboardNumbersResponse.paidTicketsValue}">
+                                                        <f:convertNumber integerOnly="true"/>
+                                                    </h:outputText>
+                                                </h6>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6"><h5>UNPAID in RWF </h5>
+                                                <h6 class="unpaid">
+                                                    <h:outputText value="#{DashBean.dashboardNumbersResponse.unPaidTicketsValue}">
+                                                        <f:convertNumber integerOnly="true"/>
+                                                    </h:outputText>
+                                                </h6>
+                                            </div>
+                                        </div>									
+                                    </span>
+                                </div>
+                            </div>
+                            <!--  -->
+                            
+                            <!-- FILTERABLE INFOS -->
+                            
+                            
+                            <!--  -->
+                            <div class="col-xs-12 col-sm-12 col-md-6 holderbox_summary" >
+                                <img src="images/equal.png" width="60" height="61" class="hidden-xs hidden-sm" style="display:block;position:absolute;right:-6%;z-index:999;top:38%;border:0px solid red;" />
+                                <div class="col-xs-12 col-sm-12 infomain">
+                                    <h3>PENALTIES</h3>
+                                    <span class="col-xs-12 " style="margin:0px;padding:0px;">
+                                        <div class="col-xs-12">
+                                            <h4>
+                                                <h:outputText value="#{DashBean.dashboardNumbersResponse.paidPenaltiesCount + DashBean.dashboardNumbersResponse.unPaidPenaltieCount}">
+                                                    <f:convertNumber integerOnly="true"/>
+                                                </h:outputText>
+                                            </h4>
+                                            <hr></hr>
+                                            <div class="col-xs-12 col-sm-6"><h5>PAID</h5>
+                                                <h6 class="paid">
+                                                    <h:outputText value="#{DashBean.dashboardNumbersResponse.paidPenaltiesCount}">
+                                                        <f:convertNumber integerOnly="true"/>
+                                                    </h:outputText>
+                                                </h6>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6"><h5>UNPAID</h5>
+                                                <h6 class="unpaid">
+                                                    <h:outputText value="#{DashBean.dashboardNumbersResponse.unPaidPenaltieCount}">
+                                                        <f:convertNumber integerOnly="true"/>
+                                                    </h:outputText>
+                                                </h6>
+                                            </div>
+                                        </div>									
+                                    </span>
+                                </div>
+                            </div>
+                            <!--  -->
+                            
+                            <!--  -->
+                            <div class="col-xs-12 col-sm-12 col-md-6 holderbox_summary" >
+                                <div class="col-xs-12 col-sm-12 infomain">
+                                    <h3>AMOUNTS</h3>
+                                    <span class="col-xs-12 " style="margin:0px;padding:0px;">
+                                        <div class="col-xs-12">
+                                            <h4>
+                                                <h:outputText value="#{DashBean.dashboardNumbersResponse.paidPenaltiesValue + DashBean.dashboardNumbersResponse.unPaidPenaltiesValue}">
+                                                    <f:convertNumber integerOnly="true"/>
+                                                </h:outputText>
+                                                <label>RWF</label>
+                                            </h4>
+                                            <hr></hr>
+                                            <div class="col-xs-12 col-sm-6"><h5>PAID in RWF </h5>
+                                                <h6 class="paid">
+                                                    <h:outputText value="#{DashBean.dashboardNumbersResponse.paidPenaltiesValue}">
+                                                        <f:convertNumber integerOnly="true"/>
+                                                    </h:outputText>
+                                                </h6>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6"><h5>UNPAID in RWF </h5>
+                                                <h6 class="unpaid"> 
+                                                    <h:outputText value="#{DashBean.dashboardNumbersResponse.unPaidPenaltiesValue}">
+                                                        <f:convertNumber integerOnly="true"/>
+                                                    </h:outputText>
+                                                </h6>
+                                            </div>
+                                        </div>									
+                                    </span>
+                                </div>
+                            </div>
+                            <!--  -->
+                            
+                            <!-- FILTERABLE INFOS -->
+                            
+                            
+                            
+                            
+                            <!-- SEARCH -->
+                            <div class="col-xs-12 col-sm-12 col-md-12 holderbox_summary" style="margin-top:17px;" >
+                                <div class="col-xs-12 col-sm-12 infomain">
+                                    <h3>SEARCH</h3>
+                                    <span class="col-xs-12 " style="margin:0px;padding:0px;min-height:150px;">
+                                        
+                                        <!--  -->
+                                        <div class="col-xs-12 col-sm-12 col-md-4 searchboxes" >
+                                            <form method="post" action="">
+                                                <input type="text" name="" value="" placeholder="Enter Car Plate No"/>
+                                                <input type="submit" value="submit"/>
+                                            </form>
+                                        </div>
+                                        <!--  -->
+                                        
+                                        <!--  -->
+                                        <div class="col-xs-12 col-sm-12 col-md-4 searchboxes" >
+                                            <form method="post" action="">
+                                                <input type="text" name="" value="" placeholder="Enter Car Owner Name"/>
+                                                <input type="submit" value="submit"/>
+                                            </form>
+                                        </div>
+                                        <!--  -->
+                                        
+                                        <!--  -->
+                                        <div class="col-xs-12 col-sm-12 col-md-4 searchboxes" >
+                                            <form method="post" action="">
+                                                <input type="text" name="" value="" placeholder="Enter Car Owner Phone Number"/>
+                                                <input type="submit" value="submit"/>
+                                            </form>
+                                        </div>
+                                        <!--  -->
+                                        
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- SEARCH -->
+                            
+                            
+                        </div>
+                    </div>
+                    <!--  -->
+                    
+                </div>
+                <!--End In -->
+            </div>
+        </div>
+        <!-- End CONTENTS- -->
+        
+        
+        <div class="clear"></div>
+        
+        <!-- Scripts -->        
+        <script type="text/javascript" src="js/mobmenu.js"></script>
+        <!-- End Scripts -->
+    </h:body>
+</html>
+

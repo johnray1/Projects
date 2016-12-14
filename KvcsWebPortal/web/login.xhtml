@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>KVCS - Kigali Veterans Cooperative Society</title>
+        
+        <link href="css/style.css" rel="stylesheet"/>
+        <link href="css/menu.css" rel="stylesheet"/>
+        <link href="css/topheader.css" rel="stylesheet"/>
+        <link href="css/bootstrap.css" rel="stylesheet"/>
+        <link href="css/footer.css" rel="stylesheet"/>
+        <link href="css/filter.css" rel="stylesheet"/>
+        <link href="css/mobmenu.css" rel="stylesheet"/>
+        <link href="css/message.css" rel="stylesheet"/>
+        <link href="css/subsim.css" rel="stylesheet"/>
+        <link href="css/forms.css" rel="stylesheet" type="text/css"/>
+        
+        <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>	
+        <script type="text/javascript" src="js/bootstrap.min2.js"></script>
+    </h:head>
+    <h:body>
+        <!-- HEADER -->
+        <div>
+            <!-- Top Header -->
+            <div class="container-fluid topheader" style="margin:0px;padding:0px;">
+                
+                <div>
+                    <div class="col-xs-3 col-sm-1 logo">
+                        <img src="images/header_logo.png" height="70" class="logo hidden-xs"/>
+                        <img src="images/header_logo.png" height="70" class="logo hidden-lg hidden-md hidden-sm visible-xs"/>
+                    </div>
+                    
+                    <div class="col-xs-9 col-sm-11 name"  style="margin:0px;padding:0px;border:0px solid red;"></div>
+                    
+                </div>
+            </div>
+            <!-- End Top Header -->
+        </div>
+        <!-- End HEADER-->
+        
+        
+        <!-- CONTENTS-->
+        <div class="container-fluid loginbg" style="background-image:url('images/ui.png');background-repeat:no-repeat;
+             background-size:contain;
+             background-position:center;
+             background-size: 100% 100%; 
+             border:0px solid red;">&nbsp;
+        </div>
+        
+        <div class="container-fluid">
+            <div class="col-xs-12" style="display:inline-block;padding:10px;padding-top:105px;height:100%;">
+                
+                <div class="col-xs-12 col-sm-2 col-md-4"></div>
+                
+                <!-- START LOGIN BOX  -->
+                <div class="col-xs-12 col-sm-8 col-md-4 loginbox">
+                    
+                     <div class="container-fluid" style="margin:0px;padding:0px;text-align:center;"></div>
+                    
+                    <div class="clear"></div>
+                    
+                    <!-- FORM -->
+                    <h:form class="container-fluid login_form" id="login_form">
+                        <div class="col-xs-12 login_theinput">
+                            <h:inputText id="user" value="#{LoginBean.username}" class="ico_email" a:placeholder="Enter Email"/>
+                        </div>
+                        <div class="col-xs-12 login_theinput">
+                            <h:inputSecret id="pass" value="#{LoginBean.pwd}" class="ico_pass" a:placeholder="Enter Password"/>
+                        </div>
+                        <div class="col-xs-12 login_submitinput">
+                            <h:commandButton action="#{LoginBean.login()}" value="LOGIN" />
+                        </div>
+                    </h:form>
+                    <!-- End FORM -->
+                   
+                    
+                </div>
+                <!--END LOGIN BOX -->
+                
+                <div id="warning" class="col-xs-12 warning">
+                    <h:outputText value="Your access code doesn't match, Please Try again!" rendered="false"/>
+                </div>
+                
+                <div class="col-xs-12 forgotpass">
+                    <a data-rel="lightcase_forgot" href="forgotpswd.xhtml" style="color:#a3a3a3;text-decoration:none;">
+                        * Forgot Password ?
+                    </a>
+                </div>
+                
+                <div class="col-xs-12 col-sm-2 col-md-4"></div>
+                
+            </div>
+        </div>
+        <!-- End CONTENTS -->
+        
+        
+        
+        
+        <!-- Scripts -->        
+        <script type="text/javascript" src="js/mobmenu.js"></script>
+        <!-- End Scripts -->
+        
+    </h:body>
+</html>
+
