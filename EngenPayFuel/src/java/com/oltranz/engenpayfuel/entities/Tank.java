@@ -57,6 +57,9 @@ public class Tank implements Serializable {
     @Column(name = "dipped_capacity", precision = 22)
     private Double dippedCapacity=0.0;
     
+    @Column(name = "diff", precision = 22)
+    private Double diff=0.0;
+    
     @Column(name = "dipped_time")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dippedTime;
@@ -208,5 +211,21 @@ public class Tank implements Serializable {
     public void setDippedTime(Date dippedTime) {
         this.dippedTime = dippedTime;
     }
+
+    /**
+     * @return the diff
+     */
+    public Double getDiff() {
+        return diff;
+    }
+
+    /**
+     * @param diff the diff to set
+     */
+    public void setDiff(Double diff) {
+        this.diff = diff;
+    }
+    
+    
     
 }

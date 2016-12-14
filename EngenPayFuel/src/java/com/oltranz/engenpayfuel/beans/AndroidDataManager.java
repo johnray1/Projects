@@ -83,6 +83,26 @@ public class AndroidDataManager {
             int deviceBranchId=commonFunctionEjb.getDeviceNoBranchId(deviceName);//device branch id
             int userId=commonFunctionEjb.isUserIdAvailable(pin);
             
+//            //check user status
+//            User user=em.find(User.class, userId);
+//            if(user==null){
+//                resultObject.setObject(null);
+//                resultObject.setMessage("User Not Found");
+//                resultObject.setStatusCode(500);
+//                return resultObject;
+//            }
+//
+//            if(user.getStatus()==8){
+//                resultObject.setObject(null);
+//                resultObject.setMessage("You are Logged in an Another Device");
+//                resultObject.setStatusCode(500);
+//                return resultObject;
+//            }
+//            user.setStatus(8);
+//            em.merge(user);
+//            em.flush();
+//            //Endcheck user status
+            
             //get the user details
             UserDetailsModel userDetails=(UserDetailsModel) userManager.getUserDetails(userId).getObject();
             List<Role> roles=userDetails.getRoles();
@@ -122,13 +142,13 @@ public class AndroidDataManager {
             loginOpModel.setBranchName(branch.getName());
             
             
-            /*  */
+            /*
             ReportModel rm=new ReportModel();
             rm.setUserId(userDetails.getUserId());
             rm.setBranchId(userDetails.getBranchId());
             rm.setType(2);
             postCreateReportModule(rm);
-            
+            */
             
             //set logs
             Log log=new Log();
@@ -165,6 +185,19 @@ public class AndroidDataManager {
         resultObject.setObjectClass(LogoutOpModel.class);
         try{
             int deviceBranchId=commonFunctionEjb.getDeviceNoBranchId(deviceName);//device branch id
+            
+//            //check user status
+//            User user=em.find(User.class, userId);
+//            if(user==null){
+//                resultObject.setObject(null);
+//                resultObject.setMessage("User Not Found");
+//                resultObject.setStatusCode(500);
+//                return resultObject;
+//            }
+//            user.setStatus(7);
+//            em.merge(user);
+//            em.flush();
+//            //End check user status
             
             //get the user details
             UserDetailsModel userDetails=(UserDetailsModel) userManager.getUserDetails(userId).getObject();
@@ -211,12 +244,13 @@ public class AndroidDataManager {
             logoutOpModel.setBranchName(branch.getName());
             
             
-            /**/
+            /*
             ReportModel rm=new ReportModel();
             rm.setUserId(userDetails.getUserId());
             rm.setBranchId(userDetails.getBranchId());
             rm.setType(2);
             postEndReportModule(rm);
+            */
             
             
             //set logs
@@ -265,12 +299,32 @@ public class AndroidDataManager {
             Date deviceDate=dateFormat.parse(saleDetailsModel.getDeviceTransactionTime());
             
             Device device=commonFunctionEjb.getDeviceNoId(saleDetailsModel.getDeviceId());
-            String transactionId=device.getDeviceId().toString()+saleDetailsModel.getDeviceTransactionId();
-            long traId=Long.parseLong(transactionId);
+            
+            
+            //first check transaction
+            Transaction checkTransaction=em.find(Transaction.class,saleDetailsModel.getDeviceTransactionId());
+            if(checkTransaction!=null){
+                
+                resultObject.setObject(saleDetailsModel);
+                resultObject.setMessage(saleDetailsModel.getDeviceTransactionId()+" Is Already Available and PAYMENT Status Is :"+checkTransaction.getPaymentStatus());
+                
+                if(checkTransaction.getPaymentStatus().equalsIgnoreCase("SUCCESS")){
+                    resultObject.setStatusCode(100);
+                }
+                if(checkTransaction.getPaymentStatus().equalsIgnoreCase("PENDING")){
+                    resultObject.setStatusCode(301);
+                }
+                if(checkTransaction.getPaymentStatus().equalsIgnoreCase("FAILURE")){
+                    resultObject.setStatusCode(500);
+                }
+                
+                return resultObject;
+            }
+            
             
             //set the transaction data
             Transaction transaction=new Transaction();
-            transaction.setTransactionId(traId);
+            transaction.setTransactionId(saleDetailsModel.getDeviceTransactionId());
             transaction.setDeviceId(device.getDeviceId());
             transaction.setDeviceTransactionId(saleDetailsModel.getDeviceTransactionId());
             transaction.setDeviceTransactionTime(deviceDate);
@@ -310,7 +364,7 @@ public class AndroidDataManager {
             
             //set Index Tracking
             IndexTracking indexTracking=new IndexTracking();
-            indexTracking.setTransactionId(traId);
+            indexTracking.setTransactionId(saleDetailsModel.getDeviceTransactionId());
             indexTracking.setTransactionTypeId(1);
             indexTracking.setUserId(saleDetailsModel.getUserId());
             indexTracking.setDateTime(dtt);
@@ -318,14 +372,14 @@ public class AndroidDataManager {
             //set Tank Tracking
             TankTracking tankTracking=new TankTracking();
             tankTracking.setTankId(tank.getTankId());
-            tankTracking.setTransactionId(traId);
+            tankTracking.setTransactionId(saleDetailsModel.getDeviceTransactionId());
             tankTracking.setTransactionTypeId(1);
             tankTracking.setUserId(saleDetailsModel.getUserId());
             tankTracking.setDateTime(dtt);
             
             //----------------------------------------Make Payment in Payment Gate Way------------------------------------------------------------------------------
             
-            PaymentResponse paymentResponse=PaymentLibrary.sendTestPaymentXML(traId,saleDetailsModel.getPaymentModeId(),saleDetailsModel.getAmount(),saleDetailsModel.getTelephone(),saleDetailsModel.getVoucherNumber());
+            PaymentResponse paymentResponse=PaymentLibrary.sendTestPaymentXML(saleDetailsModel.getDeviceTransactionId(),saleDetailsModel.getPaymentModeId(),saleDetailsModel.getAmount(),saleDetailsModel.getTelephone(),saleDetailsModel.getVoucherNumber());
             
             //------------------------------------------------------------------------------------------------------------------------------------------------------
             
@@ -374,19 +428,31 @@ public class AndroidDataManager {
                 }
             }
             em.persist(transaction);
+            em.flush();
             
             resultObject.setObject(saleDetailsModel);
             resultObject.setMessage("Sale Details Persist And Payment Status"+" : "+transaction.getPaymentStatus().toUpperCase());
-            resultObject.setStatusCode(paymentResponse.getReqStatus());
+            if(transaction.getPaymentStatus().equalsIgnoreCase("SUCCESS")){
+                resultObject.setStatusCode(100);
+            }
+            if(transaction.getPaymentStatus().equalsIgnoreCase("PENDING")){
+                resultObject.setStatusCode(301);
+            }
+            if(transaction.getPaymentStatus().equalsIgnoreCase("FAILURE")){
+                resultObject.setStatusCode(500);
+            }
+            
             return resultObject;
         }
-        catch(ParseException e){
+        catch(Exception ex){
             resultObject.setObject(null);
             resultObject.setStatusCode(500);
-            resultObject.setMessage("Unparseable or Wrong Date Format");
+            resultObject.setMessage("Error Rise On Exception"+ex.getMessage());
             return resultObject;
         }
     }
+    
+    
     
     public void momoConfirmation(ServiceProvison serviceProvisonIp){
         

@@ -46,6 +46,13 @@ public class TankManager {
         ResultObject resultObject=new ResultObject();
         resultObject.setObjectClass(Tank.class);
         
+        if(newTank.getCurrentCapacity()>newTank.getMaxCapacity()){
+            resultObject.setObject(null);
+            resultObject.setMessage("Current capacity is More then Maximum Capacity");
+            resultObject.setStatusCode(500);
+            return resultObject;
+        }
+        
         Branch branch=em.find(Branch.class, newTank.getBranchId());
         if(branch==null){
             resultObject.setObject(null);
@@ -66,7 +73,7 @@ public class TankManager {
         tank.setName(newTank.getName());
         tank.setMaxCapacity(newTank.getMaxCapacity());
         tank.setCurrentCapacity(newTank.getCurrentCapacity());
-        tank.setDippedCapacity(newTank.getCurrentCapacity());
+        tank.setDippedCapacity(0.0);
         tank.setPreCalibrationDate(newTank.getPreCalibrationDate());
         tank.setNextCalibrationDate(newTank.getNextCalibrationDate());
         tank.setBranchId(newTank.getBranchId());
@@ -86,10 +93,19 @@ public class TankManager {
         ResultObject resultObject=new ResultObject();
         resultObject.setObjectClass(Tank.class);
         
+        
+        
         Tank tank=em.find(Tank.class, editTank.getTankId());
         if(tank==null){
             resultObject.setObject(null);
             resultObject.setMessage("No Tank with id of the given one is found!");
+            resultObject.setStatusCode(500);
+            return resultObject;
+        }
+        
+        if((editTank.getCurrentCapacity()>tank.getMaxCapacity())||(editTank.getCurrentCapacity()>editTank.getMaxCapacity())){
+            resultObject.setObject(null);
+            resultObject.setMessage("Current capacity is More then Maximum Capacity");
             resultObject.setStatusCode(500);
             return resultObject;
         }
@@ -105,7 +121,6 @@ public class TankManager {
         tank.setName(editTank.getName());
         tank.setMaxCapacity(editTank.getMaxCapacity());
         tank.setCurrentCapacity(editTank.getCurrentCapacity());
-        tank.setDippedCapacity(editTank.getCurrentCapacity());
         tank.setPreCalibrationDate(editTank.getPreCalibrationDate());
         tank.setNextCalibrationDate(editTank.getNextCalibrationDate());
         tank.setBranchId(editTank.getBranchId());
@@ -240,6 +255,7 @@ public class TankManager {
         //set the tank value
         tank.setCurrentCapacity(tanking.getPostTankingCalculatedDip());
         tank.setDippedCapacity(tanking.getPostTankingCalculatedDip());
+        tank.setDiff(0.0);
         em.merge(tank);
         em.flush();
         
@@ -287,6 +303,7 @@ public class TankManager {
         Date date=new Date();
         tank.setDippedCapacity(diping.getCalculatedDip());
         tank.setDippedTime(date);
+        tank.setDiff(diping.getCalculatedDip()-tank.getCurrentCapacity());
         em.merge(tank);
         em.flush();
         

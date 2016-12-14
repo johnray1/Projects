@@ -5,6 +5,8 @@
  */
 package com.oltranz.engenpayfuel.chartmodel;
 
+import java.util.Date;
+
 /**
  *
  * @author John
@@ -13,6 +15,7 @@ public class NozzleDash {
     private int nozzleId;
     private String nozzleName;
     private double index;
+    private Date nozzleLastUsed;
 
     /**
      * @return the nozzleName
@@ -55,6 +58,22 @@ public class NozzleDash {
     public void setNozzleId(int nozzleId) {
         this.nozzleId = nozzleId;
     }
+
+    /**
+     * @return the nozzleLastUsed
+     */
+    public Date getNozzleLastUsed() {
+        return nozzleLastUsed;
+    }
+
+    /**
+     * @param nozzleLastUsed the nozzleLastUsed to set
+     */
+    public void setNozzleLastUsed(Date nozzleLastUsed) {
+        this.nozzleLastUsed = nozzleLastUsed;
+    }
+
+    
     
     
 }

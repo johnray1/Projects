@@ -194,6 +194,22 @@ public class CommonLibrary {
         
     }
     
+    
+     static public String inputStream2StringTest(InputStream stream )throws IOException{
+        BufferedReader br = null;
+        StringBuilder sb = new StringBuilder();
+        String line;
+        
+        br = new BufferedReader(new InputStreamReader(stream));
+        while ((line = br.readLine()) != null) {
+            sb.append(line);
+        }
+        
+        return sb.toString();
+        
+    }
+    
+    
     /*
     
     */

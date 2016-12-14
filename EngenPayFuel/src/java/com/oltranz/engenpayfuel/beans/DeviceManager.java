@@ -285,6 +285,8 @@ public class DeviceManager {
                 return resultObject;
             }
             
+            
+            
             //check device if same serial is available
             Device device=commonFunctionEjb.getSerialNo(regDeviceModel.getSerialNumber());
             if(device==null){

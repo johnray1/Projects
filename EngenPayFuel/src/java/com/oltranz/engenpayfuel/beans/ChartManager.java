@@ -509,6 +509,7 @@ public class ChartManager {
             tankDash.setCurrentCapacity(tank.getCurrentCapacity());
             tankDash.setMaxCapacity(tank.getMaxCapacity());
             tankDash.setDippedCapacity(tank.getDippedCapacity());
+            tankDash.setDiff(tank.getDiff());
             tankDash.setDippedTime(tank.getDippedTime());
             tankDash.setPumpDash(pumpList(tank.getTankId()));
             tankDashList.add(tankDash);
@@ -547,11 +548,19 @@ public class ChartManager {
             nozzleDash.setNozzleId(n.getNozzleId());
             nozzleDash.setNozzleName(n.getNozzleName());
             nozzleDash.setIndex(n.getNozzleIndex());
+            nozzleDash.setNozzleLastUsed(getNozzleLatestTime(n.getNozzleId()));
             
             nozzleDashList.add(nozzleDash);
         }
         
         return nozzleDashList;
+    }
+    
+    public Date getNozzleLatestTime(int nozzleId){
+        
+        Date d=(Date) em.createQuery("SELECT MAX(t.serverReqTime) FROM Transaction t WHERE t.nozzleId = :nozzleId").setParameter("nozzleId", nozzleId).getSingleResult();
+        
+        return d;
     }
     
     

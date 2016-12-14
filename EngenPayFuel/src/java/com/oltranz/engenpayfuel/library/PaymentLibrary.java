@@ -8,6 +8,8 @@ package com.oltranz.engenpayfuel.library;
 
 import com.oltranz.engenpayfuel.models.PaymentResponse;
 import com.oltranz.engenpayfuel.models.ServiceProvison;
+import static java.lang.System.out;
+import java.util.Date;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -37,8 +39,11 @@ public class PaymentLibrary {
                 +"<TELEPHONE>"+tel+"</TELEPHONE>"
                 +"<VOUCHER>"+voucher+"</VOUCHER>"
                 + "</COMMAND>";
+        out.print((new Date())+"ENGEN PAY FUEL:payment request:-"+url+"||"+xmlData);
         Response response=CommonLibrary.sendRESTRequest(url, xmlData, MediaType.APPLICATION_XML, "POST");
-        PaymentResponse paymentResponse=(PaymentResponse) CommonLibrary.unmarshalling(response.readEntity(String.class),PaymentResponse.class);
+        String jsonResponse=response.readEntity(String.class);
+        out.print("ENGEN PAY FUEL:payment response||"+jsonResponse);
+        PaymentResponse paymentResponse=(PaymentResponse) CommonLibrary.unmarshalling(jsonResponse,PaymentResponse.class);
         
         return paymentResponse;
         
@@ -55,8 +60,10 @@ public class PaymentLibrary {
                 +"<SPTRANSID>"+serviceProvisonIp.getSPTRANSID()+"</SPTRANSID>"
                 +"<STATUSDESC>"+serviceProvisonIp.getSTATUSDESC()+"</STATUSDESC>"
                 +"</COMMAND>";
+        out.print("MOMO ACKNOWLEDGEMENT:payment request:-"+url+"||"+xmlData);
         Response response=CommonLibrary.sendRESTRequest(url, xmlData, MediaType.APPLICATION_XML, "POST");
-        
+        String jsonResponse=response.readEntity(String.class);
+        out.print("MOMO ACKNOWLEDGEMENT:payment response||"+jsonResponse);
     }
     
 }

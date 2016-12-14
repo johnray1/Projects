@@ -532,12 +532,19 @@ public class UserManager {
                 
                 Integer roleId=ulist.get(0).getRoleForUserPK().getRoleId();
                 
-                List<RoleForBranch> list = (List<RoleForBranch>)em.createQuery("SELECT r FROM RoleForBranch r WHERE r.roleForBranchPK.roleId = :roleId").setParameter("roleId", roleId).getResultList();
-                if(list.size()>0){
-                    
-                    branchId=list.get(0).getRoleForBranchPK().getBranchId();
-                    branchName=commonFunctionEjb.getBranchName(branchId).getName();
+                if((roleId==1)||(roleId==2)){
+                    branchId=0;
+                    branchName="HQ";
                 }
+                else{
+                    List<RoleForBranch> list = (List<RoleForBranch>)em.createQuery("SELECT r FROM RoleForBranch r WHERE r.roleForBranchPK.roleId = :roleId").setParameter("roleId", roleId).getResultList();
+                    if(list.size()>0){
+                        
+                        branchId=list.get(0).getRoleForBranchPK().getBranchId();
+                        branchName=commonFunctionEjb.getBranchName(branchId).getName();
+                    }
+                }
+                
             }
             
         }
