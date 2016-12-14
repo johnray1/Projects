@@ -19,6 +19,7 @@ public class TankDash {
     private double maxCapacity;
     private double currentCapacity;
     private double dippedCapacity;
+    private double diff;
     private Date dippedTime;
     private List<PumpDash> pumpDash;
 
@@ -137,6 +138,20 @@ public class TankDash {
      */
     public void setDippedTime(Date dippedTime) {
         this.dippedTime = dippedTime;
+    }
+
+    /**
+     * @return the diff
+     */
+    public double getDiff() {
+        return diff;
+    }
+
+    /**
+     * @param diff the diff to set
+     */
+    public void setDiff(double diff) {
+        this.diff = diff;
     }
 
     

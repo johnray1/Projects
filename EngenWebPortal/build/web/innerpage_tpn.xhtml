@@ -10,13 +10,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <title>ENGEN - PayFuel Adminstration</title>
-        
-        <link href="css/style.css" rel="stylesheet" type="text/css" /> 
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="css/style.css" rel="stylesheet"/>
         <link href="css/footer.css" rel="stylesheet"/>
         <link href="css/menu.css" rel="stylesheet"/>
         <link href="css/tanks.css" rel="stylesheet"/>
         <link href="css/topheader.css" rel="stylesheet"/>
-        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
         <link href="css/forms.css" rel="stylesheet" type="text/css" />   
         <link href="css/lightcase.css" rel="stylesheet" type="text/css" />
         <link href="css/chosen.css" rel="stylesheet" type="text/css" />
@@ -26,10 +25,10 @@
         
         <script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        
         <script type="text/javascript" src="js/jquery.events.touch.js"></script>
         <script type="text/javascript" src="js/lightcase.js"></script>
         <script type="text/javascript" src="js/lightcase.init.js"></script>
-        
         <script type="text/javascript" src="js/easy-responsive-tabs.js"></script>
         <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="js/dataTables.buttons.min.js"></script>	
@@ -39,7 +38,7 @@
         <script type="text/javascript" src="js/vfs_fonts.js"></script>	
         <script type="text/javascript" src="js/buttons.html5.min.js"></script>	
         <script type="text/javascript" src="js/moment.min.js"></script>
-        <script src="js/customScripts.js" type="text/javascript"></script>
+        <script type="text/javascript" src="js/customScripts.js" ></script>
         
         <link type="text/css" href="js/mmenu/jquery.mmenu.all.css" rel="stylesheet" />
         <script type="text/javascript" src="js/mmenu/jquery.mmenu.all.min.js"></script>
@@ -54,8 +53,8 @@
             } );
         </script>
         
-        
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+        
         
     </h:head>
     
@@ -69,20 +68,20 @@
                     
                     
                     <!-- TABS -->
-                    <div style="border:0px solid red;" class="hidden-xs hidden-sm visible-md visible-lg">
+                    <div style="border:0px solid red;">
                         <div id="parentVerticalTab">
                             
                             <ul class="resp-tabs-list">
                                 <li id="tablist1">Tanks</li>
                                 <li id="tablist2">Pumps</li>
-                                <li id="tablist2">Nozzles</li>
+                                <li id="tablist3">Nozzles</li>
                             </ul>
                             
                             
                             <div class="resp-tabs-container">
                                 
                                 <div id="tabcontent1">
-                                    <!-- CONTENTS-->
+                                   <!-- CONTENTS-->
                                     <div class="container-fluid">
                                         <div class="col-xs-12" style="display:inline-block;padding:10px;padding-top:25px;height:100%;">
                                             
@@ -188,7 +187,7 @@
                                 
                                 
                                 
-                                <div id="tabcontent2">
+                                <div id="tabcontent2" >
                                     <!-- CONTENTS-->
                                     <div class="container-fluid">
                                         <div class="col-xs-12" style="display:inline-block;padding:10px;padding-top:25px;height:100%;">
@@ -269,7 +268,8 @@
                                     <!-- End CONTENTS -->
                                 </div>
                                 
-                                <div id="tabcontent3">
+                                
+                                <div id="tabcontent3" >
                                     <!-- CONTENTS-->
                                     <div class="container-fluid">
                                         <div class="col-xs-12" style="display:inline-block;padding:10px;padding-top:25px;height:100%;">
@@ -362,13 +362,9 @@
                     <!-- TABS -->
                     
                     
-                    
-                    
-                    
                 </div>
             </div>
             <!-- End CONTENTS- -->
-            
             
             <div id="viewDetailsContent" style="display:none">
                 
@@ -435,12 +431,12 @@
             </div>
             
             <ui:include src="templates/footer.xhtml" /> 
-            
         </div> 
+        
         <!-- Scripts -->
         
         
-        <script type="text/javascript">
+       <script type="text/javascript">
             
             var showDetails1=false;
             var showDetails2=false;
@@ -583,6 +579,8 @@
             
         </script>   
         
+        
+        
         <script>
             $(document).ready(function () {
                 $('#parentVerticalTab').easyResponsiveTabs({
@@ -599,29 +597,22 @@
                         $info.show();
                     }
                 });
-                        
-                        
+                
+                
             });
         </script>
         
-        
-        <script type="text/javascript">
-            $("document").ready(function ($) {
-                var nav = $('#menufloat0');
-                
-                $(window).scroll(function () {
-                    if ($(this).scrollTop() > 200) {
-                        nav.addClass("menufloat");
-                    } else {
-                        nav.removeClass("menufloat");
-                    }
+        <script>
+            $(document).ready(function () {
+                $('div.topheader > #menu_icon').click(function () {
+                    $(this).toggleClass('open');
                 });
             });
         </script>
         
         
-        <script src="https://code.highcharts.com/highcharts.js"></script>
-        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        
+        
         <!-- End Scripts -->
         
     </h:body>

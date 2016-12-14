@@ -476,8 +476,8 @@ $(function () {
             
             {
                 type: 'column',
-                name: 'SP Card',
-                color:'#1a8c35',
+                name: 'ENGEN Card',
+                color:'#042c90',
                 borderRadius: '0',
                 data: [500]
             }

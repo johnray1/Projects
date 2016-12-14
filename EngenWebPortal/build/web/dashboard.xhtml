@@ -278,7 +278,7 @@
                                                                             
                                                                         </label>
                                                                         <em class="lastusage">Last usage: <br />
-                                                                            <h:outputText value="#{LoginBean.date}">
+                                                                            <h:outputText value="#{nozzle.nozzleLastUsed}">
                                                                                 <f:convertDateTime type="date" pattern="EEE, d MMM yyyy HH:mm" timeZone="CAT"/>
                                                                             </h:outputText>
                                                                         </em>
@@ -299,7 +299,7 @@
                                         <!-- End In-->
                                         
                                         <script>
-                                            mySuperDiff(#{tank.tankId});
+                                           mySuperDiff(#{tank.tankId},#{tank.maxCapacity},#{tank.diff});
                                         </script>
                                         
                                     </div>

@@ -103,7 +103,7 @@ $(function () {
             },
         
             title: {
-                text: 'Product Sale :- Previous Month vs Current Month'
+                text: 'Product Sale :- Current Month'
             },
         
             xAxis: {
@@ -485,7 +485,7 @@ $(function () {
                                 {
                     type: 'column',
                     name: 'Engencard',
-                    color:'#808080',
+                    color:'#042c90',
                     borderRadius: '4',
                     data: engenCard
                 },

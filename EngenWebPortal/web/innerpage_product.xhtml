@@ -75,10 +75,11 @@
                             <ul class="resp-tabs-list">
                                 <!--
                                 <li id="tablist1">Product Type</li>
+                                <li id="tablist3" style="display: none">HQ Product</li>
                                 -->
                                
                                 <li id="tablist2">Branch Product</li>
-                                <li id="tablist3" style="display: none">HQ Product</li>
+                                
                             </ul>
                             
                             
@@ -214,13 +215,14 @@
                                     <!-- End CONTENTS -->
                                 </div>
                                 
+                                <!--
                                 <div id="tabcontent3">
-                                    <!-- CONTENTS-->
+                                    
                                     <div class="container-fluid">
                                         <div class="col-xs-12" style="display:inline-block;padding:10px;padding-top:25px;height:100%;">
                                             <div class="col-xs-12 col-sm-12 sholderinbox" style="margin:0px;margin-top:20px;padding:0px;min-height:400px;font-family:ubuntu;overflow-x:auto;">
                                                 <h2>PRODUCT LIST
-                                                    <!-- -->
+                                                    
                                                     <label class="form_toggle" for="formcontent-toggle">
                                                         <h:form >
                                                             <h:commandLink onclick="notifyEdit2()" id="addDetails2" style="color: #ffffff"> 
@@ -229,14 +231,14 @@
                                                             </h:commandLink>
                                                         </h:form>  
                                                     </label>
-                                                    <!-- -->
+                                                    
                                                     
                                                 </h2>
                                                 <span class="container-fluid" style="overflow: auto;">
                                                     <div  class="container-fluid" style="padding:10px;">
                                                         
                                                         
-                                                        <!-- Start DataTable-->  
+                                                        
                                                         
                                                         <h:panelGroup id="productsList">
                                                             <h:dataTable value="#{ProductBean.productList.productList}" var="pro"
@@ -267,11 +269,11 @@
                                                                 <h:column rendered="#{ProductBean.actionRendered}">
                                                                     <f:facet name="header">Actions</f:facet>
                                                                     <h:form >
-                                                                        <!--
+                                                                        
                                                                         <h:commandLink   onclick="notifiyViewDetails2()" id="viewDetails2"> <h:graphicImage value="images/icon_view.png" />
                                                                             <f:ajax event="click" listener="#{ProductBean.productForView(pro.productId)}" render="viewDetailsContentPanel2" />
                                                                         </h:commandLink>
-                                                                        -->
+                                                                        
                                                                         <h:commandLink onclick="notifyEdit2()"    id="editDetails" > <h:graphicImage value="images/icon_edit.png" />
                                                                             <f:ajax event="click"  listener="#{ProductBean.productForEdit(pro.productId)}" rendererType="postValidate" render=":editDetailsContentPanel2 :edit_form2" />
                                                                         </h:commandLink>
@@ -280,15 +282,15 @@
                                                                 </h:column>
                                                             </h:dataTable>
                                                         </h:panelGroup>    
-                                                        <!-- End DataTable--> 
+                                                        
                                                     </div>
                                                 </span>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- End CONTENTS -->
+                                    
                                 </div>
-                                
+                                -->
                                 
                                 
                             </div>

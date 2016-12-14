@@ -303,7 +303,7 @@ $(function () {
                 {
                     type: 'column',
                     name: 'Engencard',
-                    color:'#808080',
+                    color:'#042c90',
                     borderRadius: '4',
                     data: engenCard
                 },

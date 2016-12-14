@@ -1,13 +1,13 @@
 /*TANKS LEVELS*/
 
 window.onload = mySuperDiff;
-function mySuperDiff(tankId) {
+function mySuperDiff(tankId,maxCapacity,diffrence) {
     var theo = document.getElementById("quantity_theo"+tankId).value;
     var dip = document.getElementById("quantity_dip"+tankId).value;
-    document.getElementById("quantity_diff"+tankId).innerHTML = "" + theo - dip + "<span>&nbsp;L</span>";
-
-    var levelbg = (theo * 100) / 50000;
     
+    document.getElementById("quantity_diff"+tankId).innerHTML = "" + diffrence + "<span>&nbsp;</span>";
+    
+    var levelbg = (theo * 100) / maxCapacity;
     document.getElementById("levelbg"+tankId).style.height = "" + levelbg + "%";
 };
 
