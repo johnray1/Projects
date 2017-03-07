@@ -1,0 +1,219 @@
+
+
+/* PAYMENTS per TIME */
+$(function () {
+    $('#pay_per_time').highcharts({
+	chart: {
+            type: 'spline',
+            style: {	fontFamily: 'ubuntu'},
+        },
+        title: {
+            text: 'Payments per Month'
+        },
+        
+        xAxis: {
+            categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24','25','26','27','28','29','30','31',],
+            crosshair: true
+        },
+        
+        
+        yAxis: {
+            min: 0,
+            labels: {
+                align: 'right',
+                format: '{value:.,0f} RWF'
+            },
+            title: {
+                text: 'Amount in RWF'
+            }
+        },
+        
+        
+        tooltip: {
+            headerFormat: '<strong>Day : {point.key}</strong><br />',
+            pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:.1f} RWF</b></span><br />',
+            shared: true
+        },
+        
+        plotOptions: {
+            column: {
+                pointPadding: 0,
+                borderWidth: 0
+            }
+        },
+        
+        credits: {
+            enabled: false
+        },
+        
+        series: [{
+                name: 'MTN',
+                color: '#ffc508',
+                data: [214100, 254700, 321200, 355400, 385000, 377600, 400700, 435200, 391400, 391000, 330100, 405000, 470000, 280300, 291500, 311600, 300200, 311100, 320000, 330000, 420000, 422200, 422000, 390000, 390000, 350000, 395000, 340000, 370000,355500,410000]
+                
+            },{
+                name: 'TIGO',
+                color: '#193370',
+                data: [114100, 154007, 221002, 155400, 285000, 177006, 300007, 235002, 291400, 291000, 230001, 205000, 270000, 180003, 191005, 110016, 220000, 230000, 220000, 220022, 200220, 190000, 190000, 150000, 190050, 140000, 170000, 150055, 210000, 170000, 210000]
+                
+            }]
+    });
+});
+/* End PAYMENTS per TIME */
+
+
+
+/* PAYMENTS PSPs */
+$(function () {
+    
+    var mtnAmount = parseInt(mtn);
+    var tigoAmount = parseInt(tigo);
+    var airtelAmount = parseInt(airtel);
+    $('#pay_per_psps').highcharts({
+        
+        chart: {
+            type: 'column',
+            style: {	fontFamily: 'ubuntu'},
+        },
+        
+        title: {
+            fontSize:'14',
+            text: 'Payments per PSPs(Payment Service Providers)'
+        },
+        
+        xAxis: {
+            categories: ['MTN', 'TIGO']
+        },
+        
+        yAxis: {
+            min: 0,
+            labels: {
+                align: 'right',
+                format: '{value:.,0f} RWF'
+            },
+            title: {
+                text: 'Amount in RWF'
+            }
+        },
+        
+        credits: {
+            enabled: false
+        },
+        
+        tooltip: {
+            valueSuffix: ' RWF',
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b><br/>',
+            shared: true
+        },
+        
+        plotOptions: {
+            colorByPoint: true,
+            series: {
+                animation: {duration: 2000},
+            },
+            column: {
+                grouping: false,
+                shadow: false,
+                borderWidth: 0,				
+                dataLabels: {
+                    enabled: true,
+                    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b><br/>',
+                    format: '{point.y:,.0f} RWF'
+                }
+            }
+        },
+        
+        series: [{
+                showInLegend: false,   
+                name: 'AMOUNT',
+                colors: [
+                    '#ffc508', 
+                    '#193370'
+                ],
+                colorByPoint: true,
+                borderRadius: '0',
+                data: [mtnAmount, tigoAmount]
+            }]
+    });
+});
+
+
+/* PAYMENTS PRODUCTS */
+$(function () {
+    var dl = parseInt(dlight);
+    var an = parseInt(angaza);
+    var az = parseInt(azur);
+    $('#pay_per_products').highcharts({
+        
+        chart: {
+            type: 'column',
+            style: {	fontFamily: 'ubuntu'},
+        },
+        
+        title: {
+            fontSize:'14',
+            text: 'Payments per Products'
+        },
+        
+        xAxis: {
+            categories: ['D Light', 'Angaza', 'Azuri']
+        },
+        
+        yAxis: {
+            min: 0,
+            labels: {
+                align: 'right',
+                format: '{value:.,0f} RWF'
+            },
+            title: {
+                text: 'Amount in RWF'
+            }
+        },
+        
+        credits: {
+            enabled: false
+        },
+        
+        tooltip: {
+            valueSuffix: ' RWF',
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b><br/>',
+            shared: true
+        },
+        
+        plotOptions: {
+            colorByPoint: true,
+            series: {
+                animation: {duration: 2000},
+            },
+            column: {
+                grouping: false,
+                shadow: false,
+                borderWidth: 0,				
+                dataLabels: {
+                    enabled: true,
+                    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b><br/>',
+                    format: '{point.y:,.0f} RWF'
+                }
+            }
+        },
+        
+        series: [{
+                showInLegend: false,   
+                name: 'AMOUNT',
+                colors: [
+                    '#339999', 
+                    '#33cccc', 
+                    '#99cccc'
+                    /*, 
+			'#99ffff'
+                     */
+                ],
+                colorByPoint: true,
+                borderRadius: '0',
+                data: [dl, an, az]
+            }]
+    });
+});
+
+
+/* End PAYMENTS PSPs */

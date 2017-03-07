@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <h:form>
+                
+                <!-- HEADER -->
+                <div>
+                    <!-- Top Header -->
+                    <div class="container-fluid topheader" style="margin:0px;padding:0px;">
+                        
+                        <div>
+                            <div class="col-xs-3 col-sm-1 logo">
+                                <img src="images/header_logo.png" height="62" class="logo hidden-xs"/>
+                                <img src="images/header_logo.png" height="62" class="logo hidden-lg hidden-md hidden-sm visible-xs"/>
+                            </div>
+                            
+                            <div class="col-xs-9 col-sm-11 name"  style="margin:0px;padding:0px;border:0px solid red;">
+                                
+                                <strong class="col-xs-7 col-sm-5 col-md-5 col-lg-10 hidden-xs">Administration</strong> 
+                               
+                                <h:commandLink  class="col-xs-6 col-sm-4 col-md-4 col-lg-2 logout"  style="margin:0px;padding:0px;" action="#{LoginBean.logout()}">
+                                    <h:graphicImage value="images/icon_user.png" style="float: left"/>
+                                    <label>Welcome<strong>#{LoginBean.userName}</strong></label>
+                                </h:commandLink>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!-- End Top Header -->
+                    
+                    
+                    <!-- Menu -->
+                    <nav class="navbar navbar-default hidden-xs" style="background-color:#ffffff;height:65px;font-family:ubuntu;color:#ffffff;text-align:center;padding-bottom:0px;margin-bottom:0px;border-bottom:0px solid #1a8c35;border-radius:0px;">
+                        <div class="container-fluid" style="margin:0px;padding:0px;">
+                            
+                            <div class="col-xs-12" style="margin:0px;padding:0px;border:0px solid red;">		
+                                
+                                <ul class="mainmenu">
+                                    <li class="#{TemplateBean.dashboardClassName}">
+                                        <h:commandLink action="#{DashBean.dashBoard()}"  value="Dashboard"/>
+                                    </li>
+                                    
+                                    
+                                    <li class="#{TemplateBean.transactionClassName}">
+                                        <h:commandLink action="#{TransactionBean.transactions()}"  value="Transactions"/>
+                                    </li>
+                                    
+                                    <li class="#{TemplateBean.liquidClassName}">
+                                        <h:commandLink action="#{LiquidBean.liquids()}"  value="Liquidations"/>
+                                    </li>
+                                </ul>
+                                
+                            </div>
+                            
+                        </div>
+                    </nav>
+                    <!-- End Menu -->
+                    
+                </div>
+                <!-- End HEADER-->
+                
+                
+                <!-- HEADER MOB -->
+                <div class="col-xs-12 col-sm-12 col-md-12 visible-xs visible-sm hidden-md hidden-lg" style="margin:0px;padding:0px;">
+                    
+                    <nav class="screen">
+                        
+                        <div class="toggle col-xs-12" style="margin:0px;padding:0px;padding-left:18px;">
+                            <span class="col-xs-2" style="margin:0px;padding:0px;">Menu</span>
+                            <div class="col-xs-10 logomob" style="margin:0px;padding:0px;text-align:right">
+                                <img src="images/header_logo.png" height="62" style="margin-right:-30px " class="logo" />
+                                <strong>&nbsp;</strong> 
+                            </div>
+                        </div>
+                        
+                        <div class="menu-container">
+                            <ul class="menu visually-hidden">
+                                <li>
+                                    <h:commandLink action="#{DashBean.dashBoard()}"  value="Dashboard"/>
+                                </li>
+                                
+                                <li>
+                                    <h:commandLink action="#{TransactionBean.transactions()}"  value="Transactions"/>
+                                </li>
+                                <li>
+                                    <h:commandLink action="#{LiquidBean.liquids()}"  value="Liquidations"/>
+                                </li>
+                                <li>
+                                    <h:commandLink action="#{LoginBean.logout()}"  value="Logout"/>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="screenbox"> &nbsp; </div>
+                        
+                    </nav>
+                    
+                </div>
+                <!-- End HEADER MOB-->
+                
+            </h:form>
+        </ui:composition>
+    </h:body>
+</html>
+

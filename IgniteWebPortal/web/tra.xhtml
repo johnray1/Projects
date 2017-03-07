@@ -1,0 +1,384 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>Transactions - IGNITE Rwanda...</title>
+        
+        <!--  -->
+        
+        <link href="css/style.css" rel="stylesheet"/>
+        <link href="css/menu.css" rel="stylesheet"/>
+        <link href="css/tanks.css" rel="stylesheet"/>
+        <link href="css/topheader.css" rel="stylesheet"/>
+        <link href="css/bootstrap.css" rel="stylesheet"/>
+        <link href="css/footer.css" rel="stylesheet"/>
+        <link href="css/filter.css" rel="stylesheet"/>
+        <link href="css/mobmenu.css" rel="stylesheet"/>
+        <link href="css/message.css" rel="stylesheet"/>
+        
+        <link href="css/subsim.css" rel="stylesheet"/>
+        
+        <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>	
+        <script type="text/javascript" src="js/bootstrap.min2.js"></script>
+        
+        
+        
+        
+        <!-- DatePicker -->
+        <script type="text/javascript" src="js/datepicker/moment.min.js"></script>
+        <script type="text/javascript" src="js/datepicker/daterangepicker.js"></script>
+        <script type="text/javascript" src="js/datepicker/chosen.jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="js/datepicker/daterangepicker.css" />
+        <link rel="stylesheet" type="text/css" href="js/datepicker/chosen.css" />
+        
+        
+        <script type="text/javascript">
+            $(function() {
+                
+                $('#form\\:daterangepicker').daterangepicker({
+                    "showDropdowns": true,
+                    autoUpdateInput: true,
+                    "timePicker": true,
+                    "timePicker24Hour": true,
+                    "autoApply": true,
+                    ranges: {
+                        'Today': [moment(), moment()],
+                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')] 
+                    },
+                    "locale": {
+                        "format": "YYYY/MM/DD  HH:mm",
+                        "separator": " - ",
+                        "applyLabel": "Apply",
+                        "cancelLabel": "Cancel",
+                        "fromLabel": "From",
+                        "toLabel": "To",
+                        "customRangeLabel": "Custom",
+                        "daysOfWeek": [
+                            "Su",
+                            "Mo",
+                            "Tu",
+                            "We",
+                            "Th",
+                            "Fr",
+                            "Sa"
+                        ],
+                        "monthNames": [
+                            "January",
+                            "February",
+                            "March",
+                            "April",
+                            "May",
+                            "June",
+                            "July",
+                            "August",
+                            "September",
+                            "October",
+                            "November",
+                            "December"
+                        ],
+                        "firstDay": 1
+                    },
+                    
+                    "opens": "center"
+                }, 
+                
+                function(start, end, label) {
+                    console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
+                });
+                
+                $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
+                    $(this).val(picker.startDate.format('MM/DD/YYYY h:mm A') + ' - ' + picker.endDate.format('MM/DD/YYYY h:mm A'));
+                });
+                
+                $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
+                    $(this).val('');
+                });
+            });
+        </script>
+        <!-- DatePicker -->
+        
+        
+        <link href="js/datatable/jquery.dataTables.min.css" rel="stylesheet" />
+        <link href="js/datatable/buttons.dataTables.min.css" rel="stylesheet" />
+        <script type="text/javascript" src="js/datatable/jquery.dataTables.min.js"></script>	
+        <script type="text/javascript" src="js/datatable/dataTables.buttons.min.js"></script>	
+        <script type="text/javascript" src="js/datatable/buttons.flash.min.js"></script>	
+        <script type="text/javascript" src="js/datatable/jszip.min.js"></script>	
+        <script type="text/javascript" src="js/datatable/pdfmake.min.js"></script>	
+        <script type="text/javascript" src="js/datatable/vfs_fonts.js"></script>	
+        <script type="text/javascript" src="js/datatable/buttons.html5.min.js"></script>
+        <script type="text/javascript" src="js/datatable/customScripts.js" ></script>
+        <script>
+            
+            $(document).ready(function() {
+                turn2DataTable('dataTableList');
+            } );
+            
+        </script>
+        
+        <link type="text/css" href="js/lightcase/lightcase.css" rel="stylesheet"  />
+        <script type="text/javascript" src="js/lightcase/lightcase.js"></script>
+        <script type="text/javascript" src="js/lightcase/lightcase.init.js"></script>
+        
+        
+        
+    </h:head>
+    <h:body>
+        <ui:include src="templates/header.xhtml" /> 
+        
+        <div class="clear"></div> <br/><br/>
+        
+        <!--FILTER START-->
+        <div class="col-xs-12 col-sm-12 thebox">
+            
+            <div class="col-xs-12 col-sm-12 dashboardbox" style="margin:0px;padding:0px;min-height:100px;">                        
+                
+                <h2>Filter Transaction</h2>
+                
+                <!-- FORM -->
+                <h:form id="form" class="container-fluid sforminput"  style="margin:0px;padding:17px;">
+                    
+                    <div class="col-xs-12 col-sm-6 stextinput" style="margin:0px;padding:0px;">
+                        <h:selectOneMenu  class="chosen-select" value="#{TransactionBean.subMerchantLength}">
+                            <f:selectItem itemLabel="SUB COMPANY"/>
+                            <f:selectItem itemLabel="DLight" itemValue="9"/>
+                            <f:selectItem itemLabel="Azur" itemValue="8"/>
+                            <f:selectItem itemLabel="Angaza" itemValue="7"/>
+                            
+                        </h:selectOneMenu>
+                    </div>
+                    
+                    <div class="col-xs-12 col-sm-6 stextinput" style="margin:0px;padding:0px;">
+                        <h:selectOneMenu  class="chosen-select" value="#{TransactionBean.paymentMode}">
+                            <f:selectItem itemLabel="PAYMENT MODE"/>
+                            <f:selectItem itemLabel="MTN" itemValue="2484"/>
+                            <f:selectItem itemLabel="TIGO" itemValue="3382"/>
+                        </h:selectOneMenu>
+                    </div>
+                    
+                    
+                    
+                    <!-- DateRange -->
+                    <div class="col-xs-12 col-sm-12 stextinput_date">
+                        <h:inputText id="daterangepicker" value="#{TransactionBean.filterDate}"/>
+                    </div>	
+                    <!-- End DateRange -->
+                    
+                    <div class="col-xs-12 col-sm-12 ssubmitinputin">
+                        <h:commandButton  value="Filter" class="ssubmitinputin" action="#{TransactionBean.filterTransactions()}"/>
+                    </div>
+                    
+                </h:form>
+                <!-- End FORM -->	
+                
+            </div>
+        </div>
+        <!--FILTER END-->
+        
+        
+        <!-- CONTENTS-->
+        <div class="container-fluid" style="padding:0px;margin:0px;">
+            <div class="col-xs-12" style="padding:0px;padding-top:25px;padding-bottom:25px;height:100%;">
+                
+                <!-- In -->
+                <div class="col-xs-12" style="float: none;margin: 0 auto;padding:5px;min-height:600px;border:0px solid #f0f0f0;overflow-x:auto;font-family:ubuntu;">
+                    
+                    <div class="col-xs-12 col-sm-12 col-md-12 holderbox">
+                        <div class="col-xs-12 col-sm-12 holderinbox" style="margin:0px;padding:0px;min-height:200px;border:0px solid red;">
+                            
+                            <!-- TABS -->
+                            <div class="col-xs-12 col-sm-12 thebox" style="border:0px solid red;margin-top: 30px">
+                                
+                                <div id="tabcontent1">
+                                    <!-- In -->
+                                    <div class="col-xs-12" style="float: none;margin: 0 auto;padding:5px;min-height:400px;border:0px solid #f0f0f0;overflow-x:auto;font-family:ubuntu;">
+                                        <div class="container-fluid" style="padding:0px;font-family:ubuntu;">
+                                            
+                                            <!--table start--> 
+                                            
+                                            <h:dataTable value="#{TransactionBean.paymentsTransactionsList.txList}" var="tx"
+                                                         id="dataTableList"
+                                                         styleClass="display" 
+                                                         cellspacing="0" 
+                                                         width="100%" 
+                                                         style="padding: 0px;">
+                                                <h:column>
+                                                    <f:facet name="header">Time</f:facet>
+                                                        #{tx.statusUpdateTime} 
+                                                </h:column>
+                                                
+                                                <h:column>
+                                                    <f:facet name="header">Txn No.</f:facet>
+                                                        #{tx.merchantTransactionId}  
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">Sub Company</f:facet>
+                                                    <h:outputText rendered="#{tx.merchantTransactionId.length() == 9}" value="DLight" />
+                                                    <h:outputText rendered="#{tx.merchantTransactionId.length() == 8}" value="Azur"/>
+                                                    <h:outputText rendered="#{tx.merchantTransactionId.length() == 7}" value="Angaza"/>
+                                                </h:column>
+                                                
+                                                <h:column>
+                                                    <f:facet name="header">Amount</f:facet>
+                                                        #{tx.amount}  
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">Payment Mode</f:facet>
+                                                        #{tx.paymentSpName}  
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">Phone No</f:facet>
+                                                        #{tx.customerAccountIdAtPaymentSp}  
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">Status</f:facet>
+                                                    <h:outputText  value="#{tx.statusDesc}" rendered="#{tx.status == 100}" class="Success"/>
+                                                    <h:outputText  value="#{tx.statusDesc}" rendered="#{tx.status != 100}" class="Failed"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">Details</f:facet>
+                                                    <h:form>
+                                                        <h:commandLink onclick="notifiyViewDetails()" id="viewDetails" > 
+                                                            <h:graphicImage value="images/icon_view.png" />
+                                                            <f:ajax event="click" listener="#{TransactionBean.transactionForView(tx)}" render="viewDetailsContentPanel" />
+                                                        </h:commandLink>
+                                                    </h:form>   
+                                                </h:column>
+                                                
+                                            </h:dataTable>
+                                            
+                                            <!--table end-->
+                                            
+                                        </div>
+                                    </div>
+                                    <!-- In End-->
+                                </div>
+                                
+                            </div>
+                            <!-- TABS END -->
+                            
+                        </div>
+                    </div>
+                </div>
+                <!-- In END-->
+                
+                
+                
+            </div>
+        </div>
+        <!-- CONTENTS END-->
+        <div id="viewDetailsContent" style="display: none">
+            <h:panelGroup id="viewDetailsContentPanel" >
+                <ui:include src="popup/tra_view.xhtml" />
+            </h:panelGroup>
+        </div>
+        
+        
+        <script type="text/javascript">
+            
+            var showDetails=false;
+            var showAdd=false;
+            var showEdit=false;
+            var turnDataTable=false;
+            var content2Show="";
+            
+            function notifiyViewDetails(){
+                showDetails=true;
+                showAdd=false;
+                showEdit=false;
+                
+            }
+            
+            function notifyAdd(){
+                showAdd=true;
+                showEdit=false;
+                showDetails=false;
+            }
+            
+            function notifyEdit(){
+                showEdit=true;
+                showAdd=false;
+                showDetails=false;
+            }
+            
+            function notifiyDatatableRefresh(){
+                
+                turnDataTable=true;
+            }
+            
+            jsf.ajax.addOnEvent(function(data) { 
+                
+                switch (data.status) { 
+                    
+                    case "begin": // This is called right before ajax request is been sent.
+                        
+                        break;
+                    
+                    case "complete": // This is called right after ajax response is received.
+                        
+                        break;
+                    
+                    case "success": // This is called when ajax response is successfully processed.
+                        
+                        lightcase.start({
+                            href: '#',
+                            transition: 'scrollTop',
+                            speedIn:'600',
+                            speedOut:'600',
+                            forceWidth:true,
+                            swipe: true,
+                            useKeys: true,
+                            overlayOpacity:0.8,
+                            title:'',
+                            showSequenceInfo: false,
+                            inline: {
+                                width:'577',
+                                height:'auto'
+                            },
+                            onFinish: {
+                                function () {
+                                    
+                                    if(showDetails){
+                                        content2Show= $('#viewDetailsContentPanel').html();
+                                    }
+                                    
+                                    if(showAdd){
+                                        content2Show= $('#addDetailsContentPanel').html();
+                                    }
+                                    
+                                    if(showEdit){
+                                        content2Show= $('#editDetailsContentPanel').html();
+                                    }
+                                    
+                                    if(turnDataTable){
+                                        turn2DataTable('dataTableList');
+                                        turnDataTable=false;
+                                    }
+                                    
+                                    lightcase.get('contentInner').children().html(content2Show);
+                                    lightcase.resize();
+                                }
+                            }
+                        });
+                        
+                        break;
+                }
+            });
+            
+            
+            
+        </script> 
+    </h:body>
+</html>
+

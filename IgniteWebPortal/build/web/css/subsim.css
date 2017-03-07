@@ -1,0 +1,161 @@
+.subsim{    
+	background-color: #ffffff;
+    border: 2px solid #2e7e99;
+	border-radius:0px;
+    margin: 0px;
+    padding: 7px;
+    padding-left: 0px;
+    padding-right: 10px;
+	min-height:230px;
+	}
+
+.subsim h3{margin:0px;padding:7px;padding-bottom:17px;color:#2e7e99;font-size:23px;text-align:center;}
+.subsim:hover h3{margin:0px;padding:7px;padding-bottom:17px;color:#000000;font-size:23px;font-weight:bold;text-align:center;}
+
+div.subsimt{margin:0px;padding:0px;border:0px solid red;text-align:center;}
+div.subsimt h5{margin:0px;padding:0px;color:#999999;text-transform:uppercase;font-size:13px;font-weight:bold;text-align:center;}
+div.subsimt h4{margin:0px;padding:7px;color:#2e3a93;text-transform:uppercase;font-size:43px;font-weight:bold;text-align:center;}
+div.subsimt h6{margin:0px;padding:7px;color:#5b5b5b;font-size:17px;font-style:italic;font-weight:bold;text-align:center;}
+
+div.subsimt label.fails{display:inline-block;width:150px;margin:35px;padding:15px;font-size:16px;font-weight:bold;text-align:center;color:red;border:1px solid red;}
+div.subsimt label.fails:before{color: red;font-family:fontawesome;  content: "\f00d";  font-size: 14px; float:left; font-weight: normal;text-rendering: auto;  -webkit-font-smoothing: antialiased;}
+
+div.subsimt label.success{display:inline-block;width:150px;margin:35px;padding:15px;font-size:16px;font-weight:bold;text-align:center;color:green;border:1px solid green;}
+div.subsimt label.success:before{color:green;font-family:fontawesome;  content: "\f00c";  font-size: 14px; float:left; font-weight: normal;text-rendering: auto;  -webkit-font-smoothing: antialiased;}
+
+
+
+div.subsims{margin:0px;padding:0px;padding-left:10px;border-left:2px solid #f0f0f0;}
+div.subsims p{margin:0px;padding:0px;color:#999999;text-transform:uppercase;font-size:13px;font-weight:bold;text-align:left;}
+div.subsims p strong{display:block;margin:0px;padding:7px;color:#2e7e99;text-transform:uppercase;font-size:30px;font-weight:bold;text-align:left;}
+
+
+.infomain{    
+	background-color: #ffffff;
+    border: 2px solid #2e7e99;
+	border-radius:0px;
+    margin: 0px;
+    padding: 7px;
+    padding-left: 0px;
+    padding-right: 10px;
+	min-height:270px;
+	}
+
+.infomain h3{margin:0px;padding:7px;padding-bottom:17px;color:#2e7e99;font-size:23px;text-align:center;}
+
+div.infomain h5{margin:0px;padding:0px;color:#999999;text-transform:uppercase;font-size:13px;font-weight:bold;text-align:center;}
+div.infomain h4{margin:0px;padding:7px;color:#000000;text-transform:uppercase;font-size:50px;font-weight:bold;text-align:center;}
+div.infomain h6{margin:0px;padding:7px;color:#2e7e99;text-transform:uppercase;font-size:30px;font-weight:bold;text-align:center;}
+div.infomain h4 em, h6 em{color:#dbdbdb;text-transform:uppercase;font-size:20px;}
+
+div.infomain h6.success{color:green;}
+div.infomain h6.success:before{color:green;font-family:fontawesome;  content: "\f00c";  font-size: 27px; float:left; font-weight: normal;text-rendering: auto;  -webkit-font-smoothing: antialiased;}
+
+div.infomain h6.fails{color:red;}
+div.infomain h6.fails:before{color: red;font-family:fontawesome;  content: "\f00d";  font-size: 27px; float:left; font-weight: normal;text-rendering: auto;  -webkit-font-smoothing: antialiased;}
+
+
+div.infomain hr{border:1px solid #f3f3f3;margin-top:3px;}
+
+
+
+
+.infomainh{    
+	background-color: #ffffff;
+    border: 2px solid #2e3a93;
+	border-radius:7px;
+    margin: 0px;
+    padding: 7px;
+    padding-left: 0px;
+    padding-right: 10px;
+	min-height:250px;
+	position:relative;
+	}
+
+.infomainh h3{margin:0px;padding:7px;padding-bottom:17px;color:#2e3a93;font-size:23px;text-align:center;}
+
+div.infomainh h5{margin:0px;padding:0px;color:#999999;text-transform:uppercase;font-size:13px;font-weight:bold;text-align:center;}
+div.infomainh h4{margin:0px;padding:7px;color:#2e3a93;text-transform:uppercase;font-size:43px;line-height:100px;font-weight:bold;text-align:center;}
+
+.infomainhh{    
+    border:0px solid red;
+    margin: 0px;
+    padding:0px;
+	min-height:180px;
+	position:relative;
+	}
+
+.infomainhh > span.date{display:block;position:absolute;bottom:0px;margin:0px;padding:7px;color:#acacac;font-size:14px;text-align:center;border:0px solid #dadada;}
+
+div.infomainh hr{margin-top:3px;}
+
+
+
+
+/*MEDIAQUERIES*/
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+div.subsimt h4{margin:0px;padding:7px;color:#000000;text-transform:uppercase;font-size:43px;font-weight:bold;text-align:center;}
+
+.subsim h3{margin:0px;padding:7px;padding-left:33px;padding-bottom:17px;color:#2e7e99;font-size:20px;text-align:center;}
+.subsim:hover h3{margin:0px;padding:7px;padding-left:33px;padding-bottom:17px;color:#000000;font-size:20px;font-weight:bold;text-align:center;}
+
+div.subsims p{margin:0px;margin-bottom:27px;padding:0px;color:#999999;text-transform:uppercase;font-size:13px;font-weight:bold;text-align:left;}
+div.subsims p strong{display:block;margin:0px;padding:7px;color:#2e7e99;text-transform:uppercase;font-size:22px;font-weight:bold;text-align:left;}
+
+div.subsimt label.success{margin: 17px;}
+div.subsimt label.fails{margin: 17px;}
+
+.holderbox_summary { display: inline-block; padding: 2px;margin-bottom:27px;}
+
+div.infomain h6.success:before {
+    color: green;
+    font-family: fontawesome;
+    content: "\f00c";
+    font-size: 27px;
+    float: none;
+    font-weight: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;}
+
+div.infomain h6.fails:before {
+    color: red;
+    font-family: fontawesome;
+    content: "\f00d";
+    font-size: 27px;
+    float:none;
+    font-weight: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+}
+
+
+
+@media only screen and (min-width :480px) and (max-width : 768px) {
+
+}
+
+
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-width : 768px) and (max-width : 1024px) {
+
+}
+
+
+
+/* Desktops and laptops ----------- */
+@media only screen  and (min-width : 1224px) {
+
+}
+
+
+
+
+/* Large screens ----------- */
+@media only screen  and (min-width : 1824px) {
+
+}

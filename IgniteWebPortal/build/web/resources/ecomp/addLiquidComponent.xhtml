@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite">
+          
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="popupLabel" />
+        <cc:attribute name="telcoName" />
+        <cc:attribute name="amount" />
+        <cc:attribute name="refType" />
+        <cc:attribute name="refNo" />
+        <cc:attribute name="saveActionName" />
+        <cc:attribute name="saveButtonAction" 
+                      method-signature="java.lang.String update()"/>
+        <cc:attribute name="renderedOnsuccess" />
+    </cc:interface>
+        
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        
+        <div class="container-fluid" style="margin:0px;padding:0px;border:0px solid red;;min-height:300px;">
+            
+            <div class="col-xs-12 col-sm-12 holderinbox_popup" style="margin:0px;padding:0px;">
+                <h2 style="text-align:center;font-size:18px;">#{cc.attrs.popupLabel}</h2>
+                    
+                <!-- FORM -->
+                <div class="col-xs-12 theinput">
+                    <h:outputLabel value="TELCO NAME"/>
+                    <h:inputText id="field1" value="#{cc.attrs.telcoName}"/>
+                </div>
+                <div class="col-xs-12 theinput">
+                    <h:outputLabel value="AMOUNT"/>
+                    <h:inputText id="field2" value="#{cc.attrs.amount}"/>
+                </div>
+                <div class="col-xs-12 selectinput">
+                    <h:outputLabel value="REF TYPE"/>
+                    <h:selectOneMenu value="#{cc.attrs.refType}" >
+                        <f:selectItem itemLabel="Cheque" itemValue="Cheque"/>
+                        
+                    </h:selectOneMenu>
+                </div>
+                <div class="col-xs-12 theinput">
+                    <h:outputLabel value="REF NO."/>
+                    <h:inputText id="field4" value="#{cc.attrs.refNo}"/>
+                </div>
+                <div  class="col-xs-12 submitinput" >
+                    <h:commandButton onclick="notifiyViewDetails(); notifiyDatatableRefresh();" value="#{cc.attrs.saveActionName}" action="#{cc.attrs.saveButtonAction}">
+                        <f:ajax execute="@form" render="#{cc.attrs.renderedOnsuccess}" />
+                    </h:commandButton>
+                </div>
+                    
+                    
+                <!-- End FORM -->
+                    
+                    
+            </div>
+        </div>
+    </cc:implementation>
+</html>

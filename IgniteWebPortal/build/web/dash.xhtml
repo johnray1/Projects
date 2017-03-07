@@ -1,0 +1,334 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>IGNITE Rwanda</title>
+        
+        <!--  -->
+        
+        <link href="css/style.css" rel="stylesheet"/>
+        <link href="css/menu.css" rel="stylesheet"/>
+        <link href="css/tanks.css" rel="stylesheet"/>
+        <link href="css/topheader.css" rel="stylesheet"/>
+        <link href="css/bootstrap.css" rel="stylesheet"/>
+        <link href="css/footer.css" rel="stylesheet"/>
+        <link href="css/filter.css" rel="stylesheet"/>
+        <link href="css/mobmenu.css" rel="stylesheet"/>
+        <link href="css/message.css" rel="stylesheet"/>
+        
+        <link href="css/subsim.css" rel="stylesheet"/>
+        
+        <script type="text/javascript" src="js/jquery-1.12.0.min.js"></script>	
+        <script type="text/javascript" src="js/bootstrap.min2.js"></script>
+        
+        <!-- Chart -->
+        <script>
+            var mtn="#{DashBean.chartMtnSuccessDashboardItemTotals.sum.longValue()}";
+            var tigo="#{DashBean.chartTigoSuccessDashboardItemTotals.sum.longValue()}";
+            var airtel="#{DashBean.chartAirtelSuccessDashboardItemTotals.sum.longValue()}";
+            var dlight="#{DashBean.sumDlight.longValue()}";
+            var azur="#{DashBean.sumAzur.longValue()}";
+            var angaza="#{DashBean.sumAngaza.longValue()}";
+        </script> 
+        <script src="js/charts.js" type="text/javascript"></script>
+        <script src="js/highcharts.js"></script>
+        <script src="js/exporting.js"></script>
+         <!-- Chart End-->
+        
+        <!-- DatePicker -->
+        <script type="text/javascript" src="js/datepicker/moment.min.js"></script>
+        <script type="text/javascript" src="js/datepicker/daterangepicker.js"></script>
+        <script type="text/javascript" src="js/datepicker/chosen.jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="js/datepicker/daterangepicker.css" />
+        <link rel="stylesheet" type="text/css" href="js/datepicker/chosen.css" />
+        
+        
+        
+        <script type="text/javascript">
+            $(function() {
+                
+                $('#form\\:daterangepicker').daterangepicker({
+                    "showDropdowns": true,
+                    autoUpdateInput: true,
+                    "timePicker": true,
+                    "timePicker24Hour": true,
+                    "autoApply": true,
+                    ranges: {
+                        'Today': [moment(), moment()],
+                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')] 
+                    },
+                    "locale": {
+                        "format": "YYYY/MM/DD  HH:mm",
+                        "separator": " - ",
+                        "applyLabel": "Apply",
+                        "cancelLabel": "Cancel",
+                        "fromLabel": "From",
+                        "toLabel": "To",
+                        "customRangeLabel": "Custom",
+                        "daysOfWeek": [
+                            "Su",
+                            "Mo",
+                            "Tu",
+                            "We",
+                            "Th",
+                            "Fr",
+                            "Sa"
+                        ],
+                        "monthNames": [
+                            "January",
+                            "February",
+                            "March",
+                            "April",
+                            "May",
+                            "June",
+                            "July",
+                            "August",
+                            "September",
+                            "October",
+                            "November",
+                            "December"
+                        ],
+                        "firstDay": 1
+                    },
+                    
+                    "opens": "center"
+                }, 
+                
+                function(start, end, label) {
+                    console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
+                });
+                
+                $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
+                    $(this).val(picker.startDate.format('MM/DD/YYYY h:mm A') + ' - ' + picker.endDate.format('MM/DD/YYYY h:mm A'));
+                });
+                
+                $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
+                    $(this).val('');
+                });
+            });
+        </script>
+        <!-- DatePicker -->
+    </h:head>
+    <h:body>
+        <ui:include src="templates/header.xhtml" /> 
+        
+        <!-- SEARCH -->
+        <div class="col-xs-12 col-sm-12 col-md-12 holderbox_summary" style="margin-top:0px;">
+            <div class="col-xs-12 col-sm-12 holderbox">
+                <span class="col-xs-12 " style="margin:0px;padding:0px;min-height:100px;">
+                    
+                    
+                    <!--  -->
+                    <div class="col-xs-12 col-sm-12 col-md-12 ">
+                        <span style="display:block;margin:0px;padding:2px;text-align: center;font-size: 15px;color: #c0c0c0;">TELECOM ACCOUNT STATUS</span>
+                        
+                        <div class="col-xs-12 col-sm-12 col-md-1"></div>
+                        
+                        <div class="col-xs-12 col-sm-12 col-md-10">
+                            <div class="hqsales pmtn"><label>@ MTN </label>
+                                <span class="col-xs-12 col-sm-6 cash_collected">
+                                    <div>COLLECTED AMOUNT per last liquidation<strong><h:outputText value="#{LiquidBean.totalLiquidAmount}"><f:convertNumber integerOnly="true"/></h:outputText> <span>RWF</span></strong> </div> 
+                                    <div>ALL COMMISION 3%<strong><h:outputText value="#{DashBean.mtnSuccessDashboardItemTotals.sum * .03}"><f:convertNumber integerOnly="true"/></h:outputText> <span>RWF</span></strong></div> </span>
+                                <span class="col-xs-12 col-sm-6 cash_liquidate">
+                                    <div class="mtn">AVAILABLE AMOUNT TO LIQUIDATE<strong><h:outputText value="#{DashBean.mtnSuccessDashboardItemTotals.sum-LiquidBean.totalLiquidAmount}"><f:convertNumber integerOnly="true"/></h:outputText><span>RWF</span></strong> </div> 
+                                    <div class="date">Latest Liquidation: <b><h:outputText value="#{LiquidBean.latestLiquidAmount}"><f:convertNumber integerOnly="true"/></h:outputText> RWF</b><b>dd/mm/yyyy</b> <b class="status_success">SUCCESSFUL</b></div> 
+                                </span>
+                            </div>
+                        </div>                         
+                        
+                        
+                        <div class="col-xs-12 col-sm-12 col-md-1"></div>
+                        
+                    </div>
+                    <!--  -->
+                    
+                </span>
+            </div>
+        </div>
+        <!-- SEARCH -->
+        
+        
+        <div class="clear"></div>
+        
+        
+        <!-- FILTER -->
+        <div class="container-fluid filterbox">
+            <div class="col-xs-12" style="margin:0px;padding:0px;background-color:#f4f4f4;">
+                
+                <span  class="col-xs-12 col-sm-12 col-md-5" style="margin:0px;padding:0px;border:0px solid red;">
+                    <h:form>
+                        <h:commandLink class="#{TemplateBean.overall}" value="Over All" action="#{DashBean.dashFilter(5)}"/>
+                        <h:commandLink class="#{TemplateBean.today}" value="Today" action="#{DashBean.dashFilter(1)}"/>
+                        <h:commandLink class="#{TemplateBean.week}" value="This Week" action="#{DashBean.dashFilter(3)}"/>
+                        <h:commandLink class="#{TemplateBean.month}" value="This Month" action="#{DashBean.dashFilter(4)}"/>
+                    </h:form>
+                </span>
+                
+                <span  class="col-xs-12 col-sm-12 col-md-7 customdate" style="margin:0px;padding:0px;border:0px solid green;">
+                    <!-- FORM -->
+                    
+                    <h:form id="form"  class="container-fluid sforminput"  style="margin:0px;padding:0px;">
+                        
+                        <div class="col-xs-12 col-sm-8 stextinput_date">
+                            <h:inputText id="daterangepicker" value="#{DashBean.date}"/>
+                        </div>	
+                        
+                        <div class="col-xs-12 col-sm-4 ssubmitinput" style="margin:0px;padding:0px;">
+                            <h:commandButton  action="#{DashBean.dashFilter(0)}" value="Filter" class="ssubmitinput"/>
+                        </div>
+                        
+                    </h:form>
+                    
+                    <!-- End FORM -->
+                </span>
+                
+                
+            </div>
+        </div>
+        <!-- END FILTER -->
+        
+        
+        
+        <div class="clear"></div>
+        
+        
+        <!-- CONTENTS-->
+        <div class="container-fluid">
+            <div class="col-xs-12" style="padding:10px;padding-top:25px;padding-bottom:25px;height:100%;">
+                
+                
+                <!-- In -->
+                <div class="col-xs-12" style="float: none;margin: 0 auto;padding:5px;min-height:600px;border:0px solid #f0f0f0;overflow-x:auto;font-family:ubuntu;">
+                    
+                    
+                    
+                    <!--  -->
+                    <div class="col-xs-12 col-sm-12 col-md-12 holderbox">
+                        <div class="col-xs-12 col-sm-12 holderinbox" style="margin:0px;padding:0px;min-height:200px;border:0px solid red;">
+                            
+                            <!-- INFOS  -->
+                            
+                            <!--  -->
+                            <div class="col-xs-12 col-sm-12 col-md-6 holderbox_summary" >
+                                <div class="col-xs-12 col-sm-12 infomain">
+                                    <h3>Transactions Counts</h3>
+                                    
+                                    <span class="col-xs-12 " style="margin:0px;padding:0px;">
+                                        
+                                        <div class="col-xs-12 subsimt">
+                                            <h4>#{DashBean.dashboardItemTotals.count}</h4>
+                                            <label class="success">#{DashBean.successDashboardItemTotals.count}</label>
+                                            <label class="fails">#{DashBean.dashboardItemTotals.count-DashBean.successDashboardItemTotals.count}</label>
+                                        </div>
+                                        
+                                        
+                                    </span>
+                                    
+                                </div>
+                            </div>
+                            <!--  -->
+                            
+                            
+                            <!--  -->
+                            <div class="col-xs-12 col-sm-12 col-md-6 holderbox_summary" >
+                                <div class="col-xs-12 col-sm-12 infomain">
+                                    <h3>Transactions Equivalent Amount</h3>
+                                    
+                                    <span class="col-xs-12 " style="margin:0px;padding:0px;">
+                                        
+                                        <div class="col-xs-12">
+                                            <h4><h:outputText value="#{DashBean.dashboardItemTotals.sum}"><f:convertNumber integerOnly="true"/></h:outputText> <em>RWF</em></h4>
+                                            <hr></hr>
+                                            <div class="col-xs-6">
+                                                <h5>Succeeded Equivalent </h5>
+                                                <h6 class="success"> <h:outputText value="#{DashBean.successDashboardItemTotals.sum}"><f:convertNumber integerOnly="true"/></h:outputText> <em>RWF</em></h6>
+                                            </div>
+                                            
+                                            <div class="col-xs-6">
+                                                <h5> Failed Equivalent</h5>
+                                                <h6 class="fails"><h:outputText value="#{DashBean.dashboardItemTotals.sum-DashBean.successDashboardItemTotals.sum}"><f:convertNumber integerOnly="true"/></h:outputText> <em>RWF</em></h6>
+                                            </div>
+                                            
+                                        </div>	
+                                        
+                                    </span>
+                                    
+                                </div>
+                            </div>
+                            <!--  -->
+                            
+                            
+                            <!-- INFOS END  -->
+                            
+                            
+                            <!-- CHART  -->
+                           
+                            <!--  -->
+                            <div class="col-xs-12 col-sm-12 col-md-6 holderbox_summary" style="margin-top:17px;" >
+                                <div class="col-xs-12 col-sm-12 infomain">
+                                    <span class="col-xs-12 " style="margin:0px;padding:0px;min-height:400px;">
+                                        
+                                        <div id="pay_per_products" style="height: 500px; margin: 0 auto"></div>
+                                        
+                                    </span>
+                                </div>
+                            </div>
+                            <!--  -->
+                            
+                            
+                            <!--  -->
+                            <div class="col-xs-12 col-sm-12 col-md-6 holderbox_summary" style="margin-top:17px;" >
+                                <div class="col-xs-12 col-sm-12 infomain">
+                                    <span class="col-xs-12 " style="margin:0px;padding:0px;min-height:400px;">
+                                        
+                                        <div id="pay_per_psps" style="height: 500px; margin: 0 auto"></div>
+                                            
+                                    </span>
+                                </div>
+                            </div>
+                            <!--  -->
+                            
+                             <!--
+                            <div class="col-xs-12 col-sm-12 col-md-12 holderbox_summary" style="margin-top:17px;" >
+                                <div class="col-xs-12 col-sm-12 infomain">
+                                    <span class="col-xs-12 " style="margin:0px;padding:0px;min-height:400px;">
+                                        
+                                        <div id="pay_per_time" style="height: 500px; margin: 0 auto"></div>
+                                            
+                                    </span>
+                                </div>
+                            </div>
+                             -->
+                            
+                            <!-- CHART  -->
+                            
+                            
+                            
+                            
+                            
+                        </div>
+                    </div>
+                    <!--  -->
+                </div>
+                
+            </div>
+        </div>
+        <!-- End CONTENTS- -->
+        
+        
+        <div class="clear"></div>
+        
+        
+    </h:body>
+</html>
+

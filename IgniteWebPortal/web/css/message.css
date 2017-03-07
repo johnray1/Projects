@@ -1,0 +1,16 @@
+.messagebox{margin:0px;padding:2px;border:0px solid red;}
+.messageinbox{margin:0px;padding:0px;min-height:70px;border:2px solid red;}
+.messageinbox p{margin:0px;padding:7px;text-align:center;color:red;font-size:17px;font-style:italic;font-family:ubuntu;}
+.messageinbox span.closediv{display:block;position:absolute;right:0px;float:right;width:17px;height:17px;background-color:red;margin:4px;padding:0px;color:white;text-align:center;color:#ffffff;font-size:13px;font-family:ubuntu;cursor:pointer;}
+.messageinbox:hover span.closediv{display:block;position:absolute;right:0px;float:right;width:17px;height:17px;background-color:#000000;margin:4px;padding:0px;color:white;text-align:center;color:#ffffff;font-size:13px;font-family:ubuntu;cursor:pointer;}
+
+
+.messagemobbox{margin:0px;padding:2px;border:0px solid red;margin-top:71px;}
+.messagemobinbox{margin:0px;padding:0px;min-height:70px;border:2px solid red;}
+.messagemobinbox p{margin:0px;padding:7px;text-align:center;color:red;font-size:14px;font-style:italic;font-family:ubuntu;}
+.messagemobinbox span.closediv{display:block;position:absolute;right:0px;float:right;width:17px;height:17px;background-color:red;margin:4px;padding:0px;color:white;text-align:center;color:#ffffff;font-size:13px;font-family:ubuntu;cursor:pointer;}
+.messagemobinbox:hover span.closediv{display:block;position:absolute;right:0px;float:right;width:17px;height:17px;background-color:#000000;margin:4px;padding:0px;color:white;text-align:center;color:#ffffff;font-size:13px;font-family:ubuntu;cursor:pointer;}
+
+
+
+

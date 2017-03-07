@@ -1,0 +1,226 @@
+.filterbox{margin:0px;padding:0px;min-height:45px;border:0px solid red;padding-top:20px;}
+
+
+
+.filterbox h3{text-transform:uppercase;color:#cccccc;font-size:27px;text-align:center;padding:0px;}
+
+.filterbox a.shortdate{line-height:47px;background-color:#dfdfdf;border-right:2px solid #f4f4f4;text-transform:uppercase;color:#000000;font-size:11px;text-align:center;text-decoration:none;}
+.filterbox a.active{background-color:#cccccc;}
+
+
+.filterbox span.customdate{display:inline-block;float:right;line-height:45px;background-color:transparent;color:#000000;text-align:center;text-decoration:none;}
+.filterbox span.customdate button{display:inline-block;float:right;margin:0px;padding:0px;width:100px;line-height:45px;background-color:#dfdfdf;color:#000000;font-size:18px;text-align:center;border:1px solid #666666;text-decoration:none;}
+
+
+
+
+
+.sholderbox{display:inline-block;padding:10px;}
+
+.sholderinbox{display:block;background-color:#ffffff;border:1px solid #ffffff;-webkit-box-shadow: 0px 0px 13px 0px rgba(50, 50, 50, 0.1);-moz-box-shadow: 0px 0px 13px 0px rgba(50, 50, 50, 0.1);box-shadow: 0px 0px 13px 0px rgba(50, 50, 50, 0.1);}
+.sholderinbox:hover{display:block;background-color:#ffffff;border:1px solid rgba(204,204,204,0.3);-webkit-box-shadow: 0px 0px 13px 0px rgba(50, 50, 50, 0.5);-moz-box-shadow: 0px 0px 13px 0px rgba(50, 50, 50, 0.5);box-shadow: 0px 0px 13px 0px rgba(50, 50, 50, 0.5);}
+
+.sholderinbox h2{display:block;width:100%;background-color:rgba(204,204,204,0.1);margin:0px;padding:10px;text-align:center;font-size:22px;color:#aeaeae;font-family:ubuntu;}
+.sholderinbox:hover h2{display:block;width:100%;background-color:rgba(204,204,204,0.3);margin:0px;padding:10px;text-align:center;font-size:22px;color:#515151;font-family:ubuntu;}
+
+
+
+	
+.sforminput{
+	border:0px solid red;
+	font-family:ubuntu;
+	font-weight:normal;
+	padding:7px;
+}
+
+.stextinput {
+  text-align:center;padding:3px;
+}
+
+.stextinput select{
+  border:1px solid #c0c0c0;
+  text-align:left;
+  width:100%;
+  height:40px;
+  line-height:40px;
+  outline:none;
+}
+
+.stextinput_date{
+  text-align:center;
+  padding:0px;
+}
+
+.stextinput_date input {
+    border: 0px;
+    border-bottom: 2px solid black;
+    text-align: center;
+    padding: 0px;
+    margin-top:0px;
+    width: 99%;
+    outline: 0px;
+}
+
+.ssubmitinput{
+	text-align:center;  
+	margin:0px;
+	border:0px solid red;
+	padding:17px;
+	}
+
+input.ssubmitinput {
+
+    width: 230px;
+    background: #ffb211;
+    border: 1px solid #ffb211;
+    border-radius: 0px;
+    cursor: pointer;
+    font-size: 18px;
+    color:#000000;
+    padding: 0px;
+    transition: all 0.15s ease;
+    outline: none;
+	}
+
+input.ssubmitinput:hover {
+  width:100%;
+  background: #000000;
+  border: 1px solid #000000;
+  border-radius: 0px;
+  cursor: pointer;
+  font-size: 18px;
+  color:#ffffff;
+  padding:0px;
+  outline:none;  
+}
+
+input.ssubmitinput:active {
+   width:100%;
+  background: #363636;
+  border: 1px solid #363636;
+  border-radius: 0px;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;;
+  color:#ffffff;
+  padding:0px;
+  outline:none;  
+}
+
+
+.ssubmitinputint{
+    text-align:center;  
+    margin-top: 20px;
+    border:0px solid red;
+}
+
+input.ssubmitinputin{
+display:block;
+margin:17px;
+margin-left:auto;
+margin-right:auto;
+    width:200px;
+    background: #ffffff;
+    border: 2px solid #cccccc;
+    border-radius: 0px;
+    cursor: pointer;
+    font-size: 18px;;
+    color:#afafaf;
+    padding:5px;
+    transition: all 0.15s ease;
+    outline:none;  
+}
+
+input.ssubmitinputin:hover {
+    width:200px;
+    background: #808080;
+    border: 2px solid #808080;
+    border-radius: 0px;
+    cursor: pointer;
+    font-size: 18px;
+    letter-spacing:1px;
+    color:#ffffff;
+    padding:5px;
+    outline:none;  
+}
+
+input.ssubmitinputin:active {
+    width:200px;
+    background: #808080;
+    border: 2px solid #808080;
+    border-radius: 0px;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    letter-spacing:1px;
+    color:#ffffff;
+    padding:5px;
+    outline:none;  
+}
+
+
+
+
+.sholderinbox:hover input.ssubmitinput {
+  width:210px;
+  background: #363636;
+  border: 2px solid #363636;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 18px;;
+  color:#ffffff;
+  padding:5px;
+  outline:none;  
+}
+
+
+
+
+
+
+/* MEDIA QUERIES */
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+.filterbox a.shortdate {
+    line-height: 47px;
+    background-color: #dfdfdf;
+    border-right: 2px solid #f4f4f4;
+    text-transform: uppercase;
+    color: #000000;
+    font-size: 9px;
+    text-align: center;
+    text-decoration: none;
+}
+
+}
+
+@media only screen and (min-width :480px) and (max-width : 768px) {
+
+
+}
+
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-width : 768px) and (max-width : 1024px) {
+
+}
+
+
+/* Desktops and laptops ----------- */
+@media only screen  and (min-width : 1224px) {
+
+}
+
+
+
+/* Large screens ----------- */
+@media only screen  and (min-width : 1824px) {
+
+}
+
+
+
+
+
+
