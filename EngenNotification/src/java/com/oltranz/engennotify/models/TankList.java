@@ -15,7 +15,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 public class TankList {
     
     @JsonProperty("Tank")
-    private List<Tank> tankList;
+    private List<TankModel> tankList;
     
     @JsonProperty("message")
     private String message;
@@ -26,14 +26,14 @@ public class TankList {
     /**
      * @return the tankList
      */
-    public List<Tank> getTankList() {
+    public List<TankModel> getTankList() {
         return tankList;
     }
 
     /**
      * @param tankList the tankList to set
      */
-    public void setTankList(List<Tank> tankList) {
+    public void setTankList(List<TankModel> tankList) {
         this.tankList = tankList;
     }
 

@@ -17,6 +17,8 @@ public class DippingNotificationModel{
     
     private String id;
     
+    private int branchId;
+    
     private String branchName;
     
     private Date dipingTime;
@@ -25,9 +27,11 @@ public class DippingNotificationModel{
     
     private Date creationTime;
     
-    private String checkingPeriod;
+    private int checkingPeriod;
     
-    private String count;
+    private int count;
+    
+    private int notificationTypeId;
 
     /**
      * @return the id
@@ -102,32 +106,59 @@ public class DippingNotificationModel{
     /**
      * @return the checkingPeriod
      */
-    public String getCheckingPeriod() {
+    public int getCheckingPeriod() {
         return checkingPeriod;
     }
 
     /**
      * @param checkingPeriod the checkingPeriod to set
      */
-    public void setCheckingPeriod(String checkingPeriod) {
+    public void setCheckingPeriod(int checkingPeriod) {
         this.checkingPeriod = checkingPeriod;
     }
 
     /**
      * @return the count
      */
-    public String getCount() {
+    public int getCount() {
         return count;
     }
 
     /**
      * @param count the count to set
      */
-    public void setCount(String count) {
+    public void setCount(int count) {
         this.count = count;
     }
-    
-    
+
+    /**
+     * @return the branchId
+     */
+    public int getBranchId() {
+        return branchId;
+    }
+
+    /**
+     * @param branchId the branchId to set
+     */
+    public void setBranchId(int branchId) {
+        this.branchId = branchId;
+    }
+
+    /**
+     * @return the notificationTypeId
+     */
+    public int getNotificationTypeId() {
+        return notificationTypeId;
+    }
+
+    /**
+     * @param notificationTypeId the notificationTypeId to set
+     */
+    public void setNotificationTypeId(int notificationTypeId) {
+        this.notificationTypeId = notificationTypeId;
+    }
+
     
     
 }

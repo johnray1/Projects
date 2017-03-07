@@ -52,10 +52,20 @@ public class LowQuantityNotification implements Serializable {
     private String createdBy;
     
     @Column(name = "checking_period")
-    private String checkingPeriod;
+    private int checkingPeriod;
     
     @Column(name = "count")
-    private String count;
+    private int count;
+    
+    @Column(name = "check_count")
+    private int checkCount;
+    
+    @Column(name = "last_notify_time")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastNotifyTime;
+    
+    @Column(name = "notification_type_id")
+    private int notificationTypeId;
 
     /**
      * @return the id
@@ -86,20 +96,6 @@ public class LowQuantityNotification implements Serializable {
     }
 
     /**
-     * @return the minCapacity
-     */
-    public Double getMinCapacity() {
-        return minCapacity;
-    }
-
-    /**
-     * @param minCapacity the minCapacity to set
-     */
-    public void setMinCapacity(Double minCapacity) {
-        this.minCapacity = minCapacity;
-    }
-
-    /**
      * @return the tankId
      */
     public int getTankId() {
@@ -111,6 +107,20 @@ public class LowQuantityNotification implements Serializable {
      */
     public void setTankId(int tankId) {
         this.tankId = tankId;
+    }
+
+    /**
+     * @return the minCapacity
+     */
+    public Double getMinCapacity() {
+        return minCapacity;
+    }
+
+    /**
+     * @param minCapacity the minCapacity to set
+     */
+    public void setMinCapacity(Double minCapacity) {
+        this.minCapacity = minCapacity;
     }
 
     /**
@@ -141,35 +151,78 @@ public class LowQuantityNotification implements Serializable {
         this.createdBy = createdBy;
     }
 
-    
-
-    /**
-     * @return the count
-     */
-    public String getCount() {
-        return count;
-    }
-
-    /**
-     * @param count the count to set
-     */
-    public void setCount(String count) {
-        this.count = count;
-    }
-
     /**
      * @return the checkingPeriod
      */
-    public String getCheckingPeriod() {
+    public int getCheckingPeriod() {
         return checkingPeriod;
     }
 
     /**
      * @param checkingPeriod the checkingPeriod to set
      */
-    public void setCheckingPeriod(String checkingPeriod) {
+    public void setCheckingPeriod(int checkingPeriod) {
         this.checkingPeriod = checkingPeriod;
     }
+
+    /**
+     * @return the count
+     */
+    public int getCount() {
+        return count;
+    }
+
+    /**
+     * @param count the count to set
+     */
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    /**
+     * @return the checkCount
+     */
+    public int getCheckCount() {
+        return checkCount;
+    }
+
+    /**
+     * @param checkCount the checkCount to set
+     */
+    public void setCheckCount(int checkCount) {
+        this.checkCount = checkCount;
+    }
+
+    /**
+     * @return the lastNotifyTime
+     */
+    public Date getLastNotifyTime() {
+        return lastNotifyTime;
+    }
+
+    /**
+     * @param lastNotifyTime the lastNotifyTime to set
+     */
+    public void setLastNotifyTime(Date lastNotifyTime) {
+        this.lastNotifyTime = lastNotifyTime;
+    }
+
+    /**
+     * @return the notificationTypeId
+     */
+    public int getNotificationTypeId() {
+        return notificationTypeId;
+    }
+
+    /**
+     * @param notificationTypeId the notificationTypeId to set
+     */
+    public void setNotificationTypeId(int notificationTypeId) {
+        this.notificationTypeId = notificationTypeId;
+    }
+
+    
+    
 
     
     

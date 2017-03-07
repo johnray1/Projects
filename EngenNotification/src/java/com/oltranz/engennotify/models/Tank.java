@@ -5,194 +5,66 @@
  */
 package com.oltranz.engennotify.models;
 
-import java.util.Date;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
  *
- * @author JohnRay
+ * @author John
  */
-
 public class Tank {
     
-    private Integer tankId;
-    private String name;
-    private Double maxCapacity;
-    private Double currentCapacity;
-    private Double dippedCapacity;
-    private Double diff;
-    private Date dippedTime;
-    private Date preCalibrationDate;
-    private Date nextCalibrationDate;
-    private Integer status;
-    private Integer branchId;
-    private Integer productId;
+    @JsonProperty("Tank")
+    private TankModel tank;
+    
+    @JsonProperty("message")
+    private String message;
+    
+    @JsonProperty("statusCode")
+    private Integer statusCode;
 
     /**
-     * @return the tankId
+     * @return the tank
      */
-    public Integer getTankId() {
-        return tankId;
+    public TankModel getTank() {
+        return tank;
     }
 
     /**
-     * @param tankId the tankId to set
+     * @param tank the tank to set
      */
-    public void setTankId(Integer tankId) {
-        this.tankId = tankId;
+    public void setTank(TankModel tank) {
+        this.tank = tank;
     }
 
     /**
-     * @return the name
+     * @return the message
      */
-    public String getName() {
-        return name;
+    public String getMessage() {
+        return message;
     }
 
     /**
-     * @param name the name to set
+     * @param message the message to set
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     /**
-     * @return the maxCapacity
+     * @return the statusCode
      */
-    public Double getMaxCapacity() {
-        return maxCapacity;
+    public Integer getStatusCode() {
+        return statusCode;
     }
 
     /**
-     * @param maxCapacity the maxCapacity to set
+     * @param statusCode the statusCode to set
      */
-    public void setMaxCapacity(Double maxCapacity) {
-        this.maxCapacity = maxCapacity;
+    public void setStatusCode(Integer statusCode) {
+        this.statusCode = statusCode;
     }
 
-    /**
-     * @return the currentCapacity
-     */
-    public Double getCurrentCapacity() {
-        return currentCapacity;
-    }
-
-    /**
-     * @param currentCapacity the currentCapacity to set
-     */
-    public void setCurrentCapacity(Double currentCapacity) {
-        this.currentCapacity = currentCapacity;
-    }
-
-    /**
-     * @return the dippedCapacity
-     */
-    public Double getDippedCapacity() {
-        return dippedCapacity;
-    }
-
-    /**
-     * @param dippedCapacity the dippedCapacity to set
-     */
-    public void setDippedCapacity(Double dippedCapacity) {
-        this.dippedCapacity = dippedCapacity;
-    }
-
-    /**
-     * @return the diff
-     */
-    public Double getDiff() {
-        return diff;
-    }
-
-    /**
-     * @param diff the diff to set
-     */
-    public void setDiff(Double diff) {
-        this.diff = diff;
-    }
-
-    /**
-     * @return the dippedTime
-     */
-    public Date getDippedTime() {
-        return dippedTime;
-    }
-
-    /**
-     * @param dippedTime the dippedTime to set
-     */
-    public void setDippedTime(Date dippedTime) {
-        this.dippedTime = dippedTime;
-    }
-
-    /**
-     * @return the preCalibrationDate
-     */
-    public Date getPreCalibrationDate() {
-        return preCalibrationDate;
-    }
-
-    /**
-     * @param preCalibrationDate the preCalibrationDate to set
-     */
-    public void setPreCalibrationDate(Date preCalibrationDate) {
-        this.preCalibrationDate = preCalibrationDate;
-    }
-
-    /**
-     * @return the nextCalibrationDate
-     */
-    public Date getNextCalibrationDate() {
-        return nextCalibrationDate;
-    }
-
-    /**
-     * @param nextCalibrationDate the nextCalibrationDate to set
-     */
-    public void setNextCalibrationDate(Date nextCalibrationDate) {
-        this.nextCalibrationDate = nextCalibrationDate;
-    }
-
-    /**
-     * @return the status
-     */
-    public Integer getStatus() {
-        return status;
-    }
-
-    /**
-     * @param status the status to set
-     */
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    /**
-     * @return the branchId
-     */
-    public Integer getBranchId() {
-        return branchId;
-    }
-
-    /**
-     * @param branchId the branchId to set
-     */
-    public void setBranchId(Integer branchId) {
-        this.branchId = branchId;
-    }
-
-    /**
-     * @return the productId
-     */
-    public Integer getProductId() {
-        return productId;
-    }
-
-    /**
-     * @param productId the productId to set
-     */
-    public void setProductId(Integer productId) {
-        this.productId = productId;
-    }
-
+    
+    
+    
 }

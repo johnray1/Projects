@@ -20,7 +20,7 @@ public class SmsModel {
     
     private int wait;
     
-    private int contractId;
+    private String contractId;
 
     /**
      * @return the src
@@ -81,16 +81,18 @@ public class SmsModel {
     /**
      * @return the contractId
      */
-    public int getContractId() {
+    public String getContractId() {
         return contractId;
     }
 
     /**
      * @param contractId the contractId to set
      */
-    public void setContractId(int contractId) {
+    public void setContractId(String contractId) {
         this.contractId = contractId;
     }
+
+    
     
     
 }

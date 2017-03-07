@@ -39,6 +39,12 @@ public class NotificationDestination implements Serializable {
     @Column(name = "dest", nullable = false)
     private String dest;
     
+    @Column(name = "name")
+    private String name;
+    
+    @Column(name = "email")
+    private String email;
+    
     @Id
     @Basic(optional = false)
     @NotNull
@@ -101,6 +107,34 @@ public class NotificationDestination implements Serializable {
      */
     public void setNotificationId(String notificationId) {
         this.notificationId = notificationId;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
     }
     
     

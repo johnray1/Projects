@@ -26,7 +26,6 @@ public class DippingNotification implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
-    
     @Id
     @Basic(optional = false)
     @NotNull
@@ -50,10 +49,20 @@ public class DippingNotification implements Serializable {
     private String createdBy;
     
     @Column(name = "checking_period")
-    private String checkingPeriod;
+    private int checkingPeriod;
     
     @Column(name = "count")
-    private String count;
+    private int count;
+    
+    @Column(name = "check_count")
+    private int checkCount;
+    
+    @Column(name = "last_notify_time")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastNotifyTime;
+    
+    @Column(name = "notification_type_id")
+    private int notificationTypeId;
     
     /**
      * @return the id
@@ -124,35 +133,80 @@ public class DippingNotification implements Serializable {
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
     }
-
+    
+    /**
+     * @return the checkingPeriod
+     */
+    public int getCheckingPeriod() {
+        return checkingPeriod;
+    }
+    
+    /**
+     * @param checkingPeriod the checkingPeriod to set
+     */
+    public void setCheckingPeriod(int checkingPeriod) {
+        this.checkingPeriod = checkingPeriod;
+    }
     
     /**
      * @return the count
      */
-    public String getCount() {
+    public int getCount() {
         return count;
     }
-
+    
     /**
      * @param count the count to set
      */
-    public void setCount(String count) {
+    public void setCount(int count) {
         this.count = count;
     }
+    
+    /**
+     * @return the notificationTypeId
+     */
+    public int getNotificationTypeId() {
+        return notificationTypeId;
+    }
+    
+    /**
+     * @param notificationTypeId the notificationTypeId to set
+     */
+    public void setNotificationTypeId(int notificationTypeId) {
+        this.notificationTypeId = notificationTypeId;
+    }
+
+    
 
     /**
-     * @return the checkingPeriod
+     * @return the lastNotifyTime
      */
-    public String getCheckingPeriod() {
-        return checkingPeriod;
+    public Date getLastNotifyTime() {
+        return lastNotifyTime;
     }
 
     /**
-     * @param checkingPeriod the checkingPeriod to set
+     * @param lastNotifyTime the lastNotifyTime to set
      */
-    public void setCheckingPeriod(String checkingPeriod) {
-        this.checkingPeriod = checkingPeriod;
+    public void setLastNotifyTime(Date lastNotifyTime) {
+        this.lastNotifyTime = lastNotifyTime;
     }
+
+    /**
+     * @return the checkCount
+     */
+    public int getCheckCount() {
+        return checkCount;
+    }
+
+    /**
+     * @param checkCount the checkCount to set
+     */
+    public void setCheckCount(int checkCount) {
+        this.checkCount = checkCount;
+    }
+    
+    
     
     
     

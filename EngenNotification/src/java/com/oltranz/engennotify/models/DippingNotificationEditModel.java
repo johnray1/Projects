@@ -18,6 +18,10 @@ public class DippingNotificationEditModel {
     private String dipingTime;
     
     private String createdBy;
+    
+    private int checkingPeriod;
+    
+    private int count;
 
     /**
      * @return the id
@@ -74,6 +78,36 @@ public class DippingNotificationEditModel {
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
     }
+
+    /**
+     * @return the checkingPeriod
+     */
+    public int getCheckingPeriod() {
+        return checkingPeriod;
+    }
+
+    /**
+     * @param checkingPeriod the checkingPeriod to set
+     */
+    public void setCheckingPeriod(int checkingPeriod) {
+        this.checkingPeriod = checkingPeriod;
+    }
+
+    /**
+     * @return the count
+     */
+    public int getCount() {
+        return count;
+    }
+
+    /**
+     * @param count the count to set
+     */
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    
 
     
     

@@ -35,7 +35,7 @@ public class Notification implements Serializable{
     
     
     @Column(name = "notification_type_id")
-    private String notificationTypeId;
+    private int notificationTypeId;
     
     
     @Column(name = "notify_time")
@@ -70,19 +70,7 @@ public class Notification implements Serializable{
         this.notificationDefId = notificationDefId;
     }
 
-    /**
-     * @return the notificationTypeId
-     */
-    public String getNotificationTypeId() {
-        return notificationTypeId;
-    }
-
-    /**
-     * @param notificationTypeId the notificationTypeId to set
-     */
-    public void setNotificationTypeId(String notificationTypeId) {
-        this.notificationTypeId = notificationTypeId;
-    }
+    
 
     /**
      * @return the notifyTime
@@ -96,6 +84,20 @@ public class Notification implements Serializable{
      */
     public void setNotifyTime(Date notifyTime) {
         this.notifyTime = notifyTime;
+    }
+
+    /**
+     * @return the notificationTypeId
+     */
+    public int getNotificationTypeId() {
+        return notificationTypeId;
+    }
+
+    /**
+     * @param notificationTypeId the notificationTypeId to set
+     */
+    public void setNotificationTypeId(int notificationTypeId) {
+        this.notificationTypeId = notificationTypeId;
     }
 
    
